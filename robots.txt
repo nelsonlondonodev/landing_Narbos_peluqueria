@@ -1,0 +1,5 @@
+# robots.txt para Narbo's Salón Spa
+User-agent: *
+Allow: /
+
+Sitemap: https://www.narbossalonspa.com/sitemap.xml
