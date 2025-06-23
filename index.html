@@ -17,7 +17,10 @@
     <link rel="stylesheet" href="css/styles.css">
 
     <script>
+      // ===== CONFIGURACIÓN DE TAILWIND CON MODO OSCURO =====
       tailwind.config = {
+        // Habilitamos el modo oscuro basado en una clase en el HTML
+        darkMode: 'class', 
         theme: {
           extend: {
             colors: {
@@ -36,36 +39,45 @@
       }
     </script>
 </head>
-<body class="bg-brand-light font-sans text-gray-800">
+<body class="bg-brand-light dark:bg-gray-900 font-sans text-gray-800 dark:text-gray-300 transition-colors duration-500">
 
-    <header class="bg-brand-light/90 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+    <header class="bg-brand-light/90 dark:bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm dark:shadow-gray-800">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center max-w-screen-xl">
             <a href="#inicio" class="block">
                 <img src="images/LOGO_NARBOS_1.jpg" alt="Logo de Narbo's Salón Spa" class="h-14 w-auto"> </a>
             
-            <div class="hidden md:flex space-x-8">
-                <a href="#inicio" class="text-gray-800 hover:text-brand-green">Inicio</a>
-                <a href="#servicios" class="text-gray-800 hover:text-brand-green">Servicios</a>
-                <a href="#nosotros" class="text-gray-800 hover:text-brand-green">Nosotros</a>
-                <a href="#galeria" class="text-gray-800 hover:text-brand-green">Galería</a>
-                <a href="#ubicacion" class="text-gray-800 hover:text-brand-green">Ubicación</a>
-                <a href="#contacto" class="text-gray-800 hover:text-brand-green">Contacto</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#inicio" class="text-gray-800 dark:text-gray-200 hover:text-brand-green dark:hover:text-brand-medium">Inicio</a>
+                <a href="#servicios" class="text-gray-800 dark:text-gray-200 hover:text-brand-green dark:hover:text-brand-medium">Servicios</a>
+                <a href="#nosotros" class="text-gray-800 dark:text-gray-200 hover:text-brand-green dark:hover:text-brand-medium">Nosotros</a>
+                <a href="#galeria" class="text-gray-800 dark:text-gray-200 hover:text-brand-green dark:hover:text-brand-medium">Galería</a>
+                <a href="#ubicacion" class="text-gray-800 dark:text-gray-200 hover:text-brand-green dark:hover:text-brand-medium">Ubicación</a>
+                <a href="#contacto" class="text-gray-800 dark:text-gray-200 hover:text-brand-green dark:hover:text-brand-medium">Contacto</a>
+
+                <button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 5.05a1 1 0 010-1.414l.707-.707a1 1 0 111.414 1.414l-.707-.707a1 1 0 01-1.414 0zM3 11a1 1 0 100-2H2a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
             </div>
 
-            <div class="md:hidden">
-                <button id="menu-btn" class="text-gray-800 focus:outline-none">
+            <div class="md:hidden flex items-center">
+                 <button id="theme-toggle-mobile" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-2">
+                    <svg id="theme-toggle-dark-icon-mobile" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon-mobile" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 5.05a1 1 0 010-1.414l.707-.707a1 1 0 111.414 1.414l-.707-.707a1 1 0 01-1.414 0zM3 11a1 1 0 100-2H2a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+                <button id="menu-btn" class="text-gray-800 dark:text-gray-200 focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </nav>
 
         <div id="mobile-menu" class="hidden md:hidden">
-            <a href="#inicio" class="block py-2 px-4 text-sm hover:bg-brand-gray-light transition-colors duration-300">Inicio</a>
-            <a href="#servicios" class="block py-2 px-4 text-sm hover:bg-brand-gray-light transition-colors duration-300">Servicios</a>
-            <a href="#nosotros" class="block py-2 px-4 text-sm hover:bg-brand-gray-light transition-colors duration-300">Nosotros</a>
-            <a href="#galeria" class="block py-2 px-4 text-sm hover:bg-brand-gray-light transition-colors duration-300">Galería</a>
-            <a href="#ubicacion" class="block py-2 px-4 text-sm hover:bg-brand-gray-light transition-colors duration-300">Ubicación</a>
-            <a href="#contacto" class="block py-2 px-4 text-sm hover:bg-brand-gray-light transition-colors duration-300">Contacto</a>
+            <a href="#inicio" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Inicio</a>
+            <a href="#servicios" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Servicios</a>
+            <a href="#nosotros" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Nosotros</a>
+            <a href="#galeria" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Galería</a>
+            <a href="#ubicacion" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Ubicación</a>
+            <a href="#contacto" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Contacto</a>
         </div>
     </header>
 
@@ -73,7 +85,6 @@
         <section id="inicio" class="relative text-white h-[60vh] md:h-[80vh] flex items-center justify-center">
             <div class="absolute inset-0 bg-gradient-to-t from-brand-green/80 via-brand-green/40 to-transparent z-10"></div>
             <img src="images/foto_inicio1.jpg" alt="Fachada de Narbo's Salón Spa en Chía" class="w-full h-full object-cover absolute inset-0" loading="eager">
-            
             <div class="relative z-20 container mx-auto px-6 text-center">
                 <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4">Tu oasis de belleza y relajación en Chía</h1>
                 <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Más de 11 años de experiencia transformando tu estilo y bienestar.</p>
@@ -83,26 +94,26 @@
             </div>
         </section>
 
-        <section id="servicios" class="py-16 md:py-24 bg-gradient-to-b from-white via-gray-50 to-brand-gray-dark/20">
+        <section id="servicios" class="py-16 md:py-24 bg-gradient-to-b from-white via-gray-50 to-brand-gray-dark/20 dark:from-gray-800 dark:to-gray-900">
             <div class="container mx-auto px-6 text-center max-w-screen-xl">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-gray-900">Nuestros Servicios</h2>
-                <p class="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">Ofrecemos una amplia gama de tratamientos con productos de alta calidad para realzar tu belleza.</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-gray-900 dark:text-white">Nuestros Servicios</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto">Ofrecemos una amplia gama de tratamientos con productos de alta calidad para realzar tu belleza.</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-white p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl">
-                        <h3 class="text-2xl font-serif font-bold text-brand-green mb-3">Peluquería</h3>
-                        <p class="text-gray-600">Color, balayage, cortes, barbería, maquillaje y peinados con las mejores marcas: Wella, L'Oréal, y Schwarzkopf.</p>
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
+                        <h3 class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Peluquería</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Color, balayage, cortes, barbería, maquillaje y peinados con las mejores marcas: Wella, L'Oréal, y Schwarzkopf.</p>
                     </div>
-                    <div class="bg-white p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl">
-                        <h3 class="text-2xl font-serif font-bold text-brand-green mb-3">Manos y Pies</h3>
-                        <p class="text-gray-600">Manicure y pedicure con esmaltado semipermanente, uñas en gel o acrílicas con productos Organic, Belier y Masglo.</p>
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
+                        <h3 class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Manos y Pies</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Manicure y pedicure con esmaltado semipermanente, uñas en gel o acrílicas con productos Organic, Belier y Masglo.</p>
                     </div>
-                    <div class="bg-white p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl">
-                         <h3 class="text-2xl font-serif font-bold text-brand-green mb-3">Estética & Spa</h3>
-                        <p class="text-gray-600">Masajes relajantes, drenajes linfáticos, y limpiezas e hidrataciones faciales con productos dermatológicos.</p>
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
+                         <h3 class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Estética & Spa</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Masajes relajantes, drenajes linfáticos, y limpiezas e hidrataciones faciales con productos dermatológicos.</p>
                     </div>
-                    <div class="bg-white p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl">
-                        <h3 class="text-2xl font-serif font-bold text-brand-green mb-3">Depilación y Pestañas</h3>
-                        <p class="text-gray-600">Servicios de depilación con cera o hilo y extensiones de pestañas para una mirada impactante.</p>
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
+                        <h3 class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Depilación y Pestañas</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Servicios de depilación con cera o hilo y extensiones de pestañas para una mirada impactante.</p>
                     </div>
                 </div>
             </div>
@@ -114,21 +125,21 @@
                     <img src="https://placehold.co/600x450/C5AB94/FFFFFF?text=Equipo+Narbo's" alt="Equipo profesional de Narbo's Salón Spa sonriendo" class="rounded-lg shadow-xl w-full" loading="lazy">
                 </div>
                 <div class="text-left">
-                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4 text-left">Más de una década de experiencia</h2>
-                    <p class="text-gray-700 mb-4">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4 text-left">Más de una década de experiencia</h2>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
                         En Narbo's Salón Spa, llevamos más de 11 años dedicados al arte de la belleza y el bienestar. Aunque nuestra nueva y moderna sede abrió en 2024, nuestra pasión y experiencia nos acompañan desde 2013.
                     </p>
-                    <p class="text-gray-700 mb-4">
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
                         Somos un negocio liderado por mujeres, comprometidas con ofrecerte una experiencia inolvidable. Ofrecemos planes especiales, bonos de regalo y contamos con parqueadero gratuito para tu comodidad.
                     </p>
-                    <p class="font-bold text-brand-green">¡Te esperamos para consentirte!</p>
+                    <p class="font-bold text-brand-green dark:text-brand-medium">¡Te esperamos para consentirte!</p>
                 </div>
             </div>
         </section>
 
-        <section id="galeria" class="py-16 md:py-24 bg-brand-gray-light">
+        <section id="galeria" class="py-16 md:py-24 bg-brand-gray-light dark:bg-gray-800/50">
             <div class="container mx-auto px-6 text-center max-w-screen-xl">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-12 text-gray-900">Nuestros Trabajos</h2>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-12 text-gray-900 dark:text-white">Nuestros Trabajos</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="overflow-hidden rounded-lg shadow-md group">
                         <img src="https://placehold.co/400x400/6B755A/FFFFFF?text=Balayage" alt="Trabajo de balayage profesional" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" loading="lazy">
@@ -146,15 +157,15 @@
             </div>
         </section>
         
-        <section id="ubicacion" class="py-16 md:py-24 bg-white">
+        <section id="ubicacion" class="py-16 md:py-24 bg-white dark:bg-gray-900">
             <div class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center">
                 <div class="text-left">
-                    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-gray-900 text-left">Visítanos</h2>
-                    <p class="text-gray-700 text-lg mb-4">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-gray-900 dark:text-white text-left">Visítanos</h2>
+                    <p class="text-gray-700 dark:text-gray-300 text-lg mb-4">
                         Kilómetro 2 vía Chía-Cajicá, Bajos del hotel Ibis, Chía, Cundinamarca.
                     </p>
-                     <h3 class="text-2xl font-serif font-bold mb-4 mt-8">Horario de Atención</h3>
-                     <ul class="text-gray-700 space-y-2">
+                     <h3 class="text-2xl font-serif font-bold mb-4 mt-8 dark:text-white">Horario de Atención</h3>
+                     <ul class="text-gray-700 dark:text-gray-300 space-y-2">
                         <li><strong>Lunes a Sábado:</strong> 7:00 a.m. – 8:00 p.m.</li>
                         <li><strong>Domingo:</strong> 9:00 a.m. – 2:00 p.m.</li>
                      </ul>
@@ -168,7 +179,7 @@
                         allowfullscreen="" 
                         loading="lazy" 
                         referrerpolicy="no-referrer-when-downgrade"
-                        class="rounded-lg shadow-xl">
+                        class="rounded-lg shadow-xl dark:invert dark:grayscale">
                     </iframe>
                 </div>
             </div>
@@ -177,7 +188,7 @@
         <footer id="contacto" class="bg-gradient-to-t from-gray-800 to-brand-green text-white py-12">
             <div class="container mx-auto px-6 text-center max-w-screen-xl">
                 <h2 class="text-3xl font-serif mb-4">Agenda tu cita hoy</h2>
-                <p class="mb-6 max-w-xl mx-auto">
+                <p class="mb-6 max-w-xl mx-auto text-gray-300">
                     Llámanos o escríbenos por WhatsApp. O si prefieres, déjanos un mensaje aquí:
                 </p>
                 <a href="https://wa.me/573123462618" target="_blank" class="inline-block bg-transparent border-2 border-brand-light text-brand-light font-bold py-2 px-6 rounded-full hover:bg-brand-light hover:text-brand-green transition-colors duration-300 ease-in-out mb-8">
@@ -187,27 +198,27 @@
                 <form id="contact-form" class="max-w-xl mx-auto text-left space-y-4">
                     <div>
                         <label for="name" class="block mb-1 font-bold text-brand-light">Nombre</label>
-                        <input type="text" id="name" name="name" class="w-full p-2 rounded bg-brand-light bg-opacity-20 border border-brand-gray-light focus:outline-none focus:ring-2 focus:ring-brand-light text-white" required>
+                        <input type="text" id="name" name="name" class="w-full p-2 rounded bg-brand-light bg-opacity-20 dark:bg-gray-700 border border-brand-gray-light dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-light dark:focus:ring-brand-medium text-white" required>
                     </div>
                     <div>
                         <label for="email" class="block mb-1 font-bold text-brand-light">Correo Electrónico</label>
-                        <input type="email" id="email" name="email" class="w-full p-2 rounded bg-brand-light bg-opacity-20 border border-brand-gray-light focus:outline-none focus:ring-2 focus:ring-brand-light text-white" required>
+                        <input type="email" id="email" name="email" class="w-full p-2 rounded bg-brand-light bg-opacity-20 dark:bg-gray-700 border border-brand-gray-light dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-light dark:focus:ring-brand-medium text-white" required>
                     </div>
                     <div>
                         <label for="message" class="block mb-1 font-bold text-brand-light">Mensaje</label>
-                        <textarea id="message" name="message" rows="4" class="w-full p-2 rounded bg-brand-light bg-opacity-20 border border-brand-gray-light focus:outline-none focus:ring-2 focus:ring-brand-light text-white" required></textarea>
+                        <textarea id="message" name="message" rows="4" class="w-full p-2 rounded bg-brand-light bg-opacity-20 dark:bg-gray-700 border border-brand-gray-light dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-light dark:focus:ring-brand-medium text-white" required></textarea>
                     </div>
                     <button type="submit" class="w-full bg-gradient-to-r from-brand-medium to-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-light">Enviar Mensaje</button>
                     <p id="form-status" class="mt-4 text-center h-4"></p>
                 </form>
 
                 <div class="flex justify-center space-x-6 mt-10 mb-6">
-                    <a href="https://wa.me/573123462618" target="_blank" class="hover:text-brand-light transition-colors duration-300">WhatsApp</a>
-                    <a href="https://www.instagram.com/narbos_salon_spa/" target="_blank" class="hover:text-brand-light transition-colors duration-300">Instagram</a>
-                    <a href="https://www.facebook.com/p/Narbos-Spa-61552033490282/" target="_blank" class="hover:text-brand-light transition-colors duration-300">Facebook</a>
-                    <a href="https://www.tiktok.com/@narbosspa2508" target="_blank" class="hover:text-brand-light transition-colors duration-300">TikTok</a>
+                    <a href="https://wa.me/573123462618" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-300">WhatsApp</a>
+                    <a href="https://www.instagram.com/narbos_salon_spa/" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-300">Instagram</a>
+                    <a href="https://www.facebook.com/p/Narbos-Spa-61552033490282/" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-300">Facebook</a>
+                    <a href="https://www.tiktok.com/@narbosspa2508" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-300">TikTok</a>
                  </div>
-                 <p class="text-sm text-gray-400">© 2025 Narbo's Salón Spa. Todos los derechos reservados.</p>
+                 <p class="text-sm text-gray-400 dark:text-gray-500">© 2025 Narbo's Salón Spa. Todos los derechos reservados.</p>
             </div>
         </footer>
 
