@@ -4,24 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Metaetiquetas SEO Básicas -->
     <title>Narbo's Salón Spa | Peluquería y Spa en Chía, Colombia</title>
     <meta name="description" content="Experimenta belleza y relajación en Narbo's Salón Spa en Chía. Ofrecemos servicios de peluquería, balayage, manicure, estética facial y más. ¡Agenda tu cita!">
     <meta name="keywords" content="peluqueria chia, spa chia, balayage, masajes, manicure, narbos spa">
 
-    <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts (Playfair Display para títulos, Lato para cuerpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-    <!-- Estilos Personalizados -->
-    <!-- Asegúrate de que la ruta a tu archivo CSS es correcta -->
     <link rel="stylesheet" href="css/styles.css">
 
-    <!-- Configuración de Tailwind para usar los colores y fuentes personalizados -->
     <script>
       tailwind.config = {
         theme: {
@@ -44,15 +38,11 @@
 </head>
 <body class="bg-brand-light font-sans text-gray-800">
 
-    <!-- ====== Header y Navegación (ACTUALIZADO CON LOGO) ====== -->
     <header class="bg-brand-light/90 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center max-w-screen-xl">
-            <!-- Logo/Nombre del negocio -->
             <a href="#inicio" class="block">
-                <img src="images/LOGO_NARBOS_1.jpg" alt="Logo de Narbo's Salón Spa" class="h-14 w-auto"> <!-- Logo integrado aquí -->
-            </a>
+                <img src="images/LOGO_NARBOS_1.jpg" alt="Logo de Narbo's Salón Spa" class="h-14 w-auto"> </a>
             
-            <!-- Menú de Escritorio -->
             <div class="hidden md:flex space-x-8">
                 <a href="#servicios" class="nav-link">Servicios</a>
                 <a href="#nosotros" class="nav-link">Nosotros</a>
@@ -61,7 +51,6 @@
                 <a href="#contacto" class="nav-link">Contacto</a>
             </div>
 
-            <!-- Botón del Menú Móvil (Hamburguesa) -->
             <div class="md:hidden">
                 <button id="menu-btn" class="text-gray-800 focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -69,7 +58,6 @@
             </div>
         </nav>
 
-        <!-- Menú Móvil (inicialmente oculto) -->
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="#servicios" class="mobile-nav-link">Servicios</a>
             <a href="#nosotros" class="mobile-nav-link">Nosotros</a>
@@ -80,11 +68,8 @@
     </header>
 
     <main>
-        <!-- ====== Sección Hero (Inicio) - ACTUALIZADO CON FOTO REAL ====== -->
         <section id="inicio" class="relative text-white h-[60vh] md:h-[80vh] flex items-center justify-center">
-            <!-- Capa de superposición oscura para legibilidad del texto -->
             <div class="absolute inset-0 bg-black opacity-40 z-10"></div>
-            <!-- Imagen de fondo -->
             <img src="images/foto_inicio1.jpg" alt="Fachada de Narbo's Salón Spa en Chía" class="w-full h-full object-cover absolute inset-0" loading="eager">
             
             <div class="relative z-20 container mx-auto px-6 text-center">
@@ -96,28 +81,23 @@
             </div>
         </section>
 
-        <!-- ====== Sección Servicios ====== -->
         <section id="servicios" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6 text-center max-w-screen-xl">
                 <h2 class="section-title">Nuestros Servicios</h2>
                 <p class="section-subtitle">Ofrecemos una amplia gama de tratamientos con productos de alta calidad para realzar tu belleza.</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Tarjeta de Servicio 1 -->
                     <div class="service-card">
                         <h3 class="service-card-title">Peluquería</h3>
                         <p class="service-card-text">Color, balayage, cortes, barbería, maquillaje y peinados con las mejores marcas: Wella, L'Oréal, y Schwarzkopf.</p>
                     </div>
-                    <!-- Tarjeta de Servicio 2 -->
                     <div class="service-card">
                         <h3 class="service-card-title">Manos y Pies</h3>
                         <p class="service-card-text">Manicure y pedicure con esmaltado semipermanente, uñas en gel o acrílicas con productos Organic, Belier y Masglo.</p>
                     </div>
-                    <!-- Tarjeta de Servicio 3 -->
                     <div class="service-card">
                          <h3 class="service-card-title">Estética & Spa</h3>
                         <p class="service-card-text">Masajes relajantes, drenajes linfáticos, y limpiezas e hidrataciones faciales con productos dermatológicos.</p>
                     </div>
-                    <!-- Tarjeta de Servicio 4 -->
                     <div class="service-card">
                         <h3 class="service-card-title">Depilación y Pestañas</h3>
                         <p class="service-card-text">Servicios de depilación con cera o hilo y extensiones de pestañas para una mirada impactante.</p>
@@ -126,11 +106,9 @@
             </div>
         </section>
         
-        <!-- ====== Sección Sobre Nosotros ====== -->
         <section id="nosotros" class="py-16 md:py-24">
              <div class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <!-- Imagen (placeholder) -->
                     <img src="https://placehold.co/600x450/C5AB94/FFFFFF?text=Equipo+Narbo's" alt="Equipo profesional de Narbo's Salón Spa sonriendo" class="rounded-lg shadow-xl w-full" loading="lazy">
                 </div>
                 <div class="text-left">
@@ -146,24 +124,18 @@
             </div>
         </section>
 
-        <!-- ====== Sección Galería ====== -->
         <section id="galeria" class="py-16 md:py-24 bg-brand-gray-light">
             <div class="container mx-auto px-6 text-center max-w-screen-xl">
                 <h2 class="section-title">Nuestros Trabajos</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <!-- Imagen de Galería (placeholder) -->
                     <div class="gallery-item"><img src="https://placehold.co/400x400/6B755A/FFFFFF?text=Balayage" alt="Trabajo de balayage profesional" class="gallery-image" loading="lazy"></div>
-                    <!-- Imagen de Galería (placeholder) -->
                     <div class="gallery-item"><img src="https://placehold.co/400x400/C5AB94/FFFFFF?text=U%C3%B1as" alt="Diseño de uñas acrílicas creativo" class="gallery-image" loading="lazy"></div>
-                    <!-- Imagen de Galería (placeholder) -->
                     <div class="gallery-item"><img src="https://placehold.co/400x400/BEC2B4/FFFFFF?text=Corte" alt="Corte de cabello moderno para mujer" class="gallery-image" loading="lazy"></div>
-                    <!-- Imagen de Galería (placeholder) -->
                     <div class="gallery-item"><img src="https://placehold.co/400x400/DED2C4/333333?text=Maquillaje" alt="Maquillaje profesional para evento" class="gallery-image" loading="lazy"></div>
                 </div>
             </div>
         </section>
         
-        <!-- ====== Sección Ubicación y Horario ====== -->
         <section id="ubicacion" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center">
                 <div class="text-left">
@@ -178,22 +150,40 @@
                      </ul>
                 </div>
                 <div>
-                     <!-- Mapa de Google Maps Embebido -->
                      <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.170682136931!2d-74.0538048!3d4.7408899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9f30e9d6d399%3A0x6778c187e0767e7a!2sNarbos%20sal%C3%B3n%2p>
-             <!-- Enlaces a redes sociales -->
-             <div class="flex justify-center space-x-6 my-6">
-                <a href="https://wa.me/573123462618" target="_blank" class="footer-link">WhatsApp</a>
-                <a href="https://www.instagram.com/narbos_salon_spa/" target="_blank" class="footer-link">Instagram</a>
-                <a href="https://www.facebook.com/p/Narbos-Spa-61552033490282/" target="_blank" class="footer-link">Facebook</a>
-                <a href="https://www.tiktok.com/@narbosspa2508" target="_blank" class="footer-link">TikTok</a>
-             </div>
-             <p class="text-sm text-gray-400">&copy; 2025 Narbo's Salón Spa. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.212309853927!2d-74.0543258888916!3d4.731773095204758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f835b331a9805%3A0x6b74457781b0b5fa!2sNarbos%20Salon%20Spa!5e0!3m2!1ses!2sco!4v1719149023024!5m2!1ses!2sco" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="rounded-lg shadow-xl">
+                    </iframe>
+                </div>
+            </div>
+        </section>
 
-    <!-- Script de JavaScript al final del body para un mejor rendimiento -->
-    <!-- Asegúrate de que la ruta a tu archivo JS es correcta -->
+        <footer id="contacto" class="bg-brand-green text-white py-12">
+            <div class="container mx-auto px-6 text-center max-w-screen-xl">
+                <h2 class="text-3xl font-serif mb-4">Agenda tu cita hoy</h2>
+                <p class="mb-6">
+                    Llámanos o escríbenos por WhatsApp para reservar tu momento de relajación.
+                </p>
+                <a href="https://wa.me/573123462618" target="_blank" class="secondary-button mb-8">
+                    Contactar por WhatsApp
+                </a>
+                
+                 <div class="flex justify-center space-x-6 my-6">
+                    <a href="https://wa.me/573123462618" target="_blank" class="footer-link">WhatsApp</a>
+                    <a href="https://www.instagram.com/narbos_salon_spa/" target="_blank" class="footer-link">Instagram</a>
+                    <a href="https://www.facebook.com/p/Narbos-Spa-61552033490282/" target="_blank" class="footer-link">Facebook</a>
+                    <a href="https://www.tiktok.com/@narbosspa2508" target="_blank" class="footer-link">TikTok</a>
+                 </div>
+                 <p class="text-sm text-gray-400">© 2025 Narbo's Salón Spa. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+
     <script src="js/script.js"></script>
 </body>
 </html>
