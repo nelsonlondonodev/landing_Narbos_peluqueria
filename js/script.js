@@ -44,9 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- INICIO: NUEVA LÓGICA DE SCROLL SPY ---
+  // --- INICIO: LÓGICA DE SCROLL SPY ---
   // Selecciona todas las secciones que tienen un ID y los enlaces del menú de navegación de escritorio.
-  const sections = document.querySelectorAll("main section[id]");
+  // ***** LÍNEA CORREGIDA: Ahora incluye 'footer[id]' para detectar la sección de contacto. *****
+  const sections = document.querySelectorAll("main section[id], footer[id]");
   const navLinks = document.querySelectorAll("header nav .hidden a");
 
   // Función que se ejecuta cuando el usuario se desplaza por la página.
@@ -78,5 +79,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Agrega un 'escuchador de eventos' que llama a la función onScroll cada vez que se hace scroll.
   window.addEventListener("scroll", onScroll);
-  // --- FIN: NUEVA LÓGICA DE SCROLL SPY ---
+  // --- FIN: LÓGICA DE SCROLL SPY ---
 });
