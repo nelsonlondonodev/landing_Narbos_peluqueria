@@ -18,6 +18,30 @@ h6 {
   font-family: "Playfair Display", serif;
 }
 
+/* --- INICIO: NUEVOS ESTILOS PARA NAVEGACIÓN ACTIVA --- */
+
+/*
+  Añadimos una transición para la propiedad 'transform' a los enlaces del menú.
+  Esto asegura que el efecto de escala que vamos a añadir sea suave y no brusco.
+  Complementa las clases de transición que ya estaban en el HTML.
+*/
+header nav .hidden a {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/*
+  Esta es la clase que nuestro JavaScript añade dinámicamente.
+  Define el estilo del enlace de navegación cuando su sección correspondiente está activa.
+  Le damos el color de la marca, lo ponemos en negrita y lo hacemos un poco más grande.
+*/
+.nav-link-active {
+  color: #6b755a; /* Corresponde a 'text-brand-green' */
+  font-weight: 700; /* Corresponde a 'font-bold' */
+  transform: scale(1.1);
+}
+
+/* --- FIN: NUEVOS ESTILOS PARA NAVEGACIÓN ACTIVA --- */
+
 /* NOTA: En un setup con CDN de Tailwind, no podemos usar directivas como @apply.
   Este archivo es útil para estilos globales como el scroll-behavior o para
   CSS personalizado que no se puede lograr fácilmente con las utilidades de Tailwind.

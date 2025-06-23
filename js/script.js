@@ -43,4 +43,40 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 5000);
     }
   });
+
+  // --- INICIO: NUEVA LÓGICA DE SCROLL SPY ---
+  // Selecciona todas las secciones que tienen un ID y los enlaces del menú de navegación de escritorio.
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll("header nav .hidden a");
+
+  // Función que se ejecuta cuando el usuario se desplaza por la página.
+  const onScroll = () => {
+    const scrollPosition = window.scrollY + 150; // Añadimos un offset para que el enlace se active un poco antes.
+
+    sections.forEach((section) => {
+      // Comprueba si la posición de scroll está dentro de los límites de la sección actual.
+      if (
+        scrollPosition >= section.offsetTop &&
+        scrollPosition < section.offsetTop + section.offsetHeight
+      ) {
+        // Si es así, elimina la clase activa de todos los enlaces.
+        navLinks.forEach((link) => {
+          link.classList.remove("nav-link-active");
+        });
+
+        // Y añade la clase activa solo al enlace que corresponde a la sección actual.
+        // Se busca un enlace cuyo 'href' contenga el ID de la sección.
+        const correspondingLink = document.querySelector(
+          `header nav .hidden a[href*="${section.id}"]`
+        );
+        if (correspondingLink) {
+          correspondingLink.classList.add("nav-link-active");
+        }
+      }
+    });
+  };
+
+  // Agrega un 'escuchador de eventos' que llama a la función onScroll cada vez que se hace scroll.
+  window.addEventListener("scroll", onScroll);
+  // --- FIN: NUEVA LÓGICA DE SCROLL SPY ---
 });
