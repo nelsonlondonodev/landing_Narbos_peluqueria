@@ -1,0 +1,5 @@
+Reglas para comenzar a trabajar con los archivos día a día.
+
+1. Simpre analizar los archivos al comenzar a trabajar en ellos.
+2. Simpre devolver archivos completos, al hacer cualquier cambio, sin omitir una sola línea de código.
+3. Crear un archivo a la vez, para no forzar la respuesta, y así evitar bug: "Es decir, si vas a hacer modificaciones en diferentes archivos como; HTML, CSS Y JAVASCRIPT entre oros, vas retornado uno a uno y solictando autorzación para crear el siguiente. Ej. Modificas el HTML, luego solicitas autorización para crear el CSS, luego el JS y así sucesivamente".
