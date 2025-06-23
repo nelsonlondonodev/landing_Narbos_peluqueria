@@ -63,12 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   window.addEventListener("scroll", onScroll);
 
-  // --- INICIO: NUEVA LÓGICA PARA DARK MODE ---
+  // --- INICIO: LÓGICA AVANZADA DE TEMA (Claro, Oscuro, Automático) ---
   const themeToggleBtn = document.getElementById("theme-toggle");
   const themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
   const themeToggleLightIcon = document.getElementById(
     "theme-toggle-light-icon"
   );
+  const themeToggleAutoIcon = document.getElementById("theme-toggle-auto-icon");
+
   const themeToggleBtnMobile = document.getElementById("theme-toggle-mobile");
   const themeToggleDarkIconMobile = document.getElementById(
     "theme-toggle-dark-icon-mobile"
@@ -76,43 +78,74 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggleLightIconMobile = document.getElementById(
     "theme-toggle-light-icon-mobile"
   );
+  const themeToggleAutoIconMobile = document.getElementById(
+    "theme-toggle-auto-icon-mobile"
+  );
 
-  // Función para actualizar los íconos del tema
-  const updateThemeIcons = (isDarkMode) => {
-    themeToggleDarkIcon.classList.toggle("hidden", isDarkMode);
-    themeToggleLightIcon.classList.toggle("hidden", !isDarkMode);
-    themeToggleDarkIconMobile.classList.toggle("hidden", isDarkMode);
-    themeToggleLightIconMobile.classList.toggle("hidden", !isDarkMode);
-  };
+  // Función central para aplicar el tema y actualizar los íconos
+  const applyTheme = () => {
+    const theme = localStorage.getItem("theme") || "auto";
 
-  // Función para cambiar el tema
-  const toggleTheme = () => {
-    const isDarkMode = document.documentElement.classList.toggle("dark");
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-    updateThemeIcons(isDarkMode);
-  };
+    // Oculta todos los íconos primero para simplificar la lógica
+    [
+      themeToggleDarkIcon,
+      themeToggleLightIcon,
+      themeToggleAutoIcon,
+      themeToggleDarkIconMobile,
+      themeToggleLightIconMobile,
+      themeToggleAutoIconMobile,
+    ].forEach((icon) => {
+      icon.classList.add("hidden");
+    });
 
-  // Función para verificar el tema inicial al cargar la página
-  const initialThemeCheck = () => {
-    const userHasChosenTheme = "theme" in localStorage;
-    const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-    const isDarkMode = userHasChosenTheme
-      ? localStorage.getItem("theme") === "dark"
-      : systemPrefersDark;
-
-    if (isDarkMode) {
+    if (theme === "dark") {
       document.documentElement.classList.add("dark");
+      themeToggleLightIcon.classList.remove("hidden"); // Muestra el sol para cambiar a claro
+      themeToggleLightIconMobile.classList.remove("hidden");
+    } else if (theme === "light") {
+      document.documentElement.classList.remove("dark");
+      themeToggleDarkIcon.classList.remove("hidden"); // Muestra la luna para cambiar a oscuro
+      themeToggleDarkIconMobile.classList.remove("hidden");
+    } else {
+      // 'auto'
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+      themeToggleAutoIcon.classList.remove("hidden"); // Muestra el engranaje
+      themeToggleAutoIconMobile.classList.remove("hidden");
     }
-    updateThemeIcons(isDarkMode);
   };
 
-  // Añadir los eventos a los botones
-  themeToggleBtn.addEventListener("click", toggleTheme);
-  themeToggleBtnMobile.addEventListener("click", toggleTheme);
+  // Función para ciclar entre los temas al hacer clic
+  const cycleTheme = () => {
+    const currentTheme = localStorage.getItem("theme") || "auto";
+    let nextTheme;
 
-  // Comprobar el tema inicial
-  initialThemeCheck();
-  // --- FIN: LÓGICA PARA DARK MODE ---
+    if (currentTheme === "light") {
+      nextTheme = "dark";
+    } else if (currentTheme === "dark") {
+      nextTheme = "auto";
+    } else {
+      // Si es 'auto'
+      nextTheme = "light";
+    }
+
+    localStorage.setItem("theme", nextTheme);
+    applyTheme();
+  };
+
+  // Escucha cambios en el tema del sistema operativo
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", applyTheme);
+
+  // Añade los eventos de clic a los botones
+  themeToggleBtn.addEventListener("click", cycleTheme);
+  themeToggleBtnMobile.addEventListener("click", cycleTheme);
+
+  // Aplica el tema inicial en cuanto carga la página
+  applyTheme();
+  // --- FIN: LÓGICA AVANZADA DE TEMA ---
 });
