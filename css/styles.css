@@ -1,0 +1,24 @@
+/* Establece el comportamiento de scroll suave para toda la página */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Establece las fuentes base para el cuerpo del documento */
+body {
+  font-family: "Lato", sans-serif;
+}
+
+/* Estilos para los títulos para aplicar la fuente serif */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", serif;
+}
+
+/* NOTA: En un setup con CDN de Tailwind, no podemos usar directivas como @apply.
+  Este archivo es útil para estilos globales como el scroll-behavior o para
+  CSS personalizado que no se puede lograr fácilmente con las utilidades de Tailwind.
+*/

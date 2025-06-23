@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Narbo's Salón Spa | Peluquería y Spa en Chía, Colombia</title>
+    <meta
+      name="description"
+      content="Experimenta belleza y relajación en Narbo's Salón Spa en Chía. Ofrecemos servicios de peluquería, balayage, manicure, estética facial y más. ¡Agenda tu cita!"
+    />
+    <meta
+      name="keywords"
+      content="peluqueria chia, spa chia, balayage, masajes, manicure, narbos spa"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "brand-green": "#6B755A",
+              "brand-light": "#DED2C4",
+              "brand-medium": "#C5AB94",
+              "brand-gray-light": "#BEC2B4",
+              "brand-gray-dark": "#D3D3CB",
+            },
+            fontFamily: {
+              serif: ["Playfair Display", "serif"],
+              sans: ["Lato", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-brand-light font-sans text-gray-800">
+    <header
+      class="bg-brand-light/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm"
+    >
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center max-w-screen-xl"
+      >
+        <a href="#inicio" class="font-serif text-2xl font-bold text-brand-green"
+          >Narbo's Salón Spa</a
+        >
+
+        <div class="hidden md:flex space-x-8">
+          <a
+            href="#servicios"
+            class="text-gray-700 hover:text-brand-green transition-colors"
+            >Servicios</a
+          >
+          <a
+            href="#nosotros"
+            class="text-gray-700 hover:text-brand-green transition-colors"
+            >Nosotros</a
+          >
+          <a
+            href="#galeria"
+            class="text-gray-700 hover:text-brand-green transition-colors"
+            >Galería</a
+          >
+          <a
+            href="#ubicacion"
+            class="text-gray-700 hover:text-brand-green transition-colors"
+            >Ubicación</a
+          >
+          <a
+            href="#contacto"
+            class="text-gray-700 hover:text-brand-green transition-colors"
+            >Contacto</a
+          >
+        </div>
+
+        <div class="md:hidden">
+          <button id="menu-btn" class="text-gray-800 focus:outline-none">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <div id="mobile-menu" class="hidden md:hidden">
+        <a
+          href="#servicios"
+          class="block py-2 px-4 text-sm hover:bg-brand-gray-light"
+          >Servicios</a
+        >
+        <a
+          href="#nosotros"
+          class="block py-2 px-4 text-sm hover:bg-brand-gray-light"
+          >Nosotros</a
+        >
+        <a
+          href="#galeria"
+          class="block py-2 px-4 text-sm hover:bg-brand-gray-light"
+          >Galería</a
+        >
+        <a
+          href="#ubicacion"
+          class="block py-2 px-4 text-sm hover:bg-brand-gray-light"
+          >Ubicación</a
+        >
+        <a
+          href="#contacto"
+          class="block py-2 px-4 text-sm hover:bg-brand-gray-light"
+          >Contacto</a
+        >
+      </div>
+    </header>
+
+    <main>
+      <section
+        id="inicio"
+        class="relative text-white h-[60vh] md:h-[80vh] flex items-center"
+      >
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <img
+          src="https://placehold.co/1920x1080/6B755A/DED2C4?text=Narbo's+Sal%C3%B3n"
+          alt="Interior del salón de belleza"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div
+          class="relative container mx-auto px-6 text-center max-w-screen-xl"
+        >
+          <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4">
+            Tu oasis de belleza y relajación en Chía
+          </h1>
+          <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+            Más de 11 años de experiencia transformando tu estilo y bienestar.
+          </p>
+          <a
+            href="https://wa.me/573123462618"
+            target="_blank"
+            class="bg-brand-green hover:bg-opacity-90 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-light"
+          >
+            Agenda tu Cita por WhatsApp
+          </a>
+        </div>
+      </section>
+
+      <section id="servicios" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6 text-center max-w-screen-xl">
+          <h2 class="text-3xl md:text-4xl font-serif font-bold mb-2">
+            Nuestros Servicios
+          </h2>
+          <p class="text-gray-600 mb-12 max-w-2xl mx-auto">
+            Ofrecemos una amplia gama de tratamientos con productos de alta
+            calidad para realzar tu belleza.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-brand-light p-8 rounded-lg shadow-md text-left">
+              <h3 class="text-xl font-serif font-bold mb-3 text-brand-green">
+                Peluquería
+              </h3>
+              <p class="text-gray-700">
+                Color, balayage, cortes, barbería, maquillaje y peinados con las
+                mejores marcas: Wella, L'Oréal, y Schwarzkopf.
+              </p>
+            </div>
+            <div class="bg-brand-light p-8 rounded-lg shadow-md text-left">
+              <h3 class="text-xl font-serif font-bold mb-3 text-brand-green">
+                Manos y Pies
+              </h3>
+              <p class="text-gray-700">
+                Manicure y pedicure con esmaltado semipermanente, uñas en gel o
+                acrílicas con productos Organic, Belier y Masglo.
+              </p>
+            </div>
+            <div class="bg-brand-light p-8 rounded-lg shadow-md text-left">
+              <h3 class="text-xl font-serif font-bold mb-3 text-brand-green">
+                Estética & Spa
+              </h3>
+              <p class="text-gray-700">
+                Masajes relajantes, drenajes linfáticos, y limpiezas e
+                hidrataciones faciales con productos dermatológicos.
+              </p>
+            </div>
+            <div class="bg-brand-light p-8 rounded-lg shadow-md text-left">
+              <h3 class="text-xl font-serif font-bold mb-3 text-brand-green">
+                Depilación y Pestañas
+              </h3>
+              <p class="text-gray-700">
+                Servicios de depilación con cera o hilo y extensiones de
+                pestañas para una mirada impactante.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="nosotros" class="py-16 md:py-24">
+        <div
+          class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center"
+        >
+          <div>
+            <img
+              src="https://placehold.co/600x400/C5AB94/FFFFFF?text=Equipo+Narbo's"
+              alt="Equipo de Narbo's Salón Spa"
+              class="rounded-lg shadow-xl w-full"
+              loading="lazy"
+            />
+          </div>
+          <div class="text-left">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">
+              Más de una década de experiencia
+            </h2>
+            <p class="text-gray-700 mb-4">
+              En Narbo's Salón Spa, llevamos más de 11 años dedicados al arte de
+              la belleza y el bienestar. Aunque nuestra nueva y moderna sede
+              abrió en 2024, nuestra pasión y experiencia nos acompañan desde
+              2013.
+            </p>
+            <p class="text-gray-700 mb-4">
+              Somos un negocio liderado por mujeres, comprometidas con ofrecerte
+              una experiencia inolvidable. Ofrecemos planes especiales, bonos de
+              regalo y contamos con parqueadero gratuito para tu comodidad.
+            </p>
+            <p class="font-bold text-brand-green">
+              ¡Te esperamos para consentirte!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="galeria" class="py-16 md:py-24 bg-brand-gray-light">
+        <div class="container mx-auto px-6 text-center max-w-screen-xl">
+          <h2 class="text-3xl md:text-4xl font-serif font-bold mb-12">
+            Nuestros Trabajos
+          </h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="overflow-hidden rounded-lg">
+              <img
+                src="https://placehold.co/400x400/6B755A/FFFFFF?text=Balayage"
+                alt="Trabajo de balayage"
+                class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <div class="overflow-hidden rounded-lg">
+              <img
+                src="https://placehold.co/400x400/C5AB94/FFFFFF?text=U%C3%B1as"
+                alt="Diseño de uñas acrílicas"
+                class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <div class="overflow-hidden rounded-lg">
+              <img
+                src="https://placehold.co/400x400/BEC2B4/FFFFFF?text=Corte"
+                alt="Corte de cabello moderno"
+                class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <div class="overflow-hidden rounded-lg">
+              <img
+                src="https://placehold.co/400x400/DED2C4/333333?text=Maquillaje"
+                alt="Maquillaje profesional"
+                class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ubicacion" class="py-16 md:py-24 bg-white">
+        <div
+          class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center"
+        >
+          <div class="text-left">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">
+              Visítanos
+            </h2>
+            <p class="text-gray-700 text-lg mb-4">
+              Kilómetro 2 vía Chía-Cajicá, Bajos del hotel Ibis, Chía,
+              Cundinamarca.
+            </p>
+            <h3 class="text-2xl font-serif font-bold mb-4 mt-8">
+              Horario de Atención
+            </h3>
+            <ul class="text-gray-700 space-y-2">
+              <li><strong>Lunes a Sábado:</strong> 7:00 a.m. – 8:00 p.m.</li>
+              <li><strong>Domingo:</strong> 9:00 a.m. – 2:00 p.m.</li>
+            </ul>
+          </div>
+          <div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.170682136931!2d-74.0538048!3d4.7408899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9f30e9d6d399%3A0x6778c187e0767e7a!2sNarbos%20sal%C3%B3n%20spa!5e0!3m2!1ses!2sco!4v1718974579309!5m2!1ses!2sco"
+              width="100%"
+              height="400"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="rounded-lg shadow-xl"
+            >
+            </iframe>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="py-16 md:py-24 bg-brand-light">
+        <div class="container mx-auto px-6 max-w-screen-xl text-center">
+          <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">
+            Contáctanos
+          </h2>
+          <p class="text-gray-600 mb-8 max-w-xl mx-auto">
+            ¿Tienes alguna pregunta o quieres agendar? Escríbenos o llámanos.
+            Estamos para servirte.
+          </p>
+          <form id="contact-form" class="max-w-xl mx-auto text-left">
+            <div class="mb-4">
+              <label for="name" class="block text-gray-700 mb-2">Nombre</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full p-3 rounded-md border border-brand-medium focus:ring-2 focus:ring-brand-green focus:outline-none"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block text-gray-700 mb-2"
+                >Correo Electrónico</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full p-3 rounded-md border border-brand-medium focus:ring-2 focus:ring-brand-green focus:outline-none"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="message" class="block text-gray-700 mb-2"
+                >Mensaje</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                class="w-full p-3 rounded-md border border-brand-medium focus:ring-2 focus:ring-brand-green focus:outline-none"
+                required
+              ></textarea>
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="bg-brand-green hover:bg-opacity-90 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-light"
+              >
+                Enviar Mensaje
+              </button>
+            </div>
+            <p id="form-status" class="text-center mt-4"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12">
+      <div class="container mx-auto px-6 text-center max-w-screen-xl">
+        <a href="#inicio" class="font-serif text-2xl font-bold"
+          >Narbo's Salón Spa</a
+        >
+        <p class="my-4">
+          Kilómetro 2 vía Chía-Cajicá, Bajos del hotel Ibis, Chía, Cundinamarca
+        </p>
+        <div class="flex justify-center space-x-6 my-6">
+          <a
+            href="https://wa.me/573123462618"
+            target="_blank"
+            class="hover:text-brand-gray-light transition-colors"
+            >WhatsApp</a
+          >
+          <a
+            href="https://www.instagram.com/narbos_salon_spa/"
+            target="_blank"
+            class="hover:text-brand-gray-light transition-colors"
+            >Instagram</a
+          >
+          <a
+            href="https://www.facebook.com/p/Narbos-Spa-61552033490282/"
+            target="_blank"
+            class="hover:text-brand-gray-light transition-colors"
+            >Facebook</a
+          >
+          <a
+            href="https://www.tiktok.com/@narbosspa2508"
+            target="_blank"
+            class="hover:text-brand-gray-light transition-colors"
+            >TikTok</a
+          >
+        </div>
+        <p class="text-sm text-gray-400">
+          &copy; 2025 Narbo's Salón Spa. Todos los derechos reservados.
+        </p>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
