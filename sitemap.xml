@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- 
-    Este es el mapa del sitio para Narbo's Salón Spa.
-    Ayuda a los motores de búsqueda a entender la estructura de tu página.
-    Recuerda reemplazar "https://www.narbossalonspa.com" con tu dominio real.
-  -->
-
-  <!-- Página Principal -->
   <url>
     <loc>https://www.narbossalonspa.com/</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Secciones de la Landing Page -->
   <url>
     <loc>https://www.narbossalonspa.com/#servicios</loc>
     <lastmod>2025-06-23</lastmod>
@@ -30,7 +22,7 @@
   </url>
   <url>
     <loc>https://www.narbossalonspa.com/#galeria</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
