@@ -49,6 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
       galleryAlt2: "Diseño de uñas acrílicas creativo",
       galleryAlt3: "Corte de cabello moderno para mujer",
       galleryAlt4: "Maquillaje profesional para evento",
+      galleryAlt5: "Peinado elegante para ocasión especial",
+      galleryAlt6: "Tratamiento facial de limpieza profunda",
       locationTitle: "Visítanos",
       locationAddress:
         "Kilómetro 2 vía Chía-Cajicá, Bajos del hotel Ibis, Chía, Cundinamarca.",
@@ -120,6 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
       galleryAlt2: "Creative acrylic nail design",
       galleryAlt3: "Modern haircut for women",
       galleryAlt4: "Professional makeup for an event",
+      galleryAlt5: "Elegant hairstyle for a special occasion",
+      galleryAlt6: "Deep cleansing facial treatment",
       locationTitle: "Visit Us",
       locationAddress:
         "Kilometer 2 Chía-Cajicá road, beneath the Ibis hotel, Chía, Cundinamarca.",
