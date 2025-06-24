@@ -34,3 +34,17 @@ Implementación de Multi-idioma (i18n) y Correcciones Visuales**
 * Se expandió la galería de 4 a 6 imágenes para mostrar un portafolio de trabajos más extenso.
 * Se modificó la cuadrícula de la galería para una visualización óptima de 3x2 en dispositivos de escritorio y tableta.
 * Se actualizaron los archivos `index.html`, `script.js` (para textos alternativos multi-idioma) y `sitemap.xml` (para la fecha de modificación) para reflejar los cambios.
+---
+### Guías de Contenido y Especificaciones Técnicas
+
+**1. Especificaciones para Imágenes de la Galería**
+* **Forma (Aspecto)**: Cuadrada (relación 1:1).
+* **Resolución Ideal**: 800 x 800 píxeles (para asegurar alta calidad en todas las pantallas).
+* **Resolución Mínima**: 400 x 400 píxeles.
+* **Nota Técnica**: El diseño utiliza contenedores cuadrados. Las imágenes que no sean cuadradas serán recortadas automáticamente por el navegador para que encajen en el espacio.
+
+**2. Optimización de Imágenes para la Web**
+* **Dimensión vs. Peso**: La dimensión (ej. 800x800 píxeles) define la calidad visual, mientras que el peso del archivo (ej. 150 KB) afecta la velocidad de carga. El objetivo es tener alta calidad con bajo peso.
+* **Compresión**: Antes de subir una imagen, se debe comprimir usando herramientas online como TinyPNG o Squoosh. El peso ideal por imagen debería ser inferior a 150 KB.
+* **Formato Moderno (WebP)**: Se recomienda usar el formato WebP, ya que ofrece una compresión superior a JPG y PNG. Es compatible con todos los navegadores modernos.
+* **Carga Diferida (Lazy Loading)**: El sitio ya implementa `loading="lazy"` en las imágenes. Esto significa que las imágenes solo se cargan cuando el usuario se acerca a ellas, optimizando drásticamente la velocidad de carga inicial de la página.
