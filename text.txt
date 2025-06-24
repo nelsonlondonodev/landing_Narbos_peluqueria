@@ -1,25 +1,36 @@
-Reglas para comenzar a trabajar con los archivos día a día. 
-1. Simpre analizar los archivos al comenzar a trabajar en ellos. 
-2. Simpre devolver archivos completos, al hacer cualquier cambio, sin omitir una sola línea de código. 
-3. Crear un archivo a la vez, para no forzar la respuesta, y así evitar bug: "Es decir, si vas a hacer modificaciones en diferentes archivos como; HTML, CSS Y JAVASCRIPT entre oros, vas retornado uno a uno y solictando autorzación para crear el siguiente. Ej. Modificas el HTML, luego solicitas autorización para crear el CSS, luego el JS y así sucesivamente". 
+Reglas para comenzar a trabajar con los archivos día a día.
+1. Simpre analizar los archivos al comenzar a trabajar en ellos.
+2. Simpre devolver archivos completos, al hacer cualquier cambio, sin omitir una sola línea de código.
+3. Crear un archivo a la vez, para no forzar la respuesta, y así evitar bug: "Es decir, si vas a hacer modificaciones en diferentes archivos como; HTML, CSS Y JAVASCRIPT entre oros, vas retornado uno a uno y solictando autorzación para crear el siguiente. Ej. Modificas el HTML, luego solicitas autorización para crear el CSS, luego el JS y así sucesivamente".
 --- 
 ### Historial de Mejoras - 23 de Junio de 2025
 
-**1. Mejora de Interfaz y Experiencia de Usuario (UI/UX)** 
-* Se integraron gradientes en fondos y botones para un diseño más profundo y moderno. 
+**1.
+Mejora de Interfaz y Experiencia de Usuario (UI/UX)** * Se integraron gradientes en fondos y botones para un diseño más profundo y moderno. 
 * Se añadieron micro-interacciones (efectos `hover`) a tarjetas, botones y galería para una mejor retroalimentación visual. 
 
-**2. Interactividad Avanzada en la Navegación** 
-* Se implementó la funcionalidad "Scroll Spy" para resaltar automáticamente en el menú la sección visible en pantalla. 
+**2.
+Interactividad Avanzada en la Navegación** * Se implementó la funcionalidad "Scroll Spy" para resaltar automáticamente en el menú la sección visible en pantalla. 
 * Se añadió el enlace "Inicio", que faltaba en los menús de navegación, para mejorar la usabilidad. 
 
-**3. Implementación de Tema Avanzado (Dark Mode)** 
-* Se añadió un selector de tema con tres modos: Claro, Oscuro y Automático. 
+**3.
+Implementación de Tema Avanzado (Dark Mode)** * Se añadió un selector de tema con tres modos: Claro, Oscuro y Automático. 
 * **Modo Automático:** La página detecta y se sincroniza en tiempo real con el tema del sistema operativo del usuario. 
 * **Persistencia:** La preferencia de tema del usuario se guarda en su navegador para futuras visitas. 
 
-**4. Implementación de Multi-idioma (i18n) y Correcciones Visuales**
-* Se añadió un selector de idioma para permitir a los usuarios cambiar el contenido entre Español e Inglés.
-* La preferencia de idioma del usuario se guarda en su navegador (localStorage) para futuras visitas, con Español como idioma por defecto.
-* Se incorporaron banderas junto a los selectores de idioma (ES/EN) para una identificación visual más clara.
-* Se corrigieron errores de renderizado en los iconos del selector de tema (claro/oscuro/auto) reemplazando el código SVG por versiones más robustas y compatibles.
+**4.
+Implementación de Multi-idioma (i18n) y Correcciones Visuales**
+* Se añadió un selector de idioma para permitir a los usuarios cambiar el contenido entre Español e Inglés. 
+* La preferencia de idioma del usuario se guarda en su navegador (localStorage) para futuras visitas, con Español como idioma por defecto. 
+* Se incorporaron banderas junto a los selectores de idioma (ES/EN) para una identificación visual más clara. 
+* Se corrigieron errores de renderizado en los iconos del selector de tema (claro/oscuro/auto) reemplazando el código SVG por versiones más robustas y compatibles. 
+---
+### Historial de Mejoras - 24 de Junio de 2025
+
+**1. Corrección y Mejora de Iconos de Servicios**
+* Se reemplazaron los iconos SVG genéricos en la sección 'Nuestros Servicios' por gráficos más representativos y claros para cada categoría (Peluquería, Manos y Pies, etc.), mejorando la legibilidad y la experiencia de usuario.
+
+**2. Ampliación de la Galería de Trabajos**
+* Se expandió la galería de 4 a 6 imágenes para mostrar un portafolio de trabajos más extenso.
+* Se modificó la cuadrícula de la galería para una visualización óptima de 3x2 en dispositivos de escritorio y tableta.
+* Se actualizaron los archivos `index.html`, `script.js` (para textos alternativos multi-idioma) y `sitemap.xml` (para la fecha de modificación) para reflejar los cambios.
