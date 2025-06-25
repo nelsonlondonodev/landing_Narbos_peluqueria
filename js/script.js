@@ -212,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Aplica el idioma guardado o el predeterminado al cargar la página
   const currentLang = localStorage.getItem("language") || "es";
   setLanguage(currentLang);
 
@@ -356,4 +355,15 @@ document.addEventListener("DOMContentLoaded", () => {
   themeToggleBtnMobile.addEventListener("click", cycleTheme);
   applyTheme();
   // --- FIN: LÓGICA AVANZADA DE TEMA ---
+
+  // --- INICIO: LÓGICA DE LIGHTBOX GALLERY (GLightbox) --- (NUEVO)
+  const lightbox = GLightbox({
+    selector: ".glightbox",
+    touchNavigation: true,
+    loop: true,
+    preload: true,
+    closeEffect: "fade",
+    slideEffect: "fade",
+  });
+  // --- FIN: LÓGICA DE LIGHTBOX GALLERY ---
 });
