@@ -3,6 +3,25 @@ Reglas para comenzar a trabajar con los archivos día a día.
 2. Siempre devolver archivos completos, al hacer cualquier cambio, sin omitir una sola línea de código.
 3. Crear un archivo a la vez, para no forzar la respuesta, y así evitar bug: "Es decir, si vas a hacer modificaciones en diferentes archivos como; HTML, CSS Y JAVASCRIPT entre oros, vas retornado uno a uno y solictando autorzación para crear el siguiente. Ej. Modificas el HTML, luego solicitas autorización para crear el CSS, luego el JS y así sucesivamente".
 --- 
+
+----------------------------------Proximas mejoras----------------------------------------
+
+Sugerencia de Mejora: Funcionalidad "Lightbox"
+El diseño está genial, pero si queremos enriquecer la experiencia del usuario, podríamos añadirle una funcionalidad de Lightbox.
+
+¿Cómo funcionaría?
+
+El usuario hace clic en cualquiera de las imágenes de la galería.
+La imagen en la que hizo clic se abre en grande, centrada en la pantalla con un fondo oscuro semitransparente.
+El usuario puede navegar para ver la imagen anterior o la siguiente usando flechas a los lados.
+Puede cerrar la vista ampliada fácilmente (con un botón 'X' o presionando la tecla 'Escape').
+¿Por qué es una buena mejora?
+
+Permite ver los detalles: Tus clientes potenciales podrán apreciar la calidad de tu trabajo (color, detalles de uñas, etc.) en alta resolución.
+Experiencia inmersiva: Mantiene al usuario enganchado en tu contenido visual sin tener que salir de la página.
+Estándar profesional: Es una funcionalidad muy común y esperada en los portafolios de alta calidad hoy en día.
+---
+
 ### Historial de Mejoras - 23 de Junio de 2025
 
 **1.
@@ -48,3 +67,4 @@ Implementación de Multi-idioma (i18n) y Correcciones Visuales**
 * **Compresión**: Antes de subir una imagen, se debe comprimir usando herramientas online como TinyPNG o Squoosh. El peso ideal por imagen debería ser inferior a 150 KB.
 * **Formato Moderno (WebP)**: Se recomienda usar el formato WebP, ya que ofrece una compresión superior a JPG y PNG. Es compatible con todos los navegadores modernos.
 * **Carga Diferida (Lazy Loading)**: El sitio ya implementa `loading="lazy"` en las imágenes. Esto significa que las imágenes solo se cargan cuando el usuario se acerca a ellas, optimizando drásticamente la velocidad de carga inicial de la página.
+
