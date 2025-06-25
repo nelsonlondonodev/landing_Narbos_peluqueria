@@ -8,34 +8,33 @@ Reglas para comenzar a trabajar con los archivos día a día.
 
 Sugerencia de Mejora: Funcionalidad "Lightbox"
 El diseño está genial, pero si queremos enriquecer la experiencia del usuario, podríamos añadirle una funcionalidad de Lightbox.
-
 ¿Cómo funcionaría?
 
-El usuario hace clic en cualquiera de las imágenes de la galería.
-La imagen en la que hizo clic se abre en grande, centrada en la pantalla con un fondo oscuro semitransparente.
-El usuario puede navegar para ver la imagen anterior o la siguiente usando flechas a los lados.
-Puede cerrar la vista ampliada fácilmente (con un botón 'X' o presionando la tecla 'Escape').
+El usuario hace clic en cualquiera de las imágenes de la galería. 
+La imagen en la que hizo clic se abre en grande, centrada en la pantalla con un fondo oscuro semitransparente. 
+El usuario puede navegar para ver la imagen anterior o la siguiente usando flechas a los lados. 
+Puede cerrar la vista ampliada fácilmente (con un botón 'X' o presionando la tecla 'Escape'). 
 ¿Por qué es una buena mejora?
 
-Permite ver los detalles: Tus clientes potenciales podrán apreciar la calidad de tu trabajo (color, detalles de uñas, etc.) en alta resolución.
-Experiencia inmersiva: Mantiene al usuario enganchado en tu contenido visual sin tener que salir de la página.
-Estándar profesional: Es una funcionalidad muy común y esperada en los portafolios de alta calidad hoy en día.
+Permite ver los detalles: Tus clientes potenciales podrán apreciar la calidad de tu trabajo (color, detalles de uñas, etc.) en alta resolución. 
+Experiencia inmersiva: Mantiene al usuario enganchado en tu contenido visual sin tener que salir de la página. 
+Estándar profesional: Es una funcionalidad muy común y esperada en los portafolios de alta calidad hoy en día. 
 ---
 
 ### Historial de Mejoras - 23 de Junio de 2025
 
 **1.
 Mejora de Interfaz y Experiencia de Usuario (UI/UX)** * Se integraron gradientes en fondos y botones para un diseño más profundo y moderno. 
-* Se añadieron micro-interacciones (efectos `hover`) a tarjetas, botones y galería para una mejor retroalimentación visual. 
+* Se añadieron micro-interacciones (efectos `hover`) a tarjetas, botones y galería para una mejor retroalimentación visual.  
 
 **2.
 Interactividad Avanzada en la Navegación** * Se implementó la funcionalidad "Scroll Spy" para resaltar automáticamente en el menú la sección visible en pantalla. 
-* Se añadió el enlace "Inicio", que faltaba en los menús de navegación, para mejorar la usabilidad. 
+* Se añadió el enlace "Inicio", que faltaba en los menús de navegación, para mejorar la usabilidad.  
 
 **3.
 Implementación de Tema Avanzado (Dark Mode)** * Se añadió un selector de tema con tres modos: Claro, Oscuro y Automático. 
 * **Modo Automático:** La página detecta y se sincroniza en tiempo real con el tema del sistema operativo del usuario. 
-* **Persistencia:** La preferencia de tema del usuario se guarda en su navegador para futuras visitas. 
+* **Persistencia:** La preferencia de tema del usuario se guarda en su navegador para futuras visitas.  
 
 **4.
 Implementación de Multi-idioma (i18n) y Correcciones Visuales**
@@ -46,25 +45,37 @@ Implementación de Multi-idioma (i18n) y Correcciones Visuales**
 ---
 ### Historial de Mejoras - 24 de Junio de 2025
 
-**1. Corrección y Mejora de Iconos de Servicios**
-* Se reemplazaron los iconos SVG genéricos en la sección 'Nuestros Servicios' por gráficos más representativos y claros para cada categoría (Peluquería, Manos y Pies, etc.), mejorando la legibilidad y la experiencia de usuario.
-
+**1.
+Corrección y Mejora de Iconos de Servicios**
+* Se reemplazaron los iconos SVG genéricos en la sección 'Nuestros Servicios' por gráficos más representativos y claros para cada categoría (Peluquería, Manos y Pies, etc.), mejorando la legibilidad y la experiencia de usuario. 
 **2. Ampliación de la Galería de Trabajos**
-* Se expandió la galería de 4 a 6 imágenes para mostrar un portafolio de trabajos más extenso.
-* Se modificó la cuadrícula de la galería para una visualización óptima de 3x2 en dispositivos de escritorio y tableta.
-* Se actualizaron los archivos `index.html`, `script.js` (para textos alternativos multi-idioma) y `sitemap.xml` (para la fecha de modificación) para reflejar los cambios.
+* Se expandió la galería de 4 a 6 imágenes para mostrar un portafolio de trabajos más extenso. 
+* Se modificó la cuadrícula de la galería para una visualización óptima de 3x2 en dispositivos de escritorio y tableta. 
+* Se actualizaron los archivos `index.html`, `script.js` (para textos alternativos multi-idioma) y `sitemap.xml` (para la fecha de modificación) para reflejar los cambios. 
+---
+### Historial de Mejoras - 25 de Junio de 2025 (NUEVO)
+
+**1. Implementación de Galería "Lightbox"**
+* Se integró la librería GLightbox para mejorar la experiencia de usuario en la galería de trabajos.
+* Ahora los usuarios pueden hacer clic en una imagen para verla en una vista ampliada y centrada.
+* Se añadió navegación con flechas (anterior/siguiente) y la posibilidad de cerrar la vista con la tecla 'Escape' o un botón 'X'.
 ---
 ### Guías de Contenido y Especificaciones Técnicas
 
 **1. Especificaciones para Imágenes de la Galería**
 * **Forma (Aspecto)**: Cuadrada (relación 1:1).
-* **Resolución Ideal**: 800 x 800 píxeles (para asegurar alta calidad en todas las pantallas).
-* **Resolución Mínima**: 400 x 400 píxeles.
-* **Nota Técnica**: El diseño utiliza contenedores cuadrados. Las imágenes que no sean cuadradas serán recortadas automáticamente por el navegador para que encajen en el espacio.
+* **Resolución Ideal**: 800 x 800 píxeles (para asegurar alta calidad en todas las pantallas). 
+* **Resolución Mínima**: 400 x 400 píxeles. 
+* **Nota Técnica**: El diseño utiliza contenedores cuadrados.
+Las imágenes que no sean cuadradas serán recortadas automáticamente por el navegador para que encajen en el espacio. 
 
-**2. Optimización de Imágenes para la Web**
-* **Dimensión vs. Peso**: La dimensión (ej. 800x800 píxeles) define la calidad visual, mientras que el peso del archivo (ej. 150 KB) afecta la velocidad de carga. El objetivo es tener alta calidad con bajo peso.
-* **Compresión**: Antes de subir una imagen, se debe comprimir usando herramientas online como TinyPNG o Squoosh. El peso ideal por imagen debería ser inferior a 150 KB.
-* **Formato Moderno (WebP)**: Se recomienda usar el formato WebP, ya que ofrece una compresión superior a JPG y PNG. Es compatible con todos los navegadores modernos.
-* **Carga Diferida (Lazy Loading)**: El sitio ya implementa `loading="lazy"` en las imágenes. Esto significa que las imágenes solo se cargan cuando el usuario se acerca a ellas, optimizando drásticamente la velocidad de carga inicial de la página.
-
+**2.
+Optimización de Imágenes para la Web**
+* **Dimensión vs. Peso**: La dimensión (ej. 800x800 píxeles) define la calidad visual, mientras que el peso del archivo (ej. 150 KB) afecta la velocidad de carga. 
+El objetivo es tener alta calidad con bajo peso. 
+* **Compresión**: Antes de subir una imagen, se debe comprimir usando herramientas online como TinyPNG o Squoosh.
+El peso ideal por imagen debería ser inferior a 150 KB. 
+* **Formato Moderno (WebP)**: Se recomienda usar el formato WebP, ya que ofrece una compresión superior a JPG y PNG. 
+Es compatible con todos los navegadores modernos. 
+* **Carga Diferida (Lazy Loading)**: El sitio ya implementa `loading="lazy"` en las imágenes.
+Esto significa que las imágenes solo se cargan cuando el usuario se acerca a ellas, optimizando drásticamente la velocidad de carga inicial de la página.
