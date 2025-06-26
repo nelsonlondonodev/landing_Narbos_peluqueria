@@ -46,3 +46,24 @@ header nav .hidden a {
   Este archivo es útil para estilos globales como el scroll-behavior o para
   CSS personalizado que no se puede lograr fácilmente con las utilidades de Tailwind.
 */
+
+/* --- INICIO: ESTILOS PARA SLIDER DE RESEÑAS --- */
+
+/*
+  Añade una transición suave a las reseñas para que
+  aparezcan y desaparezcan con un efecto de fundido.
+*/
+.review-slide {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- FIN: ESTILOS PARA SLIDER DE RESEÑAS --- */

@@ -74,6 +74,15 @@ document.addEventListener("DOMContentLoaded", () => {
       footerLinkTiktok: "TikTok",
       footerCopyright:
         "© 2025 Narbo's Salón Spa. Todos los derechos reservados.",
+      reviewsTitle: "Lo que dicen nuestros clientes",
+      reviewsSubtitle:
+        "Estamos orgullosos de la experiencia que ofrecemos. Aquí tienes algunas de las reseñas de Google que más nos inspiran.",
+      review1Text:
+        '"¡El mejor balayage que me han hecho! El personal es súper profesional y amable. El lugar es hermoso y muy relajante. ¡Totalmente recomendado!"',
+      review1Author: "- Valentina R.",
+      review2Text:
+        '"La atención es de primera, el masaje relajante fue increíble y las instalaciones son impecables. Un oasis en medio de la ciudad. ¡Volveré pronto!"',
+      review2Author: "- Carlos G.",
     },
     en: {
       metaTitle: "Narbo's Salon Spa | Hair & Spa in Chía, Colombia",
@@ -147,6 +156,15 @@ document.addEventListener("DOMContentLoaded", () => {
       footerLinkFacebook: "Facebook",
       footerLinkTiktok: "TikTok",
       footerCopyright: "© 2025 Narbo's Salón Spa. All rights reserved.",
+      reviewsTitle: "What Our Clients Say",
+      reviewsSubtitle:
+        "We are proud of the experience we offer. Here are some of the most inspiring Google reviews.",
+      review1Text:
+        '"The best balayage I\'ve ever had! The staff is super professional and friendly. The place is beautiful and very relaxing. Totally recommended!"',
+      review1Author: "- Valentina R.",
+      review2Text:
+        '"Top-notch service, the relaxing massage was incredible, and the facilities are spotless. An oasis in the middle of the city. I\'ll be back soon!"',
+      review2Author: "- Carlos G.",
     },
   };
 
@@ -356,7 +374,36 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTheme();
   // --- FIN: LÓGICA AVANZADA DE TEMA ---
 
-  // --- INICIO: LÓGICA DE LIGHTBOX GALLERY (GLightbox) --- (NUEVO)
+  // --- INICIO: LÓGICA DEL SLIDER DE RESEÑAS ---
+  const reviewSlides = document.querySelectorAll(".review-slide");
+  const prevBtn = document.getElementById("prev-review");
+  const nextBtn = document.getElementById("next-review");
+  let currentReviewIndex = 0;
+
+  const showReview = (index) => {
+    reviewSlides.forEach((slide, i) => {
+      slide.style.display = i === index ? "block" : "none";
+    });
+  };
+
+  prevBtn.addEventListener("click", () => {
+    currentReviewIndex =
+      (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
+    showReview(currentReviewIndex);
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentReviewIndex = (currentReviewIndex + 1) % reviewSlides.length;
+    showReview(currentReviewIndex);
+  });
+
+  // Mostrar la primera reseña al cargar la página
+  if (reviewSlides.length > 0) {
+    showReview(currentReviewIndex);
+  }
+  // --- FIN: LÓGICA DEL SLIDER DE RESEÑAS ---
+
+  // --- INICIO: LÓGICA DE LIGHTBOX GALLERY (GLightbox) ---
   const lightbox = GLightbox({
     selector: ".glightbox",
     touchNavigation: true,
