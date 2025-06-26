@@ -78,11 +78,14 @@ document.addEventListener("DOMContentLoaded", () => {
       reviewsSubtitle:
         "Estamos orgullosos de la experiencia que ofrecemos. Aquí tienes algunas de las reseñas de Google que más nos inspiran.",
       review1Text:
-        '"¡El mejor balayage que me han hecho! El personal es súper profesional y amable. El lugar es hermoso y muy relajante. ¡Totalmente recomendado!"',
-      review1Author: "- Valentina R.",
+        '"Narbo’s Spa es mi lugar favorito para consentirme. La atención siempre es impecable, el ambiente es relajante y el servicio de uñas es espectacular. Cada vez que voy, salgo feliz con el resultado. Son muy detallistas, puntuales y cuidan cada detalle. ¡Súper recomendado!"',
+      review1Author: "- HeLLeN GaLiiNdO",
       review2Text:
-        '"La atención es de primera, el masaje relajante fue increíble y las instalaciones son impecables. Un oasis en medio de la ciudad. ¡Volveré pronto!"',
-      review2Author: "- Carlos G.",
+        '"Siempre me atienden con la mejor energía, el servicio es súper profesional y se nota el amor que le ponen a cada detalle. Mis uñas siempre quedan hermosas, duran un montón y me encanta cómo siempre logran justo lo que quiero. ¡Mil gracias por siempre hacerme sentir tan bien y por ese talento increíble que tienen! 💅✨"',
+      review2Author: "- manuela pardo",
+      review3Text:
+        '"Excelente lugar! La atención es espectacular, los servicios y productos ofrecidos son de excelente calidad, sales realmente renovad@😉"',
+      review3Author: "- Claudia Escobar",
     },
     en: {
       metaTitle: "Narbo's Salon Spa | Hair & Spa in Chía, Colombia",
@@ -160,11 +163,14 @@ document.addEventListener("DOMContentLoaded", () => {
       reviewsSubtitle:
         "We are proud of the experience we offer. Here are some of the most inspiring Google reviews.",
       review1Text:
-        '"The best balayage I\'ve ever had! The staff is super professional and friendly. The place is beautiful and very relaxing. Totally recommended!"',
-      review1Author: "- Valentina R.",
+        '"Narbo’s Spa es mi lugar favorito para consentirme. La atención siempre es impecable, el ambiente es relajante y el servicio de uñas es espectacular. Cada vez que voy, salgo feliz con el resultado. Son muy detallistas, puntuales y cuidan cada detalle. ¡Súper recomendado!"',
+      review1Author: "- HeLLeN GaLiiNdO",
       review2Text:
-        '"Top-notch service, the relaxing massage was incredible, and the facilities are spotless. An oasis in the middle of the city. I\'ll be back soon!"',
-      review2Author: "- Carlos G.",
+        '"Siempre me atienden con la mejor energía, el servicio es súper profesional y se nota el amor que le ponen a cada detalle. Mis uñas siempre quedan hermosas, duran un montón y me encanta cómo siempre logran justo lo que quiero. ¡Mil gracias por siempre hacerme sentir tan bien y por ese talento increíble que tienen! 💅✨"',
+      review2Author: "- manuela pardo",
+      review3Text:
+        '"Excelente lugar! La atención es espectacular, los servicios y productos ofrecidos son de excelente calidad, sales realmente renovad@😉"',
+      review3Author: "- Claudia Escobar",
     },
   };
 
@@ -386,19 +392,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  prevBtn.addEventListener("click", () => {
-    currentReviewIndex =
-      (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
-    showReview(currentReviewIndex);
-  });
-
-  nextBtn.addEventListener("click", () => {
-    currentReviewIndex = (currentReviewIndex + 1) % reviewSlides.length;
-    showReview(currentReviewIndex);
-  });
-
-  // Mostrar la primera reseña al cargar la página
   if (reviewSlides.length > 0) {
+    prevBtn.addEventListener("click", () => {
+      currentReviewIndex =
+        (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
+      showReview(currentReviewIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentReviewIndex = (currentReviewIndex + 1) % reviewSlides.length;
+      showReview(currentReviewIndex);
+    });
+
+    // Mostrar la primera reseña al cargar la página
     showReview(currentReviewIndex);
   }
   // --- FIN: LÓGICA DEL SLIDER DE RESEÑAS ---
