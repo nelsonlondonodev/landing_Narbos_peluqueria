@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
       locationHoursDays:
         "<strong>Lunes a Sábado:</strong> 7:00 a.m. – 8:00 p.m.",
       locationHoursSun: "<strong>Domingo:</strong> 9:00 a.m. – 2:00 p.m.",
+      locationHoursHolidays: "<strong>Festivos:</strong> 9:00 a.m. – 2:00 p.m.", // <--- LÍNEA NUEVA
       footerTitle: "Agenda tu cita hoy",
       footerSubtitle:
         "Llámanos o escríbenos por WhatsApp. O si prefieres, déjanos un mensaje aquí:",
@@ -143,6 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
       locationHoursDays:
         "<strong>Monday to Saturday:</strong> 7:00 a.m. – 8:00 p.m.",
       locationHoursSun: "<strong>Sunday:</strong> 9:00 a.m. – 2:00 p.m.",
+      locationHoursHolidays: "<strong>Holidays:</strong> 9:00 a.m. – 2:00 p.m.", // <--- LÍNEA NUEVA
       footerTitle: "Book your appointment today",
       footerSubtitle:
         "Call or write to us on WhatsApp. Or if you prefer, leave us a message here:",
