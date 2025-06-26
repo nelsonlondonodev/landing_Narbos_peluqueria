@@ -380,19 +380,35 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTheme();
   // --- FIN: LÓGICA AVANZADA DE TEMA ---
 
-  // --- INICIO: LÓGICA DEL SLIDER DE RESEÑAS ---
+  // --- INICIO: LÓGICA DEL SLIDER DE RESEÑAS (CON AUTOPLAY) ---
+  const sliderContainer = document.getElementById("reviews-slider");
   const reviewSlides = document.querySelectorAll(".review-slide");
   const prevBtn = document.getElementById("prev-review");
   const nextBtn = document.getElementById("next-review");
-  let currentReviewIndex = 0;
-
-  const showReview = (index) => {
-    reviewSlides.forEach((slide, i) => {
-      slide.style.display = i === index ? "block" : "none";
-    });
-  };
 
   if (reviewSlides.length > 0) {
+    let currentReviewIndex = 0;
+    let autoPlayInterval;
+
+    const showReview = (index) => {
+      reviewSlides.forEach((slide, i) => {
+        slide.style.display = i === index ? "block" : "none";
+      });
+    };
+
+    const nextReview = () => {
+      currentReviewIndex = (currentReviewIndex + 1) % reviewSlides.length;
+      showReview(currentReviewIndex);
+    };
+
+    const startAutoPlay = () => {
+      autoPlayInterval = setInterval(nextReview, 7000); // Cambia cada 7 segundos
+    };
+
+    const stopAutoPlay = () => {
+      clearInterval(autoPlayInterval);
+    };
+
     prevBtn.addEventListener("click", () => {
       currentReviewIndex =
         (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
@@ -400,12 +416,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     nextBtn.addEventListener("click", () => {
-      currentReviewIndex = (currentReviewIndex + 1) % reviewSlides.length;
-      showReview(currentReviewIndex);
+      nextReview();
     });
 
-    // Mostrar la primera reseña al cargar la página
+    sliderContainer.addEventListener("mouseenter", stopAutoPlay);
+    sliderContainer.addEventListener("mouseleave", startAutoPlay);
+
+    prevBtn.addEventListener("click", stopAutoPlay);
+    nextBtn.addEventListener("click", stopAutoPlay);
+
+    // Iniciar todo
     showReview(currentReviewIndex);
+    startAutoPlay();
   }
   // --- FIN: LÓGICA DEL SLIDER DE RESEÑAS ---
 
