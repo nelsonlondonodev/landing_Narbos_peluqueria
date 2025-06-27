@@ -88,22 +88,24 @@
                     <svg id="theme-toggle-light-icon-mobile" class="hidden w-5 h-5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                     <svg id="theme-toggle-auto-icon-mobile" class="hidden w-5 h-5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                 </button>
-                <button id="menu-btn" class="text-gray-800 dark:text-gray-200 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <button id="menu-btn" class="text-gray-800 dark:text-gray-200 focus:outline-none z-50">
+                    <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg id="menu-close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
         </nav>
-
-        <div id="mobile-menu" class="hidden md:hidden">
-            <a href="#inicio" data-key="navInicioMobile" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Inicio</a>
-            <a href="#servicios" data-key="navServiciosMobile" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Servicios</a>
-            <a href="#nosotros" data-key="navNosotrosMobile" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Nosotros</a>
-            <a href="#galeria" data-key="navGaleriaMobile" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Galería</a>
-            <a href="#ubicacion" data-key="navUbicacionMobile" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Ubicación</a>
-            <a href="#contacto" data-key="navContactoMobile" class="block py-2 px-4 text-sm hover:bg-brand-gray-light dark:hover:bg-gray-700">Contacto</a>
-        </div>
     </header>
 
+    <div id="mobile-menu" class="md:hidden fixed top-0 right-0 h-full w-full max-w-xs bg-brand-light dark:bg-gray-800 shadow-xl z-40 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="py-24 px-8 space-y-4">
+            <a href="#inicio" data-key="navInicioMobile" class="block py-2 px-4 text-lg hover:bg-brand-gray-light dark:hover:bg-gray-700 rounded-md">Inicio</a>
+            <a href="#servicios" data-key="navServiciosMobile" class="block py-2 px-4 text-lg hover:bg-brand-gray-light dark:hover:bg-gray-700 rounded-md">Servicios</a>
+            <a href="#nosotros" data-key="navNosotrosMobile" class="block py-2 px-4 text-lg hover:bg-brand-gray-light dark:hover:bg-gray-700 rounded-md">Nosotros</a>
+            <a href="#galeria" data-key="navGaleriaMobile" class="block py-2 px-4 text-lg hover:bg-brand-gray-light dark:hover:bg-gray-700 rounded-md">Galería</a>
+            <a href="#ubicacion" data-key="navUbicacionMobile" class="block py-2 px-4 text-lg hover:bg-brand-gray-light dark:hover:bg-gray-700 rounded-md">Ubicación</a>
+            <a href="#contacto" data-key="navContactoMobile" class="block py-2 px-4 text-lg hover:bg-brand-gray-light dark:hover:bg-gray-700 rounded-md">Contacto</a>
+        </div>
+    </div>
     <main>
         <section id="inicio" class="relative text-white h-[60vh] md:h-[80vh] flex items-end justify-center">
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent z-10"></div>
@@ -376,6 +378,7 @@
             </div>
         </footer>
     
+    <div id="menu-backdrop" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
     <script src="js/script.js"></script>
 </body>

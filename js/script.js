@@ -243,20 +243,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- FIN: LÓGICA DE TRADUCCIÓN (I18N) ---
 
-  // --- Lógica para el Menú Hamburguesa ---
+  // --- INICIO: LÓGICA MEJORADA PARA MENÚ HAMBURGUESA (OVERLAY) ---
   const menuBtn = document.getElementById("menu-btn");
   const mobileMenu = document.getElementById("mobile-menu");
-
-  menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-  });
-
+  const menuBackdrop = document.getElementById("menu-backdrop");
+  const menuOpenIcon = document.getElementById("menu-open-icon");
+  const menuCloseIcon = document.getElementById("menu-close-icon");
   const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+
+  const toggleMenu = () => {
+    // Alterna la visibilidad del menú deslizante
+    mobileMenu.classList.toggle("translate-x-full");
+
+    // Alterna la visibilidad del fondo oscuro
+    menuBackdrop.classList.toggle("hidden");
+
+    // Alterna los íconos de abrir/cerrar
+    menuOpenIcon.classList.toggle("hidden");
+    menuCloseIcon.classList.toggle("hidden");
+
+    // Alterna la clase en el body para bloquear/desbloquear el scroll
+    // Esto utiliza la regla que añadimos en styles.css
+    document.body.classList.toggle("mobile-menu-open");
+  };
+
+  // Event listener para el botón principal del menú
+  menuBtn.addEventListener("click", toggleMenu);
+
+  // Event listener para que el fondo oscuro cierre el menú
+  menuBackdrop.addEventListener("click", toggleMenu);
+
+  // Event listeners para que cada enlace dentro del menú móvil lo cierre al hacer clic
   mobileMenuLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.add("hidden");
-    });
+    link.addEventListener("click", toggleMenu);
   });
+  // --- FIN: LÓGICA MEJORADA PARA MENÚ HAMBURGUESA (OVERLAY) ---
 
   // --- Lógica para la Validación del Formulario de Contacto ---
   const contactForm = document.getElementById("contact-form");

@@ -42,11 +42,6 @@ header nav .hidden a {
 
 /* --- FIN: NUEVOS ESTILOS PARA NAVEGACIÓN ACTIVA --- */
 
-/* NOTA: En un setup con CDN de Tailwind, no podemos usar directivas como @apply.
-  Este archivo es útil para estilos globales como el scroll-behavior o para
-  CSS personalizado que no se puede lograr fácilmente con las utilidades de Tailwind.
-*/
-
 /* --- INICIO: ESTILOS PARA SLIDER DE RESEÑAS --- */
 
 /*
@@ -67,3 +62,14 @@ header nav .hidden a {
 }
 
 /* --- FIN: ESTILOS PARA SLIDER DE RESEÑAS --- */
+
+/* --- INICIO: ESTILOS PARA MENÚ MÓVIL OVERLAY --- */
+/*
+  Cuando el menú móvil está abierto, añadimos esta clase al <body>
+  con JavaScript para prevenir el scroll del contenido de fondo.
+  Esto proporciona un bloqueo de scroll más robusto.
+*/
+body.mobile-menu-open {
+  overflow: hidden;
+}
+/* --- FIN: ESTILOS PARA MENÚ MÓVIL OVERLAY --- */
