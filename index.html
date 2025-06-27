@@ -107,70 +107,73 @@
         </div>
     </div>
     <main>
-        <section id="inicio" class="relative text-white h-[60vh] md:h-[80vh] flex items-end justify-center">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent z-10"></div>
-            <img src="images/foto_inicio1.jpg" alt="Fachada de Narbo's Salón Spa en Chía" class="w-full h-full object-cover absolute inset-0" loading="eager">
+        <div class="relative">
+            <section id="inicio" class="relative h-[60vh] md:h-[80vh]">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent z-0"></div>
+                <img src="images/foto_inicio1.jpg" alt="Fachada de Narbo's Salón Spa en Chía" class="w-full h-full object-cover absolute inset-0" loading="eager">
+            </section>
             
-            <div class="relative z-20 container mx-auto px-6 text-center w-full">
-                <div class="bg-white/25 text-gray-900 dark:bg-gray-900/25 dark:text-white backdrop-blur-sm p-6 md:p-8 rounded-t-lg max-w-4xl mx-auto">
-                    <h1 data-key="heroTitle" class="text-4xl md:text-6xl font-serif font-bold mb-4">Tu oasis de belleza y relajación en Chía</h1>
-                    <p data-key="heroSubtitle" class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Más de 11 años de experiencia transformando tu estilo y bienestar.</p>
-                    
-                    <a href="https://wa.me/573123462618" target="_blank" data-key="heroCta" class="inline-flex items-center justify-center bg-gradient-to-r from-brand-medium to-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:-translate-y-1 hover:shadow-xl transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-light active:scale-95">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 24 24" fill="currentColor"><path d="M16.63,13.23a1.05,1.05,0,0,0-1.44-.09l-.86.72a11.19,11.19,0,0,1-5.49-5.49l.72-.86a1,1,0,0,0-.09-1.44l-2.22-3.11a1,1,0,0,0-1.3-.39L4.5,4.18a1,1,0,0,0-.43,1.33,14.47,14.47,0,0,0,13,13,1,1,0,0,0,1.33-.43l1.55-1.46a1,1,0,0,0-.39-1.3Z"/></svg>
-                        <span>Agenda tu Cita por WhatsApp</span>
-                    </a>
-                    </div>
-            </div>
-        </section>
-
-        <section id="servicios" class="py-16 md:py-24 bg-gradient-to-b from-white via-gray-50 to-brand-gray-dark/20 dark:from-gray-800 dark:to-gray-900">
-            <div class="container mx-auto px-6 max-w-screen-xl">
-                <h2 data-key="servicesTitle" class="text-3xl md:text-4xl font-serif font-bold mb-4 text-gray-900 dark:text-white text-center">Nuestros Servicios</h2>
-                <p data-key="servicesSubtitle" class="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto text-center">Ofrecemos una amplia gama de tratamientos con productos de alta calidad para realzar tu belleza.</p>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    
-                    <div class="group bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
-                        <svg class="w-12 h-12 mb-4 text-brand-green dark:text-brand-medium transition-colors duration-300 group-hover:text-brand-medium dark:group-hover:text-brand-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 7m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M8.6 8.6l10.4 10.4" />
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M8.6 15.4l10.4 -10.4" />
-                        </svg>
-                        <h3 data-key="service1Title" class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Peluquería</h3>
-                        <p data-key="service1Desc" class="text-gray-600 dark:text-gray-400">Color, balayage, cortes, barbería, maquillaje y peinados con las mejores marcas: Wella, L'Oréal, y Schwarzkopf.</p>
-                    </div>
-
-                    <div class="group bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
-                        <svg class="w-12 h-12 mb-4 text-brand-green dark:text-brand-medium transition-colors duration-300 group-hover:text-brand-medium dark:group-hover:text-brand-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                           <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.5 13.5h.75a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0v-.75a.75.75 0 01.75-.75z" />
-                        </svg>
-                        <h3 data-key="service2Title" class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Manos y Pies</h3>
-                        <p data-key="service2Desc" class="text-gray-600 dark:text-gray-400">Manicure y pedicure con esmaltado semipermanente, uñas en gel o acrílicas con productos Organic, Belier y Masglo.</p>
-                    </div>
-
-                    <div class="group bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
-                        <svg class="w-12 h-12 mb-4 text-brand-green dark:text-brand-medium transition-colors duration-300 group-hover:text-brand-medium dark:group-hover:text-brand-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                           <path stroke-linecap="round" stroke-linejoin="round" d="M5 21c.5 -4.5 2.5 -8 7 -10" />
-                           <path stroke-linecap="round" stroke-linejoin="round" d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12.986 13c.5 -1.5 2.5 -3 5 -3z" />
-                        </svg>
-                         <h3 data-key="service3Title" class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Estética & Spa</h3>
-                        <p data-key="service3Desc" class="text-gray-600 dark:text-gray-400">Masajes relajantes, drenajes linfáticos, y limpiezas e hidrataciones faciales con productos dermatológicos.</p>
-                    </div>
-
-                    <div class="group bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
-                        <svg class="w-12 h-12 mb-4 text-brand-green dark:text-brand-medium transition-colors duration-300 group-hover:text-brand-medium dark:group-hover:text-brand-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <h3 data-key="service4Title" class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Depilación y Pestañas</h3>
-                        <p data-key="service4Desc" class="text-gray-600 dark:text-gray-400">Servicios de depilación con cera o hilo y extensiones de pestañas para una mirada impactante.</p>
+            <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
+                <div class="container mx-auto">
+                    <div class="bg-white/75 text-gray-900 dark:bg-gray-900/75 dark:text-white backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto">
+                        <h1 data-key="heroTitle" class="text-4xl md:text-6xl font-serif font-bold mb-4">Tu oasis de belleza y relajación en Chía</h1>
+                        <p data-key="heroSubtitle" class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Más de 11 años de experiencia transformando tu estilo y bienestar.</p>
+                        <a href="https://wa.me/573123462618" target="_blank" data-key="heroCta" class="inline-flex items-center justify-center bg-gradient-to-r from-brand-medium to-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:-translate-y-1 hover:shadow-xl transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-light active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3" viewBox="0 0 24 24" fill="currentColor"><path d="M16.63,13.23a1.05,1.05,0,0,0-1.44-.09l-.86.72a11.19,11.19,0,0,1-5.49-5.49l.72-.86a1,1,0,0,0-.09-1.44l-2.22-3.11a1,1,0,0,0-1.3-.39L4.5,4.18a1,1,0,0,0-.43,1.33,14.47,14.47,0,0,0,13,13,1,1,0,0,0,1.33-.43l1.55-1.46a1,1,0,0,0-.39-1.3Z"/></svg>
+                            <span>Agenda tu Cita por WhatsApp</span>
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
-        
+
+            <section id="servicios" class="relative z-10 bg-gradient-to-b from-white via-gray-50 to-brand-gray-dark/20 dark:from-gray-800 dark:to-gray-900 pt-56 md:pt-64 pb-16 md:pb-24">
+                <div class="container mx-auto px-6 max-w-screen-xl">
+                    <h2 data-key="servicesTitle" class="text-3xl md:text-4xl font-serif font-bold mb-4 text-gray-900 dark:text-white text-center">Nuestros Servicios</h2>
+                    <p data-key="servicesSubtitle" class="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto text-center">Ofrecemos una amplia gama de tratamientos con productos de alta calidad para realzar tu belleza.</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        
+                        <div class="group bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
+                            <svg class="w-12 h-12 mb-4 text-brand-green dark:text-brand-medium transition-colors duration-300 group-hover:text-brand-medium dark:group-hover:text-brand-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M6 7m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M6 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.6 8.6l10.4 10.4" />
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M8.6 15.4l10.4 -10.4" />
+                            </svg>
+                            <h3 data-key="service1Title" class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Peluquería</h3>
+                            <p data-key="service1Desc" class="text-gray-600 dark:text-gray-400">Color, balayage, cortes, barbería, maquillaje y peinados con las mejores marcas: Wella, L'Oréal, y Schwarzkopf.</p>
+                        </div>
+
+                        <div class="group bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
+                            <svg class="w-12 h-12 mb-4 text-brand-green dark:text-brand-medium transition-colors duration-300 group-hover:text-brand-medium dark:group-hover:text-brand-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.5 13.5h.75a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0v-.75a.75.75 0 01.75-.75z" />
+                            </svg>
+                            <h3 data-key="service2Title" class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Manos y Pies</h3>
+                            <p data-key="service2Desc" class="text-gray-600 dark:text-gray-400">Manicure y pedicure con esmaltado semipermanente, uñas en gel o acrílicas con productos Organic, Belier y Masglo.</p>
+                        </div>
+
+                        <div class="group bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
+                            <svg class="w-12 h-12 mb-4 text-brand-green dark:text-brand-medium transition-colors duration-300 group-hover:text-brand-medium dark:group-hover:text-brand-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M5 21c.5 -4.5 2.5 -8 7 -10" />
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M9 18c6.218 0 10.5 -3.288 11 -12v-2h-4.014c-9 0 -11.986 4 -12.986 13c.5 -1.5 2.5 -3 5 -3z" />
+                            </svg>
+                             <h3 data-key="service3Title" class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Estética & Spa</h3>
+                            <p data-key="service3Desc" class="text-gray-600 dark:text-gray-400">Masajes relajantes, drenajes linfáticos, y limpiezas e hidrataciones faciales con productos dermatológicos.</p>
+                        </div>
+
+                        <div class="group bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl dark:hover:shadow-brand-green/20">
+                            <svg class="w-12 h-12 mb-4 text-brand-green dark:text-brand-medium transition-colors duration-300 group-hover:text-brand-medium dark:group-hover:text-brand-light" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <h3 data-key="service4Title" class="text-2xl font-serif font-bold text-brand-green dark:text-brand-medium mb-3">Depilación y Pestañas</h3>
+                            <p data-key="service4Desc" class="text-gray-600 dark:text-gray-400">Servicios de depilación con cera o hilo y extensiones de pestañas para una mirada impactante.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
         <section id="nosotros" class="py-16 md:py-24">
              <div class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center">
                 <div>
@@ -220,7 +223,7 @@
                     </div>
                     <div class="overflow-hidden rounded-lg shadow-md group">
                         <a href="images/fotos_galeria/foto_facial_1.jpg" class="glightbox">
-                            <img src="images/fotos_galeria/foto_facial_1.jpg" alt="Tratamiento facial de limpieza profunda" data-key-alt="galleryAlt6" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" loading="lazy">
+                            <img src="./images/fotos_galeria/foto_facial_1.jpg" alt="Tratamiento facial de limpieza profunda" data-key-alt="galleryAlt6" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" loading="lazy">
                         </a>
                     </div>
                 </div>
