@@ -61,15 +61,30 @@ Implementación de Galería "Lightbox"**
 * Ahora los usuarios pueden hacer clic en una imagen para verla en una vista ampliada y centrada.
 * Se añadió navegación con flechas (anterior/siguiente) y la posibilidad de cerrar la vista con la tecla 'Escape' o un botón 'X'.
 ---
-### Historial de Mejoras - 26 de Junio de 2025 (NUEVO)
+### Historial de Mejoras - 26 de Junio de 2025
 
-**1. Implementación de Sección de Reseñas de Clientes**
+**1.
+Implementación de Sección de Reseñas de Clientes**
 * Se añadió una nueva sección "Lo que dicen nuestros clientes" para mostrar reseñas reales de Google y aumentar la confianza.
 * Se desarrolló un carrusel interactivo para navegar entre las diferentes reseñas.
 * Se implementó una función de autoplay para que las reseñas roten automáticamente cada 7 segundos.
 * Se mejoró la experiencia de usuario haciendo que el carrusel se detenga al pasar el ratón por encima o al usar los controles manuales.
 * Se añadió el icono oficial de Google a cada tarjeta de reseña para indicar la fuente y dar mayor autenticidad.
 * Se corrigió un error visual en uno de los iconos para asegurar la consistencia en el diseño.
+---
+### Historial de Mejoras - 27 de Junio de 2025 (NUEVO)
+
+**1. Mejora Radical de la Experiencia en Menú Móvil (UX/UI)**
+* Se rediseñó por completo el menú de navegación para dispositivos móviles, reemplazando el antiguo menú desplegable por un panel lateral moderno (overlay) que se desliza desde la derecha.
+* Se añadió un fondo oscuro semitransparente (backdrop) que cubre la página y el ícono de hamburguesa ahora se transforma en un ícono de cierre (X) para una usabilidad más intuitiva.
+* Se implementó el bloqueo de scroll en el cuerpo de la página mientras el menú está activo.
+
+**2. Rediseño Visual de la Sección Principal (Hero)**
+* Se reubicó el bloque de contenido principal ("Tu oasis de belleza...") para que flote visualmente entre la sección de la imagen de cabecera y la sección de servicios, logrando un diseño más dinámico y profesional.
+* Se aumentó la opacidad del fondo de este bloque al 75% y se alineó su contenido a la izquierda para garantizar una mejor legibilidad y una estética más estructurada.
+
+**3. Refinamiento de Interfaz en Tarjetas de Servicios**
+* Se añadió una micro-interacción de cambio de color a los íconos en la sección "Nuestros Servicios". El color del ícono ahora transiciona suavemente al pasar el cursor sobre la tarjeta.
 ---
 ### Guías de Contenido y Especificaciones Técnicas
 
