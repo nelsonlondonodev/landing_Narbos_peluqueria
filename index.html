@@ -194,34 +194,48 @@
 
         <section id="galeria" class="py-16 md:py-24 bg-brand-gray-light dark:bg-gray-800/50">
             <div class="container mx-auto px-6 text-center max-w-screen-xl">
-                <h2 data-key="galleryTitle" class="text-3xl md:text-4xl font-serif font-bold mb-12 text-gray-900 dark:text-white">Nuestros Trabajos</h2>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                    <div class="overflow-hidden rounded-lg shadow-md group">
+                <h2 data-key="galleryTitle" class="text-3xl md:text-4xl font-serif font-bold mb-8 text-gray-900 dark:text-white">Nuestros Trabajos</h2>
+                
+                <div id="gallery-filters" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
+                    <button data-filter="todos" data-key="galleryFilterAll" class="filter-btn px-4 py-2 text-sm md:text-base font-semibold rounded-full transition-colors duration-300">Todos</button>
+                    <button data-filter="peluqueria" data-key="galleryFilterHair" class="filter-btn px-4 py-2 text-sm md:text-base font-semibold rounded-full transition-colors duration-300">Peluquería</button>
+                    <button data-filter="unas" data-key="galleryFilterNails" class="filter-btn px-4 py-2 text-sm md:text-base font-semibold rounded-full transition-colors duration-300">Uñas</button>
+                    <button data-filter="estetica" data-key="galleryFilterAesthetics" class="filter-btn px-4 py-2 text-sm md:text-base font-semibold rounded-full transition-colors duration-300">Estética</button>
+                </div>
+
+                <div id="gallery-container" class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md group" data-category="peluqueria">
                         <a href="./images/fotos_galeria/foto_9.jpg" class="glightbox">
                             <img src="./images/fotos_galeria/foto_9.jpg" alt="Trabajo de balayage profesional" data-key-alt="galleryAlt1" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" loading="lazy">
                         </a>
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-md group">
+                    
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md group" data-category="unas">
                          <a href="./images/fotos_galeria/foto_6.jpg" class="glightbox">
                             <img src="./images/fotos_galeria/foto_6.jpg" alt="Diseño de uñas acrílicas creativo" data-key-alt="galleryAlt2" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" loading="lazy">
                         </a>
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-md group">
+                    
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md group" data-category="peluqueria">
                         <a href="./images/fotos_galeria/foto_5.jpg" class="glightbox">
                             <img src="./images/fotos_galeria/foto_5.jpg" alt="Corte de cabello moderno para mujer" data-key-alt="galleryAlt3" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" loading="lazy">
                         </a>
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-md group">
+                    
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md group" data-category="estetica">
                         <a href="images/fotos_galeria/foto_maquillaje_1.jpg" class="glightbox">
                             <img src="images/fotos_galeria/foto_maquillaje_1.jpg" alt="Maquillaje profesional para evento" data-key-alt="galleryAlt4" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" loading="lazy">
                         </a>
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-md group">
+                    
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md group" data-category="peluqueria">
                         <a href="images/fotos_galeria/foto_peinado_1.jpg" class="glightbox">
                             <img src="images/fotos_galeria/foto_peinado_1.jpg" alt="Peinado elegante para ocasión especial" data-key-alt="galleryAlt5" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" loading="lazy">
                         </a>
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-md group">
+                    
+                    <div class="gallery-item overflow-hidden rounded-lg shadow-md group" data-category="estetica">
                         <a href="images/fotos_galeria/foto_facial_1.jpg" class="glightbox">
                             <img src="./images/fotos_galeria/foto_facial_1.jpg" alt="Tratamiento facial de limpieza profunda" data-key-alt="galleryAlt6" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" loading="lazy">
                         </a>
@@ -229,7 +243,6 @@
                 </div>
             </div>
         </section>
-        
         <section id="ubicacion" class="py-16 md:py-24 bg-white dark:bg-gray-900">
             <div class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center">
                 <div class="text-left">

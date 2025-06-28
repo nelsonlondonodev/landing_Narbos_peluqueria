@@ -45,6 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutP3: "¡Te esperamos para consentirte!",
       aboutAlt: "Equipo profesional de Narbo's Salón Spa sonriendo",
       galleryTitle: "Nuestros Trabajos",
+      galleryFilterAll: "Todos", // <-- NUEVA LÍNEA
+      galleryFilterHair: "Peluquería", // <-- NUEVA LÍNEA
+      galleryFilterNails: "Uñas", // <-- NUEVA LÍNEA
+      galleryFilterAesthetics: "Estética", // <-- NUEVA LÍNEA
       galleryAlt1: "Trabajo de balayage profesional",
       galleryAlt2: "Diseño de uñas acrílicas creativo",
       galleryAlt3: "Corte de cabello moderno para mujer",
@@ -58,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       locationHoursDays:
         "<strong>Lunes a Sábado:</strong> 7:00 a.m. – 8:00 p.m.",
       locationHoursSun: "<strong>Domingo:</strong> 9:00 a.m. – 2:00 p.m.",
-      locationHoursHolidays: "<strong>Festivos:</strong> 9:00 a.m. – 2:00 p.m.", // <--- LÍNEA NUEVA
+      locationHoursHolidays: "<strong>Festivos:</strong> 9:00 a.m. – 2:00 p.m.",
       footerTitle: "Agenda tu cita hoy",
       footerSubtitle:
         "Llámanos o escríbenos por WhatsApp. O si prefieres, déjanos un mensaje aquí:",
@@ -131,6 +135,10 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutP3: "We look forward to pampering you!",
       aboutAlt: "Professional team of Narbo's Salon Spa smiling",
       galleryTitle: "Our Work",
+      galleryFilterAll: "All", // <-- NUEVA LÍNEA
+      galleryFilterHair: "Hairdressing", // <-- NUEVA LÍNEA
+      galleryFilterNails: "Nails", // <-- NUEVA LÍNEA
+      galleryFilterAesthetics: "Aesthetics", // <-- NUEVA LÍNEA
       galleryAlt1: "Professional balayage work",
       galleryAlt2: "Creative acrylic nail design",
       galleryAlt3: "Modern haircut for women",
@@ -144,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       locationHoursDays:
         "<strong>Monday to Saturday:</strong> 7:00 a.m. – 8:00 p.m.",
       locationHoursSun: "<strong>Sunday:</strong> 9:00 a.m. – 2:00 p.m.",
-      locationHoursHolidays: "<strong>Holidays:</strong> 9:00 a.m. – 2:00 p.m.", // <--- LÍNEA NUEVA
+      locationHoursHolidays: "<strong>Holidays:</strong> 9:00 a.m. – 2:00 p.m.",
       footerTitle: "Book your appointment today",
       footerSubtitle:
         "Call or write to us on WhatsApp. Or if you prefer, leave us a message here:",
@@ -252,28 +260,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileMenuLinks = mobileMenu.querySelectorAll("a");
 
   const toggleMenu = () => {
-    // Alterna la visibilidad del menú deslizante
     mobileMenu.classList.toggle("translate-x-full");
-
-    // Alterna la visibilidad del fondo oscuro
     menuBackdrop.classList.toggle("hidden");
-
-    // Alterna los íconos de abrir/cerrar
     menuOpenIcon.classList.toggle("hidden");
     menuCloseIcon.classList.toggle("hidden");
-
-    // Alterna la clase en el body para bloquear/desbloquear el scroll
-    // Esto utiliza la regla que añadimos en styles.css
     document.body.classList.toggle("mobile-menu-open");
   };
 
-  // Event listener para el botón principal del menú
   menuBtn.addEventListener("click", toggleMenu);
-
-  // Event listener para que el fondo oscuro cierre el menú
   menuBackdrop.addEventListener("click", toggleMenu);
-
-  // Event listeners para que cada enlace dentro del menú móvil lo cierre al hacer clic
   mobileMenuLinks.forEach((link) => {
     link.addEventListener("click", toggleMenu);
   });
@@ -448,11 +443,62 @@ document.addEventListener("DOMContentLoaded", () => {
     prevBtn.addEventListener("click", stopAutoPlay);
     nextBtn.addEventListener("click", stopAutoPlay);
 
-    // Iniciar todo
     showReview(currentReviewIndex);
     startAutoPlay();
   }
   // --- FIN: LÓGICA DEL SLIDER DE RESEÑAS ---
+
+  // --- INICIO: NUEVA LÓGICA DEL FILTRO INTERACTIVO DE LA GALERÍA ---
+  const galleryFilters = document.getElementById("gallery-filters");
+  const galleryItems = document.querySelectorAll(".gallery-item");
+  const filterButtons = document.querySelectorAll(".filter-btn");
+
+  if (galleryFilters && galleryItems.length > 0) {
+    // Establecer el botón "Todos" como activo por defecto al cargar la página.
+    const defaultFilterBtn = document.querySelector(
+      '.filter-btn[data-filter="todos"]'
+    );
+    if (defaultFilterBtn) {
+      // Primero, eliminamos la clase activa de todos para estar seguros
+      filterButtons.forEach((btn) => btn.classList.remove("filter-btn-active"));
+      // Luego, la añadimos al botón por defecto.
+      defaultFilterBtn.classList.add("filter-btn-active");
+    }
+
+    galleryFilters.addEventListener("click", (e) => {
+      // Nos aseguramos de que el clic fue en un botón con la clase 'filter-btn'
+      const clickedButton = e.target.closest(".filter-btn");
+      if (clickedButton) {
+        const filterValue = clickedButton.getAttribute("data-filter");
+
+        // Actualizar el estilo del botón activo
+        filterButtons.forEach((btn) => {
+          btn.classList.remove("filter-btn-active");
+        });
+        clickedButton.classList.add("filter-btn-active");
+
+        // Recorrer y filtrar cada elemento de la galería
+        galleryItems.forEach((item) => {
+          const itemCategory = item.getAttribute("data-category");
+
+          // Si el filtro es "todos" o la categoría del ítem coincide, lo mostramos. Si no, lo ocultamos.
+          if (filterValue === "todos" || filterValue === itemCategory) {
+            item.classList.remove("hidden");
+          } else {
+            item.classList.add("hidden");
+          }
+        });
+
+        // ¡Paso Clave! Se debe recargar GLightbox después de filtrar.
+        // Esto actualiza la galería interna de GLightbox para que solo incluya los elementos visibles.
+        // Sin esto, al hacer clic en una imagen, las flechas de navegación mostrarían también las ocultas.
+        if (typeof lightbox !== "undefined") {
+          lightbox.reload();
+        }
+      }
+    });
+  }
+  // --- FIN: LÓGICA DEL FILTRO INTERACTIVO DE LA GALERÍA ---
 
   // --- INICIO: LÓGICA DE LIGHTBOX GALLERY (GLightbox) ---
   const lightbox = GLightbox({

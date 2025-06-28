@@ -73,3 +73,42 @@ body.mobile-menu-open {
   overflow: hidden;
 }
 /* --- FIN: ESTILOS PARA MENÚ MÓVIL OVERLAY --- */
+
+/* --- INICIO: NUEVOS ESTILOS PARA FILTRO DE GALERÍA --- */
+
+/*
+  Estilo para el botón de filtro que está ACTIVO.
+  Usamos los colores de la marca para destacarlo.
+  Esta clase se añadirá/quitará con JavaScript.
+*/
+.filter-btn-active {
+  background-color: #6b755a; /* brand-green */
+  color: #ffffff;
+}
+.dark .filter-btn-active {
+  background-color: #c5ab94; /* brand-medium */
+  color: #111827; /* gray-900 */
+}
+
+/*
+  Estilos para los botones de filtro INACTIVOS.
+  Los hacemos semitransparentes para que el activo destaque más.
+*/
+.filter-btn {
+  background-color: rgba(209, 213, 219, 0.5); /* gray-300 con 50% de opacidad */
+  color: #374151; /* gray-700 */
+}
+.dark .filter-btn {
+  background-color: rgba(75, 85, 99, 0.5); /* gray-600 con 50% de opacidad */
+  color: #d1d5db; /* gray-300 */
+}
+
+/*
+  Añade una transición suave a los ítems de la galería
+  para que el filtrado se vea más fluido.
+*/
+.gallery-item {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* --- FIN: NUEVOS ESTILOS PARA FILTRO DE GALERÍA --- */
