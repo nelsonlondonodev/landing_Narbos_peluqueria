@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navResenasMobile: "Reseñas",
       navUbicacionMobile: "Ubicación",
       navContactoMobile: "Contacto",
-      heroTitle: "Tu oasis de belleza y relajación en Chía",
+      heroTitle: "Tu peluquería en Chía", // <-- LÍNEA MODIFICADA
       heroSubtitle:
         "Más de 11 años de experiencia transformando tu estilo y bienestar.",
       heroCta: "Agenda tu Cita por WhatsApp",
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navResenasMobile: "Reviews",
       navUbicacionMobile: "Location",
       navContactoMobile: "Contact",
-      heroTitle: "Your oasis of beauty and relaxation in Chía",
+      heroTitle: "Your hair salon in Chía", // <-- LÍNEA MODIFICADA
       heroSubtitle:
         "Over 11 years of experience transforming your style and well-being.",
       heroCta: "Book via WhatsApp",

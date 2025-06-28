@@ -105,3 +105,8 @@ El peso ideal por imagen debería ser inferior a 150 KB.
 Es compatible con todos los navegadores modernos. 
 * **Carga Diferida (Lazy Loading)**: El sitio ya implementa `loading="lazy"` en las imágenes.
 Esto significa que las imágenes solo se cargan cuando el usuario se acerca a ellas, optimizando drásticamente la velocidad de carga inicial de la página.
+
+-----
+### Titulo para el H1 
+-Tu peluquería en Chía
+-Tu peluquería de confianza en Chía
