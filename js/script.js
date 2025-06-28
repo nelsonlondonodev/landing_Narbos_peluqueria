@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navResenasMobile: "Reseñas",
       navUbicacionMobile: "Ubicación",
       navContactoMobile: "Contacto",
-      heroTitle: "Tu peluquería en Chía", // <-- LÍNEA MODIFICADA
+      heroTitle: "Tu peluquería en Chía",
       heroSubtitle:
         "Más de 11 años de experiencia transformando tu estilo y bienestar.",
       heroCta: "Agenda tu Cita por WhatsApp",
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navResenasMobile: "Reviews",
       navUbicacionMobile: "Location",
       navContactoMobile: "Contact",
-      heroTitle: "Your hair salon in Chía", // <-- LÍNEA MODIFICADA
+      heroTitle: "Your hair salon in Chía",
       heroSubtitle:
         "Over 11 years of experience transforming your style and well-being.",
       heroCta: "Book via WhatsApp",
@@ -458,34 +458,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterButtons = document.querySelectorAll(".filter-btn");
 
   if (galleryFilters && galleryItems.length > 0) {
-    // Establecer el botón "Todos" como activo por defecto al cargar la página.
     const defaultFilterBtn = document.querySelector(
       '.filter-btn[data-filter="todos"]'
     );
     if (defaultFilterBtn) {
-      // Primero, eliminamos la clase activa de todos para estar seguros
       filterButtons.forEach((btn) => btn.classList.remove("filter-btn-active"));
-      // Luego, la añadimos al botón por defecto.
       defaultFilterBtn.classList.add("filter-btn-active");
     }
 
     galleryFilters.addEventListener("click", (e) => {
-      // Nos aseguramos de que el clic fue en un botón con la clase 'filter-btn'
       const clickedButton = e.target.closest(".filter-btn");
       if (clickedButton) {
         const filterValue = clickedButton.getAttribute("data-filter");
 
-        // Actualizar el estilo del botón activo
         filterButtons.forEach((btn) => {
           btn.classList.remove("filter-btn-active");
         });
         clickedButton.classList.add("filter-btn-active");
 
-        // Recorrer y filtrar cada elemento de la galería
         galleryItems.forEach((item) => {
           const itemCategory = item.getAttribute("data-category");
 
-          // Si el filtro es "todos" o la categoría del ítem coincide, lo mostramos. Si no, lo ocultamos.
           if (filterValue === "todos" || filterValue === itemCategory) {
             item.classList.remove("hidden");
           } else {
@@ -493,9 +486,6 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
 
-        // ¡Paso Clave! Se debe recargar GLightbox después de filtrar.
-        // Esto actualiza la galería interna de GLightbox para que solo incluya los elementos visibles.
-        // Sin esto, al hacer clic en una imagen, las flechas de navegación mostrarían también las ocultas.
         if (typeof lightbox !== "undefined") {
           lightbox.reload();
         }
@@ -503,6 +493,70 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   // --- FIN: LÓGICA DEL FILTRO INTERACTIVO DE LA GALERÍA ---
+
+  // --- INICIO: NUEVA LÓGICA PARA MODALES DE SERVICIOS ---
+
+  const openModalTriggers = document.querySelectorAll("[data-modal-target]");
+
+  const openModal = (modal) => {
+    if (modal) {
+      const modalContent = modal.querySelector(".bg-white"); // Target para el contenido
+      modal.classList.remove("hidden");
+      modal.classList.add("modal-animation");
+      if (modalContent) {
+        modalContent.classList.add("modal-content-animation");
+      }
+      // Reutilizamos la clase existente para bloquear el scroll
+      document.body.classList.add("mobile-menu-open");
+    }
+  };
+
+  const closeModal = (modal) => {
+    if (modal) {
+      const modalContent = modal.querySelector(".bg-white");
+      // Eliminamos las clases de animación para que se puedan volver a aplicar al abrir
+      modal.classList.remove("modal-animation");
+      if (modalContent) {
+        modalContent.classList.remove("modal-content-animation");
+      }
+      modal.classList.add("hidden");
+      // Desbloqueamos el scroll
+      document.body.classList.remove("mobile-menu-open");
+    }
+  };
+
+  // Añadir listeners para los disparadores que abren los modales
+  openModalTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const modal = document.getElementById(trigger.dataset.modalTarget);
+      openModal(modal);
+    });
+  });
+
+  // Listener para cerrar con el botón 'X', clic en el fondo, o tecla 'Escape'
+  document.querySelectorAll('[id$="-modal"]').forEach((modal) => {
+    // Clic en botón de cerrar (X)
+    const closeButton = modal.querySelector("[data-modal-close]");
+    if (closeButton) {
+      closeButton.addEventListener("click", () => closeModal(modal));
+    }
+    // Clic en el fondo del modal (overlay)
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModal(modal);
+      }
+    });
+  });
+
+  // Cierre con la tecla Escape
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const openModal = document.querySelector(".modal-animation:not(.hidden)");
+      closeModal(openModal);
+    }
+  });
+
+  // --- FIN: NUEVA LÓGICA PARA MODALES DE SERVICIOS ---
 
   // --- INICIO: LÓGICA DE LIGHTBOX GALLERY (GLightbox) ---
   const lightbox = GLightbox({
