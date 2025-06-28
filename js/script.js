@@ -93,6 +93,67 @@ document.addEventListener("DOMContentLoaded", () => {
       review3Text:
         '"Excelente lugar! La atención es espectacular, los servicios y productos ofrecidos son de excelente calidad, sales realmente renovad@😉"',
       review3Author: "- Claudia Escobar",
+      // --- Textos de Modales en Español ---
+      modalPeluqueriaDesc:
+        "En Narbo's Salón Spa, transformamos tu cabello con arte y precisión. Usamos productos de las marcas más reconocidas como Wella, L'Oréal, y Schwarzkopf para garantizar resultados espectaculares y el cuidado que tu cabello merece.",
+      modalPeluqueriaSubtitle: "Nuestros Servicios de Peluquería Incluyen:",
+      modalPeluqueriaLi1:
+        "<strong>Coloración y Técnicas Avanzadas:</strong> Desde tintes completos y cubrimiento de canas hasta las últimas tendencias en Balayage, Ombré, y Babylights.",
+      modalPeluqueriaLi2:
+        "<strong>Cortes Personalizados:</strong> Asesoramiento de imagen para encontrar el corte que mejor se adapte a tu estilo y tipo de rostro, tanto para damas como para caballeros.",
+      modalPeluqueriaLi3:
+        "<strong>Barbería:</strong> Servicios clásicos y modernos de barbería, incluyendo corte, arreglo de barba y rituales de afeitado.",
+      modalPeluqueriaLi4:
+        "<strong>Peinados y Maquillaje Profesional:</strong> Looks para eventos especiales, bodas, y cualquier ocasión. Creamos peinados recogidos, ondas, y más.",
+      modalPeluqueriaLi5:
+        "<strong>Tratamientos Capilares:</strong> Rituales de hidratación profunda, reconstrucción, y terapias para la salud de tu cuero cabelludo.",
+      modalPeluqueriaCta:
+        "¡Visítanos y deja que nuestros expertos realcen la belleza de tu cabello!",
+      modalManosPiesDesc:
+        "Tus manos y pies merecen un cuidado especial. Ofrecemos una experiencia de manicure y pedicure de lujo con las mejores marcas del mercado como Organic, Belier y Masglo para asegurar un acabado perfecto y duradero.",
+      modalManosPiesSubtitle: "Explora Nuestros Tratamientos:",
+      modalManosPiesLi1:
+        "<strong>Manicure y Pedicure Tradicional:</strong> El cuidado clásico que tus uñas necesitan para lucir limpias, sanas y elegantes.",
+      modalManosPiesLi2:
+        "<strong>Esmaltado Semipermanente:</strong> Disfruta de un color impecable y un brillo espectacular por semanas, sin preocuparte por el desgaste.",
+      modalManosPiesLi3:
+        "<strong>Uñas Esculpidas:</strong> Creamos extensiones de uñas en acrílico o gel, personalizadas en forma y tamaño para un look natural o audaz.",
+      modalManosPiesLi4:
+        "<strong>Diseños y Nail Art:</strong> Desde decoraciones sutiles hasta los diseños más creativos y en tendencia. ¡Cuéntanos tu idea y la hacemos realidad!",
+      modalManosPiesLi5:
+        "<strong>Pedicure Spa:</strong> Un ritual completo de relajación y cuidado para tus pies que incluye exfoliación, hidratación profunda y masaje.",
+      modalManosPiesCta:
+        "¡Luce unas uñas perfectas y siéntete renovada con nuestros servicios!",
+      modalEsteticaDesc:
+        "Encuentra un santuario de paz y renovación en nuestro spa. Ofrecemos tratamientos faciales y corporales diseñados para revitalizar tu piel y relajar tu mente, utilizando siempre productos dermatológicos de alta gama.",
+      modalEsteticaSubtitle: "Nuestros Rituales de Bienestar:",
+      modalEsteticaLi1:
+        "<strong>Limpieza Facial Profunda:</strong> Purifica y desintoxica tu piel, eliminando impurezas y devolviéndole su luminosidad natural.",
+      modalEsteticaLi2:
+        "<strong>Hidratación Facial Intensiva:</strong> Tratamientos personalizados para nutrir tu piel a profundidad, combatiendo la resequedad y la falta de vitalidad.",
+      modalEsteticaLi3:
+        "<strong>Masajes Relajantes:</strong> Libera el estrés y la tensión muscular con nuestras técnicas de masaje diseñadas para promover una relajación total del cuerpo y la mente.",
+      modalEsteticaLi4:
+        "<strong>Drenaje Linfático:</strong> Técnica manual suave que ayuda a eliminar toxinas, reducir la retención de líquidos y mejorar la circulación.",
+      modalEsteticaLi5:
+        "<strong>Tratamientos Corporales:</strong> Exfoliaciones y envolturas corporales para una piel suave, renovada y visiblemente más saludable.",
+      modalEsteticaCta:
+        "Regálate un momento de paz y cuidado. ¡Tu cuerpo y tu mente te lo agradecerán!",
+      modalDepilacionDesc:
+        "Realza la belleza de tu mirada y disfruta de una piel suave y libre de vello con nuestros servicios especializados. Utilizamos técnicas precisas y productos de la más alta calidad para tu comodidad y seguridad.",
+      modalDepilacionSubtitle: "Define tu Mirada y Piel:",
+      modalDepilacionLi1:
+        "<strong>Depilación con Cera:</strong> Técnica eficaz para eliminar el vello desde la raíz en diferentes zonas del cuerpo, dejando tu piel tersa por más tiempo.",
+      modalDepilacionLi2:
+        "<strong>Depilación con Hilo:</strong> Ideal para zonas delicadas como cejas, bozo y rostro. Ofrece una precisión inigualable para un diseño de cejas perfecto.",
+      modalDepilacionLi3:
+        "<strong>Extensiones de Pestañas Pelo a Pelo:</strong> Logra una mirada más densa, larga y expresiva con un acabado natural y elegante.",
+      modalDepilacionLi4:
+        "<strong>Lifting de Pestañas:</strong> Eleva y curva tus pestañas naturales desde la base para que parezcan más largas, sin necesidad de extensiones.",
+      modalDepilacionLi5:
+        "<strong>Diseño y Sombreado de Cejas:</strong> Damos forma a tus cejas según la morfología de tu rostro y aplicamos sombreado semipermanente para un look definido.",
+      modalDepilacionCta:
+        "¡Descubre el poder de una mirada y una piel impecable en Narbo's!",
     },
     en: {
       metaTitle: "Narbo's Salon Spa | Hair & Spa in Chía, Colombia",
@@ -185,6 +246,67 @@ document.addEventListener("DOMContentLoaded", () => {
       review3Text:
         '"Excellent place! The service is spectacular, the services and products offered are of excellent quality, you leave feeling truly renewed 😉"',
       review3Author: "- Claudia Escobar",
+      // --- Modal Texts in English ---
+      modalPeluqueriaDesc:
+        "At Narbo's Salon Spa, we transform your hair with art and precision. We use products from renowned brands like Wella, L'Oréal, and Schwarzkopf to ensure spectacular results and the care your hair deserves.",
+      modalPeluqueriaSubtitle: "Our Hairdressing Services Include:",
+      modalPeluqueriaLi1:
+        "<strong>Coloring & Advanced Techniques:</strong> From full dyes and gray coverage to the latest trends in Balayage, Ombré, and Babylights.",
+      modalPeluqueriaLi2:
+        "<strong>Custom Haircuts:</strong> Image consulting to find the cut that best suits your style and face shape, for both women and men.",
+      modalPeluqueriaLi3:
+        "<strong>Barbering:</strong> Classic and modern barbering services, including cuts, beard trims, and shaving rituals.",
+      modalPeluqueriaLi4:
+        "<strong>Professional Hairstyling & Makeup:</strong> Looks for special events, weddings, and any occasion. We create updos, waves, and more.",
+      modalPeluqueriaLi5:
+        "<strong>Hair Treatments:</strong> Deep hydration rituals, reconstruction, and therapies for your scalp's health.",
+      modalPeluqueriaCta:
+        "Visit us and let our experts enhance the beauty of your hair!",
+      modalManosPiesDesc:
+        "Your hands and feet deserve special care. We offer a luxury manicure and pedicure experience with top market brands like Organic, Belier, and Masglo to ensure a perfect, long-lasting finish.",
+      modalManosPiesSubtitle: "Explore Our Treatments:",
+      modalManosPiesLi1:
+        "<strong>Traditional Manicure & Pedicure:</strong> The classic care your nails need to look clean, healthy, and elegant.",
+      modalManosPiesLi2:
+        "<strong>Semi-Permanent Polish:</strong> Enjoy flawless color and spectacular shine for weeks, without worrying about chipping.",
+      modalManosPiesLi3:
+        "<strong>Sculpted Nails:</strong> We create acrylic or gel nail extensions, customized in shape and size for a natural or bold look.",
+      modalManosPiesLi4:
+        "<strong>Designs & Nail Art:</strong> From subtle decorations to the most creative and trendy designs. Tell us your idea, and we'll bring it to life!",
+      modalManosPiesLi5:
+        "<strong>Spa Pedicure:</strong> A complete relaxation and care ritual for your feet, including exfoliation, deep hydration, and massage.",
+      modalManosPiesCta:
+        "Show off perfect nails and feel renewed with our services!",
+      modalEsteticaDesc:
+        "Find a sanctuary of peace and renewal in our spa. We offer facial and body treatments designed to revitalize your skin and relax your mind, always using high-end dermatological products.",
+      modalEsteticaSubtitle: "Our Wellness Rituals:",
+      modalEsteticaLi1:
+        "<strong>Deep Cleansing Facial:</strong> Purify and detoxify your skin, removing impurities and restoring its natural radiance.",
+      modalEsteticaLi2:
+        "<strong>Intensive Facial Hydration:</strong> Personalized treatments to deeply nourish your skin, combating dryness and lack of vitality.",
+      modalEsteticaLi3:
+        "<strong>Relaxing Massages:</strong> Release stress and muscle tension with our massage techniques designed to promote total body and mind relaxation.",
+      modalEsteticaLi4:
+        "<strong>Lymphatic Drainage:</strong> A gentle manual technique that helps eliminate toxins, reduce fluid retention, and improve circulation.",
+      modalEsteticaLi5:
+        "<strong>Body Treatments:</strong> Body exfoliations and wraps for soft, renewed, and visibly healthier skin.",
+      modalEsteticaCta:
+        "Treat yourself to a moment of peace and care. Your body and mind will thank you!",
+      modalDepilacionDesc:
+        "Enhance the beauty of your look and enjoy smooth, hair-free skin with our specialized services. We use precise techniques and the highest quality products for your comfort and safety.",
+      modalDepilacionSubtitle: "Define Your Look and Skin:",
+      modalDepilacionLi1:
+        "<strong>Waxing:</strong> An effective technique to remove hair from the root in various body areas, leaving your skin smooth for longer.",
+      modalDepilacionLi2:
+        "<strong>Threading:</strong> Ideal for delicate areas like eyebrows, upper lip, and face. It offers unparalleled precision for a perfect eyebrow design.",
+      modalDepilacionLi3:
+        "<strong>Classic Eyelash Extensions:</strong> Achieve a fuller, longer, and more expressive look with a natural and elegant finish.",
+      modalDepilacionLi4:
+        "<strong>Lash Lift:</strong> Lifts and curls your natural lashes from the base to make them appear longer, without needing extensions.",
+      modalDepilacionLi5:
+        "<strong>Eyebrow Design & Shading:</strong> We shape your eyebrows according to your facial morphology and apply semi-permanent shading for a defined look.",
+      modalDepilacionCta:
+        "Discover the power of a flawless look and skin at Narbo's!",
     },
   };
 
@@ -494,19 +616,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // --- FIN: LÓGICA DEL FILTRO INTERACTIVO DE LA GALERÍA ---
 
-  // --- INICIO: NUEVA LÓGICA PARA MODALES DE SERVICIOS ---
+  // --- INICIO: LÓGICA PARA MODALES DE SERVICIOS ---
 
   const openModalTriggers = document.querySelectorAll("[data-modal-target]");
 
   const openModal = (modal) => {
     if (modal) {
-      const modalContent = modal.querySelector(".bg-white"); // Target para el contenido
+      const modalContent = modal.querySelector(".bg-white");
       modal.classList.remove("hidden");
       modal.classList.add("modal-animation");
       if (modalContent) {
         modalContent.classList.add("modal-content-animation");
       }
-      // Reutilizamos la clase existente para bloquear el scroll
       document.body.classList.add("mobile-menu-open");
     }
   };
@@ -514,18 +635,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeModal = (modal) => {
     if (modal) {
       const modalContent = modal.querySelector(".bg-white");
-      // Eliminamos las clases de animación para que se puedan volver a aplicar al abrir
       modal.classList.remove("modal-animation");
       if (modalContent) {
         modalContent.classList.remove("modal-content-animation");
       }
       modal.classList.add("hidden");
-      // Desbloqueamos el scroll
       document.body.classList.remove("mobile-menu-open");
     }
   };
 
-  // Añadir listeners para los disparadores que abren los modales
   openModalTriggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
       const modal = document.getElementById(trigger.dataset.modalTarget);
@@ -533,14 +651,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Listener para cerrar con el botón 'X', clic en el fondo, o tecla 'Escape'
   document.querySelectorAll('[id$="-modal"]').forEach((modal) => {
-    // Clic en botón de cerrar (X)
     const closeButton = modal.querySelector("[data-modal-close]");
     if (closeButton) {
       closeButton.addEventListener("click", () => closeModal(modal));
     }
-    // Clic en el fondo del modal (overlay)
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {
         closeModal(modal);
@@ -548,7 +663,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Cierre con la tecla Escape
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       const openModal = document.querySelector(".modal-animation:not(.hidden)");
@@ -556,7 +670,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- FIN: NUEVA LÓGICA PARA MODALES DE SERVICIOS ---
+  // --- FIN: LÓGICA PARA MODALES DE SERVICIOS ---
 
   // --- INICIO: LÓGICA DE LIGHTBOX GALLERY (GLightbox) ---
   const lightbox = GLightbox({
