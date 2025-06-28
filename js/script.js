@@ -10,12 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
       navServicios: "Servicios",
       navNosotros: "Nosotros",
       navGaleria: "Galería",
+      navResenas: "Reseñas",
       navUbicacion: "Ubicación",
       navContacto: "Contacto",
       navInicioMobile: "Inicio",
       navServiciosMobile: "Servicios",
       navNosotrosMobile: "Nosotros",
       navGaleriaMobile: "Galería",
+      navResenasMobile: "Reseñas",
       navUbicacionMobile: "Ubicación",
       navContactoMobile: "Contacto",
       heroTitle: "Tu oasis de belleza y relajación en Chía",
@@ -45,10 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutP3: "¡Te esperamos para consentirte!",
       aboutAlt: "Equipo profesional de Narbo's Salón Spa sonriendo",
       galleryTitle: "Nuestros Trabajos",
-      galleryFilterAll: "Todos", // <-- NUEVA LÍNEA
-      galleryFilterHair: "Peluquería", // <-- NUEVA LÍNEA
-      galleryFilterNails: "Uñas", // <-- NUEVA LÍNEA
-      galleryFilterAesthetics: "Estética", // <-- NUEVA LÍNEA
+      galleryFilterAll: "Todos",
+      galleryFilterHair: "Peluquería",
+      galleryFilterNails: "Uñas",
+      galleryFilterAesthetics: "Estética",
       galleryAlt1: "Trabajo de balayage profesional",
       galleryAlt2: "Diseño de uñas acrílicas creativo",
       galleryAlt3: "Corte de cabello moderno para mujer",
@@ -100,12 +102,14 @@ document.addEventListener("DOMContentLoaded", () => {
       navServicios: "Services",
       navNosotros: "About Us",
       navGaleria: "Gallery",
+      navResenas: "Reviews",
       navUbicacion: "Location",
       navContacto: "Contact",
       navInicioMobile: "Home",
       navServiciosMobile: "Services",
       navNosotrosMobile: "About Us",
       navGaleriaMobile: "Gallery",
+      navResenasMobile: "Reviews",
       navUbicacionMobile: "Location",
       navContactoMobile: "Contact",
       heroTitle: "Your oasis of beauty and relaxation in Chía",
@@ -135,10 +139,10 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutP3: "We look forward to pampering you!",
       aboutAlt: "Professional team of Narbo's Salon Spa smiling",
       galleryTitle: "Our Work",
-      galleryFilterAll: "All", // <-- NUEVA LÍNEA
-      galleryFilterHair: "Hairdressing", // <-- NUEVA LÍNEA
-      galleryFilterNails: "Nails", // <-- NUEVA LÍNEA
-      galleryFilterAesthetics: "Aesthetics", // <-- NUEVA LÍNEA
+      galleryFilterAll: "All",
+      galleryFilterHair: "Hairdressing",
+      galleryFilterNails: "Nails",
+      galleryFilterAesthetics: "Aesthetics",
       galleryAlt1: "Professional balayage work",
       galleryAlt2: "Creative acrylic nail design",
       galleryAlt3: "Modern haircut for women",
@@ -173,13 +177,13 @@ document.addEventListener("DOMContentLoaded", () => {
       reviewsSubtitle:
         "We are proud of the experience we offer. Here are some of the most inspiring Google reviews.",
       review1Text:
-        '"Narbo’s Spa es mi lugar favorito para consentirme. La atención siempre es impecable, el ambiente es relajante y el servicio de uñas es espectacular. Cada vez que voy, salgo feliz con el resultado. Son muy detallistas, puntuales y cuidan cada detalle. ¡Súper recomendado!"',
+        '"Narbo\'s Spa is my favorite place to pamper myself. The service is always impeccable, the atmosphere is relaxing, and the nail service is spectacular. Every time I go, I leave happy with the result. They are very detail-oriented, punctual, and take care of every detail. Highly recommended!"',
       review1Author: "- HeLLeN GaLiiNdO",
       review2Text:
-        '"Siempre me atienden con la mejor energía, el servicio es súper profesional y se nota el amor que le ponen a cada detalle. Mis uñas siempre quedan hermosas, duran un montón y me encanta cómo siempre logran justo lo que quiero. ¡Mil gracias por siempre hacerme sentir tan bien y por ese talento increíble que tienen! 💅✨"',
+        '"They always greet me with the best energy, the service is super professional, and you can see the love they put into every detail. My nails always look beautiful, they last a long time, and I love how they always achieve just what I want. Thank you so much for always making me feel so good and for the incredible talent you have! 💅✨"',
       review2Author: "- manuela pardo",
       review3Text:
-        '"Excelente lugar! La atención es espectacular, los servicios y productos ofrecidos son de excelente calidad, sales realmente renovad@😉"',
+        '"Excellent place! The service is spectacular, the services and products offered are of excellent quality, you leave feeling truly renewed 😉"',
       review3Author: "- Claudia Escobar",
     },
   };
@@ -448,7 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // --- FIN: LÓGICA DEL SLIDER DE RESEÑAS ---
 
-  // --- INICIO: NUEVA LÓGICA DEL FILTRO INTERACTIVO DE LA GALERÍA ---
+  // --- INICIO: LÓGICA DEL FILTRO INTERACTIVO DE LA GALERÍA ---
   const galleryFilters = document.getElementById("gallery-filters");
   const galleryItems = document.querySelectorAll(".gallery-item");
   const filterButtons = document.querySelectorAll(".filter-btn");
