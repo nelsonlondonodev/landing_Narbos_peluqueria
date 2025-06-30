@@ -247,3 +247,27 @@ body.mobile-menu-open {
 }
 
 /* --- FIN: ESTILOS PARA ANIMACIÓN EN SECCIÓN "SOBRE NOSOTROS" --- */
+
+/* --- INICIO: NUEVOS ESTILOS PARA TARJETAS DE RESEÑAS INTERACTIVAS --- */
+
+/*
+  Clase para el contenedor del slider, que ahora será un enlace.
+  Añadimos un cursor de tipo puntero para indicar que es clicable.
+  Añadimos una transición para que los cambios de sombra y transformación sean suaves.
+*/
+#reviews-slider-wrapper {
+  display: block; /* Hacemos que el 'a' se comporte como un bloque */
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/*
+  Efecto al pasar el cursor sobre la tarjeta.
+  La levantamos ligeramente y aumentamos la sombra para dar una sensación de profundidad.
+*/
+#reviews-slider-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+/* --- FIN: NUEVOS ESTILOS PARA TARJETAS DE RESEÑAS INTERACTIVAS --- */
