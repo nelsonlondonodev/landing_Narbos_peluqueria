@@ -108,5 +108,5 @@ Esto significa que las imágenes solo se cargan cuando el usuario se acerca a el
 
 -----
 ### Titulo para el H1 
--Tu peluquería en Chía
--Tu peluquería de confianza en Chía
+-Tu peluquería en Chía / omitir este Titulo
+-Tu peluquería de confianza en Chía / omitir este Titulo
