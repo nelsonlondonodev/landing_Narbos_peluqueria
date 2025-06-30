@@ -699,4 +699,26 @@ document.addEventListener("DOMContentLoaded", () => {
     slideEffect: "fade",
   });
   // --- FIN: LÓGICA DE LIGHTBOX GALLERY ---
+
+  // --- INICIO: LÓGICA PARA ANIMACIÓN POR SCROLL ---
+  const scrollAnimateElements = document.querySelectorAll(".scroll-animate");
+
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1, // El elemento se considera visible cuando al menos el 10% está en pantalla
+    }
+  );
+
+  scrollAnimateElements.forEach((element) => {
+    observer.observe(element);
+  });
+  // --- FIN: LÓGICA PARA ANIMACIÓN POR SCROLL ---
 });
