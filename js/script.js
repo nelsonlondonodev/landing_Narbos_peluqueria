@@ -541,8 +541,8 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTheme();
   // --- FIN: LÓGICA AVANZADA DE TEMA ---
 
-  // --- INICIO: LÓGICA DEL SLIDER DE RESEÑAS (CON AUTOPLAY) ---
-  const sliderContainer = document.getElementById("reviews-slider");
+  // --- INICIO: LÓGICA DEL SLIDER DE RESEÑAS (CON AUTOPLAY Y ALTURA UNIFORME) ---
+  const sliderWrapper = document.getElementById("reviews-slider-wrapper");
   const reviewSlides = document.querySelectorAll(".review-slide");
   const prevBtn = document.getElementById("prev-review");
   const nextBtn = document.getElementById("next-review");
@@ -550,6 +550,20 @@ document.addEventListener("DOMContentLoaded", () => {
   if (reviewSlides.length > 0) {
     let currentReviewIndex = 0;
     let autoPlayInterval;
+
+    // Función para unificar la altura de los slides
+    const unifySlideHeights = () => {
+      let maxHeight = 0;
+      reviewSlides.forEach((slide) => {
+        slide.style.height = "auto"; // Resetea la altura para recalcular
+        if (slide.offsetHeight > maxHeight) {
+          maxHeight = slide.offsetHeight;
+        }
+      });
+      reviewSlides.forEach((slide) => {
+        slide.style.minHeight = `${maxHeight}px`;
+      });
+    };
 
     const showReview = (index) => {
       reviewSlides.forEach((slide, i) => {
@@ -563,28 +577,36 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const startAutoPlay = () => {
-      autoPlayInterval = setInterval(nextReview, 7000); // Cambia cada 7 segundos
+      autoPlayInterval = setInterval(nextReview, 7000);
     };
 
     const stopAutoPlay = () => {
       clearInterval(autoPlayInterval);
     };
 
-    prevBtn.addEventListener("click", () => {
+    // Manejo de clics en los botones para evitar que activen el enlace
+    prevBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // Previene la navegación
+      e.stopPropagation(); // Detiene la propagación del evento al enlace padre
       currentReviewIndex =
         (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
       showReview(currentReviewIndex);
+      stopAutoPlay();
     });
 
-    nextBtn.addEventListener("click", () => {
+    nextBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       nextReview();
+      stopAutoPlay();
     });
 
-    sliderContainer.addEventListener("mouseenter", stopAutoPlay);
-    sliderContainer.addEventListener("mouseleave", startAutoPlay);
+    sliderWrapper.addEventListener("mouseenter", stopAutoPlay);
+    sliderWrapper.addEventListener("mouseleave", startAutoPlay);
 
-    prevBtn.addEventListener("click", stopAutoPlay);
-    nextBtn.addEventListener("click", stopAutoPlay);
+    // Unificar alturas al cargar y al cambiar el tamaño de la ventana
+    unifySlideHeights();
+    window.addEventListener("resize", unifySlideHeights);
 
     showReview(currentReviewIndex);
     startAutoPlay();
