@@ -168,3 +168,30 @@ body.mobile-menu-open {
 }
 
 /* --- FIN: ESTILOS PARA ANIMACIÓN DE HERO --- */
+
+/* --- INICIO: ESTILOS PARA ÍCONOS EN MODALES DE SERVICIOS --- */
+
+/*
+  Usamos Flexbox para alinear el ícono y el texto en cada item de la lista.
+*/
+.modal-service-item {
+  display: flex;
+  align-items: flex-start; /* Alinea el ícono con el inicio del texto, ideal para textos de varias líneas */
+}
+
+/*
+  Estilos para el contenedor del ícono.
+*/
+.modal-service-icon {
+  flex-shrink: 0; /* Previene que el ícono se encoja si el texto es largo */
+  color: #6b755a; /* Color brand-green por defecto */
+  margin-right: 0.75rem; /* Espacio entre el ícono y el texto (12px) */
+  margin-top: 3px; /* Pequeño ajuste para alinear visualmente mejor con la altura del texto */
+}
+
+/* En modo oscuro, usamos un color más claro para el ícono para que contraste bien. */
+.dark .modal-service-icon {
+  color: #c5ab94; /* Color brand-medium */
+}
+
+/* --- FIN: ESTILOS PARA ÍCONOS EN MODALES DE SERVICIOS --- */
