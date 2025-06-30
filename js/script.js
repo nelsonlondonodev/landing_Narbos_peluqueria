@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutP1:
         "En Narbo's Salón Spa, llevamos más de 11 años dedicados al arte de la belleza y el bienestar. Aunque nuestra nueva y moderna sede abrió en 2024, nuestra pasión y experiencia nos acompañan desde 2013.",
       aboutP2:
-        "Somos un negocio liderado por mujeres, comprometidas con ofrecerte una experiencia inolvidable. Ofrecemos planes especiales, bonos de regalo y contamos con parqueadero gratuito para tu comodidad.",
+        "Somos un equipo de profesionales, comprometidos con ofrecerte una experiencia inolvidable. Ofrecemos planes especiales, bonos de regalo y contamos con parqueadero gratuito para tu comodidad.",
       aboutP3: "¡Te esperamos para consentirte!",
       aboutAlt: "Equipo profesional de Narbo's Salón Spa sonriendo",
       galleryTitle: "Nuestros Trabajos",
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutP1:
         "At Narbo's Salon Spa, we have been dedicated to the art of beauty and wellness for over 11 years. Although our new, modern location opened in 2024, our passion and experience have been with us since 2013.",
       aboutP2:
-        "We are a women-led business, committed to offering you an unforgettable experience. We offer special packages, gift certificates, and have free parking for your convenience.",
+        "We are a team of professionals, committed to offering you an unforgettable experience. We offer special packages, gift certificates, and have free parking for your convenience.",
       aboutP3: "We look forward to pampering you!",
       aboutAlt: "Professional team of Narbo's Salon Spa smiling",
       galleryTitle: "Our Work",
