@@ -145,3 +145,26 @@ body.mobile-menu-open {
 }
 
 /* --- FIN: NUEVOS ESTILOS PARA MODAL DE SERVICIOS --- */
+
+/* --- INICIO: ESTILOS PARA ANIMACIÓN DE HERO --- */
+
+/* Clase inicial para los elementos que animaremos en la sección hero.
+  Empiezan invisibles y ligeramente desplazados hacia abajo.
+  La transición se aplicará a las propiedades de opacidad y transformación.
+*/
+.animate-hero-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/*
+  Cuando JavaScript añada esta clase, el elemento se volverá visible
+  y volverá a su posición original, creando el efecto de animación.
+*/
+.animate-hero-element.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- FIN: ESTILOS PARA ANIMACIÓN DE HERO --- */

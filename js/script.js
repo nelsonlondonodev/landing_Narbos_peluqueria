@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // --- INICIO: LÓGICA PARA ANIMACIÓN DE HERO EN CARGA ---
+  const heroTitle = document.getElementById("hero-title");
+  const heroSubtitle = document.getElementById("hero-subtitle");
+
+  // Nos aseguramos de que los elementos existen antes de intentar animarlos
+  if (heroTitle && heroSubtitle) {
+    // Añadimos la clase 'is-visible' con un pequeño retraso para activar la animación
+    setTimeout(() => {
+      heroTitle.classList.add("is-visible");
+    }, 100); // Retraso de 100ms para el título
+
+    setTimeout(() => {
+      heroSubtitle.classList.add("is-visible");
+    }, 400); // Un retraso un poco mayor para el subtítulo para un efecto escalonado
+  }
+  // --- FIN: LÓGICA PARA ANIMACIÓN DE HERO EN CARGA ---
+
   // --- INICIO: LÓGICA DE TRADUCCIÓN (I18N) ---
 
   const translations = {
