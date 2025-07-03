@@ -3,20 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroTitle = document.getElementById("hero-title");
   const heroSubtitle = document.getElementById("hero-subtitle");
 
-  // Nos aseguramos de que los elementos existen antes de intentar animarlos
   if (heroTitle && heroSubtitle) {
-    // Añadimos la clase 'is-visible' con un pequeño retraso para activar la animación
     setTimeout(() => {
       heroTitle.classList.add("is-visible");
-    }, 100); // Retraso de 100ms para el título
-
+    }, 100);
     setTimeout(() => {
       heroSubtitle.classList.add("is-visible");
-    }, 400); // Un retraso un poco mayor para el subtítulo para un efecto escalonado
+    }, 400);
   }
   // --- FIN: LÓGICA PARA ANIMACIÓN DE HERO EN CARGA ---
 
-  // --- INICIO: LÓGICA DE TRADUCCIÓN (I18N) ---
+  // --- INICIO: LÓGICA DE TRADUCCIÓN (I18N) MEJORADA ---
 
   const translations = {
     es: {
@@ -110,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
       review3Text:
         '"Excelente lugar! La atención es espectacular, los servicios y productos ofrecidos son de excelente calidad, sales realmente renovad@😉"',
       review3Author: "- Claudia Escobar",
-      // --- Textos de Modales en Español ---
       modalPeluqueriaDesc:
         "Transformamos tu cabello con arte, precisión y productos de las mejores marcas como Wella, L'Oréal y Schwarzkopf para garantizar resultados espectaculares.",
       modalPeluqueriaSubtitle: "Nuestros Servicios Destacados:",
@@ -263,7 +259,6 @@ document.addEventListener("DOMContentLoaded", () => {
       review3Text:
         '"Excellent place! The service is spectacular, the services and products offered are of excellent quality, you leave feeling truly renewed 😉"',
       review3Author: "- Claudia Escobar",
-      // --- Modal Texts in English ---
       modalPeluqueriaDesc:
         "We transform your hair with art, precision, and top brand products like Wella, L'Oréal, and Schwarzkopf to ensure spectacular results.",
       modalPeluqueriaSubtitle: "Our Featured Services:",
@@ -327,6 +322,9 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   };
 
+  const langToggleDesktop = document.getElementById("lang-toggle-desktop");
+  const langToggleMobile = document.getElementById("lang-toggle-mobile");
+
   const setLanguage = (lang) => {
     document.documentElement.lang = lang;
 
@@ -349,50 +347,36 @@ document.addEventListener("DOMContentLoaded", () => {
       .setAttribute("content", translations[lang].metaDescription);
     document.title = translations[lang].metaTitle;
 
-    updateLangButtonsStyle(lang);
+    updateLangToggleButtons(lang);
   };
 
-  const updateLangButtonsStyle = (activeLang) => {
-    document.querySelectorAll(".lang-btn, .lang-btn-mobile").forEach((btn) => {
-      const btnLang = btn.dataset.lang || btn.dataset.langMobile;
-      if (btnLang === activeLang) {
-        btn.classList.add(
-          "font-bold",
-          "text-brand-green",
-          "dark:text-brand-medium"
-        );
-        btn.classList.remove("text-gray-500", "hover:text-brand-green");
-      } else {
-        btn.classList.remove(
-          "font-bold",
-          "text-brand-green",
-          "dark:text-brand-medium"
-        );
-        btn.classList.add("text-gray-500", "hover:text-brand-green");
-      }
-    });
+  const updateLangToggleButtons = (currentLang) => {
+    const targetLang = currentLang === "es" ? "en" : "es";
+    const flagCode = targetLang === "es" ? "es" : "gb";
+
+    const buttonHTML = `
+      <img src="https://flagcdn.com/w20/${flagCode}.png" srcset="https://flagcdn.com/w40/${flagCode}.png 2x" alt="${targetLang.toUpperCase()}" class="w-5 h-auto mr-2">
+      ${targetLang.toUpperCase()}
+    `;
+
+    langToggleDesktop.innerHTML = buttonHTML;
+    langToggleMobile.innerHTML = buttonHTML;
   };
 
-  document.querySelectorAll(".lang-btn").forEach((button) => {
-    button.addEventListener("click", () => {
-      const lang = button.dataset.lang;
-      localStorage.setItem("language", lang);
-      setLanguage(lang);
-    });
-  });
+  const toggleLanguage = () => {
+    const currentLang = localStorage.getItem("language") || "es";
+    const newLang = currentLang === "es" ? "en" : "es";
+    localStorage.setItem("language", newLang);
+    setLanguage(newLang);
+  };
 
-  document.querySelectorAll(".lang-btn-mobile").forEach((button) => {
-    button.addEventListener("click", () => {
-      const lang = button.dataset.langMobile;
-      localStorage.setItem("language", lang);
-      setLanguage(lang);
-    });
-  });
+  langToggleDesktop.addEventListener("click", toggleLanguage);
+  langToggleMobile.addEventListener("click", toggleLanguage);
 
   const currentLang = localStorage.getItem("language") || "es";
   setLanguage(currentLang);
 
-  // --- FIN: LÓGICA DE TRADUCCIÓN (I18N) ---
+  // --- FIN: LÓGICA DE TRADUCCIÓN (I18N) MEJORADA ---
 
   // --- INICIO: LÓGICA MEJORADA PARA MENÚ HAMBURGUESA (OVERLAY) ---
   const menuBtn = document.getElementById("menu-btn");
@@ -551,11 +535,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentReviewIndex = 0;
     let autoPlayInterval;
 
-    // Función para unificar la altura de los slides
     const unifySlideHeights = () => {
       let maxHeight = 0;
       reviewSlides.forEach((slide) => {
-        slide.style.height = "auto"; // Resetea la altura para recalcular
+        slide.style.height = "auto";
         if (slide.offsetHeight > maxHeight) {
           maxHeight = slide.offsetHeight;
         }
@@ -584,10 +567,9 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(autoPlayInterval);
     };
 
-    // Manejo de clics en los botones para evitar que activen el enlace
     prevBtn.addEventListener("click", (e) => {
-      e.preventDefault(); // Previene la navegación
-      e.stopPropagation(); // Detiene la propagación del evento al enlace padre
+      e.preventDefault();
+      e.stopPropagation();
       currentReviewIndex =
         (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
       showReview(currentReviewIndex);
@@ -604,7 +586,6 @@ document.addEventListener("DOMContentLoaded", () => {
     sliderWrapper.addEventListener("mouseenter", stopAutoPlay);
     sliderWrapper.addEventListener("mouseleave", startAutoPlay);
 
-    // Unificar alturas al cargar y al cambiar el tamaño de la ventana
     unifySlideHeights();
     window.addEventListener("resize", unifySlideHeights);
 
@@ -735,7 +716,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     },
     {
-      threshold: 0.1, // El elemento se considera visible cuando al menos el 10% está en pantalla
+      threshold: 0.1,
     }
   );
 
