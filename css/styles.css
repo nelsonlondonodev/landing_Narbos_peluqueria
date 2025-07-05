@@ -315,3 +315,19 @@ body.mobile-menu-open {
   opacity: 1; /* Hacemos visible el borde. */
 }
 /* --- FIN: ESTILOS PARA BORDE GRADIENTE EN TARJETAS DE SERVICIO (CORREGIDO) --- */
+
+/* --- INICIO: ESTILOS PARA SECCIÓN DE VIDEO --- */
+
+/*
+  Establece una relación de aspecto de 9:16 para el video.
+  Esto reserva el espacio vertical correcto ANTES de que el video cargue,
+  evitando el "salto" brusco del contenido inferior.
+  La clase se aplica directamente a la etiqueta <video> en el HTML.
+*/
+.video-aspect-ratio {
+  aspect-ratio: 9 / 16;
+  background-color: #000; /* Fondo negro mientras carga el video */
+  object-fit: cover; /* Asegura que el video cubra toda el area sin distorsionarse */
+}
+
+/* --- FIN: ESTILOS PARA SECCIÓN DE VIDEO --- */
