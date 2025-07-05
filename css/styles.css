@@ -319,15 +319,22 @@ body.mobile-menu-open {
 /* --- INICIO: ESTILOS PARA SECCIÓN DE VIDEO --- */
 
 /*
-  Establece una relación de aspecto de 9:16 para el video.
-  Esto reserva el espacio vertical correcto ANTES de que el video cargue,
-  evitando el "salto" brusco del contenido inferior.
-  La clase se aplica directamente a la etiqueta <video> en el HTML.
+  Limpiamos esta clase, quitando 'object-fit' que no tiene efecto en un DIV.
+  Esta propiedad ya está correctamente aplicada en la etiqueta <video> del HTML.
 */
 .video-aspect-ratio {
   aspect-ratio: 9 / 16;
   background-color: #000; /* Fondo negro mientras carga el video */
-  object-fit: cover; /* Asegura que el video cubra toda el area sin distorsionarse */
+}
+
+/*
+  ¡NUEVA REGLA!
+  Esta es la corrección principal. Le da al contenedor un ancho completo
+  dentro de su columna para que la proporción 9:16 se pueda calcular
+  correctamente y el contenedor no se colapse.
+*/
+#video-promo .video-aspect-ratio {
+  width: 100%;
 }
 
 /* --- FIN: ESTILOS PARA SECCIÓN DE VIDEO --- */
