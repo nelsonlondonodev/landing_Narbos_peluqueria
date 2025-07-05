@@ -60,6 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "Somos un equipo de profesionales, comprometidos con ofrecerte una experiencia inolvidable. Ofrecemos planes especiales, bonos de regalo y contamos con parqueadero gratuito para tu comodidad.",
       aboutP3: "¡Te esperamos para consentirte!",
       aboutAlt: "Equipo profesional de Narbo's Salón Spa sonriendo",
+      videoTitle: "Descubre Nuestro Estilo",
+      videoDesc:
+        "Sumérgete en el ambiente de Narbo's. Mira nuestros últimos trabajos, transformaciones y momentos especiales directamente desde nuestro Instagram. ¡La inspiración que buscas está a un play de distancia!",
+      videoCta: "Síguenos en Instagram",
       galleryTitle: "Nuestros Trabajos",
       galleryFilterAll: "Todos",
       galleryFilterHair: "Peluquería",
@@ -212,6 +216,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "We are a team of professionals, committed to offering you an unforgettable experience. We offer special packages, gift certificates, and have free parking for your convenience.",
       aboutP3: "We look forward to pampering you!",
       aboutAlt: "Professional team of Narbo's Salon Spa smiling",
+      videoTitle: "Discover Our Style",
+      videoDesc:
+        "Immerse yourself in the Narbo's atmosphere. See our latest work, transformations, and special moments directly from our Instagram. The inspiration you're looking for is just a play away!",
+      videoCta: "Follow us on Instagram",
       galleryTitle: "Our Work",
       galleryFilterAll: "All",
       galleryFilterHair: "Hairdressing",

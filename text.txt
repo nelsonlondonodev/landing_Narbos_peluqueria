@@ -8,94 +8,101 @@ Reglas para comenzar a trabajar con los archivos día a día.
 
 ### Historial de Mejoras - 05 de Julio de 2025 (NUEVO)
 
-**1. Corrección y Mejora de Traducciones en Pie de Página**
+**1. Implementación de Sección de Video Promocional**
+* Se añadió una nueva sección "Descubre Nuestro Estilo" entre las secciones "Nosotros" y "Galería".
+* Se diseñó un layout de dos columnas: una para texto y un botón a Instagram, y otra con un reproductor de video MP4.
+* El reproductor de video se estilizó para simular un formato de "Reel" de Instagram, con un marco y reproducción en bucle silenciada por defecto.
+* Se prepararon todos los textos de la nueva sección para ser multi-idioma.
+
+**2. Corrección y Mejora de Traducciones en Pie de Página**
 * Se corrigió un error en el sistema de traducción que eliminaba el crédito al desarrollador en el pie de página.
-* Se reestructuró el código HTML y las claves de traducción en JavaScript para permitir que tanto el aviso de copyright como el crédito al desarrollador se muestren correctamente en ambos idiomas (Español e Inglés).
+* Se reestructuró el código HTML y las claves de traducción en JavaScript para permitir que tanto el aviso de copyright como el crédito al desarrollador se muestren correctamente en ambos idiomas.
 
 ### Historial de Mejoras - 27 de Junio de 2025
 
 **1.
 Mejora Radical de la Experiencia en Menú Móvil (UX/UI)**
-* Se rediseñó por completo el menú de navegación para dispositivos móviles, reemplazando el antiguo menú desplegable por un panel lateral moderno (overlay) que se desliza desde la derecha.
-* Se añadió un fondo oscuro semitransparente (backdrop) que cubre la página y el ícono de hamburguesa ahora se transforma en un ícono de cierre (X) para una usabilidad más intuitiva.
-* Se implementó el bloqueo de scroll en el cuerpo de la página mientras el menú está activo.
+* [cite_start]Se rediseñó por completo el menú de navegación para dispositivos móviles, reemplazando el antiguo menú desplegable por un panel lateral moderno (overlay) que se desliza desde la derecha. [cite: 34]
+* [cite_start]Se añadió un fondo oscuro semitransparente (backdrop) que cubre la página y el ícono de hamburguesa ahora se transforma en un ícono de cierre (X) para una usabilidad más intuitiva. [cite: 35]
+* [cite_start]Se implementó el bloqueo de scroll en el cuerpo de la página mientras el menú está activo. [cite: 36]
 
 **2.
 Rediseño Visual de la Sección Principal (Hero)**
-* Se reubicó el bloque de contenido principal ("Tu oasis de belleza...") para que flote visualmente entre la sección de la imagen de cabecera y la sección de servicios, logrando un diseño más dinámico y profesional.
-* Se aumentó la opacidad del fondo de este bloque al 75% y se alineó su contenido a la izquierda para garantizar una mejor legibilidad y una estética más estructurada.
+* [cite_start]Se reubicó el bloque de contenido principal ("Tu oasis de belleza...") para que flote visualmente entre la sección de la imagen de cabecera y la sección de servicios, logrando un diseño más dinámico y profesional. [cite: 37]
+* [cite_start]Se aumentó la opacidad del fondo de este bloque al 75% y se alineó su contenido a la izquierda para garantizar una mejor legibilidad y una estética más estructurada. [cite: 38]
 **3. Refinamiento de Interfaz en Tarjetas de Servicios**
-* Se añadió una micro-interacción de cambio de color a los íconos en la sección "Nuestros Servicios".
-El color del ícono ahora transiciona suavemente al pasar el cursor sobre la tarjeta.
+* [cite_start]Se añadió una micro-interacción de cambio de color a los íconos en la sección "Nuestros Servicios". [cite: 39]
+[cite_start]El color del ícono ahora transiciona suavemente al pasar el cursor sobre la tarjeta. [cite: 40]
 ---
 ### Historial de Mejoras - 26 de Junio de 2025
 
 **1.
 Implementación de Sección de Reseñas de Clientes**
-* Se añadió una nueva sección "Lo que dicen nuestros clientes" para mostrar reseñas reales de Google y aumentar la confianza.
-* Se desarrolló un carrusel interactivo para navegar entre las diferentes reseñas.
-* Se implementó una función de autoplay para que las reseñas roten automáticamente cada 7 segundos.
-* Se mejoró la experiencia de usuario haciendo que el carrusel se detenga al pasar el ratón por encima o al usar los controles manuales.
-* Se añadió el icono oficial de Google a cada tarjeta de reseña para indicar la fuente y dar mayor autenticidad.
+* [cite_start]Se añadió una nueva sección "Lo que dicen nuestros clientes" para mostrar reseñas reales de Google y aumentar la confianza. [cite: 27]
+* [cite_start]Se desarrolló un carrusel interactivo para navegar entre las diferentes reseñas. [cite: 28]
+* [cite_start]Se implementó una función de autoplay para que las reseñas roten automáticamente cada 7 segundos. [cite: 29]
+* [cite_start]Se mejoró la experiencia de usuario haciendo que el carrusel se detenga al pasar el ratón por encima o al usar los controles manuales. [cite: 30]
+* [cite_start]Se añadió el icono oficial de Google a cada tarjeta de reseña para indicar la fuente y dar mayor autenticidad. [cite: 31]
 ---
 ### Historial de Mejoras - 25 de Junio de 2025
 
 **1.
 Implementación de Galería "Lightbox"**
-* Se integró la librería GLightbox para mejorar la experiencia de usuario en la galería de trabajos.
-* Ahora los usuarios pueden hacer clic en una imagen para verla en una vista ampliada y centrada.
-* Se añadió navegación con flechas (anterior/siguiente) y la posibilidad de cerrar la vista con la tecla 'Escape' o un botón 'X'.
+* [cite_start]Se integró la librería GLightbox para mejorar la experiencia de usuario en la galería de trabajos. [cite: 23]
+* [cite_start]Ahora los usuarios pueden hacer clic en una imagen para verla en una vista ampliada y centrada. [cite: 24]
+* [cite_start]Se añadió navegación con flechas (anterior/siguiente) y la posibilidad de cerrar la vista con la tecla 'Escape' o un botón 'X'. [cite: 25]
 ---
 ### Historial de Mejoras - 24 de Junio de 2025
 
 **1.
 Corrección y Mejora de Iconos de Servicios**
-* Se reemplazaron los iconos SVG genéricos en la sección 'Nuestros Servicios' por gráficos más representativos y claros para cada categoría (Peluquería, Manos y Pies, etc.), mejorando la legibilidad y la experiencia de usuario.
+* [cite_start]Se reemplazaron los iconos SVG genéricos en la sección 'Nuestros Servicios' por gráficos más representativos y claros para cada categoría (Peluquería, Manos y Pies, etc.), mejorando la legibilidad y la experiencia de usuario. [cite: 18]
 **2. Ampliación de la Galería de Trabajos**
-* Se expandió la galería de 4 a 6 imágenes para mostrar un portafolio de trabajos más extenso.
-* Se modificó la cuadrícula de la galería para una visualización óptima de 3x2 en dispositivos de escritorio y tableta.
+* [cite_start]Se expandió la galería de 4 a 6 imágenes para mostrar un portafolio de trabajos más extenso. [cite: 19]
+* [cite_start]Se modificó la cuadrícula de la galería para una visualización óptima de 3x2 en dispositivos de escritorio y tableta. [cite: 20]
+* [cite_start]Se actualizaron los archivos `index.html`, `script.js` (para textos alternativos multi-idioma) y `sitemap.xml` (para la fecha de modificación) para reflejar los cambios. [cite: 21]
 ---
 ### Historial de Mejoras - 23 de Junio de 2025
 
 **1.
-Mejora de Interfaz y Experiencia de Usuario (UI/UX)** * Se integraron gradientes en fondos y botones para un diseño más profundo y moderno.
-* Se añadieron micro-interacciones (efectos `hover`) a tarjetas, botones y galería para una mejor retroalimentación visual.  
+[cite_start]Mejora de Interfaz y Experiencia de Usuario (UI/UX)** * Se integraron gradientes en fondos y botones para un diseño más profundo y moderno. [cite: 6]
+* [cite_start]Se añadieron micro-interacciones (efectos `hover`) a tarjetas, botones y galería para una mejor retroalimentación visual. [cite: 7]  
 
 **2.
-Interactividad Avanzada en la Navegación** * Se implementó la funcionalidad "Scroll Spy" para resaltar automáticamente en el menú la sección visible en pantalla.
-* Se añadió el enlace "Inicio", que faltaba en los menús de navegación, para mejorar la usabilidad.  
+[cite_start]Interactividad Avanzada en la Navegación** * Se implementó la funcionalidad "Scroll Spy" para resaltar automáticamente en el menú la sección visible en pantalla. [cite: 8]
+* [cite_start]Se añadió el enlace "Inicio", que faltaba en los menús de navegación, para mejorar la usabilidad. [cite: 9]  
 
 **3.
-Implementación de Tema Avanzado (Dark Mode)** * Se añadió un selector de tema con tres modos: Claro, Oscuro y Automático.
-* **Modo Automático:** La página detecta y se sincroniza en tiempo real con el tema del sistema operativo del usuario.
-* **Persistencia:** La preferencia de tema del usuario se guarda en su navegador para futuras visitas.  
+[cite_start]Implementación de Tema Avanzado (Dark Mode)** * Se añadió un selector de tema con tres modos: Claro, Oscuro y Automático. [cite: 10]
+* [cite_start]**Modo Automático:** La página detecta y se sincroniza en tiempo real con el tema del sistema operativo del usuario. [cite: 11]
+* [cite_start]**Persistencia:** La preferencia de tema del usuario se guarda en su navegador para futuras visitas. [cite: 12]  
 
 **4.
 Implementación de Multi-idioma (i18n) y Correcciones Visuales**
-* Se añadió un selector de idioma para permitir a los usuarios cambiar el contenido entre Español e Inglés.
-* La preferencia de idioma del usuario se guarda en su navegador (localStorage) para futuras visitas, con Español como idioma por defecto.
-* Se incorporaron banderas junto a los selectores de idioma (ES/EN) para una identificación visual más clara.
-* Se corrigieron errores de renderizado en los iconos del selector de tema (claro/oscuro/auto) reemplazando el código SVG por versiones más robustas y compatibles.
+* [cite_start]Se añadió un selector de idioma para permitir a los usuarios cambiar el contenido entre Español e Inglés. [cite: 13]
+* [cite_start]La preferencia de idioma del usuario se guarda en su navegador (localStorage) para futuras visitas, con Español como idioma por defecto. [cite: 14]
+* [cite_start]Se incorporaron banderas junto a los selectores de idioma (ES/EN) para una identificación visual más clara. [cite: 15]
+* [cite_start]Se corrigieron errores de renderizado en los iconos del selector de tema (claro/oscuro/auto) reemplazando el código SVG por versiones más robustas y compatibles. [cite: 16]
 ---
 ### Guías de Contenido y Especificaciones Técnicas
 
 **1. Especificaciones para Imágenes de la Galería**
-* **Forma (Aspecto)**: Cuadrada (relación 1:1).
-* **Resolución Ideal**: 800 x 800 píxeles (para asegurar alta calidad en todas las pantallas).
-* **Resolución Mínima**: 400 x 400 píxeles. 
-* **Nota Técnica**: El diseño utiliza contenedores cuadrados.
-Las imágenes que no sean cuadradas serán recortadas automáticamente por el navegador para que encajen en el espacio. 
+* [cite_start]**Forma (Aspecto)**: Cuadrada (relación 1:1). [cite: 41]
+* [cite_start]**Resolución Ideal**: 800 x 800 píxeles (para asegurar alta calidad en todas las pantallas). [cite: 42]
+* [cite_start]**Resolución Mínima**: 400 x 400 píxeles. [cite: 43]
+* [cite_start]**Nota Técnica**: El diseño utiliza contenedores cuadrados. [cite: 44]
+[cite_start]Las imágenes que no sean cuadradas serán recortadas automáticamente por el navegador para que encajen en el espacio. [cite: 44] 
 
 **2.
 Optimización de Imágenes para la Web**
-* **Dimensión vs. Peso**: La dimensión (ej. 800x800 píxeles) define la calidad visual, mientras que el peso del archivo (ej. 150 KB) afecta la velocidad de carga.
-El objetivo es tener alta calidad con bajo peso. 
-* **Compresión**: Antes de subir una imagen, se debe comprimir usando herramientas online como TinyPNG o Squoosh.
-El peso ideal por imagen debería ser inferior a 150 KB.
-* **Formato Moderno (WebP)**: Se recomienda usar el formato WebP, ya que ofrece una compresión superior a JPG y PNG.
-Es compatible con todos los navegadores modernos. 
-* **Carga Diferida (Lazy Loading)**: El sitio ya implementa `loading="lazy"` en las imágenes.
-Esto significa que las imágenes solo se cargan cuando el usuario se acerca a ellas, optimizando drásticamente la velocidad de carga inicial de la página.
+* [cite_start]**Dimensión vs. Peso**: La dimensión (ej. 800x800 píxeles) define la calidad visual, mientras que el peso del archivo (ej. 150 KB) afecta la velocidad de carga. [cite: 45]
+[cite_start]El objetivo es tener alta calidad con bajo peso. [cite: 46]
+* [cite_start]**Compresión**: Antes de subir una imagen, se debe comprimir usando herramientas online como TinyPNG o Squoosh. [cite: 47]
+[cite_start]El peso ideal por imagen debería ser inferior a 150 KB. [cite: 47]
+* [cite_start]**Formato Moderno (WebP)**: Se recomienda usar el formato WebP, ya que ofrece una compresión superior a JPG y PNG. [cite: 48]
+[cite_start]Es compatible con todos los navegadores modernos. [cite: 49]
+* [cite_start]**Carga Diferida (Lazy Loading)**: El sitio ya implementa `loading="lazy"` en las imágenes. [cite: 50]
+[cite_start]Esto significa que las imágenes solo se cargan cuando el usuario se acerca a ellas, optimizando drásticamente la velocidad de carga inicial de la página. [cite: 50]
 -----
 ### Titulo para el H1 
 -Tu peluquería en Chía / omitir este Titulo
