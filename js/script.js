@@ -93,8 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
       footerLinkInstagram: "Instagram",
       footerLinkFacebook: "Facebook",
       footerLinkTiktok: "TikTok",
-      footerCopyright:
-        "© 2025 Narbo's Salón Spa. Todos los derechos reservados.",
+      footerRights: "Todos los derechos reservados.",
+      footerMadeWith: "Hecho con ❤️ por",
       reviewsTitle: "Lo que dicen nuestros clientes",
       reviewsSubtitle:
         "Estamos orgullosos de la experiencia que ofrecemos. Aquí tienes algunas de las reseñas de Google que más nos inspiran.",
@@ -246,7 +246,8 @@ document.addEventListener("DOMContentLoaded", () => {
       footerLinkInstagram: "Instagram",
       footerLinkFacebook: "Facebook",
       footerLinkTiktok: "TikTok",
-      footerCopyright: "© 2025 Narbo's Salón Spa. All rights reserved.",
+      footerRights: "All rights reserved.",
+      footerMadeWith: "Made with ❤️ by",
       reviewsTitle: "What Our Clients Say",
       reviewsSubtitle:
         "We are proud of the experience we offer. Here are some of the most inspiring Google reviews.",
