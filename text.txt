@@ -6,6 +6,55 @@ Reglas para comenzar a trabajar con los archivos día a día.
 
 ----------------------------------Proximas mejoras----------------------------------------
 
+### Historial de Mejoras - 05 de Julio de 2025 (NUEVO)
+
+**1. Corrección y Mejora de Traducciones en Pie de Página**
+* Se corrigió un error en el sistema de traducción que eliminaba el crédito al desarrollador en el pie de página.
+* Se reestructuró el código HTML y las claves de traducción en JavaScript para permitir que tanto el aviso de copyright como el crédito al desarrollador se muestren correctamente en ambos idiomas (Español e Inglés).
+
+### Historial de Mejoras - 27 de Junio de 2025
+
+**1.
+Mejora Radical de la Experiencia en Menú Móvil (UX/UI)**
+* Se rediseñó por completo el menú de navegación para dispositivos móviles, reemplazando el antiguo menú desplegable por un panel lateral moderno (overlay) que se desliza desde la derecha.
+* Se añadió un fondo oscuro semitransparente (backdrop) que cubre la página y el ícono de hamburguesa ahora se transforma en un ícono de cierre (X) para una usabilidad más intuitiva.
+* Se implementó el bloqueo de scroll en el cuerpo de la página mientras el menú está activo.
+
+**2.
+Rediseño Visual de la Sección Principal (Hero)**
+* Se reubicó el bloque de contenido principal ("Tu oasis de belleza...") para que flote visualmente entre la sección de la imagen de cabecera y la sección de servicios, logrando un diseño más dinámico y profesional.
+* Se aumentó la opacidad del fondo de este bloque al 75% y se alineó su contenido a la izquierda para garantizar una mejor legibilidad y una estética más estructurada.
+**3. Refinamiento de Interfaz en Tarjetas de Servicios**
+* Se añadió una micro-interacción de cambio de color a los íconos en la sección "Nuestros Servicios".
+El color del ícono ahora transiciona suavemente al pasar el cursor sobre la tarjeta.
+---
+### Historial de Mejoras - 26 de Junio de 2025
+
+**1.
+Implementación de Sección de Reseñas de Clientes**
+* Se añadió una nueva sección "Lo que dicen nuestros clientes" para mostrar reseñas reales de Google y aumentar la confianza.
+* Se desarrolló un carrusel interactivo para navegar entre las diferentes reseñas.
+* Se implementó una función de autoplay para que las reseñas roten automáticamente cada 7 segundos.
+* Se mejoró la experiencia de usuario haciendo que el carrusel se detenga al pasar el ratón por encima o al usar los controles manuales.
+* Se añadió el icono oficial de Google a cada tarjeta de reseña para indicar la fuente y dar mayor autenticidad.
+---
+### Historial de Mejoras - 25 de Junio de 2025
+
+**1.
+Implementación de Galería "Lightbox"**
+* Se integró la librería GLightbox para mejorar la experiencia de usuario en la galería de trabajos.
+* Ahora los usuarios pueden hacer clic en una imagen para verla en una vista ampliada y centrada.
+* Se añadió navegación con flechas (anterior/siguiente) y la posibilidad de cerrar la vista con la tecla 'Escape' o un botón 'X'.
+---
+### Historial de Mejoras - 24 de Junio de 2025
+
+**1.
+Corrección y Mejora de Iconos de Servicios**
+* Se reemplazaron los iconos SVG genéricos en la sección 'Nuestros Servicios' por gráficos más representativos y claros para cada categoría (Peluquería, Manos y Pies, etc.), mejorando la legibilidad y la experiencia de usuario.
+**2. Ampliación de la Galería de Trabajos**
+* Se expandió la galería de 4 a 6 imágenes para mostrar un portafolio de trabajos más extenso.
+* Se modificó la cuadrícula de la galería para una visualización óptima de 3x2 en dispositivos de escritorio y tableta.
+---
 ### Historial de Mejoras - 23 de Junio de 2025
 
 **1.
@@ -28,49 +77,6 @@ Implementación de Multi-idioma (i18n) y Correcciones Visuales**
 * Se incorporaron banderas junto a los selectores de idioma (ES/EN) para una identificación visual más clara.
 * Se corrigieron errores de renderizado en los iconos del selector de tema (claro/oscuro/auto) reemplazando el código SVG por versiones más robustas y compatibles.
 ---
-### Historial de Mejoras - 24 de Junio de 2025
-
-**1.
-Corrección y Mejora de Iconos de Servicios**
-* Se reemplazaron los iconos SVG genéricos en la sección 'Nuestros Servicios' por gráficos más representativos y claros para cada categoría (Peluquería, Manos y Pies, etc.), mejorando la legibilidad y la experiencia de usuario.
-**2. Ampliación de la Galería de Trabajos**
-* Se expandió la galería de 4 a 6 imágenes para mostrar un portafolio de trabajos más extenso.
-* Se modificó la cuadrícula de la galería para una visualización óptima de 3x2 en dispositivos de escritorio y tableta.
-* Se actualizaron los archivos `index.html`, `script.js` (para textos alternativos multi-idioma) y `sitemap.xml` (para la fecha de modificación) para reflejar los cambios.
----
-### Historial de Mejoras - 25 de Junio de 2025
-
-**1.
-Implementación de Galería "Lightbox"**
-* Se integró la librería GLightbox para mejorar la experiencia de usuario en la galería de trabajos.
-* Ahora los usuarios pueden hacer clic en una imagen para verla en una vista ampliada y centrada.
-* Se añadió navegación con flechas (anterior/siguiente) y la posibilidad de cerrar la vista con la tecla 'Escape' o un botón 'X'.
----
-### Historial de Mejoras - 26 de Junio de 2025
-
-**1.
-Implementación de Sección de Reseñas de Clientes**
-* Se añadió una nueva sección "Lo que dicen nuestros clientes" para mostrar reseñas reales de Google y aumentar la confianza.
-* Se desarrolló un carrusel interactivo para navegar entre las diferentes reseñas.
-* Se implementó una función de autoplay para que las reseñas roten automáticamente cada 7 segundos.
-* Se mejoró la experiencia de usuario haciendo que el carrusel se detenga al pasar el ratón por encima o al usar los controles manuales.
-* Se añadió el icono oficial de Google a cada tarjeta de reseña para indicar la fuente y dar mayor autenticidad.
-* Se corrigió un error visual en uno de los iconos para asegurar la consistencia en el diseño.
----
-### Historial de Mejoras - 27 de Junio de 2025 (NUEVO)
-
-**1. Mejora Radical de la Experiencia en Menú Móvil (UX/UI)**
-* Se rediseñó por completo el menú de navegación para dispositivos móviles, reemplazando el antiguo menú desplegable por un panel lateral moderno (overlay) que se desliza desde la derecha.
-* Se añadió un fondo oscuro semitransparente (backdrop) que cubre la página y el ícono de hamburguesa ahora se transforma en un ícono de cierre (X) para una usabilidad más intuitiva.
-* Se implementó el bloqueo de scroll en el cuerpo de la página mientras el menú está activo.
-
-**2. Rediseño Visual de la Sección Principal (Hero)**
-* Se reubicó el bloque de contenido principal ("Tu oasis de belleza...") para que flote visualmente entre la sección de la imagen de cabecera y la sección de servicios, logrando un diseño más dinámico y profesional.
-* Se aumentó la opacidad del fondo de este bloque al 75% y se alineó su contenido a la izquierda para garantizar una mejor legibilidad y una estética más estructurada.
-
-**3. Refinamiento de Interfaz en Tarjetas de Servicios**
-* Se añadió una micro-interacción de cambio de color a los íconos en la sección "Nuestros Servicios". El color del ícono ahora transiciona suavemente al pasar el cursor sobre la tarjeta.
----
 ### Guías de Contenido y Especificaciones Técnicas
 
 **1. Especificaciones para Imágenes de la Galería**
@@ -90,7 +96,6 @@ El peso ideal por imagen debería ser inferior a 150 KB.
 Es compatible con todos los navegadores modernos. 
 * **Carga Diferida (Lazy Loading)**: El sitio ya implementa `loading="lazy"` en las imágenes.
 Esto significa que las imágenes solo se cargan cuando el usuario se acerca a ellas, optimizando drásticamente la velocidad de carga inicial de la página.
-
 -----
 ### Titulo para el H1 
 -Tu peluquería en Chía / omitir este Titulo
