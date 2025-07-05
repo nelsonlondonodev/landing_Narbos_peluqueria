@@ -272,35 +272,6 @@ body.mobile-menu-open {
 }
 /* --- FIN: NUEVOS ESTILOS PARA TARJETAS DE RESEÑAS INTERACTIVAS --- */
 
-/* --- INICIO: ESTILOS PARA VIDEO DE INICIO (HERO) --- */
-/*
-  Por defecto, el video está oculto. Esto es para priorizar la imagen
-  de respaldo en dispositivos móviles, donde el video no se reproducirá.
-*/
-#hero-video {
-  display: none;
-}
-
-/*
-  Usamos una media query para pantallas de tamaño 'md' (768px) en adelante.
-  En estas pantallas más grandes, mostramos el video.
-  La propiedad 'display: block' sobrescribe el 'display: none' anterior.
-*/
-@media (min-width: 768px) {
-  #hero-video {
-    display: block;
-  }
-
-  /*
-    Cuando el video se muestra en pantallas grandes, ocultamos la imagen
-    de respaldo para que no haya dos fondos a la vez.
-  */
-  #hero-fallback-image {
-    display: none;
-  }
-}
-/* --- FIN: ESTILOS PARA VIDEO DE INICIO (HERO) --- */
-
 /* --- INICIO: ESTILOS PARA BORDE GRADIENTE EN TARJETAS DE SERVICIO (CORREGIDO) --- */
 
 /* 1. Preparamos la tarjeta. La clave es `isolation: isolate;` que crea un nuevo

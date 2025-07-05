@@ -6,21 +6,6 @@ Reglas para comenzar a trabajar con los archivos día a día.
 
 ----------------------------------Proximas mejoras----------------------------------------
 
-Sugerencia de Mejora: Funcionalidad "Lightbox"
-El diseño está genial, pero si queremos enriquecer la experiencia del usuario, podríamos añadirle una funcionalidad de Lightbox.
-¿Cómo funcionaría?
-
-El usuario hace clic en cualquiera de las imágenes de la galería.
-La imagen en la que hizo clic se abre en grande, centrada en la pantalla con un fondo oscuro semitransparente.
-El usuario puede navegar para ver la imagen anterior o la siguiente usando flechas a los lados.
-Puede cerrar la vista ampliada fácilmente (con un botón 'X' o presionando la tecla 'Escape').
-¿Por qué es una buena mejora?
-
-Permite ver los detalles: Tus clientes potenciales podrán apreciar la calidad de tu trabajo (color, detalles de uñas, etc.) en alta resolución.
-Experiencia inmersiva: Mantiene al usuario enganchado en tu contenido visual sin tener que salir de la página.
-Estándar profesional: Es una funcionalidad muy común y esperada en los portafolios de alta calidad hoy en día.
----
-
 ### Historial de Mejoras - 23 de Junio de 2025
 
 **1.
