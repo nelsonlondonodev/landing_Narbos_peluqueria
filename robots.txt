@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.narbossalonspa.com/sitemap.xml
+Sitemap: https://www.narbossalon.com/sitemap.xml

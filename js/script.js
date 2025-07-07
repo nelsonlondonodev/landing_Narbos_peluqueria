@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const translations = {
     es: {
-      metaTitle: "Narbo's Salón Spa | Peluquería y Spa en Chía, Colombia",
+      metaTitle: "Peluquería y Spa en Chía | Narbo's Salón Spa",
       metaDescription:
-        "Experimenta belleza y relajación en Narbo's Salón Spa en Chía. Ofrecemos servicios de peluquería, balayage, manicure, estética facial y más. ¡Agenda tu cita!",
+        "¿Buscas peluquería y spa en Chía? En Narbo's Salón Spa ofrecemos barbería, estética y lo último en uñas acrílicas, gel y polygel. ¡Agenda tu cita hoy!",
       navInicio: "Inicio",
       navServicios: "Servicios",
       navNosotros: "Nosotros",
@@ -34,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
       navResenasMobile: "Reseñas",
       navUbicacionMobile: "Ubicación",
       navContactoMobile: "Contacto",
-      heroTitle: "Tu oasis de belleza y relajación en Chía",
+      heroTitle:
+        "Estilo, belleza y bienestar: Tu salón de belleza y spa en Chía",
       heroSubtitle:
         "Más de 11 años de experiencia transformando tu estilo y bienestar.",
       heroCta: "Agenda tu Cita por WhatsApp",
@@ -173,9 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "¡Descubre el poder de una mirada y una piel impecable en Narbo's!",
     },
     en: {
-      metaTitle: "Narbo's Salon Spa | Hair & Spa in Chía, Colombia",
+      metaTitle: "Hair Salon and Spa in Chía | Narbo's Salón Spa",
       metaDescription:
-        "Experience beauty and relaxation at Narbo's Salon Spa in Chía. We offer hairdressing, balayage, manicures, facials, and more. Book your appointment!",
+        "Looking for a hair salon and spa in Chía? At Narbo's Salón Spa we offer barbering, aesthetics, and the latest in acrylic, gel, and polygel nails. Book your appointment today!",
       navInicio: "Home",
       navServicios: "Services",
       navNosotros: "About Us",
@@ -190,7 +191,8 @@ document.addEventListener("DOMContentLoaded", () => {
       navResenasMobile: "Reviews",
       navUbicacionMobile: "Location",
       navContactoMobile: "Contact",
-      heroTitle: "Your oasis of beauty and relaxation in Chía",
+      heroTitle:
+        "Style, beauty, and wellness: Your beauty salon and spa in Chía",
       heroSubtitle:
         "Over 11 years of experience transforming your style and well-being.",
       heroCta: "Book via WhatsApp",
