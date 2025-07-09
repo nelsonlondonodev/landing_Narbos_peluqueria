@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7XLWJJBSDL"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XLWJJBSDL"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -11,8 +10,7 @@
   gtag('config', 'G-7XLWJJBSDL');
 </script>
 
-    <!-- Google Search Console Verification -->
-<meta name="google-site-verification" content="z7iMcq4xUxxKeXpDsVU32HJ_a0jXCwyOFmZi-7vvCKs" />
+    <meta name="google-site-verification" content="z7iMcq4xUxxKeXpDsVU32HJ_a0jXCwyOFmZi-7vvCKs" />
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -205,10 +203,16 @@
                     </a>
                 </div>
                 <div class="scroll-animate scroll-animate-bottom flex justify-center">
-                    <div class="relative overflow-hidden max-w-xs bg-gray-800 dark:bg-gray-900/50 rounded-xl shadow-2xl p-2 video-aspect-ratio">
-                        <video class="absolute top-0 left-0 w-full h-full object-cover rounded-lg transform transition-transform duration-500 hover:scale-105" src="video/video_instagram_1.mp4" autoplay loop muted playsinline controls poster="images/video_poster.jpg">
+                    <div id="video-container" class="relative overflow-hidden max-w-xs bg-gray-800 dark:bg-gray-900/50 rounded-xl shadow-2xl p-2 video-aspect-ratio">
+                        <video id="promo-video" class="absolute top-0 left-0 w-full h-full object-cover rounded-lg" src="video/video_instagram_1.mp4" muted playsinline poster="images/fotos_galeria/video_galeria/imagen_video_instagram.jpg">
                             Tu navegador no soporta el tag de video.
                         </video>
+                        <button id="video-play-button" aria-label="Reproducir video">
+                            <svg class="w-16 h-16" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="48" fill="rgba(0, 0, 0, 0.4)" stroke="#FFFFFF" stroke-width="2"/>
+                                <polygon points="38,30 70,50 38,70" fill="#FFFFFF"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
