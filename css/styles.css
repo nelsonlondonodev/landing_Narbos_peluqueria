@@ -318,23 +318,30 @@ body.mobile-menu-open {
 
 /* --- INICIO: ESTILOS PARA SECCIÓN DE VIDEO --- */
 
-/*
-  Limpiamos esta clase, quitando 'object-fit' que no tiene efecto en un DIV.
-  Esta propiedad ya está correctamente aplicada en la etiqueta <video> del HTML.
-*/
 .video-aspect-ratio {
   aspect-ratio: 9 / 16;
-  background-color: #000; /* Fondo negro mientras carga el video */
+  background-color: #000;
 }
 
-/*
-  ¡NUEVA REGLA!
-  Esta es la corrección principal. Le da al contenedor un ancho completo
-  dentro de su columna para que la proporción 9:16 se pueda calcular
-  correctamente y el contenedor no se colapse.
-*/
 #video-promo .video-aspect-ratio {
   width: 100%;
+}
+
+/* Estilos para el botón de Play superpuesto */
+#video-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease-out, opacity 0.3s ease-out;
+}
+
+#video-play-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 /* --- FIN: ESTILOS PARA SECCIÓN DE VIDEO --- */

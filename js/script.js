@@ -703,6 +703,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- FIN: LÓGICA PARA MODALES DE SERVICIOS ---
 
+  // --- INICIO: LÓGICA PARA REPRODUCTOR DE VIDEO PERSONALIZADO ---
+  const videoContainer = document.getElementById("video-container");
+  const promoVideo = document.getElementById("promo-video");
+  const videoPlayButton = document.getElementById("video-play-button");
+
+  if (videoContainer && promoVideo && videoPlayButton) {
+    // 1. Al hacer clic en el contenedor, pausar o reproducir el video
+    videoContainer.addEventListener("click", () => {
+      if (promoVideo.paused) {
+        promoVideo.play();
+      } else {
+        promoVideo.pause();
+      }
+    });
+
+    // 2. Cuando el video se reproduzca, ocultar el botón de play
+    promoVideo.addEventListener("play", () => {
+      videoPlayButton.classList.add("hidden");
+    });
+
+    // 3. Cuando el video se pause o termine, mostrar el botón de play
+    promoVideo.addEventListener("pause", () => {
+      videoPlayButton.classList.remove("hidden");
+    });
+
+    promoVideo.addEventListener("ended", () => {
+      videoPlayButton.classList.remove("hidden");
+    });
+  }
+  // --- FIN: LÓGICA PARA REPRODUCTOR DE VIDEO PERSONALIZADO ---
+
   // --- INICIO: LÓGICA DE LIGHTBOX GALLERY (GLightbox) ---
   const lightbox = GLightbox({
     selector: ".glightbox",
