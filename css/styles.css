@@ -382,4 +382,23 @@ body.mobile-menu-open {
   transform: scale(1.05);
 }
 
+#service-card-estetica::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(
+      rgba(20, 20, 20, 0.4),
+      rgba(20, 20, 20, 0.6)
+    ),
+    url("../images/fotos_galeria/estetica/foto_estetica_1.jpg");
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease-out;
+}
+
+#service-card-estetica:hover::after {
+  transform: scale(1.05);
+}
+
 /* --- FIN: ESTILOS PARA TARJETAS DE SERVICIO CON FONDO --- */
