@@ -293,20 +293,16 @@ body.mobile-menu-open {
   /* El borde se crea con la propiedad `border` y `border-image` */
   border: 2px solid transparent;
   background: linear-gradient(135deg, #c5ab94, #6b755a) border-box; /* Gradiente para el borde */
-  -webkit-mask: /* Antiguo truco para "perforar" el centro y que solo quede el borde */ linear-gradient(
-        #fff 0 0
-      )
-      padding-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor; /* El operador que hace la magia de la perforación */
+
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
   mask-composite: exclude;
 
-  /* El radio debe coincidir con el de la tarjeta ('rounded-lg') */
   border-radius: 0.5rem;
-
-  /* Por defecto, el borde está totalmente oculto. */
   opacity: 0;
-  /* Animación suave para cuando aparezca. */
   transition: opacity 0.3s ease-in-out;
 }
 
