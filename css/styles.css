@@ -397,3 +397,30 @@ body.mobile-menu-open {
 }
 
 /* --- FIN: ESTILOS PARA TARJETAS DE SERVICIO CON FONDO --- */
+
+/* Estilos para el botón flotante de WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex; /* Usar flexbox para centrar el contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    width: 60px; /* Ancho fijo para el botón circular */
+    height: 60px; /* Alto fijo para el botón circular */
+    background-color: #25D366; /* Color verde de WhatsApp */
+    border-radius: 50%; /* Hacerlo circular */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto flotante */
+    transition: transform 0.3s ease-in-out;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-float img {
+    /* La imagen se escalará dentro del contenedor flex */
+    max-width: 80%; /* Ajustar según sea necesario para dar un poco de padding */
+    max-height: 80%; /* Ajustar según sea necesario para dar un poco de padding */
+}
