@@ -1,0 +1,28 @@
+{
+  "name": "landing_narbos_salon",
+  "version": "1.0.0",
+  "description": "Narbo's Salón Spa - Landing Page Profesional Este repositorio contiene el código fuente de la página web oficial de Narbo's Salón Spa, una landing page moderna, interactiva y totalmente responsiva, diseñada para atraer y servir a los clientes del salón con una experiencia de usuario excepcional.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nelsonlondonodev/landing_Narbos_peluqueria.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nelsonlondonodev/landing_Narbos_peluqueria/issues"
+  },
+  "homepage": "https://github.com/nelsonlondonodev/landing_Narbos_peluqueria#readme",
+  "devDependencies": {
+    "csso-cli": "^4.0.2",
+    "html-minifier": "^4.0.0",
+    "imagemin-cli": "^8.0.0",
+    "svgo": "^4.0.0",
+    "terser": "^5.43.1"
+  }
+}
