@@ -790,4 +790,17 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(element);
   });
   // --- FIN: LÓGICA PARA ANIMACIÓN POR SCROLL ---
+
+  // --- INICIO: LÓGICA PARA HEADER DINÁMICO AL HACER SCROLL ---
+  const header = document.querySelector("header");
+  if (header) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        header.classList.add("header-scrolled");
+      } else {
+        header.classList.remove("header-scrolled");
+      }
+    });
+  }
+  // --- FIN: LÓGICA PARA HEADER DINÁMICO AL HACER SCROLL ---
 });
