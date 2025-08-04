@@ -1,7 +1,7 @@
 Narbo's Salón Spa - Landing Page Profesional
 Este repositorio contiene el código fuente de la página web oficial de Narbo's Salón Spa, una landing page moderna, interactiva y totalmente responsiva, diseñada para atraer y servir a los clientes del salón con una experiencia de usuario excepcional.
 
-Ver Demo en Vivo (https://nelsonlondono.es/)
+Ver Demo en Vivo (https://narbossalon.com/)
 
 ✨ Características Principales
 Este proyecto no es solo una página web estática, sino una herramienta de marketing digital completa, equipada con funcionalidades avanzadas:
