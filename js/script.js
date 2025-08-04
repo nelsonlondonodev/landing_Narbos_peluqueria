@@ -104,7 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
       formEmailLabel: "Correo Electrónico",
       formMessageLabel: "Mensaje",
       formSubmitBtn: "Enviar Mensaje",
-      formStatusError: "Por favor, completa todos los campos.",
+      formStatusSubmitting: "Enviando...",
+      formStatusError: "Hubo un error al enviar. Inténtalo de nuevo.",
       formStatusSuccess: "¡Gracias por tu mensaje! Te responderemos pronto.",
       footerLinkWhatsapp: "WhatsApp",
       footerLinkInstagram: "Instagram",
@@ -440,24 +441,45 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactForm = document.getElementById("contact-form");
   const formStatus = document.getElementById("form-status");
 
-  contactForm.addEventListener("submit", (e) => {
+  contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
     const lang = localStorage.getItem("language") || "es";
+    const data = new FormData(e.target);
+    
+    formStatus.textContent = translations[lang].formStatusSubmitting;
+    formStatus.style.color = "#6B755A"; // brand-green
 
-    if (name === "" || email === "" || message === "") {
+    try {
+      const response = await fetch(e.target.action, {
+        method: e.target.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        formStatus.textContent = translations[lang].formStatusSuccess;
+        formStatus.style.color = "green";
+        contactForm.reset();
+      } else {
+        response.json().then(data => {
+          if (Object.hasOwn(data, 'errors')) {
+            formStatus.textContent = data["errors"].map(error => error["message"]).join(", ")
+          } else {
+            formStatus.textContent = translations[lang].formStatusError;
+          }
+          formStatus.style.color = "red";
+        })
+      }
+    } catch (error) {
       formStatus.textContent = translations[lang].formStatusError;
       formStatus.style.color = "red";
-    } else {
-      formStatus.textContent = translations[lang].formStatusSuccess;
-      formStatus.style.color = "green";
-      contactForm.reset();
-      setTimeout(() => {
-        formStatus.textContent = "";
-      }, 5000);
     }
+    
+    setTimeout(() => {
+      formStatus.textContent = "";
+    }, 5000);
   });
 
   // --- LÓGICA DE SCROLL SPY ---
