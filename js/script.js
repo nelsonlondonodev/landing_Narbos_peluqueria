@@ -93,9 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Kilómetro 2 vía Chía-Cajicá, Bajos del hotel Ibis, Chía, Cundinamarca.",
       locationHoursTitle: "Horario de Atención",
       hoursWeekdayLabel: "Lunes a Sábado",
-      hoursWeekdayTime: "7:00 a.m. – 8:00 p.m.",
+      hoursWeekdayTime: "7:00 a.m. – 7:30 p.m.",
       hoursWeekendLabel: "Domingos y Festivos",
-      hoursWeekendTime: "9:00 a.m. – 2:00 p.m.",
+      hoursWeekendTime: "9:00 a.m. – 5:00 p.m.",
       footerTitle: "Agenda tu cita hoy",
       footerSubtitle:
         "Llámanos o escríbenos por WhatsApp. O si prefieres, déjanos un mensaje aquí:",
@@ -263,9 +263,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Kilometer 2 Chía-Cajicá road, beneath the Ibis hotel, Chía, Cundinamarca.",
       locationHoursTitle: "Opening Hours",
       hoursWeekdayLabel: "Monday to Saturday",
-      hoursWeekdayTime: "7:00 a.m. – 8:00 p.m.",
+      hoursWeekdayTime: "7:00 a.m. – 7:30 p.m.",
       hoursWeekendLabel: "Sundays & Holidays",
-      hoursWeekendTime: "9:00 a.m. – 2:00 p.m.",
+      hoursWeekendTime: "9:00 a.m. – 5:00 p.m.",
       footerTitle: "Book your appointment today",
       footerSubtitle:
         "Call or write to us on WhatsApp. Or if you prefer, leave us a message here:",
