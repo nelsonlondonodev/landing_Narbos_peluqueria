@@ -781,6 +781,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- FIN: LÓGICA PARA REPRODUCTOR DE VIDEO PERSONALIZADO ---
 
   // --- INICIO: LÓGICA DE LIGHTBOX GALLERY (GLightbox) ---
+  let lastFocusedElement;
+  const mainContent = document.querySelector('main');
+
   const lightbox = GLightbox({
     selector: ".glightbox",
     touchNavigation: true,
@@ -788,6 +791,24 @@ document.addEventListener("DOMContentLoaded", () => {
     preload: true,
     closeEffect: "fade",
     slideEffect: "fade",
+    onOpen: () => {
+      // Guardamos el elemento que tenía el foco
+      lastFocusedElement = document.activeElement;
+      // Hacemos todo el contenido de fondo "inerte"
+      if (mainContent) {
+        mainContent.inert = true;
+      }
+    },
+    onClose: () => {
+      // Reactivamos el contenido de fondo
+      if (mainContent) {
+        mainContent.inert = false;
+      }
+      // Devolvemos el foco a su sitio
+      if (lastFocusedElement) {
+        lastFocusedElement.focus();
+      }
+    },
   });
   // --- FIN: LÓGICA DE LIGHTBOX GALLERY ---
 
