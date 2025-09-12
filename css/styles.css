@@ -451,7 +451,7 @@ header nav .hidden a.nav-link-active::after {
       rgba(20, 20, 20, 0.4),
       rgba(20, 20, 20, 0.6)
     ),
-    url("../images/fotos_galeria/peluqueria/foto_7_peluqueria.jpg");
+    url("../images/fotos_galeria/peluqueria/foto_7_peluqueria.webp");
 }
 
 #service-card-manos-pies::after {
@@ -459,7 +459,7 @@ header nav .hidden a.nav-link-active::after {
       rgba(20, 20, 20, 0.4),
       rgba(20, 20, 20, 0.6)
     ),
-    url("../images/fotos_galeria/unas/foto_unas_1.jpg");
+    url("../images/fotos_galeria/unas/foto_unas_1.webp");
 }
 
 #service-card-estetica::after {
@@ -467,7 +467,7 @@ header nav .hidden a.nav-link-active::after {
       rgba(20, 20, 20, 0.4),
       rgba(20, 20, 20, 0.6)
     ),
-    url("../images/fotos_galeria/estetica/foto_estetica_1.jpg");
+    url("../images/fotos_galeria/estetica/foto_estetica_1.webp");
 }
 
 #service-card-depilacion::after {
@@ -475,7 +475,7 @@ header nav .hidden a.nav-link-active::after {
       rgba(20, 20, 20, 0.4),
       rgba(20, 20, 20, 0.6)
     ),
-    url("../images/fotos_galeria/peluqueria/foto_8_peluqueria.jpg");
+    url("../images/fotos_galeria/peluqueria/foto_8_peluqueria.webp");
 }
 
 /* --- FIN: ESTILOS PARA TARJETAS DE SERVICIO CON FONDO --- */
