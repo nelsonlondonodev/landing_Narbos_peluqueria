@@ -1,109 +1,21 @@
-Reglas para comenzar a trabajar con los archivos día a día.
-1. Siempre analizar los archivos al comenzar a trabajar en ellos.
-2. Siempre devolver archivos completos, al hacer cualquier cambio, sin omitir una sola línea de código.
-3. Crear un archivo a la vez, para no forzar la respuesta, y así evitar bug: "Es decir, si vas a hacer modificaciones en diferentes archivos como; HTML, CSS Y JAVASCRIPT entre oros, vas retornado uno a uno y solictando autorzación para crear el siguiente. Ej. Modificas el HTML, luego solicitas autorización para crear el CSS, luego el JS y así sucesivamente".
---- 
+### Listado de Posibles Temas para el Blog de Narbo's Salón Spa
 
-----------------------------------Proximas mejoras----------------------------------------
+1.  **"Los 5 Tratamientos Capilares Imprescindibles para el Clima de Chía y la Sabana de Bogotá"**
+    *   **Enfoque:** Abordar los problemas comunes del cabello causados por el clima de la sabana (resequedad, frizz por la humedad, daño solar por la altitud). Se pueden recomendar tratamientos específicos que ofrezca el salón, como hidrataciones profundas, keratina o rituales de reparación.
+    *   **SEO Local:** "tratamientos capilares en Chía", "cuidado del cabello clima frío", "peluquerías en la sabana de Bogotá".
 
-### Historial de Mejoras - 05 de Julio de 2025 (NUEVO)
+2.  **"Guía Definitiva de Balayage en Chía: Todo lo que Necesitas Saber Antes de Tu Cita en Narbo's"**
+    *   **Enfoque:** El balayage es una técnica muy popular. Este artículo puede explicar en qué consiste, para quién es ideal, cómo se diferencia de otras técnicas como las mechas tradicionales, y cómo mantenerlo. Se pueden usar fotos de trabajos realizados en el salón.
+    *   **SEO Local:** "balayage en Chía", "expertos en coloración Cundinamarca", "mejor peluquería para balayage Chía".
 
-**1. Implementación de Sección de Video Promocional**
-* Se añadió una nueva sección "Descubre Nuestro Estilo" entre las secciones "Nosotros" y "Galería".
-* Se diseñó un layout de dos columnas: una para texto y un botón a Instagram, y otra con un reproductor de video MP4.
-* El reproductor de video se estilizó para simular un formato de "Reel" de Instagram, con un marco y reproducción en bucle silenciada por defecto.
-* Se prepararon todos los textos de la nueva sección para ser multi-idioma.
+3.  **"Narbos Salón Spa: Más que una Peluquería en Chía, un Oasis de Bienestar"**
+    *   **Enfoque:** Un artículo más institucional que presente la filosofía del salón. Puede hablar de la experiencia completa que ofrecen: desde el café de bienvenida hasta los masajes relajantes, posicionándose como un lugar para desconectar y cuidarse. Ideal para destacar los servicios de spa.
+    *   **SEO Local:** "spa en Chía", "día de spa Cundinamarca", "salón de belleza y spa Chía".
 
-**2. Corrección y Mejora de Traducciones en Pie de Página**
-* Se corrigió un error en el sistema de traducción que eliminaba el crédito al desarrollador en el pie de página.
-* Se reestructuró el código HTML y las claves de traducción en JavaScript para permitir que tanto el aviso de copyright como el crédito al desarrollador se muestren correctamente en ambos idiomas.
+4.  **"Tendencias de Uñas para 2025: Lo que se Llevará en Chía y Cómo Pedirlo en Narbo's"**
+    *   **Enfoque:** Un artículo sobre las últimas tendencias en diseño de uñas (colores, formas, nail art). Se puede conectar con los productos que usan (Organic, Belier, Masglo) y mostrar fotos de diseños hechos en el salón.
+    *   **SEO Local:** "uñas acrílicas Chía", "manicure semipermanente Cundinamarca", "tendencias de uñas 2025 Colombia".
 
-### Historial de Mejoras - 27 de Junio de 2025
-
-**1.
-Mejora Radical de la Experiencia en Menú Móvil (UX/UI)**
-* [cite_start]Se rediseñó por completo el menú de navegación para dispositivos móviles, reemplazando el antiguo menú desplegable por un panel lateral moderno (overlay) que se desliza desde la derecha. [cite: 34]
-* [cite_start]Se añadió un fondo oscuro semitransparente (backdrop) que cubre la página y el ícono de hamburguesa ahora se transforma en un ícono de cierre (X) para una usabilidad más intuitiva. [cite: 35]
-* [cite_start]Se implementó el bloqueo de scroll en el cuerpo de la página mientras el menú está activo. [cite: 36]
-
-**2.
-Rediseño Visual de la Sección Principal (Hero)**
-* [cite_start]Se reubicó el bloque de contenido principal ("Tu oasis de belleza...") para que flote visualmente entre la sección de la imagen de cabecera y la sección de servicios, logrando un diseño más dinámico y profesional. [cite: 37]
-* [cite_start]Se aumentó la opacidad del fondo de este bloque al 75% y se alineó su contenido a la izquierda para garantizar una mejor legibilidad y una estética más estructurada. [cite: 38]
-**3. Refinamiento de Interfaz en Tarjetas de Servicios**
-* [cite_start]Se añadió una micro-interacción de cambio de color a los íconos en la sección "Nuestros Servicios". [cite: 39]
-[cite_start]El color del ícono ahora transiciona suavemente al pasar el cursor sobre la tarjeta. [cite: 40]
----
-### Historial de Mejoras - 26 de Junio de 2025
-
-**1.
-Implementación de Sección de Reseñas de Clientes**
-* [cite_start]Se añadió una nueva sección "Lo que dicen nuestros clientes" para mostrar reseñas reales de Google y aumentar la confianza. [cite: 27]
-* [cite_start]Se desarrolló un carrusel interactivo para navegar entre las diferentes reseñas. [cite: 28]
-* [cite_start]Se implementó una función de autoplay para que las reseñas roten automáticamente cada 7 segundos. [cite: 29]
-* [cite_start]Se mejoró la experiencia de usuario haciendo que el carrusel se detenga al pasar el ratón por encima o al usar los controles manuales. [cite: 30]
-* [cite_start]Se añadió el icono oficial de Google a cada tarjeta de reseña para indicar la fuente y dar mayor autenticidad. [cite: 31]
----
-### Historial de Mejoras - 25 de Junio de 2025
-
-**1.
-Implementación de Galería "Lightbox"**
-* [cite_start]Se integró la librería GLightbox para mejorar la experiencia de usuario en la galería de trabajos. [cite: 23]
-* [cite_start]Ahora los usuarios pueden hacer clic en una imagen para verla en una vista ampliada y centrada. [cite: 24]
-* [cite_start]Se añadió navegación con flechas (anterior/siguiente) y la posibilidad de cerrar la vista con la tecla 'Escape' o un botón 'X'. [cite: 25]
----
-### Historial de Mejoras - 24 de Junio de 2025
-
-**1.
-Corrección y Mejora de Iconos de Servicios**
-* [cite_start]Se reemplazaron los iconos SVG genéricos en la sección 'Nuestros Servicios' por gráficos más representativos y claros para cada categoría (Peluquería, Manos y Pies, etc.), mejorando la legibilidad y la experiencia de usuario. [cite: 18]
-**2. Ampliación de la Galería de Trabajos**
-* [cite_start]Se expandió la galería de 4 a 6 imágenes para mostrar un portafolio de trabajos más extenso. [cite: 19]
-* [cite_start]Se modificó la cuadrícula de la galería para una visualización óptima de 3x2 en dispositivos de escritorio y tableta. [cite: 20]
-* [cite_start]Se actualizaron los archivos `index.html`, `script.js` (para textos alternativos multi-idioma) y `sitemap.xml` (para la fecha de modificación) para reflejar los cambios. [cite: 21]
----
-### Historial de Mejoras - 23 de Junio de 2025
-
-**1.
-[cite_start]Mejora de Interfaz y Experiencia de Usuario (UI/UX)** * Se integraron gradientes en fondos y botones para un diseño más profundo y moderno. [cite: 6]
-* [cite_start]Se añadieron micro-interacciones (efectos `hover`) a tarjetas, botones y galería para una mejor retroalimentación visual. [cite: 7]  
-
-**2.
-[cite_start]Interactividad Avanzada en la Navegación** * Se implementó la funcionalidad "Scroll Spy" para resaltar automáticamente en el menú la sección visible en pantalla. [cite: 8]
-* [cite_start]Se añadió el enlace "Inicio", que faltaba en los menús de navegación, para mejorar la usabilidad. [cite: 9]  
-
-**3.
-[cite_start]Implementación de Tema Avanzado (Dark Mode)** * Se añadió un selector de tema con tres modos: Claro, Oscuro y Automático. [cite: 10]
-* [cite_start]**Modo Automático:** La página detecta y se sincroniza en tiempo real con el tema del sistema operativo del usuario. [cite: 11]
-* [cite_start]**Persistencia:** La preferencia de tema del usuario se guarda en su navegador para futuras visitas. [cite: 12]  
-
-**4.
-Implementación de Multi-idioma (i18n) y Correcciones Visuales**
-* [cite_start]Se añadió un selector de idioma para permitir a los usuarios cambiar el contenido entre Español e Inglés. [cite: 13]
-* [cite_start]La preferencia de idioma del usuario se guarda en su navegador (localStorage) para futuras visitas, con Español como idioma por defecto. [cite: 14]
-* [cite_start]Se incorporaron banderas junto a los selectores de idioma (ES/EN) para una identificación visual más clara. [cite: 15]
-* [cite_start]Se corrigieron errores de renderizado en los iconos del selector de tema (claro/oscuro/auto) reemplazando el código SVG por versiones más robustas y compatibles. [cite: 16]
----
-### Guías de Contenido y Especificaciones Técnicas
-
-**1. Especificaciones para Imágenes de la Galería**
-* [cite_start]**Forma (Aspecto)**: Cuadrada (relación 1:1). [cite: 41]
-* [cite_start]**Resolución Ideal**: 800 x 800 píxeles (para asegurar alta calidad en todas las pantallas). [cite: 42]
-* [cite_start]**Resolución Mínima**: 400 x 400 píxeles. [cite: 43]
-* [cite_start]**Nota Técnica**: El diseño utiliza contenedores cuadrados. [cite: 44]
-[cite_start]Las imágenes que no sean cuadradas serán recortadas automáticamente por el navegador para que encajen en el espacio. [cite: 44] 
-
-**2.
-Optimización de Imágenes para la Web**
-* [cite_start]**Dimensión vs. Peso**: La dimensión (ej. 800x800 píxeles) define la calidad visual, mientras que el peso del archivo (ej. 150 KB) afecta la velocidad de carga. [cite: 45]
-[cite_start]El objetivo es tener alta calidad con bajo peso. [cite: 46]
-* [cite_start]**Compresión**: Antes de subir una imagen, se debe comprimir usando herramientas online como TinyPNG o Squoosh. [cite: 47]
-[cite_start]El peso ideal por imagen debería ser inferior a 150 KB. [cite: 47]
-* [cite_start]**Formato Moderno (WebP)**: Se recomienda usar el formato WebP, ya que ofrece una compresión superior a JPG y PNG. [cite: 48]
-[cite_start]Es compatible con todos los navegadores modernos. [cite: 49]
-* [cite_start]**Carga Diferida (Lazy Loading)**: El sitio ya implementa `loading="lazy"` en las imágenes. [cite: 50]
-[cite_start]Esto significa que las imágenes solo se cargan cuando el usuario se acerca a ellas, optimizando drásticamente la velocidad de carga inicial de la página. [cite: 50]
------
-### Titulo para el H1 
--Tu peluquería en Chía / omitir este Titulo
--Tu peluquería de confianza en Chía / omitir este Titulo
+5.  **"¿Boda o Evento en Chía? Tu Guía de Peinado y Maquillaje Profesional en Narbo's Salón Spa"**
+    *   **Enfoque:** Dirigido a un nicho específico. Puede hablar de los paquetes para novias o eventos, la importancia de un maquillaje y peinado profesional, y dar consejos sobre cómo prepararse para la cita. Chía es una zona con muchos eventos sociales y bodas.
+    *   **SEO Local:** "maquillaje para bodas Chía", "peinados para eventos Cundinamarca", "paquetes de novia peluquería Chía".
