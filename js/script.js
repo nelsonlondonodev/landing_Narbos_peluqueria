@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("script.js loaded and DOMContentLoaded fired."); // Added console.log
   // --- INICIO: LÓGICA PARA ANIMACIÓN DE HERO EN CARGA ---
   const heroTitle = document.getElementById("hero-title");
   const heroSubtitle = document.getElementById("hero-subtitle");
@@ -378,9 +379,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    document
-      .getElementById("meta-description")
-      .setAttribute("content", translations[lang].metaDescription);
+    const metaDescription = document.getElementById("meta-description");
+    if (metaDescription) { // Add check here
+      metaDescription.setAttribute("content", translations[lang].metaDescription);
+    }
+    
+    // document.title is always available, no need to check
     document.title = translations[lang].metaTitle;
 
     updateLangToggleButtons(lang);
@@ -395,8 +399,8 @@ document.addEventListener("DOMContentLoaded", () => {
       ${targetLang.toUpperCase()}
     `;
 
-    langToggleDesktop.innerHTML = buttonHTML;
-    langToggleMobile.innerHTML = buttonHTML;
+    if (langToggleDesktop) langToggleDesktop.innerHTML = buttonHTML; // Add check here
+    if (langToggleMobile) langToggleMobile.innerHTML = buttonHTML; // Add check here
   };
 
   const toggleLanguage = () => {
@@ -406,8 +410,8 @@ document.addEventListener("DOMContentLoaded", () => {
     setLanguage(newLang);
   };
 
-  langToggleDesktop.addEventListener("click", toggleLanguage);
-  langToggleMobile.addEventListener("click", toggleLanguage);
+  if (langToggleDesktop) langToggleDesktop.addEventListener("click", toggleLanguage); // Add check here
+  if (langToggleMobile) langToggleMobile.addEventListener("click", toggleLanguage); // Add check here
 
   const currentLang = localStorage.getItem("language") || "es";
   setLanguage(currentLang);
@@ -528,6 +532,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const applyTheme = () => {
     const theme = localStorage.getItem("theme") || "auto";
+    console.log("Applying theme:", theme); // Added console.log
     [
       themeToggleDarkIcon,
       themeToggleLightIcon,
@@ -536,25 +541,27 @@ document.addEventListener("DOMContentLoaded", () => {
       themeToggleLightIconMobile,
       themeToggleAutoIconMobile,
     ].forEach((icon) => {
-      icon.classList.add("hidden");
+      if (icon) { // Add check here
+        icon.classList.add("hidden");
+      }
     });
 
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
-      themeToggleLightIcon.classList.remove("hidden");
-      themeToggleLightIconMobile.classList.remove("hidden");
+      if (themeToggleLightIcon) themeToggleLightIcon.classList.remove("hidden"); // Add check here
+      if (themeToggleLightIconMobile) themeToggleLightIconMobile.classList.remove("hidden"); // Add check here
     } else if (theme === "light") {
       document.documentElement.classList.remove("dark");
-      themeToggleDarkIcon.classList.remove("hidden");
-      themeToggleDarkIconMobile.classList.remove("hidden");
+      if (themeToggleDarkIcon) themeToggleDarkIcon.classList.remove("hidden"); // Add check here
+      if (themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.remove("hidden"); // Add check here
     } else {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         document.documentElement.classList.add("dark");
       } else {
         document.documentElement.classList.remove("dark");
       }
-      themeToggleAutoIcon.classList.remove("hidden");
-      themeToggleAutoIconMobile.classList.remove("hidden");
+      if (themeToggleAutoIcon) themeToggleAutoIcon.classList.remove("hidden"); // Add check here
+      if (themeToggleAutoIconMobile) themeToggleAutoIconMobile.classList.remove("hidden"); // Add check here
     }
   };
 
@@ -577,8 +584,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window
     .matchMedia("(prefers-color-scheme: dark)")
     .addEventListener("change", applyTheme);
-  themeToggleBtn.addEventListener("click", cycleTheme);
-  themeToggleBtnMobile.addEventListener("click", cycleTheme);
+  if (themeToggleBtn) themeToggleBtn.addEventListener("click", cycleTheme); // Add check here
+  if (themeToggleBtnMobile) themeToggleBtnMobile.addEventListener("click", cycleTheme); // Add check here
   applyTheme();
   // --- FIN: LÓGICA AVANZADA DE TEMA ---
 
