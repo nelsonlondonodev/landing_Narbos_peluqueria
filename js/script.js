@@ -359,62 +359,70 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   };
 
+  // --- INICIO: LÓGICA DE TRADUCCIÓN (I18N) MEJORADA ---
+  // Se obtienen las referencias a los botones de idioma
   const langToggleDesktop = document.getElementById("lang-toggle-desktop");
   const langToggleMobile = document.getElementById("lang-toggle-mobile");
 
-  const setLanguage = (lang) => {
-    document.documentElement.lang = lang;
+  // Solo inicializar la lógica de idioma si al menos uno de los botones existe
+  if (langToggleDesktop || langToggleMobile) {
+    const setLanguage = (lang) => {
+      document.documentElement.lang = lang;
 
-    document.querySelectorAll("[data-key]").forEach((elem) => {
-      const key = elem.getAttribute("data-key");
-      if (translations[lang] && translations[lang][key]) {
-        elem.innerHTML = translations[lang][key];
+      document.querySelectorAll("[data-key]").forEach((elem) => {
+        const key = elem.getAttribute("data-key");
+        if (translations[lang] && translations[lang][key]) {
+          elem.innerHTML = translations[lang][key];
+        }
+      });
+
+      document.querySelectorAll("[data-key-alt]").forEach((elem) => {
+        const key = elem.getAttribute("data-key-alt");
+        if (translations[lang] && translations[lang][key]) {
+          elem.setAttribute("alt", translations[lang][key]);
+        }
+      });
+
+      const metaDescription = document.getElementById("meta-description");
+      if (metaDescription) {
+        metaDescription.setAttribute("content", translations[lang].metaDescription);
       }
-    });
+      
+      document.title = translations[lang].metaTitle;
 
-    document.querySelectorAll("[data-key-alt]").forEach((elem) => {
-      const key = elem.getAttribute("data-key-alt");
-      if (translations[lang] && translations[lang][key]) {
-        elem.setAttribute("alt", translations[lang][key]);
-      }
-    });
+      updateLangToggleButtons(lang);
+    };
 
-    const metaDescription = document.getElementById("meta-description");
-    if (metaDescription) { // Add check here
-      metaDescription.setAttribute("content", translations[lang].metaDescription);
-    }
-    
-    // document.title is always available, no need to check
-    document.title = translations[lang].metaTitle;
+    const updateLangToggleButtons = (currentLang) => {
+      const targetLang = currentLang === "es" ? "en" : "es";
+      const flagCode = targetLang === "es" ? "es" : "gb";
 
-    updateLangToggleButtons(lang);
-  };
+      const buttonHTML = `
+        <img src="https://flagcdn.com/w20/${flagCode}.png" srcset="https://flagcdn.com/w40/${flagCode}.png 2x" alt="${targetLang.toUpperCase()}" class="w-5 h-auto mr-2">
+        ${targetLang.toUpperCase()}
+      `;
 
-  const updateLangToggleButtons = (currentLang) => {
-    const targetLang = currentLang === "es" ? "en" : "es";
-    const flagCode = targetLang === "es" ? "es" : "gb";
+      if (langToggleDesktop) langToggleDesktop.innerHTML = buttonHTML;
+      if (langToggleMobile) langToggleMobile.innerHTML = buttonHTML;
+    };
 
-    const buttonHTML = `
-      <img src="https://flagcdn.com/w20/${flagCode}.png" srcset="https://flagcdn.com/w40/${flagCode}.png 2x" alt="${targetLang.toUpperCase()}" class="w-5 h-auto mr-2">
-      ${targetLang.toUpperCase()}
-    `;
+    const toggleLanguage = () => {
+      const currentLang = localStorage.getItem("language") || "es";
+      const newLang = currentLang === "es" ? "en" : "es";
+      localStorage.setItem("language", newLang);
+      setLanguage(newLang);
+    };
 
-    if (langToggleDesktop) langToggleDesktop.innerHTML = buttonHTML; // Add check here
-    if (langToggleMobile) langToggleMobile.innerHTML = buttonHTML; // Add check here
-  };
+    if (langToggleDesktop) langToggleDesktop.addEventListener("click", toggleLanguage);
+    if (langToggleMobile) langToggleMobile.addEventListener("click", toggleLanguage);
 
-  const toggleLanguage = () => {
     const currentLang = localStorage.getItem("language") || "es";
-    const newLang = currentLang === "es" ? "en" : "es";
-    localStorage.setItem("language", newLang);
-    setLanguage(newLang);
-  };
-
-  if (langToggleDesktop) langToggleDesktop.addEventListener("click", toggleLanguage); // Add check here
-  if (langToggleMobile) langToggleMobile.addEventListener("click", toggleLanguage); // Add check here
+    setLanguage(currentLang); // This call is now inside the if block
+  }
+  // --- FIN: LÓGICA DE TRADUCCIÓN (I18N) MEJORADA ---
 
   const currentLang = localStorage.getItem("language") || "es";
-  setLanguage(currentLang);
+  // Moved setLanguage(currentLang); to the end of DOMContentLoaded
 
   // --- FIN: LÓGICA DE TRADUCCIÓN (I18N) MEJORADA ---
 
@@ -511,84 +519,85 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   window.addEventListener("scroll", onScroll);
 
-  // --- INICIO: LÓGICA AVANZADA DE TEMA (Claro, Oscuro, Automático) ---
-  const themeToggleBtn = document.getElementById("theme-toggle");
-  const themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
-  const themeToggleLightIcon = document.getElementById(
-    "theme-toggle-light-icon"
-  );
-  const themeToggleAutoIcon = document.getElementById("theme-toggle-auto-icon");
-
-  const themeToggleBtnMobile = document.getElementById("theme-toggle-mobile");
-  const themeToggleDarkIconMobile = document.getElementById(
-    "theme-toggle-dark-icon-mobile"
-  );
-  const themeToggleLightIconMobile = document.getElementById(
-    "theme-toggle-light-icon-mobile"
-  );
-  const themeToggleAutoIconMobile = document.getElementById(
-    "theme-toggle-auto-icon-mobile"
-  );
-
-  const applyTheme = () => {
-    const theme = localStorage.getItem("theme") || "auto";
-    console.log("Applying theme:", theme); // Added console.log
-    [
-      themeToggleDarkIcon,
-      themeToggleLightIcon,
-      themeToggleAutoIcon,
-      themeToggleDarkIconMobile,
-      themeToggleLightIconMobile,
-      themeToggleAutoIconMobile,
-    ].forEach((icon) => {
-      if (icon) { // Add check here
-        icon.classList.add("hidden");
-      }
-    });
-
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-      if (themeToggleLightIcon) themeToggleLightIcon.classList.remove("hidden"); // Add check here
-      if (themeToggleLightIconMobile) themeToggleLightIconMobile.classList.remove("hidden"); // Add check here
-    } else if (theme === "light") {
-      document.documentElement.classList.remove("dark");
-      if (themeToggleDarkIcon) themeToggleDarkIcon.classList.remove("hidden"); // Add check here
-      if (themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.remove("hidden"); // Add check here
-    } else {
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-      if (themeToggleAutoIcon) themeToggleAutoIcon.classList.remove("hidden"); // Add check here
-      if (themeToggleAutoIconMobile) themeToggleAutoIconMobile.classList.remove("hidden"); // Add check here
+    // --- INICIO: LÓGICA AVANZADA DE TEMA (Claro, Oscuro, Automático) ---
+    // Se obtienen las referencias a los botones de tema
+    const themeToggleBtn = document.getElementById("theme-toggle");
+    const themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
+    const themeToggleLightIcon = document.getElementById(
+      "theme-toggle-light-icon"
+    );
+    const themeToggleAutoIcon = document.getElementById("theme-toggle-auto-icon");
+  
+    const themeToggleBtnMobile = document.getElementById("theme-toggle-mobile");
+    const themeToggleDarkIconMobile = document.getElementById(
+      "theme-toggle-dark-icon-mobile"
+    );
+    const themeToggleLightIconMobile = document.getElementById(
+      "theme-toggle-light-icon-mobile"
+    );
+    const themeToggleAutoIconMobile = document.getElementById(
+      "theme-toggle-auto-icon-mobile"
+    );
+  
+    // Solo inicializar la lógica de tema si al menos uno de los botones existe
+    if (themeToggleBtn || themeToggleBtnMobile) {
+      const applyTheme = () => {
+        const theme = localStorage.getItem("theme") || "auto";
+        console.log("Applying theme:", theme); // Added console.log
+        [
+          themeToggleDarkIcon,
+          themeToggleLightIcon,
+          themeToggleAutoIcon,
+          themeToggleDarkIconMobile,
+          themeToggleLightIconMobile,
+          themeToggleAutoIconMobile,
+        ].forEach((icon) => {
+          if (icon) { // Add check here
+            icon.classList.add("hidden");
+          }
+        });
+  
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+          if (themeToggleLightIcon) themeToggleLightIcon.classList.remove("hidden"); // Add check here
+          if (themeToggleLightIconMobile) themeToggleLightIconMobile.classList.remove("hidden"); // Add check here
+        } else if (theme === "light") {
+          document.documentElement.classList.remove("dark");
+          if (themeToggleDarkIcon) themeToggleDarkIcon.classList.remove("hidden"); // Add check here
+          if (themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.remove("hidden"); // Add check here
+        } else {
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.classList.add("dark");
+          }
+          if (themeToggleAutoIcon) themeToggleAutoIcon.classList.remove("hidden"); // Add check here
+          if (themeToggleAutoIconMobile) themeToggleAutoIconMobile.classList.remove("hidden"); // Add check here
+        }
+      };
+  
+      const cycleTheme = () => {
+        const currentTheme = localStorage.getItem("theme") || "auto";
+        let nextTheme;
+  
+        if (currentTheme === "light") {
+          nextTheme = "dark";
+        } else if (currentTheme === "dark") {
+          nextTheme = "auto";
+        } else {
+          nextTheme = "light";
+        }
+  
+        localStorage.setItem("theme", nextTheme);
+        applyTheme();
+      };
+  
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", applyTheme);
+      if (themeToggleBtn) themeToggleBtn.addEventListener("click", cycleTheme); // Add check here
+      if (themeToggleBtnMobile) themeToggleBtnMobile.addEventListener("click", cycleTheme); // Add check here
+      applyTheme();
     }
-  };
-
-  const cycleTheme = () => {
-    const currentTheme = localStorage.getItem("theme") || "auto";
-    let nextTheme;
-
-    if (currentTheme === "light") {
-      nextTheme = "dark";
-    } else if (currentTheme === "dark") {
-      nextTheme = "auto";
-    } else {
-      nextTheme = "light";
-    }
-
-    localStorage.setItem("theme", nextTheme);
-    applyTheme();
-  };
-
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", applyTheme);
-  if (themeToggleBtn) themeToggleBtn.addEventListener("click", cycleTheme); // Add check here
-  if (themeToggleBtnMobile) themeToggleBtnMobile.addEventListener("click", cycleTheme); // Add check here
-  applyTheme();
-  // --- FIN: LÓGICA AVANZADA DE TEMA ---
-
+    // --- FIN: LÓGICA AVANZADA DE TEMA ---
   // --- INICIO: LÓGICA DEL SLIDER DE RESEÑAS (CON AUTOPLAY Y ALTURA UNIFORME) ---
   const sliderWrapper = document.getElementById("reviews-slider-wrapper");
   const reviewSlides = document.querySelectorAll(".review-slide");
@@ -853,4 +862,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   // --- FIN: LÓGICA PARA HEADER DINÁMICO AL HACER SCROLL ---
+  setLanguage(currentLang); // Moved here to ensure elements are ready
 });
