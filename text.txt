@@ -1,21 +1,17 @@
-### Listado de Posibles Temas para el Blog de Narbo's Salón Spa
 
-1.  **"Los 5 Tratamientos Capilares Imprescindibles para el Clima de Chía y la Sabana de Bogotá"**
-    *   **Enfoque:** Abordar los problemas comunes del cabello causados por el clima de la sabana (resequedad, frizz por la humedad, daño solar por la altitud). Se pueden recomendar tratamientos específicos que ofrezca el salón, como hidrataciones profundas, keratina o rituales de reparación.
-    *   **SEO Local:** "tratamientos capilares en Chía", "cuidado del cabello clima frío", "peluquerías en la sabana de Bogotá".
+Análisis:
 
-2.  **"Guía Definitiva de Balayage en Chía: Todo lo que Necesitas Saber Antes de Tu Cita en Narbo's"**
-    *   **Enfoque:** El balayage es una técnica muy popular. Este artículo puede explicar en qué consiste, para quién es ideal, cómo se diferencia de otras técnicas como las mechas tradicionales, y cómo mantenerlo. Se pueden usar fotos de trabajos realizados en el salón.
-    *   **SEO Local:** "balayage en Chía", "expertos en coloración Cundinamarca", "mejor peluquería para balayage Chía".
+1.  **Rutas de archivos:** En `blog/articles/tratamientos-capilares-clima-chia.html`, las rutas a los assets (CSS, JS, imágenes) son relativas (`../../`), lo que puede causar problemas si la estructura de la URL cambia.
+2.  **Navegación:** El enlace "Blog" en la barra de navegación está marcado como activo en todas las páginas del blog, lo cual es correcto.
+3.  **Estilos:** El `<blockquote>` en el artículo no tiene un estilo visualmente atractivo. Podríamos mejorarlo.
+4.  **JavaScript:** El archivo `script.js` contiene toda la lógica del sitio. Aunque funcional, podríamos optimizarlo para asegurarnos de que solo se ejecute el código necesario en cada página. Por ejemplo, la lógica del slider de reseñas solo es necesaria en la página de inicio.
+5.  **Contenido del artículo:** El contenido es bueno, pero podemos mejorar la legibilidad y el SEO añadiendo una tabla de contenidos y optimizando los encabezados.
 
-3.  **"Narbos Salón Spa: Más que una Peluquería en Chía, un Oasis de Bienestar"**
-    *   **Enfoque:** Un artículo más institucional que presente la filosofía del salón. Puede hablar de la experiencia completa que ofrecen: desde el café de bienvenida hasta los masajes relajantes, posicionándose como un lugar para desconectar y cuidarse. Ideal para destacar los servicios de spa.
-    *   **SEO Local:** "spa en Chía", "día de spa Cundinamarca", "salón de belleza y spa Chía".
+Plan de acción:
 
-4.  **"Tendencias de Uñas para 2025: Lo que se Llevará en Chía y Cómo Pedirlo en Narbo's"**
-    *   **Enfoque:** Un artículo sobre las últimas tendencias en diseño de uñas (colores, formas, nail art). Se puede conectar con los productos que usan (Organic, Belier, Masglo) y mostrar fotos de diseños hechos en el salón.
-    *   **SEO Local:** "uñas acrílicas Chía", "manicure semipermanente Cundinamarca", "tendencias de uñas 2025 Colombia".
-
-5.  **"¿Boda o Evento en Chía? Tu Guía de Peinado y Maquillaje Profesional en Narbo's Salón Spa"**
-    *   **Enfoque:** Dirigido a un nicho específico. Puede hablar de los paquetes para novias o eventos, la importancia de un maquillaje y peinado profesional, y dar consejos sobre cómo prepararse para la cita. Chía es una zona con muchos eventos sociales y bodas.
-    *   **SEO Local:** "maquillaje para bodas Chía", "peinados para eventos Cundinamarca", "paquetes de novia peluquería Chía".
+1.  **Mejorar el CSS del `<blockquote>`:** Haré que el `<blockquote>` sea más prominente y visualmente atractivo.
+2.  **Optimizar el `script.js`:** Añadiré condicionales para que ciertas funciones solo se ejecuten en las páginas donde son necesarias.
+3.  **Mejorar el artículo:**
+    *   Añadiré una tabla de contenidos al principio del artículo.
+    *   Ajustaré los encabezados para mejorar la jerarquía y el SEO.
+4.  **Rutas de archivos:** Por ahora, mantendré las rutas relativas, pero es algo a tener en cuenta para el futuro.
