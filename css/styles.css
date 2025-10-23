@@ -506,3 +506,39 @@ header nav .hidden a.nav-link-active::after {
     max-width: 80%; /* Ajustar según sea necesario para dar un poco de padding */
     max-height: 80%; /* Ajustar según sea necesario para dar un poco de padding */
 }
+
+/* --- INICIO: ESTILOS PARA BLOCKQUOTE EN ARTÍCULOS --- */
+
+.prose blockquote {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 0;
+  font-style: normal;
+  font-size: 1.125rem; /* Aumenta el tamaño de la fuente */
+  color: #374151; /* Un gris más oscuro para mejor legibilidad */
+}
+
+.dark .prose blockquote {
+  color: #d1d5db; /* Un gris más claro para modo oscuro */
+}
+
+.prose blockquote::before {
+  content: "“";
+  position: absolute;
+  left: -0.5rem;
+  top: -1rem;
+  font-size: 4rem;
+  font-family: "Playfair Display", serif;
+  color: #c5ab94; /* brand-medium */
+  opacity: 0.8;
+}
+
+.dark .prose blockquote::before {
+  color: #6b755a; /* brand-green */
+}
+
+.prose blockquote p {
+  font-style: italic;
+}
+
+/* --- FIN: ESTILOS PARA BLOCKQUOTE EN ARTÍCULOS --- */
