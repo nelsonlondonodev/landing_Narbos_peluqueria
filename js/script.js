@@ -72,8 +72,7 @@ const translations = {
       galleryAlt17: "Cuidado y belleza estética en nuestro spa",
       galleryAlt18: "Resultados de nuestros tratamientos de estética",
       locationTitle: "Visítanos",
-      locationAddress:
-        "Kilómetro 2 vía Chía-Cajicá, Bajos del hotel Ibis, Chía, Cundinamarca.",
+      locationAddress: "Bajos del hotel ibis, Cajicá - Chía #Kilómetro 2, Chía, Cundinamarca, Colombia",
       locationHoursTitle: "Horario de Atención",
       hoursWeekdayLabel: "Lunes a Sábado",
       hoursWeekdayTime: "7:00 a.m. – 7:30 p.m.",
@@ -275,8 +274,7 @@ const translations = {
       galleryAlt17: "Aesthetic care and beauty at our spa",
       galleryAlt18: "Results of our aesthetics treatments",
       locationTitle: "Visit Us",
-      locationAddress:
-        "Kilometer 2 Chía-Cajicá road, beneath the Ibis hotel, Chía, Cundinamarca.",
+      locationAddress: "Under the Ibis hotel, Cajicá - Chía #Kilómetro 2, Chía, Cundinamarca, Colombia",
       locationHoursTitle: "Opening Hours",
       hoursWeekdayLabel: "Monday to Saturday",
       hoursWeekdayTime: "7:00 a.m. – 7:30 p.m.",
