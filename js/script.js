@@ -1,22 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("script.js loaded and DOMContentLoaded fired."); // Added console.log
-  // --- INICIO: LÓGICA PARA ANIMACIÓN DE HERO EN CARGA ---
-  const heroTitle = document.getElementById("hero-title");
-  const heroSubtitle = document.getElementById("hero-subtitle");
-
-  if (heroTitle && heroSubtitle) {
-    setTimeout(() => {
-      heroTitle.classList.add("is-visible");
-    }, 100);
-    setTimeout(() => {
-      heroSubtitle.classList.add("is-visible");
-    }, 400);
-  }
-  // --- FIN: LÓGICA PARA ANIMACIÓN DE HERO EN CARGA ---
-
-  // --- INICIO: LÓGICA DE TRADUCCIÓN (I18N) MEJORADA ---
-
-  const translations = {
+const translations = {
     es: {
       metaTitle: "Peluquería y Spa en Chía | Narbo's Salón Spa",
       metaDescription:
@@ -357,303 +339,298 @@ document.addEventListener("DOMContentLoaded", () => {
       modalDepilacionCta:
         "Discover the power of a flawless look and skin at Narbo's!",
     },
-  };
+};
 
-  // --- INICIO: LÓGICA DE TRADUCCIÓN (I18N) MEJORADA ---
-  // Se obtienen las referencias a los botones de idioma
+function initHeroAnimation() {
+  const heroTitle = document.getElementById("hero-title");
+  const heroSubtitle = document.getElementById("hero-subtitle");
+
+  if (heroTitle && heroSubtitle) {
+    setTimeout(() => {
+      heroTitle.classList.add("is-visible");
+    }, 100);
+    setTimeout(() => {
+      heroSubtitle.classList.add("is-visible");
+    }, 400);
+  }
+}
+
+function initI18n() {
   const langToggleDesktop = document.getElementById("lang-toggle-desktop");
   const langToggleMobile = document.getElementById("lang-toggle-mobile");
 
-  // Solo inicializar la lógica de idioma si al menos uno de los botones existe
-  if (langToggleDesktop || langToggleMobile) {
-    const setLanguage = (lang) => {
-      document.documentElement.lang = lang;
+  if (!langToggleDesktop && !langToggleMobile) return;
 
-      document.querySelectorAll("[data-key]").forEach((elem) => {
-        const key = elem.getAttribute("data-key");
-        if (translations[lang] && translations[lang][key]) {
-          elem.innerHTML = translations[lang][key];
-        }
-      });
+  const setLanguage = (lang) => {
+    document.documentElement.lang = lang;
 
-      document.querySelectorAll("[data-key-alt]").forEach((elem) => {
-        const key = elem.getAttribute("data-key-alt");
-        if (translations[lang] && translations[lang][key]) {
-          elem.setAttribute("alt", translations[lang][key]);
-        }
-      });
-
-      const metaDescription = document.getElementById("meta-description");
-      if (metaDescription) {
-        metaDescription.setAttribute("content", translations[lang].metaDescription);
-      }
-      
-      document.title = translations[lang].metaTitle;
-
-      updateLangToggleButtons(lang);
-    };
-
-    const updateLangToggleButtons = (currentLang) => {
-      const targetLang = currentLang === "es" ? "en" : "es";
-      const flagCode = targetLang === "es" ? "es" : "gb";
-
-      const buttonHTML = `
-        <img src="https://flagcdn.com/w20/${flagCode}.png" srcset="https://flagcdn.com/w40/${flagCode}.png 2x" alt="${targetLang.toUpperCase()}" class="w-5 h-auto mr-2">
-        ${targetLang.toUpperCase()}
-      `;
-
-      if (langToggleDesktop) langToggleDesktop.innerHTML = buttonHTML;
-      if (langToggleMobile) langToggleMobile.innerHTML = buttonHTML;
-    };
-
-    const toggleLanguage = () => {
-      const currentLang = localStorage.getItem("language") || "es";
-      const newLang = currentLang === "es" ? "en" : "es";
-      localStorage.setItem("language", newLang);
-      setLanguage(newLang);
-    };
-
-    if (langToggleDesktop) langToggleDesktop.addEventListener("click", toggleLanguage);
-    if (langToggleMobile) langToggleMobile.addEventListener("click", toggleLanguage);
-
-    const currentLang = localStorage.getItem("language") || "es";
-    setLanguage(currentLang); // This call is now inside the if block
-  }
-  // --- FIN: LÓGICA DE TRADUCCIÓN (I18N) MEJORADA ---
-
-  const currentLang = localStorage.getItem("language") || "es";
-  // Moved setLanguage(currentLang); to the end of DOMContentLoaded
-
-  // --- FIN: LÓGICA DE TRADUCCIÓN (I18N) MEJORADA ---
-
-  // --- INICIO: LÓGICA MEJORADA PARA MENÚ HAMBURGUESA (OVERLAY) ---
-  const menuBtn = document.getElementById("menu-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const menuBackdrop = document.getElementById("menu-backdrop");
-  const menuOpenIcon = document.getElementById("menu-open-icon");
-  const menuCloseIcon = document.getElementById("menu-close-icon");
-  const mobileMenuLinks = mobileMenu.querySelectorAll("a");
-
-  const toggleMenu = () => {
-    mobileMenu.classList.toggle("translate-x-full");
-    menuBackdrop.classList.toggle("hidden");
-    menuOpenIcon.classList.toggle("hidden");
-    menuCloseIcon.classList.toggle("hidden");
-    document.body.classList.toggle("mobile-menu-open");
-  };
-
-  menuBtn.addEventListener("click", toggleMenu);
-  menuBackdrop.addEventListener("click", toggleMenu);
-  mobileMenuLinks.forEach((link) => {
-    link.addEventListener("click", toggleMenu);
-  });
-  // --- FIN: LÓGICA MEJORADA PARA MENÚ HAMBURGUESA (OVERLAY) ---
-
-  // --- Lógica para la Validación del Formulario de Contacto ---
-  const contactForm = document.getElementById("contact-form");
-  const formStatus = document.getElementById("form-status");
-
-  contactForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const lang = localStorage.getItem("language") || "es";
-    const data = new FormData(e.target);
-    
-    formStatus.textContent = translations[lang].formStatusSubmitting;
-    formStatus.style.color = "#6B755A"; // brand-green
-
-    try {
-      const response = await fetch(e.target.action, {
-        method: e.target.method,
-        body: data,
-        headers: {
-            'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        formStatus.textContent = translations[lang].formStatusSuccess;
-        formStatus.style.color = "green";
-        contactForm.reset();
-      } else {
-        response.json().then(data => {
-          if (Object.hasOwn(data, 'errors')) {
-            formStatus.textContent = data["errors"].map(error => error["message"]).join(", ")
-          } else {
-            formStatus.textContent = translations[lang].formStatusError;
-          }
-          formStatus.style.color = "red";
-        })
-      }
-    } catch (error) {
-      formStatus.textContent = translations[lang].formStatusError;
-      formStatus.style.color = "red";
-    }
-    
-    setTimeout(() => {
-      formStatus.textContent = "";
-    }, 5000);
-  });
-
-  // --- LÓGICA DE SCROLL SPY ---
-  const sections = document.querySelectorAll("main section[id], footer[id]");
-  const navLinks = document.querySelectorAll("header nav .hidden a");
-
-  const onScroll = () => {
-    const scrollPosition = window.scrollY + 150;
-    sections.forEach((section) => {
-      if (
-        scrollPosition >= section.offsetTop &&
-        scrollPosition < section.offsetTop + section.offsetHeight
-      ) {
-        navLinks.forEach((link) => {
-          link.classList.remove("nav-link-active");
-        });
-        const correspondingLink = document.querySelector(
-          `header nav .hidden a[href*="${section.id}"]`
-        );
-        if (correspondingLink) {
-          correspondingLink.classList.add("nav-link-active");
-        }
+    document.querySelectorAll("[data-key]").forEach((elem) => {
+      const key = elem.getAttribute("data-key");
+      if (translations[lang] && translations[lang][key]) {
+        elem.innerHTML = translations[lang][key];
       }
     });
-  };
-  window.addEventListener("scroll", onScroll);
 
-    // --- INICIO: LÓGICA AVANZADA DE TEMA (Claro, Oscuro, Automático) ---
-    // Se obtienen las referencias a los botones de tema
+    document.querySelectorAll("[data-key-alt]").forEach((elem) => {
+      const key = elem.getAttribute("data-key-alt");
+      if (translations[lang] && translations[lang][key]) {
+        elem.setAttribute("alt", translations[lang][key]);
+      }
+    });
+
+    const metaDescription = document.getElementById("meta-description");
+    if (metaDescription && translations[lang] && translations[lang].metaDescription) {
+      metaDescription.setAttribute("content", translations[lang].metaDescription);
+    }
+    
+    if (translations[lang] && translations[lang].metaTitle) {
+        document.title = translations[lang].metaTitle;
+    }
+
+    updateLangToggleButtons(lang);
+  };
+
+  const updateLangToggleButtons = (currentLang) => {
+    const targetLang = currentLang === "es" ? "en" : "es";
+    const flagCode = targetLang === "es" ? "es" : "gb";
+
+    const buttonHTML = `
+      <img src="https://flagcdn.com/w20/${flagCode}.png" srcset="https://flagcdn.com/w40/${flagCode}.png 2x" alt="${targetLang.toUpperCase()}" class="w-5 h-auto mr-2">
+      ${targetLang.toUpperCase()}
+    `;
+
+    if (langToggleDesktop) langToggleDesktop.innerHTML = buttonHTML;
+    if (langToggleMobile) langToggleMobile.innerHTML = buttonHTML;
+  };
+
+  const toggleLanguage = () => {
+    const currentLang = localStorage.getItem("language") || "es";
+    const newLang = currentLang === "es" ? "en" : "es";
+    localStorage.setItem("language", newLang);
+    setLanguage(newLang);
+  };
+
+  if (langToggleDesktop) langToggleDesktop.addEventListener("click", toggleLanguage);
+  if (langToggleMobile) langToggleMobile.addEventListener("click", toggleLanguage);
+
+  const currentLang = localStorage.getItem("language") || "es";
+  setLanguage(currentLang);
+}
+
+function initMobileMenu() {
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    
+    if (!menuBtn || !mobileMenu) return;
+
+    const menuBackdrop = document.getElementById("menu-backdrop");
+    const menuOpenIcon = document.getElementById("menu-open-icon");
+    const menuCloseIcon = document.getElementById("menu-close-icon");
+    const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+
+    const toggleMenu = () => {
+        mobileMenu.classList.toggle("translate-x-full");
+        if (menuBackdrop) menuBackdrop.classList.toggle("hidden");
+        if (menuOpenIcon) menuOpenIcon.classList.toggle("hidden");
+        if (menuCloseIcon) menuCloseIcon.classList.toggle("hidden");
+        document.body.classList.toggle("mobile-menu-open");
+    };
+
+    menuBtn.addEventListener("click", toggleMenu);
+    if (menuBackdrop) menuBackdrop.addEventListener("click", toggleMenu);
+    mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", toggleMenu);
+    });
+}
+
+function initContactForm() {
+    const contactForm = document.getElementById("contact-form");
+    if (!contactForm) return;
+
+    const formStatus = document.getElementById("form-status");
+
+    contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const lang = localStorage.getItem("language") || "es";
+        const data = new FormData(e.target);
+        
+        if(formStatus) formStatus.textContent = translations[lang].formStatusSubmitting;
+        if(formStatus) formStatus.style.color = "#6B755A";
+
+        try {
+            const response = await fetch(e.target.action, {
+                method: e.target.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                if(formStatus) formStatus.textContent = translations[lang].formStatusSuccess;
+                if(formStatus) formStatus.style.color = "green";
+                contactForm.reset();
+            } else {
+                response.json().then(data => {
+                    if (Object.hasOwn(data, 'errors')) {
+                        if(formStatus) formStatus.textContent = data["errors"].map(error => error["message"]).join(", ");
+                    } else {
+                        if(formStatus) formStatus.textContent = translations[lang].formStatusError;
+                    }
+                    if(formStatus) formStatus.style.color = "red";
+                })
+            }
+        } catch (error) {
+            if(formStatus) formStatus.textContent = translations[lang].formStatusError;
+            if(formStatus) formStatus.style.color = "red";
+        }
+        
+        setTimeout(() => {
+            if(formStatus) formStatus.textContent = "";
+        }, 5000);
+    });
+}
+
+function initScrollSpy() {
+    const sections = document.querySelectorAll("main section[id], footer[id]");
+    const navLinks = document.querySelectorAll("header nav .hidden a");
+
+    if (sections.length === 0 || navLinks.length === 0) return;
+
+    const onScroll = () => {
+        const scrollPosition = window.scrollY + 150;
+        sections.forEach((section) => {
+            if (
+                scrollPosition >= section.offsetTop &&
+                scrollPosition < section.offsetTop + section.offsetHeight
+            ) {
+                navLinks.forEach((link) => {
+                    link.classList.remove("nav-link-active");
+                });
+                const correspondingLink = document.querySelector(
+                    `header nav .hidden a[href*="${section.id}"]`
+                );
+                if (correspondingLink) {
+                    correspondingLink.classList.add("nav-link-active");
+                }
+            }
+        });
+    };
+    window.addEventListener("scroll", onScroll);
+}
+
+function initThemeToggle() {
     const themeToggleBtn = document.getElementById("theme-toggle");
     const themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
-    const themeToggleLightIcon = document.getElementById(
-      "theme-toggle-light-icon"
-    );
+    const themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
     const themeToggleAutoIcon = document.getElementById("theme-toggle-auto-icon");
-  
     const themeToggleBtnMobile = document.getElementById("theme-toggle-mobile");
-    const themeToggleDarkIconMobile = document.getElementById(
-      "theme-toggle-dark-icon-mobile"
-    );
-    const themeToggleLightIconMobile = document.getElementById(
-      "theme-toggle-light-icon-mobile"
-    );
-    const themeToggleAutoIconMobile = document.getElementById(
-      "theme-toggle-auto-icon-mobile"
-    );
-  
-    // Solo inicializar la lógica de tema si al menos uno de los botones existe
-    if (themeToggleBtn || themeToggleBtnMobile) {
-      const applyTheme = () => {
+    const themeToggleDarkIconMobile = document.getElementById("theme-toggle-dark-icon-mobile");
+    const themeToggleLightIconMobile = document.getElementById("theme-toggle-light-icon-mobile");
+    const themeToggleAutoIconMobile = document.getElementById("theme-toggle-auto-icon-mobile");
+
+    if (!themeToggleBtn && !themeToggleBtnMobile) return;
+
+    const applyTheme = () => {
         const theme = localStorage.getItem("theme") || "auto";
-        console.log("Applying theme:", theme); // Added console.log
-        [
-          themeToggleDarkIcon,
-          themeToggleLightIcon,
-          themeToggleAutoIcon,
-          themeToggleDarkIconMobile,
-          themeToggleLightIconMobile,
-          themeToggleAutoIconMobile,
-        ].forEach((icon) => {
-          if (icon) { // Add check here
-            icon.classList.add("hidden");
-          }
+        const allIcons = [
+            themeToggleDarkIcon, themeToggleLightIcon, themeToggleAutoIcon,
+            themeToggleDarkIconMobile, themeToggleLightIconMobile, themeToggleAutoIconMobile
+        ];
+        
+        allIcons.forEach((icon) => {
+            if (icon) icon.classList.add("hidden");
         });
-  
+
         if (theme === "dark") {
-          document.documentElement.classList.add("dark");
-          if (themeToggleLightIcon) themeToggleLightIcon.classList.remove("hidden"); // Add check here
-          if (themeToggleLightIconMobile) themeToggleLightIconMobile.classList.remove("hidden"); // Add check here
-        } else if (theme === "light") {
-          document.documentElement.classList.remove("dark");
-          if (themeToggleDarkIcon) themeToggleDarkIcon.classList.remove("hidden"); // Add check here
-          if (themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.remove("hidden"); // Add check here
-        } else {
-          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
             document.documentElement.classList.add("dark");
-          }
-          if (themeToggleAutoIcon) themeToggleAutoIcon.classList.remove("hidden"); // Add check here
-          if (themeToggleAutoIconMobile) themeToggleAutoIconMobile.classList.remove("hidden"); // Add check here
-        }
-      };
-  
-      const cycleTheme = () => {
-        const currentTheme = localStorage.getItem("theme") || "auto";
-        let nextTheme;
-  
-        if (currentTheme === "light") {
-          nextTheme = "dark";
-        } else if (currentTheme === "dark") {
-          nextTheme = "auto";
+            if (themeToggleLightIcon) themeToggleLightIcon.classList.remove("hidden");
+            if (themeToggleLightIconMobile) themeToggleLightIconMobile.classList.remove("hidden");
+        } else if (theme === "light") {
+            document.documentElement.classList.remove("dark");
+            if (themeToggleDarkIcon) themeToggleDarkIcon.classList.remove("hidden");
+            if (themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.remove("hidden");
         } else {
-          nextTheme = "light";
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+            if (themeToggleAutoIcon) themeToggleAutoIcon.classList.remove("hidden");
+            if (themeToggleAutoIconMobile) themeToggleAutoIconMobile.classList.remove("hidden");
         }
-  
+    };
+
+    const cycleTheme = () => {
+        const currentTheme = localStorage.getItem("theme") || "auto";
+        const nextTheme = currentTheme === "light" ? "dark" : currentTheme === "dark" ? "auto" : "light";
         localStorage.setItem("theme", nextTheme);
         applyTheme();
-      };
-  
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", applyTheme);
-      if (themeToggleBtn) themeToggleBtn.addEventListener("click", cycleTheme); // Add check here
-      if (themeToggleBtnMobile) themeToggleBtnMobile.addEventListener("click", cycleTheme); // Add check here
-      applyTheme();
-    }
-    // --- FIN: LÓGICA AVANZADA DE TEMA ---
-  // --- INICIO: LÓGICA DEL SLIDER DE RESEÑAS (CON AUTOPLAY Y ALTURA UNIFORME) ---
-  const sliderWrapper = document.getElementById("reviews-slider-wrapper");
-  const reviewSlides = document.querySelectorAll(".review-slide");
-  const prevBtn = document.getElementById("prev-review");
-  const nextBtn = document.getElementById("next-review");
+    };
 
-  if (reviewSlides.length > 0) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+    if (themeToggleBtn) themeToggleBtn.addEventListener("click", cycleTheme);
+    if (themeToggleBtnMobile) themeToggleBtnMobile.addEventListener("click", cycleTheme);
+    
+    applyTheme();
+}
+
+function initReviewsSlider() {
+    const sliderWrapper = document.getElementById("reviews-slider-wrapper");
+    if (!sliderWrapper) return;
+
+    const reviewSlides = document.querySelectorAll(".review-slide");
+    const prevBtn = document.getElementById("prev-review");
+    const nextBtn = document.getElementById("next-review");
+
+    if (reviewSlides.length === 0 || !prevBtn || !nextBtn) return;
+
     let currentReviewIndex = 0;
     let autoPlayInterval;
 
     const unifySlideHeights = () => {
-      let maxHeight = 0;
-      reviewSlides.forEach((slide) => {
-        slide.style.height = "auto";
-        if (slide.offsetHeight > maxHeight) {
-          maxHeight = slide.offsetHeight;
-        }
-      });
-      reviewSlides.forEach((slide) => {
-        slide.style.minHeight = `${maxHeight}px`;
-      });
+        let maxHeight = 0;
+        reviewSlides.forEach((slide) => {
+            slide.style.height = "auto";
+            if (slide.offsetHeight > maxHeight) {
+                maxHeight = slide.offsetHeight;
+            }
+        });
+        reviewSlides.forEach((slide) => {
+            slide.style.minHeight = `${maxHeight}px`;
+        });
     };
 
     const showReview = (index) => {
-      reviewSlides.forEach((slide, i) => {
-        slide.style.display = i === index ? "block" : "none";
-      });
+        reviewSlides.forEach((slide, i) => {
+            slide.style.display = i === index ? "block" : "none";
+        });
     };
 
     const nextReview = () => {
-      currentReviewIndex = (currentReviewIndex + 1) % reviewSlides.length;
-      showReview(currentReviewIndex);
+        currentReviewIndex = (currentReviewIndex + 1) % reviewSlides.length;
+        showReview(currentReviewIndex);
     };
 
     const startAutoPlay = () => {
-      autoPlayInterval = setInterval(nextReview, 7000);
+        autoPlayInterval = setInterval(nextReview, 7000);
     };
 
     const stopAutoPlay = () => {
-      clearInterval(autoPlayInterval);
+        clearInterval(autoPlayInterval);
     };
 
     prevBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      currentReviewIndex =
-        (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
-      showReview(currentReviewIndex);
-      stopAutoPlay();
+        e.preventDefault();
+        e.stopPropagation();
+        currentReviewIndex = (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
+        showReview(currentReviewIndex);
+        stopAutoPlay();
     });
 
     nextBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      nextReview();
-      stopAutoPlay();
+        e.preventDefault();
+        e.stopPropagation();
+        nextReview();
+        stopAutoPlay();
     });
 
     sliderWrapper.addEventListener("mouseenter", stopAutoPlay);
@@ -661,206 +638,166 @@ document.addEventListener("DOMContentLoaded", () => {
 
     unifySlideHeights();
     window.addEventListener("resize", unifySlideHeights);
-
     showReview(currentReviewIndex);
     startAutoPlay();
-  }
-  // --- FIN: LÓGICA DEL SLIDER DE RESEÑAS ---
+}
 
-  // --- INICIO: LÓGICA DEL FILTRO INTERACTIVO DE LA GALERÍA ---
-  const galleryFilters = document.getElementById("gallery-filters");
-  const galleryItems = document.querySelectorAll(".gallery-item");
-  const filterButtons = document.querySelectorAll(".filter-btn");
+function initGallery() {
+    const galleryFilters = document.getElementById("gallery-filters");
+    const galleryItems = document.querySelectorAll(".gallery-item");
 
-  if (galleryFilters && galleryItems.length > 0) {
-    const defaultFilterBtn = document.querySelector(
-      '.filter-btn[data-filter="todos"]'
-    );
+    if (!galleryFilters || galleryItems.length === 0) return;
+
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const defaultFilterBtn = document.querySelector('.filter-btn[data-filter="todos"]');
+    
     if (defaultFilterBtn) {
-      filterButtons.forEach((btn) => btn.classList.remove("filter-btn-active"));
-      defaultFilterBtn.classList.add("filter-btn-active");
+        filterButtons.forEach((btn) => btn.classList.remove("filter-btn-active"));
+        defaultFilterBtn.classList.add("filter-btn-active");
     }
 
     galleryFilters.addEventListener("click", (e) => {
-      const clickedButton = e.target.closest(".filter-btn");
-      if (clickedButton) {
-        const filterValue = clickedButton.getAttribute("data-filter");
+        const clickedButton = e.target.closest(".filter-btn");
+        if (clickedButton) {
+            const filterValue = clickedButton.getAttribute("data-filter");
+            filterButtons.forEach((btn) => btn.classList.remove("filter-btn-active"));
+            clickedButton.classList.add("filter-btn-active");
 
-        filterButtons.forEach((btn) => {
-          btn.classList.remove("filter-btn-active");
-        });
-        clickedButton.classList.add("filter-btn-active");
+            galleryItems.forEach((item) => {
+                const itemCategory = item.getAttribute("data-category");
+                item.style.display = (filterValue === "todos" || filterValue === itemCategory) ? "" : "none";
+            });
 
-        galleryItems.forEach((item) => {
-          const itemCategory = item.getAttribute("data-category");
-
-          if (filterValue === "todos" || filterValue === itemCategory) {
-            item.classList.remove("hidden");
-          } else {
-            item.classList.add("hidden");
-          }
-        });
-
-        if (typeof lightbox !== "undefined") {
-          lightbox.reload();
+            if (typeof lightbox !== "undefined" && lightbox) {
+                lightbox.reload();
+            }
         }
-      }
     });
-  }
-  // --- FIN: LÓGICA DEL FILTRO INTERACTIVO DE LA GALERÍA ---
 
-  // --- INICIO: LÓGICA PARA MODALES DE SERVICIOS ---
+    const lightbox = GLightbox({ selector: ".glightbox" });
+}
 
-  const openModalTriggers = document.querySelectorAll("[data-modal-target]");
+function initModals() {
+    const openModalTriggers = document.querySelectorAll("[data-modal-target]");
+    if (openModalTriggers.length === 0) return;
 
-  const openModal = (modal) => {
-    if (modal) {
-      const modalContent = modal.querySelector(".bg-white");
-      modal.classList.remove("hidden");
-      modal.classList.add("modal-animation");
-      if (modalContent) {
-        modalContent.classList.add("modal-content-animation");
-      }
-      document.body.classList.add("mobile-menu-open");
-    }
-  };
+    const openModal = (modal) => {
+        if (modal) {
+            modal.classList.remove("hidden");
+            document.body.style.overflow = "hidden";
+        }
+    };
 
-  const closeModal = (modal) => {
-    if (modal) {
-      const modalContent = modal.querySelector(".bg-white");
-      modal.classList.remove("modal-animation");
-      if (modalContent) {
-        modalContent.classList.remove("modal-content-animation");
-      }
-      modal.classList.add("hidden");
-      document.body.classList.remove("mobile-menu-open");
-    }
-  };
+    const closeModal = (modal) => {
+        if (modal) {
+            modal.classList.add("hidden");
+            document.body.style.overflow = "";
+        }
+    };
 
-  openModalTriggers.forEach((trigger) => {
-    trigger.addEventListener("click", () => {
-      const modal = document.getElementById(trigger.dataset.modalTarget);
-      openModal(modal);
+    openModalTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", () => {
+            const modal = document.getElementById(trigger.dataset.modalTarget);
+            openModal(modal);
+        });
     });
-  });
 
-  document.querySelectorAll('[id$="-modal"]').forEach((modal) => {
-    const closeButton = modal.querySelector("[data-modal-close]");
-    if (closeButton) {
-      closeButton.addEventListener("click", () => closeModal(modal));
-    }
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        closeModal(modal);
-      }
+    document.querySelectorAll('[id$="-modal"]').forEach((modal) => {
+        const closeButton = modal.querySelector("[data-modal-close]");
+        if (closeButton) {
+            closeButton.addEventListener("click", () => closeModal(modal));
+        }
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal(modal);
+        });
     });
-  });
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      const openModal = document.querySelector(".modal-animation:not(.hidden)");
-      closeModal(openModal);
-    }
-  });
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            const openModal = document.querySelector('[id$="-modal"]:not(.hidden)');
+            closeModal(openModal);
+        }
+    });
+}
 
-  // --- FIN: LÓGICA PARA MODALES DE SERVICIOS ---
+function initVideoPlayer() {
+    const videoContainer = document.getElementById("video-container");
+    if (!videoContainer) return;
 
-  // --- INICIO: LÓGICA PARA REPRODUCTOR DE VIDEO PERSONALIZADO ---
-  const videoContainer = document.getElementById("video-container");
-  const promoVideo = document.getElementById("promo-video");
-  const videoPlayButton = document.getElementById("video-play-button");
+    const promoVideo = document.getElementById("promo-video");
+    const videoPlayButton = document.getElementById("video-play-button");
 
-  if (videoContainer && promoVideo && videoPlayButton) {
-    // 1. Al hacer clic en el contenedor, pausar o reproducir el video
+    if (!promoVideo || !videoPlayButton) return;
+
     videoContainer.addEventListener("click", () => {
-      if (promoVideo.paused) {
-        promoVideo.play();
-      } else {
-        promoVideo.pause();
-      }
+        if (promoVideo.paused) {
+            promoVideo.play();
+        } else {
+            promoVideo.pause();
+        }
     });
 
-    // 2. Cuando el video se reproduzca, ocultar el botón de play
     promoVideo.addEventListener("play", () => {
-      videoPlayButton.classList.add("hidden");
+        videoPlayButton.classList.add("hidden");
     });
 
-    // 3. Cuando el video se pause o termine, mostrar el botón de play
     promoVideo.addEventListener("pause", () => {
-      videoPlayButton.classList.remove("hidden");
+        videoPlayButton.classList.remove("hidden");
     });
 
     promoVideo.addEventListener("ended", () => {
-      videoPlayButton.classList.remove("hidden");
+        videoPlayButton.classList.remove("hidden");
     });
-  }
-  // --- FIN: LÓGICA PARA REPRODUCTOR DE VIDEO PERSONALIZADO ---
+}
 
-  // --- INICIO: LÓGICA DE LIGHTBOX GALLERY (GLightbox) ---
-  let lastFocusedElement;
-  const mainContent = document.querySelector('main');
+function initScrollAnimations() {
+    const scrollAnimateElements = document.querySelectorAll(".scroll-animate");
+    if (scrollAnimateElements.length === 0) return;
 
-  const lightbox = GLightbox({
-    selector: ".glightbox",
-    touchNavigation: true,
-    loop: true,
-    preload: true,
-    closeEffect: "fade",
-    slideEffect: "fade",
-    onOpen: () => {
-      // Guardamos el elemento que tenía el foco
-      lastFocusedElement = document.activeElement;
-      // Hacemos todo el contenido de fondo "inerte"
-      if (mainContent) {
-        mainContent.inert = true;
-      }
-    },
-    onClose: () => {
-      // Reactivamos el contenido de fondo
-      if (mainContent) {
-        mainContent.inert = false;
-      }
-      // Devolvemos el foco a su sitio
-      if (lastFocusedElement) {
-        lastFocusedElement.focus();
-      }
-    },
-  });
-  // --- FIN: LÓGICA DE LIGHTBOX GALLERY ---
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.1 }
+    );
 
-  // --- INICIO: LÓGICA PARA ANIMACIÓN POR SCROLL ---
-  const scrollAnimateElements = document.querySelectorAll(".scroll-animate");
+    scrollAnimateElements.forEach((element) => {
+        observer.observe(element);
+    });
+}
 
-  const observer = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.1,
-    }
-  );
+function initHeaderScroll() {
+    const header = document.querySelector("header");
+    if (!header) return;
 
-  scrollAnimateElements.forEach((element) => {
-    observer.observe(element);
-  });
-  // --- FIN: LÓGICA PARA ANIMACIÓN POR SCROLL ---
-
-  // --- INICIO: LÓGICA PARA HEADER DINÁMICO AL HACER SCROLL ---
-  const header = document.querySelector("header");
-  if (header) {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
-        header.classList.add("header-scrolled");
-      } else {
-        header.classList.remove("header-scrolled");
-      }
+        if (window.scrollY > 50) {
+            header.classList.add("header-scrolled");
+        } else {
+            header.classList.remove("header-scrolled");
+        }
     });
-  }
-  // --- FIN: LÓGICA PARA HEADER DINÁMICO AL HACER SCROLL ---
-  setLanguage(currentLang); // Moved here to ensure elements are ready
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM fully loaded and parsed");
+
+    // Initialize all functionalities
+    initI18n();
+    initThemeToggle();
+    initMobileMenu();
+    initHeaderScroll();
+    initHeroAnimation();
+    initContactForm();
+    initScrollSpy();
+    initReviewsSlider();
+    initGallery();
+    initModals();
+    initVideoPlayer();
+    initScrollAnimations();
 });
