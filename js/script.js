@@ -743,6 +743,32 @@ function initGallery() {
     });
 
     const lightbox = GLightbox({ selector: ".glightbox" });
+
+    // Accessibility fix for aria-hidden warning
+    const mainContent = document.querySelector("main");
+    const header = document.querySelector("header");
+    const footer = document.querySelector("footer");
+
+    lightbox.on('open', () => {
+        if (mainContent) {
+            mainContent.setAttribute('inert', '');
+            mainContent.removeAttribute('aria-hidden');
+        }
+        if (header) {
+            header.setAttribute('inert', '');
+            header.removeAttribute('aria-hidden');
+        }
+        if (footer) {
+            footer.setAttribute('inert', '');
+            footer.removeAttribute('aria-hidden');
+        }
+    });
+
+    lightbox.on('close', () => {
+        if (mainContent) mainContent.removeAttribute('inert');
+        if (header) header.removeAttribute('inert');
+        if (footer) footer.removeAttribute('inert');
+    });
 }
 
 function initModals() {
