@@ -105,9 +105,14 @@ const translations = {
       review2Text:
         '"Siempre me atienden con la mejor energía, el servicio es súper profesional y se nota el amor que le ponen a cada detalle. Mis uñas siempre quedan hermosas, duran un montón y me encanta cómo siempre logran justo lo que quiero. ¡Mil gracias por siempre hacerme sentir tan bien y por ese talento increíble que tienen! 💅✨"',
       review2Author: "- manuela pardo",
-      review3Text:
-        '"Excelente lugar! La atención es espectacular, los servicios y productos ofrecidos son de excelente calidad, sales realmente renovad@😉"',
       review3Author: "- Claudia Escobar",
+      blogTitle: "Blog de Narbo's Salón Spa",
+      blogSubtitle: "Consejos, tendencias y secretos de belleza de nuestros expertos en Chía.",
+      article1Category: "Cuidado Capilar",
+      article1Date: "20 de Octubre, 2025",
+      article1Title: "Los 5 Tratamientos Capilares Imprescindibles para el Clima de Chía",
+      article1Desc: "Vivir en la Sabana de Bogotá tiene su encanto, pero el clima puede ser un desafío para tu cabello. Descubre los tratamientos esenciales que ofrecemos en Narbo's para mantenerlo radiante.",
+      readMore: "Leer más &rarr;",
       modalPeluqueriaDesc:
         "Transformamos tu cabello con arte, precisión y productos de las mejores marcas como Wella, L'Oréal y Schwarzkopf para garantizar resultados espectaculares.",
       modalPeluqueriaSubtitle: "Nuestros Servicios Destacados:",
@@ -278,6 +283,13 @@ const translations = {
       review3Text:
         '"Excellent place! The service is spectacular, the services and products offered are of excellent quality, you leave feeling truly renewed 😉"',
       review3Author: "- Claudia Escobar",
+      blogTitle: "Narbo's Salón Spa Blog",
+      blogSubtitle: "Tips, trends, and beauty secrets from our experts in Chía.",
+      article1Category: "Hair Care",
+      article1Date: "October 20, 2025",
+      article1Title: "The 5 Essential Hair Treatments for the Climate of Chía",
+      article1Desc: "Living in the Savannah of Bogotá has its charm, but the climate can be a challenge for your hair. Discover the essential treatments we offer at Narbo's to keep it radiant.",
+      readMore: "Read more &rarr;",
       modalPeluqueriaDesc:
         "We transform your hair with art, precision, and top brand products like Wella, L'Oréal, and Schwarzkopf to ensure spectacular results.",
       modalPeluqueriaSubtitle: "Our Featured Services:",
