@@ -1,3 +1,548 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Establece el comportamiento de scroll suave para toda la página */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Establece las fuentes base para el cuerpo del documento */
+body {
+  font-family: "Lato", sans-serif;
+}
+
+/* Estilos para los títulos para aplicar la fuente serif */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display", serif;
+}
+
+/* --- INICIO: NUEVOS ESTILOS PARA NAVEGACIÓN ACTIVA --- */
+
+/*
+  Añadimos una transición para la propiedad 'transform' a los enlaces del menú.
+  Esto asegura que el efecto de escala que vamos a añadir sea suave y no brusco.
+  Complementa las clases de transición que ya estaban en el HTML.
+*/
+header nav .hidden a {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/*
+  Esta es la clase que nuestro JavaScript añade dinámicamente.
+  Define el estilo del enlace de navegación cuando su sección correspondiente está activa.
+  Le damos el color de la marca, lo ponemos en negrita y lo hacemos un poco más grande.
+*/
+.nav-link-active {
+  color: #6b755a; /* Corresponde a 'text-brand-green' */
+  font-weight: 700; /* Corresponde a 'font-bold' */
+  transform: scale(1.1);
+}
+
+/* --- FIN: NUEVOS ESTILOS PARA NAVEGACIÓN ACTIVA --- */
+
+/* --- INICIO: ESTILOS PARA SLIDER DE RESEÑAS --- */
+
+/*
+  Añade una transición suave a las reseñas para que
+  aparezcan y desaparezcan con un efecto de fundido.
+*/
+.review-slide {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- FIN: ESTILOS PARA SLIDER DE RESEÑAS --- */
+
+/* --- INICIO: ESTILOS PARA MENÚ MÓVIL OVERLAY --- */
+/*
+  Cuando el menú móvil está abierto, añadimos esta clase al <body>
+  con JavaScript para prevenir el scroll del contenido de fondo.
+  Esto proporciona un bloqueo de scroll más robusto.
+*/
+body.mobile-menu-open {
+  overflow: hidden;
+}
+/* --- FIN: ESTILOS PARA MENÚ MÓVIL OVERLAY --- */
+
+/* --- INICIO: ESTILOS PARA HEADER DINÁMICO Y NAVEGACIÓN --- */
+
+/*
+  Estilos base para el header. 
+  Añadimos una transición suave para las propiedades que cambiarán con el scroll (padding, background-color).
+*/
+header {
+  transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* 
+  Estilos para el logo dentro del header.
+  También le añadimos una transición para que el cambio de tamaño sea fluido.
+*/
+header nav > a > img {
+  transition: height 0.3s ease-in-out;
+}
+
+/*
+  Esta es la clase que JavaScript añade al header cuando el usuario hace scroll.
+  Reduce el padding vertical, haciendo la barra más delgada.
+  Aumenta la opacidad del fondo para que destaque más sobre el contenido.
+*/
+header.header-scrolled {
+  padding-top: 0.5rem; /* 8px */
+  padding-bottom: 0.5rem; /* 8px */
+  background-color: rgba(107, 117, 90, 0.95); /* brand-green con más opacidad */
+}
+
+.dark header.header-scrolled {
+  background-color: rgba(17, 24, 39, 0.95); /* gray-900 con más opacidad */
+}
+
+/* 
+  Cuando el header tiene la clase .header-scrolled, el logo se hace más pequeño.
+*/
+header.header-scrolled nav > a > img {
+  height: 3rem; /* 48px, reducido desde los 3.5rem originales */
+}
+
+/*
+  Preparamos los enlaces de navegación para el efecto de la línea animada.
+  El pseudo-elemento ::after será nuestra línea.
+*/
+header nav .hidden a {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+header nav .hidden a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #C5AB94; /* brand-medium */
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+/*
+  Al pasar el cursor sobre el enlace, la línea aparece animándose desde la derecha.
+*/
+header nav .hidden a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* 
+  Para el enlace activo, la línea siempre será visible.
+*/
+header nav .hidden a.nav-link-active::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+
+/* --- FIN: ESTILOS PARA HEADER DINÁMICO Y NAVEGACIÓN --- */
+
+/* --- INICIO: NUEVOS ESTILOS PARA FILTRO DE GALERÍA --- */
+
+/*
+  Estilo para el botón de filtro que está ACTIVO.
+  Usamos los colores de la marca para destacarlo.
+  Esta clase se añadirá/quitará con JavaScript.
+*/
+.filter-btn-active {
+  background-color: #6b755a; /* brand-green */
+  color: #ffffff;
+}
+.dark .filter-btn-active {
+  background-color: #c5ab94; /* brand-medium */
+  color: #111827; /* gray-900 */
+}
+
+/*
+  Estilos para los botones de filtro INACTIVOS.
+  Los hacemos semitransparentes para que el activo destaque más.
+*/
+.filter-btn {
+  background-color: rgba(209, 213, 219, 0.5); /* gray-300 con 50% de opacidad */
+  color: #374151; /* gray-700 */
+}
+.dark .filter-btn {
+  background-color: rgba(75, 85, 99, 0.5); /* gray-600 con 50% de opacidad */
+  color: #d1d5db; /* gray-300 */
+}
+
+/*
+  Añade una transición suave a los ítems de la galería
+  para que el filtrado se vea más fluido.
+*/
+.gallery-item {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/*
+  NUEVO: Estilo para el efecto HOVER en los botones de filtro inactivos.
+  Se aplica un color de fondo intermedio para dar retroalimentación visual.
+*/
+.filter-btn:not(.filter-btn-active):hover {
+  background-color: #a6b199; /* Un tono más claro de brand-green */
+  color: #ffffff;
+}
+.dark .filter-btn:not(.filter-btn-active):hover {
+  background-color: #d3c4b6; /* Un tono más claro de brand-medium */
+  color: #1f2937; /* gray-800 */
+}
+/* --- FIN: NUEVOS ESTILOS PARA FILTRO DE GALERÍA --- */
+
+/* --- INICIO: NUEVOS ESTILOS PARA MODAL DE SERVICIOS --- */
+
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUpModal {
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Estas animaciones se aplicarán al modal y a su contenido
+  cada vez que aparezcan (cuando JavaScript quite la clase 'hidden').
+*/
+.modal-animation {
+  animation: fadeInModal 0.3s ease-out forwards;
+}
+
+.modal-content-animation {
+  animation: scaleUpModal 0.3s ease-out forwards;
+}
+
+/* --- FIN: NUEVOS ESTILOS PARA MODAL DE SERVICIOS --- */
+
+/* --- INICIO: ESTILOS PARA ANIMACIÓN DE HERO --- */
+
+/* Clase inicial para los elementos que animaremos en la sección hero.
+  Empiezan invisibles y ligeramente desplazados hacia abajo.
+  La transición se aplicará a las propiedades de opacidad y transformación.
+*/
+.animate-hero-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/*
+  Cuando JavaScript añada esta clase, el elemento se volverá visible
+  y volverá a su posición original, creando el efecto de animación.
+*/
+.animate-hero-element.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- FIN: ESTILOS PARA ANIMACIÓN DE HERO --- */
+
+/* --- INICIO: ESTILOS PARA ÍCONOS EN MODALES DE SERVICIOS --- */
+
+/*
+  Usamos Flexbox para alinear el ícono y el texto en cada item de la lista.
+*/
+.modal-service-item {
+  display: flex;
+  align-items: flex-start; /* Alinea el ícono con el inicio del texto, ideal para textos de varias líneas */
+}
+
+/*
+  Estilos para el contenedor del ícono.
+*/
+.modal-service-icon {
+  flex-shrink: 0; /* Previene que el ícono se encoja si el texto es largo */
+  color: #6b755a; /* Color brand-green por defecto */
+  margin-right: 0.75rem; /* Espacio entre el ícono y el texto (12px) */
+  margin-top: 3px; /* Pequeño ajuste para alinear visualmente mejor con la altura del texto */
+}
+
+/* En modo oscuro, usamos un color más claro para el ícono para que contraste bien. */
+.dark .modal-service-icon {
+  color: #c5ab94; /* Color brand-medium */
+}
+
+/* --- FIN: ESTILOS PARA ÍCONOS EN MODALES DE SERVICIOS --- */
+
+/* --- INICIO: ESTILOS PARA ANIMACIÓN EN SECCIÓN "SOBRE NOSOTROS" --- */
+
+/*
+  Clase base para los elementos que animaremos al hacer scroll.
+  Inicialmente están invisibles.
+  Se define una transición suave para la opacidad y la transformación.
+*/
+.scroll-animate {
+  opacity: 0;
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/*
+  Estilo específico para el elemento que entrará desde la izquierda.
+  Inicialmente está desplazado 30px hacia la izquierda.
+*/
+.scroll-animate-left {
+  transform: translateX(-30px);
+}
+
+/*
+  Estilo específico para el elemento que entrará desde abajo.
+  Inicialmente está desplazado 30px hacia abajo.
+*/
+.scroll-animate-bottom {
+  transform: translateY(30px);
+}
+
+/*
+  Esta es la clase que JavaScript añadirá cuando el elemento sea visible.
+  Hace que el elemento sea totalmente opaco y lo mueve a su posición original (0,0),
+  activando la animación definida en la clase base .scroll-animate.
+*/
+.is-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* --- FIN: ESTILOS PARA ANIMACIÓN EN SECCIÓN "SOBRE NOSOTROS" --- */
+
+/* --- INICIO: NUEVOS ESTILOS PARA TARJETAS DE RESEÑAS INTERACTIVAS --- */
+
+/*
+  Clase para el contenedor del slider, que ahora será un enlace.
+  Añadimos un cursor de tipo puntero para indicar que es clicable.
+  Añadimos una transición para que los cambios de sombra y transformación sean suaves.
+*/
+#reviews-slider-wrapper {
+  display: block; /* Hacemos que el 'a' se comporte como un bloque */
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/*
+  Efecto al pasar el cursor sobre la tarjeta.
+  La levantamos ligeramente y aumentamos la sombra para dar una sensación de profundidad.
+*/
+#reviews-slider-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+/* --- FIN: NUEVOS ESTILOS PARA TARJETAS DE RESEÑAS INTERACTIVAS --- */
+
+/* --- INICIO: ESTILOS PARA BORDE GRADIENTE EN TARJETAS DE SERVICIO (CORREGIDO) --- */
+
+/* 1. Preparamos la tarjeta. La clave es `isolation: isolate;` que crea un nuevo
+   contexto de apilamiento y soluciona el conflicto con la animación `transform`. */
+#servicios .group {
+  position: relative;
+  isolation: isolate; /* ¡Esta es la corrección clave! */
+}
+
+/* 2. Creamos el borde falso usando un pseudo-elemento ::before */
+#servicios .group::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* El borde se crea con la propiedad `border` y `border-image` */
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, #c5ab94, #6b755a) border-box; /* Gradiente para el borde */
+
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  border-radius: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* 3. Mostramos el borde gradiente al pasar el cursor sobre la tarjeta. */
+#servicios .group:hover::before {
+  opacity: 1; /* Hacemos visible el borde. */
+}
+/* --- FIN: ESTILOS PARA BORDE GRADIENTE EN TARJETAS DE SERVICIO (CORREGIDO) --- */
+
+/* --- INICIO: ESTILOS PARA SECCIÓN DE VIDEO --- */
+
+.video-aspect-ratio {
+  aspect-ratio: 9 / 16;
+  background-color: #000;
+}
+
+#video-promo .video-aspect-ratio {
+  width: 100%;
+}
+
+/* Estilos para el botón de Play superpuesto */
+#video-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease-out, opacity 0.3s ease-out;
+}
+
+#video-play-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* --- FIN: ESTILOS PARA SECCIÓN DE VIDEO --- */
+
+/* --- INICIO: ESTILOS PARA TARJETAS DE SERVICIO CON FONDO --- */
+
+#service-card-peluqueria::after,
+#service-card-manos-pies::after,
+#service-card-estetica::after,
+#service-card-depilacion::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease-out;
+}
+
+#service-card-peluqueria:hover::after,
+#service-card-manos-pies:hover::after,
+#service-card-estetica:hover::after,
+#service-card-depilacion:hover::after {
+  transform: scale(1.05);
+}
+
+#service-card-peluqueria::after {
+  background-image: linear-gradient(
+      rgba(20, 20, 20, 0.4),
+      rgba(20, 20, 20, 0.6)
+    ),
+    url("../images/fotos_galeria/peluqueria/foto_7_peluqueria.webp");
+}
+
+#service-card-manos-pies::after {
+  background-image: linear-gradient(
+      rgba(20, 20, 20, 0.4),
+      rgba(20, 20, 20, 0.6)
+    ),
+    url("../images/fotos_galeria/unas/foto_unas_1.webp");
+}
+
+#service-card-estetica::after {
+  background-image: linear-gradient(
+      rgba(20, 20, 20, 0.4),
+      rgba(20, 20, 20, 0.6)
+    ),
+    url("../images/fotos_galeria/estetica/foto_estetica_1.webp");
+}
+
+#service-card-depilacion::after {
+  background-image: linear-gradient(
+      rgba(20, 20, 20, 0.4),
+      rgba(20, 20, 20, 0.6)
+    ),
+    url("../images/fotos_galeria/peluqueria/foto_8_peluqueria.webp");
+}
+
+/* --- FIN: ESTILOS PARA TARJETAS DE SERVICIO CON FONDO --- */
+
+/* Estilos para el botón flotante de WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex; /* Usar flexbox para centrar el contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    width: 60px; /* Ancho fijo para el botón circular */
+    height: 60px; /* Alto fijo para el botón circular */
+    background-color: #25D366; /* Color verde de WhatsApp */
+    border-radius: 50%; /* Hacerlo circular */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto flotante */
+    transition: transform 0.3s ease-in-out;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-float img {
+    /* La imagen se escalará dentro del contenedor flex */
+    max-width: 80%; /* Ajustar según sea necesario para dar un poco de padding */
+    max-height: 80%; /* Ajustar según sea necesario para dar un poco de padding */
+}
+
+/* --- INICIO: ESTILOS PARA BLOCKQUOTE EN ARTÍCULOS --- */
+
+.prose blockquote {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 0;
+  font-style: normal;
+  font-size: 1.125rem; /* Aumenta el tamaño de la fuente */
+  color: #374151; /* Un gris más oscuro para mejor legibilidad */
+}
+
+.dark .prose blockquote {
+  color: #d1d5db; /* Un gris más claro para modo oscuro */
+}
+
+.prose blockquote::before {
+  content: "“";
+  position: absolute;
+  left: -0.5rem;
+  top: -1rem;
+  font-size: 4rem;
+  font-family: "Playfair Display", serif;
+  color: #c5ab94; /* brand-medium */
+  opacity: 0.8;
+}
+
+.dark .prose blockquote::before {
+  color: #6b755a; /* brand-green */
+}
+
+.prose blockquote p {
+  font-style: italic;
+}
+
+/* --- FIN: ESTILOS PARA BLOCKQUOTE EN ARTÍCULOS --- */
