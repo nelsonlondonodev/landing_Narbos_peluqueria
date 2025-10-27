@@ -297,32 +297,6 @@ header nav .hidden a.nav-link-active::after {
 /* --- INICIO: ESTILOS PARA ANIMACIÓN EN SECCIÓN "SOBRE NOSOTROS" --- */
 
 /*
-  Clase base para los elementos que animaremos al hacer scroll.
-  Inicialmente están invisibles.
-  Se define una transición suave para la opacidad y la transformación.
-*/
-.scroll-animate {
-  opacity: 0;
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-/*
-  Estilo específico para el elemento que entrará desde la izquierda.
-  Inicialmente está desplazado 30px hacia la izquierda.
-*/
-.scroll-animate-left {
-  transform: translateX(-30px);
-}
-
-/*
-  Estilo específico para el elemento que entrará desde abajo.
-  Inicialmente está desplazado 30px hacia abajo.
-*/
-.scroll-animate-bottom {
-  transform: translateY(30px);
-}
-
-/*
   Esta es la clase que JavaScript añadirá cuando el elemento sea visible.
   Hace que el elemento sea totalmente opaco y lo mueve a su posición original (0,0),
   activando la animación definida en la clase base .scroll-animate.
@@ -331,6 +305,16 @@ header nav .hidden a.nav-link-active::after {
   opacity: 1;
   transform: translate(0, 0);
 }
+
+/* --- INICIO: ESTILOS PARA ANIMACIONES CON ANIMATE.CSS --- */
+.animation-hidden {
+  visibility: hidden;
+}
+
+.animate__animated.is-visible {
+  visibility: visible;
+}
+/* --- FIN: ESTILOS PARA ANIMACIONES CON ANIMATE.CSS --- */
 
 /* --- FIN: ESTILOS PARA ANIMACIÓN EN SECCIÓN "SOBRE NOSOTROS" --- */
 

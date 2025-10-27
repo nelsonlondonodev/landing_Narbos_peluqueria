@@ -465,22 +465,39 @@ function initVideoPlayer() {
 }
 
 function initScrollAnimations() {
-    const scrollAnimateElements = document.querySelectorAll(".scroll-animate");
-    if (scrollAnimateElements.length === 0) return;
+    const animatedElements = document.querySelectorAll("[data-animation]");
+    if (animatedElements.length === 0) return;
 
     const observer = new IntersectionObserver(
         (entries, observer) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add("is-visible");
-                    observer.unobserve(entry.target);
+                    const element = entry.target;
+                    const animation = element.getAttribute("data-animation");
+                    const delay = element.getAttribute("data-animation-delay");
+
+                    // Add a class to mark it as visible for any custom non-Animate.css transitions
+                    element.classList.add("is-visible");
+
+                    // Add Animate.css classes
+                    if (animation) {
+                        element.classList.add("animate__animated", `animate__${animation}`);
+                    }
+                    
+                    if (delay) {
+                        element.style.animationDelay = delay;
+                    }
+
+                    observer.unobserve(element);
                 }
             });
         },
         { threshold: 0.1 }
     );
 
-    scrollAnimateElements.forEach((element) => {
+    animatedElements.forEach((element) => {
+        // Hide element initially to prevent flash of unstyled content, but keep its space
+        element.classList.add("animation-hidden");
         observer.observe(element);
     });
 }
