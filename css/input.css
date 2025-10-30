@@ -39,7 +39,7 @@ header nav .hidden a {
   Le damos el color de la marca, lo ponemos en negrita y lo hacemos un poco más grande.
 */
 .nav-link-active {
-  color: #6b755a; /* Corresponde a 'text-brand-green' */
+  color: #FFFFFF; /* Blanco para máximo contraste */
   font-weight: 700; /* Corresponde a 'font-bold' */
   transform: scale(1.1);
 }
@@ -135,7 +135,7 @@ header nav .hidden a::after {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: #C5AB94; /* brand-medium */
+  background-color: #FFFFFF; /* Blanco para máximo contraste */
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.3s ease-out;
