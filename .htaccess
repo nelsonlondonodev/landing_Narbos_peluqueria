@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Si la solicitud no es para un archivo o directorio que ya existe
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Redirigir todas las demás solicitudes a la carpeta dist
+  RewriteRule ^(.*)$ /dist/$1 [L]
+</IfModule>
