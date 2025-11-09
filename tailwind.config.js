@@ -6,10 +6,10 @@ module.exports = {
     extend: {
       colors: {
         'brand-green': '#6B755A',
-        'brand-light': '#DED2C4',
+        'brand-light': '#C7B8A8',
         'brand-medium': '#C5AB94',
-        'brand-gray-light': '#BEC2B4',
-        'brand-gray-dark': '#D3D3CB',
+        'brand-gray-light': '#5C6F70',
+        'brand-gray-dark': '#364041',
       },
       fontFamily: {
         'serif': ['Playfair Display', 'serif'],
