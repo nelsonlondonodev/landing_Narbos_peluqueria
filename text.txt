@@ -1,4 +1,3 @@
-
 Análisis:
 
 1.  **Rutas de archivos:** En `blog/articles/tratamientos-capilares-clima-chia.html`, las rutas a los assets (CSS, JS, imágenes) son relativas (`../../`), lo que puede causar problemas si la estructura de la URL cambia.
@@ -9,9 +8,28 @@ Análisis:
 
 Plan de acción:
 
-1.  **Mejorar el CSS del `<blockquote>`:** Haré que el `<blockquote>` sea más prominente y visualmente atractivo.
+1.  **Mejorar el CSS del `<blockquote>`:** Haré que el `blockquote` sea más prominente y visualmente atractivo.
 2.  **Optimizar el `script.js`:** Añadiré condicionales para que ciertas funciones solo se ejecuten en las páginas donde son necesarias.
 3.  **Mejorar el artículo:**
     *   Añadiré una tabla de contenidos al principio del artículo.
     *   Ajustaré los encabezados para mejorar la jerarquía y el SEO.
 4.  **Rutas de archivos:** Por ahora, mantendré las rutas relativas, pero es algo a tener en cuenta para el futuro.
+
+---
+
+**PENDIENTE: Corrección de estilos en producción (degradado y fondo de galería)**
+
+**Problema:**
+Las secciones "Servicios" (degradado) y "Galería" (color de fondo) no muestran los estilos correctos en la versión de producción (carpeta `dist`), a pesar de que se ven bien en desarrollo.
+
+**Clases de Tailwind afectadas:**
+*   **Degradado de "Servicios":** `bg-gradient-to-b from-white via-gray-50 to-brand-gray-dark/20` (y sus variantes `dark:from-gray-800 dark:to-gray-900`).
+*   **Fondo de "Galería":** `bg-brand-gray-light` (y su variante `dark:bg-gray-800/50`).
+
+**Intentos de solución y resultados:**
+1.  **Añadir clases exactas a la `safelist` en `tailwind.config.js`:** No funcionó.
+2.  **Añadir un patrón de expresión regular a la `safelist` en `tailwind.config.js`:** No funcionó.
+3.  **Aplicar los estilos directamente usando `@apply` en `css/input.css`:** No funcionó.
+
+**Conclusión:**
+A pesar de los intentos de forzar la inclusión de estas clases mediante `safelist` y `@apply`, los estilos persisten en no aplicarse correctamente en la versión de producción. La causa exacta de por qué estas soluciones estándar no funcionan para este caso específico no está clara. Se requiere una investigación más profunda en el futuro.
