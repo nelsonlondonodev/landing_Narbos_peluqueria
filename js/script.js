@@ -286,16 +286,25 @@ function initReviewsSlider() {
     let autoPlayInterval;
 
     const unifySlideHeights = () => {
-        let maxHeight = 0;
-        reviewSlides.forEach((slide) => {
-            slide.style.height = "auto";
-            if (slide.offsetHeight > maxHeight) {
-                maxHeight = slide.offsetHeight;
-            }
-        });
-        reviewSlides.forEach((slide) => {
-            slide.style.minHeight = `${maxHeight}px`;
-        });
+        if (window.matchMedia("(min-width: 768px)").matches) {
+            // Desktop view: unify heights
+            let maxHeight = 0;
+            reviewSlides.forEach((slide) => {
+                slide.style.height = "auto";
+                if (slide.offsetHeight > maxHeight) {
+                    maxHeight = slide.offsetHeight;
+                }
+            });
+            reviewSlides.forEach((slide) => {
+                slide.style.minHeight = `${maxHeight}px`;
+            });
+        } else {
+            // Mobile view: let height be auto
+            reviewSlides.forEach((slide) => {
+                slide.style.minHeight = "auto";
+                slide.style.height = "auto";
+            });
+        }
     };
 
     const showReview = (index) => {
