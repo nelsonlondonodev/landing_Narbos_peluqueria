@@ -12,11 +12,22 @@ function initHeroAnimation() {
   }
 }
 
+const isBlogPage = () => {
+  return window.location.pathname.includes('/blog/');
+};
+
 async function initI18n() {
   const langToggleDesktop = document.getElementById("lang-toggle-desktop");
   const langToggleMobile = document.getElementById("lang-toggle-mobile");
 
   if (!langToggleDesktop && !langToggleMobile) return;
+
+  // Don't initialize translations on blog pages
+  if (isBlogPage()) {
+    if (langToggleDesktop) langToggleDesktop.style.display = 'none';
+    if (langToggleMobile) langToggleMobile.style.display = 'none';
+    return;
+  }
 
   let translations = {};
 
