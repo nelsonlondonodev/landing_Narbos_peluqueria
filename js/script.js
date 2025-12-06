@@ -16,6 +16,67 @@ const isBlogPage = () => {
   return window.location.pathname.includes('/blog/');
 };
 
+/**
+ * Calculates the base path for fetching assets depending on the current page depth.
+ * This is crucial for locating assets correctly from index, /blog/, or /blog/articles/.
+ * @returns {string} The relative path to the project root.
+ */
+function getBasePath() {
+  const path = window.location.pathname;
+  if (path.includes('/blog/articles/')) {
+    return '../../';
+  } else if (path.includes('/blog/')) {
+    return '../';
+  }
+  return './';
+}
+
+/**
+ * Fetches and injects common HTML components like the header and footer.
+ * This function is designed to work only on pages that have the placeholder elements.
+ */
+async function loadCommonComponents() {
+  const headerPlaceholder = document.getElementById('header-placeholder');
+  const footerPlaceholder = document.getElementById('footer-placeholder');
+
+  // If the placeholders don't exist, we are likely on the main index.html
+  // which has the header/footer hardcoded, so we do nothing.
+  if (!headerPlaceholder || !footerPlaceholder) {
+    console.log("Placeholders not found, skipping component load.");
+    return;
+  }
+
+  const basePath = getBasePath();
+  // Correctly build the path to the templates which are in the /blog/ directory
+  const headerPath = `${basePath}blog/templates/header.html`;
+  const footerPath = `${basePath}blog/templates/footer.html`;
+
+  try {
+    const [headerRes, footerRes] = await Promise.all([
+      fetch(headerPath),
+      fetch(footerPath),
+    ]);
+
+    if (!headerRes.ok) throw new Error(`Failed to fetch header: ${headerRes.status}`);
+    if (!footerRes.ok) throw new Error(`Failed to fetch footer: ${footerRes.status}`);
+
+    const [headerHtml, footerHtml] = await Promise.all([
+      headerRes.text(),
+      footerRes.text(),
+    ]);
+
+    // Use outerHTML to completely replace the placeholders with the fetched content.
+    headerPlaceholder.outerHTML = headerHtml;
+    footerPlaceholder.outerHTML = footerHtml;
+
+  } catch (error) {
+    console.error("Error loading common components:", error);
+    // Optionally, display an error message to the user in the placeholders
+    if (headerPlaceholder) headerPlaceholder.innerHTML = "<p style='text-align: center; color: red;'>Error al cargar el encabezado.</p>";
+    if (footerPlaceholder) footerPlaceholder.innerHTML = "<p style='text-align: center; color: red;'>Error al cargar el pie de página.</p>";
+  }
+}
+
 async function initI18n() {
   const langToggleDesktop = document.getElementById("lang-toggle-desktop");
   const langToggleMobile = document.getElementById("lang-toggle-mobile");
@@ -30,16 +91,6 @@ async function initI18n() {
   }
 
   let translations = {};
-
-  const getBasePath = () => {
-    const path = window.location.pathname;
-    if (path.includes('/blog/articles/')) {
-      return '../../';
-    } else if (path.includes('/blog/')) {
-      return '../';
-    }
-    return './';
-  };
 
   const setLanguage = (lang) => {
     document.documentElement.lang = lang;
@@ -535,10 +586,14 @@ function initHeaderScroll() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded and parsed");
+document.addEventListener("DOMContentLoaded", async () => {
+    console.log("DOM fully loaded. Starting initializations.");
 
-    // Initialize all functionalities
+    // First, load header/footer on pages that need them.
+    await loadCommonComponents();
+    console.log("Common components loaded (if applicable).");
+
+    // Now that the DOM is complete (including fetched parts), initialize all functionalities.
     initI18n();
     initThemeToggle();
     initMobileMenu();
@@ -551,4 +606,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initModals();
     initVideoPlayer();
     initScrollAnimations();
+    
+    console.log("All functionalities initialized.");
 });
