@@ -34,3 +34,11 @@ HTML5: Para una estructura semántica y accesible.
 Tailwind CSS: Un framework CSS "utility-first" que permite crear diseños complejos y responsivos de manera rápida y consistente.
 
 JavaScript (ES6+): Para toda la lógica interactiva, como el cambio de tema, el multi-idioma, la galería y los componentes dinámicos.
+
+---
+
+### 📝 Últimas Actualizaciones (20 de diciembre, 2025)
+- **Optimización SEO:** Se actualizó el `Meta Title` y la `Meta Description` para mejorar el posicionamiento en buscadores, enfocándose en palabras clave locales como "Peluquería y Spa en Chía".
+- **Sincronización de Idiomas:** Los cambios de SEO se aplicaron tanto en español como en inglés a través de los archivos de configuración de idiomas.
+- **Producción:** Se regeneró la carpeta `dist/` con los archivos optimizados listos para despliegue.
+
