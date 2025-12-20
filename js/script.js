@@ -87,7 +87,7 @@ async function initI18n() {
   const loadTranslations = async (lang) => {
     const basePath = getBasePath();
     try {
-      const response = await fetch(`${basePath}lang/${lang}.json`);
+      const response = await fetch(`${basePath}lang/${lang}.json?v=1.1`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
