@@ -8,7 +8,7 @@
     "clean": "rm -rf dist",
     "build:css": "tailwindcss -i ./css/input.css -o dist/css/styles.css --minify",
     "build:js": "terser js/script.js -o dist/js/script.js -c -m",
-    "build:assets": "mkdir -p dist/images dist/video dist/lang dist/blog/articles/images && cp -R images/. dist/images/ && cp -R video/. dist/video/ && cp -R lang/. dist/lang/ && cp -R blog/articles/images/. dist/blog/articles/images/ && cp robots.txt dist/robots.txt && cp sitemap.xml dist/sitemap.xml",
+    "build:assets": "mkdir -p dist/images dist/video dist/lang dist/blog/articles/images dist/js/components && cp -R images/. dist/images/ && cp -R video/. dist/video/ && cp -R lang/. dist/lang/ && cp -R blog/articles/images/. dist/blog/articles/images/ && cp -R js/components/. dist/js/components/ && cp robots.txt dist/robots.txt && cp sitemap.xml dist/sitemap.xml",
     "build:html": "html-minifier index.html -o dist/index.html && html-minifier blog/index.html -o dist/blog/index.html && html-minifier blog/articles/tratamientos-capilares-clima-chia.html -o dist/blog/articles/tratamientos-capilares-clima-chia.html && html-minifier blog/articles/salon-de-belleza-y-spa-en-chia-cerca-de-cajica.html -o dist/blog/articles/salon-de-belleza-y-spa-en-chia-cerca-de-cajica.html && html-minifier blog/articles/cuidado-del-balayage.html -o dist/blog/articles/cuidado-del-balayage.html",
     "build": "npm run clean && mkdir -p dist/css dist/js && npm run build:css && npm run build:js && npm run build:assets && npm run build:html"
   },
