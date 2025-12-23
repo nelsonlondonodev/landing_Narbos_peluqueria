@@ -535,8 +535,8 @@ function initHeaderScroll() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded and parsed");
+window.initApp = function() {
+    console.log("Initializing App...");
 
     // Initialize all functionalities
     initI18n();
@@ -551,4 +551,11 @@ document.addEventListener("DOMContentLoaded", () => {
     initModals();
     initVideoPlayer();
     initScrollAnimations();
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    // If navbar-root exists, we wait for the module to call initApp
+    if (!document.getElementById('navbar-root')) {
+        window.initApp();
+    }
 });
