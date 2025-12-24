@@ -52,6 +52,7 @@ export function getFooterHTML(basePath = './') {
                 <br class="sm:hidden" />
                 <span class="hidden sm:inline"> | </span>
                 <span data-key="footerMadeWith">Hecho con ❤️ por</span>
+                <a href="https://nelsonlondono.es" target="_blank" rel="noopener noreferrer" class="underline hover:text-white transition-colors duration-200">Nelson Londoño Agencia</a>
             </p>
         </div>
     </footer>
