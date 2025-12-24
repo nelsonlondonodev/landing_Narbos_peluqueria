@@ -33,17 +33,19 @@ HTML5: Para una estructura semántica y accesible.
 
 Tailwind CSS: Un framework CSS "utility-first" que permite crear diseños complejos y responsivos de manera rápida y consistente.
 
-JavaScript (ES6+): Para toda la lógica interactiva, como el cambio de tema, el multi-idioma, la galería y los componentes dinámicos. Utiliza una arquitectura basada en componentes modulares para mejorar la escalabilidad.
+JavaScript (ES6+): Para toda la lógica interactiva y modular. Utiliza una arquitectura basada en componentes reutilizables (ES Modules) inyectados dinámicamente para mejorar la escalabilidad y el mantenimiento del sitio.
 
 ---
 
-### 📝 Últimas Actualizaciones (23 de diciembre, 2025)
+### 📝 Últimas Actualizaciones (24 de diciembre, 2025)
+- **Estandarización de Footer:** Se modularizó el pie de página (`Footer`) como un componente reutilizable, implementándolo en la Home, el índice del Blog y todos los artículos.
+- **Componente de Contacto Independiente:** Se separó el formulario de contacto (`ContactForm`) del footer. Esto permite una mayor flexibilidad al escalar la web, pudiendo insertar el formulario en cualquier sección o página nueva de forma independiente.
+- **Optimización de Mantenimiento:** La actualización de enlaces globales (como redes sociales o créditos del desarrollador) ahora se realiza en un solo archivo centralizado para toda la web.
+
+### 📝 Actualizaciones Anteriores (23 de diciembre, 2025)
 - **Arquitectura de Componentes:** Se inició la migración hacia una estructura modular. Se implementó la barra de navegación (`Navbar`) como el primer componente reutilizable inyectado dinámicamente mediante JavaScript (ES Modules).
 - **Mantenibilidad:** Se centralizó la lógica de navegación y el menú móvil, eliminando código duplicado en la Home, el Blog y los artículos individuales.
-- **Optimización de Build:** Se actualizaron los scripts de construcción en `package.json` para dar soporte a la nueva carpeta de componentes (`js/components`).
 
 ### 📝 Actualizaciones Anteriores (20 de diciembre, 2025)
 - **Optimización SEO:** Se actualizó el `Meta Title` y la `Meta Description` para mejorar el posicionamiento en buscadores, enfocándose en palabras clave locales como "Peluquería y Spa en Chía".
 - **Sincronización de Idiomas:** Los cambios de SEO se aplicaron tanto en español como en inglés a través de los archivos de configuración de idiomas.
-- **Producción:** Se regeneró la carpeta `dist/` con los archivos optimizados listos para despliegue.
-
