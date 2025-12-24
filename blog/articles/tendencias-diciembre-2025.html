@@ -286,7 +286,10 @@
         
         const startApp = () => {
              if (window.initApp) {
-                window.initApp();
+                // Use a small delay to ensure the DOM has rendered the injected HTML
+                setTimeout(() => {
+                    window.initApp();
+                }, 0);
             }
         };
 

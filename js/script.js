@@ -123,11 +123,13 @@ function initMobileMenu() {
     if (!menuBtn || !mobileMenu) return;
 
     const menuBackdrop = document.getElementById("menu-backdrop");
-    const menuOpenIcon = document.getElementById("menu-open-icon");
-    const menuCloseIcon = document.getElementById("menu-close-icon");
     const mobileMenuLinks = mobileMenu.querySelectorAll("a");
 
+    // Toggle function logic
     const toggleMenu = () => {
+        const menuOpenIcon = document.getElementById("menu-open-icon");
+        const menuCloseIcon = document.getElementById("menu-close-icon");
+
         mobileMenu.classList.toggle("translate-x-full");
         if (menuBackdrop) menuBackdrop.classList.toggle("hidden");
         if (menuOpenIcon) menuOpenIcon.classList.toggle("hidden");
@@ -135,10 +137,25 @@ function initMobileMenu() {
         document.body.classList.toggle("mobile-menu-open");
     };
 
-    menuBtn.addEventListener("click", toggleMenu);
-    if (menuBackdrop) menuBackdrop.addEventListener("click", toggleMenu);
+    // Remove old listeners by replacing elements (Clean Code approach for idempotency in Vanilla JS)
+    const setupListener = (element, callback) => {
+        if (!element) return;
+        const clone = element.cloneNode(true);
+        element.parentNode.replaceChild(clone, element);
+        clone.addEventListener("click", callback);
+        return clone;
+    };
+
+    setupListener(menuBtn, toggleMenu);
+    setupListener(menuBackdrop, toggleMenu);
+
     mobileMenuLinks.forEach((link) => {
-        link.addEventListener("click", toggleMenu);
+        link.addEventListener("click", (e) => {
+            // Only toggle if the menu is actually open
+            if (!mobileMenu.classList.contains("translate-x-full")) {
+                toggleMenu();
+            }
+        });
     });
 }
 
