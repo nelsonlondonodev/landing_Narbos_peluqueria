@@ -263,33 +263,21 @@
       </div>
     </main>
 
-    <footer
-      id="contacto"
-      class="bg-gradient-to-t from-gray-800 to-brand-green text-white py-12"
-    >
-      <div class="container mx-auto px-6 text-center max-w-screen-xl">
-        <p class="text-sm text-gray-400 dark:text-gray-500">
-          © 2025 Narbo's Salón Spa.
-          <br class="sm:hidden" />
-          <span class="hidden sm:inline"> | </span>
-          Hecho con ❤️ por
-          <a
-            href="http://nelsonlondono.es"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="underline hover:text-white transition-colors duration-200"
-            >Nelson Londono Agencia</a
-          >.
-        </p>
-      </div>
-    </footer>
+    <div id="footer-root"></div>
 
     <script src="../js/script.js?v=1.1"></script>
     <script type="module">
         import { getNavbarHTML } from '../js/components/Navbar.js';
+        import { getFooterHTML } from '../js/components/Footer.js';
+
         const navbarRoot = document.getElementById('navbar-root');
         if (navbarRoot) {
             navbarRoot.innerHTML = getNavbarHTML('../', false);
+        }
+
+        const footerRoot = document.getElementById('footer-root');
+        if (footerRoot) {
+            footerRoot.innerHTML = getFooterHTML('../');
         }
         
         const startApp = () => {
