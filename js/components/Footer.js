@@ -1,8 +1,3 @@
-
-/**
- * Datos de configuración para las redes sociales.
- * Facilita agregar o modificar redes en el futuro.
- */
 const socialLinksData = [
     {
         name: "WhatsApp",
@@ -26,9 +21,6 @@ const socialLinksData = [
     }
 ];
 
-/**
- * Genera el HTML para los enlaces de redes sociales.
- */
 function renderSocialLinks() {
     return socialLinksData.map(link => `
         <a href="${link.url}" target="_blank" class="text-gray-400 hover:text-white transition-colors duration-300">
@@ -41,34 +33,7 @@ function renderSocialLinks() {
 }
 
 /**
- * Genera el HTML del formulario de contacto.
- * Mantiene los IDs originales para compatibilidad con js/script.js.
- */
-function renderContactForm() {
-    const inputClasses = "w-full p-2 rounded bg-brand-light bg-opacity-20 dark:bg-gray-700 border border-brand-gray-light dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-light dark:focus:ring-brand-medium text-white";
-    
-    return `
-    <form id="contact-form" action="https://formspree.io/f/xyzpdrwe" method="POST" class="max-w-xl mx-auto text-left space-y-4" data-animation="fadeInUp" data-animation-delay="0.6s">
-        <div>
-            <label for="name" data-key="formNameLabel" class="block mb-1 font-bold text-brand-light">Nombre</label>
-            <input type="text" id="name" name="name" class="${inputClasses}" required>
-        </div>
-        <div>
-            <label for="email" data-key="formEmailLabel" class="block mb-1 font-bold text-brand-light">Correo Electrónico</label>
-            <input type="email" id="email" name="email" class="${inputClasses}" required>
-        </div>
-        <div>
-            <label for="message" data-key="formMessageLabel" class="block mb-1 font-bold text-brand-light">Mensaje</label>
-            <textarea id="message" name="message" rows="4" class="${inputClasses}" required></textarea>
-        </div>
-        <button type="submit" data-key="formSubmitBtn" class="w-full bg-gradient-to-r from-brand-medium to-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-light">Enviar Mensaje</button>
-        <p id="form-status" class="mt-4 text-center h-4"></p>
-    </form>
-    `;
-}
-
-/**
- * Genera el HTML completo del Footer.
+ * Genera el HTML del Footer (Pie de página global).
  * @param {string} basePath - Ruta base para los assets.
  * @returns {string} HTML del componente Footer.
  */
@@ -76,19 +41,9 @@ export function getFooterHTML(basePath = './') {
     const year = new Date().getFullYear();
     
     return `
-    <footer id="contacto" class="bg-gradient-to-t from-gray-800 to-brand-green text-white py-12">
+    <footer class="bg-gradient-to-t from-gray-800 to-brand-green text-white py-12">
         <div class="container mx-auto px-6 text-center max-w-screen-xl">
-            <h2 data-key="footerTitle" class="text-3xl font-serif mb-4" data-animation="fadeInUp">Agenda tu cita hoy</h2>
-            <p data-key="footerSubtitle" class="mb-6 max-w-xl mx-auto text-gray-300" data-animation="fadeInUp" data-animation-delay="0.2s">
-                Llámanos o escríbenos por WhatsApp. O si prefieres, déjanos un mensaje aquí:
-            </p>
-            <a href="https://wa.me/573123462618?text=hola, ¡Te hablo desde la web de Narbos Salón!" target="_blank" data-key="footerCta" class="inline-block bg-transparent border-2 border-brand-light text-brand-light font-bold py-2 px-6 rounded-full hover:bg-brand-light hover:text-brand-green transition-colors duration-300 ease-in-out mb-8" data-animation="zoomIn" data-animation-delay="0.4s">
-                Contactar por WhatsApp
-            </a>
-            
-            ${renderContactForm()}
-
-            <div class="flex justify-center space-x-6 mt-10 mb-6">
+            <div class="flex justify-center space-x-6 mb-6">
                 ${renderSocialLinks()}
             </div>
             

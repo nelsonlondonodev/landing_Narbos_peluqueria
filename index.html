@@ -405,7 +405,10 @@
             </div>
         </section>
 
-        <div id="footer-root"></div>
+        <div id="contact-root"></div>
+    </main>
+
+    <div id="footer-root"></div>
     
 
     
@@ -646,23 +649,20 @@
     <script src="js/script.js?v=1.1" defer></script>
     <script type="module">
         import { getNavbarHTML } from './js/components/Navbar.js';
+        import { getContactFormHTML } from './js/components/ContactForm.js';
         import { getFooterHTML } from './js/components/Footer.js';
 
         const navbarRoot = document.getElementById('navbar-root');
-        if (navbarRoot) {
-            navbarRoot.innerHTML = getNavbarHTML('./', true);
-        }
+        if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML('./', true);
+
+        const contactRoot = document.getElementById('contact-root');
+        if (contactRoot) contactRoot.innerHTML = getContactFormHTML();
 
         const footerRoot = document.getElementById('footer-root');
-        if (footerRoot) {
-            footerRoot.innerHTML = getFooterHTML('./');
-        }
+        if (footerRoot) footerRoot.innerHTML = getFooterHTML('./');
         
-        // Función para verificar e iniciar la app
         const startApp = () => {
-             if (window.initApp) {
-                window.initApp();
-            }
+             if (window.initApp) window.initApp();
         };
 
         if (document.readyState === 'loading') {
