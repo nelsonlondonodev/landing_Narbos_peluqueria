@@ -27,9 +27,15 @@ Carga diferida (Lazy Loading) para las imágenes, mejorando drásticamente la ve
 Archivos sitemap.xml y robots.txt incluidos para una mejor indexación en motores de búsqueda como Google.
 
 ### 📝 Últimas Actualizaciones (25 de diciembre, 2025)
+- **Refactorización Completa (Clean Code):** Se ha migrado todo el código monolítico de `script.js` a una arquitectura profesional basada en servicios y controladores:
+    - `ThemeService`: Gestión robusta de temas (Claro/Oscuro/Auto) con persistencia.
+    - `I18nService`: Servicio de internacionalización independiente.
+    - `ContactFormController`: Lógica separada para la gestión y validación del formulario de contacto.
+    - `ReviewsCarousel`: Componente encapsulado para el slider de testimonios.
+    - `UIService`: Centralización de animaciones e interacciones de UI (ScrollSpy, Galería, Video, etc.).
 - **Sistema de Build Automatizado:** Se implementó un script de construcción personalizado en Node.js (`scripts/build.js`) que automatiza la minificación de HTML, CSS (Tailwind) y JavaScript (Terser). Ahora detecta automáticamente nuevos artículos del blog y componentes sin necesidad de configuración manual.
-- **Arquitectura ES Modules:** Se completó la migración a módulos de JavaScript (ESM). El archivo `script.js` ahora actúa como un orquestador que importa componentes independientes (como `MobileMenu.js`), mejorando la mantenibilidad y evitando colisiones de nombres.
-- **Refactorización del Menú Móvil:** Se solucionaron bugs críticos de visualización y lógica. El menú ahora cuenta con una arquitectura robusta basada en clases, fondo sólido para mejor legibilidad y un botón de cierre interno dedicado.
+- **Arquitectura ES Modules:** Se completó la migración a módulos de JavaScript (ESM). El archivo `script.js` ahora actúa como un orquestador minimalista (< 30 líneas) que inicializa los servicios necesarios.
+- **Refactorización del Menú Móvil:** Se solucionaron bugs críticos de visualización y lógica con un nuevo componente `MobileMenu.js` que ofrece una UX superior.
 
 ### 📝 Últimas Actualizaciones (24 de diciembre, 2025)
 - **Estandarización de Footer:** Se modularizó el pie de página (`Footer`) como un componente reutilizable, implementándolo en la Home, el índice del Blog y todos los artículos.
