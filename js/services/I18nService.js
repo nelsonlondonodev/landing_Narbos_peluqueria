@@ -4,6 +4,10 @@
  */
 export class I18nService {
     constructor() {
+        if (I18nService.instance) {
+            return I18nService.instance;
+        }
+
         this.currentLang = localStorage.getItem("language") || "es";
         this.translations = {};
         
@@ -12,6 +16,24 @@ export class I18nService {
         this.langToggleMobile = document.getElementById("lang-toggle-mobile");
         
         this.init();
+
+        I18nService.instance = this;
+    }
+
+    static getInstance() {
+        if (!I18nService.instance) {
+            I18nService.instance = new I18nService();
+        }
+        return I18nService.instance;
+    }
+
+    /**
+     * Get translation for a specific key.
+     * @param {string} key - The translation key.
+     * @returns {string} The translated text or the key if not found.
+     */
+    t(key) {
+        return this.translations[key] || key;
     }
 
     async init() {

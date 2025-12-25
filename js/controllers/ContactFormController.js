@@ -28,26 +28,10 @@ export class ContactFormController {
     async handleSubmit(e) {
         e.preventDefault();
         
-        const lang = localStorage.getItem("language") || "es";
-        
-        // Basic translations for form status (could be improved by fetching from I18nService if it was a singleton)
-        const messages = {
-            es: {
-                submitting: "Enviando...",
-                success: "¡Gracias! Tu mensaje ha sido enviado.",
-                error: "Oops! Hubo un problema al enviar tu formulario."
-            },
-            en: {
-                submitting: "Sending...",
-                success: "Thanks! Your message has been sent.",
-                error: "Oops! There was a problem submitting your form."
-            }
-        };
-
-        const currentMessages = messages[lang] || messages.es;
+        const i18n = I18nService.getInstance();
 
         if (this.formStatus) {
-            this.formStatus.textContent = currentMessages.submitting;
+            this.formStatus.textContent = i18n.t('formStatusSubmitting');
             this.formStatus.style.color = "#6B755A";
         }
 
@@ -62,7 +46,7 @@ export class ContactFormController {
 
             if (response.ok) {
                 if (this.formStatus) {
-                    this.formStatus.textContent = currentMessages.success;
+                    this.formStatus.textContent = i18n.t('formStatusSuccess');
                     this.formStatus.style.color = "green";
                 }
                 this.contactForm.reset();
@@ -71,13 +55,13 @@ export class ContactFormController {
                 if (Object.hasOwn(data, 'errors')) {
                     if (this.formStatus) this.formStatus.textContent = data["errors"].map(error => error["message"]).join(", ");
                 } else {
-                    if (this.formStatus) this.formStatus.textContent = currentMessages.error;
+                    if (this.formStatus) this.formStatus.textContent = i18n.t('formStatusError');
                 }
                 if (this.formStatus) this.formStatus.style.color = "red";
             }
         } catch (error) {
             if (this.formStatus) {
-                this.formStatus.textContent = currentMessages.error;
+                this.formStatus.textContent = i18n.t('formStatusError');
                 this.formStatus.style.color = "red";
             }
         }
