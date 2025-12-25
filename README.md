@@ -33,6 +33,10 @@ Archivos sitemap.xml y robots.txt incluidos para una mejor indexación en motore
     - `ContactFormController`: Lógica separada para la gestión y validación del formulario de contacto.
     - `ReviewsCarousel`: Componente encapsulado para el slider de testimonios.
     - `UIService`: Centralización de animaciones e interacciones de UI (ScrollSpy, Galería, Video, etc.).
+- **Optimización SEO y Accesibilidad:** 
+    - Se implementaron etiquetas **Open Graph** y **Twitter Cards** para una previsualización profesional en redes sociales.
+    - Mejora de la accesibilidad mediante **roles semánticos (Aria)** y soporte completo para **navegación por teclado** en elementos interactivos.
+    - Reducción del **CLS (Cumulative Layout Shift)** reservando espacio para componentes inyectados dinámicamente.
 - **Sistema de Build Automatizado:** Se implementó un script de construcción personalizado en Node.js (`scripts/build.js`) que automatiza la minificación de HTML, CSS (Tailwind) y JavaScript (Terser). Ahora detecta automáticamente nuevos artículos del blog y componentes sin necesidad de configuración manual.
 - **Arquitectura ES Modules:** Se completó la migración a módulos de JavaScript (ESM). El archivo `script.js` ahora actúa como un orquestador minimalista (< 30 líneas) que inicializa los servicios necesarios.
 - **Refactorización del Menú Móvil:** Se solucionaron bugs críticos de visualización y lógica con un nuevo componente `MobileMenu.js` que ofrece una UX superior.

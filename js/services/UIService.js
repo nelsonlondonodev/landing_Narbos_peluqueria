@@ -152,6 +152,15 @@ export class UIService {
                 const modal = document.getElementById(trigger.dataset.modalTarget);
                 openModal(modal);
             });
+
+            // Keyboard Accessibility Support
+            trigger.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modalTarget);
+                    openModal(modal);
+                }
+            });
         });
 
         document.querySelectorAll('[id$="-modal"]').forEach((modal) => {
