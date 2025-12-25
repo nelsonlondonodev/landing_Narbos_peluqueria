@@ -1,6 +1,7 @@
 import { getNavbarHTML } from './components/Navbar.js'; // Assuming this might be needed later, but focusing on MobileMenu now
 import { MobileMenu } from './components/MobileMenu.js';
 import { ReviewsCarousel } from './components/ReviewsCarousel.js';
+import { I18nService } from './services/I18nService.js';
 
 function initHeroAnimation() {
   const heroTitle = document.getElementById("hero-title");
@@ -17,109 +18,6 @@ function initHeroAnimation() {
   }
 }
 
-const isBlogPage = () => {
-  return window.location.pathname.includes('/blog/');
-};
-
-async function initI18n() {
-  const langToggleDesktop = document.getElementById("lang-toggle-desktop");
-  const langToggleMobile = document.getElementById("lang-toggle-mobile");
-
-  if (!langToggleDesktop && !langToggleMobile) return;
-
-  // Don't initialize translations on blog pages
-  if (isBlogPage()) {
-    if (langToggleDesktop) langToggleDesktop.style.display = 'none';
-    if (langToggleMobile) langToggleMobile.style.display = 'none';
-    return;
-  }
-
-  let translations = {};
-
-  const getBasePath = () => {
-    const path = window.location.pathname;
-    if (path.includes('/blog/articles/')) {
-      return '../../';
-    } else if (path.includes('/blog/')) {
-      return '../';
-    }
-    return './';
-  };
-
-  const setLanguage = (lang) => {
-    document.documentElement.lang = lang;
-
-    document.querySelectorAll("[data-key]").forEach((elem) => {
-      const key = elem.getAttribute("data-key");
-      if (translations[key]) {
-        elem.innerHTML = translations[key];
-      }
-    });
-
-    document.querySelectorAll("[data-key-alt]").forEach((elem) => {
-      const key = elem.getAttribute("data-key-alt");
-      if (translations[key]) {
-        elem.setAttribute("alt", translations[key]);
-      }
-    });
-
-    const metaDescription = document.getElementById("meta-description");
-    if (metaDescription && translations.metaDescription) {
-      metaDescription.setAttribute("content", translations.metaDescription);
-    }
-    
-    if (translations.metaTitle) {
-        document.title = translations.metaTitle;
-    }
-
-    updateLangToggleButtons(lang);
-  };
-
-  const updateLangToggleButtons = (currentLang) => {
-    const targetLang = currentLang === "es" ? "en" : "es";
-    const flagCode = targetLang === "es" ? "es" : "gb";
-    const basePath = getBasePath();
-
-    const buttonHTML = `
-      <img src="https://flagcdn.com/w20/${flagCode}.png" srcset="https://flagcdn.com/w40/${flagCode}.png 2x" alt="${targetLang.toUpperCase()}" class="w-5 h-auto mr-2">
-      ${targetLang.toUpperCase()}
-    `;
-
-    if (langToggleDesktop) langToggleDesktop.innerHTML = buttonHTML;
-    if (langToggleMobile) langToggleMobile.innerHTML = buttonHTML;
-  };
-
-  const loadTranslations = async (lang) => {
-    const basePath = getBasePath();
-    try {
-      const response = await fetch(`${basePath}lang/${lang}.json?v=1.1`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      translations = await response.json();
-      setLanguage(lang);
-    } catch (error) {
-      console.error("Could not load translation file:", error);
-      // Fallback to Spanish if loading fails
-      if (lang !== 'es') {
-        await loadTranslations('es');
-      }
-    }
-  };
-
-  const toggleLanguage = async () => {
-    const currentLang = localStorage.getItem("language") || "es";
-    const newLang = currentLang === "es" ? "en" : "es";
-    localStorage.setItem("language", newLang);
-    await loadTranslations(newLang);
-  };
-
-  if (langToggleDesktop) langToggleDesktop.addEventListener("click", toggleLanguage);
-  if (langToggleMobile) langToggleMobile.addEventListener("click", toggleLanguage);
-
-  const currentLang = localStorage.getItem("language") || "es";
-  await loadTranslations(currentLang);
-}
 
 
 function initContactForm() {
@@ -442,7 +340,7 @@ window.initApp = function() {
     console.log("Initializing App...");
 
     // Initialize all functionalities
-    initI18n();
+    new I18nService();
     initThemeToggle();
     new MobileMenu();
     initHeaderScroll();
