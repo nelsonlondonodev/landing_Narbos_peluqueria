@@ -37,58 +37,39 @@ export class ReviewsCarousel {
             this.stopAutoPlay();
         });
 
-        // Hover events to pause autoplay
-        this.sliderWrapper.addEventListener("mouseenter", () => this.stopAutoPlay());
-        this.sliderWrapper.addEventListener("mouseleave", () => this.startAutoPlay());
-
-        // Responsive Height Management
-        this.unifySlideHeights();
+        // Apply CSS Grid Stack pattern for auto-height
+        // This forces the container to take the height of the tallest slide automatically via CSS
+        this.sliderWrapper.querySelector('#reviews-slider').style.display = 'grid';
+        this.sliderWrapper.querySelector('#reviews-slider').style.gridTemplateAreas = '"stack"';
         
-        // Debounce resize event to improve performance
-        let resizeTimer;
-        window.addEventListener("resize", () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                this.unifySlideHeights();
-            }, 250);
+        this.reviewSlides.forEach(slide => {
+            // Remove inline display:none that might be present in HTML
+            slide.style.display = ''; 
+            
+            slide.style.gridArea = 'stack';
+            slide.style.transition = 'opacity 0.5s ease-in-out';
+            // Ensure slides overlap correctly
+            slide.style.width = '100%'; 
         });
 
         // Initial State
         this.showReview(this.currentIndex);
         this.startAutoPlay();
-
-
     }
 
-    unifySlideHeights() {
-        if (window.matchMedia("(min-width: 768px)").matches) {
-            // Desktop view: set all slides to the height of the tallest one
-            let maxHeight = 0;
-            
-            // Reset to auto to measure natural height
-            this.reviewSlides.forEach((slide) => {
-                slide.style.height = "auto";
-                if (slide.offsetHeight > maxHeight) {
-                    maxHeight = slide.offsetHeight;
-                }
-            });
-
-            // Apply max height
-            this.reviewSlides.forEach((slide) => {
-                slide.style.minHeight = `${maxHeight}px`;
-            });
-        } else {
-            // Mobile view: let height be natural
-            this.reviewSlides.forEach((slide) => {
-                slide.style.minHeight = "auto";
-                slide.style.height = "auto";
-            });
-        }
-    }
+    // Removed unifySlideHeights as CSS Grid handles it natively now
 
     showReview(index) {
         this.reviewSlides.forEach((slide, i) => {
-            slide.style.display = i === index ? "block" : "none";
+            if (i === index) {
+                slide.style.opacity = '1';
+                slide.style.visibility = 'visible';
+                slide.style.zIndex = '1';
+            } else {
+                slide.style.opacity = '0';
+                slide.style.visibility = 'hidden';
+                slide.style.zIndex = '0';
+            }
         });
     }
 
