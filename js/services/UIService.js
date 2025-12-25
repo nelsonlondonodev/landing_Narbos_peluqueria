@@ -16,7 +16,6 @@ export class UIService {
         this.initVideoPlayer();
         this.initScrollAnimations();
         
-        console.log("UIService: UI interactions initialized.");
     }
 
     initHeaderScroll() {

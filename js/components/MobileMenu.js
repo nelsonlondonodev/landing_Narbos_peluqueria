@@ -63,7 +63,7 @@ export class MobileMenu {
             }
         });
         
-        console.log("MobileMenu: Initialized.");
+
     }
 
     toggle() {
@@ -77,7 +77,7 @@ export class MobileMenu {
     open() {
         if (this.isOpen) return;
         
-        console.log("MobileMenu: Opening...");
+
         this.mobileMenu.classList.remove("translate-x-full");
         document.body.classList.add("mobile-menu-open");
         
@@ -91,7 +91,7 @@ export class MobileMenu {
     close() {
         if (!this.isOpen) return;
 
-        console.log("MobileMenu: Closing...");
+
         this.mobileMenu.classList.add("translate-x-full");
         document.body.classList.remove("mobile-menu-open");
         

@@ -7,7 +7,6 @@ import { ContactFormController } from './controllers/ContactFormController.js';
 import { UIService } from './services/UIService.js';
 
 window.initApp = function() {
-    console.log("Initializing App...");
 
     // Core Services
     new I18nService();

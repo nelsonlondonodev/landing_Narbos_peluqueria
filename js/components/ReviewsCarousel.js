@@ -49,7 +49,7 @@ export class ReviewsCarousel {
         this.showReview(this.currentIndex);
         this.startAutoPlay();
 
-        console.log("ReviewsCarousel: Initialized.");
+
     }
 
     unifySlideHeights() {

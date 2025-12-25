@@ -22,7 +22,7 @@ export class ContactFormController {
         if (!this.contactForm) return;
 
         this.contactForm.addEventListener("submit", (e) => this.handleSubmit(e));
-        console.log("ContactFormController: Initialized.");
+
     }
 
     async handleSubmit(e) {

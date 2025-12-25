@@ -31,7 +31,7 @@ export class I18nService {
         // Initial load
         await this.loadTranslations(this.currentLang);
         
-        console.log(`I18nService: Initialized with language '${this.currentLang}'.`);
+
     }
 
     isBlogPage() {

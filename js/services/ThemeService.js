@@ -38,7 +38,6 @@ export class ThemeService {
 
         // Initial application
         this.applyTheme();
-        console.log("ThemeService: Initialized.");
     }
 
     applyTheme() {
