@@ -4,7 +4,7 @@
  * @returns {string} HTML del componente ContactForm.
  */
 export function getContactFormHTML() {
-    const inputClasses = "w-full p-2 rounded bg-brand-light bg-opacity-20 dark:bg-gray-700 border border-brand-gray-light dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-light dark:focus:ring-brand-medium text-white";
+    const inputClasses = "w-full p-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-green dark:focus:ring-brand-medium text-gray-900 dark:text-white transition-all duration-200";
     
     return `
     <section id="contacto" class="py-12 bg-white dark:bg-gray-900">
