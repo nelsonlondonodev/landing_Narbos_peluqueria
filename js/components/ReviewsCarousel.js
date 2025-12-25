@@ -43,7 +43,15 @@ export class ReviewsCarousel {
 
         // Responsive Height Management
         this.unifySlideHeights();
-        window.addEventListener("resize", () => this.unifySlideHeights());
+        
+        // Debounce resize event to improve performance
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                this.unifySlideHeights();
+            }, 250);
+        });
 
         // Initial State
         this.showReview(this.currentIndex);
