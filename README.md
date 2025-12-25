@@ -26,26 +26,21 @@ Carga diferida (Lazy Loading) para las imágenes, mejorando drásticamente la ve
 
 Archivos sitemap.xml y robots.txt incluidos para una mejor indexación en motores de búsqueda como Google.
 
-🛠️ Tecnologías Utilizadas
-Este proyecto fue construido utilizando tecnologías web modernas, enfocadas en la eficiencia, el rendimiento y la mantenibilidad.
-
-HTML5: Para una estructura semántica y accesible.
-
-Tailwind CSS: Un framework CSS "utility-first" que permite crear diseños complejos y responsivos de manera rápida y consistente.
-
-JavaScript (ES6+): Para toda la lógica interactiva y modular. Utiliza una arquitectura basada en componentes reutilizables (ES Modules) inyectados dinámicamente para mejorar la escalabilidad y el mantenimiento del sitio.
-
----
+### 📝 Últimas Actualizaciones (25 de diciembre, 2025)
+- **Sistema de Build Automatizado:** Se implementó un script de construcción personalizado en Node.js (`scripts/build.js`) que automatiza la minificación de HTML, CSS (Tailwind) y JavaScript (Terser). Ahora detecta automáticamente nuevos artículos del blog y componentes sin necesidad de configuración manual.
+- **Arquitectura ES Modules:** Se completó la migración a módulos de JavaScript (ESM). El archivo `script.js` ahora actúa como un orquestador que importa componentes independientes (como `MobileMenu.js`), mejorando la mantenibilidad y evitando colisiones de nombres.
+- **Refactorización del Menú Móvil:** Se solucionaron bugs críticos de visualización y lógica. El menú ahora cuenta con una arquitectura robusta basada en clases, fondo sólido para mejor legibilidad y un botón de cierre interno dedicado.
 
 ### 📝 Últimas Actualizaciones (24 de diciembre, 2025)
 - **Estandarización de Footer:** Se modularizó el pie de página (`Footer`) como un componente reutilizable, implementándolo en la Home, el índice del Blog y todos los artículos.
 - **Componente de Contacto Independiente:** Se separó el formulario de contacto (`ContactForm`) del footer. Esto permite una mayor flexibilidad al escalar la web, pudiendo insertar el formulario en cualquier sección o página nueva de forma independiente.
 - **Optimización de Mantenimiento:** La actualización de enlaces globales (como redes sociales o créditos del desarrollador) ahora se realiza en un solo archivo centralizado para toda la web.
 
-### 📝 Actualizaciones Anteriores (23 de diciembre, 2025)
-- **Arquitectura de Componentes:** Se inició la migración hacia una estructura modular. Se implementó la barra de navegación (`Navbar`) como el primer componente reutilizable inyectado dinámicamente mediante JavaScript (ES Modules).
-- **Mantenibilidad:** Se centralizó la lógica de navegación y el menú móvil, eliminando código duplicado en la Home, el Blog y los artículos individuales.
+🛠️ Tecnologías Utilizadas
+Este proyecto fue construido utilizando tecnologías web modernas, enfocadas en la eficiencia, el rendimiento y la mantenibilidad.
 
-### 📝 Actualizaciones Anteriores (20 de diciembre, 2025)
-- **Optimización SEO:** Se actualizó el `Meta Title` y la `Meta Description` para mejorar el posicionamiento en buscadores, enfocándose en palabras clave locales como "Peluquería y Spa en Chía".
-- **Sincronización de Idiomas:** Los cambios de SEO se aplicaron tanto en español como en inglés a través de los archivos de configuración de idiomas.
+- **HTML5:** Estructura semántica y accesible.
+- **Tailwind CSS:** Framework CSS "utility-first" para un diseño consistente y optimizado.
+- **JavaScript (ES6+ Modules):** Arquitectura modular basada en componentes independientes.
+- **Node.js Build Pipeline:** Scripting personalizado para optimización de activos y automatización de despliegue.
+- **GLightbox:** Para una galería de imágenes interactiva y accesible.
