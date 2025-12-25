@@ -27,19 +27,19 @@ Carga diferida (Lazy Loading) para las imágenes, mejorando drásticamente la ve
 Archivos sitemap.xml y robots.txt incluidos para una mejor indexación en motores de búsqueda como Google.
 
 ### 📝 Últimas Actualizaciones (25 de diciembre, 2025)
-- **Refactorización Completa (Clean Code):** Se ha migrado todo el código monolítico de `script.js` a una arquitectura profesional basada en servicios y controladores:
-    - `ThemeService`: Gestión robusta de temas (Claro/Oscuro/Auto) con persistencia.
-    - `I18nService`: Servicio de internacionalización independiente.
-    - `ContactFormController`: Lógica separada para la gestión y validación del formulario de contacto.
-    - `ReviewsCarousel`: Componente encapsulado para el slider de testimonios.
-    - `UIService`: Centralización de animaciones e interacciones de UI (ScrollSpy, Galería, Video, etc.).
-- **Optimización SEO y Accesibilidad:** 
-    - Se implementaron etiquetas **Open Graph** y **Twitter Cards** para una previsualización profesional en redes sociales.
-    - Mejora de la accesibilidad mediante **roles semánticos (Aria)** y soporte completo para **navegación por teclado** en elementos interactivos.
-    - Reducción del **CLS (Cumulative Layout Shift)** reservando espacio para componentes inyectados dinámicamente.
-- **Sistema de Build Automatizado:** Se implementó un script de construcción personalizado en Node.js (`scripts/build.js`) que automatiza la minificación de HTML, CSS (Tailwind) y JavaScript (Terser). Ahora detecta automáticamente nuevos artículos del blog y componentes sin necesidad de configuración manual.
-- **Arquitectura ES Modules:** Se completó la migración a módulos de JavaScript (ESM). El archivo `script.js` ahora actúa como un orquestador minimalista (< 30 líneas) que inicializa los servicios necesarios.
-- **Refactorización del Menú Móvil:** Se solucionaron bugs críticos de visualización y lógica con un nuevo componente `MobileMenu.js` que ofrece una UX superior.
+- **Mejoras de UX y Rendimiento (ReviewsCarousel):**
+    - Se eliminó por completo el **CLS (Cumulative Layout Shift)** en el carrusel de testimonios implementando una técnica moderna de **CSS Grid Stack**.
+    - Ahora el carrusel mantiene una altura estable automáticamente sin necesidad de cálculos costosos en JavaScript, evitando saltos de contenido en móviles.
+    - Se añadieron transiciones suaves de opacidad (fade) entre diapositivas.
+- **Refactorización de Arquitectura (Clean Code):**
+    - **I18nService Singleton:** Se implementó el patrón Singleton para el servicio de idiomas, permitiendo un acceso global eficiente a las traducciones desde cualquier controlador.
+    - **Configuración Centralizada:** Se extrajeron los datos estáticos (redes sociales) a `js/config.js`, mejorando la mantenibilidad y siguiendo el principio Open/Closed.
+    - **Controlador de Formulario:** Se delegó la lógica de textos de estado al `I18nService`, eliminando duplicidad de código.
+- **Accesibilidad y Diseño (ContactForm):**
+    - Se corrigió un problema crítico de contraste en los campos del formulario, asegurando que el texto sea legible tanto en modo claro como oscuro.
+    - Se optimizaron los estilos de los inputs para una mejor experiencia táctil en móviles.
+- **Corrección Crítica de UI (MobileMenu):**
+    - Se implementó un patrón de "Portal" para el menú móvil, moviéndolo al `<body>` al inicializar para evitar conflictos de contexto de apilamiento (`z-index`) y desplazamiento visual.
 
 ### 📝 Últimas Actualizaciones (24 de diciembre, 2025)
 - **Estandarización de Footer:** Se modularizó el pie de página (`Footer`) como un componente reutilizable, implementándolo en la Home, el índice del Blog y todos los artículos.
