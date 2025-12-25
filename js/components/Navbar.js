@@ -58,8 +58,13 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         </div>
     </nav>
     
-    <div id="mobile-menu" class="md:hidden fixed top-0 right-0 h-full w-full max-w-xs bg-brand-light dark:bg-gray-800 shadow-xl z-40 transform translate-x-full transition-transform duration-300 ease-in-out">
-        <div class="py-24 px-8 space-y-4">
+    <div id="mobile-menu" class="md:hidden fixed top-0 right-0 h-screen w-64 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-2xl z-[110] transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex justify-end p-4">
+            <button id="internal-close-btn" aria-label="Cerrar menú" class="p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="flex flex-col px-8 space-y-4 overflow-y-auto max-h-[calc(100vh-80px)]">
             ${navLink('#inicio', 'navInicio', 'Inicio', true)}
             ${navLink('#servicios', 'navServicios', 'Servicios', true)}
             ${navLink('#nosotros', 'navNosotros', 'Nosotros', true)}

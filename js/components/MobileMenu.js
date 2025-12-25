@@ -10,6 +10,7 @@ export class MobileMenu {
         this.backdrop = document.getElementById("menu-backdrop");
         this.openIcon = document.getElementById("menu-open-icon");
         this.closeIcon = document.getElementById("menu-close-icon");
+        this.internalCloseBtn = document.getElementById("internal-close-btn");
         this.links = document.querySelectorAll("#mobile-menu a");
         
         this.isOpen = false;
@@ -31,6 +32,10 @@ export class MobileMenu {
 
         if (this.backdrop) {
             this.backdrop.onclick = () => this.close();
+        }
+
+        if (this.internalCloseBtn) {
+            this.internalCloseBtn.onclick = () => this.close();
         }
 
         // Close on link click
