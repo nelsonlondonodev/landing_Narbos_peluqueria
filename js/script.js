@@ -2,6 +2,7 @@ import { getNavbarHTML } from './components/Navbar.js'; // Assuming this might b
 import { MobileMenu } from './components/MobileMenu.js';
 import { ReviewsCarousel } from './components/ReviewsCarousel.js';
 import { I18nService } from './services/I18nService.js';
+import { ThemeService } from './services/ThemeService.js';
 
 function initHeroAnimation() {
   const heroTitle = document.getElementById("hero-title");
@@ -94,61 +95,6 @@ function initScrollSpy() {
     window.addEventListener("scroll", onScroll);
 }
 
-function initThemeToggle() {
-    const themeToggleBtn = document.getElementById("theme-toggle");
-    const themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
-    const themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
-    const themeToggleAutoIcon = document.getElementById("theme-toggle-auto-icon");
-    const themeToggleBtnMobile = document.getElementById("theme-toggle-mobile");
-    const themeToggleDarkIconMobile = document.getElementById("theme-toggle-dark-icon-mobile");
-    const themeToggleLightIconMobile = document.getElementById("theme-toggle-light-icon-mobile");
-    const themeToggleAutoIconMobile = document.getElementById("theme-toggle-auto-icon-mobile");
-
-    if (!themeToggleBtn && !themeToggleBtnMobile) return;
-
-    const applyTheme = () => {
-        const theme = localStorage.getItem("theme") || "auto";
-        const allIcons = [
-            themeToggleDarkIcon, themeToggleLightIcon, themeToggleAutoIcon,
-            themeToggleDarkIconMobile, themeToggleLightIconMobile, themeToggleAutoIconMobile
-        ];
-        
-        allIcons.forEach((icon) => {
-            if (icon) icon.classList.add("hidden");
-        });
-
-        if (theme === "dark") {
-            document.documentElement.classList.add("dark");
-            if (themeToggleLightIcon) themeToggleLightIcon.classList.remove("hidden");
-            if (themeToggleLightIconMobile) themeToggleLightIconMobile.classList.remove("hidden");
-        } else if (theme === "light") {
-            document.documentElement.classList.remove("dark");
-            if (themeToggleDarkIcon) themeToggleDarkIcon.classList.remove("hidden");
-            if (themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.remove("hidden");
-        } else {
-            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                document.documentElement.classList.add("dark");
-            } else {
-                document.documentElement.classList.remove("dark");
-            }
-            if (themeToggleAutoIcon) themeToggleAutoIcon.classList.remove("hidden");
-            if (themeToggleAutoIconMobile) themeToggleAutoIconMobile.classList.remove("hidden");
-        }
-    };
-
-    const cycleTheme = () => {
-        const currentTheme = localStorage.getItem("theme") || "auto";
-        const nextTheme = currentTheme === "light" ? "dark" : currentTheme === "dark" ? "auto" : "light";
-        localStorage.setItem("theme", nextTheme);
-        applyTheme();
-    };
-
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
-    if (themeToggleBtn) themeToggleBtn.addEventListener("click", cycleTheme);
-    if (themeToggleBtnMobile) themeToggleBtnMobile.addEventListener("click", cycleTheme);
-    
-    applyTheme();
-}
 
 
 function initGallery() {
@@ -341,7 +287,7 @@ window.initApp = function() {
 
     // Initialize all functionalities
     new I18nService();
-    initThemeToggle();
+    new ThemeService();
     new MobileMenu();
     initHeaderScroll();
     initHeroAnimation();

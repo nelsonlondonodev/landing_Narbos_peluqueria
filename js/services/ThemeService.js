@@ -1,0 +1,88 @@
+/**
+ * ThemeService
+ * Handles theme switching (dark/light/auto) and persistence.
+ */
+export class ThemeService {
+    constructor() {
+        // Desktop Icons
+        this.themeToggleBtn = document.getElementById("theme-toggle");
+        this.themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
+        this.themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
+        this.themeToggleAutoIcon = document.getElementById("theme-toggle-auto-icon");
+
+        // Mobile Icons
+        this.themeToggleBtnMobile = document.getElementById("theme-toggle-mobile");
+        this.themeToggleDarkIconMobile = document.getElementById("theme-toggle-dark-icon-mobile");
+        this.themeToggleLightIconMobile = document.getElementById("theme-toggle-light-icon-mobile");
+        this.themeToggleAutoIconMobile = document.getElementById("theme-toggle-auto-icon-mobile");
+
+        this.init();
+    }
+
+    init() {
+        if (!this.themeToggleBtn && !this.themeToggleBtnMobile) {
+            console.warn("ThemeService: Toggle buttons not found.");
+            return;
+        }
+
+        // Bind Events
+        if (this.themeToggleBtn) {
+            this.themeToggleBtn.addEventListener("click", () => this.cycleTheme());
+        }
+        if (this.themeToggleBtnMobile) {
+            this.themeToggleBtnMobile.addEventListener("click", () => this.cycleTheme());
+        }
+
+        // System preference listener
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => this.applyTheme());
+
+        // Initial application
+        this.applyTheme();
+        console.log("ThemeService: Initialized.");
+    }
+
+    applyTheme() {
+        const theme = localStorage.getItem("theme") || "auto";
+        const allIcons = [
+            this.themeToggleDarkIcon, this.themeToggleLightIcon, this.themeToggleAutoIcon,
+            this.themeToggleDarkIconMobile, this.themeToggleLightIconMobile, this.themeToggleAutoIconMobile
+        ];
+        
+        // Hide all icons first
+        allIcons.forEach((icon) => {
+            if (icon) icon.classList.add("hidden");
+        });
+
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+            this.showIcon(this.themeToggleLightIcon);
+            this.showIcon(this.themeToggleLightIconMobile);
+        } else if (theme === "light") {
+            document.documentElement.classList.remove("dark");
+            this.showIcon(this.themeToggleDarkIcon);
+            this.showIcon(this.themeToggleDarkIconMobile);
+        } else {
+            // Auto
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+            this.showIcon(this.themeToggleAutoIcon);
+            this.showIcon(this.themeToggleAutoIconMobile);
+        }
+    }
+
+    showIcon(iconElement) {
+        if (iconElement) {
+            iconElement.classList.remove("hidden");
+        }
+    }
+
+    cycleTheme() {
+        const currentTheme = localStorage.getItem("theme") || "auto";
+        const nextTheme = currentTheme === "light" ? "dark" : currentTheme === "dark" ? "auto" : "light";
+        localStorage.setItem("theme", nextTheme);
+        this.applyTheme();
+    }
+}
