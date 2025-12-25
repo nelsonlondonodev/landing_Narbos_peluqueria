@@ -1,5 +1,6 @@
 import { getNavbarHTML } from './components/Navbar.js'; // Assuming this might be needed later, but focusing on MobileMenu now
 import { MobileMenu } from './components/MobileMenu.js';
+import { ReviewsCarousel } from './components/ReviewsCarousel.js';
 
 function initHeroAnimation() {
   const heroTitle = document.getElementById("hero-title");
@@ -251,83 +252,6 @@ function initThemeToggle() {
     applyTheme();
 }
 
-function initReviewsSlider() {
-    const sliderWrapper = document.getElementById("reviews-slider-wrapper");
-    if (!sliderWrapper) return;
-
-    const reviewSlides = document.querySelectorAll(".review-slide");
-    const prevBtn = document.getElementById("prev-review");
-    const nextBtn = document.getElementById("next-review");
-
-    if (reviewSlides.length === 0 || !prevBtn || !nextBtn) return;
-
-    let currentReviewIndex = 0;
-    let autoPlayInterval;
-
-    const unifySlideHeights = () => {
-        if (window.matchMedia("(min-width: 768px)").matches) {
-            // Desktop view: unify heights
-            let maxHeight = 0;
-            reviewSlides.forEach((slide) => {
-                slide.style.height = "auto";
-                if (slide.offsetHeight > maxHeight) {
-                    maxHeight = slide.offsetHeight;
-                }
-            });
-            reviewSlides.forEach((slide) => {
-                slide.style.minHeight = `${maxHeight}px`;
-            });
-        } else {
-            // Mobile view: let height be auto
-            reviewSlides.forEach((slide) => {
-                slide.style.minHeight = "auto";
-                slide.style.height = "auto";
-            });
-        }
-    };
-
-    const showReview = (index) => {
-        reviewSlides.forEach((slide, i) => {
-            slide.style.display = i === index ? "block" : "none";
-        });
-    };
-
-    const nextReview = () => {
-        currentReviewIndex = (currentReviewIndex + 1) % reviewSlides.length;
-        showReview(currentReviewIndex);
-    };
-
-    const startAutoPlay = () => {
-        autoPlayInterval = setInterval(nextReview, 7000);
-    };
-
-    const stopAutoPlay = () => {
-        clearInterval(autoPlayInterval);
-    };
-
-    prevBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        currentReviewIndex = (currentReviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
-        showReview(currentReviewIndex);
-        stopAutoPlay();
-    });
-
-    nextBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        nextReview();
-        stopAutoPlay();
-    });
-
-    sliderWrapper.addEventListener("mouseenter", stopAutoPlay);
-    sliderWrapper.addEventListener("mouseleave", startAutoPlay);
-
-    unifySlideHeights();
-    window.addEventListener("resize", unifySlideHeights);
-    showReview(currentReviewIndex);
-    startAutoPlay();
-}
 
 function initGallery() {
     const galleryFilters = document.getElementById("gallery-filters");
@@ -525,7 +449,7 @@ window.initApp = function() {
     initHeroAnimation();
     initContactForm();
     initScrollSpy();
-    initReviewsSlider();
+    new ReviewsCarousel();
     initGallery();
     initModals();
     initVideoPlayer();
