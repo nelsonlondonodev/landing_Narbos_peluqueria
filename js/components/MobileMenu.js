@@ -24,6 +24,19 @@ export class MobileMenu {
             return;
         }
 
+        // Move to body to avoid stacking context issues (backdrop-filter/transform on parent)
+        // This ensures 'position: fixed' relates to the viewport, not the header.
+        if (this.mobileMenu.parentElement !== document.body) {
+            document.body.appendChild(this.mobileMenu);
+        }
+
+        if (this.backdrop && this.backdrop.parentElement !== document.body) {
+            document.body.appendChild(this.backdrop);
+        }
+
+        // Force initial visual state to be closed
+        this.mobileMenu.classList.add("translate-x-full");
+
         // Clean event binding
         this.menuBtn.onclick = (e) => {
             e.stopPropagation();
