@@ -3,6 +3,7 @@ import { MobileMenu } from './components/MobileMenu.js';
 import { ReviewsCarousel } from './components/ReviewsCarousel.js';
 import { I18nService } from './services/I18nService.js';
 import { ThemeService } from './services/ThemeService.js';
+import { ContactFormController } from './controllers/ContactFormController.js';
 
 function initHeroAnimation() {
   const heroTitle = document.getElementById("hero-title");
@@ -21,51 +22,6 @@ function initHeroAnimation() {
 
 
 
-function initContactForm() {
-    const contactForm = document.getElementById("contact-form");
-    if (!contactForm) return;
-
-    const formStatus = document.getElementById("form-status");
-
-    contactForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const lang = localStorage.getItem("language") || "es";
-        const data = new FormData(e.target);
-        
-        if(formStatus) formStatus.textContent = translations[lang].formStatusSubmitting;
-        if(formStatus) formStatus.style.color = "#6B755A";
-
-        try {
-            const response = await fetch(e.target.action, {
-                method: e.target.method,
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-                if(formStatus) formStatus.textContent = translations[lang].formStatusSuccess;
-                if(formStatus) formStatus.style.color = "green";
-                contactForm.reset();
-            } else {
-                response.json().then(data => {
-                    if (Object.hasOwn(data, 'errors')) {
-                        if(formStatus) formStatus.textContent = data["errors"].map(error => error["message"]).join(", ");
-                    } else {
-                        if(formStatus) formStatus.textContent = translations[lang].formStatusError;
-                    }
-                    if(formStatus) formStatus.style.color = "red";
-                })
-            }
-        } catch (error) {
-            if(formStatus) formStatus.textContent = translations[lang].formStatusError;
-            if(formStatus) formStatus.style.color = "red";
-        }
-        
-        setTimeout(() => {
-            if(formStatus) formStatus.textContent = "";
-        }, 5000);
-    });
-}
 
 function initScrollSpy() {
     const sections = document.querySelectorAll("main section[id], footer[id]");
@@ -291,7 +247,7 @@ window.initApp = function() {
     new MobileMenu();
     initHeaderScroll();
     initHeroAnimation();
-    initContactForm();
+    new ContactFormController();
     initScrollSpy();
     new ReviewsCarousel();
     initGallery();
