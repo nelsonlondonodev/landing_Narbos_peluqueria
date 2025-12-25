@@ -1,5 +1,9 @@
+import { getNavbarHTML } from './components/Navbar.js'; // Assuming this might be needed later, but focusing on MobileMenu now
+import { MobileMenu } from './components/MobileMenu.js';
+
 function initHeroAnimation() {
   const heroTitle = document.getElementById("hero-title");
+
   const heroSubtitle = document.getElementById("hero-subtitle");
 
   if (heroTitle && heroSubtitle) {
@@ -116,48 +120,6 @@ async function initI18n() {
   await loadTranslations(currentLang);
 }
 
-function initMobileMenu() {
-    const menuBtn = document.getElementById("menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
-    
-    if (!menuBtn || !mobileMenu) return;
-
-    const menuBackdrop = document.getElementById("menu-backdrop");
-    const mobileMenuLinks = mobileMenu.querySelectorAll("a");
-
-    // Toggle function logic
-    const toggleMenu = () => {
-        const menuOpenIcon = document.getElementById("menu-open-icon");
-        const menuCloseIcon = document.getElementById("menu-close-icon");
-
-        mobileMenu.classList.toggle("translate-x-full");
-        if (menuBackdrop) menuBackdrop.classList.toggle("hidden");
-        if (menuOpenIcon) menuOpenIcon.classList.toggle("hidden");
-        if (menuCloseIcon) menuCloseIcon.classList.toggle("hidden");
-        document.body.classList.toggle("mobile-menu-open");
-    };
-
-    // Remove old listeners by replacing elements (Clean Code approach for idempotency in Vanilla JS)
-    const setupListener = (element, callback) => {
-        if (!element) return;
-        const clone = element.cloneNode(true);
-        element.parentNode.replaceChild(clone, element);
-        clone.addEventListener("click", callback);
-        return clone;
-    };
-
-    setupListener(menuBtn, toggleMenu);
-    setupListener(menuBackdrop, toggleMenu);
-
-    mobileMenuLinks.forEach((link) => {
-        link.addEventListener("click", (e) => {
-            // Only toggle if the menu is actually open
-            if (!mobileMenu.classList.contains("translate-x-full")) {
-                toggleMenu();
-            }
-        });
-    });
-}
 
 function initContactForm() {
     const contactForm = document.getElementById("contact-form");
@@ -558,7 +520,7 @@ window.initApp = function() {
     // Initialize all functionalities
     initI18n();
     initThemeToggle();
-    initMobileMenu();
+    new MobileMenu();
     initHeaderScroll();
     initHeroAnimation();
     initContactForm();

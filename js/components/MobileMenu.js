@@ -1,0 +1,86 @@
+/**
+ * MobileMenu Component
+ * Handles the logic for the mobile navigation menu.
+ * Adheres to SRP: Only handles the menu state (open/close).
+ */
+export class MobileMenu {
+    constructor() {
+        this.menuBtn = document.getElementById("menu-btn");
+        this.mobileMenu = document.getElementById("mobile-menu");
+        this.backdrop = document.getElementById("menu-backdrop");
+        this.openIcon = document.getElementById("menu-open-icon");
+        this.closeIcon = document.getElementById("menu-close-icon");
+        this.links = document.querySelectorAll("#mobile-menu a");
+        
+        this.isOpen = false;
+
+        this.init();
+    }
+
+    init() {
+        if (!this.menuBtn || !this.mobileMenu) {
+            console.warn("MobileMenu: Critical elements not found in DOM.");
+            return;
+        }
+
+        // Clean event binding
+        this.menuBtn.onclick = (e) => {
+            e.stopPropagation();
+            this.toggle();
+        };
+
+        if (this.backdrop) {
+            this.backdrop.onclick = () => this.close();
+        }
+
+        // Close on link click
+        this.links.forEach(link => {
+            link.addEventListener('click', () => this.close());
+        });
+
+        // Close on resize (logic only)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && this.isOpen) {
+                this.close();
+            }
+        });
+        
+        console.log("MobileMenu: Initialized.");
+    }
+
+    toggle() {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
+        }
+    }
+
+    open() {
+        if (this.isOpen) return;
+        
+        console.log("MobileMenu: Opening...");
+        this.mobileMenu.classList.remove("translate-x-full");
+        document.body.classList.add("mobile-menu-open");
+        
+        if (this.backdrop) this.backdrop.classList.remove("hidden");
+        if (this.openIcon) this.openIcon.classList.add("hidden");
+        if (this.closeIcon) this.closeIcon.classList.remove("hidden");
+
+        this.isOpen = true;
+    }
+
+    close() {
+        if (!this.isOpen) return;
+
+        console.log("MobileMenu: Closing...");
+        this.mobileMenu.classList.add("translate-x-full");
+        document.body.classList.remove("mobile-menu-open");
+        
+        if (this.backdrop) this.backdrop.classList.add("hidden");
+        if (this.openIcon) this.openIcon.classList.remove("hidden");
+        if (this.closeIcon) this.closeIcon.classList.add("hidden");
+
+        this.isOpen = false;
+    }
+}
