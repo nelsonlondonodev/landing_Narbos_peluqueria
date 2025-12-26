@@ -20,38 +20,38 @@ function generateArticleCard(article) {
         ? `<a href="${article.link}" class="hover:text-brand-green dark:hover:text-brand-medium" data-key="${article.titleKey}">${article.title}</a>` 
         : `<a href="${article.link}" class="hover:text-brand-green dark:hover:text-brand-medium">${article.title}</a>`;
 
-    const descHTML = article.descriptionKey
-        ? `<p class="text-gray-700 dark:text-gray-300 mb-4" data-key="${article.descriptionKey}">${article.description}</p>` 
-        : `<p class="text-gray-700 dark:text-gray-300 mb-4">${article.description}</p>`;
-
-    return `
-            <!-- Artículo: ${article.id} -->
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
-              <a href="${article.link}">
-                <img
-                  src="${article.image}"
-                  alt="${article.alt}"
-                  class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </a>
-              <div class="p-6">
-                <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                  ${categoryHTML} • ${dateHTML}
-                </p>
-                <h2 class="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-3">
-                  ${titleHTML}
-                </h2>
-                ${descHTML}
-                <a
-                  href="${article.link}"
-                  class="font-bold text-brand-green dark:text-brand-medium hover:underline"
-                  data-key="readMore"
-                  >Leer más &rarr;</a
-                >
-              </div>
-            </div>`;
-}
+        const descHTML = article.descriptionKey
+            ? `<p class="text-gray-700 dark:text-gray-300 mb-4" data-key="${article.descriptionKey}">${article.description}</p>`
+            : `<p class="text-gray-700 dark:text-gray-300 mb-4">${article.description}</p>`;
+    
+        return `
+                <!-- Artículo: ${article.id} -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group">
+                  <a href="${article.link}" aria-label="Leer artículo: ${article.title.replace(/"/g, '&quot;')}">
+                    <img
+                      src="${article.image}"
+                      alt="${article.alt}"
+                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  </a>
+                  <div class="p-6">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                      ${categoryHTML} • ${dateHTML}
+                    </p>
+                    <h2 class="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-3">
+                      ${titleHTML}
+                    </h2>
+                    ${descHTML}
+                    <a
+                      href="${article.link}"
+                      class="font-bold text-brand-green dark:text-brand-medium hover:underline"
+                      data-key="readMore"
+                      aria-label="Leer más sobre ${article.title.replace(/"/g, '&quot;')}"
+                      >Leer más &rarr;</a
+                    >
+                  </div>
+                </div>`;}
 
 /**
  * Orquestador de la generación del blog
