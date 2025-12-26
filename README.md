@@ -39,6 +39,11 @@ Archivos sitemap.xml y robots.txt incluidos para una mejor indexación en motore
 - **Base de Datos Local:**
     - Se centralizó toda la información de los artículos en `js/data/articles.js`, actuando como una "base de datos" ligera en formato JSON/JS, eliminando la necesidad de editar HTML manualmente para listar posts.
 
+### 🔮 Roadmap & Transición 2026 (Enero)
+- **Migración a Multi-Página:** El proyecto evolucionará de una Landing Page única a una arquitectura web robusta con URLs dedicadas para cada servicio (ej: `/servicios/peluqueria.html`).
+- **Actualización de Stack:** Se ha programado la actualización de **Tailwind CSS a la versión v4.x** para enero de 2026.
+    - *Nota:* Se ha **congelado** la refactorización profunda de CSS (safelist/config) hasta esa fecha para garantizar la estabilidad del sitio durante la temporada de fin de año.
+
 ### 📝 Últimas Actualizaciones (25 de diciembre, 2025)
 - **Mejoras de UX y Rendimiento (ReviewsCarousel):**
     - Se eliminó por completo el **CLS (Cumulative Layout Shift)** en el carrusel de testimonios implementando una técnica moderna de **CSS Grid Stack**.
