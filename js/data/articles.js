@@ -4,6 +4,17 @@
  */
 const articles = [
     {
+        id: 'tendencias-cabello-2026',
+        date: '26 de diciembre de 2025',
+        isoDate: '2025-12-26',
+        category: 'Tendencias',
+        title: 'Tendencias de Cabello 2026: El Futuro del Estilo',
+        description: 'Prepárate para el 2026 con las tendencias más innovadoras en cortes y coloración. Lo que necesitas saber para estar a la moda.',
+        image: 'articles/images/image_blog_1.webp', // Placeholder
+        alt: 'Tendencias de Cabello 2026: El Futuro del Estilo',
+        link: '/blog/articles/tendencias-cabello-2026.html'
+    },
+    {
         id: 'tendencias-diciembre-2025',
         date: '10 Diciembre 2025',
         isoDate: '2025-12-10',
