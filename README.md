@@ -27,6 +27,14 @@ Carga diferida (Lazy Loading) para las imágenes, mejorando drásticamente la ve
 Archivos sitemap.xml y robots.txt incluidos para una mejor indexación en motores de búsqueda como Google.
 
 ### 📝 Últimas Actualizaciones (26 de diciembre, 2025)
+- **Experiencia de Usuario (UX/UI):**
+    - **Botón de Compartir Nativo:** Se implementó el componente reutilizable `ShareButton.js` que utiliza la **Web Share API** moderna. Permite compartir artículos fácilmente en móviles (WhatsApp, Instagram, etc.) y tiene un fallback automático al portapapeles para escritorio.
+    - **Navegación Mejorada:** Se estandarizó la inclusión de **Tablas de Contenido (TOC)** y enlaces internos en todos los artículos del blog para mejorar la retención de lectura.
+    - **Consistencia Visual:** Se unificaron estilos y ubicaciones de elementos UI a lo largo de todo el blog.
+- **Calidad de Código (Refactoring):**
+    - **Limpieza HTML:** Se eliminaron scripts redundantes en los archivos HTML, unificando la lógica de inicialización.
+    - **Rendimiento:** Se aplicó `loading="lazy"` a las imágenes principales de los artículos antiguos.
+    - **Accesibilidad:** Se mejoraron los atributos `aria-label` y se ocultaron iconos decorativos (`aria-hidden`) para lectores de pantalla.
 - **Escalabilidad del Blog (SSG Architecture):**
     - Se implementó un sistema de **Generación de Sitios Estáticos (SSG)** híbrido para el blog. Ahora, el índice del blog (`blog/index.html`) se genera automáticamente en tiempo de compilación (Build-Time) a partir de una fuente de datos centralizada.
     - **Objetivo:** Combinar la facilidad de gestión de un CMS con el rendimiento y SEO perfecto de archivos HTML estáticos.
