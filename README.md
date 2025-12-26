@@ -26,22 +26,24 @@ Carga diferida (Lazy Loading) para las imágenes, mejorando drásticamente la ve
 
 Archivos sitemap.xml y robots.txt incluidos para una mejor indexación en motores de búsqueda como Google.
 
+🚨 Arquitectura de URLs y Reglas Críticas de SEO
+Para preservar el historial de indexación en Google Search Console y evitar errores de "propiedad no válida" o contenido duplicado, se DEBEN seguir estas reglas estrictas:
+
+1. Dominio Principal: El sitio opera bajo https://narbossalon.com (SIN www). El archivo .htaccess está configurado para redirigir cualquier intento de acceso con www al dominio raíz.
+2. URLs Limpias: Se debe evitar el uso de index.html en los enlaces. El servidor redirige automáticamente cualquier petición a /index.html hacia la raíz /.
+3. Etiquetas Canonicals: Todas las páginas deben incluir una etiqueta <link rel="canonical" href="https://narbossalon.com/..."> que coincida exactamente con la URL final sin www.
+4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
+
 ### 📝 Últimas Actualizaciones (26 de diciembre, 2025)
+- **Infraestructura SEO (Crítico):**
+    - **Unificación de Dominio:** Se estableció el dominio raíz `https://narbossalon.com` (Non-WWW) como el estándar oficial para alinearse con el historial de Google Search Console.
+    - **Redirección de index.html:** Se implementó una regla 301 en `.htaccess` para redirigir peticiones de archivos físicos `index.html` a la raíz del directorio, eliminando problemas de contenido duplicado.
+- **Automatización del Build:**
+    - **Cache Busting Automático:** Se mejoró el script `scripts/build.js` para inyectar automáticamente un hash de versión (`?v=timestamp`) en las referencias a CSS y JS en todos los archivos HTML de producción.
+    - **Generación Dinámica de Sitemap:** Ahora el sitemap se genera automáticamente con el dominio raíz correcto antes de cada compilación.
 - **Optimización de Rendimiento (Performance):**
-    - **Migración a WebP:** Se convirtieron todas las imágenes de los artículos del blog a formato **WebP**, reduciendo significativamente el peso de la página sin perder calidad.
-    - **Configuración de Servidor Avanzada:** Se optimizó el archivo `.htaccess` implementando:
-        - **Compresión Gzip:** Para reducir el tamaño de transferencia de HTML, CSS y JS.
-        - **Políticas de Caché Agresivas:** Caché de 1 año para imágenes, fuentes y scripts para cargas instantáneas en visitas recurrentes.
-        - **Seguridad:** Cabeceras de seguridad y bloqueo de listado de directorios.
-- **SEO & Visibilidad:**
-    - **Automatización del Sitemap:** Se creó el script `scripts/generate-sitemap.js` que genera automáticamente el `sitemap.xml` basándose en la base de datos de artículos, asegurando que Google siempre conozca el contenido más nuevo.
-    - **Estandarización de Canonical Tags:** Se verificaron y unificaron todas las etiquetas `rel="canonical"` para evitar contenido duplicado.
-    - **SEO Local (Chía):** Se optimizaron los títulos H1 y Meta Tags del nuevo artículo de Tendencias 2026 para posicionar mejor en búsquedas locales en Chía.
-    - **Meta Descripciones:** Se reescribieron las descripciones para incluir **Llamados a la Acción (CTA)** persuasivos y cumplir con los límites de caracteres de Google.
-- **Consistencia Visual y UI:**
-    - **Estandarización de Imágenes:** Se unificó el tamaño y comportamiento de las imágenes principales en todos los artículos para garantizar una experiencia visual coherente en móviles, tablets y escritorio.
-- **Automatización de Contenido (CLI Tools):**
-    - Se mejoró el flujo de trabajo: ahora `npm run build` genera automáticamente el índice del blog y el sitemap actualizado antes de compilar.
+    - **Migración a WebP:** Se convirtieron todas las imágenes de los artículos del blog a formato **WebP**.
+    - **Configuración de Servidor Avanzada:** Optimización de `.htaccess` con compresión Gzip y políticas de caché de 1 año para activos estáticos.
 
 ### 🔮 Roadmap & Transición 2026 (Enero)
 - **Migración a Multi-Página:** El proyecto evolucionará de una Landing Page única a una arquitectura web robusta con URLs dedicadas para cada servicio (ej: `/servicios/peluqueria.html`).
