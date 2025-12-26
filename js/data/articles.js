@@ -64,7 +64,7 @@ const articles = [
         titleKey: 'article1Title',
         description: 'Vivir en la Sabana de Bogotá tiene su encanto, pero el clima puede ser un desafío para tu cabello. Descubre los tratamientos esenciales que ofrecemos en Narbo\'s para mantenerlo radiante.',
         descriptionKey: 'article1Desc',
-        image: '/blog/articles/images/image_blog_1.webp',
+        image: '/blog/articles/images/image_blog_1.jpeg',
         alt: 'Tratamientos capilares para el clima de Chía',
         link: '/blog/articles/tratamientos-capilares-clima-chia.html'
     }
