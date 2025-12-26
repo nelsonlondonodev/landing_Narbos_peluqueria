@@ -8,10 +8,10 @@ const articles = [
         date: '26 de diciembre de 2025',
         isoDate: '2025-12-26',
         category: 'Tendencias',
-        title: 'Tendencias de Cabello 2026: El Futuro del Estilo',
-        description: 'Prepárate para el 2026 con las tendencias más innovadoras en cortes y coloración. Lo que necesitas saber para estar a la moda.',
+        title: '¡Adelántate al futuro! Las tendencias de cabello 2026 que transformarán tu look en Narbo\'s Salón Spa',
+        description: 'Prepárate para el 2026 con las tendencias más innovadoras en cortes y coloración. Lujo silencioso y salud capilar absoluta.',
         image: 'articles/images/image_blog_1.webp', // Placeholder
-        alt: 'Tendencias de Cabello 2026: El Futuro del Estilo',
+        alt: '¡Adelántate al futuro! Las tendencias de cabello 2026 que transformarán tu look en Narbo\'s Salón Spa',
         link: '/blog/articles/tendencias-cabello-2026.html'
     },
     {
