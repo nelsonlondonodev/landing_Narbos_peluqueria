@@ -8,10 +8,10 @@ const articles = [
         date: '26 de diciembre de 2025',
         isoDate: '2025-12-26',
         category: 'Tendencias',
-        title: '¡Adelántate al futuro! Las tendencias de cabello 2026 que transformarán tu look 🔮 ✨',
-        description: 'Prepárate para el 2026 con las tendencias más innovadoras en cortes y coloración. Lujo silencioso y salud capilar absoluta.',
+        title: 'Tendencias de Cabello 2026: Cortes, Color y Estilo',
+        description: 'Descubre las tendencias de cabello 2026: Lujo silencioso, Rich Hair y el regreso del volumen. ¡Agenda tu cita en Narbo\'s Salón Spa y adelántate al estilo!',
         image: 'articles/images/balayage-honey-glow-tendencia-2026-chia-narbos.webp',
-        alt: 'Balayage tono Honey Glow y Caramel Spice tendencia 2026 realizado en Narbo\'s Salón Spa Chía. Cabello largo con ondas suaves y aspecto saludable.',
+        alt: 'Tendencias de cabello 2026: Cortes, color y estilo en Narbo\'s Salón Spa',
         link: '/blog/articles/tendencias-cabello-2026.html'
     },
     {
