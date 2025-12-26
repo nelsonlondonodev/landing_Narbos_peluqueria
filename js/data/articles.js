@@ -10,7 +10,7 @@ const articles = [
         category: 'Tendencias',
         title: '¡Adelántate al futuro! Las tendencias de cabello 2026 que transformarán tu look 🔮 ✨',
         description: 'Prepárate para el 2026 con las tendencias más innovadoras en cortes y coloración. Lujo silencioso y salud capilar absoluta.',
-        image: 'articles/images/balayage-honey-glow-tendencia-2026-chia-narbos.jpeg',
+        image: 'articles/images/balayage-honey-glow-tendencia-2026-chia-narbos.webp',
         alt: 'Balayage tono Honey Glow y Caramel Spice tendencia 2026 realizado en Narbo\'s Salón Spa Chía. Cabello largo con ondas suaves y aspecto saludable.',
         link: '/blog/articles/tendencias-cabello-2026.html'
     },
@@ -64,7 +64,7 @@ const articles = [
         titleKey: 'article1Title',
         description: 'Vivir en la Sabana de Bogotá tiene su encanto, pero el clima puede ser un desafío para tu cabello. Descubre los tratamientos esenciales que ofrecemos en Narbo\'s para mantenerlo radiante.',
         descriptionKey: 'article1Desc',
-        image: '/blog/articles/images/image_blog_1.jpeg',
+        image: '/blog/articles/images/image_blog_1.webp',
         alt: 'Tratamientos capilares para el clima de Chía',
         link: '/blog/articles/tratamientos-capilares-clima-chia.html'
     }
