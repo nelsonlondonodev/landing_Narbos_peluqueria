@@ -3,7 +3,7 @@ const path = require('path');
 const articles = require('../js/data/articles');
 
 const SITEMAP_PATH = path.join(__dirname, '../sitemap.xml');
-const BASE_URL = 'https://www.narbossalon.com';
+const BASE_URL = 'https://narbossalon.com';
 const TODAY = new Date().toISOString().split('T')[0];
 
 /**
@@ -20,7 +20,7 @@ function generateSitemap() {
         { loc: '/#resenas', priority: '0.8', changefreq: 'monthly' },
         { loc: '/#ubicacion', priority: '0.9', changefreq: 'yearly' },
         { loc: '/#contacto', priority: '0.9', changefreq: 'yearly' },
-        { loc: '/blog/index.html', priority: '0.9', changefreq: 'monthly' },
+        { loc: '/blog/', priority: '0.9', changefreq: 'monthly' },
     ];
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
