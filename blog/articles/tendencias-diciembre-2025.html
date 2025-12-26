@@ -84,10 +84,16 @@
             class="w-full md:w-3/4 lg:w-1/2 lg:max-h-96 object-cover mx-auto rounded-lg shadow-lg mb-12"
             data-animation="fadeInUp"
             data-animation-delay="0.2s"
+            loading="lazy"
           />
           <div
             class="prose lg:prose-xl max-w-none text-gray-800 dark:text-gray-300"
           >
+            <div class="share-button-container mb-8 flex justify-center" 
+                 data-title="Tendencias fin de Año: Balayage, uñas en Chía | Narbo's Salon" 
+                 data-text="Luce espectacular en Navidad y Año Nuevo con estas tendencias.">
+            </div>
+
             <div
               class="bg-white/50 dark:bg-gray-800/50 p-6 rounded-lg shadow-md mb-12 border-l-4 border-brand-green dark:border-brand-medium"
               data-animation="fadeInUp"
@@ -271,26 +277,28 @@
 
     <script src="../../js/script.js?v=1.1" type="module"></script>
     <script type="module">
+        /**
+         * Article Initialization
+         * Mounts shared components (Navbar, Footer) with correct relative paths.
+         */
         import { getNavbarHTML } from '../../js/components/Navbar.js';
         import { getFooterHTML } from '../../js/components/Footer.js';
 
+        // 1. Mount Navbar
         const navbarRoot = document.getElementById('navbar-root');
         if (navbarRoot) {
             navbarRoot.innerHTML = getNavbarHTML('../../', false);
         }
 
+        // 2. Mount Footer
         const footerRoot = document.getElementById('footer-root');
         if (footerRoot) {
             footerRoot.innerHTML = getFooterHTML('../../');
         }
         
+        // 3. Initialize App Logic
         const startApp = () => {
-             if (window.initApp) {
-                // Use a small delay to ensure the DOM has rendered the injected HTML
-                setTimeout(() => {
-                    window.initApp();
-                }, 0);
-            }
+             if (window.initApp) window.initApp();
         };
 
         if (document.readyState === 'loading') {
