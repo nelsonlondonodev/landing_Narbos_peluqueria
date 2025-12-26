@@ -8,7 +8,8 @@
     "clean": "rm -rf dist",
     "new-post": "node scripts/create-article.js",
     "generate:blog": "node scripts/generate-blog.js",
-    "build": "npm run generate:blog && node scripts/build.js"
+    "generate:sitemap": "node scripts/generate-sitemap.js",
+    "build": "npm run generate:blog && npm run generate:sitemap && node scripts/build.js"
   },
   "repository": {
     "type": "git",
