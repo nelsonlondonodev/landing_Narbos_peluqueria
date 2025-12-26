@@ -27,25 +27,21 @@ Carga diferida (Lazy Loading) para las imágenes, mejorando drásticamente la ve
 Archivos sitemap.xml y robots.txt incluidos para una mejor indexación en motores de búsqueda como Google.
 
 ### 📝 Últimas Actualizaciones (26 de diciembre, 2025)
-- **Experiencia de Usuario (UX/UI):**
-    - **Botón de Compartir Nativo:** Se implementó el componente reutilizable `ShareButton.js` que utiliza la **Web Share API** moderna. Permite compartir artículos fácilmente en móviles (WhatsApp, Instagram, etc.) y tiene un fallback automático al portapapeles para escritorio.
-    - **Navegación Mejorada:** Se estandarizó la inclusión de **Tablas de Contenido (TOC)** y enlaces internos en todos los artículos del blog para mejorar la retención de lectura.
-    - **Consistencia Visual:** Se unificaron estilos y ubicaciones de elementos UI a lo largo de todo el blog.
-- **Calidad de Código (Refactoring):**
-    - **Limpieza HTML:** Se eliminaron scripts redundantes en los archivos HTML, unificando la lógica de inicialización.
-    - **Rendimiento:** Se aplicó `loading="lazy"` a las imágenes principales de los artículos antiguos.
-    - **Accesibilidad:** Se mejoraron los atributos `aria-label` y se ocultaron iconos decorativos (`aria-hidden`) para lectores de pantalla.
-- **Escalabilidad del Blog (SSG Architecture):**
-    - Se implementó un sistema de **Generación de Sitios Estáticos (SSG)** híbrido para el blog. Ahora, el índice del blog (`blog/index.html`) se genera automáticamente en tiempo de compilación (Build-Time) a partir de una fuente de datos centralizada.
-    - **Objetivo:** Combinar la facilidad de gestión de un CMS con el rendimiento y SEO perfecto de archivos HTML estáticos.
+- **Optimización de Rendimiento (Performance):**
+    - **Migración a WebP:** Se convirtieron todas las imágenes de los artículos del blog a formato **WebP**, reduciendo significativamente el peso de la página sin perder calidad.
+    - **Configuración de Servidor Avanzada:** Se optimizó el archivo `.htaccess` implementando:
+        - **Compresión Gzip:** Para reducir el tamaño de transferencia de HTML, CSS y JS.
+        - **Políticas de Caché Agresivas:** Caché de 1 año para imágenes, fuentes y scripts para cargas instantáneas en visitas recurrentes.
+        - **Seguridad:** Cabeceras de seguridad y bloqueo de listado de directorios.
+- **SEO & Visibilidad:**
+    - **Automatización del Sitemap:** Se creó el script `scripts/generate-sitemap.js` que genera automáticamente el `sitemap.xml` basándose en la base de datos de artículos, asegurando que Google siempre conozca el contenido más nuevo.
+    - **Estandarización de Canonical Tags:** Se verificaron y unificaron todas las etiquetas `rel="canonical"` para evitar contenido duplicado.
+    - **SEO Local (Chía):** Se optimizaron los títulos H1 y Meta Tags del nuevo artículo de Tendencias 2026 para posicionar mejor en búsquedas locales en Chía.
+    - **Meta Descripciones:** Se reescribieron las descripciones para incluir **Llamados a la Acción (CTA)** persuasivos y cumplir con los límites de caracteres de Google.
+- **Consistencia Visual y UI:**
+    - **Estandarización de Imágenes:** Se unificó el tamaño y comportamiento de las imágenes principales en todos los artículos para garantizar una experiencia visual coherente en móviles, tablets y escritorio.
 - **Automatización de Contenido (CLI Tools):**
-    - Se creó el comando `npm run new-post` para generar nuevos artículos. Este script:
-        - Crea el archivo HTML automáticamente basado en una **Plantilla Maestra** (`blog/article.template.html`).
-        - Pre-configura todos los **Meta Tags SEO, Open Graph y Twitter Cards**.
-        - Inyecta la entrada en la base de datos de artículos (`js/data/articles.js`).
-    - Se creó el comando `npm run generate:blog` que reconstruye el índice del blog basándose en la base de datos, asegurando que siempre esté sincronizado.
-- **Base de Datos Local:**
-    - Se centralizó toda la información de los artículos en `js/data/articles.js`, actuando como una "base de datos" ligera en formato JSON/JS, eliminando la necesidad de editar HTML manualmente para listar posts.
+    - Se mejoró el flujo de trabajo: ahora `npm run build` genera automáticamente el índice del blog y el sitemap actualizado antes de compilar.
 
 ### 🔮 Roadmap & Transición 2026 (Enero)
 - **Migración a Multi-Página:** El proyecto evolucionará de una Landing Page única a una arquitectura web robusta con URLs dedicadas para cada servicio (ej: `/servicios/peluqueria.html`).
