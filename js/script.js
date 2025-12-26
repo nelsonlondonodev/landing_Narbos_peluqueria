@@ -5,6 +5,7 @@ import { I18nService } from './services/I18nService.js';
 import { ThemeService } from './services/ThemeService.js';
 import { ContactFormController } from './controllers/ContactFormController.js';
 import { UIService } from './services/UIService.js';
+import { ShareButton } from './components/ShareButton.js';
 
 window.initApp = function() {
 
@@ -16,6 +17,7 @@ window.initApp = function() {
     new MobileMenu();
     new ReviewsCarousel();
     new ContactFormController();
+    new ShareButton();
     
     // UI Interactions
     new UIService();
