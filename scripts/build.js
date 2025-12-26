@@ -100,11 +100,12 @@ const buildJS = async () => {
 };
 
 /**
- * Task: Build HTML (Find all HTMLs and Minify)
+ * Task: Build HTML (Find all HTMLs, Minify and Inject Cache Busting)
  */
 const buildHTML = async () => {
     log('Processing HTML files...');
     const htmlFiles = getFiles(SRC_DIR, '.html');
+    const buildHash = Math.floor(Date.now() / 1000); // Unique timestamp for this build
 
     for (const file of htmlFiles) {
         const relativePath = path.relative(SRC_DIR, file);
@@ -112,10 +113,27 @@ const buildHTML = async () => {
         
         ensureDir(path.dirname(destPath));
 
+        let htmlContent = fs.readFileSync(file, 'utf8');
+
+        // Automatic Cache Busting
+        // 1. CSS: Replace "css/styles.css" (or with existing query strings) -> "css/styles.css?v=HASH"
+        // Also handles relative paths like ../../css/styles.css
+        htmlContent = htmlContent.replace(/(href=".*?css\/styles\.css)(\?v=[\w\.]+)?(")/g, `$1?v=${buildHash}$3`);
+        
+        // 2. JS: Replace "js/script.js" (or with existing query strings) -> "js/script.js?v=HASH"
+        htmlContent = htmlContent.replace(/(src=".*?js\/script\.js)(\?v=[\w\.]+)?(")/g, `$1?v=${buildHash}$3`);
+
+        // Write processed HTML to temp file for minification
+        const tempPath = destPath + '.temp';
+        fs.writeFileSync(tempPath, htmlContent);
+
         // HTML Minifier options
         const options = '--collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true';
         
-        await execPromise(`npx html-minifier "${file}" -o "${destPath}" ${options}`);
+        await execPromise(`npx html-minifier "${tempPath}" -o "${destPath}" ${options}`);
+        
+        // Remove temp file
+        fs.unlinkSync(tempPath);
     }
 };
 
