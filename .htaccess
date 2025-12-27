@@ -1,68 +1,14 @@
-# ----------------------------------------------------------------------
-# | Configuración de Redirección y Directorio                          |
-# ----------------------------------------------------------------------
-
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # 0. Redirigir index.html a la raíz (Evitar contenido duplicado)
-  RewriteRule ^index\.html$ / [R=301,L]
+  # 1. SEO: Forzar HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-  # 1. Forzar HTTPS y NO-WWW (Consistencia SEO - Prefiriendo dominio raíz)
-  RewriteCond %{HTTPS} off [OR]
-  RewriteCond %{HTTP_HOST} ^www\. [NC]
-  RewriteRule ^(.*)$ https://narbossalon.com/$1 [L,R=301]
+  # 2. SEO: Forzar SIN-WWW (Alineado con Google Search Console)
+  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-  # 2. Si la solicitud no es para un archivo o directorio real
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-
-  # 3. Redirigir a la carpeta dist (Producción)
-  RewriteRule ^(.*)$ dist/$1 [L]
-</IfModule>
-
-# ----------------------------------------------------------------------
-# | Compresión Gzip (Mejora de Velocidad)                              |
-# ----------------------------------------------------------------------
-
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml
-</IfModule>
-
-# ----------------------------------------------------------------------
-# | Caché de Navegador (Optimización de Rendimiento)                   |
-# ----------------------------------------------------------------------
-
-<IfModule mod_expires.c>
-  ExpiresActive On
-  
-  # Imágenes y Medios
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
-  ExpiresByType image/x-icon "access plus 1 year"
-  ExpiresByType video/mp4 "access plus 1 year"
-  
-  # Fuentes
-  ExpiresByType font/woff "access plus 1 year"
-  ExpiresByType font/woff2 "access plus 1 year"
-  
-  # Código
-  ExpiresByType text/css "access plus 1 year"
-  ExpiresByType text/javascript "access plus 1 year"
-  ExpiresByType application/javascript "access plus 1 year"
-</IfModule>
-
-# ----------------------------------------------------------------------
-# | Seguridad Básica                                                   |
-# ----------------------------------------------------------------------
-
-# Impedir listado de directorios
-Options -Indexes
-
-# Protección contra Sniffing de tipos MIME
-<IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
+  # El resto se maneja por defecto: Si el archivo (index.html, blog/, etc) existe, se muestra.
 </IfModule>
