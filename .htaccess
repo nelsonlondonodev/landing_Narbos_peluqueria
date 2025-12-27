@@ -2,29 +2,13 @@
   RewriteEngine On
   RewriteBase /
 
-  # 1. SEO: Forzar SIN-WWW (Consistency with GSC)
-  # Redirige www.narbossalon.com a narbossalon.com
-  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
-
-  # 2. Seguridad: Forzar HTTPS
+  # 1. SEO: Forzar HTTPS
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-  # 3. EXCEPCIÓN: Blog "Legacy"
-  # Si la URL empieza por /blog, servir directamente del sistema de archivos (root/blog)
-  # ADVERTENCIA: Esto ignora la versión generada en dist/blog
-  RewriteRule ^blog - [L]
+  # 2. SEO: Forzar SIN-WWW (Alineado con Google Search Console)
+  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-  # 4. ENRUTAMIENTO APP (Carpeta dist)
-  # Todo lo demás se sirve desde dentro de la carpeta dist/
-  
-  # Si la petición es la raíz, servir dist/index.html
-  RewriteRule ^$ dist/index.html [L]
-
-  # Si el archivo solicitado NO existe en la raíz física...
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  # ...intentar servirlo desde dist/
-  RewriteRule ^(.*)$ dist/$1 [L]
+  # El resto se maneja por defecto: Si el archivo (index.html, blog/, etc) existe, se muestra.
 </IfModule>
