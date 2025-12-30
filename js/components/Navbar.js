@@ -25,7 +25,22 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         
         <div class="hidden md:flex items-center space-x-8">
             ${navLink('#inicio', 'navInicio', 'Inicio')}
-            ${navLink('#servicios', 'navServicios', 'Servicios')}
+            
+            <!-- Dropdown Servicios -->
+            <div class="relative group">
+                <button class="flex items-center text-white dark:text-gray-200 hover:text-brand-medium dark:hover:text-brand-medium transition-colors py-2">
+                    <span data-key="navServicios">Servicios</span>
+                    <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="absolute left-0 mt-0 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left z-50">
+                    <div class="py-2">
+                        <a href="${linkPrefix}#servicios" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-green dark:hover:text-brand-medium">Todos los Servicios</a>
+                        <a href="${basePath}servicios/peluqueria.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-green dark:hover:text-brand-medium">Peluquería</a>
+                        <!-- Futuros servicios aquí -->
+                    </div>
+                </div>
+            </div>
+
             ${navLink('#nosotros', 'navNosotros', 'Nosotros')}
             ${navLink('#galeria', 'navGaleria', 'Galería')}
             ${navLink('#resenas', 'navResenas', 'Reseñas')}
