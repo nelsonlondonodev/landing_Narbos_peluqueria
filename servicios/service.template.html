@@ -73,10 +73,10 @@
         </div>
       </section>
 
-      <!-- Contenido Principal -->
-      <section class="py-16">
+      <!-- Sección Principal (Fondo Blanco) -->
+      <section class="py-16 bg-white dark:bg-gray-900">
         <div class="container mx-auto px-6 max-w-screen-lg">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div data-animation="fadeInLeft">
               <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white mb-6">
                 {{SECTION_1_TITLE}}
@@ -87,27 +87,33 @@
             </div>
             <div class="relative" data-animation="fadeInRight">
               <img src="../{{IMAGE_PATH}}" alt="{{IMAGE_ALT}}" class="rounded-2xl shadow-2xl w-full object-cover aspect-square" />
-              <!-- Badge decorativo -->
-              <div class="absolute -bottom-4 -right-4 bg-brand-medium text-white p-4 rounded-lg shadow-lg hidden md:block">
-                <p class="font-bold text-lg">Narbo's Spa</p>
-                <p class="text-sm opacity-80">Calidad y Cuidado</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Silo Navigation: Enlaces a otros servicios relacionados -->
-          <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
-            <h3 class="text-xl font-serif font-bold mb-6 text-gray-900 dark:text-white">Explora otros servicios:</h3>
-            <div class="flex flex-wrap gap-4">
-              <a href="/index.html#servicios" class="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-brand-medium hover:text-white transition-colors">Todos los Servicios</a>
-              <!-- Los scripts de build pueden inyectar aquí más enlaces -->
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Sección de Contacto -->
-      <div id="contact-root"></div>
+      <!-- Sección Secundaria (Fondo Color Marca Suave) -->
+      <section class="py-16 bg-brand-light/20 dark:bg-gray-800/50">
+        <div class="container mx-auto px-6 max-w-screen-lg">
+            <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white mb-8 text-center">
+                Más Detalles
+            </h2>
+            <div class="prose dark:prose-invert max-w-none mx-auto">
+                <!-- Placeholder para contenido adicional -->
+                <p class="text-center">Contenido adicional para enriquecer la experiencia del usuario.</p>
+            </div>
+        </div>
+      </section>
+
+      <!-- Silo Navigation (Fondo Blanco) -->
+      <section class="py-16 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800">
+        <div class="container mx-auto px-6 max-w-screen-lg">
+            <h3 class="text-xl font-serif font-bold mb-6 text-gray-900 dark:text-white">Explora otros servicios:</h3>
+            <div class="flex flex-wrap gap-4">
+              <a href="/index.html#servicios" class="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-brand-medium hover:text-white transition-colors">Todos los Servicios</a>
+            </div>
+        </div>
+      </section>
     </main>
 
     <div id="footer-root"></div>
@@ -117,16 +123,12 @@
     <script type="module">
       import { getNavbarHTML } from '../js/components/Navbar.js';
       import { getFooterHTML } from '../js/components/Footer.js';
-      import { getContactFormHTML } from '../js/components/ContactForm.js';
 
       const basePath = '../';
       
       // Inyección de Componentes
       const navbarRoot = document.getElementById('navbar-root');
       if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(basePath, false);
-
-      const contactRoot = document.getElementById('contact-root');
-      if (contactRoot) contactRoot.innerHTML = getContactFormHTML();
 
       const footerRoot = document.getElementById('footer-root');
       if (footerRoot) footerRoot.innerHTML = getFooterHTML(basePath);
@@ -144,5 +146,6 @@
         startApp();
       }
     </script>
+
   </body>
 </html>
