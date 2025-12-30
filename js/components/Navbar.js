@@ -28,14 +28,15 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             
             <!-- Dropdown Servicios -->
             <div class="relative group">
-                <button class="flex items-center text-white dark:text-gray-200 hover:text-brand-medium dark:hover:text-brand-medium transition-colors py-2">
+                <button class="flex items-center text-white dark:text-gray-200 hover:text-brand-medium dark:hover:text-brand-medium transition-colors py-2 focus:outline-none" aria-haspopup="true">
                     <span data-key="navServicios">Servicios</span>
                     <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div class="absolute left-0 mt-0 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left z-50">
-                    <div class="py-2">
-                        <a href="${linkPrefix}#servicios" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-green dark:hover:text-brand-medium">Todos los Servicios</a>
-                        <a href="${basePath}servicios/peluqueria.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-green dark:hover:text-brand-medium">Peluquería</a>
+                
+                <!-- Dropdown Menu: Hidden by default, block on hover -->
+                <div class="absolute left-0 top-full pt-2 w-48 hidden group-hover:block z-50">
+                    <div class="bg-white dark:bg-gray-800 rounded-md shadow-xl py-2 border border-gray-100 dark:border-gray-700">
+                        <a href="${basePath}servicios/peluqueria.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-green dark:hover:text-brand-medium transition-colors">Peluquería</a>
                         <!-- Futuros servicios aquí -->
                     </div>
                 </div>
