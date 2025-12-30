@@ -146,32 +146,30 @@
     <div id="footer-root"></div>
 
     <!-- Scripts -->
-    <script src="../js/script.js?v=1.2" type="module"></script>
+    <!-- NOTA: No cargamos js/script.js completo para evitar conflictos con I18nService en subcarpetas por ahora -->
     <script type="module">
       import { getNavbarHTML } from '../js/components/Navbar.js';
       import { getFooterHTML } from '../js/components/Footer.js';
+      import { MobileMenu } from '../js/components/MobileMenu.js';
+      import { UIService } from '../js/services/UIService.js';
+      import { ThemeService } from '../js/services/ThemeService.js';
 
       const basePath = '../';
       
-      // Inyección de Componentes
+      // 1. Inyección de Componentes Estáticos
       const navbarRoot = document.getElementById('navbar-root');
       if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(basePath, false);
 
       const footerRoot = document.getElementById('footer-root');
       if (footerRoot) footerRoot.innerHTML = getFooterHTML(basePath);
 
-      // Inicialización de lógica global
-      const startApp = () => {
-        if (window.initApp) {
-          window.initApp();
-        }
-      };
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', startApp);
-      } else {
-        startApp();
-      }
+      // 2. Inicialización de Lógica Específica
+      document.addEventListener('DOMContentLoaded', () => {
+          // Inicializar servicios core (sin traducciones por ahora)
+          new ThemeService();
+          new MobileMenu();
+          new UIService();
+      });
     </script>
   </body>
 </html>
