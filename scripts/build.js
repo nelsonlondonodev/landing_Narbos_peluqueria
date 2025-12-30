@@ -66,10 +66,10 @@ const clean = async () => {
  * Task: Build CSS (Tailwind)
  */
 const buildCSS = async () => {
-    log('Building Tailwind CSS...');
+    log('Building Tailwind CSS (v4)...');
     ensureDir(path.join(DIST_DIR, 'css'));
     // Using the CLI command defined in package.json context
-    await execPromise('npx tailwindcss -i ./css/input.css -o ./dist/css/styles.css --minify');
+    await execPromise('npx @tailwindcss/cli -i ./css/input.css -o ./dist/css/styles.css --minify');
 };
 
 /**
