@@ -731,9 +731,6 @@
   .bg-brand-green {
     background-color: var(--color-brand-green);
   }
-  .bg-brand-light {
-    background-color: var(--color-brand-light);
-  }
   .bg-brand-light\/10 {
     background-color: color-mix(in srgb, #C7B8A8 10%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -1643,15 +1640,20 @@
 html {
   scroll-behavior: smooth;
 }
+@layer base {
+  :root {
+    --color-text-base: #1f2937;
+  }
+  .dark {
+    --color-brand-light: #111827;
+    --color-text-base: #d1d5db;
+  }
+}
 body {
   font-family: "Lato", sans-serif;
   background-color: var(--color-brand-light);
-  color: #1f2937;
+  color: var(--color-text-base);
   transition: background-color 0.5s ease, color 0.5s ease;
-}
-.dark body {
-  background-color: #111827 !important;
-  color: #d1d5db !important;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif;

@@ -16,17 +16,21 @@ html {
 }
 
 /* Establece las fuentes base para el cuerpo del documento */
+@layer base {
+  :root {
+    --color-text-base: #1f2937; /* gray-800 */
+  }
+  .dark {
+    --color-brand-light: #111827; /* gray-900 */
+    --color-text-base: #d1d5db; /* gray-300 */
+  }
+}
+
 body {
   font-family: "Lato", sans-serif;
   background-color: var(--color-brand-light);
-  color: #1f2937; /* gray-800 */
+  color: var(--color-text-base);
   transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-/* Forzar colores en modo oscuro de forma global y escalable */
-.dark body {
-  background-color: #111827 !important; /* gray-900 */
-  color: #d1d5db !important; /* gray-300 */
 }
 
 /* Estilos para los títulos para aplicar la fuente serif */
