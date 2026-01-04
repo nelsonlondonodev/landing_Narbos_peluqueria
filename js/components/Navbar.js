@@ -28,13 +28,13 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             
             <!-- Dropdown Servicios -->
             <div class="relative group">
-                <button class="flex items-center text-white dark:text-gray-200 hover:text-brand-medium dark:hover:text-brand-medium transition-colors py-2 focus:outline-none" aria-haspopup="true">
+                <button id="desktop-services-btn" class="flex items-center text-white dark:text-gray-200 hover:text-brand-medium dark:hover:text-brand-medium transition-colors py-2 focus:outline-none" aria-haspopup="true" aria-expanded="false">
                     <span data-key="navServicios">Servicios</span>
                     <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 
-                <!-- Dropdown Menu: Hidden by default, block on hover -->
-                <div class="absolute left-0 top-full pt-2 w-48 hidden group-hover:block z-50">
+                <!-- Dropdown Menu -->
+                <div id="desktop-services-menu" class="absolute left-0 top-full pt-2 w-48 hidden group-hover:block hover:block z-50">
                     <div class="bg-white dark:bg-gray-800 rounded-md shadow-xl py-2 border border-gray-100 dark:border-gray-700">
                         <a href="${basePath}servicios/peluqueria.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-green dark:hover:text-brand-medium transition-colors">Peluquería</a>
                         <!-- Futuros servicios aquí -->

@@ -11,11 +11,50 @@ export class UIService {
         this.initHeaderScroll();
         this.initHeroAnimation();
         this.initScrollSpy();
+        this.initNavbarDropdown();
         this.initGallery();
         this.initModals();
         this.initVideoPlayer();
         this.initScrollAnimations();
         
+    }
+
+    initNavbarDropdown() {
+        const btn = document.getElementById("desktop-services-btn");
+        const menu = document.getElementById("desktop-services-menu");
+
+        if (!btn || !menu) return;
+
+        // Toggle on click
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isHidden = menu.classList.contains("hidden");
+            
+            // Close other menus if any (future-proofing)
+            if (isHidden) {
+                menu.classList.remove("hidden");
+                btn.setAttribute("aria-expanded", "true");
+            } else {
+                menu.classList.add("hidden");
+                btn.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        // Close when clicking outside
+        document.addEventListener("click", (e) => {
+            if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.add("hidden");
+                btn.setAttribute("aria-expanded", "false");
+            }
+        });
+
+        // Keyboard support (Escape key)
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && !menu.classList.contains("hidden")) {
+                menu.classList.add("hidden");
+                btn.setAttribute("aria-expanded", "false");
+            }
+        });
     }
 
     initHeaderScroll() {
@@ -47,7 +86,7 @@ export class UIService {
 
     initScrollSpy() {
         const sections = document.querySelectorAll("main section[id], footer[id]");
-        const navLinks = document.querySelectorAll("header nav .hidden a");
+        const navLinks = document.querySelectorAll("header nav .desktop-menu a");
 
         if (sections.length === 0 || navLinks.length === 0) return;
 
@@ -62,7 +101,7 @@ export class UIService {
                         link.classList.remove("nav-link-active");
                     });
                     const correspondingLink = document.querySelector(
-                        `header nav .hidden a[href*="${section.id}"]`
+                        `header nav .desktop-menu a[href*="${section.id}"]`
                     );
                     if (correspondingLink) {
                         correspondingLink.classList.add("nav-link-active");
