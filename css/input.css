@@ -18,6 +18,15 @@ html {
 /* Establece las fuentes base para el cuerpo del documento */
 body {
   font-family: "Lato", sans-serif;
+  background-color: var(--color-brand-light);
+  color: #1f2937; /* gray-800 */
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Forzar colores en modo oscuro de forma global y escalable */
+.dark body {
+  background-color: #111827 !important; /* gray-900 */
+  color: #d1d5db !important; /* gray-300 */
 }
 
 /* Estilos para los títulos para aplicar la fuente serif */

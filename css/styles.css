@@ -1091,6 +1091,13 @@
       }
     }
   }
+  .hover\:block {
+    &:hover {
+      @media (hover: hover) {
+        display: block;
+      }
+    }
+  }
   .hover\:-translate-y-1 {
     &:hover {
       @media (hover: hover) {
@@ -1638,6 +1645,13 @@ html {
 }
 body {
   font-family: "Lato", sans-serif;
+  background-color: var(--color-brand-light);
+  color: #1f2937;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+.dark body {
+  background-color: #111827 !important;
+  color: #d1d5db !important;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif;
