@@ -34,6 +34,16 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 3. Etiquetas Canonicals: Todas las páginas deben incluir una etiqueta <link rel="canonical" href="https://narbossalon.com/..."> que coincida exactamente con la URL final sin www.
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
+### 📝 Últimas Actualizaciones (4 de enero, 2026)
+- **Estabilización de UI y Arquitectura (Tailwind v4):**
+    - **Solución de Bugs Críticos:**
+        - **Navbar Invisible:** Se corrigió un conflicto de renderizado en Chrome invirtiendo la lógica de visibilidad (`Desktop-First`) y usando clases semánticas.
+        - **Dropdown de Servicios:** Se implementó una lógica híbrida (CSS/JS) robusta que soporta tanto *hover* en escritorio como *clic* en dispositivos táctiles.
+        - **Dark Mode Reactivo:** Se migró el sistema de temas a **Variables CSS Reactivas**, eliminando el retraso de renderizado (scroll repaint bug) y asegurando una transición instantánea y fluida en toda la página.
+    - **Clean Code & Refactorización:**
+        - **Centralización de Estilos:** Se eliminaron clases de utilidad redundantes (`bg-brand-light`, `dark:bg-gray-900`) de **todos** los archivos HTML. El estilo base del sitio ahora se controla de forma global y mantenible desde `input.css`.
+    - **Infraestructura de Compilación:** Se reparó y estabilizó el pipeline de construcción de Tailwind v4, asegurando la correcta generación de binarios y estilos.
+
 ### 📝 Últimas Actualizaciones (26 de diciembre, 2025)
 - **Infraestructura SEO (Crítico):**
     - **Unificación de Dominio:** Se estableció el dominio raíz `https://narbossalon.com` (Non-WWW) como el estándar oficial para alinearse con el historial de Google Search Console.
