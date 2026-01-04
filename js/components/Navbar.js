@@ -23,7 +23,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             <img src="${basePath}images/logo_narbos.webp" alt="Logo de Narbo's Salón Spa" class="h-14 w-auto" width="280" height="56">
         </a>
         
-        <div class="hidden md:flex items-center space-x-8">
+        <div class="desktop-menu flex items-center space-x-8 max-md:hidden">
             ${navLink('#inicio', 'navInicio', 'Inicio')}
             
             <!-- Dropdown Servicios -->

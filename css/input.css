@@ -37,7 +37,7 @@ h6 {
   Esto asegura que el efecto de escala que vamos a añadir sea suave y no brusco.
   Complementa las clases de transición que ya estaban en el HTML.
 */
-header nav .hidden a {
+header nav .desktop-menu a {
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -130,13 +130,13 @@ header.header-scrolled nav > a > img {
   Preparamos los enlaces de navegación para el efecto de la línea animada.
   El pseudo-elemento ::after será nuestra línea.
 */
-header nav .hidden a {
+header nav .desktop-menu a {
   position: relative;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-header nav .hidden a::after {
+header nav .desktop-menu a::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -152,7 +152,7 @@ header nav .hidden a::after {
 /*
   Al pasar el cursor sobre el enlace, la línea aparece animándose desde la derecha.
 */
-header nav .hidden a:hover::after {
+header nav .desktop-menu a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
@@ -160,7 +160,7 @@ header nav .hidden a:hover::after {
 /* 
   Para el enlace activo, la línea siempre será visible.
 */
-header nav .hidden a.nav-link-active::after {
+header nav .desktop-menu a.nav-link-active::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
