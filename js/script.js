@@ -2,7 +2,6 @@ import { getNavbarHTML } from './components/Navbar.js'; // Assuming this might b
 import { MobileMenu } from './components/MobileMenu.js';
 import { ReviewsCarousel } from './components/ReviewsCarousel.js';
 import { I18nService } from './services/I18nService.js';
-import { ThemeService } from './services/ThemeService.js';
 import { ContactFormController } from './controllers/ContactFormController.js';
 import { UIService } from './services/UIService.js';
 import { ShareButton } from './components/ShareButton.js';
@@ -20,7 +19,6 @@ window.initApp = function() {
     try {
         // Core Services
         new I18nService();
-        new ThemeService();
         
         // Components
         new MobileMenu();
