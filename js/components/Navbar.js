@@ -72,7 +72,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             ${navLink('#resenas', 'navResenas', 'Reseñas', true)}
             ${navLink('#ubicacion', 'navUbicacion', 'Ubicación', true)}
             ${navLink('#contacto', 'navContacto', 'Contacto', true)}
-            <a href="${basePath}blog/index.html" class="block py-2 px-4 text-lg hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md active:bg-gray-200 dark:active:bg-gray-600">Blog</a>
+            <a href="${basePath}blog/index.html" class="block py-2 px-4 text-lg hover:bg-gray-100 rounded-md active:bg-gray-200">Blog</a>
         </div>
     </div>
     
