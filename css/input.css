@@ -7,7 +7,7 @@
   --color-brand-gray-light: #858A76;
   --color-brand-gray-dark: #364041;
   --font-serif: "Playfair Display", serif;
-  --font-sans: "Lato", sans-serif;
+  --font-sans: "Montserrat", sans-serif;
 }
 
 /* Establece el comportamiento de scroll suave para toda la página */
@@ -23,7 +23,7 @@ html {
 }
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Montserrat", sans-serif;
   background-color: #ffffff; /* Explicitly force white */
   color: #1f2937;
   transition: background-color 0.5s ease, color 0.5s ease;
