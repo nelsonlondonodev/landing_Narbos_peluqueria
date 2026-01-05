@@ -70,7 +70,7 @@ export class UIService {
         };
 
         window.addEventListener("scroll", updateHeaderState);
-        window.addEventListener("themeChanged", updateHeaderState);
+
         
         // Initial check
         updateHeaderState();
