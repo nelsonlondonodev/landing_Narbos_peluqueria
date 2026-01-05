@@ -97,8 +97,8 @@ export class ThemeService {
             this.showIcon(this.themeToggleAutoIcon);
             this.showIcon(this.themeToggleAutoIconMobile);
         }
-        // Force UI updates (like navbar scroll state)
-        window.dispatchEvent(new Event('scroll'));
+        // Force UI updates via custom event to avoid conflicts with browser extensions listening to 'scroll'
+        window.dispatchEvent(new CustomEvent('themeChanged'));
         console.log(`Theme Applied: ${theme}`);
     }
 

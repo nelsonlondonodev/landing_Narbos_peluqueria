@@ -4,13 +4,13 @@
  * @returns {string} HTML del componente ContactForm.
  */
 export function getContactFormHTML() {
-    const inputClasses = "w-full p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-green dark:focus:ring-brand-medium text-gray-900 dark:text-white transition-all duration-200";
+    const inputClasses = "w-full p-3 rounded-lg bg-white dark:bg-brand-gray-dark/50 border border-brand-medium/50 dark:border-brand-medium/50 focus:outline-none focus:ring-2 focus:ring-brand-green dark:focus:ring-brand-medium text-brand-gray-dark dark:text-brand-light transition-all duration-200 placeholder-brand-gray-light/70";
     
     return `
-    <section id="contacto" class="py-12 bg-white dark:bg-gray-900">
+    <section id="contacto" class="py-12 bg-white dark:bg-brand-gray-dark">
         <div class="container mx-auto px-6 max-w-screen-xl text-center">
-            <h2 data-key="footerTitle" class="text-3xl font-serif mb-4 text-gray-900 dark:text-white" data-animation="fadeInUp">Agenda tu cita hoy</h2>
-            <p data-key="footerSubtitle" class="mb-6 max-w-xl mx-auto text-gray-600 dark:text-gray-300" data-animation="fadeInUp" data-animation-delay="0.2s">
+            <h2 data-key="footerTitle" class="text-3xl font-serif mb-4 text-brand-gray-dark dark:text-white" data-animation="fadeInUp">Agenda tu cita hoy</h2>
+            <p data-key="footerSubtitle" class="mb-6 max-w-xl mx-auto text-brand-gray-dark/80 dark:text-brand-light" data-animation="fadeInUp" data-animation-delay="0.2s">
                 Llámanos o escríbenos por WhatsApp. O si prefieres, déjanos un mensaje aquí:
             </p>
             <a href="https://wa.me/573123462618?text=hola, ¡Te hablo desde la web de Narbos Salón!" target="_blank" data-key="footerCta" class="inline-block bg-brand-green text-white font-bold py-2 px-6 rounded-full hover:bg-brand-green/90 transition-colors duration-300 ease-in-out mb-8" data-animation="zoomIn" data-animation-delay="0.4s">

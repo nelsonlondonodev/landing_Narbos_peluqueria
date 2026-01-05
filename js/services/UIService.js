@@ -61,13 +61,19 @@ export class UIService {
         const header = document.querySelector("header");
         if (!header) return;
 
-        window.addEventListener("scroll", () => {
+        const updateHeaderState = () => {
             if (window.scrollY > 50) {
                 header.classList.add("header-scrolled");
             } else {
                 header.classList.remove("header-scrolled");
             }
-        });
+        };
+
+        window.addEventListener("scroll", updateHeaderState);
+        window.addEventListener("themeChanged", updateHeaderState);
+        
+        // Initial check
+        updateHeaderState();
     }
 
     initHeroAnimation() {

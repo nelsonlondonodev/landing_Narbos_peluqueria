@@ -20,13 +20,13 @@ export function getFooterHTML(basePath = './') {
     const year = new Date().getFullYear();
     
     return `
-    <footer class="bg-gradient-to-t from-gray-800 to-brand-green text-white py-12">
+    <footer class="bg-gradient-to-t from-brand-gray-dark to-brand-green text-white py-12">
         <div class="container mx-auto px-6 text-center max-w-screen-xl">
             <div class="flex justify-center space-x-6 mb-6">
-                ${renderSocialLinks()}
+                ${renderSocialLinks().replace(/text-gray-400/g, 'text-brand-light/70')}
             </div>
             
-            <p class="text-sm text-gray-400 dark:text-gray-500">
+            <p class="text-sm text-brand-light/80">
                 © ${year} Narbo's Salón Spa.
                 <br class="sm:hidden" />
                 <span class="hidden sm:inline"> | </span>
