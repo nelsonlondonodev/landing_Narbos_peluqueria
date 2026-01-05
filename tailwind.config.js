@@ -18,22 +18,16 @@ module.exports = {
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        'float-slow': {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-15px)' },
+          '50%': { transform: 'translateY(-50px)' }, // Movimiento vertical fuerte
         },
         sway: {
-          '0%, 100%': { transform: 'rotate(-5deg)' },
-          '50%': { transform: 'rotate(5deg)' },
+          '0%, 100%': { transform: 'rotate(-15deg)' },
+          '50%': { transform: 'rotate(15deg)' },
         }
       },
       animation: {
-        float: 'float 6s ease-in-out infinite',
-        'float-slow': 'float-slow 8s ease-in-out infinite',
-        'float-delayed': 'float 7s ease-in-out infinite 2s',
-        sway: 'sway 4s ease-in-out infinite',
+        float: 'float 5s ease-in-out infinite',
+        sway: 'sway 5s ease-in-out infinite',
       },
     }
   },

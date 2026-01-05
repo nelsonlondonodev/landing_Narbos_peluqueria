@@ -6,11 +6,11 @@
 export class FloatingDecorations {
     constructor() {
         this.sections = [
-            { id: 'inicio', count: 4, icons: ['scissors', 'comb', 'lotus'] },
-            { id: 'servicios', count: 6, icons: ['dryer', 'polish', 'sparkle'] },
-            { id: 'nosotros', count: 3, icons: ['lotus', 'leaf'] },
-            { id: 'galeria', count: 5, icons: ['camera', 'scissors', 'polish'] },
-            { id: 'resenas', count: 3, icons: ['star', 'quote'] }
+            { id: 'inicio', count: 2, icons: ['scissors', 'comb', 'lotus'] },
+            { id: 'servicios', count: 2, icons: ['dryer', 'polish', 'sparkle'] },
+            { id: 'nosotros', count: 1, icons: ['lotus', 'leaf'] },
+            { id: 'galeria', count: 2, icons: ['camera', 'scissors', 'polish'] },
+            { id: 'resenas', count: 1, icons: ['star', 'quote'] }
         ];
         
         this.iconsStore = {
@@ -45,17 +45,23 @@ export class FloatingDecorations {
         if (!element.classList.contains('relative')) {
             element.classList.add('relative');
         }
+        // IMPORTANT: Ensure the EXISTING content of the section stays on top of the icons
+        // We iterate over children and add z-10 relative to content
+        Array.from(element.children).forEach(child => {
+            if (!child.classList.contains('absolute')) { // Don't mess with existing absolute elements if possible
+                 child.classList.add('relative', 'z-10');
+            }
+        });
 
         const container = document.createElement('div');
+        // z-0 ensures it is behind the z-10 content but legal in stacking context
         container.className = 'absolute inset-0 overflow-hidden pointer-events-none z-0';
         container.setAttribute('aria-hidden', 'true');
         
         for (let i = 0; i < count; i++) {
-            // Map generic keys to specific new store keys if needed, or update section config
-            // Mapping check:
+            
             let iconKey = allowedIcons[Math.floor(Math.random() * allowedIcons.length)];
             
-            // Fallback mapping for old keys to new store keys
             if (iconKey === 'comb') iconKey = 'sparkle'; 
             if (iconKey === 'dryer') iconKey = 'leaf';
             if (iconKey === 'polish') iconKey = 'gem';
@@ -72,26 +78,37 @@ export class FloatingDecorations {
             const left = Math.floor(Math.random() * 90) + 5; // 5-95%
             const top = Math.floor(Math.random() * 90) + 5; // 5-95%
             const rotation = Math.floor(Math.random() * 360);
-            const delay = Math.random() * 5;
-            const duration = Math.floor(Math.random() * 10) + 12; // 12-22s float (Slower)
             
-            // Random color class
-            const colors = ['text-brand-green', 'text-brand-medium', 'text-brand-light'];
+            // FASTER ANIMATION: 3s to 6s
+            const duration = Math.floor(Math.random() * 3) + 3; 
+            const delay = Math.random() * 1; // Minimal delay
+            
+            // Use darker colors for visibility against white bg
+            // text-gray-300, text-gray-400 instead of brand-light
+            const colors = ['text-brand-green/20', 'text-brand-medium/30', 'text-black/10'];
             const colorClass = colors[Math.floor(Math.random() * colors.length)];
             
-            // Animation class
-            const animations = ['animate-float', 'animate-float-slow', 'animate-sway'];
-            const animClass = animations[Math.floor(Math.random() * animations.length)];
+            // Force animation without 'animate-' prefix relying strictly on tailwind config might be flaky if not safelisted? 
+            // We use inline styles for animation for 100% guarantee if classes fail.
+            // But let's try standard classes first with opacity 0.3 for clear visibility.
+            
+            const animClass = 'animate-float'; // Stick to simple float first to debug
 
-            // Opacity kept at 8% as requested for visibility without distraction
-            icon.className = `absolute opacity-[0.08] ${colorClass} ${animClass}`;
+            // Opacity explicit in color class or here. 
+            // Using text-black/20 is safer.
+            icon.className = `absolute ${colorClass} ${animClass}`;
             icon.style.width = `${size}px`;
             icon.style.height = `${size}px`;
             icon.style.left = `${left}%`;
             icon.style.top = `${top}%`;
             icon.style.transform = `rotate(${rotation}deg)`;
-            icon.style.animationDelay = `${delay}s`;
+            
+            // We force the animation style inline to be 100% sure it applies
+            icon.style.animationName = 'float';
             icon.style.animationDuration = `${duration}s`;
+            icon.style.animationIterationCount = 'infinite';
+            icon.style.animationTimingFunction = 'ease-in-out';
+            icon.style.animationDelay = `${delay}s`;
             
             // Ensure viewBox is 0 0 24 24 for Lucide
             icon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">${iconSvgContent}</svg>`;
@@ -99,7 +116,6 @@ export class FloatingDecorations {
             container.appendChild(icon);
         }
         
-        // Prepend so it sits behind everything else
         element.prepend(container);
     }
 }
