@@ -97,6 +97,8 @@ export class ThemeService {
             this.showIcon(this.themeToggleAutoIcon);
             this.showIcon(this.themeToggleAutoIconMobile);
         }
+        // Force UI updates (like navbar scroll state)
+        window.dispatchEvent(new Event('scroll'));
         console.log(`Theme Applied: ${theme}`);
     }
 

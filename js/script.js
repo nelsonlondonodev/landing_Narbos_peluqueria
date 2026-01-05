@@ -6,7 +6,6 @@ import { ThemeService } from './services/ThemeService.js';
 import { ContactFormController } from './controllers/ContactFormController.js';
 import { UIService } from './services/UIService.js';
 import { ShareButton } from './components/ShareButton.js';
-import { runThemeDebug } from './debug-theme.js';
 
 
 // Ensure initApp is idempotent and robust
@@ -32,11 +31,6 @@ window.initApp = function() {
         // UI Interactions
         new UIService();
         
-        // Run Debugger
-        setTimeout(() => {
-            runThemeDebug();
-        }, 1000);
-
         console.log("App Initialized Successfully");
     } catch (error) {
         console.error("Critical Error initializing app:", error);
