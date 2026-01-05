@@ -12,8 +12,6 @@ window.initApp = function() {
     if (appInitialized) return;
     appInitialized = true;
 
-    console.log("Initializing App...");
-
     try {
         // Core Services
         
@@ -26,7 +24,6 @@ window.initApp = function() {
         // UI Interactions
         new UIService();
         
-        console.log("App Initialized Successfully");
     } catch (error) {
         console.error("Critical Error initializing app:", error);
     }
