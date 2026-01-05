@@ -184,6 +184,16 @@ const runBuild = async () => {
             copyAssets()
         ]);
 
+        // 5. Inyectar componentes estáticos (SSG)
+        // Usamos spawn o exec para correr el script como modulo JS
+        log('Running SSG Injection...');
+        try {
+            await execPromise('node scripts/ssg.js');
+        } catch (error) {
+             console.error("Error in SSG step:", error);
+             // No fallar el build completo, pero avisar
+        }
+
         const duration = ((Date.now() - startTime) / 1000).toFixed(2);
         log(`Build completed successfully in ${duration}s! 🚀`, colors.green);
         
