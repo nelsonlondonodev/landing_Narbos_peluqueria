@@ -50,6 +50,15 @@ Para preservar el historial de indexación en Google Search Console y evitar err
     - **Navbar Color Fix:** Se forzó el color inicial de la barra de navegación usando un valor arbitrario (`bg-[#6B755A]`) para garantizar su visibilidad antes de hacer scroll, corrigiendo el comportamiento donde aparecía transparente o invisible inicialmente.
     - **Limpieza de CSS:** Se eliminaron reglas redundantes en `input.css` que generaban conflictos de especificidad con las utilidades de color.
 
+### 📝 Últimas Actualizaciones (Sesión PM, 5 de enero 2026)
+- **Depuración Mayor (Code Cleanup):** 🧹
+    - **Eliminación de Features:** Se retiraron completamente el sopote para **Modo Oscuro** y **Multi-idioma (I18n)** para simplificar la UX y eliminar código muerto.
+    - **Identidad Visual:** Se estableció un sistema de diseño estricto dual: **Playfair Display** (Títulos) y **Montserrat** (Textos), eliminando Lato y otras fuentes.
+    - **Archivos:** Eliminación de logs (`SESSION_LOGS.md`) y backups obsoletos.
+- **Optimización SEO Técnica (Core Web Vitals):** 🚀
+    - **Solución CLS (Cumulative Layout Shift):** Se implementó una arquitectura **SSG (Static Site Generation)** para el Navbar y Footer.
+    - **Script SSG:** Nuevo script `scripts/ssg.js` que inyecta el HTML de los componentes *durante el build*, garantizando que Google y otros bots vean el menú completo instantáneamente y eliminando los saltos visuales de carga.
+
 ### 📝 Últimas Actualizaciones (26 de diciembre, 2025)
 - **Infraestructura SEO (Crítico):**
     - **Unificación de Dominio:** Se estableció el dominio raíz `https://narbossalon.com` (Non-WWW) como el estándar oficial para alinearse con el historial de Google Search Console.
