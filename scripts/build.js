@@ -70,6 +70,8 @@ const buildCSS = async () => {
     ensureDir(path.join(DIST_DIR, 'css'));
     // Using the CLI command defined in package.json context
     await execPromise('npx @tailwindcss/cli -i ./css/input.css -o ./dist/css/styles.css --minify');
+    // Also copy to source css folder for local dev server (Live Server) support
+    fs.copyFileSync(path.join(DIST_DIR, 'css/styles.css'), path.join(SRC_DIR, 'css/styles.css'));
 };
 
 /**

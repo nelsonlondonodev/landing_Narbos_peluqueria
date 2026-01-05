@@ -11,7 +11,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
     // Función auxiliar para generar enlaces de navegación
     const navLink = (href, key, text, mobile = false) => {
         const baseClasses = "text-white dark:text-gray-200 hover:text-brand-medium dark:hover:text-brand-medium active:text-brand-medium dark:active:text-brand-medium";
-        const mobileClasses = "block py-2 px-4 text-lg hover:bg-brand-gray-light dark:hover:bg-gray-700 rounded-md active:bg-brand-gray-light dark:active:bg-gray-700";
+        const mobileClasses = "block py-2 px-4 text-lg hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md active:bg-gray-200 dark:active:bg-gray-600";
         const finalHref = href.startsWith('#') ? `${linkPrefix}${href}` : href;
         
         return `<a href="${finalHref}" data-key="${key}${mobile ? 'Mobile' : ''}" class="${mobile ? mobileClasses : baseClasses}">${text}</a>`;
@@ -88,7 +88,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             ${navLink('#resenas', 'navResenas', 'Reseñas', true)}
             ${navLink('#ubicacion', 'navUbicacion', 'Ubicación', true)}
             ${navLink('#contacto', 'navContacto', 'Contacto', true)}
-            <a href="${basePath}blog/index.html" class="block py-2 px-4 text-lg hover:bg-brand-gray-light dark:hover:bg-gray-700 rounded-md active:bg-brand-gray-light dark:active:bg-gray-700">Blog</a>
+            <a href="${basePath}blog/index.html" class="block py-2 px-4 text-lg hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md active:bg-gray-200 dark:active:bg-gray-600">Blog</a>
         </div>
     </div>
     

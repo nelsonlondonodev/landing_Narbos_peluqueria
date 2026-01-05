@@ -28,6 +28,8 @@ html {
 
 body {
   font-family: "Lato", sans-serif;
+  background-color: #ffffff; /* Explicitly force white */
+  color: #1f2937;
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
@@ -405,7 +407,6 @@ header nav .desktop-menu a.nav-link-active::after {
 
 .video-aspect-ratio {
   aspect-ratio: 9 / 16;
-  background-color: #000;
 }
 
 #video-promo .video-aspect-ratio {
