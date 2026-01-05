@@ -14,7 +14,27 @@ module.exports = {
       fontFamily: {
         'serif': ['Playfair Display', 'serif'],
         'sans': ['Montserrat', 'sans-serif'],
-      }
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        'float-slow': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-15px)' },
+        },
+        sway: {
+          '0%, 100%': { transform: 'rotate(-5deg)' },
+          '50%': { transform: 'rotate(5deg)' },
+        }
+      },
+      animation: {
+        float: 'float 6s ease-in-out infinite',
+        'float-slow': 'float-slow 8s ease-in-out infinite',
+        'float-delayed': 'float 7s ease-in-out infinite 2s',
+        sway: 'sway 4s ease-in-out infinite',
+      },
     }
   },
   plugins: [],

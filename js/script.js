@@ -3,6 +3,7 @@ import { ReviewsCarousel } from './components/ReviewsCarousel.js';
 import { ContactFormController } from './controllers/ContactFormController.js';
 import { UIService } from './services/UIService.js';
 import { ShareButton } from './components/ShareButton.js';
+import { FloatingDecorations } from './components/FloatingDecorations.js';
 
 
 // Ensure initApp is idempotent and robust
@@ -20,6 +21,7 @@ window.initApp = function() {
         new ReviewsCarousel();
         new ContactFormController();
         new ShareButton();
+        new FloatingDecorations();
         
         // UI Interactions
         new UIService();

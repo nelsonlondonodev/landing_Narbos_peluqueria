@@ -1,6 +1,11 @@
-const fs = require('fs');
-const path = require('path');
-const articles = require('../js/data/articles');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import articles from '../js/data/articles.js';
 
 const BLOG_INDEX_PATH = path.join(__dirname, '../blog/index.html');
 

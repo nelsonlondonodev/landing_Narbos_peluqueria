@@ -70,4 +70,4 @@ const articles = [
     }
 ];
 
-module.exports = articles;
+export default articles;
