@@ -20,24 +20,51 @@ export class ThemeService {
     }
 
     init() {
+        // Retry mechanism for dynamic elements
         if (!this.themeToggleBtn && !this.themeToggleBtnMobile) {
-            console.warn("ThemeService: Toggle buttons not found.");
+            // Try fetching again in case DOM wasn't ready (though it should be)
+            this.themeToggleBtn = document.getElementById("theme-toggle");
+            this.themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
+            this.themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
+            this.themeToggleAutoIcon = document.getElementById("theme-toggle-auto-icon");
+
+            this.themeToggleBtnMobile = document.getElementById("theme-toggle-mobile");
+            this.themeToggleDarkIconMobile = document.getElementById("theme-toggle-dark-icon-mobile");
+            this.themeToggleLightIconMobile = document.getElementById("theme-toggle-light-icon-mobile");
+            this.themeToggleAutoIconMobile = document.getElementById("theme-toggle-auto-icon-mobile");
+        }
+
+        if (!this.themeToggleBtn && !this.themeToggleBtnMobile) {
+            console.warn("ThemeService: Toggle buttons still not found after retry. Theme switching disabled.");
             return;
         }
 
-        // Bind Events
-        if (this.themeToggleBtn) {
-            this.themeToggleBtn.addEventListener("click", () => this.cycleTheme());
-        }
-        if (this.themeToggleBtnMobile) {
-            this.themeToggleBtnMobile.addEventListener("click", () => this.cycleTheme());
-        }
+        // Bind Events with error handling
+        try {
+            if (this.themeToggleBtn) {
+                this.themeToggleBtn.addEventListener("click", (e) => {
+                    e.preventDefault(); 
+                    console.log("Desktop Theme Toggle Clicked");
+                    this.cycleTheme();
+                });
+            }
+            if (this.themeToggleBtnMobile) {
+                this.themeToggleBtnMobile.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    console.log("Mobile Theme Toggle Clicked");
+                    this.cycleTheme();
+                });
+            }
 
-        // System preference listener
-        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => this.applyTheme());
+            // System preference listener
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => this.applyTheme());
 
-        // Initial application
-        this.applyTheme();
+            // Initial application
+            console.log("ThemeService initialized. Applying initial theme...");
+            this.applyTheme();
+        } catch (err) {
+            console.error("ThemeService Error:", err);
+        }
     }
 
     applyTheme() {
@@ -70,6 +97,7 @@ export class ThemeService {
             this.showIcon(this.themeToggleAutoIcon);
             this.showIcon(this.themeToggleAutoIconMobile);
         }
+        console.log(`Theme Applied: ${theme}`);
     }
 
     showIcon(iconElement) {

@@ -44,6 +44,12 @@ Para preservar el historial de indexación en Google Search Console y evitar err
         - **Centralización de Estilos:** Se eliminaron clases de utilidad redundantes (`bg-brand-light`, `dark:bg-gray-900`) de **todos** los archivos HTML. El estilo base del sitio ahora se controla de forma global y mantenible desde `input.css`.
     - **Infraestructura de Compilación:** Se reparó y estabilizó el pipeline de construcción de Tailwind v4, asegurando la correcta generación de binarios y estilos.
 
+### 📝 Últimas Actualizaciones (5 de enero, 2026)
+- **Correcciones Post-Migración Tailwind v4:**
+    - **Dark Mode Stabilizado:** Se reemplazó la dependencia estricta de variables CSS en el `body` por clases de utilidad explícitas (`bg-brand-light dark:bg-gray-900`), solucionando el error donde el fondo permanecía claro mientras el texto cambiaba a blanco.
+    - **Navbar Color Fix:** Se forzó el color inicial de la barra de navegación usando un valor arbitrario (`bg-[#6B755A]`) para garantizar su visibilidad antes de hacer scroll, corrigiendo el comportamiento donde aparecía transparente o invisible inicialmente.
+    - **Limpieza de CSS:** Se eliminaron reglas redundantes en `input.css` que generaban conflictos de especificidad con las utilidades de color.
+
 ### 📝 Últimas Actualizaciones (26 de diciembre, 2025)
 - **Infraestructura SEO (Crítico):**
     - **Unificación de Dominio:** Se estableció el dominio raíz `https://narbossalon.com` (Non-WWW) como el estándar oficial para alinearse con el historial de Google Search Console.
