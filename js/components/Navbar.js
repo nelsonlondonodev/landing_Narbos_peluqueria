@@ -48,15 +48,9 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             ${navLink('#ubicacion', 'navUbicacion', 'Ubicación')}
             ${navLink('#contacto', 'navContacto', 'Contacto')}
             <a href="${basePath}blog/index.html" class="text-white hover:text-brand-medium active:text-brand-medium">Blog</a>
-
-            <div class="ml-4 border-l border-brand-medium/50 pl-4 flex items-center space-x-4">
-                <button id="lang-toggle-desktop" aria-label="Cambiar idioma" class="flex items-center text-white hover:text-brand-medium transition-colors duration-200"></button>
-            </div>
         </div>
 
         <div class="md:hidden flex items-center">
-             <button id="lang-toggle-mobile" aria-label="Cambiar idioma" class="mr-2 flex items-center text-white hover:text-white transition-colors duration-200"></button>
-             
              <button id="menu-btn" aria-label="Abrir menú de navegación" class="text-white focus:outline-none z-50">
                  <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                  <svg id="menu-close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>

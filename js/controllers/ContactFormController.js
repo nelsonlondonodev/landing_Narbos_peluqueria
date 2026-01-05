@@ -1,4 +1,4 @@
-import { I18nService } from '../services/I18nService.js';
+
 
 /**
  * ContactFormController
@@ -28,10 +28,8 @@ export class ContactFormController {
     async handleSubmit(e) {
         e.preventDefault();
         
-        const i18n = I18nService.getInstance();
-
         if (this.formStatus) {
-            this.formStatus.textContent = i18n.t('formStatusSubmitting');
+            this.formStatus.textContent = "Enviando mensaje...";
             this.formStatus.style.color = "#6B755A";
         }
 
@@ -46,7 +44,7 @@ export class ContactFormController {
 
             if (response.ok) {
                 if (this.formStatus) {
-                    this.formStatus.textContent = i18n.t('formStatusSuccess');
+                    this.formStatus.textContent = "¡Mensaje enviado con éxito!";
                     this.formStatus.style.color = "green";
                 }
                 this.contactForm.reset();
@@ -55,13 +53,13 @@ export class ContactFormController {
                 if (Object.hasOwn(data, 'errors')) {
                     if (this.formStatus) this.formStatus.textContent = data["errors"].map(error => error["message"]).join(", ");
                 } else {
-                    if (this.formStatus) this.formStatus.textContent = i18n.t('formStatusError');
+                    if (this.formStatus) this.formStatus.textContent = "Hubo un error al enviar el mensaje.";
                 }
                 if (this.formStatus) this.formStatus.style.color = "red";
             }
         } catch (error) {
             if (this.formStatus) {
-                this.formStatus.textContent = i18n.t('formStatusError');
+                this.formStatus.textContent = "Hubo un error al enviar el mensaje.";
                 this.formStatus.style.color = "red";
             }
         }

@@ -152,7 +152,6 @@
       import { getFooterHTML } from '../js/components/Footer.js';
       import { MobileMenu } from '../js/components/MobileMenu.js';
       import { UIService } from '../js/services/UIService.js';
-      import { ThemeService } from '../js/services/ThemeService.js';
 
       const basePath = '../';
       
@@ -166,7 +165,6 @@
       // 2. Inicialización de Lógica Específica
       document.addEventListener('DOMContentLoaded', () => {
           // Inicializar servicios core (sin traducciones por ahora)
-          new ThemeService();
           new MobileMenu();
           new UIService();
       });

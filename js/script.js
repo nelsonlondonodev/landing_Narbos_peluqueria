@@ -1,7 +1,5 @@
-import { getNavbarHTML } from './components/Navbar.js'; // Assuming this might be needed later, but focusing on MobileMenu now
 import { MobileMenu } from './components/MobileMenu.js';
 import { ReviewsCarousel } from './components/ReviewsCarousel.js';
-import { I18nService } from './services/I18nService.js';
 import { ContactFormController } from './controllers/ContactFormController.js';
 import { UIService } from './services/UIService.js';
 import { ShareButton } from './components/ShareButton.js';
@@ -18,7 +16,6 @@ window.initApp = function() {
 
     try {
         // Core Services
-        new I18nService();
         
         // Components
         new MobileMenu();
