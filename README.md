@@ -41,12 +41,12 @@ Para preservar el historial de indexación en Google Search Console y evitar err
         - **Dropdown de Servicios:** Se implementó una lógica híbrida (CSS/JS) robusta que soporta tanto *hover* en escritorio como *clic* en dispositivos táctiles.
         - **Dark Mode Reactivo:** Se migró el sistema de temas a **Variables CSS Reactivas**, eliminando el retraso de renderizado (scroll repaint bug) y asegurando una transición instantánea y fluida en toda la página.
     - **Clean Code & Refactorización:**
-        - **Centralización de Estilos:** Se eliminaron clases de utilidad redundantes (`bg-brand-light`, `dark:bg-gray-900`) de **todos** los archivos HTML. El estilo base del sitio ahora se controla de forma global y mantenible desde `input.css`.
+        - **Centralización de Estilos:** Se eliminaron clases de utilidad redundantes (`bg-brand-light`) de **todos** los archivos HTML. El estilo base del sitio ahora se controla de forma global y mantenible desde `input.css`.
     - **Infraestructura de Compilación:** Se reparó y estabilizó el pipeline de construcción de Tailwind v4, asegurando la correcta generación de binarios y estilos.
 
 ### 📝 Últimas Actualizaciones (5 de enero, 2026)
 - **Correcciones Post-Migración Tailwind v4:**
-    - **Dark Mode Stabilizado:** Se reemplazó la dependencia estricta de variables CSS en el `body` por clases de utilidad explícitas (`bg-brand-light dark:bg-gray-900`), solucionando el error donde el fondo permanecía claro mientras el texto cambiaba a blanco.
+
     - **Navbar Color Fix:** Se forzó el color inicial de la barra de navegación usando un valor arbitrario (`bg-[#6B755A]`) para garantizar su visibilidad antes de hacer scroll, corrigiendo el comportamiento donde aparecía transparente o invisible inicialmente.
     - **Limpieza de CSS:** Se eliminaron reglas redundantes en `input.css` que generaban conflictos de especificidad con las utilidades de color.
 
