@@ -158,54 +158,85 @@
         </div>
       </section>
 
-      <!-- Sección 1: Introducción y Detalles (Fondo Blanco) -->
+      <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
       <section class="py-16 md:py-24 bg-white overflow-x-hidden">
-        <div class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center">
-            <div data-animation="fadeInLeft">
+        <div class="container mx-auto px-6 max-w-screen-xl">
+            <div class="text-center mb-16" data-animation="fadeInUp">
               <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
-                Transformamos tu Imagen con Arte y Experiencia
+                Elige tu Experiencia
               </h2>
-              <div class="prose max-w-none text-lg leading-relaxed text-gray-700">
-                <p class="mb-6">
-                  En <strong>Narbo's Salón Spa</strong>, entendemos que tu cabello es tu mejor accesorio. Nuestro equipo de estilistas expertos está en constante formación para ofrecerte lo último en tendencias mundiales.
-                </p>
-                
-                <h3 class="text-2xl font-serif font-bold text-brand-green mb-4">Nuestros Servicios Destacados:</h3>
-                <ul class="space-y-4 mb-8">
-                  <li class="flex items-start">
-                    <span class="mr-3 mt-1 text-brand-green">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 2.1a2 2 0 00-2.828 0L10 2.757v8.486zM16 18H9.04a2 2 0 01-1.414-.586l-1.586-1.586A2 2 0 016.04 14V6.414l1-1L15.414 14l-1 1h.586A2 2 0 0117 17v1z" clip-rule="evenodd" />
-                      </svg>
-                    </span>
-                    <div><strong>Coloración Avanzada:</strong> Balayage, Babylights y cubrimiento perfecto.</div>
-                  </li>
-                  <li class="flex items-start">
-                    <span class="mr-3 mt-1 text-brand-green">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                        <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
-                      </svg>
-                    </span>
-                    <div><strong>Cortes de Diseño:</strong> Asesoría personalizada según tu rostro.</div>
-                  </li>
-                  <li class="flex items-start">
-                    <span class="mr-3 mt-1 text-brand-green">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M5.5 2A2.5 2.5 0 003 4.5v10.879a2.5 2.5 0 004.1 1.977l.736-.883a3.5 3.5 0 014.328 0l.736.883a2.5 2.5 0 004.1-1.977V4.5A2.5 2.5 0 0014.5 2h-9zM8 6a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                      </svg>
-                    </span>
-                    <div><strong>Salud Capilar:</strong> Keratina y Botox Capilar con marcas premium.</div>
-                  </li>
-                </ul>
-              </div>
+              <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+                Explora nuestras especialidades y descubre por qué somos el referente en belleza integral en Chía.
+              </p>
             </div>
-            <div class="relative" data-animation="fadeInRight">
-                <img src="../images/fotos_galeria/peluqueria/foto_1_peluqueria.webp" alt="Resultado de peluquería en Narbo's" class="rounded-2xl shadow-2xl w-full object-cover aspect-square" />
-                <div class="absolute -bottom-6 -right-6 bg-brand-green text-white p-6 rounded-lg shadow-xl hidden lg:block">
-                    <p class="font-bold text-xl">Calidad Garantizada</p>
-                    <p class="opacity-80">Wella | L'Oréal | Schwarzkopf</p>
-                </div>
+
+            <!-- Grid de Servicios (Hub) -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Card 1: Cortes -->
+                <a href="cortes-de-pelo-chia.html" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="../images/fotos_galeria/peluqueria/foto_2_peluqueria.webp" alt="Cortes de Pelo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">Cortes & Estilo</h3>
+                        <p class="text-gray-600 text-sm mb-4">Diseños personalizados para dama y asesoría de imagen.</p>
+                        <span class="text-brand-green font-bold text-sm uppercase tracking-wider flex items-center">
+                            Ver Detalles 
+                            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Card 2: Barbería -->
+                <a href="barberia-chia.html" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="../images/fotos_galeria/peluqueria/foto_3_peluqueria.webp" alt="Barbería" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">Barbería</h3>
+                        <p class="text-gray-600 text-sm mb-4">Cortes masculinos modernos, barbas y ritual de toalla.</p>
+                        <span class="text-brand-green font-bold text-sm uppercase tracking-wider flex items-center">
+                            Ver Detalles 
+                            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Card 3: Color -->
+                <a href="balayage-y-color.html" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="../images/fotos_galeria/peluqueria/foto_4_peluqueria.webp" alt="Balayage y Color" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">Color & Balayage</h3>
+                        <p class="text-gray-600 text-sm mb-4">Expertos en rubios, corrección de color y técnicas avanzadas.</p>
+                        <span class="text-brand-green font-bold text-sm uppercase tracking-wider flex items-center">
+                            Ver Detalles 
+                            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Card 4: Tratamientos -->
+                <a href="tratamientos-capilares.html" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="../images/fotos_galeria/peluqueria/foto_5_peluqueria.webp" alt="Tratamientos Capilares" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">Salud Capilar</h3>
+                        <p class="text-gray-600 text-sm mb-4">Recuperación profunda, Keratinas y Botox Capilar.</p>
+                        <span class="text-brand-green font-bold text-sm uppercase tracking-wider flex items-center">
+                            Ver Detalles 
+                            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </span>
+                    </div>
+                </a>
+
             </div>
         </div>
       </section>
