@@ -517,3 +517,15 @@ header nav .desktop-menu a.nav-link-active::after {
 }
 
 /* --- FIN: ESTILOS PARA BLOCKQUOTE EN ARTÍCULOS --- */
+
+/* --- INICIO: ANIMACIONES FLOTANTES --- */
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.animate-floating {
+    animation: floating 3s ease-in-out infinite;
+}
+/* --- FIN: ANIMACIONES FLOTANTES --- */
