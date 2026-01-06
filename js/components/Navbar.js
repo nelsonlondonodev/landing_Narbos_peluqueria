@@ -44,11 +44,10 @@ export function getNavbarHTML(basePath = './', isHome = true) {
                 </div>
             </div>
 
-            ${navLink('#nosotros', 'navNosotros', 'Nosotros')}
-            ${navLink('#galeria', 'navGaleria', 'Galería')}
-            ${navLink('#resenas', 'navResenas', 'Reseñas')}
-            ${navLink('#ubicacion', 'navUbicacion', 'Ubicación')}
-            ${navLink('#contacto', 'navContacto', 'Contacto')}
+            ${navLink(basePath + 'nosotros.html', 'navNosotros', 'Nosotros')}
+            ${navLink(basePath + 'galeria-trabajos.html', 'navGaleria', 'Galería')} 
+            ${navLink(basePath + 'resenas.html', 'navResenas', 'Reseñas')}
+            ${navLink(basePath + 'contacto.html', 'navContacto', 'Contacto')}
             <a href="${basePath}blog/index.html" class="text-white hover:text-brand-medium active:text-brand-medium">Blog</a>
         </div>
 
@@ -77,11 +76,10 @@ export function getNavbarHTML(basePath = './', isHome = true) {
                 <a href="${basePath}depilacion/index.html" class="block py-2 px-6 text-lg hover:bg-brand-light/10 text-brand-gray-dark">Depilación</a>
             </div>
 
-            ${navLink('#nosotros', 'navNosotros', 'Nosotros', true)}
-            ${navLink('#galeria', 'navGaleria', 'Galería', true)}
-            ${navLink('#resenas', 'navResenas', 'Reseñas', true)}
-            ${navLink('#ubicacion', 'navUbicacion', 'Ubicación', true)}
-            ${navLink('#contacto', 'navContacto', 'Contacto', true)}
+            ${navLink(basePath + 'nosotros.html', 'navNosotros', 'Nosotros', true)}
+            ${navLink(basePath + 'galeria-trabajos.html', 'navGaleria', 'Galería', true)}
+            ${navLink(basePath + 'resenas.html', 'navResenas', 'Reseñas', true)}
+            ${navLink(basePath + 'contacto.html', 'navContacto', 'Contacto', true)}
             <a href="${basePath}blog/index.html" class="block py-2 px-4 text-lg hover:bg-gray-100 rounded-md active:bg-gray-200">Blog</a>
         </div>
     </div>
