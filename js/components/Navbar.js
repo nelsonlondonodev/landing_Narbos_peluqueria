@@ -34,10 +34,12 @@ export function getNavbarHTML(basePath = './', isHome = true) {
                 </button>
                 
                 <!-- Dropdown Menu -->
-                <div id="desktop-services-menu" class="absolute left-0 top-full pt-2 w-48 hidden group-hover:block hover:block z-50">
-                    <div class="bg-white rounded-md shadow-xl py-2 border border-brand-medium/20">
-                        <a href="${basePath}servicios/peluqueria.html" class="block px-4 py-2 text-sm text-brand-gray-dark hover:bg-brand-light/20 hover:text-brand-green transition-colors">Peluquería</a>
-                        <!-- Futuros servicios aquí -->
+                <div id="desktop-services-menu" class="absolute left-0 top-full pt-2 w-56 hidden group-hover:block hover:block z-50">
+                    <div class="bg-white rounded-md shadow-xl py-2 border border-brand-medium/20 text-left">
+                        <a href="${basePath}peluqueria/index.html" class="block px-4 py-2 text-sm text-brand-gray-dark hover:bg-brand-light/20 hover:text-brand-green transition-colors">Peluquería</a>
+                        <a href="${basePath}unas-manicure-pedicure/index.html" class="block px-4 py-2 text-sm text-brand-gray-dark hover:bg-brand-light/20 hover:text-brand-green transition-colors">Uñas y Manos</a>
+                        <a href="${basePath}spa-y-estetica/masajes-relajantes-chia.html" class="block px-4 py-2 text-sm text-brand-gray-dark hover:bg-brand-light/20 hover:text-brand-green transition-colors">Spa y Estética</a>
+                        <a href="${basePath}depilacion/index.html" class="block px-4 py-2 text-sm text-brand-gray-dark hover:bg-brand-light/20 hover:text-brand-green transition-colors">Depilación</a>
                     </div>
                 </div>
             </div>
@@ -66,7 +68,15 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         </div>
         <div class="flex flex-col px-8 space-y-4 overflow-y-auto max-h-[calc(100vh-80px)]">
             ${navLink('#inicio', 'navInicio', 'Inicio', true)}
-            ${navLink('#servicios', 'navServicios', 'Servicios', true)}
+            
+            <div class="border-b border-gray-100 pb-2">
+                <span class="block py-2 px-4 text-sm font-bold text-gray-500 uppercase tracking-wider">Servicios</span>
+                <a href="${basePath}peluqueria/index.html" class="block py-2 px-6 text-lg hover:bg-brand-light/10 text-brand-gray-dark">Peluquería</a>
+                <a href="${basePath}unas-manicure-pedicure/index.html" class="block py-2 px-6 text-lg hover:bg-brand-light/10 text-brand-gray-dark">Uñas</a>
+                <a href="${basePath}spa-y-estetica/masajes-relajantes-chia.html" class="block py-2 px-6 text-lg hover:bg-brand-light/10 text-brand-gray-dark">Spa</a>
+                <a href="${basePath}depilacion/index.html" class="block py-2 px-6 text-lg hover:bg-brand-light/10 text-brand-gray-dark">Depilación</a>
+            </div>
+
             ${navLink('#nosotros', 'navNosotros', 'Nosotros', true)}
             ${navLink('#galeria', 'navGaleria', 'Galería', true)}
             ${navLink('#resenas', 'navResenas', 'Reseñas', true)}
