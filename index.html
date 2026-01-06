@@ -243,7 +243,7 @@
             </div>
         </section>
 
-        <div id="contact-root"></div>
+
 
 
 
@@ -502,7 +502,6 @@
          * Mounts core components: Navbar, Contact Form, and Footer.
          */
         import { getNavbarHTML } from './js/components/Navbar.js';
-        import { getContactFormHTML } from './js/components/ContactForm.js';
         import { getFooterHTML } from './js/components/Footer.js';
 
         // 1. Mount Navbar
@@ -511,13 +510,7 @@
             navbarRoot.innerHTML = getNavbarHTML('./', true);
         }
 
-        // 2. Mount Contact Form
-        const contactRoot = document.getElementById('contact-root');
-        if (contactRoot) {
-            contactRoot.innerHTML = getContactFormHTML();
-        }
-
-        // 3. Mount Footer
+        // 2. Mount Footer
         const footerRoot = document.getElementById('footer-root');
         if (footerRoot) {
             footerRoot.innerHTML = getFooterHTML('./');
