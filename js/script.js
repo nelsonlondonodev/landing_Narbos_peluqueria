@@ -4,6 +4,7 @@ import { ContactFormController } from './controllers/ContactFormController.js';
 import { UIService } from './services/UIService.js';
 import { ShareButton } from './components/ShareButton.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
+import { WhatsAppButton } from './components/WhatsAppButton.js';
 
 
 // Ensure initApp is idempotent and robust
@@ -22,6 +23,7 @@ window.initApp = function() {
         new ContactFormController();
         new ShareButton();
         new FloatingDecorations();
+        new WhatsAppButton();
         
         // UI Interactions
         new UIService();
