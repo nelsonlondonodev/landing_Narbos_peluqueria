@@ -5,7 +5,7 @@ import { UIService } from './services/UIService.js';
 import { ShareButton } from './components/ShareButton.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
-import { FAQController } from './controllers/FAQController.js';
+import { FAQAccordion } from './components/FAQAccordion.js';
 
 
 // Ensure initApp is idempotent and robust
@@ -25,7 +25,7 @@ window.initApp = function() {
         new ShareButton();
         new FloatingDecorations();
         new WhatsAppButton();
-        new FAQController();
+        new FAQAccordion('#faq');
         
         // UI Interactions
         new UIService();

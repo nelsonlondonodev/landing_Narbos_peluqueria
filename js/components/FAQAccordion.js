@@ -1,10 +1,16 @@
-export class FAQController {
-    constructor() {
-        this.detailsElements = document.querySelectorAll('#faq details');
+export class FAQAccordion {
+    /**
+     * @param {string} selector - CSS selector for the FAQ container (e.g., '#faq' or '.faq-section')
+     */
+    constructor(selector = '#faq') {
+        this.container = document.querySelector(selector);
         this.init();
     }
 
     init() {
+        if (!this.container) return;
+
+        this.detailsElements = this.container.querySelectorAll('details');
         if (!this.detailsElements.length) return;
 
         this.detailsElements.forEach(details => {
@@ -51,7 +57,7 @@ export class FAQController {
         );
 
         animation.onfinish = () => {
-            // Optional: clear explicit styles if needed, though WAAPI usually cleans up automatically unless strictly filled
+            // Optional cleanup
         };
     }
 
