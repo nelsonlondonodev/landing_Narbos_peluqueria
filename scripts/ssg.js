@@ -46,28 +46,43 @@ async function runSSG() {
         }
     }
 
-    // 2. Procesar peluqueria/index.html (Peluquería)
-    const peluqueriaPath = path.join(DIST_DIR, 'peluqueria/index.html');
-    if (fs.existsSync(peluqueriaPath)) {
-        console.log('Rendering services for peluqueria/index.html...');
-        let html = fs.readFileSync(peluqueriaPath, 'utf8');
-        const dom = new JSDOM(html);
-        const document = dom.window.document;
-        
-        global.document = document;
-        global.window = dom.window;
+    // 2. Procesar páginas de servicios (Peluquería y derivadas)
+    const hairServiceFiles = [
+        'peluqueria/index.html',
+        'cortes-de-pelo-en-chia.html',
+        'barberia-en-chia.html',
+        'balayage-y-color-en-chia.html',
+        'tratamientos-capilares-chia.html',
+        'servicios/unas-manicura-pedicura-chia.html',
+        'servicios/spa-y-estetica-facial-chia.html',
+        'servicios/depilacion-y-pestanas-chia.html'
+    ];
 
-        const grid = document.getElementById('hair-services-grid');
-        if (grid) {
-            hairSalonServices.forEach(data => {
-                const card = new ServiceCard(data);
-                grid.appendChild(card.render());
-            });
+    for (const relativePath of hairServiceFiles) {
+        const fullPath = path.join(DIST_DIR, relativePath);
+        if (fs.existsSync(fullPath)) {
+            console.log(`Rendering services for ${relativePath}...`);
+            let html = fs.readFileSync(fullPath, 'utf8');
+            const dom = new JSDOM(html);
+            const document = dom.window.document;
+            
+            global.document = document;
+            global.window = dom.window;
 
-            fs.writeFileSync(peluqueriaPath, dom.serialize());
-            console.log('✅ peluqueria/index.html pre-renderizado.');
-        } else {
-            console.warn('⚠️ No se encontró #hair-services-grid en peluqueria/index.html');
+            const grid = document.getElementById('hair-services-grid');
+            if (grid) {
+                // Limpiar contenido existente si lo hay
+                grid.innerHTML = '';
+                hairSalonServices.forEach(data => {
+                    const card = new ServiceCard(data);
+                    grid.appendChild(card.render());
+                });
+
+                fs.writeFileSync(fullPath, dom.serialize());
+                console.log(`✅ ${relativePath} pre-renderizado.`);
+            } else {
+                console.warn(`⚠️ No se encontró #hair-services-grid en ${relativePath}`);
+            }
         }
     }
 }
