@@ -44,6 +44,14 @@ Para preservar el historial de indexación en Google Search Console y evitar err
         - **Centralización de Estilos:** Se eliminaron clases de utilidad redundantes (`bg-brand-light`) de **todos** los archivos HTML. El estilo base del sitio ahora se controla de forma global y mantenible desde `input.css`.
     - **Infraestructura de Compilación:** Se reparó y estabilizó el pipeline de construcción de Tailwind v4, asegurando la correcta generación de binarios y estilos.
 
+### 📝 Últimas Actualizaciones (7 de enero, 2026)
+- **Estrategia SEO Local & Arquitectura:**
+    - **Landing Pages Dedicadas:** Se crearon 7 páginas estáticas optimizadas para SEO local (ej: `cortes-de-pelo-en-chia.html`) con H1s únicos y contenido semántico, viviendo en la raíz para URLs limpias.
+    - **Inyección SSG Global:** Se actualizó `scripts/ssg.js` para pre-renderizar componentes dinámicos (`ServiceCard`) en *todas* las páginas de servicio durante el build, mejorando el Core Web Vitals (LCP).
+- **Estabilidad de Navegación:**
+    - **Rutas Absolutas:** Se migraron todos los enlaces internos (`js/data/*.js`) a formato absoluto (`/ruta...`). Esto soluciona definitivamente los errores 404 al navegar entre niveles de carpetas (`root` vs `peluqueria/` vs `servicios/`).
+    - **Breadcrumbs:** Corrección de rutas en la navegación de migas de pan.
+
 ### 📝 Últimas Actualizaciones (5 de enero, 2026)
 - **Correcciones Post-Migración Tailwind v4:**
 
