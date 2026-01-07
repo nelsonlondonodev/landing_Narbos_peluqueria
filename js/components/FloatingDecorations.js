@@ -32,12 +32,33 @@ export class FloatingDecorations {
     }
 
     init() {
+        // 1. Legacy/Specific Sections (Homepage)
         this.sections.forEach(section => {
              const element = document.getElementById(section.id);
              if (element) {
                  this.injectIcons(element, section.count, section.icons);
              }
         });
+
+        // 2. Generic Data Attribute Support [data-floating-bg="count|icons"]
+        // Example: data-floating-bg="2" implies 2 generic icons
+        const genericElements = document.querySelectorAll('[data-floating-bg]');
+        genericElements.forEach(el => {
+            const count = parseInt(el.dataset.floatingBg) || 2;
+            this.injectIcons(el, count, ['scissors', 'sparkle', 'leaf', 'gem']);
+        });
+
+        // 3. Blog Article Auto-Detection
+        // If we are in a blog article (has <article> tag), decorate the main container
+        const article = document.querySelector('article');
+        const main = document.querySelector('main');
+        if (article && main) {
+            // Avoid double injection if main already has ID in sections (unlikely) or data attrib
+            if (!main.hasAttribute('data-floating-bg-injected')) {
+                this.injectIcons(main, 4, ['scissors', 'comb', 'sparkle', 'leaf']);
+                main.setAttribute('data-floating-bg-injected', 'true');
+            }
+        }
     }
 
     injectIcons(element, count, allowedIcons) {
