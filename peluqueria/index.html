@@ -172,72 +172,8 @@
             </div>
 
             <!-- Grid de Servicios (Hub) -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <!-- Card 1: Cortes -->
-                <a href="cortes-de-pelo-chia.html" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="../images/fotos_galeria/peluqueria/foto_2_peluqueria.webp" alt="Cortes de Pelo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">Cortes & Estilo</h3>
-                        <p class="text-gray-600 text-sm mb-4">Diseños personalizados para dama y asesoría de imagen.</p>
-                        <span class="text-brand-green font-bold text-sm uppercase tracking-wider flex items-center">
-                            Ver Detalles 
-                            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Card 2: Barbería -->
-                <a href="barberia-chia.html" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="../images/fotos_galeria/peluqueria/foto_3_peluqueria.webp" alt="Barbería" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">Barbería</h3>
-                        <p class="text-gray-600 text-sm mb-4">Cortes masculinos modernos, barbas y ritual de toalla.</p>
-                        <span class="text-brand-green font-bold text-sm uppercase tracking-wider flex items-center">
-                            Ver Detalles 
-                            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Card 3: Color -->
-                <a href="balayage-y-color.html" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="../images/fotos_galeria/peluqueria/foto_4_peluqueria.webp" alt="Balayage y Color" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">Color & Balayage</h3>
-                        <p class="text-gray-600 text-sm mb-4">Expertos en rubios, corrección de color y técnicas avanzadas.</p>
-                        <span class="text-brand-green font-bold text-sm uppercase tracking-wider flex items-center">
-                            Ver Detalles 
-                            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Card 4: Tratamientos -->
-                <a href="tratamientos-capilares.html" class="group block bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="../images/fotos_galeria/peluqueria/foto_5_peluqueria.webp" alt="Tratamientos Capilares" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">Salud Capilar</h3>
-                        <p class="text-gray-600 text-sm mb-4">Recuperación profunda, Keratinas y Botox Capilar.</p>
-                        <span class="text-brand-green font-bold text-sm uppercase tracking-wider flex items-center">
-                            Ver Detalles 
-                            <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </span>
-                    </div>
-                </a>
-
+            <div id="hair-services-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Services injected via JS -->
             </div>
         </div>
       </section>
@@ -411,6 +347,19 @@
           new UIService();
           new FAQAccordion('#faq');
           new WhatsAppButton();
+
+          // 3. Montar Servicios de Peluquería (Standard Variant)
+          const hairServicesGrid = document.getElementById('hair-services-grid');
+          if (hairServicesGrid) {
+              import('../js/components/ServiceCard.js').then(({ ServiceCard }) => {
+                  import('../js/data/hairSalonServices.js').then(({ hairSalonServices }) => {
+                      hairSalonServices.forEach(data => {
+                          const card = new ServiceCard(data);
+                          hairServicesGrid.appendChild(card.render());
+                      });
+                  });
+              });
+          }
       });
     </script>
   </body>
