@@ -173,26 +173,53 @@
       <section class="py-16 md:py-24 bg-brand-light/10">
         <div class="container mx-auto px-6 max-w-screen-xl text-center">
             <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-12" data-animation="fadeInUp">Nuestros Trabajos</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-animation="fadeInUp" data-animation-delay="0.2s">
-                <!-- Cortes & Estilo -->
-                <img src="../images/fotos_galeria/peluqueria/foto_6_peluqueria.webp" alt="Corte y diseño dama" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 w-full aspect-video object-cover">
-                <img src="../images/fotos_galeria/peluqueria/foto_7_peluqueria.webp" alt="Estilismo profesional" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 w-full aspect-video object-cover">
+            <!-- Bento Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]" data-animation="fadeInUp" data-animation-delay="0.2s">
                 
-                <!-- Barbería (Provisional: foto_8) -->
-                <img src="../images/fotos_galeria/peluqueria/foto_8_peluqueria.webp" alt="Barbería Clásica" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 w-full aspect-video object-cover">
-                <img src="../images/fotos_galeria/peluqueria/foto_8_peluqueria.webp" alt="Cortes Masculinos" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 w-full aspect-video object-cover">
+                <!-- 1. Principal: Corte/Estilo (Grande) -->
+                <div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="../images/fotos_galeria/peluqueria/foto_6_peluqueria.webp" alt="Corte y diseño dama destacado" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <p class="text-white font-serif text-xl font-bold">Cortes & Estilo</p>
+                    </div>
+                </div>
 
-                <!-- Color & Balayage -->
-                <img src="../images/fotos_galeria/peluqueria/foto_4_peluqueria.webp" alt="Balayage y Rubios" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 w-full aspect-video object-cover">
-                <img src="../images/fotos_galeria/peluqueria/foto_3_peluqueria.webp" alt="Corrección de color y Peinados" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 w-full aspect-video object-cover">
+                <!-- 2. Color (Vertical) -->
+                <div class="md:row-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="../images/fotos_galeria/peluqueria/foto_4_peluqueria.webp" alt="Balayage y Color" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <p class="text-white font-serif font-bold">Color</p>
+                    </div>
+                </div>
 
-                <!-- Uñas -->
-                <img src="../images/fotos_galeria/unas/foto_unas_1.webp" alt="Manicure Semipermanente" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 w-full aspect-video object-cover">
-                <img src="../images/fotos_galeria/unas/foto_unas_2.webp" alt="Nail Art y Diseño" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 w-full aspect-video object-cover">
+                <!-- 3. Barbería (Cuadrada) -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="../images/fotos_galeria/peluqueria/foto_8_peluqueria.webp" alt="Barbería" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <p class="text-white font-serif font-bold">Barbería</p>
+                    </div>
+                </div>
 
-                <!-- Spa (Provisional: Duplicada) -->
-                <img src="../images/fotos_galeria/estetica/foto_estetica_1.webp" alt="Estética Facial" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 w-full aspect-video object-cover">
-                <img src="../images/fotos_galeria/estetica/foto_estetica_1.webp" alt="Spa y Relajación" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 w-full aspect-video object-cover">
+                <!-- 4. Uñas (Cuadrada) -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="../images/fotos_galeria/unas/foto_unas_1.webp" alt="Manicure" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+
+                <!-- 5. Estilismo/Peinado (Horizontal 2 cols) -->
+                <div class="md:col-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="../images/fotos_galeria/peluqueria/foto_7_peluqueria.webp" alt="Estilismo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+
+                 <!-- 6. Spa (Cuadrada) -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="../images/fotos_galeria/estetica/foto_estetica_1.webp" alt="Spa Facial" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+                
+                 <!-- 7. Uñas Detalle (Cuadrada) -->
+                <div class="relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="../images/fotos_galeria/unas/foto_unas_2.webp" alt="Nail Art" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+
             </div>
         </div>
       </section>
