@@ -364,6 +364,14 @@
                   const data = pagesData['peluqueria'];
                   if (data && data.hero) {
                       heroRoot.innerHTML = getHeroHTML(data.hero);
+                      
+                      // Trigger animation manually since UIService missed it
+                      setTimeout(() => {
+                          const title = document.getElementById('hero-title');
+                          const subtitle = document.getElementById('hero-subtitle');
+                          if (title) title.classList.add('is-visible');
+                          if (subtitle) subtitle.classList.add('is-visible');
+                      }, 100);
                   }
               });
           }
