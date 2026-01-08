@@ -4,7 +4,7 @@ export const servicesData = [
         description: "Color, balayage, cortes, barbería, maquillaje y peinados con las mejores marcas: Wella, L'Oréal, y Schwarzkopf.",
         icon: '<path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>',
         link: "/peluqueria/index.html",
-        image: "images/fotos_galeria/peluqueria/foto_1_peluqueria.webp",
+        image: "images/fotos_galeria/peluqueria/foto_6_peluqueria.webp",
         animationDelay: "0s"
     },
     {
@@ -28,7 +28,7 @@ export const servicesData = [
         description: "Servicios de depilación con cera o hilo y extensiones de pestañas para una mirada impactante.",
         icon: '<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5zM16 8L2 22M17.5 15H9"/>',
         link: "/servicios/depilacion-y-pestanas-chia.html",
-        image: "images/fotos_galeria/peluqueria/foto_2_peluqueria.webp", // Placeholder
+        image: "images/fotos_galeria/peluqueria/foto_6_peluqueria.webp", // Placeholder
         animationDelay: "0.6s"
     }
 ];

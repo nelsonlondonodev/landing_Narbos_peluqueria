@@ -3,14 +3,14 @@ export const hairSalonServices = [
         title: "Cortes & Estilo",
         description: "Diseños personalizados para dama y asesoría de imagen.",
         link: "/cortes-de-pelo-en-chia.html",
-        image: "../images/fotos_galeria/peluqueria/foto_2_peluqueria.webp",
+        image: "../images/fotos_galeria/peluqueria/foto_6_peluqueria.webp",
         variant: "standard"
     },
     {
         title: "Barbería",
         description: "Cortes masculinos modernos, barbas y ritual de toalla.",
         link: "/barberia-en-chia.html",
-        image: "../images/fotos_galeria/peluqueria/foto_3_peluqueria.webp",
+        image: "../images/fotos_galeria/peluqueria/foto_8_peluqueria.webp", // Provisional (es de pestañas pero sirve por tono oscuro hasta tener foto real) o usamos foto_3
         variant: "standard"
     },
     {
