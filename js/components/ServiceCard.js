@@ -65,13 +65,13 @@ export class ServiceCard {
 
     renderOverlay(element) {
         // Overlay Variant (Home Style)
-        element.className = "group relative p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl overflow-hidden cursor-pointer block h-full select-none bg-brand-green";
+        element.className = "group relative p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl overflow-hidden cursor-pointer block h-full select-none bg-brand-green hover:bg-white transition-colors duration-500";
 
         let backgroundHtml = '';
         if (this.image) {
             backgroundHtml = `
-                <img src="${this.image}" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 z-0 opacity-40 group-hover:opacity-30">
-                <div class="absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0"></div>
+                <img src="${this.image}" alt="" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0 transition-opacity duration-500 group-hover:opacity-20"></div>
             `;
         } else {
              backgroundHtml = `<div class="absolute inset-0 bg-gradient-to-br from-brand-green to-brand-green-dark z-0"></div>`;
@@ -79,14 +79,14 @@ export class ServiceCard {
 
         element.innerHTML = `
             ${backgroundHtml}
-            <svg class="w-12 h-12 mb-4 text-white transition-colors duration-300 relative z-10 animate-floating" 
+            <svg class="w-12 h-12 mb-4 text-white transition-colors duration-300 relative z-10 animate-floating group-hover:text-brand-green-dark" 
                  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
                  fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 ${this.icon || ''}
             </svg>
-            <h3 class="text-2xl font-serif font-bold text-white mb-3 relative z-10 drop-shadow-md">${this.title}</h3>
-            <p class="text-brand-light relative z-10 drop-shadow-sm font-medium opacity-95">${this.description}</p>
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 z-20 pointer-events-none"></div>
+            <h3 class="text-2xl font-serif font-bold text-white mb-3 relative z-10 drop-shadow-md transition-colors duration-300 group-hover:text-brand-gray-dark">${this.title}</h3>
+            <p class="text-brand-light relative z-10 drop-shadow-sm font-medium opacity-95 transition-colors duration-300 group-hover:text-brand-gray-dark group-hover:font-semibold">${this.description}</p>
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-white/10 transition-colors duration-300 z-20 pointer-events-none"></div>
         `;
     }
 
