@@ -19,12 +19,12 @@ export function getNavbarHTML(basePath = './', isHome = true) {
 
     return `
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center max-w-screen-xl">
-        <a href="${linkPrefix}#inicio" class="block">
+        <a href="${isHome ? '#' : basePath + 'index.html'}" class="block">
             <img src="${basePath}images/logo_narbos.webp" alt="Logo de Narbo's Salón Spa" class="h-14 w-auto" width="280" height="56">
         </a>
         
         <div class="desktop-menu flex items-center space-x-8 max-md:hidden">
-            ${navLink('#inicio', 'navInicio', 'Inicio')}
+            ${navLink(isHome ? '#' : basePath + 'index.html', 'navInicio', 'Inicio')}
             
             <!-- Dropdown Servicios -->
             <div class="relative group">
@@ -66,7 +66,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             </button>
         </div>
         <div class="flex flex-col px-8 space-y-4 overflow-y-auto max-h-[calc(100vh-80px)]">
-            ${navLink('#inicio', 'navInicio', 'Inicio', true)}
+            ${navLink(isHome ? '#' : basePath + 'index.html', 'navInicio', 'Inicio', true)}
             
             <div class="border-b border-gray-100 pb-2">
                 <span class="block py-2 px-4 text-sm font-bold text-gray-500 uppercase tracking-wider">Servicios</span>
