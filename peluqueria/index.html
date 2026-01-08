@@ -147,20 +147,11 @@
     </nav>
 
     <main>
-      <!-- Hero de Servicio (Consistente con Home) -->
-      <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden" data-floating-bg="3">
-        <img src="../images/fotos_galeria/peluqueria/foto_7_peluqueria.webp" alt="Servicio de Peluquería profesional en Narbo's" class="w-full h-full object-cover absolute inset-0 z-0" loading="eager" width="1920" height="1080">
-        <div class="absolute inset-0 bg-black/40 z-10"></div>
-        <div class="absolute z-20 inset-0 flex items-center justify-center px-6">
-            <div class="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-xl shadow-2xl max-w-3xl text-center" data-animation="zoomIn">
-                <h1 class="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-4">Peluquería en Chía: Expertos en Estilo, Color y Bienestar</h1>
-                <p class="text-lg md:text-xl text-gray-700">Expertos en realzar tu belleza con técnicas de vanguardia y productos de clase mundial.</p>
-            </div>
-        </div>
-      </section>
+      <!-- Hero Injection Point (SSG) -->
+      <div id="hero-root"></div>
 
       <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
-      <section class="py-16 md:py-24 bg-white overflow-x-hidden">
+      <section class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
         <div class="container mx-auto px-6 max-w-screen-xl">
             <div class="text-center mb-16" data-animation="fadeInUp">
               <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
@@ -358,6 +349,22 @@
                           hairServicesGrid.appendChild(card.render());
                       });
                   });
+              });
+          }
+
+          // 4. Fallback Client-Side para Desarrollo (Hero)
+          // Si estamos en dev (o falló el SSG), #hero-root estará vacío. Lo llenamos dinámicamente.
+          const heroRoot = document.getElementById('hero-root');
+          if (heroRoot && !heroRoot.hasChildNodes()) {
+              console.log("Hydrating Hero from Client (Dev Mode)...");
+              Promise.all([
+                  import('../js/components/HeroSection.js'),
+                  import('../js/data/pagesData.js')
+              ]).then(([{ getHeroHTML }, { pagesData }]) => {
+                  const data = pagesData['peluqueria'];
+                  if (data && data.hero) {
+                      heroRoot.innerHTML = getHeroHTML(data.hero);
+                  }
               });
           }
       });

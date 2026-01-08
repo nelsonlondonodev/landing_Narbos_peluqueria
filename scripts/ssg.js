@@ -47,21 +47,34 @@ async function runSSG() {
     }
 
     // 2. Procesar páginas de servicios (Peluquería y derivadas)
-    const hairServiceFiles = [
-        'peluqueria/index.html',
-        'cortes-de-pelo-en-chia.html',
-        'barberia-en-chia.html',
-        'balayage-y-color-en-chia.html',
-        'tratamientos-capilares-chia.html',
-        'servicios/unas-manicura-pedicura-chia.html',
-        'servicios/spa-y-estetica-facial-chia.html',
-        'servicios/depilacion-y-pestanas-chia.html'
+    // Importamos la configuración compartida (Dinámica para soportar ESM en build script si es necesario, 
+    // pero como ssg.js es modules, probaremos import estático o dinámico. 
+    // Nota: 'pagesData.js' usa export const, debe funcionar con import estático arriba si configuramos bien,
+    // pero para evitar conflictos de ruta relativa en ejecución node, usaremos import() dinámico.
+    
+    const { pagesData } = await import('../js/data/pagesData.js');
+
+    const pagesConfig = [
+        {
+            path: 'peluqueria/index.html',
+            key: 'peluqueria'
+        },
+        // Mapeo para otras páginas (se irán migrando)
+        { path: 'cortes-de-pelo-en-chia.html' },
+        { path: 'barberia-en-chia.html' },
+        { path: 'balayage-y-color-en-chia.html' },
+        { path: 'tratamientos-capilares-chia.html' },
+        { path: 'servicios/unas-manicura-pedicura-chia.html' },
+        { path: 'servicios/spa-y-estetica-facial-chia.html' },
+        { path: 'servicios/depilacion-y-pestanas-chia.html' }
     ];
 
-    for (const relativePath of hairServiceFiles) {
+    for (const pageConfig of pagesConfig) {
+        const relativePath = pageConfig.path;
         const fullPath = path.join(DIST_DIR, relativePath);
+        
         if (fs.existsSync(fullPath)) {
-            console.log(`Rendering services for ${relativePath}...`);
+            console.log(`Rendering services/hero for ${relativePath}...`);
             let html = fs.readFileSync(fullPath, 'utf8');
             const dom = new JSDOM(html);
             const document = dom.window.document;
@@ -69,20 +82,33 @@ async function runSSG() {
             global.document = document;
             global.window = dom.window;
 
+            // A. Inyección de Servicios (Lógica existente)
             const grid = document.getElementById('hair-services-grid');
             if (grid) {
-                // Limpiar contenido existente si lo hay
                 grid.innerHTML = '';
                 hairSalonServices.forEach(data => {
                     const card = new ServiceCard(data);
                     grid.appendChild(card.render());
                 });
-
-                fs.writeFileSync(fullPath, dom.serialize());
-                console.log(`✅ ${relativePath} pre-renderizado.`);
-            } else {
-                console.warn(`⚠️ No se encontró #hair-services-grid en ${relativePath}`);
             }
+
+            // B. Inyección de Hero (Nueva lógica)
+            if (pageConfig.key && pagesData[pageConfig.key] && pagesData[pageConfig.key].hero) {
+                const heroData = pagesData[pageConfig.key].hero;
+                const heroRoot = document.getElementById('hero-root');
+                
+                if (heroRoot) {
+                     const { getHeroHTML } = await import('../js/components/HeroSection.js');
+                     heroRoot.innerHTML = getHeroHTML(heroData);
+                     console.log(`✨ Hero inyectado en ${relativePath}`);
+                } else {
+                    console.warn(`⚠️ No se encontró #hero-root en ${relativePath}, saltando inyección de Hero.`);
+                }
+            }
+
+
+            fs.writeFileSync(fullPath, dom.serialize());
+            console.log(`✅ ${relativePath} procesado.`);
         }
     }
 }
