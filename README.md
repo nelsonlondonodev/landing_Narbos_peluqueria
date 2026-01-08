@@ -34,7 +34,15 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 3. Etiquetas Canonicals: Todas las páginas deben incluir una etiqueta <link rel="canonical" href="https://narbossalon.com/..."> que coincida exactamente con la URL final sin www.
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
-### 📝 Últimas Actualizaciones (8 de enero, 2026)
+### 📝 Últimas Actualizaciones (8 de enero, 2026 - Parte 2)
+- **UX Multimedia ("Bento Grid" Premium):**
+    - Se transformó la galería tradicional de imágenes en un **Bento Grid** moderno en las páginas `peluqueria/index.html` y `cortes-de-pelo-en-chia.html`.
+    - **Video Híbrido:** Se integró contenido de video (`.mp4`) con **Lazy Loading Inteligente** (IntersectionObserver + Poster) para no afectar la velocidad de carga inicial (Core Web Vitals).
+    - **SEO de Video:** Implementación de Schema Markup **VideoObject (JSON-LD)** para garantizar la indexación correcta en Google Search Console.
+    - **Pinterest Mobile Layout:** Optimización específica para móviles, pasando de 1 columna a **2 columnas**, mejorando la densidad de contenido y la retención del usuario.
+    - **Conversion rate optimization (CRO):** Se reemplazó el botón saliente de Instagram por un **Call-to-Action (CTA) contextual** directo a WhatsApp al final de cada galería.
+
+### 📝 Últimas Actualizaciones (8 de enero, 2026 - Parte 1)
 - **Refactorización de Assets (Imágenes):**
     - Se reorganizó la carpeta `images/` eliminando el subdirectorio obsoleto `fotos_galeria` y moviendo los recursos a carpetas semánticas (`peluqueria`, `spa-y-estetica`, `unas-manicure-pedicure`, `team`).
     - Se actualizaron masivamente todas las referencias en HTML y JS, y se restauraron archivos eliminados accidentalmente (`video_galeria`).
