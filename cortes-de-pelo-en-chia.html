@@ -49,6 +49,28 @@
       "description": "Cortes de cabello y estilismo profesional para dama"
     }
     </script>
+    
+    <!-- Video Schema for Google Indexing -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "Experiencia Narbo's Salón - Transformación y Estilo",
+      "description": "Descubre la experiencia de cambio de look en Narbo's Salón Spa. Especialistas en balayage, cortes modernos y cuidado capilar en Chía y Cajicá.",
+      "thumbnailUrl": [
+        "https://narbossalon.com/images/peluqueria/foto_6_peluqueria.webp"
+      ],
+      "uploadDate": "2024-05-15T08:00:00-05:00",
+      "duration": "PT0M15S",
+      "contentUrl": "https://narbossalon.com/video/video_instagram_1.mp4",
+      "embedUrl": "https://narbossalon.com/peluqueria/",
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": { "@type": "WatchAction" },
+        "userInteractionCount": 564
+      }
+    }
+    </script>
 
     <link rel="stylesheet" href="css/styles.css?v=1.2" />
     <link rel="icon" type="image/webp" href="images/favicon_narbos.webp" />
@@ -124,11 +146,89 @@
       <section class="py-16 md:py-24 bg-brand-light/10">
         <div class="container mx-auto px-6 max-w-screen-xl text-center">
             <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-12" data-animation="fadeInUp">Nuestros Trabajos</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-animation="fadeInUp" data-animation-delay="0.2s">
-                <img src="../images/peluqueria/foto_6_peluqueria.webp" alt="Corte dama" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
-                <img src="../images/peluqueria/foto_3_peluqueria.webp" alt="Peinado novia" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
-                <img src="../images/peluqueria/foto_4_peluqueria.webp" alt="Coloración balayage" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
-                <img src="../images/peluqueria/foto_5_peluqueria.webp" alt="Tratamiento capilar" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
+            <!-- Bento Grid Layout -->
+            <!-- CAMBIO: grid-cols-2 en móvil para estilo Pinterest denso -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[250px]" data-animation="fadeInUp" data-animation-delay="0.2s">
+                
+                <!-- 1. Principal: Video Destacado (Grande - Ocupa todo el ancho en móvil) -->
+                <div class="col-span-2 md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <video poster="images/peluqueria/foto_6_peluqueria.webp" muted loop playsinline class="lazy-video w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <source data-src="video/video_instagram_1.mp4" type="video/mp4">
+                        Tu navegador no soporta videos HTML5.
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-8">
+                        <div>
+                            <p class="text-white font-serif text-lg md:text-2xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Experiencia Narbo's</p>
+                            <p class="text-gray-200 text-xs md:text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Vive el cambio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Color (Vertical en desktop, normal en movil) -->
+                <div class="col-span-1 md:row-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="images/peluqueria/foto_4_peluqueria.webp" alt="Balayage y Color" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-6">
+                        <p class="text-white font-serif font-bold text-sm md:text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Color Profundo</p>
+                    </div>
+                </div>
+
+                <!-- 3. Balayage Detalle -->
+                <div class="col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="images/peluqueria/foto_3_peluqueria.webp" alt="Detalle Balayage" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-4">
+                        <p class="text-white font-serif font-bold text-xs md:text-sm">Iluminaciones</p>
+                    </div>
+                </div>
+
+                <!-- 4. Barbería -->
+                <div class="col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="images/peluqueria/foto_8_peluqueria.webp" alt="Barbería" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-4">
+                        <p class="text-white font-serif font-bold text-xs md:text-base">Barbería</p>
+                    </div>
+                </div>
+
+                <!-- 5. Uñas -->
+                <div class="col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="images/unas-manicure-pedicure/foto_unas_1.webp" alt="Manicure" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-4">
+                        <p class="text-white font-serif font-bold text-xs md:text-base">Nails Art</p>
+                    </div>
+                </div>
+
+                <!-- 6. Estilismo/Peinado (Destacado horizontal en ambos) -->
+                <div class="col-span-2 md:col-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="images/peluqueria/foto_7_peluqueria.webp" alt="Estilismo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-6">
+                        <p class="text-white font-serif text-lg md:text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Peinados</p>
+                    </div>
+                </div>
+
+                 <!-- 7. Spa -->
+                <div class="col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="images/spa-y-estetica/foto_estetica_1.webp" alt="Spa Facial" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-4">
+                        <p class="text-white font-serif font-bold text-xs md:text-base">Spa Facial</p>
+                    </div>
+                </div>
+                
+                 <!-- 8. Uñas Detalle -->
+                <div class="col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="images/unas-manicure-pedicure/foto_unas_2.webp" alt="Nail Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+
+                 <!-- 9. Tratamientos (Destacado en movil para cerrar bien) -->
+                <div class="col-span-2 md:col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="images/peluqueria/foto_5_peluqueria.webp" alt="Tratamiento Capilar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 object-top">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-4">
+                        <p class="text-white font-serif font-bold">Tratamientos</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-8 text-lg font-serif text-brand-gray-dark">
+                ¿Te gustó lo que viste? <a href="https://wa.me/573123462618?text=Hola,%20vi%20sus%20trabajos%20en%20la%20web%20y%20quisiera%20agendar%20una%20cita" target="_blank" rel="noopener noreferrer" class="text-brand-green font-bold hover:underline">Agenda tu cita aquí</a> y déjanos asesorarte.
             </div>
         </div>
       </section>
@@ -267,14 +367,14 @@
 
     <!-- Scripts -->
     <script type="module">
-      import { getNavbarHTML } from '../js/components/Navbar.js';
-      import { getFooterHTML } from '../js/components/Footer.js';
-      import { MobileMenu } from '../js/components/MobileMenu.js';
-      import { UIService } from '../js/services/UIService.js';
-      import { FAQAccordion } from '../js/components/FAQAccordion.js';
-      import { WhatsAppButton } from '../js/components/WhatsAppButton.js';
+      import { getNavbarHTML } from './js/components/Navbar.js';
+      import { getFooterHTML } from './js/components/Footer.js';
+      import { MobileMenu } from './js/components/MobileMenu.js';
+      import { UIService } from './js/services/UIService.js';
+      import { FAQAccordion } from './js/components/FAQAccordion.js';
+      import { WhatsAppButton } from './js/components/WhatsAppButton.js';
 
-      const basePath = '../';
+      const basePath = './';
       
       // 1. Inyección de Componentes Estáticos
       const navbarRoot = document.getElementById('navbar-root');
@@ -293,14 +393,40 @@
           // 3. Montar Servicios de Peluquería (Standard Variant)
           const hairServicesGrid = document.getElementById('hair-services-grid');
           if (hairServicesGrid) {
-              import('../js/components/ServiceCard.js').then(({ ServiceCard }) => {
-                  import('../js/data/hairSalonServices.js').then(({ hairSalonServices }) => {
+              import('./js/components/ServiceCard.js').then(({ ServiceCard }) => {
+                  import('./js/data/hairSalonServices.js').then(({ hairSalonServices }) => {
                       hairSalonServices.forEach(data => {
                           const card = new ServiceCard(data);
                           hairServicesGrid.appendChild(card.render());
                       });
                   });
               });
+          }
+
+          // 4. Autoplay Lazy Videos (UX/Performance) - Consistent with Peluquería
+          const lazyVideos = document.querySelectorAll('video.lazy-video');
+          if ('IntersectionObserver' in window) {
+              const videoObserver = new IntersectionObserver((entries, observer) => {
+                  entries.forEach(entry => {
+                      if (entry.isIntersecting) {
+                          const video = entry.target;
+                          const sources = video.querySelectorAll('source');
+                          
+                          sources.forEach(source => {
+                              if (source.dataset.src) {
+                                  source.src = source.dataset.src;
+                              }
+                          });
+
+                          video.load();
+                          video.play().catch(e => console.log("Autoplay prevented:", e));
+                          video.classList.remove('lazy-video');
+                          observer.unobserve(video);
+                      }
+                  });
+              }, { rootMargin: "0px 0px 50px 0px" });
+
+              lazyVideos.forEach(video => videoObserver.observe(video));
           }
       });
     </script>
