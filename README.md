@@ -34,6 +34,24 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 3. Etiquetas Canonicals: Todas las páginas deben incluir una etiqueta <link rel="canonical" href="https://narbossalon.com/..."> que coincida exactamente con la URL final sin www.
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
+### 📝 Últimas Actualizaciones (8 de enero, 2026)
+- **Refactorización de Assets (Imágenes):**
+    - Se reorganizó la carpeta `images/` eliminando el subdirectorio obsoleto `fotos_galeria` y moviendo los recursos a carpetas semánticas (`peluqueria`, `spa-y-estetica`, `unas-manicure-pedicure`, `team`).
+    - Se actualizaron masivamente todas las referencias en HTML y JS, y se restauraron archivos eliminados accidentalmente (`video_galeria`).
+- **Corrección de UX en Navegación (Navbar):**
+    - **Scroll Offset Fix:** Se eliminó el ancla `#inicio` en los enlaces de la Home para evitar que el navegador cargue la página con un desplazamiento indeseado.
+    - **Lógica de Colapso Invertida:** Se corrigió el CSS para que la barra inicie "Alta" (con padding) y se contraiga al hacer scroll, alineando la transición visual con la reducción del logo.
+    - **Compilación Manual:** Se documenta que cambios en `input.css` requieren ejecutar `npx @tailwindcss/cli -i ./css/input.css -o ./css/styles.css` si no se usa el modo *dev*.
+
+### 📝 Últimas Actualizaciones (8 de enero, 2026)
+- **Refactorización de Assets (Imágenes):**
+    - Se reorganizó la carpeta `images/` eliminando el subdirectorio obsoleto `fotos_galeria` y moviendo los recursos a carpetas semánticas (`peluqueria`, `spa-y-estetica`, `unas-manicure-pedicure`, `team`).
+    - Se actualizaron masivamente todas las referencias en HTML y JS, y se restauraron archivos eliminados accidentalmente (`video_galeria`).
+- **Corrección de UX en Navegación (Navbar):**
+    - **Scroll Offset Fix:** Se eliminó el ancla `#inicio` en los enlaces de la Home para evitar que el navegador cargue la página con un desplazamiento indeseado.
+    - **Lógica de Colapso Invertida:** Se corrigió el CSS para que la barra inicie "Alta" (con padding) y se contraiga al hacer scroll, alineando la transición visual con la reducción del logo.
+    - **Compilación Manual:** Se documenta que cambios en `input.css` requieren ejecutar `npx @tailwindcss/cli -i ./css/input.css -o ./css/styles.css` si no se usa el modo *dev*.
+
 ### 📝 Últimas Actualizaciones (4 de enero, 2026)
 - **Estabilización de UI y Arquitectura (Tailwind v4):**
     - **Solución de Bugs Críticos:**
