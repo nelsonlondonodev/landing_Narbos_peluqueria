@@ -176,79 +176,80 @@
             <p class="text-gray-600 mb-12 max-w-2xl mx-auto" data-animation="fadeInUp">Descubre la precisión y el arte detrás de cada servicio.</p>
             
             <!-- Bento Grid Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]" data-animation="fadeInUp" data-animation-delay="0.2s">
+            <!-- CAMBIO: grid-cols-2 en móvil para estilo Pinterest denso -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[250px]" data-animation="fadeInUp" data-animation-delay="0.2s">
                 
-                <!-- 1. Principal: Video Destacado (Grande) -->
-                <div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
-                    <video autoplay muted loop playsinline class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <source src="../video/video_instagram_1.mp4" type="video/mp4">
+                <!-- 1. Principal: Video Destacado (Grande - Ocupa todo el ancho en móvil) -->
+                <div class="col-span-2 md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <video poster="../images/peluqueria/foto_6_peluqueria.webp" muted loop playsinline class="lazy-video w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <source data-src="../video/video_instagram_1.mp4" type="video/mp4">
                         Tu navegador no soporta videos HTML5.
                     </video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-8">
                         <div>
-                            <p class="text-white font-serif text-2xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Experiencia Narbo's</p>
-                            <p class="text-gray-200 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Vive el cambio</p>
+                            <p class="text-white font-serif text-lg md:text-2xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Experiencia Narbo's</p>
+                            <p class="text-gray-200 text-xs md:text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">Vive el cambio</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. Color (Vertical) -->
-                <div class="md:row-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
+                <!-- 2. Color (Vertical en desktop, normal en movil) -->
+                <div class="col-span-1 md:row-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
                     <img src="../images/peluqueria/foto_4_peluqueria.webp" alt="Balayage y Color" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                        <p class="text-white font-serif text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Color Profundo</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-6">
+                        <p class="text-white font-serif font-bold text-sm md:text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Color Profundo</p>
                     </div>
                 </div>
 
-                <!-- 3. Balayage Detalle (Cuadrada - NUEVA) -->
-                <div class="relative group overflow-hidden rounded-2xl shadow-lg">
+                <!-- 3. Balayage Detalle -->
+                <div class="col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
                     <img src="../images/peluqueria/foto_3_peluqueria.webp" alt="Detalle Balayage" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <p class="text-white font-serif font-bold text-sm">Iluminaciones</p>
+                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-4">
+                        <p class="text-white font-serif font-bold text-xs md:text-sm">Iluminaciones</p>
                     </div>
                 </div>
 
-                <!-- 4. Barbería (Cuadrada) -->
-                <div class="relative group overflow-hidden rounded-2xl shadow-lg">
+                <!-- 4. Barbería -->
+                <div class="col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
                     <img src="../images/peluqueria/foto_8_peluqueria.webp" alt="Barbería" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <p class="text-white font-serif font-bold">Barbería</p>
+                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-4">
+                        <p class="text-white font-serif font-bold text-xs md:text-base">Barbería</p>
                     </div>
                 </div>
 
-                <!-- 5. Uñas (Cuadrada) -->
-                <div class="relative group overflow-hidden rounded-2xl shadow-lg">
+                <!-- 5. Uñas -->
+                <div class="col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
                     <img src="../images/unas-manicure-pedicure/foto_unas_1.webp" alt="Manicure" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <p class="text-white font-serif font-bold">Nails Art</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-4">
+                        <p class="text-white font-serif font-bold text-xs md:text-base">Nails Art</p>
                     </div>
                 </div>
 
-                <!-- 6. Estilismo/Peinado (Horizontal 2 cols) -->
-                <div class="md:col-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
+                <!-- 6. Estilismo/Peinado (Destacado horizontal en ambos) -->
+                <div class="col-span-2 md:col-span-2 relative group overflow-hidden rounded-2xl shadow-lg">
                     <img src="../images/peluqueria/foto_7_peluqueria.webp" alt="Estilismo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                        <p class="text-white font-serif text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Peinados</p>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-6">
+                        <p class="text-white font-serif text-lg md:text-xl font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Peinados</p>
                     </div>
                 </div>
 
-                 <!-- 7. Spa (Cuadrada) -->
-                <div class="relative group overflow-hidden rounded-2xl shadow-lg">
+                 <!-- 7. Spa -->
+                <div class="col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
                     <img src="../images/spa-y-estetica/foto_estetica_1.webp" alt="Spa Facial" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                        <p class="text-white font-serif font-bold">Spa Facial</p>
+                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-4">
+                        <p class="text-white font-serif font-bold text-xs md:text-base">Spa Facial</p>
                     </div>
                 </div>
                 
-                 <!-- 8. Uñas Detalle (Cuadrada) -->
-                <div class="relative group overflow-hidden rounded-2xl shadow-lg">
+                 <!-- 8. Uñas Detalle -->
+                <div class="col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
                     <img src="../images/unas-manicure-pedicure/foto_unas_2.webp" alt="Nail Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 </div>
 
-                 <!-- 9. Tratamientos (Cuadrada - NUEVA) -->
-                <div class="relative group overflow-hidden rounded-2xl shadow-lg">
-                    <img src="../images/peluqueria/foto_5_peluqueria.webp" alt="Tratamiento Capilar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                 <!-- 9. Tratamientos (Destacado en movil para cerrar bien) -->
+                <div class="col-span-2 md:col-span-1 relative group overflow-hidden rounded-2xl shadow-lg">
+                    <img src="../images/peluqueria/foto_5_peluqueria.webp" alt="Tratamiento Capilar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 object-top">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 md:p-4">
                         <p class="text-white font-serif font-bold">Tratamientos</p>
                     </div>
                 </div>
@@ -453,6 +454,31 @@
                       }, 100);
                   }
               });
+          }
+          // 5. Autoplay Lazy Videos (UX/Performance)
+          const lazyVideos = document.querySelectorAll('video.lazy-video');
+          if ('IntersectionObserver' in window) {
+              const videoObserver = new IntersectionObserver((entries, observer) => {
+                  entries.forEach(entry => {
+                      if (entry.isIntersecting) {
+                          const video = entry.target;
+                          const sources = video.querySelectorAll('source');
+                          
+                          sources.forEach(source => {
+                              if (source.dataset.src) {
+                                  source.src = source.dataset.src;
+                              }
+                          });
+
+                          video.load();
+                          video.play().catch(e => console.log("Autoplay prevented:", e));
+                          video.classList.remove('lazy-video');
+                          observer.unobserve(video);
+                      }
+                  });
+              }, { rootMargin: "0px 0px 50px 0px" }); // Cargar un poco antes de que llegue
+
+              lazyVideos.forEach(video => videoObserver.observe(video));
           }
       });
     </script>
