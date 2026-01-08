@@ -2,9 +2,10 @@
 
 @theme {
   --color-brand-green: #6B755A;
-  --color-brand-light: #C7B8A8;
+  --color-brand-light: #DED2C4;
   --color-brand-medium: #C5AB94;
-  --color-brand-gray-light: #858A76;
+  --color-brand-gray-light: #BEC2B4;
+  --color-brand-gray-lighter: #D3D3CB;
   --color-brand-gray-dark: #364041;
   --font-serif: "Playfair Display", serif;
   --font-sans: "Montserrat", sans-serif;
