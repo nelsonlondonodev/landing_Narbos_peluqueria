@@ -1943,16 +1943,16 @@ header nav .desktop-menu a.nav-link-active::after {
   transform: scale(1.05);
 }
 #service-card-peluqueria::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/fotos_galeria/peluqueria/foto_7_peluqueria.webp");
+  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/peluqueria/foto_7_peluqueria.webp");
 }
 #service-card-manos-pies::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/fotos_galeria/unas/foto_unas_1.webp");
+  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/unas-manicure-pedicure/foto_unas_1.webp");
 }
 #service-card-estetica::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/fotos_galeria/estetica/foto_estetica_1.webp");
+  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/spa-y-estetica/foto_estetica_1.webp");
 }
 #service-card-depilacion::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/fotos_galeria/peluqueria/foto_8_peluqueria.webp");
+  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/peluqueria/foto_8_peluqueria.webp");
 }
 .whatsapp-float {
   position: fixed;
