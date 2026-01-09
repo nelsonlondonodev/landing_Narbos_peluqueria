@@ -1,6 +1,6 @@
 /**
  * Componente para manejar decoraciones flotantes con efecto Parallax.
- * Añade profundidad visual sin interferir con el contenido principal.
+ * Optimizado para Tailwind CSS v4 con diseño Responsivo.
  */
 export class FloatingDecorations {
     constructor() {
@@ -9,7 +9,6 @@ export class FloatingDecorations {
     }
 
     init() {
-        // Solo inicializar si no estamos en un dispositivo muy pequeño o si el usuario prefiere movimiento reducido
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) return;
 
@@ -18,30 +17,53 @@ export class FloatingDecorations {
     }
 
     injectDecorations() {
-        // Configuración de las hojas: Ubicación, imagen y velocidad de parallax
+        /**
+         * Configuración de las hojas usando clases de Tailwind v4.
+         * mobileClasses: Estilo por defecto (discreto para móvil).
+         * desktopClasses: md: o lg: para el diseño inmersivo en PC.
+         */
         const configs = [
             // --- Sección Inicio (Hero) ---
-            // Hoja Seca Izquierda: Movida hacia la derecha para morder la imagen (left: -1% en lugar de -5%)
-            // Z-Index: 10 (Entre imagen z-0 y texto z-20)
-            { top: '10%', left: '-1%', size: '180px', rotate: '45deg', speed: 0.1, parent: 'inicio', img: 'hoja-seca-3d.png', zIndex: 'z-10' },
-            
-            // Hoja Verde Derecha: Subida y movida a la izquierda drásticamente para superponerse claramente sobre la modelo
-            // Z-Index: 10 (Entre imagen z-0 y texto z-20)
-            { top: '35%', right: '15%', size: '220px', rotate: '-15deg', speed: 0.15, parent: 'inicio', img: 'hoja-verde-3d.png', zIndex: 'z-10' },
+            { 
+                parent: 'inicio', 
+                img: 'hoja-seca-3d.png', 
+                speed: 0.1,
+                classes: 'w-20 -left-4 top-[10%] opacity-70 md:w-44 md:left-[-1%] md:opacity-90 z-10' 
+            },
+            { 
+                parent: 'inicio', 
+                img: 'hoja-verde-3d.png', 
+                speed: 0.15,
+                classes: 'w-24 -right-4 top-[40%] opacity-70 md:w-56 md:right-[15%] md:top-[35%] md:opacity-90 z-10' 
+            },
             
             // --- Sección Servicios ---
-            { top: '50px', right: '-80px', size: '200px', rotate: '120deg', speed: 0.08, parent: 'servicios', img: 'hoja-seca-3d.png', zIndex: 'z-0' },
-            { top: '40%', left: '-60px', size: '160px', rotate: '200deg', speed: 0.12, parent: 'servicios', img: 'hoja-verde-3d.png', zIndex: 'z-0' },
+            { 
+                parent: 'servicios', 
+                img: 'hoja-seca-3d.png', 
+                speed: 0.08,
+                classes: 'w-16 -right-6 top-10 md:w-48 md:-right-20 md:top-12 z-0' 
+            },
+            { 
+                parent: 'servicios', 
+                img: 'hoja-verde-3d.png', 
+                speed: 0.12,
+                classes: 'w-20 -left-6 top-1/2 md:w-40 md:-left-12 md:top-[40%] z-0' 
+            },
             
             // --- Sección FAQ ---
-            { top: '10px', left: '10px', size: '120px', rotate: '10deg', speed: 0.05, parent: 'faq', img: 'hoja-seca-3d.png', zIndex: 'z-0' }
+            { 
+                parent: 'faq', 
+                img: 'hoja-seca-3d.png', 
+                speed: 0.05,
+                classes: 'w-12 left-0 top-0 md:w-32 md:left-2 md:top-2 z-0' 
+            }
         ];
 
         configs.forEach((config) => {
             const parentSection = document.getElementById(config.parent);
             if (!parentSection) return;
 
-            // Aseguramos contexto de posicionamiento
             if (getComputedStyle(parentSection).position === 'static') {
                 parentSection.classList.add('relative');
             }
@@ -49,55 +71,37 @@ export class FloatingDecorations {
             const leaf = document.createElement('img');
             leaf.src = `images/${config.img}`; 
             leaf.onerror = () => { leaf.src = 'images/leaf-placeholder.svg'; };
+            leaf.alt = '';
             
-            leaf.alt = ''; // Decorativo
+            // Aplicamos las clases de Tailwind (Posicionamiento absoluto, pointer-events y el drop-shadow 3D)
+            // Agregamos 'drop-shadow-xl' o un filtro personalizado vía clase si se prefiere, 
+            // pero para mantener el control preciso del drop-shadow 3D usamos una clase de utilidad.
+            leaf.className = `absolute pointer-events-none transition-transform duration-100 ease-linear ${config.classes}`;
             
-            // Clases base
-            // IMPORTANTE: Eliminamos 'z-0' estático y usamos la config o por defecto z-0
-            const zIndexClass = config.zIndex || 'z-0';
-            leaf.classList.add('floating-leaf', 'absolute', 'pointer-events-none', zIndexClass);
-            
-            // Estilos para posicionamiento y tamaño
-            leaf.style.width = config.size;
-            leaf.style.top = config.top;
-            if (config.left) leaf.style.left = config.left;
-            if (config.right) leaf.style.right = config.right;
-            
-            // Transformación inicial
-            leaf.style.transform = `rotate(${config.rotate})`;
-            leaf.style.transition = 'transform 0.1s linear'; 
-            
-            // Sombra 3D
+            // Aplicamos el filtro 3D que es constante
             leaf.style.filter = 'drop-shadow(0px 10px 15px rgba(0,0,0,0.15))';
-            
-            // Opacidad
-            leaf.style.opacity = '0.9';
 
             this.leaves.push({
                 element: leaf,
-                speed: config.speed
+                speed: config.speed,
+                // Guardamos la rotación base para el parallax
+                rotation: config.classes.includes('rotate-') ? '' : (config.parent === 'inicio' && config.img.includes('seca') ? 'rotate(45deg)' : 'rotate(-15deg)')
             });
 
             parentSection.prepend(leaf);
             
-            // Gestión de z-index para el contenido existente
-            // Solo si la hoja es z-0, forzamos al contenido a ser z-10.
-            // Si la hoja es z-10 (como en Hero), debemos tener cuidado de no tapar botones interactivos (z-20+).
-            // En Hero, el texto es z-20, así que z-10 es seguro.
-            
+            // Aseguramos que el contenido esté sobre las hojas
             Array.from(parentSection.children).forEach(child => {
                 if (child !== leaf) {
-                    const style = getComputedStyle(child);
-                    // Si el elemento no tiene posición, aseguramos relative
-                    if (style.position === 'static') {
+                    if (getComputedStyle(child).position === 'static') {
                         child.classList.add('relative');
                     }
-                    
-                    // Si la hoja es fondo (z-0), elevamos el contenido a z-10
-                    if (zIndexClass === 'z-0') {
+                    // Si la hoja no es z-10, el contenido debe ser z-10
+                    if (!config.classes.includes('z-10')) {
                         child.classList.add('z-10');
+                    } else {
+                        // En Hero, el contenido ya es z-20 por HTML
                     }
-                    // Si la hoja es z-10, asumimos que el contenido crítico ya tiene z-index superior (como el Hero Title z-20)
                 }
             });
         });
@@ -106,19 +110,12 @@ export class FloatingDecorations {
     startParallaxLoop() {
         const animate = () => {
             const scrollY = window.scrollY;
-            
             this.leaves.forEach(item => {
                 const yOffset = scrollY * item.speed;
-                const currentTransform = item.element.style.transform || '';
-                const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
-                const rotation = rotateMatch ? rotateMatch[0] : 'rotate(0deg)';
-                
-                item.element.style.transform = `${rotation} translateY(${yOffset}px)`;
+                item.element.style.transform = `${item.rotation} translateY(${yOffset}px)`;
             });
-
             requestAnimationFrame(animate);
         };
-
         requestAnimationFrame(animate);
     }
 }
