@@ -18,61 +18,71 @@ export class FloatingDecorations {
     }
 
     injectDecorations() {
-        // Configuración de las hojas: Ubicación y velocidad de parallax
-        // speed: positivo mueve hacia arriba al hacer scroll (más lento que el scroll), negativo acelera o invierte.
+        // Configuración de las hojas: Ubicación, imagen y velocidad de parallax
+        // Usamos IDs de imagen numéricos para rotar entre diferentes assets
         const configs = [
-            { top: '10%', left: '-5%', size: '150px', rotate: '45deg', speed: 0.1, parent: 'inicio' },
-            { top: '80%', right: '-5%', size: '200px', rotate: '-15deg', speed: 0.15, parent: 'inicio' },
-            { top: '50px', right: '-80px', size: '180px', rotate: '120deg', speed: 0.08, parent: 'servicios' },
-            { top: '40%', left: '-60px', size: '140px', rotate: '200deg', speed: 0.12, parent: 'servicios' },
-            // Solo añadir en FAQ si existe la sección
-            { top: '10px', left: '10px', size: '100px', rotate: '10deg', speed: 0.05, parent: 'faq' }
+            // Sección Inicio (Hero)
+            { top: '10%', left: '-5%', size: '180px', rotate: '45deg', speed: 0.1, parent: 'inicio', img: 'hoja-seca-3d.png' },
+            { top: '70%', right: '-8%', size: '220px', rotate: '-15deg', speed: 0.15, parent: 'inicio', img: 'hoja-verde-3d.png' },
+            
+            // Sección Servicios
+            { top: '50px', right: '-80px', size: '200px', rotate: '120deg', speed: 0.08, parent: 'servicios', img: 'hoja-seca-3d.png' },
+            { top: '40%', left: '-60px', size: '160px', rotate: '200deg', speed: 0.12, parent: 'servicios', img: 'hoja-verde-3d.png' },
+            
+            // Sección FAQ (si existe)
+            { top: '10px', left: '10px', size: '120px', rotate: '10deg', speed: 0.05, parent: 'faq', img: 'hoja-seca-3d.png' }
         ];
 
-        configs.forEach((config, index) => {
+        configs.forEach((config) => {
             const parentSection = document.getElementById(config.parent);
             if (!parentSection) return;
 
-            // Aseguramos que el padre tenga posición relativa para que el absolute funcione
+            // Aseguramos contexto de posicionamiento
             if (getComputedStyle(parentSection).position === 'static') {
                 parentSection.classList.add('relative');
             }
-            // Aseguramos que el contenido del padre tenga z-index superior
-            // Esto asume que el contenido dentro del section ya tiene alguna estructura, 
-            // pero forzamos una clase de contenedor si es necesario o aplicamos z-0 a la hoja.
 
             const leaf = document.createElement('img');
-            leaf.src = '/images/leaf-placeholder.svg';
-            leaf.alt = ''; // Decorativo, vacio para accesibilidad
-            leaf.classList.add('floating-leaf', 'absolute', 'pointer-events-none', 'z-0', 'opacity-80', 'mix-blend-multiply');
+            // Asignamos la ruta a la imagen real (el usuario debe proveer estos archivos en /images/)
+            // Fallback temporal al placeholder si no existen
+            leaf.src = `images/${config.img}`; 
+            leaf.onerror = () => { leaf.src = 'images/leaf-placeholder.svg'; }; // Fallback seguro
             
-            // Estilos inline para posicionamiento específico
+            leaf.alt = ''; // Decorativo
+            leaf.classList.add('floating-leaf', 'absolute', 'pointer-events-none', 'z-0');
+            
+            // Estilos para posicionamiento y tamaño
             leaf.style.width = config.size;
             leaf.style.top = config.top;
             if (config.left) leaf.style.left = config.left;
             if (config.right) leaf.style.right = config.right;
-            leaf.style.transform = `rotate(${config.rotate})`;
-            leaf.style.transition = 'transform 0.1s linear'; // Suavizado
             
-            // Filtro de sombra suave para profundidad
-            leaf.style.filter = 'drop-shadow(5px 10px 6px rgba(0,0,0,0.1))';
+            // Transformación inicial
+            leaf.style.transform = `rotate(${config.rotate})`;
+            leaf.style.transition = 'transform 0.1s linear'; 
+            
+            // *** CORRECCIÓN VISUAL: Sombra específica para efecto 3D ***
+            leaf.style.filter = 'drop-shadow(0px 10px 15px rgba(0,0,0,0.15))';
+            
+            // Ajustamos opacidad para que no compita demasiado, pero sea visible como imagen real
+            leaf.style.opacity = '0.9';
 
-            // Guardamos referencia para el loop de animación
             this.leaves.push({
                 element: leaf,
-                baseTop: parseFloat(config.top), // Simplificación, mejor usar offset
-                speed: config.speed,
-                initialY: 0
+                speed: config.speed
             });
 
             parentSection.prepend(leaf);
             
-            // Aseguramos que el resto del contenido del section esté por encima
-            // Esto es un "hack" seguro: asume que los hijos directos del section (salvo la hoja) son contenido
+            // Gestión de z-index para asegurar que el contenido esté siempre encima
             Array.from(parentSection.children).forEach(child => {
-                if (child !== leaf && getComputedStyle(child).position === 'static') {
-                    child.classList.add('relative', 'z-10');
-                } else if (child !== leaf) {
+                if (child !== leaf) {
+                    // Si el elemento ya tiene posición (relative/absolute), solo ajustamos z-index
+                    // Si es static, lo volvemos relative para que z-index aplique
+                    const style = getComputedStyle(child);
+                    if (style.position === 'static') {
+                        child.classList.add('relative');
+                    }
                     child.classList.add('z-10');
                 }
             });
@@ -80,23 +90,20 @@ export class FloatingDecorations {
     }
 
     startParallaxLoop() {
-        let lastScrollY = window.scrollY;
-        
         const animate = () => {
             const scrollY = window.scrollY;
             
             this.leaves.forEach(item => {
-                // Calculamos el desplazamiento relativo al viewport o al scroll global
-                // Para efecto simple: mover el elemento un % de los píxeles scrolleados
                 const yOffset = scrollY * item.speed;
+                // Extraemos la rotación inicial guardada en el estilo inline
+                // (O podríamos guardarla en el objeto item para mayor limpieza, pero esto funciona)
+                const currentTransform = item.element.style.transform || '';
+                const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
+                const rotation = rotateMatch ? rotateMatch[0] : 'rotate(0deg)';
                 
-                // Mantenemos la rotación original y añadimos la traslación Y
-                // Nota: leemos la rotación inicial del estilo inline o la guardamos en el objeto
-                const initialRotation = item.element.style.transform.match(/rotate\(([^)]+)\)/)[0];
-                item.element.style.transform = `${initialRotation} translateY(${yOffset}px)`;
+                item.element.style.transform = `${rotation} translateY(${yOffset}px)`;
             });
 
-            lastScrollY = scrollY;
             requestAnimationFrame(animate);
         };
 
