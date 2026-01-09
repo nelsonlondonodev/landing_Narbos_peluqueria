@@ -56,7 +56,7 @@ export class FloatingDecorations {
                 parent: 'faq', 
                 img: 'hoja-seca-3d.png', 
                 speed: 0.05,
-                classes: 'w-24 -left-6 -top-5 md:w-32 md:left-2 md:top-2 z-20' 
+                classes: 'w-24 -left-8 -top-10 -rotate-45 md:w-32 md:left-2 md:top-2 md:rotate-10 z-20' 
             }
         ];
 
