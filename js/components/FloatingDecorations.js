@@ -42,13 +42,13 @@ export class FloatingDecorations {
                 parent: 'servicios', 
                 img: 'hoja-seca-3d.png', 
                 speed: 0.08,
-                classes: 'w-16 -right-6 top-10 md:w-48 md:-right-20 md:top-12 z-0' 
+                classes: 'w-24 -right-2 top-10 md:w-48 md:-right-20 md:top-12 z-20' 
             },
             { 
                 parent: 'servicios', 
                 img: 'hoja-verde-3d.png', 
                 speed: 0.12,
-                classes: 'w-20 -left-6 top-1/2 md:w-40 md:-left-12 md:top-[40%] z-0' 
+                classes: 'w-28 -left-4 top-1/2 md:w-40 md:-left-12 md:top-[40%] z-20' 
             },
             
             // --- Sección FAQ ---
@@ -56,7 +56,7 @@ export class FloatingDecorations {
                 parent: 'faq', 
                 img: 'hoja-seca-3d.png', 
                 speed: 0.05,
-                classes: 'w-12 left-0 top-0 md:w-32 md:left-2 md:top-2 z-0' 
+                classes: 'w-20 -left-2 -top-4 md:w-32 md:left-2 md:top-2 z-20' 
             }
         ];
 
