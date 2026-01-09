@@ -42,7 +42,7 @@ export class FloatingDecorations {
                 parent: 'servicios', 
                 img: 'hoja-seca-3d.png', 
                 speed: 0.08,
-                classes: 'w-24 -right-2 top-10 md:w-48 md:-right-20 md:top-12 z-20' 
+                classes: 'w-24 -right-2 top-24 md:w-48 md:-right-20 md:top-12 z-20' 
             },
             { 
                 parent: 'servicios', 
