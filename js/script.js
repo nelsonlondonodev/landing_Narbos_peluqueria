@@ -6,6 +6,10 @@ import { ShareButton } from './components/ShareButton.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
 import { FAQAccordion } from './components/FAQAccordion.js';
+import { HeaderController } from './controllers/HeaderController.js';
+import { ModalController } from './controllers/ModalController.js';
+import { VideoPlayerController } from './controllers/VideoPlayerController.js';
+import { GalleryController } from './controllers/GalleryController.js';
 
 
 // Ensure initApp is idempotent and robust
@@ -18,7 +22,7 @@ window.initApp = function() {
     try {
         // Core Services
         
-        // Components
+        // Components & Controllers
         new MobileMenu();
         new ReviewsCarousel();
         new ContactFormController();
@@ -27,39 +31,16 @@ window.initApp = function() {
         new WhatsAppButton();
         new FAQAccordion('#faq');
         
-        // UI Interactions
+        // Split UIService Controllers
+        new HeaderController();
+        new ModalController();
+        new VideoPlayerController();
+        new GalleryController();
+
+        // UI Interactions (Animations)
         new UIService();
         
     } catch (error) {
         console.error("Critical Error initializing app:", error);
     }
 };
-
-// Auto-start for pages without specific inline initialization logic (like some inner pages)
-// or as a fallback if the inline script somehow missed it (though inline usually handles it)
-document.addEventListener("DOMContentLoaded", () => {
-    // We check if it has already been called (idempotency handled inside initApp)
-    // But we give precedence to inline scripts which might want to mount components first.
-    // If we are on a page where navbar-root is MISSING, we might need to init immediately.
-    // Use a small timeout to allow inline scripts to run first if they exist?
-    // Actually, simply calling it if it hasn't run is safest.
-    
-    // Check if we are on a page that needs auto-init from here (e.g. no inline script doing it)
-    // We can just call it. But we want to ensure Navbar is in DOM if it's supposed to be.
-    // The inline script mounts the Navbar. If we run before that, ThemeService fails.
-    
-    // The previous logic was: if (!navbar-root) initApp().
-    // We will keep it but make it smarter?
-    // Actually, let's just leave it to the inline script for pages with navbar-root.
-    
-    if (!document.getElementById('navbar-root')) {
-         window.initApp();
-    }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    // If navbar-root exists, we wait for the module to call initApp
-    if (!document.getElementById('navbar-root')) {
-        window.initApp();
-    }
-});

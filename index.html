@@ -470,50 +470,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
-    <script src="js/script.js?v=1.2" type="module"></script>
-    <script type="module">
-        /**
-         * Home Page Initialization
-         * Mounts core components: Navbar, Contact Form, and Footer.
-         */
-        import { getNavbarHTML } from './js/components/Navbar.js';
-        import { getFooterHTML } from './js/components/Footer.js';
-
-        // 1. Mount Navbar
-        const navbarRoot = document.getElementById('navbar-root');
-        if (navbarRoot) {
-            navbarRoot.innerHTML = getNavbarHTML('./', true);
-        }
-
-        // 2. Mount Footer
-        const footerRoot = document.getElementById('footer-root');
-        if (footerRoot) {
-            footerRoot.innerHTML = getFooterHTML('./');
-        }
-
-        // 3. Mount Services
-        import { ServiceCard } from './js/components/ServiceCard.js';
-        import { servicesData } from './js/data/servicesData.js';
-        
-        const servicesGrid = document.getElementById('services-grid');
-        if (servicesGrid) {
-            servicesData.forEach(data => {
-                const card = new ServiceCard(data);
-                servicesGrid.appendChild(card.render());
-            });
-        }
-        
-        // 4. Initialize App Logic (Services, Components, Controllers)
-        const startApp = () => {
-             if (window.initApp) window.initApp();
-        };
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startApp);
-        } else {
-            startApp();
-        }
-    </script>
+    <script src="js/main.js" type="module"></script>
 
 </body>
 </html>
