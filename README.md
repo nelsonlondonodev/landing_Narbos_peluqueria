@@ -60,6 +60,13 @@ Para preservar el historial de indexación en Google Search Console y evitar err
     - **Lógica de Colapso Invertida:** Se corrigió el CSS para que la barra inicie "Alta" (con padding) y se contraiga al hacer scroll, alineando la transición visual con la reducción del logo.
     - **Compilación Manual:** Se documenta que cambios en `input.css` requieren ejecutar `npx @tailwindcss/cli -i ./css/input.css -o ./css/styles.css` si no se usa el modo *dev*.
 
+## Arquitectura y Escalabilidad (Nuevo)
+
+Para garantizar la estabilidad visual y el correcto funcionamiento del menú móvil en todas las páginas, se han establecido los siguientes estándares:
+
+1.  **Wrapper de Aplicación**: Todo el contenido visible (excepto el Header) debe estar dentro de un `<div id="app-wrapper" class="relative w-full overflow-x-hidden">`. Esto previene conflictos de *stacking context* con elementos flotantes.
+2.  **Header Estándar**: Se debe usar la clase CSS `.site-header` en la etiqueta `<header>` para asegurar posicionamiento fijo y z-index correcto.
+3.  **Documentación**: Consulta `LAYOUT_GUIDE.md` en la raíz del proyecto para detalles de implementación de nuevas páginas.
 ### 📝 Últimas Actualizaciones (8 de enero, 2026)
 - **Refactorización de Assets (Imágenes):**
     - Se reorganizó la carpeta `images/` eliminando el subdirectorio obsoleto `fotos_galeria` y moviendo los recursos a carpetas semánticas (`peluqueria`, `spa-y-estetica`, `unas-manicure-pedicure`, `team`).
