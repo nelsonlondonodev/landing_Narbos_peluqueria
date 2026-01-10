@@ -88,51 +88,60 @@ export class FloatingDecorations {
         ];
 
         configs.forEach((config) => {
-            const parentSection = document.getElementById(config.parent);
-            // If parent section doesn't exist, skip silently
-            if (!parentSection) return;
+            try {
+                const parentSection = document.getElementById(config.parent);
+                // If parent section doesn't exist, skip silently
+                if (!parentSection) return;
 
-            if (getComputedStyle(parentSection).position === 'static') {
-                parentSection.classList.add('relative');
-            }
-
-            const leaf = document.createElement('img');
-            // Fix: Use basePath for image paths to support subdirectories
-            leaf.src = `${this.basePath}images/${config.img}`; 
-            leaf.onerror = () => { leaf.src = `${this.basePath}images/leaf-placeholder.svg`; };
-            leaf.alt = '';
-            
-            leaf.className = `absolute pointer-events-none drop-shadow-2xl transition-transform duration-700 ease-out will-change-transform ${config.classes}`;
-            
-            // Solo añadimos data-speed si hay animación
-            if (this.config.enableAnimation) {
-                leaf.setAttribute('data-speed', config.speed);
-                // Guardamos la rotación base para el parallax
-                const rotation = config.classes.includes('rotate-') ? '' : (config.parent === 'inicio' && config.img.includes('seca') ? 'rotate(45deg)' : 'rotate(-15deg)');
-                
-                this.leaves.push({
-                    element: leaf,
-                    speed: config.speed,
-                    rotation: rotation
-                });
-            }
-
-            parentSection.prepend(leaf);
-            
-            // Aseguramos que el contenido esté sobre las hojas
-            Array.from(parentSection.children).forEach(child => {
-                if (child !== leaf) {
-                    if (getComputedStyle(child).position === 'static') {
-                        child.classList.add('relative');
-                    }
-                    // Si la hoja no es z-10, el contenido debe ser z-10
-                    if (!config.classes.includes('z-10')) {
-                        child.classList.add('z-10');
-                    } else {
-                        // En Hero, el contenido ya es z-20 por HTML
-                    }
+                if (window.getComputedStyle(parentSection).position === 'static') {
+                    parentSection.classList.add('relative');
                 }
-            });
+
+                const leaf = document.createElement('img');
+                // Fix: Use basePath for image paths to support subdirectories
+                leaf.src = `${this.basePath}images/${config.img}`; 
+                leaf.onerror = () => { leaf.src = `${this.basePath}images/leaf-placeholder.svg`; };
+                leaf.alt = '';
+                
+                leaf.className = `absolute pointer-events-none drop-shadow-2xl transition-transform duration-700 ease-out will-change-transform ${config.classes}`;
+                
+                // Solo añadimos data-speed si hay animación
+                if (this.config.enableAnimation) {
+                    leaf.setAttribute('data-speed', config.speed);
+                    // Guardamos la rotación base para el parallax
+                    const rotation = config.classes.includes('rotate-') ? '' : (config.parent === 'inicio' && config.img.includes('seca') ? 'rotate(45deg)' : 'rotate(-15deg)');
+                    
+                    this.leaves.push({
+                        element: leaf,
+                        speed: config.speed,
+                        rotation: rotation
+                    });
+                }
+
+                parentSection.prepend(leaf);
+                
+                // Aseguramos que el contenido esté sobre las hojas
+                // Use a standard for loop for reliability or checking if children exist
+                if (parentSection.children.length > 0) {
+                     Array.from(parentSection.children).forEach(child => {
+                        if (child !== leaf) {
+                            // Ensure child is an element node
+                            if (child.nodeType === 1) { 
+                                const style = window.getComputedStyle(child);
+                                if (style.position === 'static') {
+                                    child.classList.add('relative');
+                                }
+                                // Si la hoja no es z-10, el contenido debe ser z-10
+                                if (!config.classes.includes('z-10')) {
+                                    child.classList.add('z-10');
+                                }
+                            }
+                        }
+                    });
+                }
+            } catch (err) {
+                console.warn(`FloatingDecorations: Failed to inject leaf for ${config.parent}`, err);
+            }
         });
     }
 
