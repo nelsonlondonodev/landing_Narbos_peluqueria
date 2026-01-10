@@ -34,6 +34,15 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 3. Etiquetas Canonicals: Todas las páginas deben incluir una etiqueta <link rel="canonical" href="https://narbossalon.com/..."> que coincida exactamente con la URL final sin www.
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
+### 📝 Últimas Actualizaciones (10 de enero, 2026)
+- **Refactorización Mayor de JavaScript (Arquitectura Modular):** 🏗️
+    - **Descomposición de UIService:** Se eliminó el "God Object" `UIService.js`, dividiendo sus responsabilidades en controladores atómicos y mantenibles: `HeaderController`, `ModalController`, `VideoPlayerController` y `GalleryController`.
+    - **Punto de Entrada Centralizado:** Se creó `js/main.js` para orquestar la inicialización de la Home, reemplazando scripts inline dispersos y mejorando el orden de ejecución.
+- **Experiencia de Usuario (Peluquería):** 🍃
+    - **Decoraciones Flotantes (Parallax):** Se implementó la animación de hojas 3D en la página de Peluquería (`peluqueria/index.html`), reutilizando el componente `FloatingDecorations`.
+    - **Optimización de Activos:** Las imágenes decorativas se migraron de PNG a **WebP**, reduciendo su peso en un ~60% para asegurar un LCP óptimo sin perjudicar el SEO.
+    - **Corrección de Contenido:** Revisión ortográfica y gramatical completa (Sentence Case) en títulos y descripciones de servicios.
+
 ### 📝 Últimas Actualizaciones (8 de enero, 2026 - Parte 2)
 - **UX Multimedia ("Bento Grid" Premium):**
     - Se transformó la galería tradicional de imágenes en un **Bento Grid** moderno en las páginas `peluqueria/index.html` y `cortes-de-pelo-en-chia.html`.
