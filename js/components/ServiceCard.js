@@ -20,7 +20,7 @@ export class ServiceCard {
      * @param {string} [props.animationDelay] - Delay for animation ("0.2s")
      * @param {'overlay'|'standard'} [props.variant] - Visual style ('overlay' | 'standard')
      */
-    constructor({ title, description, icon, image, link, modalId, animationDelay = "0s", variant = 'overlay' }) {
+    constructor({ title, description, icon, image, link, modalId, animationDelay = "0s", variant = 'overlay', i18nTitle, i18nDesc }) {
         this.title = title;
         this.description = description;
         this.icon = icon;
@@ -29,6 +29,8 @@ export class ServiceCard {
         this.modalId = modalId;
         this.animationDelay = animationDelay;
         this.variant = variant;
+        this.i18nTitle = i18nTitle;
+        this.i18nDesc = i18nDesc;
     }
 
     render() {
@@ -77,6 +79,9 @@ export class ServiceCard {
              backgroundHtml = `<div class="absolute inset-0 bg-gradient-to-br from-brand-green to-brand-green-dark z-0"></div>`;
         }
 
+        const i18nTitleAttr = this.i18nTitle ? `data-i18n="${this.i18nTitle}"` : '';
+        const i18nDescAttr = this.i18nDesc ? `data-i18n="${this.i18nDesc}"` : '';
+
         element.innerHTML = `
             ${backgroundHtml}
             <svg class="w-12 h-12 mb-4 text-white transition-colors duration-300 relative z-10 animate-floating group-hover:text-brand-green-dark" 
@@ -84,8 +89,8 @@ export class ServiceCard {
                  fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 ${this.icon || ''}
             </svg>
-            <h3 class="text-2xl font-serif font-bold text-white mb-3 relative z-10 drop-shadow-md transition-colors duration-300 group-hover:text-brand-gray-dark">${this.title}</h3>
-            <p class="text-brand-light relative z-10 drop-shadow-sm font-medium opacity-95 transition-colors duration-300 group-hover:text-brand-gray-dark group-hover:font-semibold">${this.description}</p>
+            <h3 ${i18nTitleAttr} class="text-2xl font-serif font-bold text-white mb-3 relative z-10 drop-shadow-md transition-colors duration-300 group-hover:text-brand-gray-dark">${this.title}</h3>
+            <p ${i18nDescAttr} class="text-brand-light relative z-10 drop-shadow-sm font-medium opacity-95 transition-colors duration-300 group-hover:text-brand-gray-dark group-hover:font-semibold">${this.description}</p>
             <div class="absolute inset-0 bg-black/0 group-hover:bg-white/10 transition-colors duration-300 z-20 pointer-events-none"></div>
         `;
     }
