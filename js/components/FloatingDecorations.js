@@ -3,7 +3,8 @@
  * Optimizado para Tailwind CSS v4 con diseño Responsivo.
  */
 export class FloatingDecorations {
-    constructor() {
+    constructor(basePath = './') {
+        this.basePath = basePath;
         this.leaves = [];
         this.init();
     }
@@ -69,8 +70,9 @@ export class FloatingDecorations {
             }
 
             const leaf = document.createElement('img');
-            leaf.src = `images/${config.img}`; 
-            leaf.onerror = () => { leaf.src = 'images/leaf-placeholder.svg'; };
+            // Fix: Use basePath for image paths to support subdirectories
+            leaf.src = `${this.basePath}images/${config.img}`; 
+            leaf.onerror = () => { leaf.src = `${this.basePath}images/leaf-placeholder.svg`; };
             leaf.alt = '';
             
             // Aplicamos las clases de Tailwind (Posicionamiento absoluto, pointer-events y el drop-shadow 3D)

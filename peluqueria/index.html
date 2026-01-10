@@ -166,11 +166,13 @@
     </nav>
 
     <main>
-      <!-- Hero Injection Point (SSG) -->
-      <div id="hero-root"></div>
+      <!-- Hero Injection Point (SSG) - Wrapped for Floating Decorations -->
+      <div id="inicio" class="relative">
+          <div id="hero-root"></div>
+      </div>
 
       <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
-      <section class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
+      <section id="servicios" class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
         <div class="container mx-auto px-6 max-w-screen-xl">
             <div class="text-center mb-16" data-animation="fadeInUp">
               <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
@@ -421,6 +423,7 @@
       import { UIService } from '../js/services/UIService.js';
       import { FAQAccordion } from '../js/components/FAQAccordion.js';
       import { WhatsAppButton } from '../js/components/WhatsAppButton.js';
+      import { FloatingDecorations } from '../js/components/FloatingDecorations.js';
 
       const basePath = '../';
       
@@ -437,6 +440,8 @@
           new UIService();
           new FAQAccordion('#faq');
           new WhatsAppButton();
+          // Initialize Floating Decorations
+          new FloatingDecorations('../');
 
           // 3. Montar Servicios de Peluquería (Standard Variant)
           const hairServicesGrid = document.getElementById('hair-services-grid');
