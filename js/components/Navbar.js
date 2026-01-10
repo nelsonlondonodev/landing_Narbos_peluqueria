@@ -74,13 +74,13 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         </div>
     </nav>
     
-    <div id="mobile-menu" class="md:hidden fixed top-0 right-0 h-screen w-64 bg-white text-brand-gray-dark shadow-2xl z-[110] transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div id="mobile-menu" class="md:hidden fixed top-0 right-0 w-64 h-[100dvh] bg-white text-brand-gray-dark shadow-2xl z-[110] transform translate-x-full transition-transform duration-300 ease-in-out">
         <div class="flex justify-end p-4">
             <button id="internal-close-btn" aria-label="Cerrar menú" class="p-2 text-brand-gray-dark/80 hover:text-brand-gray-dark transition-colors">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
-        <div class="flex flex-col px-8 space-y-4 overflow-y-auto max-h-[calc(100vh-80px)]">
+        <div class="flex flex-col px-8 space-y-4 overflow-y-auto max-h-[calc(100dvh-80px)]">
             ${navLink(isHome ? '#' : basePath + 'index.html', 'nav.home', 'Inicio', true)}
             
             <div class="border-b border-gray-100 pb-2">
@@ -97,7 +97,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             <a href="${basePath}blog/index.html" class="block py-2 px-4 text-lg hover:bg-gray-100 rounded-md active:bg-gray-200 text-brand-gray-dark" data-i18n="nav.blog">Blog</a>
             
             <!-- Mobile Language Switcher (Inside Menu) - Optional duplicate for better UX -->
-             <div class="mt-4 border-t border-gray-100 pt-4 flex justify-center">
+             <div class="mt-4 border-t border-gray-100 pt-4 flex justify-center pb-8">
                  <button class="lang-toggle-mobile-internal px-4 py-2 border border-brand-gray-dark rounded text-brand-gray-dark font-bold hover:bg-brand-gray-dark hover:text-white transition-colors">
                     ${currentLang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
                  </button>
@@ -105,6 +105,6 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         </div>
     </div>
     
-    <div id="menu-backdrop" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+    <div id="menu-backdrop" class="fixed inset-0 bg-black/50 z-[100] hidden md:hidden blur-sm transition-opacity duration-300"></div>
     `;
 }

@@ -77,9 +77,9 @@ export class MobileMenu {
     open() {
         if (this.isOpen) return;
         
-
         this.mobileMenu.classList.remove("translate-x-full");
         document.body.classList.add("mobile-menu-open");
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
         
         if (this.backdrop) this.backdrop.classList.remove("hidden");
         if (this.openIcon) this.openIcon.classList.add("hidden");
@@ -91,9 +91,9 @@ export class MobileMenu {
     close() {
         if (!this.isOpen) return;
 
-
         this.mobileMenu.classList.add("translate-x-full");
         document.body.classList.remove("mobile-menu-open");
+        document.body.style.overflow = ''; // Restore scrolling
         
         if (this.backdrop) this.backdrop.classList.add("hidden");
         if (this.openIcon) this.openIcon.classList.remove("hidden");

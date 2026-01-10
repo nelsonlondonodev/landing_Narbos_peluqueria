@@ -344,6 +344,9 @@
   .z-\[60\] {
     z-index: 60;
   }
+  .z-\[100\] {
+    z-index: 100;
+  }
   .z-\[110\] {
     z-index: 110;
   }
@@ -497,6 +500,9 @@
   .h-\[60vh\] {
     height: 60vh;
   }
+  .h-\[100dvh\] {
+    height: 100dvh;
+  }
   .h-auto {
     height: auto;
   }
@@ -508,6 +514,9 @@
   }
   .max-h-\[90vh\] {
     max-height: 90vh;
+  }
+  .max-h-\[calc\(100dvh-80px\)\] {
+    max-height: calc(100dvh - 80px);
   }
   .max-h-\[calc\(100vh-80px\)\] {
     max-height: calc(100vh - 80px);
@@ -1046,6 +1055,9 @@
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
   }
+  .pb-8 {
+    padding-bottom: calc(var(--spacing) * 8);
+  }
   .pb-16 {
     padding-bottom: calc(var(--spacing) * 16);
   }
@@ -1238,6 +1250,10 @@
     @supports (color: color-mix(in lab, red, red)) {
       --tw-shadow-color: color-mix(in oklab, color-mix(in oklab, var(--color-green-500) 40%, transparent) var(--tw-shadow-alpha), transparent);
     }
+  }
+  .blur-sm {
+    --tw-blur: blur(var(--blur-sm));
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
   .drop-shadow-2xl {
     --tw-drop-shadow-size: drop-shadow(0 25px 25px var(--tw-drop-shadow-color, rgb(0 0 0 / 0.15)));
