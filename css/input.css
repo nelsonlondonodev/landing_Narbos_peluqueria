@@ -47,7 +47,7 @@ h6 {
   Esto asegura que el efecto de escala que vamos a añadir sea suave y no brusco.
   Complementa las clases de transición que ya estaban en el HTML.
 */
-header nav .desktop-menu a {
+.site-header nav .desktop-menu a {
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -98,39 +98,37 @@ body.mobile-menu-open {
 
 /* --- INICIO: ESTILOS PARA HEADER DINÁMICO Y NAVEGACIÓN --- */
 
-/*
-  Estilos base para el header. 
-  Añadimos una transición suave para las propiedades que cambiarán con el scroll (padding, background-color).
+/* 
+  Estilos base estandarizados para el Site Header.
+  Usa @apply para heredar utilidades de Tailwind y asegurar consistencia.
+  Forzamos 'fixed' para evitar problemas de desaparición en scroll.
 */
-header {
-  transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out;
+.site-header {
+  @apply bg-brand-green backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md transition-transform duration-300;
+  
+  transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
   padding-top: 1rem; /* 16px - Start Tall */
   padding-bottom: 1rem; /* 16px - Start Tall */
 }
 
-/* 
-  Estilos para el logo dentro del header.
-  También le añadimos una transición para que el cambio de tamaño sea fluido.
-*/
-header nav > a > img {
-  transition: height 0.3s ease-in-out;
-}
-
 /*
-  Esta es la clase que JavaScript añade al header cuando el usuario hace scroll.
-  Reduce el padding vertical, haciendo la barra más delgada.
-  Aumenta la opacidad del fondo para que destaque más sobre el contenido.
+  Estilos para el header cuando el usuario hace scroll.
+  La clase .header-scrolled se añade vía JS (Navbar.js).
 */
-header.header-scrolled {
+.site-header.header-scrolled {
   padding-top: 0.5rem; /* 8px */
   padding-bottom: 0.5rem; /* 8px */
   background-color: rgba(107, 117, 90, 0.95); /* brand-green con más opacidad */
 }
 
 /* 
-  Cuando el header tiene la clase .header-scrolled, el logo se hace más pequeño.
+  Estilos para el logo dentro del header.
 */
-header.header-scrolled nav > a > img {
+.site-header nav > a > img {
+  transition: height 0.3s ease-in-out;
+}
+
+.site-header.header-scrolled nav > a > img {
   height: 3rem; /* 48px, reducido desde los 3.5rem originales */
 }
 
@@ -138,13 +136,13 @@ header.header-scrolled nav > a > img {
   Preparamos los enlaces de navegación para el efecto de la línea animada.
   El pseudo-elemento ::after será nuestra línea.
 */
-header nav .desktop-menu a {
+.site-header nav .desktop-menu a {
   position: relative;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-header nav .desktop-menu a::after {
+.site-header nav .desktop-menu a::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -160,7 +158,7 @@ header nav .desktop-menu a::after {
 /*
   Al pasar el cursor sobre el enlace, la línea aparece animándose desde la derecha.
 */
-header nav .desktop-menu a:hover::after {
+.site-header nav .desktop-menu a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
@@ -168,7 +166,7 @@ header nav .desktop-menu a:hover::after {
 /* 
   Para el enlace activo, la línea siempre será visible.
 */
-header nav .desktop-menu a.nav-link-active::after {
+.site-header nav .desktop-menu a.nav-link-active::after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }

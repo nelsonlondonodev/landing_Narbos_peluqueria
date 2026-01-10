@@ -10,7 +10,7 @@ export class HeaderController {
     }
 
     initHeaderScroll() {
-        const header = document.querySelector("header");
+        const header = document.querySelector(".site-header");
         if (!header) return;
 
         const updateHeaderState = () => {

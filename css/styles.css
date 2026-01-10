@@ -60,7 +60,6 @@
     --radius-2xl: 1rem;
     --drop-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.15);
     --drop-shadow-md: 0 3px 3px rgb(0 0 0 / 0.12);
-    --drop-shadow-xl: 0 9px 7px rgb(0 0 0 / 0.1);
     --drop-shadow-2xl: 0 25px 25px rgb(0 0 0 / 0.15);
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
@@ -335,9 +334,6 @@
   .z-20 {
     z-index: 20;
   }
-  .z-30 {
-    z-index: 30;
-  }
   .z-50 {
     z-index: 50;
   }
@@ -509,17 +505,11 @@
   .h-full {
     height: 100%;
   }
-  .h-screen {
-    height: 100vh;
-  }
   .max-h-\[90vh\] {
     max-height: 90vh;
   }
   .max-h-\[calc\(100dvh-80px\)\] {
     max-height: calc(100dvh - 80px);
-  }
-  .max-h-\[calc\(100vh-80px\)\] {
-    max-height: calc(100vh - 80px);
   }
   .w-3 {
     width: calc(var(--spacing) * 3);
@@ -1600,13 +1590,6 @@
       }
     }
   }
-  .hover\:text-brand-medium {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-brand-medium);
-      }
-    }
-  }
   .hover\:text-gray-800 {
     &:hover {
       @media (hover: hover) {
@@ -1692,11 +1675,6 @@
   .active\:bg-gray-200 {
     &:active {
       background-color: var(--color-gray-200);
-    }
-  }
-  .active\:text-brand-medium {
-    &:active {
-      color: var(--color-brand-medium);
     }
   }
   .max-md\:hidden {
@@ -2024,7 +2002,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif;
 }
-header nav .desktop-menu a {
+.site-header nav .desktop-menu a {
   transition: color 0.3s ease, transform 0.3s ease;
 }
 .nav-link-active {
@@ -2046,28 +2024,44 @@ header nav .desktop-menu a {
 body.mobile-menu-open {
   overflow: hidden;
 }
-header {
-  transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out;
+.site-header {
+  position: fixed;
+  top: calc(var(--spacing) * 0);
+  left: calc(var(--spacing) * 0);
+  z-index: 50;
+  width: 100%;
+  background-color: var(--color-brand-green);
+  --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  --tw-backdrop-blur: blur(var(--blur-sm));
+  -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  transition-property: transform, translate, scale, rotate;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+  transition-duration: var(--tw-duration, var(--default-transition-duration));
+  --tw-duration: 300ms;
+  transition-duration: 300ms;
+  transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-header nav > a > img {
-  transition: height 0.3s ease-in-out;
-}
-header.header-scrolled {
+.site-header.header-scrolled {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   background-color: rgba(107, 117, 90, 0.95);
 }
-header.header-scrolled nav > a > img {
+.site-header nav > a > img {
+  transition: height 0.3s ease-in-out;
+}
+.site-header.header-scrolled nav > a > img {
   height: 3rem;
 }
-header nav .desktop-menu a {
+.site-header nav .desktop-menu a {
   position: relative;
   text-decoration: none;
   transition: color 0.3s ease;
 }
-header nav .desktop-menu a::after {
+.site-header nav .desktop-menu a::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -2079,11 +2073,11 @@ header nav .desktop-menu a::after {
   transform-origin: bottom right;
   transition: transform 0.3s ease-out;
 }
-header nav .desktop-menu a:hover::after {
+.site-header nav .desktop-menu a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-header nav .desktop-menu a.nav-link-active::after {
+.site-header nav .desktop-menu a.nav-link-active::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
