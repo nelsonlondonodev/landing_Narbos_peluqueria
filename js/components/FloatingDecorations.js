@@ -27,13 +27,13 @@ export class FloatingDecorations {
             // --- Sección Inicio (Hero) ---
             { 
                 parent: 'inicio', 
-                img: 'hoja-seca-3d.png', 
+                img: 'hoja-seca-3d.webp', 
                 speed: 0.1,
                 classes: 'w-20 -left-4 top-[10%] opacity-70 md:w-44 md:left-[-1%] md:opacity-90 z-10' 
             },
             { 
                 parent: 'inicio', 
-                img: 'hoja-verde-3d.png', 
+                img: 'hoja-verde-3d.webp', 
                 speed: 0.15,
                 classes: 'w-24 -right-4 top-[40%] opacity-70 md:w-56 md:right-[15%] md:top-[35%] md:opacity-90 z-10' 
             },
@@ -41,13 +41,13 @@ export class FloatingDecorations {
             // --- Sección Servicios ---
             { 
                 parent: 'servicios', 
-                img: 'hoja-seca-3d.png', 
+                img: 'hoja-seca-3d.webp', 
                 speed: 0.08,
                 classes: 'w-24 -right-2 top-24 md:w-48 md:-right-20 md:top-12 z-20' 
             },
             { 
                 parent: 'servicios', 
-                img: 'hoja-verde-3d.png', 
+                img: 'hoja-verde-3d.webp', 
                 speed: 0.12,
                 classes: 'w-28 -left-4 top-1/2 md:w-40 md:-left-12 md:top-[40%] z-20' 
             },
@@ -55,7 +55,7 @@ export class FloatingDecorations {
             // --- Sección FAQ ---
             { 
                 parent: 'faq', 
-                img: 'hoja-seca-3d.png', 
+                img: 'hoja-seca-3d.webp', 
                 speed: 0.05,
                 classes: 'w-24 -left-8 -top-10 -rotate-45 md:w-32 md:left-2 md:top-2 md:rotate-10 z-20' 
             }
