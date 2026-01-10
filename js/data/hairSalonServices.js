@@ -1,6 +1,6 @@
 export const hairSalonServices = [
     {
-        title: "Cortes & Estilo",
+        title: "Cortes y estilo",
         description: "Diseños personalizados para dama y asesoría de imagen.",
         link: "/cortes-de-pelo-en-chia.html",
         image: "../images/peluqueria/foto_6_peluqueria.webp",
@@ -14,15 +14,15 @@ export const hairSalonServices = [
         variant: "standard"
     },
     {
-        title: "Color & Balayage",
+        title: "Color y balayage",
         description: "Expertos en rubios, corrección de color y técnicas avanzadas.",
         link: "/balayage-y-color-en-chia.html",
         image: "../images/peluqueria/foto_4_peluqueria.webp",
         variant: "standard"
     },
     {
-        title: "Salud Capilar",
-        description: "Recuperación profunda, Keratinas y Botox Capilar.",
+        title: "Salud capilar",
+        description: "Recuperación profunda, keratinas y botox capilar.",
         link: "/tratamientos-capilares-chia.html",
         image: "../images/peluqueria/foto_5_peluqueria.webp",
         variant: "standard"
