@@ -440,8 +440,30 @@
           new UIService();
           new FAQAccordion('#faq');
           new WhatsAppButton();
-          // Initialize Floating Decorations
-          new FloatingDecorations('../');
+          // Initialize Floating Decorations (Static Mode for Peluquería)
+          new FloatingDecorations({
+              basePath: '../',
+              enableAnimation: false,
+              customConfig: [
+                  // Hoja 1: Esquina Superior Derecha (Fija)
+                  {
+                      parent: 'inicio',
+                      img: 'hoja-seca-3d.webp',
+                      speed: 0,
+                      classes: 'w-32 -right-6 top-0 md:w-56 md:-right-12 md:-top-4 rotate-12 z-0 opacity-80'
+                  },
+                  // Hoja 2: Esquina Inferior Izquierda (Fija)
+                  {
+                      parent: 'inicio', // O 'servicios' si queremos que esté más abajo
+                      img: 'hoja-verde-3d.webp',
+                      speed: 0,
+                      // Usamos position fixed respecto al viewport o absolute respecto al contenedor grande?
+                      // El usuario pidió "bottom-0 left-0". Si 'inicio' es solo el hero, bottom-0 es el fin del hero.
+                      // Probemos en el Hero primero.
+                      classes: 'w-28 -left-8 bottom-0 md:w-48 md:-left-4 md:-bottom-12 -rotate-12 z-0 opacity-80'
+                  }
+              ]
+          });
 
           // 3. Montar Servicios de Peluquería (Standard Variant)
           const hairServicesGrid = document.getElementById('hair-services-grid');

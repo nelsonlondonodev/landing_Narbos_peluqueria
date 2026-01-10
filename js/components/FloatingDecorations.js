@@ -3,18 +3,42 @@
  * Optimizado para Tailwind CSS v4 con diseño Responsivo.
  */
 export class FloatingDecorations {
-    constructor(basePath = './') {
-        this.basePath = basePath;
+    /**
+     * @param {string|Object} options - Base path string OR options object
+     * @param {string} options.basePath - Path to assets (default './')
+     * @param {boolean} options.enableAnimation - Whether to run the parallax loop (default true)
+     * @param {Array} options.customConfig - Array of decoration configs to override defaults
+     */
+    constructor(options = './') {
+        // Handle backward compatibility (string argument)
+        if (typeof options === 'string') {
+            this.config = {
+                basePath: options,
+                enableAnimation: true,
+                customConfig: null
+            };
+        } else {
+            this.config = {
+                basePath: options.basePath || './',
+                enableAnimation: options.enableAnimation !== false, // Default true
+                customConfig: options.customConfig || null
+            };
+        }
+
+        this.basePath = this.config.basePath;
         this.leaves = [];
         this.init();
     }
 
     init() {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
-
+        
         this.injectDecorations();
-        this.startParallaxLoop();
+
+        // Only start animation loop if enabled and motion is allowed
+        if (this.config.enableAnimation && !prefersReducedMotion) {
+            this.startParallaxLoop();
+        }
     }
 
     injectDecorations() {
@@ -23,7 +47,9 @@ export class FloatingDecorations {
          * mobileClasses: Estilo por defecto (discreto para móvil).
          * desktopClasses: md: o lg: para el diseño inmersivo en PC.
          */
-        const configs = [
+        
+        // Use custom config if provided, otherwise use default
+        const configs = this.config.customConfig || [
             // --- Sección Inicio (Hero) ---
             { 
                 parent: 'inicio', 
@@ -63,6 +89,7 @@ export class FloatingDecorations {
 
         configs.forEach((config) => {
             const parentSection = document.getElementById(config.parent);
+            // If parent section doesn't exist, skip silently
             if (!parentSection) return;
 
             if (getComputedStyle(parentSection).position === 'static') {
@@ -75,20 +102,20 @@ export class FloatingDecorations {
             leaf.onerror = () => { leaf.src = `${this.basePath}images/leaf-placeholder.svg`; };
             leaf.alt = '';
             
-            // Aplicamos las clases de Tailwind (Posicionamiento absoluto, pointer-events y el drop-shadow 3D)
-            // Agregamos 'drop-shadow-xl' o un filtro personalizado vía clase si se prefiere, 
-            // pero para mantener el control preciso del drop-shadow 3D usamos una clase de utilidad.
-            leaf.className = `absolute pointer-events-none transition-transform duration-100 ease-linear ${config.classes}`;
+            leaf.className = `absolute pointer-events-none drop-shadow-2xl transition-transform duration-700 ease-out will-change-transform ${config.classes}`;
             
-            // Aplicamos el filtro 3D que es constante
-            leaf.style.filter = 'drop-shadow(0px 10px 15px rgba(0,0,0,0.15))';
-
-            this.leaves.push({
-                element: leaf,
-                speed: config.speed,
+            // Solo añadimos data-speed si hay animación
+            if (this.config.enableAnimation) {
+                leaf.setAttribute('data-speed', config.speed);
                 // Guardamos la rotación base para el parallax
-                rotation: config.classes.includes('rotate-') ? '' : (config.parent === 'inicio' && config.img.includes('seca') ? 'rotate(45deg)' : 'rotate(-15deg)')
-            });
+                const rotation = config.classes.includes('rotate-') ? '' : (config.parent === 'inicio' && config.img.includes('seca') ? 'rotate(45deg)' : 'rotate(-15deg)');
+                
+                this.leaves.push({
+                    element: leaf,
+                    speed: config.speed,
+                    rotation: rotation
+                });
+            }
 
             parentSection.prepend(leaf);
             
