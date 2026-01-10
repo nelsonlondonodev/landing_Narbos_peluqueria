@@ -1,3 +1,4 @@
+import { TranslationService } from './services/TranslationService.js';
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
 import { ServiceCard } from './components/ServiceCard.js';
@@ -10,10 +11,19 @@ import './script.js';
  * Handles component mounting and app initialization.
  */
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Mount Static Layout (Navbar, Footer)
     mountLayout();
+    
+    // 2. Initialize Translation Service
+    const translationService = new TranslationService();
+    translationService.init();
+    // Bind listeners *after* layout is mounted
+    translationService.bindSwitchers(); 
+
+    // 3. Mount Content
     mountHomeServices();
     
-    // Initialize Core App Logic (Controllers)
+    // 4. Initialize Core App Logic (Controllers)
     if (window.initApp) {
         window.initApp();
     }
