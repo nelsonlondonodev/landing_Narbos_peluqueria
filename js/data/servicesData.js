@@ -8,7 +8,7 @@ export const servicesData = [
         animationDelay: "0s"
     },
     {
-        title: "Manos y Pies",
+        title: "Manos y pies",
         description: "Manicure y pedicure con esmaltado semipermanente, uñas en gel o acrílicas con productos Organic, Belier y Masglo.",
         icon: '<path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/>',
         link: "/servicios/unas-manicura-pedicura-chia.html",
@@ -16,7 +16,7 @@ export const servicesData = [
         animationDelay: "0.2s"
     },
     {
-        title: "Estética & Spa",
+        title: "Estética y spa",
         description: "Masajes relajantes, drenajes linfáticos, y limpiezas e hidrataciones faciales con productos dermatológicos.",
         icon: '<path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m3 4.5a4.5 4.5 0 1 0 4.5-4.5M12 16.5V15m4.5-3H15"/>',
         link: "/servicios/spa-y-estetica-facial-chia.html",
@@ -24,7 +24,7 @@ export const servicesData = [
         animationDelay: "0.4s"
     },
     {
-        title: "Depilación y Pestañas",
+        title: "Depilación y pestañas",
         description: "Servicios de depilación con cera o hilo y extensiones de pestañas para una mirada impactante.",
         icon: '<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5zM16 8L2 22M17.5 15H9"/>',
         link: "/servicios/depilacion-y-pestanas-chia.html",
