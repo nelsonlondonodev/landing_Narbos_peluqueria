@@ -155,9 +155,21 @@
         <div id="breadcrumbs-root"></div>
 
     <main>
-      <!-- Hero Injection Point (SSG) - Wrapped for Floating Decorations -->
+      <!-- Hero de Peluquería (Principal) -->
       <div id="inicio" class="relative">
-          <div id="hero-root"></div>
+          <section class="relative h-[60vh] md:h-[80vh] bg-white">
+              <img src="../images/peluqueria/foto_7_peluqueria.webp" alt="Servicio de Peluquería profesional en Narbo's" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080">
+          </section>
+
+          <!-- Floating Content Box -->
+          <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
+              <div class="container mx-auto">
+                  <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
+                      <h1 class="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4">Peluquería en Chía: Expertos en estilo, color y bienestar</h1>
+                      <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">Expertos en realzar tu belleza con técnicas de vanguardia y productos de clase mundial.</p>
+                  </div>
+              </div>
+          </div>
       </div>
 
       <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
@@ -411,25 +423,6 @@
     <!-- Scripts -->
     <script type="module" src="../js/service-page.js"></script>
     
-    <!-- Hero Fallback Logic (Dev Mode) -->
-    <script type="module">
-        document.addEventListener('DOMContentLoaded', () => {
-             const heroRoot = document.getElementById('hero-root');
-             if (heroRoot && !heroRoot.hasChildNodes()) {
-                 import('../js/components/HeroSection.js').then(({ getHeroHTML }) => {
-                     import('../js/data/pagesData.js').then(({ pagesData }) => {
-                          const data = pagesData['peluqueria'];
-                          if (data && data.hero) {
-                               heroRoot.innerHTML = getHeroHTML(data.hero);
-                               setTimeout(() => {
-                                   const title = document.getElementById('hero-title');
-                                   if(title) title.classList.add('is-visible');
-                               }, 100);
-                          }
-                     });
-                 });
-             }
-        });
-    </script>
+
   </body>
 </html>

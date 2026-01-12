@@ -9,21 +9,12 @@ export class FloatingDecorations {
      * @param {boolean} options.enableAnimation - Whether to run the parallax loop (default true)
      * @param {Array} options.customConfig - Array of decoration configs to override defaults
      */
-    constructor(options = './') {
-        // Handle backward compatibility (string argument)
-        if (typeof options === 'string') {
-            this.config = {
-                basePath: options,
-                enableAnimation: true,
-                customConfig: null
-            };
-        } else {
-            this.config = {
-                basePath: options.basePath || './',
-                enableAnimation: options.enableAnimation !== false, // Default true
-                customConfig: options.customConfig || null
-            };
-        }
+    constructor(options = {}) {
+        this.config = {
+            basePath: options.basePath || './',
+            enableAnimation: options.enableAnimation !== false, // Default: true
+            customConfig: options.customConfig || null
+        };
 
         this.basePath = this.config.basePath;
         this.leaves = [];

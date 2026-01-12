@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
  * Injects static layout components (Navbar, Footer).
  */
 function initLayout() {
-    // Assuming we are in a subfolder like /peluqueria/
     const basePath = '../';
 
     const navbarRoot = document.getElementById('navbar-root');
@@ -90,25 +89,16 @@ function getFilteredServices(path) {
  * Currently tailored for the Peluquería main page or pages with 'inicio' ID.
  */
 function initFloatingDecorations() {
-    // Only initialize if the container exists (checked internally by the component, but we can guard here too)
-    // The original logic passed specific config for Peluquería
-    const isPeluqueriaHome = window.location.pathname.endsWith('/peluqueria/') || window.location.pathname.endsWith('/peluqueria/index.html');
-    
-    // We can enable it for subpages too if they have the same hero structure with id="inicio" or similar.
-    // For now, let's target where it was requested, or broadly if elements exist.
-    
     new FloatingDecorations({
         basePath: '../',
-        enableAnimation: false, // Static as requested in previous iterations
+        enableAnimation: false, // Static as requested
         customConfig: [
-            // Leaf 1: Top Right (Fixed)
             {
-                parent: 'inicio', // Ensure your HTML has this ID on the Hero wrapper
+                parent: 'inicio',
                 img: 'hoja-seca-3d.webp',
                 speed: 0,
                 classes: 'w-32 -right-6 top-0 md:w-56 md:-right-12 md:-top-4 rotate-12 z-10 opacity-80'
             },
-            // Leaf 2: Bottom Left (Fixed)
             {
                 parent: 'inicio',
                 img: 'hoja-verde-3d.webp',

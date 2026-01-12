@@ -79,8 +79,8 @@ export class ServiceCard {
              backgroundHtml = `<div class="absolute inset-0 bg-gradient-to-br from-brand-green to-brand-green-dark z-0"></div>`;
         }
 
-        const i18nTitleAttr = this.i18nTitle ? `data-i18n="${this.i18nTitle}"` : '';
-        const i18nDescAttr = this.i18nDesc ? `data-i18n="${this.i18nDesc}"` : '';
+        const i18nTitleAttr = '';
+        const i18nDescAttr = '';
 
         element.innerHTML = `
             ${backgroundHtml}
