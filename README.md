@@ -34,6 +34,15 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 3. Etiquetas Canonicals: Todas las páginas deben incluir una etiqueta <link rel="canonical" href="https://narbossalon.com/..."> que coincida exactamente con la URL final sin www.
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
+### 📝 Últimas Actualizaciones (12 de enero, 2026)
+- **Consistencia de Experiencia de Usuario (Service Pages):** ✨
+    - **Solución de Saltos Visuales (Layout Shift):** Se corrigió definitivamente el problema de "brinco" en la sección de Preguntas Frecuentes (FAQ) en todas las páginas de servicios (`Peluquería`, `Balayage`, `Barbería`, `Cortes`, `Tratamientos`) eliminando animaciones conflictivas en bloques extensos.
+    - **Navegación Móvil (Breadcrumbs):** Se aumentó el espaciado superior (`pt-32`) del componente de migas de pan para garantizar su visibilidad en móviles bajo el encabezado fijo.
+    - **Estandarización de Estructura:** Se unificó la estructura HTML del Hero Section en `peluqueria/index.html` para coincidir con las subpáginas, moviendo el `id="inicio"` al elemento `<section>`.
+- **Salubridad del Código (Code Health):** 🛠️
+    - **Limpieza de Deuda Técnica:** Eliminación de bloque de scripts duplicados y atributos oxidados (`data-floating-bg`) que ya no cumplían función.
+    - **Corrección de Metadatos SEO:** Alineación estricta de `twitter:url` y Schema JSON-LD con las URLs canónicas correctas en la página principal de Peluquería.
+
 ### 📝 Últimas Actualizaciones (10 de enero, 2026)
 - **Refactorización Mayor de JavaScript (Arquitectura Modular):** 🏗️
     - **Descomposición de UIService:** Se eliminó el "God Object" `UIService.js`, dividiendo sus responsabilidades en controladores atómicos y mantenibles: `HeaderController`, `ModalController`, `VideoPlayerController` y `GalleryController`.
