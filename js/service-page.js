@@ -7,6 +7,7 @@ import { WhatsAppButton } from './components/WhatsAppButton.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { hairSalonServices } from './data/hairSalonServices.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
+import { FloatingDecorations } from './components/FloatingDecorations.js';
 
 /**
  * Service Page Initialization
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLayout();
     initCommonComponents();
     initServiceGrid();
+    initFloatingDecorations();
     initLazyVideos();
     initBreadcrumbs();
 });
@@ -81,6 +83,40 @@ function getFilteredServices(path) {
     }
     // Add more filters as needed..
     return hairSalonServices; // Default: show all
+}
+
+/**
+ * Initializes floating 3D decorations (leaves) if applicable.
+ * Currently tailored for the Peluquería main page or pages with 'inicio' ID.
+ */
+function initFloatingDecorations() {
+    // Only initialize if the container exists (checked internally by the component, but we can guard here too)
+    // The original logic passed specific config for Peluquería
+    const isPeluqueriaHome = window.location.pathname.endsWith('/peluqueria/') || window.location.pathname.endsWith('/peluqueria/index.html');
+    
+    // We can enable it for subpages too if they have the same hero structure with id="inicio" or similar.
+    // For now, let's target where it was requested, or broadly if elements exist.
+    
+    new FloatingDecorations({
+        basePath: '../',
+        enableAnimation: false, // Static as requested in previous iterations
+        customConfig: [
+            // Leaf 1: Top Right (Fixed)
+            {
+                parent: 'inicio', // Ensure your HTML has this ID on the Hero wrapper
+                img: 'hoja-seca-3d.webp',
+                speed: 0,
+                classes: 'w-32 -right-6 top-0 md:w-56 md:-right-12 md:-top-4 rotate-12 z-10 opacity-80'
+            },
+            // Leaf 2: Bottom Left (Fixed)
+            {
+                parent: 'inicio',
+                img: 'hoja-verde-3d.webp',
+                speed: 0,
+                classes: 'w-28 -left-8 bottom-0 md:w-48 md:-left-4 md:-bottom-12 -rotate-12 z-10 opacity-80'
+            }
+        ]
+    });
 }
 
 /**
