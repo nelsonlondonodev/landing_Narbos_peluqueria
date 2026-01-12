@@ -393,8 +393,8 @@
           // 3. Montar Servicios de Peluquería (Standard Variant)
           const hairServicesGrid = document.getElementById('hair-services-grid');
           if (hairServicesGrid) {
-              import('./js/components/ServiceCard.js').then(({ ServiceCard }) => {
-                  import('./js/data/hairSalonServices.js').then(({ hairSalonServices }) => {
+              import('../js/components/ServiceCard.js').then(({ ServiceCard }) => {
+                  import('../js/data/hairSalonServices.js').then(({ hairSalonServices }) => {
                       hairSalonServices.forEach(data => {
                           const card = new ServiceCard(data);
                           hairServicesGrid.appendChild(card.render());
