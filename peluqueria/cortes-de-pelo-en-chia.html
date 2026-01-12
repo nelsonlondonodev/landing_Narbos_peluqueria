@@ -95,23 +95,8 @@
     <div id="app-wrapper" class="relative w-full overflow-x-hidden">
         
         <!-- Breadcrumbs -->
-        <nav aria-label="Breadcrumb" class="bg-white py-3 px-6 relative z-10">
-            <div class="container mx-auto max-w-screen-xl">
-                <ol class="list-none p-0 inline-flex text-sm text-gray-600">
-                    <li class="flex items-center">
-                        <a href="../index.html" class="hover:text-brand-green transition-colors">Inicio</a>
-                        <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
-                    </li>
-                    <li class="flex items-center">
-                        <a href="index.html" class="hover:text-brand-green transition-colors">Peluquería</a>
-                        <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
-                    </li>
-                    <li>
-                        <span class="text-gray-800 font-semibold" aria-current="page">Cortes de Pelo</span>
-                    </li>
-                </ol>
-            </div>
-        </nav>
+        <!-- Breadcrumbs (Injected by JS) -->
+        <div id="breadcrumbs-root"></div>
 
         <main>
             <div class="relative">
@@ -439,6 +424,19 @@
 
               lazyVideos.forEach(video => videoObserver.observe(video));
           }
+
+          // 5. Initialize Breadcrumbs
+          import('../js/components/Breadcrumbs.js').then(({ Breadcrumbs }) => {
+              const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
+              if (breadcrumbsRoot) {
+                  const items = [
+                      { label: 'Inicio', link: '../index.html' },
+                      { label: 'Peluquería', link: 'index.html' },
+                      { label: 'Cortes de Pelo', link: '#' }
+                  ];
+                  breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
+              }
+          });
       });
     </script>
   </body>
