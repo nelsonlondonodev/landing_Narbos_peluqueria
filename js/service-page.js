@@ -1,4 +1,3 @@
-
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
 import { MobileMenu } from './components/MobileMenu.js';
@@ -10,99 +9,147 @@ import { hairSalonServices } from './data/hairSalonServices.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 
 /**
- * Service Page Main Entry Point
- * Initializes common layout and components for service subpages in /peluqueria/
+ * Service Page Initialization
+ * Entry point for all service subpages (e.g., /peluqueria/*) using a clean modular approach.
  */
 document.addEventListener('DOMContentLoaded', () => {
-    // Determine the base path (assuming we are in /peluqueria/)
+    initLayout();
+    initCommonComponents();
+    initServiceGrid();
+    initLazyVideos();
+    initBreadcrumbs();
+});
+
+// --- Internal Helper Functions ---
+
+/**
+ * Injects static layout components (Navbar, Footer).
+ */
+function initLayout() {
+    // Assuming we are in a subfolder like /peluqueria/
     const basePath = '../';
 
-    // 1. Inyección de Componentes Estáticos (Navbar, Footer)
     const navbarRoot = document.getElementById('navbar-root');
-    if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(basePath, false);
+    if (navbarRoot) {
+        navbarRoot.innerHTML = getNavbarHTML(basePath, false);
+    }
 
     const footerRoot = document.getElementById('footer-root');
-    if (footerRoot) footerRoot.innerHTML = getFooterHTML(basePath);
+    if (footerRoot) {
+        footerRoot.innerHTML = getFooterHTML(basePath);
+    }
+}
 
-    // 2. Inicialización de Componentes Comunes
+/**
+ * Initializes common UI components used across all service pages.
+ */
+function initCommonComponents() {
     new MobileMenu();
     new UIService();
     new FAQAccordion('#faq');
     new WhatsAppButton();
+}
 
-    // 3. Montar Servicios de Peluquería
+/**
+ * Renders the Service Cards Grid, automatically filtering out the card 
+ * of the currently active service to avoid self-referencing redundancy.
+ */
+function initServiceGrid() {
     const hairServicesGrid = document.getElementById('hair-services-grid');
-    if (hairServicesGrid) {
-        // Obtenemos la URL actual para saber qué servicio filtrar
-        const currentPath = window.location.pathname;
-        
-        let servicesToRender = hairSalonServices;
+    if (!hairServicesGrid) return;
 
-        if (currentPath.includes('cortes-de-pelo')) {
-             servicesToRender = hairSalonServices.filter(s => !s.link.includes('cortes-de-pelo'));
-        } else if (currentPath.includes('barberia')) {
-             servicesToRender = hairSalonServices.filter(s => !s.link.includes('barberia'));
-        }
-        // Agrega más condiciones si es necesario para otras páginas
-        
-        servicesToRender.forEach(data => {
-            const card = new ServiceCard(data);
-            hairServicesGrid.appendChild(card.render());
-        });
+    const currentPath = window.location.pathname;
+    const servicesToRender = getFilteredServices(currentPath);
+
+    servicesToRender.forEach(data => {
+        const card = new ServiceCard(data);
+        hairServicesGrid.appendChild(card.render());
+    });
+}
+
+/**
+ * Helper to filter services data based on current URL.
+ * @param {string} path - Current window pathname
+ * @returns {Array} - Filtered Array of service data objects
+ */
+function getFilteredServices(path) {
+    if (path.includes('cortes-de-pelo')) {
+        return hairSalonServices.filter(s => !s.link.includes('cortes-de-pelo'));
     }
+    if (path.includes('barberia')) {
+        return hairSalonServices.filter(s => !s.link.includes('barberia'));
+    }
+    // Add more filters as needed..
+    return hairSalonServices; // Default: show all
+}
 
-    // 4. Autoplay Lazy Videos (UX/Performance)
+/**
+ * Initializes Lazy Loading and Autoplay for muted videos to improve performance.
+ */
+function initLazyVideos() {
     const lazyVideos = document.querySelectorAll('video.lazy-video');
-    if ('IntersectionObserver' in window) {
-        const videoObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const video = entry.target;
-                    const sources = video.querySelectorAll('source');
-                    
-                    sources.forEach(source => {
-                        if (source.dataset.src) {
-                            source.src = source.dataset.src;
-                        }
-                    });
+    if (lazyVideos.length === 0 || !('IntersectionObserver' in window)) return;
 
-                    video.load();
-                    video.play().catch(e => console.log("Autoplay prevented:", e));
-                    video.classList.remove('lazy-video');
-                    observer.unobserve(video);
-                }
-            });
-        }, { rootMargin: "0px 0px 50px 0px" });
+    const videoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                playVideo(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: "0px 0px 50px 0px" });
 
-        lazyVideos.forEach(video => videoObserver.observe(video));
-    }
+    lazyVideos.forEach(video => videoObserver.observe(video));
+}
 
-    // 5. Initialize Breadcrumbs
+/**
+ * Helper to actually load and play a video element.
+ * @param {HTMLVideoElement} video 
+ */
+function playVideo(video) {
+    const sources = video.querySelectorAll('source');
+    sources.forEach(source => {
+        if (source.dataset.src) {
+            source.src = source.dataset.src;
+        }
+    });
+
+    video.load();
+    video.play().catch(e => console.warn("Autoplay blocked or failed:", e));
+    video.classList.remove('lazy-video');
+}
+
+/**
+ * Generates and renders breadcrumbs based on the current page's context.
+ */
+function initBreadcrumbs() {
     const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
-    if (breadcrumbsRoot) {
-        const items = [
-            { label: 'Inicio', link: '../index.html' },
-            { label: 'Peluquería', link: 'index.html' }
-        ];
+    if (!breadcrumbsRoot) return;
 
-        // Añadir el tercer nivel específico basado en la página actual
-        const currentPath = window.location.pathname;
-        if (currentPath.includes('cortes-de-pelo')) {
-            items.push({ label: 'Cortes de Pelo', link: '#' });
-        } else if (currentPath.includes('barberia')) {
-            items.push({ label: 'Barbería', link: '#' });
-        } else if (currentPath.includes('balayage')) {
-            items.push({ label: 'Color y Balayage', link: '#' });
-        } else if (currentPath.includes('tratamientos')) {
-            items.push({ label: 'Tratamientos', link: '#' });
-        }
-         // Si es peluqueria/index.html, no añadimos nada extra o manejamos "Peluquería" como activo
-        if (currentPath.endsWith('/peluqueria/') || currentPath.endsWith('/peluqueria/index.html')) {
-             // En este caso "Peluquería" es el último. 
-             // Ajustamos el link del segundo item para que no sea clickable si estamos en él
-             items[1].link = '#';
-        }
+    const currentPath = window.location.pathname;
+    
+    // Base Breadcrumbs
+    const items = [
+        { label: 'Inicio', link: '../index.html' },
+        { label: 'Peluquería', link: 'index.html' }
+    ];
 
-        breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
+    // Determine current sub-page
+    if (currentPath.includes('cortes-de-pelo')) {
+        items.push({ label: 'Cortes de Pelo', link: '#' });
+    } else if (currentPath.includes('barberia')) {
+        items.push({ label: 'Barbería', link: '#' });
+    } else if (currentPath.includes('balayage')) {
+        items.push({ label: 'Color y Balayage', link: '#' });
+    } else if (currentPath.includes('tratamientos')) {
+        items.push({ label: 'Tratamientos', link: '#' });
     }
-});
+
+    // Handle "Main Service Hub" case
+    const isServiceHome = currentPath.endsWith('/peluqueria/') || currentPath.endsWith('/peluqueria/index.html');
+    if (isServiceHome) {
+        items[1].link = '#'; // Make "Peluquería" unclickable if we are already there
+    }
+
+    breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
+}
