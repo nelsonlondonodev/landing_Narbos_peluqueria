@@ -56,7 +56,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             <a href="${basePath}blog/index.html" class="text-white hover:text-brand-gold active:text-brand-gold" data-i18n="nav.blog">Blog</a>
 
             <!-- Desktop Language Switcher -->
-            <button id="lang-toggle-desktop" class="ml-4 border border-white/50 rounded-full px-3 py-1 text-xs font-semibold text-white hover:bg-white hover:text-brand-dark transition-all uppercase tracking-wider">
+            <button id="lang-toggle-desktop" class="ml-4 border border-white/50 rounded-full px-3 py-1 text-xs font-semibold text-white hover:bg-white hover:text-brand-gray-dark transition-all uppercase tracking-wider">
                 ${nextLangLabel}
             </button>
         </div>
