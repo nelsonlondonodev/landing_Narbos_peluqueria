@@ -87,47 +87,56 @@
   </head>
   <body class="font-sans transition-colors duration-500">
     
-    <header class="bg-brand-green backdrop-blur-sm sticky top-0 z-50 shadow-md">
+    <header class="site-header">
       <div id="navbar-root"></div>
     </header>
 
-    <!-- Breadcrumbs -->
-    <nav aria-label="Breadcrumb" class="bg-gray-100 py-3 px-6">
-        <div class="container mx-auto max-w-screen-xl">
-            <ol class="list-none p-0 inline-flex text-sm text-gray-600">
-                <li class="flex items-center">
-                    <a href="../index.html" class="hover:text-brand-green transition-colors">Inicio</a>
-                    <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
-                </li>
-                <li class="flex items-center">
-                    <a href="index.html" class="hover:text-brand-green transition-colors">Peluquería</a>
-                    <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
-                </li>
-                <li>
-                    <span class="text-gray-800 font-semibold" aria-current="page">Cortes de Pelo</span>
-                </li>
-            </ol>
-        </div>
-    </nav>
-
-    <main>
-      <!-- Hero de Servicio (Consistente con Home) -->
-      <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden" data-floating-bg="3">
-        <img src="../images/peluqueria/foto_6_peluqueria.webp" alt="Cortes de pelo en Chía" class="w-full h-full object-cover absolute inset-0 z-0" loading="eager" width="1920" height="1080">
-        <div class="absolute inset-0 bg-black/40 z-10"></div>
-        <div class="absolute z-20 inset-0 flex items-center justify-center px-6">
-            <div class="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-xl shadow-2xl max-w-3xl text-center" data-animation="zoomIn">
-                <h1 class="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-4">Cortes de Cabello para Dama en Chía</h1>
-                <p class="text-lg md:text-xl text-gray-700">Diseños personalizados, puntas perfectas y cambios de look completos. Nuestros estilistas expertos analizarán tus facciones para resaltar tu belleza natural.</p>
+    <!-- App Content Wrapper -->
+    <div id="app-wrapper" class="relative w-full overflow-x-hidden">
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="Breadcrumb" class="bg-white py-3 px-6 relative z-10">
+            <div class="container mx-auto max-w-screen-xl">
+                <ol class="list-none p-0 inline-flex text-sm text-gray-600">
+                    <li class="flex items-center">
+                        <a href="../index.html" class="hover:text-brand-green transition-colors">Inicio</a>
+                        <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
+                    </li>
+                    <li class="flex items-center">
+                        <a href="index.html" class="hover:text-brand-green transition-colors">Peluquería</a>
+                        <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
+                    </li>
+                    <li>
+                        <span class="text-gray-800 font-semibold" aria-current="page">Cortes de Pelo</span>
+                    </li>
+                </ol>
             </div>
-        </div>
-      </section>
+        </nav>
 
-      <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
-      <section class="py-16 md:py-24 bg-white overflow-x-hidden">
-        <div class="container mx-auto px-6 max-w-screen-xl">
-            <div class="text-center mb-16" data-animation="fadeInUp">
-              <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
+        <main>
+            <div class="relative">
+                <!-- Hero Section Reference: index.html -->
+                <section class="relative h-[60vh] md:h-[80vh] bg-white">
+                    <img src="../images/peluqueria/foto_6_peluqueria.webp" alt="Cortes de pelo en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080">
+                </section>
+
+                <!-- Floating Content Box -->
+                <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
+                    <div class="container mx-auto">
+                        <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
+                            <h1 class="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-4">Cortes de Cabello para Dama en Chía</h1>
+                            <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">Diseños personalizados, puntas perfectas y cambios de look completos. Nuestros estilistas expertos analizarán tus facciones para resaltar tu belleza natural.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
+                <!-- Added overlapping padding (pt-56 md:pt-64) -->
+                <section class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
+                    <div class="container mx-auto px-6 max-w-screen-xl">
+                        <div class="text-center mb-16" data-animation="fadeInUp">
+                            <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
+
                 Elige tu Experiencia
               </h2>
               <p class="text-lg text-gray-700 max-w-2xl mx-auto">
@@ -363,6 +372,8 @@
 
     </main>
 
+    </div><!-- End #app-wrapper -->
+    
     <div id="footer-root"></div>
 
     <!-- Scripts -->
