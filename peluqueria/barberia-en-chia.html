@@ -178,58 +178,7 @@
     <div id="footer-root"></div>
 
     <!-- Scripts -->
-    <script type="module">
-      import { getNavbarHTML } from '../js/components/Navbar.js';
-      import { getFooterHTML } from '../js/components/Footer.js';
-      import { MobileMenu } from '../js/components/MobileMenu.js';
-      import { UIService } from '../js/services/UIService.js';
-      import { FAQAccordion } from '../js/components/FAQAccordion.js';
-      import { WhatsAppButton } from '../js/components/WhatsAppButton.js';
-
-      const basePath = '../';
-      
-      // 1. Inyección de Componentes Estáticos
-      const navbarRoot = document.getElementById('navbar-root');
-      if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(basePath, false);
-
-      const footerRoot = document.getElementById('footer-root');
-      if (footerRoot) footerRoot.innerHTML = getFooterHTML(basePath);
-
-      // 2. Inicialización de Lógica Específica
-      document.addEventListener('DOMContentLoaded', () => {
-          new MobileMenu();
-          new UIService();
-          new FAQAccordion('#faq');
-          new WhatsAppButton();
-
-          // 3. Montar Servicios Relacionados (Filter out Barbería)
-          const hairServicesGrid = document.getElementById('hair-services-grid');
-          if (hairServicesGrid) {
-              import('../js/components/ServiceCard.js').then(({ ServiceCard }) => {
-                  import('../js/data/hairSalonServices.js').then(({ hairSalonServices }) => {
-                      // Filter out the current service (Barbería)
-                      const relatedServices = hairSalonServices.filter(s => !s.link.includes('barberia'));
-                      relatedServices.forEach(data => {
-                          const card = new ServiceCard(data);
-                          hairServicesGrid.appendChild(card.render());
-                      });
-                  });
-              });
-          }
-
-          // 4. Initialize Breadcrumbs
-          import('../js/components/Breadcrumbs.js').then(({ Breadcrumbs }) => {
-              const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
-              if (breadcrumbsRoot) {
-                  const items = [
-                      { label: 'Inicio', link: '../index.html' },
-                      { label: 'Peluquería', link: 'index.html' },
-                      { label: 'Barbería', link: '#' }
-                  ];
-                  breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
-              }
-          });
-      });
-    </script>
+    <!-- Scripts -->
+    <script type="module" src="../js/service-page.js"></script>
   </body>
 </html>

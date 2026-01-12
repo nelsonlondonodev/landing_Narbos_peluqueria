@@ -468,67 +468,28 @@
               });
           }
 
-          // 4. Fallback Client-Side para Desarrollo (Hero)
-          // Si estamos en dev (o falló el SSG), #hero-root estará vacío. Lo llenamos dinámicamente.
-          const heroRoot = document.getElementById('hero-root');
-          if (heroRoot && !heroRoot.hasChildNodes()) {
-              console.log("Hydrating Hero from Client (Dev Mode)...");
-              Promise.all([
-                  import('../js/components/HeroSection.js'),
-                  import('../js/data/pagesData.js')
-              ]).then(([{ getHeroHTML }, { pagesData }]) => {
-                  const data = pagesData['peluqueria'];
-                  if (data && data.hero) {
-                      heroRoot.innerHTML = getHeroHTML(data.hero);
-                      
-                      // Trigger animation manually since UIService missed it
-                      setTimeout(() => {
-                          const title = document.getElementById('hero-title');
-                          const subtitle = document.getElementById('hero-subtitle');
-                          if (title) title.classList.add('is-visible');
-                          if (subtitle) subtitle.classList.add('is-visible');
-                      }, 100);
-                  }
-              });
-          }
-          // 5. Autoplay Lazy Videos (UX/Performance)
-          const lazyVideos = document.querySelectorAll('video.lazy-video');
-          if ('IntersectionObserver' in window) {
-              const videoObserver = new IntersectionObserver((entries, observer) => {
-                  entries.forEach(entry => {
-                      if (entry.isIntersecting) {
-                          const video = entry.target;
-                          const sources = video.querySelectorAll('source');
-                          
-                          sources.forEach(source => {
-                              if (source.dataset.src) {
-                                  source.src = source.dataset.src;
-                              }
-                          });
-
-                          video.load();
-                          video.play().catch(e => console.log("Autoplay prevented:", e));
-                          video.classList.remove('lazy-video');
-                          observer.unobserve(video);
-                      }
-                  });
-              }, { rootMargin: "0px 0px 50px 0px" }); // Cargar un poco antes de que llegue
-
-              lazyVideos.forEach(video => videoObserver.observe(video));
-          }
-
-          // 6. Initialize Breadcrumbs
-          import('../js/components/Breadcrumbs.js').then(({ Breadcrumbs }) => {
-              const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
-              if (breadcrumbsRoot) {
-                  const items = [
-                      { label: 'Inicio', link: '../index.html' },
-                      { label: 'Peluquería', link: '#' }
-                  ];
-                  breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
-              }
-          });
-      });
+    <!-- Scripts -->
+    <script type="module" src="../js/service-page.js"></script>
+    
+    <!-- Hero Fallback Logic (Dev Mode) -->
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', () => {
+             const heroRoot = document.getElementById('hero-root');
+             if (heroRoot && !heroRoot.hasChildNodes()) {
+                 import('../js/components/HeroSection.js').then(({ getHeroHTML }) => {
+                     import('../js/data/pagesData.js').then(({ pagesData }) => {
+                          const data = pagesData['peluqueria'];
+                          if (data && data.hero) {
+                               heroRoot.innerHTML = getHeroHTML(data.hero);
+                               setTimeout(() => {
+                                   const title = document.getElementById('hero-title');
+                                   if(title) title.classList.add('is-visible');
+                               }, 100);
+                          }
+                     });
+                 });
+             }
+        });
     </script>
   </body>
 </html>

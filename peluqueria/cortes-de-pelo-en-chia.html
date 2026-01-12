@@ -298,85 +298,8 @@
     </div><!-- End #app-wrapper -->
     
     <div id="footer-root"></div>
-
+    
     <!-- Scripts -->
-    <script type="module">
-      import { getNavbarHTML } from '../js/components/Navbar.js';
-      import { getFooterHTML } from '../js/components/Footer.js';
-      import { MobileMenu } from '../js/components/MobileMenu.js';
-      import { UIService } from '../js/services/UIService.js';
-      import { FAQAccordion } from '../js/components/FAQAccordion.js';
-      import { WhatsAppButton } from '../js/components/WhatsAppButton.js';
-
-      const basePath = '../';
-      
-      // 1. Inyección de Componentes Estáticos
-      const navbarRoot = document.getElementById('navbar-root');
-      if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(basePath, false);
-
-      const footerRoot = document.getElementById('footer-root');
-      if (footerRoot) footerRoot.innerHTML = getFooterHTML(basePath);
-
-      // 2. Inicialización de Lógica Específica
-      document.addEventListener('DOMContentLoaded', () => {
-          new MobileMenu();
-          new UIService();
-          new FAQAccordion('#faq');
-          new WhatsAppButton();
-
-          // 3. Montar Servicios Relacionados (Filter out current page)
-          const hairServicesGrid = document.getElementById('hair-services-grid');
-          if (hairServicesGrid) {
-              import('../js/components/ServiceCard.js').then(({ ServiceCard }) => {
-                  import('../js/data/hairSalonServices.js').then(({ hairSalonServices }) => {
-                      const relatedServices = hairSalonServices.filter(s => !s.link.includes('cortes-de-pelo'));
-                      relatedServices.forEach(data => {
-                          const card = new ServiceCard(data);
-                          hairServicesGrid.appendChild(card.render());
-                      });
-                  });
-              });
-          }
-
-          // 4. Autoplay Lazy Videos (UX/Performance) - Consistent with Peluquería
-          const lazyVideos = document.querySelectorAll('video.lazy-video');
-          if ('IntersectionObserver' in window) {
-              const videoObserver = new IntersectionObserver((entries, observer) => {
-                  entries.forEach(entry => {
-                      if (entry.isIntersecting) {
-                          const video = entry.target;
-                          const sources = video.querySelectorAll('source');
-                          
-                          sources.forEach(source => {
-                              if (source.dataset.src) {
-                                  source.src = source.dataset.src;
-                              }
-                          });
-
-                          video.load();
-                          video.play().catch(e => console.log("Autoplay prevented:", e));
-                          video.classList.remove('lazy-video');
-                          observer.unobserve(video);
-                      }
-                  });
-              }, { rootMargin: "0px 0px 50px 0px" });
-
-              lazyVideos.forEach(video => videoObserver.observe(video));
-          }
-
-          // 5. Initialize Breadcrumbs
-          import('../js/components/Breadcrumbs.js').then(({ Breadcrumbs }) => {
-              const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
-              if (breadcrumbsRoot) {
-                  const items = [
-                      { label: 'Inicio', link: '../index.html' },
-                      { label: 'Peluquería', link: 'index.html' },
-                      { label: 'Cortes de Pelo', link: '#' }
-                  ];
-                  breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
-              }
-          });
-      });
-    </script>
+    <script type="module" src="../js/service-page.js"></script>
   </body>
 </html>
