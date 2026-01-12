@@ -406,67 +406,7 @@
     </div> <!-- End of App Content Wrapper -->
 
     <!-- Scripts -->
-    <script type="module">
-      import { getNavbarHTML } from '../js/components/Navbar.js';
-      import { getFooterHTML } from '../js/components/Footer.js';
-      import { MobileMenu } from '../js/components/MobileMenu.js';
-      import { UIService } from '../js/services/UIService.js';
-      import { FAQAccordion } from '../js/components/FAQAccordion.js';
-      import { WhatsAppButton } from '../js/components/WhatsAppButton.js';
-      import { FloatingDecorations } from '../js/components/FloatingDecorations.js';
 
-      const basePath = '../';
-      
-      // 1. Inyección de Componentes Estáticos
-      const navbarRoot = document.getElementById('navbar-root');
-      if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(basePath, false);
-
-      const footerRoot = document.getElementById('footer-root');
-      if (footerRoot) footerRoot.innerHTML = getFooterHTML(basePath);
-
-      // 2. Inicialización de Lógica Específica
-      document.addEventListener('DOMContentLoaded', () => {
-          new MobileMenu();
-          new UIService();
-          new FAQAccordion('#faq');
-          new WhatsAppButton();
-          // Initialize Floating Decorations (Static Mode for Peluquería)
-          new FloatingDecorations({
-              basePath: '../',
-              enableAnimation: false,
-              customConfig: [
-                  // Hoja 1: Esquina Superior Derecha (Fija)
-                  {
-                      parent: 'inicio',
-                      img: 'hoja-seca-3d.webp',
-                      speed: 0,
-                      classes: 'w-32 -right-6 top-0 md:w-56 md:-right-12 md:-top-4 rotate-12 z-10 opacity-80'
-                  },
-                  // Hoja 2: Esquina Inferior Izquierda (Fija)
-                  {
-                      parent: 'inicio', // O 'servicios' si queremos que esté más abajo
-                      img: 'hoja-verde-3d.webp',
-                      speed: 0,
-                      // Usamos position fixed respecto al viewport o absolute respecto al contenedor grande?
-                      // El usuario pidió "bottom-0 left-0". Si 'inicio' es solo el hero, bottom-0 es el fin del hero.
-                      // Probemos en el Hero primero.
-                      classes: 'w-28 -left-8 bottom-0 md:w-48 md:-left-4 md:-bottom-12 -rotate-12 z-10 opacity-80'
-                  }
-              ]
-          });
-
-          // 3. Montar Servicios de Peluquería (Standard Variant)
-          const hairServicesGrid = document.getElementById('hair-services-grid');
-          if (hairServicesGrid) {
-              import('../js/components/ServiceCard.js').then(({ ServiceCard }) => {
-                  import('../js/data/hairSalonServices.js').then(({ hairSalonServices }) => {
-                      hairSalonServices.forEach(data => {
-                          const card = new ServiceCard(data);
-                          hairServicesGrid.appendChild(card.render());
-                      });
-                  });
-              });
-          }
 
     <!-- Scripts -->
     <script type="module" src="../js/service-page.js"></script>
