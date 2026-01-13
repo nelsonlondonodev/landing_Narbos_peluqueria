@@ -39,7 +39,7 @@ function initFloatingDecorations() {
 
 
 function initLayout() {
-    const basePath = '../';
+    const basePath = '../../';
     const navbarRoot = document.getElementById('navbar-root');
     if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(basePath, false);
 

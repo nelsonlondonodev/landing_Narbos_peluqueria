@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
  * Injects static layout components (Navbar, Footer).
  */
 function initLayout() {
-    const basePath = '../';
+    const basePath = '../../';
 
     const navbarRoot = document.getElementById('navbar-root');
     if (navbarRoot) {
@@ -92,7 +92,7 @@ function getFilteredServices(path) {
  */
 function initFloatingDecorations() {
     new FloatingDecorations({
-        basePath: '../',
+        basePath: '../../',
         enableAnimation: false, // Static as requested
         customConfig: [
             {
@@ -158,7 +158,7 @@ function initBreadcrumbs() {
     
     // Base Breadcrumbs
     const items = [
-        { label: 'Inicio', link: '../index.html' },
+        { label: 'Inicio', link: '../../index.html' },
         { label: 'Peluquería', link: 'index.html' }
     ];
 
