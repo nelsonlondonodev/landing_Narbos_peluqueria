@@ -70,39 +70,27 @@
     </header>
 
     <!-- Breadcrumbs -->
-    <nav aria-label="Breadcrumb" class="bg-gray-100 py-3 px-6">
-        <div class="container mx-auto max-w-screen-xl">
-            <ol class="list-none p-0 inline-flex text-sm text-gray-600">
-                <li class="flex items-center">
-                    <a href="../index.html" class="hover:text-brand-green transition-colors">Inicio</a>
-                    <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
-                </li>
-                 <li class="flex items-center">
-                    <a href="../peluqueria/index.html" class="hover:text-brand-green transition-colors">Peluquería</a>
-                    <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
-                </li>
-                <li>
-                    <span class="text-gray-800 font-semibold" aria-current="page">Manos y Pies</span>
-                </li>
-            </ol>
-        </div>
-    </nav>
+    <!-- Breadcrumbs -->
+    <div id="breadcrumbs-root"></div>
 
     <main>
-      <!-- Hero de Servicio (Consistente con Home) -->
-      <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden" data-floating-bg="3">
-        <img src="../images/peluqueria/foto_8_peluqueria.webp" alt="Manicure y Pedicure en Chía" class="w-full h-full object-cover absolute inset-0 z-0" loading="eager" width="1920" height="1080">
-        <div class="absolute inset-0 bg-black/40 z-10"></div>
-        <div class="absolute z-20 inset-0 flex items-center justify-center px-6">
-            <div class="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-xl shadow-2xl max-w-3xl text-center" data-animation="zoomIn">
-                <h1 class="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-4">Uñas en Chía: Manicura, Pedicura y Diseños Exclusivos</h1>
-                <p class="text-lg md:text-xl text-gray-700">Expertos en uñas polygel, acrílicas y nail art. Tu estilo, nuestras manos.</p>
+      <div class="relative">
+        <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
+            <img src="../images/peluqueria/foto_8_peluqueria.webp" alt="Manicure y Pedicure en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080">
+        </section>
+
+        <!-- Floating Content Box -->
+        <div class="absolute z-20 top-[40vh] md:top-[65vh] left-0 right-0 px-6">
+            <div class="container mx-auto">
+                <div class="bg-white text-brand-gray-dark backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
+                    <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4">Uñas en Chía: Manicura, Pedicura y Diseños Exclusivos</h1>
+                    <p class="text-lg md:text-xl text-brand-gray-dark/80 max-w-2xl mx-auto">Expertos en uñas polygel, acrílicas y nail art. Tu estilo, nuestras manos.</p>
+                </div>
             </div>
         </div>
-      </section>
 
-      <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
-      <section class="py-16 md:py-24 bg-white overflow-x-hidden">
+        <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
+        <section class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
         <div class="container mx-auto px-6 max-w-screen-xl">
             <div class="text-center mb-16" data-animation="fadeInUp">
               <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
@@ -355,193 +343,6 @@
     </div>
 
     <!-- Scripts -->
-    <script type="module">
-      import { getNavbarHTML } from '../js/components/Navbar.js';
-      import { getFooterHTML } from '../js/components/Footer.js';
-      import { MobileMenu } from '../js/components/MobileMenu.js';
-      import { UIService } from '../js/services/UIService.js';
-      import { FAQAccordion } from '../js/components/FAQAccordion.js';
-      import { WhatsAppButton } from '../js/components/WhatsAppButton.js';
-      // import { ServiceCard } from '../js/components/ServiceCard.js'; // Opcional si quisieras usar el componente base
-
-      const basePath = '../';
-      
-      // 1. Inyección de Componentes Estáticos
-      const navbarRoot = document.getElementById('navbar-root');
-      if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(basePath, false);
-
-      const footerRoot = document.getElementById('footer-root');
-      if (footerRoot) footerRoot.innerHTML = getFooterHTML(basePath);
-
-      // 2. Inicialización de Lógica Específica
-      document.addEventListener('DOMContentLoaded', () => {
-          new MobileMenu();
-          new UIService();
-          new FAQAccordion('#faq');
-          new WhatsAppButton();
-
-          /* -------------------------------------------------------------------------- */
-          /*                       LÓGICA ESPECÍFICA DE SERVICIOS (MANOS Y PIES)      */
-          /* -------------------------------------------------------------------------- */
-
-          // 1. DATA: Servicios de Uñas
-          const servicesData = [
-            {
-                id: 1,
-                title: 'Manicura Spa',
-                price: '$35.000',
-                duration: '45 min',
-                summary: 'Limpieza profunda, exfoliación e hidratación para manos suaves y renovadas.',
-                description: 'Nuestra Manicura Spa es un ritual completo de renovación para tus manos. El servicio comienza con una limpieza detallada de cutículas y limado de uñas según tu preferencia. Continuamos con una exfoliación profunda utilizando sales minerales aromáticas para eliminar células muertas, seguida de una mascarilla hidratante nutritiva. Finalizamos con un masaje relajante de manos que activa la circulación y, por supuesto, el esmaltado tradicional con el tono que elijas de nuestra amplia gama de colores premium.',
-                image: '../images/unas-manicure-pedicure/foto_unas_1.webp'
-            },
-            {
-                id: 2,
-                title: 'Pedicura Spa',
-                price: '$45.000',
-                duration: '60 min',
-                summary: 'El tratamiento ideal para pies cansados con masaje anti-estrés y cuidado estético.',
-                description: 'Deleita tus pies con nuestra Pedicura Spa, diseñada no solo para embellecer sino para relajar. Disfrutarás de un baño de pies inmersivo con sales efervescentes, remoción cuidadosa de durezas y callosidades, tratamiento de cutículas y una exfoliación revitalizante. El punto culminante es nuestro masaje terapéutico diseñado para aliviar la tensión acumulada. Tus pies quedarán suaves, descansados y estéticamente perfectos con un esmaltado impecable.',
-                image: '../images/unas-manicure-pedicure/foto_unas_1.webp' 
-            },
-            {
-                id: 3,
-                title: 'Esmaltado Semipermanente',
-                price: '$55.000',
-                duration: '60 min',
-                summary: 'Color vibrante, secado instantáneo y brillo espejo garantizado por 21 días.',
-                description: 'La solución perfecta para la mujer moderna que busca manos impecables por más tiempo. Utilizamos marcas líderes mundiales como Organic Nails y Masglo Gel Evolution para asegurar un acabado profesional. El proceso incluye una preparación meticulosa de la uña (manicura en seco), aplicación de base protectora, dos capas de color intenso y un top coat de alto brillo, todo curado en lámpara LED. Olvídate de los rayones y disfruta de uñas perfectas por hasta 3 semanas.',
-                image: '../images/peluqueria/foto_8_peluqueria.webp' 
-            },
-            {
-                id: 4,
-                title: 'Uñas Acrílicas / Polygel (Esculpidas)',
-                price: '$120.000',
-                duration: '120 min',
-                summary: 'Extensiones artísticas con Acrílico o Polygel para unas uñas de impacto.',
-                description: 'Transforma tus manos con nuestro servicio de uñas esculpidas. Ya sea que desees mayor longitud o corregir la forma natural de tus uñas, nuestras artistas crearán estructuras perfectas (Coffin, Stiletto, Almendra, Cuadrada) utilizando **acrílico** o **Polygel** (Acrigel) de última generación, ideal para quienes buscan ligereza y resistencia. Este servicio premium incluye manicura completa, moldeado experto y esmaltado semipermanente.',
-                image: '../images/peluqueria/foto_7_peluqueria.webp'
-            },
-            {
-                id: 5,
-                title: 'Retiro de Semipermanente',
-                price: '$15.000',
-                duration: '20 min',
-                summary: 'Remoción cuidadosa del esmalte gel cuidando la salud de tu uña natural.',
-                description: 'No arranques tu esmalte. Nuestro servicio de retiro profesional utiliza técnicas suaves para disolver el producto sin limar excesivamente ni dañar la capa superior de tu uña natural. Finalizamos con una aplicación de aceite de cutícula vitaminado para restaurar la hidratación.',
-                image: '../images/peluqueria/foto_3_peluqueria.webp'
-            },
-            {
-                id: 6,
-                title: 'Diseños de Uñas (Nail Art)',
-                price: 'Desde $5.000',
-                duration: '15+ min',
-                summary: 'Uñas decoradas: animal print, diseños fáciles, pedrería y tendencias.',
-                description: 'Personaliza tu manicura con nuestro servicio de Nail Art en Chía. Realizamos **uñas decoradas** a tu gusto: desde tendencias como **animal print**, líneas minimalistas para **uñas cortas**, efectos espejo, baby boomer, hasta "uñas decoradas fácil" y rápido si tienes poco tiempo. ¡Trae tu inspiración de Pinterest o Instagram y la haremos realidad!',
-                image: '../images/peluqueria/foto_5_peluqueria.webp'
-            }
-          ];
-
-          // 2. REFERENCIAS DOM
-          const gridContainer = document.getElementById('nail-services-grid');
-          const modal = document.getElementById('service-modal');
-          const modalBackdrop = document.getElementById('modal-backdrop');
-          const modalPanel = document.getElementById('modal-panel');
-          const closeModalBtn = document.getElementById('close-modal-btn');
-          
-          // Elementos internos del Modal
-          const mTitle = document.getElementById('modal-title');
-          const mImage = document.getElementById('modal-image');
-          const mDuration = document.getElementById('modal-duration');
-          const mPrice = document.getElementById('modal-price');
-          const mDesc = document.getElementById('modal-description');
-
-          // 3. RENDERIZAR TARJETAS EN EL GRID
-          if (gridContainer) {
-              gridContainer.innerHTML = servicesData.map(service => `
-                 <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto">
-                    <!-- Imagen de Tarjeta -->
-                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
-                        <img src="${service.image}" alt="${service.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
-                        <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-gray-dark text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-white/50">
-                            ${service.duration}
-                        </span>
-                    </div>
-
-                    <!-- Contenido de Tarjeta -->
-                    <div class="p-6 flex flex-col flex-grow relative">
-                        <!-- Borde Gradiente en Hover (Pseudo-element handled in CSS usually, adding explicit interaction element here) -->
-                        
-                        <div class="flex justify-between items-start mb-3">
-                             <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">${service.title}</h3>
-                        </div>
-                        
-                        <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${service.summary}</p>
-                        
-                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
-                            <span class="text-lg font-bold text-brand-green">${service.price}</span>
-                            <button onclick="window.openServiceModal(${service.id})" class="group/btn relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-all duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green cursor-pointer">
-                                <span>Ver Detalles</span>
-                                <svg class="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-                 </article>
-              `).join('');
-          }
-
-          // 4. LÓGICA DEL MODAL
-          window.openServiceModal = (id) => {
-              const service = servicesData.find(s => s.id === id);
-              if (!service) return;
-
-              // Llenar datos con animación de entrada
-              mTitle.textContent = service.title;
-              mImage.src = service.image;
-              mDuration.textContent = service.duration;
-              mPrice.textContent = service.price;
-              mDesc.textContent = service.description;
-
-              // Mostrar modal
-              modal.classList.remove('hidden');
-              
-              // Animación de entrada (Fade In + Scale Up)
-              // Usamos un pequeño timeout para permitir que el display:block se aplique antes de cambiar la opacidad
-              requestAnimationFrame(() => {
-                modalBackdrop.classList.remove('opacity-0');
-                modalPanel.classList.remove('opacity-0', 'scale-95');
-                modalPanel.classList.add('opacity-100', 'scale-100');
-              });
-              
-              document.body.style.overflow = 'hidden'; // Bloquear scroll del body
-          };
-
-          const closeModal = () => {
-              // Animación de salida
-              modalBackdrop.classList.add('opacity-0');
-              modalPanel.classList.remove('opacity-100', 'scale-100');
-              modalPanel.classList.add('opacity-0', 'scale-95');
-              
-              // Esperar a que termine la transición (300ms) antes de ocultar el HTML
-              setTimeout(() => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = ''; // Restaurar scroll
-              }, 300);
-          };
-
-          // 5. EVENT LISTENERS
-          closeModalBtn.addEventListener('click', closeModal);
-          modalBackdrop.addEventListener('click', (e) => {
-              if (e.target === modalBackdrop) closeModal();
-          });
-          
-          document.addEventListener('keydown', (e) => {
-              if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                  closeModal();
-              }
-          });
-      });
-    </script>
+    <script type="module" src="../js/nails-page.js"></script>
   </body>
 </html>

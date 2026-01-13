@@ -26,7 +26,7 @@ export class Breadcrumbs {
         }).join('');
 
         return `
-            <nav aria-label="Breadcrumb" class="bg-gray-100 py-3 px-6 relative z-10 pt-32">
+            <nav aria-label="Breadcrumb" class="bg-gray-100 py-3 px-6 relative z-10">
                 <div class="container mx-auto max-w-screen-xl">
                     <ol class="list-none p-0 inline-flex text-sm text-gray-600">
                         ${listItems}
