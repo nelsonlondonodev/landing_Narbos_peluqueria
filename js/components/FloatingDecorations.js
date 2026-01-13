@@ -91,7 +91,10 @@ export class FloatingDecorations {
                 const leaf = document.createElement('img');
                 // Fix: Use basePath for image paths to support subdirectories
                 leaf.src = `${this.basePath}images/${config.img}`; 
-                leaf.onerror = () => { leaf.src = `${this.basePath}images/leaf-placeholder.svg`; };
+                leaf.onerror = () => { 
+                    leaf.style.display = 'none';
+                    leaf.onerror = null; 
+                };
                 leaf.alt = '';
                 
                 leaf.className = `absolute pointer-events-none drop-shadow-2xl transition-transform duration-700 ease-out will-change-transform ${config.classes}`;
