@@ -23,6 +23,7 @@ export const translations = {
         "img.waxing.desc": "Servicios de depilación con cera o hilo y extensiones de pestañas para una mirada impactante.",
         // Dropdown Services (Short)
         "services.hair": "Peluquería",
+        "services.barber": "Barbería",
         "services.nails": "Uñas",
         "services.spa": "Spa y Estética",
         "services.waxing": "Depilación",
@@ -66,6 +67,7 @@ export const translations = {
         "img.waxing.desc": "Waxing or threading services and eyelash extensions for a stunning look.",
         // Dropdown Services (Short)
         "services.hair": "Hair Salon",
+        "services.barber": "Barber Shop",
         "services.nails": "Nail Bar",
         "services.spa": "Spa & Aesthetics",
         "services.waxing": "Waxing",
