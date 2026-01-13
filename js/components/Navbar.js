@@ -69,7 +69,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
 
     // Desktop Mega Menu HTML Generation
     const megaMenuDesktop = `
-        <div id="desktop-services-menu" class="absolute left-0 top-full pt-6 w-full hidden group-hover:block hover:block z-50">
+        <div id="desktop-services-menu" class="absolute left-0 top-full -mt-4 pt-10 w-full hidden group-hover:block hover:block z-50">
              <div class="bg-white rounded-lg shadow-2xl border border-brand-medium/10 p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto w-full">
                 ${menuCategories.map(cat => `
                     <div class="flex flex-col space-y-3">
