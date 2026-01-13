@@ -79,10 +79,10 @@ export function getNavbarHTML(basePath = './', isHome = true) {
 
     // --- Main Navbar Render ---
     return `
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center max-w-screen-xl relative z-50">
+    <nav class="container mx-auto px-6 py-2 flex justify-between items-center max-w-screen-xl relative z-50">
         <!-- Logo -->
         <a href="${isHome ? '#' : basePath + 'index.html'}" class="block group">
-             <img src="${basePath}images/logo_narbos.webp" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-16 transition-transform duration-300 group-hover:scale-105" width="280" height="56">
+             <img src="${basePath}images/logo_narbos.webp" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56">
         </a>
         
         <!-- Desktop Menu -->
