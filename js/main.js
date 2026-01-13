@@ -100,7 +100,7 @@ function initApp() {
     new MobileMenu();
     new WhatsAppButton();
     new HeaderController(); // Handles sticky/transparent header
-    new FloatingDecorations(); // If applicable
+    new FloatingDecorations({ basePath: basePath }); // Pass calculated basePath
     
     // 4. Initialize Functionality Components (Safe to call even if elements missing)
     new FAQAccordion('#faq');
