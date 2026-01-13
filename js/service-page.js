@@ -156,27 +156,42 @@ function initBreadcrumbs() {
 
     const currentPath = window.location.pathname;
     
-    // Base Breadcrumbs
+    // Base Breadcrumbs (Always starts with Home)
     const items = [
-        { label: 'Inicio', link: '../../index.html' },
-        { label: 'Peluquería', link: 'index.html' }
+        { label: 'Inicio', link: '../../index.html' }
     ];
 
-    // Determine current sub-page
-    if (currentPath.includes('cortes-de-pelo')) {
-        items.push({ label: 'Cortes de Pelo', link: '#' });
-    } else if (currentPath.includes('barberia')) {
-        items.push({ label: 'Barbería', link: '#' });
-    } else if (currentPath.includes('balayage')) {
-        items.push({ label: 'Color y Balayage', link: '#' });
-    } else if (currentPath.includes('tratamientos')) {
-        items.push({ label: 'Tratamientos', link: '#' });
-    }
+    // Dynamic Category Detection
+    if (currentPath.includes('/peluqueria/')) {
+        items.push({ label: 'Peluquería', link: '../../servicios/peluqueria/index.html' });
+        
+        // Sub-pages detection
+        if (currentPath.includes('cortes-de-pelo')) items.push({ label: 'Cortes de Pelo', link: '#' });
+        else if (currentPath.includes('barberia')) items.push({ label: 'Barbería', link: '#' }); // Fallback if file in peluqueria
+        else if (currentPath.includes('balayage') || currentPath.includes('color')) items.push({ label: 'Color y Balayage', link: '#' });
+        else if (currentPath.includes('tratamientos')) items.push({ label: 'Tratamientos', link: '#' });
+        
+        // If we are at the index itself, remove redundancy or handle by Breadcrumbs component (usually last item is active)
+        if (currentPath.endsWith('/peluqueria/index.html') || currentPath.endsWith('/peluqueria/')) {
+            // No extra item needed, 'Peluquería' is the current page
+        }
 
-    // Handle "Main Service Hub" case
-    const isServiceHome = currentPath.endsWith('/peluqueria/') || currentPath.endsWith('/peluqueria/index.html');
-    if (isServiceHome) {
-        items[1].link = '#'; // Make "Peluquería" unclickable if we are already there
+    } else if (currentPath.includes('/barberia/')) {
+        items.push({ label: 'Barbería', link: '#' });
+
+    } else if (currentPath.includes('/estetica/')) {
+        items.push({ label: 'Estética y Spa', link: '../../servicios/estetica/spa-facial-integral.html' });
+        
+        if (currentPath.includes('masajes')) items.push({ label: 'Masajes', link: '#' });
+        else if (currentPath.includes('limpieza')) items.push({ label: 'Limpieza Facial', link: '#' });
+        else if (currentPath.includes('cejas')) items.push({ label: 'Cejas y Pestañas', link: '#' });
+
+    } else if (currentPath.includes('/depilacion/')) {
+        items.push({ label: 'Depilación', link: '#' });
+
+    } else if (currentPath.includes('/unas-spa/')) {
+        items.push({ label: 'Uñas y Spa', link: '../../servicios/unas-spa/unas-acrilicas-gel-chia.html' });
+        if (currentPath.includes('diseno')) items.push({ label: 'Diseño y Nail Art', link: '#' });
     }
 
     breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();

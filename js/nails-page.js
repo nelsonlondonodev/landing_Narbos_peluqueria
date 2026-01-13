@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initFloatingDecorations() {
     new FloatingDecorations({
-        basePath: '../',
+        basePath: '../../',
         enableAnimation: false, // Static as requested usually for performance or style
         customConfig: [
              {
@@ -60,7 +60,7 @@ function initBreadcrumbs() {
     if (!breadcrumbsRoot) return;
 
     const items = [
-        { label: 'Inicio', link: '../index.html' },
+        { label: 'Inicio', link: '../../index.html' },
         { label: 'Uñas y Manos', link: '#' }
     ];
 
