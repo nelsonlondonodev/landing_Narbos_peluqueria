@@ -15,7 +15,7 @@ export const servicesData = [
         description: "Manicure y pedicure con esmaltado semipermanente, uñas en gel o acrílicas con productos Organic, Belier y Masglo.",
         i18nDesc: "img.nails.desc",
         icon: '<path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/>',
-        link: "/servicios/unas-manicura-pedicura-chia.html",
+        link: "/unas-manicure-pedicure/unas-manicura-pedicura-chia.html",
         image: "images/peluqueria/foto_8_peluqueria.webp", // Placeholder
         animationDelay: "0.2s"
     },
