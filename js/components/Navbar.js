@@ -24,7 +24,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         },
         {
             title: "Uñas",
-            link: `${basePath}servicios/unas-spa/unas-acrilicas-gel-chia.html`, // Intended to be Hub
+            link: `${basePath}servicios/unas-spa/index.html`,
             items: [
                 { label: "Acrílicas y Gel", link: `${basePath}servicios/unas-spa/unas-acrilicas-gel-chia.html` },
                 { label: "Diseño y Nail Art", link: `${basePath}servicios/unas-spa/diseno-de-unas-nail-art.html` },
@@ -34,7 +34,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         },
         {
             title: "Barbería",
-            link: `${basePath}servicios/barberia/barberia-cortes-hombre.html`,
+            link: `${basePath}servicios/barberia/index.html`,
             items: [
                 { label: "Cortes Caballero", link: `${basePath}servicios/barberia/barberia-cortes-hombre.html` },
                 { label: "Arreglo de Barba", link: `${basePath}servicios/barberia/barberia-cortes-hombre.html#barba` },
@@ -43,7 +43,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         },
         {
             title: "Estética",
-            link: `${basePath}servicios/estetica/spa-facial-integral.html`,
+            link: `${basePath}servicios/estetica/index.html`,
             items: [
                 { label: "Spa Facial", link: `${basePath}servicios/estetica/spa-facial-integral.html` },
                 { label: "Limpieza Facial", link: `${basePath}servicios/estetica/limpieza-facial.html` },
