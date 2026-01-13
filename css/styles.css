@@ -1393,6 +1393,12 @@
       color: color-mix(in oklab, var(--color-brand-light) 80%, transparent);
     }
   }
+  .text-brand-light\/90 {
+    color: color-mix(in srgb, #DED2C4 90%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-brand-light) 90%, transparent);
+    }
+  }
   .text-brand-medium {
     color: var(--color-brand-medium);
   }
