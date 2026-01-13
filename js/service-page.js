@@ -4,6 +4,7 @@ import { MobileMenu } from './components/MobileMenu.js';
 import { UIService } from './services/UIService.js';
 import { FAQAccordion } from './components/FAQAccordion.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
+import { HeaderController } from './controllers/HeaderController.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { hairSalonServices } from './data/hairSalonServices.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
@@ -49,6 +50,7 @@ function initCommonComponents() {
     new UIService();
     new FAQAccordion('#faq');
     new WhatsAppButton();
+    new HeaderController();
 }
 
 /**

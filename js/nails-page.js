@@ -6,6 +6,7 @@ import { FAQAccordion } from './components/FAQAccordion.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
+import { HeaderController } from './controllers/HeaderController.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initLayout();
@@ -51,6 +52,7 @@ function initCommonComponents() {
     new UIService();
     new FAQAccordion('#faq');
     new WhatsAppButton();
+    new HeaderController();
 }
 
 function initBreadcrumbs() {
