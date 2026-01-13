@@ -90,9 +90,45 @@ export function getNavbarHTML(basePath = './', isHome = true) {
              </div>
         </div>
     `;
-// ...
+    // Mobile Menu HTML Generation
+    const megaMenuMobile = `
+        <div class="border-b border-gray-100 pb-2">
+            <button class="w-full flex justify-between items-center py-3 px-4 text-lg font-bold text-gray-500 uppercase tracking-wider hover:bg-gray-50 focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180');">
+                <span data-i18n="nav.services">Servicios</span>
+                <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="hidden bg-gray-50/50 space-y-1 pb-4">
+                ${menuCategories.map(cat => `
+                    <div class="px-6 py-2">
+                        <a href="${cat.link}" class="block font-bold text-brand-green text-base mb-2 select-none">${cat.title}</a>
+                        <ul class="border-l-2 border-gray-200 pl-3 space-y-2">
+                            ${cat.items.map(item => `
+                                <li>
+                                    <a href="${item.link}" class="block text-brand-gray-dark text-sm hover:text-brand-gold">
+                                        ${item.label}
+                                    </a>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+
+    return `
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center max-w-screen-xl relative z-50">
+        <!-- Logo -->
+        <a href="${isHome ? '#' : basePath + 'index.html'}" class="block group">
+             <img src="${basePath}images/logo_narbos.webp" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-16 transition-transform duration-300 group-hover:scale-105" width="280" height="56">
+        </a>
+        
+        <!-- Desktop Menu -->
+        <div class="desktop-menu flex items-center space-x-8 max-md:hidden pl-8">
+            ${navLink(isHome ? '#' : basePath + 'index.html', 'nav.home', 'Inicio')}
+            
             <!-- Mega Menu Trigger -->
-            <div class="group h-full flex items-center"> <!-- Removed relative to align dropdown to Nav container -->
+            <div class="group h-full flex items-center">
                 <button id="desktop-services-btn" class="flex items-center text-white hover:text-brand-gold transition-colors py-4 focus:outline-none font-medium h-full" aria-haspopup="true" aria-expanded="false">
                     <span data-i18n="nav.services">Servicios</span>
                     <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
