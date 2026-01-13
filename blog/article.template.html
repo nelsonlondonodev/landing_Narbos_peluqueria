@@ -160,32 +160,7 @@
 
     <div id="footer-root"></div>
 
-    <script src="../../js/script.js?v=1.2" type="module"></script>
-    <script type="module">
-        import { getNavbarHTML } from '../../js/components/Navbar.js';
-        import { getFooterHTML } from '../../js/components/Footer.js';
+    <script src="../../js/main.js?v=1.2" type="module"></script>
 
-        const navbarRoot = document.getElementById('navbar-root');
-        if (navbarRoot) {
-            navbarRoot.innerHTML = getNavbarHTML('../../', false);
-        }
-
-        const footerRoot = document.getElementById('footer-root');
-        if (footerRoot) {
-            footerRoot.innerHTML = getFooterHTML('../../');
-        }
-        
-        const startApp = () => {
-             if (window.initApp) {
-                window.initApp();
-            }
-        };
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startApp);
-        } else {
-            startApp();
-        }
-    </script>
   </body>
 </html>

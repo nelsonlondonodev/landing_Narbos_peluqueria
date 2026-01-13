@@ -420,37 +420,7 @@
 
     <div id="footer-root"></div>
 
-    <script src="../../js/script.js?v=1.2" type="module"></script>
-    <script type="module">
-        /**
-         * Article Initialization
-         * Mounts shared components (Navbar, Footer) with correct relative paths.
-         */
-        import { getNavbarHTML } from '../../js/components/Navbar.js';
-        import { getFooterHTML } from '../../js/components/Footer.js';
+    <script src="../../js/main.js?v=1.2" type="module"></script>
 
-        // 1. Mount Navbar
-        const navbarRoot = document.getElementById('navbar-root');
-        if (navbarRoot) {
-            navbarRoot.innerHTML = getNavbarHTML('../../', false);
-        }
-
-        // 2. Mount Footer
-        const footerRoot = document.getElementById('footer-root');
-        if (footerRoot) {
-            footerRoot.innerHTML = getFooterHTML('../../');
-        }
-        
-        // 3. Initialize App Logic
-        const startApp = () => {
-             if (window.initApp) window.initApp();
-        };
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startApp);
-        } else {
-            startApp();
-        }
-    </script>
   </body>
 </html>

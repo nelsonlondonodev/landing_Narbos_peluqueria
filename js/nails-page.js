@@ -1,25 +1,25 @@
-import { getNavbarHTML } from './components/Navbar.js';
-import { getFooterHTML } from './components/Footer.js';
-import { MobileMenu } from './components/MobileMenu.js';
-import { UIService } from './services/UIService.js';
-import { FAQAccordion } from './components/FAQAccordion.js';
-import { WhatsAppButton } from './components/WhatsAppButton.js';
+import { initApp } from './main.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
-import { HeaderController } from './controllers/HeaderController.js';
+
+/**
+ * Nails Page Logic
+ * Custom logic for the Nails & Spa section.
+ * Global init handled by main.js.
+ */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initLayout();
-    initCommonComponents();
+    // Specific initializations
     initBreadcrumbs();
     initNailServices();
     initFloatingDecorations();
 });
 
+
 function initFloatingDecorations() {
     new FloatingDecorations({
         basePath: '../../',
-        enableAnimation: false, // Static as requested usually for performance or style
+        enableAnimation: false, 
         customConfig: [
              {
                 parent: 'inicio',
@@ -37,24 +37,6 @@ function initFloatingDecorations() {
     });
 }
 
-
-function initLayout() {
-    const basePath = '../../';
-    const navbarRoot = document.getElementById('navbar-root');
-    if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(basePath, false);
-
-    const footerRoot = document.getElementById('footer-root');
-    if (footerRoot) footerRoot.innerHTML = getFooterHTML(basePath);
-}
-
-function initCommonComponents() {
-    new MobileMenu();
-    new UIService();
-    new FAQAccordion('#faq');
-    new WhatsAppButton();
-    new HeaderController();
-}
-
 function initBreadcrumbs() {
     const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
     if (!breadcrumbsRoot) return;
@@ -67,6 +49,10 @@ function initBreadcrumbs() {
     breadcrumbsRoot.innerHTML = new Breadcrumbs(items, { customClasses: 'pt-4' }).render();
 }
 
+/**
+ * Initializes specific logic for Nails Grid and its Modal.
+ * Note: Data is kept here as requested/legacy structure.
+ */
 function initNailServices() {
     // 1. DATA: Servicios de Uñas
     const servicesData = [

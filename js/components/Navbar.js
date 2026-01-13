@@ -5,56 +5,13 @@
  * @returns {string} HTML del componente Navbar.
  */
 import { translations } from '../data/translations.js';
+import { getMenuCategories } from '../data/navigation.js';
 
 export function getNavbarHTML(basePath = './', isHome = true) {
     const linkPrefix = isHome ? '' : '/index.html';
+    const menuCategories = getMenuCategories(basePath);
     
-    // --- Configuration: Mega Menu Structure ---
-    const menuCategories = [
-        {
-            title: "Peluquería",
-            link: `${basePath}servicios/peluqueria/index.html`,
-            items: [
-                { label: "Corte Dama", link: `${basePath}servicios/peluqueria/corte-cabello-mujer.html` },
-                { label: "Corte General", link: `${basePath}servicios/peluqueria/cortes-de-pelo-en-chia.html` },
-                { label: "Balayage y Mechas", link: `${basePath}servicios/peluqueria/balayage-mechas-chia.html` },
-                { label: "Color y Tinturas", link: `${basePath}servicios/peluqueria/color-tinturas-cabello.html` },
-                { label: "Tratamientos", link: `${basePath}servicios/peluqueria/tratamientos-capilares-chia.html` }
-            ]
-        },
-        {
-            title: "Uñas",
-            link: `${basePath}servicios/unas-spa/index.html`,
-            items: [
-                { label: "Acrílicas y Gel", link: `${basePath}servicios/unas-spa/unas-acrilicas-gel-chia.html` },
-                { label: "Diseño y Nail Art", link: `${basePath}servicios/unas-spa/diseno-de-unas-nail-art.html` },
-                { label: "Manicure Spa", link: `${basePath}servicios/unas-spa/unas-acrilicas-gel-chia.html#manicure` }, // Anchor placeholder
-                { label: "Pedicure Spa", link: `${basePath}servicios/unas-spa/unas-acrilicas-gel-chia.html#pedicure` }
-            ]
-        },
-        {
-            title: "Barbería",
-            link: `${basePath}servicios/barberia/index.html`,
-            items: [
-                { label: "Cortes Caballero", link: `${basePath}servicios/barberia/barberia-cortes-hombre.html` },
-                { label: "Arreglo de Barba", link: `${basePath}servicios/barberia/barberia-cortes-hombre.html#barba` },
-                { label: "Ritual Toalla Caliente", link: `${basePath}servicios/barberia/barberia-cortes-hombre.html#ritual` }
-            ]
-        },
-        {
-            title: "Estética",
-            link: `${basePath}servicios/estetica/index.html`,
-            items: [
-                { label: "Spa Facial", link: `${basePath}servicios/estetica/spa-facial-integral.html` },
-                { label: "Limpieza Facial", link: `${basePath}servicios/estetica/limpieza-facial.html` },
-                { label: "Masajes Relajantes", link: `${basePath}servicios/estetica/masajes-relajantes.html` },
-                { label: "Cejas y Pestañas", link: `${basePath}servicios/estetica/cejas-y-pestanas.html` },
-                { label: "Depilación", link: `${basePath}servicios/depilacion/index.html` }
-            ]
-        }
-    ];
-
-    // Helper for simple top-level links
+    // Helper helpers
     const navLink = (href, key, text, mobile = false) => {
         const baseClasses = "text-white hover:text-brand-gold active:text-brand-gold font-medium";
         const mobileClasses = "block py-2 px-4 text-lg hover:bg-brand-light/20 rounded-md active:bg-brand-light/40 text-brand-gray-dark border-b border-gray-100/50";
@@ -62,60 +19,65 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         return `<a href="${finalHref}" data-i18n="${key}" class="${mobile ? mobileClasses : baseClasses}">${text}</a>`;
     };
 
-    // Determine default lang for initial render
     const storedLang = typeof localStorage !== 'undefined' ? localStorage.getItem('user-lang') : 'es';
     const currentLang = (storedLang || navigator.language.split('-')[0] || 'es') === 'en' ? 'en' : 'es';
     const nextLangLabel = currentLang === 'es' ? 'EN' : 'ES';
 
-    // Desktop Mega Menu HTML Generation
+    // --- Template Parts ---
+
+    const desktopMenuGrid = menuCategories.map(cat => `
+        <div class="flex flex-col space-y-3">
+            <a href="${cat.link}" class="font-serif font-bold text-brand-green uppercase tracking-wider text-base border-b-2 border-brand-gold/30 pb-2 hover:text-brand-gold transition-colors block">
+                ${cat.title}
+            </a>
+            <ul class="space-y-2">
+                ${cat.items.map(item => `
+                    <li>
+                        <a href="${item.link}" class="text-brand-gray-dark hover:text-brand-green hover:translate-x-1 transition-all duration-200 text-sm block">
+                            ${item.label}
+                        </a>
+                    </li>
+                `).join('')}
+            </ul>
+        </div>
+    `).join('');
+
     const megaMenuDesktop = `
         <div id="desktop-services-menu" class="absolute left-0 top-full -mt-4 pt-10 w-full hidden group-hover:block hover:block z-50">
              <div class="bg-white rounded-lg shadow-2xl border border-brand-medium/10 p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto w-full">
-                ${menuCategories.map(cat => `
-                    <div class="flex flex-col space-y-3">
-                        <a href="${cat.link}" class="font-serif font-bold text-brand-green uppercase tracking-wider text-base border-b-2 border-brand-gold/30 pb-2 hover:text-brand-gold transition-colors block">
-                            ${cat.title}
-                        </a>
-                        <ul class="space-y-2">
-                            ${cat.items.map(item => `
-                                <li>
-                                    <a href="${item.link}" class="text-brand-gray-dark hover:text-brand-green hover:translate-x-1 transition-all duration-200 text-sm block">
-                                        ${item.label}
-                                    </a>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-                `).join('')}
+                ${desktopMenuGrid}
              </div>
         </div>
     `;
-    // Mobile Menu HTML Generation
+
+    const mobileMenuContent = menuCategories.map(cat => `
+        <div class="px-6 py-2">
+            <a href="${cat.link}" class="block font-bold text-brand-green text-base mb-2 select-none">${cat.title}</a>
+            <ul class="border-l-2 border-gray-200 pl-3 space-y-2">
+                ${cat.items.map(item => `
+                    <li>
+                        <a href="${item.link}" class="block text-brand-gray-dark text-sm hover:text-brand-gold">
+                            ${item.label}
+                        </a>
+                    </li>
+                `).join('')}
+            </ul>
+        </div>
+    `).join('');
+
     const megaMenuMobile = `
         <div class="border-b border-gray-100 pb-2">
-            <button class="w-full flex justify-between items-center py-3 px-4 text-lg font-bold text-gray-500 uppercase tracking-wider hover:bg-gray-50 focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180');">
+             <button class="w-full flex justify-between items-center py-3 px-4 text-lg font-bold text-gray-500 uppercase tracking-wider hover:bg-gray-50 focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180');">
                 <span data-i18n="nav.services">Servicios</span>
                 <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             <div class="hidden bg-gray-50/50 space-y-1 pb-4">
-                ${menuCategories.map(cat => `
-                    <div class="px-6 py-2">
-                        <a href="${cat.link}" class="block font-bold text-brand-green text-base mb-2 select-none">${cat.title}</a>
-                        <ul class="border-l-2 border-gray-200 pl-3 space-y-2">
-                            ${cat.items.map(item => `
-                                <li>
-                                    <a href="${item.link}" class="block text-brand-gray-dark text-sm hover:text-brand-gold">
-                                        ${item.label}
-                                    </a>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-                `).join('')}
+                ${mobileMenuContent}
             </div>
         </div>
     `;
 
+    // --- Main Navbar Render ---
     return `
     <nav class="container mx-auto px-6 py-4 flex justify-between items-center max-w-screen-xl relative z-50">
         <!-- Logo -->

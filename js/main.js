@@ -1,69 +1,134 @@
+/**
+ * Main Application Script (Unified Entry Point)
+ * Centralizes initialization logic for Navbar, Footer, and all interactive components.
+ * Replaces script.js logic.
+ */
+
 import { TranslationService } from './services/TranslationService.js';
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
+import { getContactFormHTML } from './components/ContactForm.js'; // Added import
+// Components
+import { MobileMenu } from './components/MobileMenu.js';
+import { WhatsAppButton } from './components/WhatsAppButton.js';
+import { FAQAccordion } from './components/FAQAccordion.js';
+import { ReviewsCarousel } from './components/ReviewsCarousel.js';
+import { ShareButton } from './components/ShareButton.js';
+import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { ServiceCard } from './components/ServiceCard.js';
+// Controllers
+import { ContactFormController } from './controllers/ContactFormController.js';
+import { HeaderController } from './controllers/HeaderController.js';
+import { ModalController } from './controllers/ModalController.js';
+import { VideoPlayerController } from './controllers/VideoPlayerController.js';
+import { GalleryController } from './controllers/GalleryController.js';
+// Services
+import { UIService } from './services/UIService.js';
 import { servicesData } from './data/servicesData.js';
-// Import the core app logic (which defines window.initApp)
-import './script.js'; 
+
 
 /**
- * Main Entry Point
- * Handles component mounting and app initialization.
+ * Automatically calculates relative path to root based on current URL depth.
  */
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Mount Static Layout (Navbar, Footer)
-    mountLayout();
-
-    // 2. Mount Content (Services Cards MUST be in DOM before i18n init)
-    mountHomeServices();
+function calculateBasePath() {
+    const path = window.location.pathname;
+    if (path === '/' || path === '/index.html') return './';
     
-    // 3. Initialize Translation Service
-    const translationService = new TranslationService();
-    translationService.init();
-    // Bind listeners *after* layout is mounted
-    translationService.bindSwitchers(); 
+    // get directory path (e.g. /servicios/peluqueria)
+    let dirPath = path.substring(0, path.lastIndexOf('/'));
+    if (dirPath.startsWith('/')) dirPath = dirPath.substring(1);
     
-    // 4. Initialize Core App Logic (Controllers)
-    if (window.initApp) {
-        window.initApp();
-    }
-});
+    if (!dirPath) return './';
+    
+    const segments = dirPath.split('/').filter(s => s.length > 0);
+    return '../'.repeat(segments.length);
+}
 
-function mountLayout() {
+/**
+ * Mounts the static layout (Navbar, Footer, ContactForm).
+ */
+function mountLayout(basePath) {
     const navbarRoot = document.getElementById('navbar-root');
     const footerRoot = document.getElementById('footer-root');
+    const contactRoot = document.getElementById('contact-root'); // Check for contact root
+    
+    // Determine isHome for Navbar styling
+    const path = window.location.pathname;
+    const isHomePage = (path === '/' || path.endsWith('/index.html')) && basePath === './';
 
-    // Determine environment context
-    // Ideally this should be configurable, but we can infer for now.
-    // If we are in the root index.html, we likely want './' and isHome=true.
-    // We can check if we are in a subdirectory by checking document.baseURI or location.
-    
-    // Simple heuristic: If we are at root, basePath is './'. 
-    // If we are deep, we need to know depth.
-    // For now, valid for index.html as requested. 
-    // We will make it smart enough to be used in index.html specifically.
-    
-    // HACK: To support multiple pages without complexity, we can read a data attribute from the script tag 
-    // if we converted this to a generic loader.
-    // But for this specific task (fixing index.html), we hardcode for Home.
-    // However, to be "best practice", let's be robust.
-    
-    // For index.html specifically:
     if (navbarRoot) {
-        navbarRoot.innerHTML = getNavbarHTML('./', true);
+        navbarRoot.innerHTML = getNavbarHTML(basePath, isHomePage);
     }
 
     if (footerRoot) {
-        footerRoot.innerHTML = getFooterHTML('./');
+        footerRoot.innerHTML = getFooterHTML(basePath);
+    }
+
+    if (contactRoot) {
+         contactRoot.innerHTML = getContactFormHTML();
     }
 }
 
+/**
+ * Mounts Home Services Grid if element exists.
+ */
 function mountHomeServices() {
     const servicesGrid = document.getElementById('services-grid');
-    if (servicesGrid) {
+    if (servicesGrid && servicesData) {
+        // Clear previous content just in case
+        servicesGrid.innerHTML = '';
         servicesData.forEach(data => {
             const card = new ServiceCard(data);
             servicesGrid.appendChild(card.render());
         });
     }
 }
+
+/**
+ * Initializes the application.
+ * Called automatically via DOMContentLoaded.
+ */
+function initApp() {
+    // 1. Calculate Base Path
+    const basePath = calculateBasePath();
+    
+    // 2. Mount Layout (Navbar/Footer)
+    mountLayout(basePath);
+    
+    // 3. Initialize Global Components (depend on layout or body)
+    // Mobile Menu needs Navbar to be mounted first
+    new MobileMenu();
+    new WhatsAppButton();
+    new HeaderController(); // Handles sticky/transparent header
+    new FloatingDecorations(); // If applicable
+    
+    // 4. Initialize Functionality Components (Safe to call even if elements missing)
+    new FAQAccordion('#faq');
+    new ReviewsCarousel();
+    new ContactFormController();
+    new ShareButton();
+    new ModalController(); // Handles service modals if present
+    new VideoPlayerController();
+    new GalleryController();
+    
+    // 5. Mount Home Specifics
+    mountHomeServices();
+    
+    // 6. UI Service (Animations, etc)
+    new UIService();
+
+    // 7. Translation Service (Last, to bind to all injected elements)
+    const translationService = new TranslationService();
+    translationService.init();
+    translationService.bindSwitchers();
+}
+
+// Boot the app
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
+
+// Export for debugging or manual re-init if needed
+export { initApp };
