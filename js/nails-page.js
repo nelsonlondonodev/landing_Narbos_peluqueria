@@ -62,7 +62,7 @@ function initBreadcrumbs() {
         { label: 'Uñas y Manos', link: '#' }
     ];
 
-    breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
+    breadcrumbsRoot.innerHTML = new Breadcrumbs(items, { customClasses: 'pt-4' }).render();
 }
 
 function initNailServices() {

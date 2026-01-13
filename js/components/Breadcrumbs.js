@@ -1,6 +1,7 @@
 export class Breadcrumbs {
-    constructor(items) {
+    constructor(items, options = {}) {
         this.items = items;
+        this.customClasses = options.customClasses || 'pt-32';
     }
 
     render() {
@@ -26,7 +27,7 @@ export class Breadcrumbs {
         }).join('');
 
         return `
-            <nav aria-label="Breadcrumb" class="bg-gray-100 py-3 px-6 relative z-10">
+            <nav aria-label="Breadcrumb" class="bg-gray-100 py-3 px-6 relative z-10 ${this.customClasses}">
                 <div class="container mx-auto max-w-screen-xl">
                     <ol class="list-none p-0 inline-flex text-sm text-gray-600">
                         ${listItems}
