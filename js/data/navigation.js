@@ -42,8 +42,7 @@ export const getMenuCategories = (basePath = './') => [
         title: "Barbería",
         link: `${basePath}servicios/barberia/index.html`,
         items: [
-            { label: "Cortes Caballero", link: `${basePath}servicios/barberia/barberia-cortes-hombre.html` },
-            { label: "Arreglo de Barba", link: `${basePath}servicios/barberia/barberia-cortes-hombre.html#barba` }
+            { label: "Corte y Barba", link: `${basePath}servicios/barberia/index.html` }
         ]
     },
     {
