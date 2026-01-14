@@ -44,14 +44,16 @@ class ServicePageManager {
                  const card = new ServiceCard(data);
                  const cardElement = card.render();
                  
-                 // Lógica para abrir el modal si el enlace es el específico
+     // Lógica para abrir el modal si el enlace es el específico
                  if (data.link === '#open-modal-beard') {
-                    cardElement.addEventListener('click', (e) => {
+                    let modalControllerInstance; 
+                    cardElement.addEventListener('click', async (e) => {
                         e.preventDefault();
-                        import('./controllers/ModalController.js').then(({ ModalController }) => {
-                            const modalController = new ModalController();
-                            modalController.openModal('beard-modal');
-                        });
+                        if (!modalControllerInstance) {
+                            const { ModalController } = await import('./controllers/ModalController.js');
+                            modalControllerInstance = new ModalController();
+                        }
+                        modalControllerInstance.openModal('beard-modal');
                     });
                  }
 
