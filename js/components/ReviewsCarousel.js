@@ -1,97 +1,114 @@
 /**
- * ReviewsCarousel Component
- * Handles the testimonials slider logic: auto-play, navigation, and responsive heights.
+ * Componente Carrusel de Reseñas.
+ * Maneja la lógica del slider de testimonios: autolay, navegación y alturas responsivas.
  */
 export class ReviewsCarousel {
     constructor() {
-        this.sliderWrapper = document.getElementById("reviews-slider-wrapper");
-        this.reviewSlides = document.querySelectorAll(".review-slide");
-        this.prevBtn = document.getElementById("prev-review");
-        this.nextBtn = document.getElementById("next-review");
+        this.DOM = {
+            wrapper: document.getElementById("reviews-slider-wrapper"),
+            slides: document.querySelectorAll(".review-slide"),
+            prevBtn: document.getElementById("prev-review"),
+            nextBtn: document.getElementById("next-review"),
+            slider: document.getElementById("reviews-slider")
+        };
 
-        this.currentIndex = 0;
-        this.autoPlayInterval = null;
-        this.autoPlayDelay = 7000;
+        this.state = {
+            currentIndex: 0,
+            autoPlayInterval: null,
+            autoPlayDelay: 7000
+        };
 
         this.init();
     }
 
+    /**
+     * Inicializa el componente si los elementos existen.
+     */
     init() {
-        if (!this.sliderWrapper || this.reviewSlides.length === 0 || !this.prevBtn || !this.nextBtn) {
-            // Component not present on this page
-            return;
-        }
+        if (!this.DOM.wrapper || this.DOM.slides.length === 0) return;
 
-        // Event Listeners for Navigation
-        this.prevBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this.prev();
-            this.stopAutoPlay();
-        });
-
-        this.nextBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            this.next();
-            this.stopAutoPlay();
-        });
-
-        // Apply CSS Grid Stack pattern for auto-height
-        // This forces the container to take the height of the tallest slide automatically via CSS
-        this.sliderWrapper.querySelector('#reviews-slider').style.display = 'grid';
-        this.sliderWrapper.querySelector('#reviews-slider').style.gridTemplateAreas = '"stack"';
-        
-        this.reviewSlides.forEach(slide => {
-            // Remove inline display:none that might be present in HTML
-            slide.style.display = ''; 
-            
-            slide.style.gridArea = 'stack';
-            slide.style.transition = 'opacity 0.5s ease-in-out';
-            // Ensure slides overlap correctly
-            slide.style.width = '100%'; 
-        });
-
-        // Initial State
-        this.showReview(this.currentIndex);
+        this.setupStyles();
+        this.bindEvents();
+        this.updateView(this.state.currentIndex);
         this.startAutoPlay();
     }
 
-    // Removed unifySlideHeights as CSS Grid handles it natively now
+    /**
+     * Configura los estilos necesarios para el funcionamiento (CSS Grid Stack).
+     */
+    setupStyles() {
+        if (!this.DOM.slider) return;
 
-    showReview(index) {
-        this.reviewSlides.forEach((slide, i) => {
-            if (i === index) {
-                slide.style.opacity = '1';
-                slide.style.visibility = 'visible';
-                slide.style.zIndex = '1';
-            } else {
-                slide.style.opacity = '0';
-                slide.style.visibility = 'hidden';
-                slide.style.zIndex = '0';
-            }
+        this.DOM.slider.style.display = 'grid';
+        this.DOM.slider.style.gridTemplateAreas = '"stack"';
+        
+        this.DOM.slides.forEach(slide => {
+            slide.style.display = ''; // Limpiar inline styles previos
+            slide.style.gridArea = 'stack';
+            slide.style.transition = 'opacity 0.5s ease-in-out';
+            slide.style.width = '100%'; 
+        });
+    }
+
+    /**
+     * Asigna los manejadores de eventos.
+     */
+    bindEvents() {
+        if (this.DOM.prevBtn) {
+            this.DOM.prevBtn.addEventListener("click", (e) => this.handleNavigation(e, 'prev'));
+        }
+        if (this.DOM.nextBtn) {
+            this.DOM.nextBtn.addEventListener("click", (e) => this.handleNavigation(e, 'next'));
+        }
+    }
+
+    /**
+     * Maneja la navegación manual.
+     * @param {Event} e 
+     * @param {'prev'|'next'} direction 
+     */
+    handleNavigation(e, direction) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (direction === 'prev') this.prev();
+        else this.next();
+
+        this.stopAutoPlay();
+    }
+
+    /**
+     * Actualiza la visibilidad de los slides.
+     * @param {number} index 
+     */
+    updateView(index) {
+        this.DOM.slides.forEach((slide, i) => {
+            const isActive = i === index;
+            slide.style.opacity = isActive ? '1' : '0';
+            slide.style.visibility = isActive ? 'visible' : 'hidden';
+            slide.style.zIndex = isActive ? '1' : '0';
         });
     }
 
     next() {
-        this.currentIndex = (this.currentIndex + 1) % this.reviewSlides.length;
-        this.showReview(this.currentIndex);
+        this.state.currentIndex = (this.state.currentIndex + 1) % this.DOM.slides.length;
+        this.updateView(this.state.currentIndex);
     }
 
     prev() {
-        this.currentIndex = (this.currentIndex - 1 + this.reviewSlides.length) % this.reviewSlides.length;
-        this.showReview(this.currentIndex);
+        this.state.currentIndex = (this.state.currentIndex - 1 + this.DOM.slides.length) % this.DOM.slides.length;
+        this.updateView(this.state.currentIndex);
     }
 
     startAutoPlay() {
-        this.stopAutoPlay(); // Ensure no duplicate intervals
-        this.autoPlayInterval = setInterval(() => this.next(), this.autoPlayDelay);
+        this.stopAutoPlay();
+        this.state.autoPlayInterval = setInterval(() => this.next(), this.state.autoPlayDelay);
     }
 
     stopAutoPlay() {
-        if (this.autoPlayInterval) {
-            clearInterval(this.autoPlayInterval);
-            this.autoPlayInterval = null;
+        if (this.state.autoPlayInterval) {
+            clearInterval(this.state.autoPlayInterval);
+            this.state.autoPlayInterval = null;
         }
     }
 }

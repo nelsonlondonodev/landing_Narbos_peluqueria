@@ -7,24 +7,120 @@
 import { translations } from '../data/translations.js';
 import { getMenuCategories } from '../data/navigation.js';
 
+/**
+ * Genera el HTML de la barra de navegación.
+ * @param {string} basePath - Ruta base.
+ * @param {boolean} isHome - Página de inicio o interna.
+ * @returns {string} HTML.
+ */
 export function getNavbarHTML(basePath = './', isHome = true) {
     const linkPrefix = isHome ? '' : '/index.html';
     const menuCategories = getMenuCategories(basePath);
+    const navLink = createNavLinkHelper(linkPrefix);
     
-    // Helper helpers
-    const navLink = (href, key, text, mobile = false) => {
+    // Preparar configuración de idioma
+    const langConfig = getLangConfig();
+
+    return `
+    <nav class="container mx-auto px-6 py-2 flex justify-between items-center max-w-screen-xl relative z-50">
+        ${renderLogo(basePath, isHome)}
+        
+        <!-- Desktop Menu -->
+        <div class="desktop-menu flex items-center space-x-8 max-md:hidden pl-8">
+            ${navLink(isHome ? '#' : basePath + 'index.html', 'nav.home', 'Inicio')}
+            ${renderMegaMenuDesktop(menuCategories)}
+            ${navLink(basePath + 'nosotros.html', 'nav.about', 'Nosotros')}
+            ${navLink(basePath + 'resenas.html', 'nav.reviews', 'Reseñas')}
+            ${navLink(basePath + 'contacto.html', 'nav.contact', 'Contacto')}
+            <a href="${basePath}blog/index.html" class="text-white hover:text-brand-gold active:text-brand-gold font-medium" data-i18n="nav.blog">Blog</a>
+            
+            <!-- Desktop Language Switcher -->
+            <button id="lang-toggle-desktop" class="ml-4 border border-white/40 rounded-full px-3 py-1 text-xs font-semibold text-white hover:bg-white hover:text-brand-gray-dark transition-all duration-300 uppercase tracking-widest shadow-sm hover:shadow-lg">
+                ${langConfig.nextLangLabel}
+            </button>
+        </div>
+
+        <!-- Mobile Toggle -->
+        ${renderMobileToggle(langConfig.nextLangLabel)}
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="md:hidden fixed top-0 right-0 w-[85vw] max-w-sm h-[100dvh] bg-white text-brand-gray-dark shadow-2xl z-[110] transform translate-x-full transition-transform duration-300 ease-out overflow-y-auto">
+        ${renderMobileMenuHeader()}
+        
+        <div class="flex flex-col p-4 space-y-1">
+            ${navLink(isHome ? '#' : basePath + 'index.html', 'nav.home', 'Inicio', true)}
+            ${renderMegaMenuMobile(menuCategories)}
+            ${navLink(basePath + 'nosotros.html', 'nav.about', 'Nosotros', true)}
+            ${navLink(basePath + 'resenas.html', 'nav.reviews', 'Reseñas', true)}
+            ${navLink(basePath + 'contacto.html', 'nav.contact', 'Contacto', true)}
+            <a href="${basePath}blog/index.html" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50" data-i18n="nav.blog">Blog</a>
+            
+             <div class="mt-8 px-4">
+                 <button class="lang-toggle-mobile-internal w-full py-3 border-2 border-brand-green/20 rounded-lg text-brand-green font-bold hover:bg-brand-green hover:text-white transition-all uppercase tracking-widest text-sm">
+                    ${langConfig.currentLang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+                 </button>
+             </div>
+        </div>
+    </div>
+    
+    <div id="menu-backdrop" class="fixed inset-0 bg-black/60 z-[100] hidden md:hidden backdrop-blur-sm transition-opacity duration-300"></div>
+    `;
+}
+
+// --- Helpers de Renderizado ---
+
+function createNavLinkHelper(linkPrefix) {
+    return (href, key, text, mobile = false) => {
         const baseClasses = "text-white hover:text-brand-gold active:text-brand-gold font-medium";
         const mobileClasses = "block py-2 px-4 text-lg hover:bg-brand-light/20 rounded-md active:bg-brand-light/40 text-brand-gray-dark border-b border-gray-100/50";
         const finalHref = href.startsWith('#') ? `${linkPrefix}${href}` : href;
         return `<a href="${finalHref}" data-i18n="${key}" class="${mobile ? mobileClasses : baseClasses}">${text}</a>`;
     };
+}
 
+function getLangConfig() {
     const storedLang = typeof localStorage !== 'undefined' ? localStorage.getItem('user-lang') : 'es';
     const currentLang = (storedLang || navigator.language.split('-')[0] || 'es') === 'en' ? 'en' : 'es';
     const nextLangLabel = currentLang === 'es' ? 'EN' : 'ES';
+    return { currentLang, nextLangLabel };
+}
 
-    // --- Template Parts ---
+function renderLogo(basePath, isHome) {
+    return `
+        <a href="${isHome ? '#' : basePath + 'index.html'}" class="block group">
+             <img src="${basePath}images/logo_narbos.webp" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56">
+        </a>
+    `;
+}
 
+function renderMobileToggle(langLabel) {
+    return `
+        <div class="md:hidden flex items-center gap-4">
+             <button id="lang-toggle-mobile" class="border border-white/50 rounded-md px-2 py-1 text-xs font-bold text-white hover:bg-white/10 transition-colors uppercase">
+                ${langLabel}
+             </button>
+
+             <button id="menu-btn" aria-label="Abrir menú" class="text-white focus:outline-none z-50 p-1">
+                 <svg id="menu-open-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                 <svg id="menu-close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+             </button>
+        </div>
+    `;
+}
+
+function renderMobileMenuHeader() {
+    return `
+        <div class="flex justify-between items-center p-5 border-b border-gray-100">
+             <span class="text-brand-green font-serif font-bold text-lg">Menú</span>
+            <button id="internal-close-btn" aria-label="Cerrar menú" class="p-2 text-gray-400 hover:text-brand-red transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    `;
+}
+
+function renderMegaMenuDesktop(menuCategories) {
     const desktopMenuGrid = menuCategories.map(cat => `
         <div class="flex flex-col space-y-3">
             <a href="${cat.link}" class="font-serif font-bold text-brand-green uppercase tracking-wider text-base border-b-2 border-brand-gold/30 pb-2 hover:text-brand-gold transition-colors block">
@@ -42,14 +138,22 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         </div>
     `).join('');
 
-    const megaMenuDesktop = `
-        <div id="desktop-services-menu" class="absolute left-0 top-full -mt-4 pt-10 w-full hidden group-hover:block hover:block z-50">
-             <div class="bg-white rounded-lg shadow-2xl border border-brand-medium/10 p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto w-full">
-                ${desktopMenuGrid}
-             </div>
+    return `
+        <div class="group h-full flex items-center">
+            <button id="desktop-services-btn" class="flex items-center text-white hover:text-brand-gold transition-colors py-4 focus:outline-none font-medium h-full" aria-haspopup="true" aria-expanded="false">
+                <span data-i18n="nav.services">Servicios</span>
+                <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+             <div id="desktop-services-menu" class="absolute left-0 top-full -mt-4 pt-10 w-full hidden group-hover:block hover:block z-50">
+                 <div class="bg-white rounded-lg shadow-2xl border border-brand-medium/10 p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto w-full">
+                    ${desktopMenuGrid}
+                 </div>
+            </div>
         </div>
     `;
+}
 
+function renderMegaMenuMobile(menuCategories) {
     const mobileMenuContent = menuCategories.map(cat => `
         <div class="px-6 py-2">
             <a href="${cat.link}" class="block font-bold text-brand-green text-base mb-2 select-none">${cat.title}</a>
@@ -65,7 +169,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         </div>
     `).join('');
 
-    const megaMenuMobile = `
+    return `
         <div class="border-b border-gray-100 pb-2">
              <button class="w-full flex justify-between items-center py-3 px-4 text-lg font-bold text-gray-500 uppercase tracking-wider hover:bg-gray-50 focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180');">
                 <span data-i18n="nav.services">Servicios</span>
@@ -75,78 +179,5 @@ export function getNavbarHTML(basePath = './', isHome = true) {
                 ${mobileMenuContent}
             </div>
         </div>
-    `;
-
-    // --- Main Navbar Render ---
-    return `
-    <nav class="container mx-auto px-6 py-2 flex justify-between items-center max-w-screen-xl relative z-50">
-        <!-- Logo -->
-        <a href="${isHome ? '#' : basePath + 'index.html'}" class="block group">
-             <img src="${basePath}images/logo_narbos.webp" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56">
-        </a>
-        
-        <!-- Desktop Menu -->
-        <div class="desktop-menu flex items-center space-x-8 max-md:hidden pl-8">
-            ${navLink(isHome ? '#' : basePath + 'index.html', 'nav.home', 'Inicio')}
-            
-            <!-- Mega Menu Trigger -->
-            <div class="group h-full flex items-center">
-                <button id="desktop-services-btn" class="flex items-center text-white hover:text-brand-gold transition-colors py-4 focus:outline-none font-medium h-full" aria-haspopup="true" aria-expanded="false">
-                    <span data-i18n="nav.services">Servicios</span>
-                    <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                ${megaMenuDesktop}
-            </div>
-
-            ${navLink(basePath + 'nosotros.html', 'nav.about', 'Nosotros')}
-            ${navLink(basePath + 'resenas.html', 'nav.reviews', 'Reseñas')}
-            ${navLink(basePath + 'contacto.html', 'nav.contact', 'Contacto')}
-            <a href="${basePath}blog/index.html" class="text-white hover:text-brand-gold active:text-brand-gold font-medium" data-i18n="nav.blog">Blog</a>
-
-            <!-- Desktop Language Switcher -->
-            <button id="lang-toggle-desktop" class="ml-4 border border-white/40 rounded-full px-3 py-1 text-xs font-semibold text-white hover:bg-white hover:text-brand-gray-dark transition-all duration-300 uppercase tracking-widest shadow-sm hover:shadow-lg">
-                ${nextLangLabel}
-            </button>
-        </div>
-
-        <!-- Mobile Toggle -->
-        <div class="md:hidden flex items-center gap-4">
-             <button id="lang-toggle-mobile" class="border border-white/50 rounded-md px-2 py-1 text-xs font-bold text-white hover:bg-white/10 transition-colors uppercase">
-                ${nextLangLabel}
-             </button>
-
-             <button id="menu-btn" aria-label="Abrir menú" class="text-white focus:outline-none z-50 p-1">
-                 <svg id="menu-open-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                 <svg id="menu-close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-             </button>
-        </div>
-    </nav>
-    
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="md:hidden fixed top-0 right-0 w-[85vw] max-w-sm h-[100dvh] bg-white text-brand-gray-dark shadow-2xl z-[110] transform translate-x-full transition-transform duration-300 ease-out overflow-y-auto">
-        <div class="flex justify-between items-center p-5 border-b border-gray-100">
-             <span class="text-brand-green font-serif font-bold text-lg">Menú</span>
-            <button id="internal-close-btn" aria-label="Cerrar menú" class="p-2 text-gray-400 hover:text-brand-red transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-        </div>
-        
-        <div class="flex flex-col p-4 space-y-1">
-            ${navLink(isHome ? '#' : basePath + 'index.html', 'nav.home', 'Inicio', true)}
-            ${megaMenuMobile}
-            ${navLink(basePath + 'nosotros.html', 'nav.about', 'Nosotros', true)}
-            ${navLink(basePath + 'resenas.html', 'nav.reviews', 'Reseñas', true)}
-            ${navLink(basePath + 'contacto.html', 'nav.contact', 'Contacto', true)}
-            <a href="${basePath}blog/index.html" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50" data-i18n="nav.blog">Blog</a>
-            
-             <div class="mt-8 px-4">
-                 <button class="lang-toggle-mobile-internal w-full py-3 border-2 border-brand-green/20 rounded-lg text-brand-green font-bold hover:bg-brand-green hover:text-white transition-all uppercase tracking-widest text-sm">
-                    ${currentLang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
-                 </button>
-             </div>
-        </div>
-    </div>
-    
-    <div id="menu-backdrop" class="fixed inset-0 bg-black/60 z-[100] hidden md:hidden backdrop-blur-sm transition-opacity duration-300"></div>
     `;
 }

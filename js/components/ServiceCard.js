@@ -1,112 +1,116 @@
+/**
+ * Componente Tarjeta de Servicio.
+ * Renderiza tarjetas de servicios en variantes 'overlay' (Home) o 'standard' (Grid).
+ */
 export class ServiceCard {
     /**
      * @param {Object} props
-     * @param {string} props.title - Title of the service
-     * @param {string} props.description - Description of the service
-     * @param {string} props.icon - SVG content string
-     * @param {string} [props.image] - Background image URL (optional)
-     * @param {string} [props.link] - URL to navigate to (optional)
-     * @param {string} [props.modalId] - ID of the modal to open (optional)
-     * @param {string} [props.animationDelay] - Delay for animation (e.g., "0.2s")
+     * @param {string} props.title - Título del servicio
+     * @param {string} props.description - Descripción corta
+     * @param {string} [props.icon] - SVG string
+     * @param {string} [props.image] - URL de imagen
+     * @param {string} [props.link] - URL de destino
+     * @param {string} [props.modalId] - ID de modal (si aplica)
+     * @param {string} [props.animationDelay] - Delay de animación ("0.2s")
+     * @param {'overlay'|'standard'} [props.variant] - Estilo visual
      */
-    /**
-     * @param {Object} props
-     * @param {string} props.title - Title of the service
-     * @param {string} props.description - Description of the service
-     * @param {string} [props.icon] - SVG content string (Optional in standard variant)
-     * @param {string} [props.image] - Background/Header image URL
-     * @param {string} [props.link] - URL to navigate to
-     * @param {string} [props.modalId] - ID of the modal to open
-     * @param {string} [props.animationDelay] - Delay for animation ("0.2s")
-     * @param {'overlay'|'standard'} [props.variant] - Visual style ('overlay' | 'standard')
-     */
-    constructor({ title, description, icon, image, link, modalId, animationDelay = "0s", variant = 'overlay', i18nTitle, i18nDesc }) {
-        this.title = title;
-        this.description = description;
-        this.icon = icon;
-        this.image = image;
-        this.link = link;
-        this.modalId = modalId;
-        this.animationDelay = animationDelay;
-        this.variant = variant;
-        this.i18nTitle = i18nTitle;
-        this.i18nDesc = i18nDesc;
+    constructor({ title, description, icon, image, link, modalId, animationDelay = "0s", variant = 'overlay' }) {
+        this.props = { title, description, icon, image, link, modalId, animationDelay, variant };
     }
 
+    /**
+     * Genera el elemento DOM de la tarjeta.
+     * @returns {HTMLElement}
+     */
     render() {
-        const isLink = !!this.link;
+        const isLink = !!this.props.link;
         const tag = isLink ? 'a' : 'div';
         const element = document.createElement(tag);
 
-        // Attributes Logic
-        if (isLink) {
-            element.href = this.link;
-            element.setAttribute('aria-label', `Ver detalles de ${this.title}`);
-        } else if (this.modalId) {
-            element.setAttribute('role', 'button');
-            element.setAttribute('tabindex', '0');
-            element.setAttribute('aria-label', `Ver detalles de ${this.title}`);
-            element.setAttribute('data-modal-target', this.modalId);
-        }
+        this.applyAttributes(element, isLink);
         
-        element.id = `service-card-${this.toKebabCase(this.title)}`;
-        element.setAttribute('data-animation', 'zoomIn');
-        if (this.animationDelay) {
-            element.setAttribute('data-animation-delay', this.animationDelay);
-        }
-
-        // Render based on variant
-        if (this.variant === 'standard') {
-            this.renderStandard(element);
+        if (this.props.variant === 'standard') {
+            this.renderStandardContent(element);
         } else {
-            this.renderOverlay(element);
+            this.renderOverlayContent(element);
         }
 
         return element;
     }
 
-    renderOverlay(element) {
-        // Overlay Variant (Home Style)
-        element.className = "group relative p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl overflow-hidden cursor-pointer block h-full select-none bg-brand-green hover:bg-white transition-colors duration-500";
-
-        let backgroundHtml = '';
-        if (this.image) {
-            backgroundHtml = `
-                <img src="${this.image}" alt="" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0 transition-opacity duration-500 group-hover:opacity-20"></div>
-            `;
-        } else {
-             backgroundHtml = `<div class="absolute inset-0 bg-gradient-to-br from-brand-green to-brand-green-dark z-0"></div>`;
+    /**
+     * Aplica atributos accesibles y de animación.
+     */
+    applyAttributes(element, isLink) {
+        element.id = `service-card-${this.toKebabCase(this.props.title)}`;
+        element.setAttribute('data-animation', 'zoomIn');
+        
+        if (this.props.animationDelay) {
+            element.setAttribute('data-animation-delay', this.props.animationDelay);
         }
 
-        const i18nTitleAttr = '';
-        const i18nDescAttr = '';
+        if (isLink) {
+            element.href = this.props.link;
+            element.setAttribute('aria-label', `Ver detalles de ${this.props.title}`);
+        } else if (this.props.modalId) {
+            element.setAttribute('role', 'button');
+            element.setAttribute('tabindex', '0');
+            element.setAttribute('aria-label', `Ver detalles de ${this.props.title}`);
+            element.setAttribute('data-modal-target', this.props.modalId);
+        }
+    }
 
+    /**
+     * Renderiza el contenido para la variante Overlay (Home).
+     */
+    renderOverlayContent(element) {
+        element.className = "group relative p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl overflow-hidden cursor-pointer block h-full select-none bg-brand-green hover:bg-white transition-colors duration-500";
+        
+        const backgroundHtml = this.getOverlayBackground();
+        const iconHtml = this.getOverlayIcon();
+        
         element.innerHTML = `
             ${backgroundHtml}
-            <svg class="w-12 h-12 mb-4 text-white transition-colors duration-300 relative z-10 animate-floating group-hover:text-brand-green-dark" 
-                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
-                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                ${this.icon || ''}
-            </svg>
-            <h3 ${i18nTitleAttr} class="text-2xl font-serif font-bold text-white mb-3 relative z-10 drop-shadow-md transition-colors duration-300 group-hover:text-brand-gray-dark">${this.title}</h3>
-            <p ${i18nDescAttr} class="text-brand-light relative z-10 drop-shadow-sm font-medium opacity-95 transition-colors duration-300 group-hover:text-brand-gray-dark group-hover:font-semibold">${this.description}</p>
+            ${iconHtml}
+            <h3 class="text-2xl font-serif font-bold text-white mb-3 relative z-10 drop-shadow-md transition-colors duration-300 group-hover:text-brand-gray-dark">${this.props.title}</h3>
+            <p class="text-brand-light relative z-10 drop-shadow-sm font-medium opacity-95 transition-colors duration-300 group-hover:text-brand-gray-dark group-hover:font-semibold">${this.props.description}</p>
             <div class="absolute inset-0 bg-black/0 group-hover:bg-white/10 transition-colors duration-300 z-20 pointer-events-none"></div>
         `;
     }
 
-    renderStandard(element) {
-        // Standard Variant (Sub-page Style - Card with Image Top)
+    getOverlayBackground() {
+        if (this.props.image) {
+            return `
+                <img src="${this.props.image}" alt="" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0 transition-opacity duration-500 group-hover:opacity-20"></div>
+            `;
+        }
+        return `<div class="absolute inset-0 bg-gradient-to-br from-brand-green to-brand-green-dark z-0"></div>`;
+    }
+
+    getOverlayIcon() {
+        return `
+            <svg class="w-12 h-12 mb-4 text-white transition-colors duration-300 relative z-10 animate-floating group-hover:text-brand-green-dark" 
+                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                ${this.props.icon || ''}
+            </svg>
+        `;
+    }
+
+    /**
+     * Renderiza el contenido para la variante Standard (Grids).
+     */
+    renderStandardContent(element) {
         element.className = "group block bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col";
 
-        const imageHtml = this.image ? `
+        const imageHtml = this.props.image ? `
             <div class="relative h-48 overflow-hidden shrink-0">
-                <img src="${this.image}" alt="${this.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                <img src="${this.props.image}" alt="${this.props.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
             </div>
         ` : '';
 
-        // "Ver Detalles" Action
         const actionHtml = `
             <span class="text-brand-green font-bold text-sm uppercase tracking-wider flex items-center mt-auto pt-4">
                 Ver Detalles 
@@ -117,8 +121,8 @@ export class ServiceCard {
         element.innerHTML = `
             ${imageHtml}
             <div class="p-6 flex flex-col flex-grow">
-                <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">${this.title}</h3>
-                <p class="text-gray-600 text-sm mb-4 flex-grow">${this.description}</p>
+                <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">${this.props.title}</h3>
+                <p class="text-gray-600 text-sm mb-4 flex-grow">${this.props.description}</p>
                 ${actionHtml}
             </div>
         `;
@@ -127,9 +131,9 @@ export class ServiceCard {
     toKebabCase(str) {
         return str
             .toLowerCase()
-            .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
-            .replace(/[^a-z0-9 -]/g, "") // Remove bad chars
-            .replace(/\s+/g, "-") // Replace spaces with hyphens
-            .replace(/-+/g, "-"); // Remove duplicate hyphens
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "") 
+            .replace(/[^a-z0-9 -]/g, "") 
+            .replace(/\s+/g, "-") 
+            .replace(/-+/g, "-"); 
     }
 }
