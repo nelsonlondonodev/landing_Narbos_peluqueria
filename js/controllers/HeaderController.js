@@ -1,95 +1,117 @@
 /**
- * HeaderController
- * Manages header interactions: scroll state, dropdowns, and scroll spy.
+ * Controlador del Header.
+ * Maneja el estado del scroll, menús desplegables y scroll spy.
  */
 export class HeaderController {
     constructor() {
-        this.initHeaderScroll();
-        this.initNavbarDropdown();
+        this.DOM = {
+            header: document.querySelector(".site-header"),
+            dropdownBtn: document.getElementById("desktop-services-btn"),
+            dropdownMenu: document.getElementById("desktop-services-menu")
+        };
+
+        this.init();
+    }
+
+    init() {
+        this.initScrollEffect();
+        this.initDropdowns();
         this.initScrollSpy();
     }
 
-    initHeaderScroll() {
-        const header = document.querySelector(".site-header");
-        if (!header) return;
+    /**
+     * Cambia el estilo del header al hacer scroll.
+     */
+    initScrollEffect() {
+        if (!this.DOM.header) return;
 
-        const updateHeaderState = () => {
-            if (window.scrollY > 50) {
-                header.classList.add("header-scrolled");
-            } else {
-                header.classList.remove("header-scrolled");
-            }
+        const handleScroll = () => {
+            const isScrolled = window.scrollY > 50;
+            this.DOM.header.classList.toggle("header-scrolled", isScrolled);
         };
 
-        window.addEventListener("scroll", updateHeaderState);
-        // Initial check
-        updateHeaderState();
+        window.addEventListener("scroll", handleScroll);
+        handleScroll(); // Initial check
     }
 
-    initNavbarDropdown() {
-        const btn = document.getElementById("desktop-services-btn");
-        const menu = document.getElementById("desktop-services-menu");
+    /**
+     * Maneja la lógica del menú desplegable de servicios.
+     */
+    initDropdowns() {
+        if (!this.DOM.dropdownBtn || !this.DOM.dropdownMenu) return;
 
-        if (!btn || !menu) return;
-
-        // Toggle on click
-        btn.addEventListener("click", (e) => {
+        // Toggle Click
+        this.DOM.dropdownBtn.addEventListener("click", (e) => {
             e.stopPropagation();
-            const isHidden = menu.classList.contains("hidden");
-            
-            if (isHidden) {
-                menu.classList.remove("hidden");
-                btn.setAttribute("aria-expanded", "true");
-            } else {
-                menu.classList.add("hidden");
-                btn.setAttribute("aria-expanded", "false");
-            }
+            this.toggleDropdown();
         });
 
-        // Close when clicking outside
+        // Click Outside
         document.addEventListener("click", (e) => {
-            if (!btn.contains(e.target) && !menu.contains(e.target)) {
-                menu.classList.add("hidden");
-                btn.setAttribute("aria-expanded", "false");
+            if (!this.isClickInsideDropdown(e.target)) {
+                this.closeDropdown();
             }
         });
 
-        // Keyboard support (Escape key)
+        // Escape Key
         document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && !menu.classList.contains("hidden")) {
-                menu.classList.add("hidden");
-                btn.setAttribute("aria-expanded", "false");
-            }
+            if (e.key === "Escape") this.closeDropdown();
         });
     }
 
+    toggleDropdown() {
+        const isHidden = this.DOM.dropdownMenu.classList.contains("hidden");
+        if (isHidden) {
+            this.openDropdown();
+        } else {
+            this.closeDropdown();
+        }
+    }
+
+    openDropdown() {
+        this.DOM.dropdownMenu.classList.remove("hidden");
+        this.DOM.dropdownBtn.setAttribute("aria-expanded", "true");
+    }
+
+    closeDropdown() {
+        this.DOM.dropdownMenu.classList.add("hidden");
+        this.DOM.dropdownBtn.setAttribute("aria-expanded", "false");
+    }
+
+    isClickInsideDropdown(target) {
+        return this.DOM.dropdownBtn.contains(target) || this.DOM.dropdownMenu.contains(target);
+    }
+
+    /**
+     * Actualiza el enlace activo del menú según la sección visible.
+     */
     initScrollSpy() {
         const sections = document.querySelectorAll("main section[id], footer[id]");
         const navLinks = document.querySelectorAll("header nav .desktop-menu a");
 
         if (sections.length === 0 || navLinks.length === 0) return;
 
-        const onScroll = () => {
+        const handleScrollSpy = () => {
             const scrollPosition = window.scrollY + 150;
+            
             sections.forEach((section) => {
-                if (
-                    scrollPosition >= section.offsetTop &&
-                    scrollPosition < section.offsetTop + section.offsetHeight
-                ) {
-                    navLinks.forEach((link) => {
-                        link.classList.remove("nav-link-active");
-                    });
-                    const correspondingLink = document.querySelector(
-                        `header nav .desktop-menu a[href*="${section.id}"]`
-                    );
-                    if (correspondingLink) {
-                        correspondingLink.classList.add("nav-link-active");
-                    }
+                const { offsetTop, offsetHeight, id } = section;
+                if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                    this.updateActiveLink(navLinks, id);
                 }
             });
         };
-        window.addEventListener("scroll", onScroll);
-        // Initial check
-        onScroll();
+
+        window.addEventListener("scroll", handleScrollSpy);
+        handleScrollSpy();
+    }
+
+    updateActiveLink(navLinks, sectionId) {
+        navLinks.forEach((link) => link.classList.remove("nav-link-active"));
+        
+        const activeLink = document.querySelector(`header nav .desktop-menu a[href*="${sectionId}"]`);
+        if (activeLink) {
+            activeLink.classList.add("nav-link-active");
+        }
     }
 }

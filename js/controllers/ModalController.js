@@ -1,73 +1,96 @@
 /**
- * ModalController
- * Handles generic modal interactions (open, close, accessibility).
+ * Controlador de Modales.
+ * Maneja la apertura, cierre y accesibilidad de ventanas modales.
  */
 export class ModalController {
     constructor() {
-        this.initModals();
+        this.init();
     }
 
-    initModals() {
-        const openModalTriggers = document.querySelectorAll("[data-modal-target]");
-        if (openModalTriggers.length === 0) return;
+    init() {
+        this.bindTriggers();
+        this.bindCloseButtons();
+        this.bindGlobalEvents();
+    }
 
-        const openModal = (modal) => {
-            if (modal) {
-                modal.classList.remove("hidden");
-                // Add classes for animations if defined in CSS
-                const content = modal.querySelector('div'); // Assuming first div is content
-                if (content) {
-                   content.classList.add('modal-content-animation');
-                }
-                modal.classList.add('modal-animation');
-                
-                document.body.style.overflow = "hidden";
-            }
-        };
+    /**
+     * Asigna eventos a los elementos que abren modales.
+     */
+    bindTriggers() {
+        const triggers = document.querySelectorAll("[data-modal-target]");
+        
+        triggers.forEach((trigger) => {
+            const modalId = trigger.dataset.modalTarget;
+            
+            trigger.addEventListener("click", () => this.openModal(modalId));
 
-        const closeModal = (modal) => {
-            if (modal) {
-                modal.classList.add("hidden");
-                modal.classList.remove('modal-animation');
-                 const content = modal.querySelector('div');
-                if (content) {
-                   content.classList.remove('modal-content-animation');
-                }
-                document.body.style.overflow = "";
-            }
-        };
-
-        openModalTriggers.forEach((trigger) => {
-            trigger.addEventListener("click", () => {
-                const modal = document.getElementById(trigger.dataset.modalTarget);
-                openModal(modal);
-            });
-
-            // Keyboard Accessibility Support
+            // Soporte accesibilidad teclado
             trigger.addEventListener("keydown", (e) => {
                 if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    const modal = document.getElementById(trigger.dataset.modalTarget);
-                    openModal(modal);
+                    this.openModal(modalId);
                 }
             });
         });
+    }
 
+    /**
+     * Asigna eventos a los botones de cierre dentro de los modales.
+     */
+    bindCloseButtons() {
         document.querySelectorAll('[id$="-modal"]').forEach((modal) => {
             const closeButton = modal.querySelector("[data-modal-close]");
+            
             if (closeButton) {
-                closeButton.addEventListener("click", () => closeModal(modal));
+                closeButton.addEventListener("click", () => this.closeModal(modal));
             }
+            
+            // Cerrar al hacer clic en el backdrop
             modal.addEventListener("click", (e) => {
-                if (e.target === modal) closeModal(modal);
+                if (e.target === modal) this.closeModal(modal);
             });
         });
+    }
 
+    /**
+     * Eventos globales (Escape key).
+     */
+    bindGlobalEvents() {
         window.addEventListener("keydown", (e) => {
             if (e.key === "Escape") {
                 const openModal = document.querySelector('[id$="-modal"]:not(.hidden)');
-                closeModal(openModal);
+                if (openModal) this.closeModal(openModal);
             }
         });
+    }
+
+    openModal(modalId) {
+        const modal = typeof modalId === 'string' ? document.getElementById(modalId) : modalId;
+        if (!modal) return;
+
+        modal.classList.remove("hidden");
+        modal.classList.add('modal-animation');
+        
+        // Animación de contenido
+        const content = modal.querySelector('div');
+        if (content) {
+            content.classList.add('modal-content-animation');
+        }
+
+        document.body.style.overflow = "hidden";
+    }
+
+    closeModal(modal) {
+        if (!modal) return;
+
+        modal.classList.add("hidden");
+        modal.classList.remove('modal-animation');
+        
+        const content = modal.querySelector('div');
+        if (content) {
+            content.classList.remove('modal-content-animation');
+        }
+
+        document.body.style.overflow = "";
     }
 }

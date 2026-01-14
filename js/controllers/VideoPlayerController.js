@@ -1,39 +1,51 @@
 /**
- * VideoPlayerController
- * Manages custom video player interactions (play/pause overlay buttons).
+ * Controlador del Reproductor de Video.
+ * Maneja las interacciones del video personalizado (botones play/pause overlays).
  */
 export class VideoPlayerController {
     constructor() {
-        this.initVideoPlayer();
+        this.DOM = {
+            container: document.getElementById("video-container"),
+            video: document.getElementById("promo-video"),
+            btn: document.getElementById("video-play-button")
+        };
+
+        this.init();
     }
 
-    initVideoPlayer() {
-        const videoContainer = document.getElementById("video-container");
-        if (!videoContainer) return;
+    init() {
+        if (!this.DOM.container || !this.DOM.video || !this.DOM.btn) return;
 
-        const promoVideo = document.getElementById("promo-video");
-        const videoPlayButton = document.getElementById("video-play-button");
+        this.bindEvents();
+    }
 
-        if (!promoVideo || !videoPlayButton) return;
+    bindEvents() {
+        // Toggle play al hacer clic en el contenedor
+        this.DOM.container.addEventListener("click", () => this.togglePlay());
 
-        videoContainer.addEventListener("click", () => {
-            if (promoVideo.paused) {
-                promoVideo.play();
-            } else {
-                promoVideo.pause();
-            }
-        });
+        // Actualizar UI según estado del video
+        this.DOM.video.addEventListener("play", () => this.updateUI(true));
+        this.DOM.video.addEventListener("pause", () => this.updateUI(false));
+        this.DOM.video.addEventListener("ended", () => this.updateUI(false));
+    }
 
-        promoVideo.addEventListener("play", () => {
-            videoPlayButton.classList.add("hidden");
-        });
+    togglePlay() {
+        if (this.DOM.video.paused) {
+            this.DOM.video.play();
+        } else {
+            this.DOM.video.pause();
+        }
+    }
 
-        promoVideo.addEventListener("pause", () => {
-            videoPlayButton.classList.remove("hidden");
-        });
-
-        promoVideo.addEventListener("ended", () => {
-            videoPlayButton.classList.remove("hidden");
-        });
+    /**
+     * Actualiza la interfaz (botón play) según si está reproduciendo.
+     * @param {boolean} isPlaying 
+     */
+    updateUI(isPlaying) {
+        if (isPlaying) {
+            this.DOM.btn.classList.add("hidden");
+        } else {
+            this.DOM.btn.classList.remove("hidden");
+        }
     }
 }
