@@ -697,6 +697,9 @@
   .animate-ping {
     animation: var(--animate-ping);
   }
+  .cursor-default {
+    cursor: default;
+  }
   .cursor-pointer {
     cursor: pointer;
   }

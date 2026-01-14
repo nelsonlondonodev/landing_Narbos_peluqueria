@@ -1,9 +1,15 @@
+/**
+ * Módulo para manejar la lógica del acordeón de Preguntas Frecuentes.
+ * Incluye animaciones suaves y accesibilidad.
+ */
 export class FAQAccordion {
     /**
-     * @param {string} selector - CSS selector for the FAQ container (e.g., '#faq' or '.faq-section')
+     * @param {string} selector - Selector CSS del contenedor (e.g., '#faq').
      */
     constructor(selector = '#faq') {
         this.container = document.querySelector(selector);
+        // Verificar preferencia de movimiento reducido
+        this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         this.init();
     }
 
@@ -19,35 +25,39 @@ export class FAQAccordion {
 
             if (!summary || !content) return;
 
-            summary.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default browser toggle
-                if (details.hasAttribute('open')) {
-                    this.close(details, content);
-                } else {
-                    this.open(details, content);
-                }
-            });
+            summary.addEventListener('click', (e) => this.handleToggle(e, details, content));
         });
     }
 
+    /**
+     * Maneja el evento click en el summary.
+     */
+    handleToggle(e, details, content) {
+        e.preventDefault(); // Evita el comportamiento por defecto para controlar la animación
+        
+        if (details.hasAttribute('open')) {
+            this.close(details, content);
+        } else {
+            this.open(details, content);
+        }
+    }
+
+    /**
+     * Abre el elemento con animación.
+     */
     open(details, content) {
-        // Close others first (Accordion behavior)
-        this.detailsElements.forEach(otherDetails => {
-            if (otherDetails !== details && otherDetails.hasAttribute('open')) {
-                const otherContent = otherDetails.querySelector('.faq-content');
-                if (otherContent) this.close(otherDetails, otherContent);
-            }
-        });
+        // Cerrar otros elementos abiertos (Comportamiento de Acordeón)
+        this.closeOthers(details);
 
         details.setAttribute('open', '');
         
-        // Animation
-        const startHeight = 0;
-        const endHeight = content.scrollHeight;
+        if (this.prefersReducedMotion) return; // Saltar animación si el usuario lo prefiere
 
-        const animation = content.animate(
+        const endHeight = content.scrollHeight;
+        
+        content.animate(
             [
-                { height: `${startHeight}px`, opacity: 0 },
+                { height: '0px', opacity: 0 },
                 { height: `${endHeight}px`, opacity: 1 }
             ],
             {
@@ -55,20 +65,23 @@ export class FAQAccordion {
                 easing: 'ease-out'
             }
         );
-
-        animation.onfinish = () => {
-            // Optional cleanup
-        };
     }
 
+    /**
+     * Cierra el elemento con animación.
+     */
     close(details, content) {
+        if (this.prefersReducedMotion) {
+            details.removeAttribute('open');
+            return;
+        }
+
         const startHeight = content.scrollHeight;
-        const endHeight = 0;
 
         const animation = content.animate(
             [
                 { height: `${startHeight}px`, opacity: 1 },
-                { height: `${endHeight}px`, opacity: 0 }
+                { height: '0px', opacity: 0 }
             ],
             {
                 duration: 300,
@@ -79,5 +92,17 @@ export class FAQAccordion {
         animation.onfinish = () => {
             details.removeAttribute('open');
         };
+    }
+
+    /**
+     * Cierra otros elementos abiertos.
+     */
+    closeOthers(currentDetails) {
+        this.detailsElements.forEach(other => {
+            if (other !== currentDetails && other.hasAttribute('open')) {
+                const otherContent = other.querySelector('.faq-content');
+                if (otherContent) this.close(other, otherContent);
+            }
+        });
     }
 }
