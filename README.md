@@ -45,6 +45,9 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 - **Correcciones Críticas y Mejoras:** 🛠️
     - **Rutas Relativas Dinámicas:** Se corrigió el algoritmo `calculateBasePath` en `main.js` para soportar correctamente la navegación en páginas anidadas profundas (ej: `/servicios/peluqueria/index.html`).
     - **Optimización de Imports:** Eliminación de dependencias circulares y duplicadas en `TranslationService`.
+    - **Refinamiento de UX (Barbería):** 💈
+        - **Menú Simplificado:** Se actualizó la navegación principal, consolidando la sección de Barbería en un enlace único y directo "Corte y Barba" que dirige a la página especializada.
+        - **Modal Interactivo:** Implementación de un modal detallado para el servicio "Arreglo de Barba" en la página de servicios, con carga dinámica de controladores (`lazy loading`) y corrección de posicionamiento (`fixed`) para garantizar su correcta visualización y cierre.
 
 ### 📝 Últimas Actualizaciones (12 de enero, 2026)
 - **Consistencia de Experiencia de Usuario (Service Pages):** ✨
