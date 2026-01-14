@@ -1,3 +1,8 @@
+/**
+ * Servicio de Traducción (I18n).
+ * Gestiona el idioma actual, persistencia y actualización del DOM.
+ * @singleton
+ */
 import { translations } from '../data/translations.js';
 
 export class TranslationService {
@@ -7,42 +12,49 @@ export class TranslationService {
         }
         TranslationService.instance = this;
 
-        this.currentLang = 'es'; // Default
+        this.currentLang = 'es';
         this.translations = translations;
     }
 
+    /**
+     * Inicializa el servicio, carga preferencias y aplica traducciones.
+     */
     init() {
         this.loadPreference();
         this.applyTranslations();
-        console.log(`TranslationService initialized. Language: ${this.currentLang}`);
+        this.bindSwitchers();
     }
 
+    /**
+     * Carga el idioma preferido del LocalStorage o navegador.
+     */
     loadPreference() {
         const storedLang = localStorage.getItem('user-lang');
-        if (storedLang && ['es', 'en'].includes(storedLang)) {
-            this.currentLang = storedLang;
-        } else {
-            // Detect browser language
-            const browserLang = navigator.language.split('-')[0];
-            this.currentLang = ['es', 'en'].includes(browserLang) ? browserLang : 'es';
-        }
-        // Save computed preference to normalize
-        localStorage.setItem('user-lang', this.currentLang);
+        const browserLang = navigator.language.split('-')[0];
         
-        // Set html lang attribute
-        document.documentElement.lang = this.currentLang;
+        // Prioridad: LocalStorage > Navegador > 'es'
+        if (this.isValidLang(storedLang)) {
+            this.currentLang = storedLang;
+        } else if (this.isValidLang(browserLang)) {
+            this.currentLang = browserLang;
+        } else {
+            this.currentLang = 'es';
+        }
+
+        this.saveState();
     }
 
+    /**
+     * Establece el idioma manualmente y actualiza la UI.
+     * @param {'es'|'en'} lang 
+     */
     setLanguage(lang) {
-        if (!['es', 'en'].includes(lang)) return;
-        
+        if (!this.isValidLang(lang)) return;
+
         this.currentLang = lang;
-        localStorage.setItem('user-lang', lang);
-        document.documentElement.lang = lang;
-        
+        this.saveState();
         this.applyTranslations();
         
-        // Dispatch event for other components (like Navbar) to update UI state if needed
         window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
     }
 
@@ -51,10 +63,18 @@ export class TranslationService {
         this.setLanguage(newLang);
     }
 
+    /**
+     * Retorna el texto traducido para una clave dada.
+     * @param {string} key 
+     * @returns {string} Texto traducido o la clave si no existe.
+     */
     getTranslation(key) {
         return this.translations[this.currentLang][key] || key;
     }
 
+    /**
+     * Actualiza todos los elementos con atributo [data-i18n].
+     */
     applyTranslations() {
         const elements = document.querySelectorAll('[data-i18n]');
         
@@ -63,20 +83,26 @@ export class TranslationService {
             const translation = this.getTranslation(key);
             
             if (translation) {
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    if (element.hasAttribute('placeholder')) {
-                        element.placeholder = translation;
-                    }
-                } else {
-                     element.textContent = translation;
-                }
+                this.updateElementContent(element, translation);
             }
         });
         
-        // Update Switcher Buttons Text
-         this.updateSwitcherUI();
+        this.updateSwitcherUI();
+    }
+
+    updateElementContent(element, text) {
+        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            if (element.hasAttribute('placeholder')) {
+                element.placeholder = text;
+            }
+        } else {
+            element.textContent = text;
+        }
     }
     
+    /**
+     * Actualiza el texto de los botones cambiadores de idioma.
+     */
     updateSwitcherUI() {
         const nextLang = this.currentLang === 'es' ? 'EN' : 'ES';
         const buttons = document.querySelectorAll('#lang-toggle-desktop, #lang-toggle-mobile, .lang-toggle-mobile-internal');
@@ -89,7 +115,6 @@ export class TranslationService {
             }
         });
         
-        // Update HTML lang attribute
         document.documentElement.lang = this.currentLang;
     }
 
@@ -101,6 +126,15 @@ export class TranslationService {
                 this.toggleLanguage();
             });
         });
+    }
+
+    saveState() {
+        localStorage.setItem('user-lang', this.currentLang);
+        document.documentElement.lang = this.currentLang;
+    }
+
+    isValidLang(lang) {
+        return ['es', 'en'].includes(lang);
     }
 
     getCurrentLang() {
