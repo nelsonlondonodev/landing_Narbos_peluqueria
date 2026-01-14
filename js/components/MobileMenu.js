@@ -3,102 +3,136 @@
  * Handles the logic for the mobile navigation menu.
  * Adheres to SRP: Only handles the menu state (open/close).
  */
+/**
+ * Componente Menú Móvil.
+ * Maneja la apertura, cierre y accesibilidad del menú de navegación lateral.
+ */
 export class MobileMenu {
     constructor() {
-        this.menuBtn = document.getElementById("menu-btn");
-        this.mobileMenu = document.getElementById("mobile-menu");
-        this.backdrop = document.getElementById("menu-backdrop");
-        this.openIcon = document.getElementById("menu-open-icon");
-        this.closeIcon = document.getElementById("menu-close-icon");
-        this.internalCloseBtn = document.getElementById("internal-close-btn");
-        this.links = document.querySelectorAll("#mobile-menu a");
+        this.DOM = {
+            menuBtn: document.getElementById("menu-btn"),
+            mobileMenu: document.getElementById("mobile-menu"),
+            backdrop: document.getElementById("menu-backdrop"),
+            openIcon: document.getElementById("menu-open-icon"),
+            closeIcon: document.getElementById("menu-close-icon"),
+            internalCloseBtn: document.getElementById("internal-close-btn"),
+            links: document.querySelectorAll("#mobile-menu a")
+        };
         
         this.isOpen = false;
-
         this.init();
     }
 
+    /**
+     * Inicializa el componente.
+     */
     init() {
-        if (!this.menuBtn || !this.mobileMenu) {
+        if (!this.DOM.menuBtn || !this.DOM.mobileMenu) {
             console.warn("MobileMenu: Critical elements not found in DOM.");
             return;
         }
 
-        // Move to body to avoid stacking context issues (backdrop-filter/transform on parent)
-        // This ensures 'position: fixed' relates to the viewport, not the header.
-        if (this.mobileMenu.parentElement !== document.body) {
-            document.body.appendChild(this.mobileMenu);
+        this.moveMenuToBody();
+        this.resetInitialState();
+        this.bindEvents();
+    }
+
+    /**
+     * Mueve el menú y backdrop al final del body para evitar problemas de Stacking Context.
+     */
+    moveMenuToBody() {
+        if (this.DOM.mobileMenu.parentElement !== document.body) {
+            document.body.appendChild(this.DOM.mobileMenu);
         }
 
-        if (this.backdrop && this.backdrop.parentElement !== document.body) {
-            document.body.appendChild(this.backdrop);
+        if (this.DOM.backdrop && this.DOM.backdrop.parentElement !== document.body) {
+            document.body.appendChild(this.DOM.backdrop);
         }
+    }
 
-        // Force initial visual state to be closed
-        this.mobileMenu.classList.add("translate-x-full");
+    /**
+     * Asegura que el menú inicie oculto visualmente.
+     */
+    resetInitialState() {
+        this.DOM.mobileMenu.classList.add("translate-x-full");
+    }
 
-        // Clean event binding
-        this.menuBtn.onclick = (e) => {
+    /**
+     * Asigna los event listeners.
+     */
+    bindEvents() {
+        // Toggle desde el botón del header
+        this.DOM.menuBtn.onclick = (e) => {
             e.stopPropagation();
             this.toggle();
         };
 
-        if (this.backdrop) {
-            this.backdrop.onclick = () => this.close();
+        // Cerrar desde backdrop
+        if (this.DOM.backdrop) {
+            this.DOM.backdrop.onclick = () => this.close();
         }
 
-        if (this.internalCloseBtn) {
-            this.internalCloseBtn.onclick = () => this.close();
+        // Cerrar desde botón interno (X)
+        if (this.DOM.internalCloseBtn) {
+            this.DOM.internalCloseBtn.onclick = () => this.close();
         }
 
-        // Close on link click
-        this.links.forEach(link => {
+        // Cerrar al hacer clic en un enlace
+        this.DOM.links.forEach(link => {
             link.addEventListener('click', () => this.close());
         });
 
-        // Close on resize (logic only)
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 768 && this.isOpen) {
-                this.close();
-            }
-        });
-        
+        // Cerrar al redimensionar a desktop
+        window.addEventListener('resize', () => this.handleResize());
+    }
 
+    handleResize() {
+        if (window.innerWidth >= 768 && this.isOpen) {
+            this.close();
+        }
     }
 
     toggle() {
-        if (this.isOpen) {
-            this.close();
-        } else {
-            this.open();
-        }
+        this.isOpen ? this.close() : this.open();
     }
 
     open() {
         if (this.isOpen) return;
         
-        this.mobileMenu.classList.remove("translate-x-full");
+        this.DOM.mobileMenu.classList.remove("translate-x-full");
         document.body.classList.add("mobile-menu-open");
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.style.overflow = 'hidden'; // Prevenir scroll de fondo
         
-        if (this.backdrop) this.backdrop.classList.remove("hidden");
-        if (this.openIcon) this.openIcon.classList.add("hidden");
-        if (this.closeIcon) this.closeIcon.classList.remove("hidden");
-
+        this.toggleElements(true);
         this.isOpen = true;
     }
 
     close() {
         if (!this.isOpen) return;
 
-        this.mobileMenu.classList.add("translate-x-full");
+        this.DOM.mobileMenu.classList.add("translate-x-full");
         document.body.classList.remove("mobile-menu-open");
-        document.body.style.overflow = ''; // Restore scrolling
+        document.body.style.overflow = ''; // Restaurar scroll
         
-        if (this.backdrop) this.backdrop.classList.add("hidden");
-        if (this.openIcon) this.openIcon.classList.remove("hidden");
-        if (this.closeIcon) this.closeIcon.classList.add("hidden");
-
+        this.toggleElements(false);
         this.isOpen = false;
+    }
+
+    /**
+     * Alterna la visibilidad de iconos y backdrop.
+     * @param {boolean} isOpening - True si se está abriendo el menú.
+     */
+    toggleElements(isOpening) {
+        if (this.DOM.backdrop) {
+            this.DOM.backdrop.classList.toggle("hidden", !isOpening);
+        }
+        
+        if (this.DOM.openIcon) {
+            this.DOM.openIcon.classList.toggle("hidden", isOpening);
+        }
+        
+        if (this.DOM.closeIcon) {
+            this.DOM.closeIcon.classList.toggle("hidden", !isOpening);
+        }
     }
 }

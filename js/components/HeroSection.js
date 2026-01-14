@@ -9,13 +9,42 @@
  * @param {string} props.imageAlt - Texto alternativo para SEO
  * @returns {string} HTML string
  */
+/**
+ * Componente Hero Section (SSG)
+ * Genera el HTML estático para la sección principal.
+ * 
+ * @param {Object} props
+ * @param {string} props.title - Título principal (H1)
+ * @param {string} props.subtitle - Subtítulo descriptivo
+ * @param {string} props.imageSrc - Ruta de la imagen de fondo
+ * @param {string} props.imageAlt - Texto alternativo para SEO
+ * @returns {string} HTML string
+ */
 export const getHeroHTML = ({ title, subtitle, imageSrc, imageAlt }) => {
     return `
     <div class="relative">
+        ${renderHeroImage(imageSrc, imageAlt)}
+        ${renderHeroContent(title, subtitle)}
+    </div>
+    `;
+};
+
+/**
+ * Renderiza la sección de la imagen de fondo.
+ */
+function renderHeroImage(src, alt) {
+    return `
         <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-            <img src="${imageSrc}" alt="${imageAlt}" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager">
+            <img src="${src}" alt="${alt}" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager">
         </section>
-        
+    `;
+}
+
+/**
+ * Renderiza el cuadro de contenido flotante.
+ */
+function renderHeroContent(title, subtitle) {
+    return `
         <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
             <div class="container mx-auto">
                 <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
@@ -24,6 +53,5 @@ export const getHeroHTML = ({ title, subtitle, imageSrc, imageAlt }) => {
                 </div>
             </div>
         </div>
-    </div>
     `;
-};
+}
