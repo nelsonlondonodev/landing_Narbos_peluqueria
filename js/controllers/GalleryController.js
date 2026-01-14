@@ -1,69 +1,105 @@
 /**
- * GalleryController
- * Manages gallery filtering and GLightbox integration.
+ * Controlador de Galería.
+ * Maneja el filtrado de imágenes y la integración con GLightbox.
  */
 export class GalleryController {
     constructor() {
-        this.initGallery();
+        this.init();
     }
 
-    initGallery() {
-        const galleryFilters = document.getElementById("gallery-filters");
-        const galleryItems = document.querySelectorAll(".gallery-item");
+    init() {
+        this.DOM = {
+            filtersContainer: document.getElementById("gallery-filters"),
+            items: document.querySelectorAll(".gallery-item"),
+            filterButtons: document.querySelectorAll(".filter-btn")
+        };
 
-        if (!galleryFilters || galleryItems.length === 0) return;
+        if (!this.DOM.filtersContainer || this.DOM.items.length === 0) return;
 
-        const filterButtons = document.querySelectorAll(".filter-btn");
+        this.setupFilters();
+        this.setupLightbox();
+    }
+
+    /**
+     * Configura la lógica de filtrado de categorías.
+     */
+    setupFilters() {
         const defaultFilterBtn = document.querySelector('.filter-btn[data-filter="todos"]');
-        
         if (defaultFilterBtn) {
-            filterButtons.forEach((btn) => btn.classList.remove("filter-btn-active"));
-            defaultFilterBtn.classList.add("filter-btn-active");
+            this.toggleActiveFilter(defaultFilterBtn);
         }
 
-        galleryFilters.addEventListener("click", (e) => {
+        this.DOM.filtersContainer.addEventListener("click", (e) => {
             const clickedButton = e.target.closest(".filter-btn");
-            if (clickedButton) {
-                const filterValue = clickedButton.getAttribute("data-filter");
-                filterButtons.forEach((btn) => btn.classList.remove("filter-btn-active"));
-                clickedButton.classList.add("filter-btn-active");
+            if (!clickedButton) return;
 
-                galleryItems.forEach((item) => {
-                    const itemCategory = item.getAttribute("data-category");
-                    item.style.display = (filterValue === "todos" || filterValue === itemCategory) ? "" : "none";
-                });
+            const filterValue = clickedButton.getAttribute("data-filter");
+            this.toggleActiveFilter(clickedButton);
+            this.applyFilter(filterValue);
+            this.reloadLightbox();
+        });
+    }
 
-                if (typeof lightbox !== "undefined" && lightbox) {
-                    lightbox.reload();
-                }
-            }
+    toggleActiveFilter(activeButton) {
+        this.DOM.filterButtons.forEach((btn) => btn.classList.remove("filter-btn-active"));
+        activeButton.classList.add("filter-btn-active");
+    }
+
+    applyFilter(filterValue) {
+        this.DOM.items.forEach((item) => {
+            const itemCategory = item.getAttribute("data-category");
+            const shouldShow = filterValue === "todos" || filterValue === itemCategory;
+            item.style.display = shouldShow ? "" : "none";
+        });
+    }
+
+    /**
+     * Inicializa GLightbox si la librería está disponible.
+     */
+    setupLightbox() {
+        if (typeof GLightbox === "undefined") return;
+
+        this.lightbox = GLightbox({ 
+            selector: ".glightbox",
+            touchNavigation: true,
+            loop: true,
+            autoplayVideos: true
         });
 
-        // Initialize GLightbox only if available globally
-        if (typeof GLightbox !== "undefined") {
-            const lightbox = GLightbox({ 
-                selector: ".glightbox",
-                touchNavigation: true,
-                loop: true,
-                autoplayVideos: true
-            });
-            
-            // Accessibility fix
-            const mainContent = document.querySelector("main");
-            const header = document.querySelector("header");
-            const footer = document.querySelector("footer");
+        this.setupAccessibilityEvents();
+    }
 
-            lightbox.on('open', () => {
-                if (mainContent) { mainContent.setAttribute('inert', ''); mainContent.removeAttribute('aria-hidden'); }
-                if (header) { header.setAttribute('inert', ''); header.removeAttribute('aria-hidden'); }
-                if (footer) { footer.setAttribute('inert', ''); footer.removeAttribute('aria-hidden'); }
-            });
-
-            lightbox.on('close', () => {
-                if (mainContent) mainContent.removeAttribute('inert');
-                if (header) header.removeAttribute('inert');
-                if (footer) footer.removeAttribute('inert');
-            });
+    reloadLightbox() {
+        if (this.lightbox) {
+            this.lightbox.reload();
         }
+    }
+
+    /**
+     * Maneja la accesibilidad (inert attribute) al abrir/cerrar el lightbox.
+     */
+    setupAccessibilityEvents() {
+        if (!this.lightbox) return;
+
+        const contentElements = [
+            document.querySelector("main"),
+            document.querySelector("header"),
+            document.querySelector("footer")
+        ];
+
+        this.lightbox.on('open', () => {
+            contentElements.forEach(el => {
+                if (el) {
+                    el.setAttribute('inert', '');
+                    el.removeAttribute('aria-hidden');
+                }
+            });
+        });
+
+        this.lightbox.on('close', () => {
+            contentElements.forEach(el => {
+                if (el) el.removeAttribute('inert');
+            });
+        });
     }
 }
