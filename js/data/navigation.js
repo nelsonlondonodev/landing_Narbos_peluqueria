@@ -1,7 +1,20 @@
 /**
- * Estructura de navegación del sitio.
- * @param {string} basePath - Ruta base para los assets.
- * @returns {Array} Array de categorías y sus items.
+ * @typedef {Object} MenuItem
+ * @property {string} label - Texto visible del enlace.
+ * @property {string} link - URL destino.
+ */
+
+/**
+ * @typedef {Object} MenuCategory
+ * @property {string} title - Título de la categoría del menú.
+ * @property {string} link - Enlace principal de la categoría.
+ * @property {MenuItem[]} items - Elementos del submenú.
+ */
+
+/**
+ * Genera la estructura de navegación del sitio.
+ * @param {string} basePath - Ruta base para los assets y enlaces.
+ * @returns {MenuCategory[]} Array de categorías y sus items.
  */
 export const getMenuCategories = (basePath = './') => [
     {

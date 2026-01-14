@@ -1,6 +1,24 @@
 /**
- * Lista de artículos del blog
- * Este archivo es la ÚNICA fuente de verdad para el índice del blog.
+ * @typedef {Object} Article
+ * @property {string} id - Identificador único del artículo.
+ * @property {string} date - Fecha legible.
+ * @property {string} isoDate - Fecha en formato ISO (YYYY-MM-DD).
+ * @property {string} category - Categoría visible.
+ * @property {string} [categoryKey] - Clave de internacionalización para la categoría.
+ * @property {string} title - Título del artículo.
+ * @property {string} [titleKey] - Clave de internacionalización para el título.
+ * @property {string} description - Descripción breve.
+ * @property {string} [descriptionKey] - Clave de internacionalización para la descripción.
+ * @property {string} image - Ruta de la imagen destacada.
+ * @property {string} alt - Texto alternativo de la imagen.
+ * @property {string} link - URL del artículo.
+ * @property {boolean} [featured] - Si el artículo debe destacarse.
+ */
+
+/**
+ * Lista de artículos del blog.
+ * Fuente de verdad para el índice del blog y SSG.
+ * @type {Article[]}
  */
 const articles = [
     {
@@ -70,4 +88,4 @@ const articles = [
     }
 ];
 
-export default articles;
+export default Object.freeze(articles);

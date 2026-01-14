@@ -1,4 +1,20 @@
-export const servicesData = [
+/**
+ * @typedef {Object} MainService
+ * @property {string} title - Título del servicio.
+ * @property {string} i18nTitle - Clave i18n para el título.
+ * @property {string} description - Descripción corta.
+ * @property {string} i18nDesc - Clave i18n para la descripción.
+ * @property {string} icon - SVG string del icono.
+ * @property {string} link - URL destino.
+ * @property {string} image - Ruta de imagen (placeholder).
+ * @property {string} animationDelay - Retardo de animación CSS.
+ */
+
+/**
+ * Servicios principales mostrados en la página de Inicio.
+ * @type {MainService[]}
+ */
+export const servicesData = Object.freeze([
     {
         title: "Peluquería",
         i18nTitle: "img.hair",
@@ -39,4 +55,4 @@ export const servicesData = [
         image: "images/peluqueria/foto_6_peluqueria.webp", // Placeholder
         animationDelay: "0.6s"
     }
-];
+]);

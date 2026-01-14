@@ -1,4 +1,17 @@
-export const hairSalonServices = [
+/**
+ * @typedef {Object} HairSalonService
+ * @property {string} title - Título del servicio.
+ * @property {string} description - Descripción breve.
+ * @property {string} link - Ruta o URL destino.
+ * @property {string} image - Ruta de la imagen.
+ * @property {'standard'|'overlay'} [variant] - Variante de visualización.
+ */
+
+/**
+ * Catálogo de servicios de peluquería principal.
+ * @type {HairSalonService[]}
+ */
+export const hairSalonServices = Object.freeze([
     {
         title: "Cortes y estilo",
         description: "Diseños personalizados para dama y asesoría de imagen.",
@@ -27,4 +40,4 @@ export const hairSalonServices = [
         image: "/images/peluqueria/foto_5_peluqueria.webp",
         variant: "standard"
     }
-];
+]);

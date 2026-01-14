@@ -1,4 +1,18 @@
-export const translations = {
+/**
+ * @typedef {Object.<string, string>} TranslationMap
+ */
+
+/**
+ * @typedef {Object} TranslationsConfig
+ * @property {TranslationMap} es - Traducciones en Español (Default).
+ * @property {TranslationMap} en - Traducciones en Inglés.
+ */
+
+/**
+ * Diccionario de traducciones para i18n.
+ * @type {TranslationsConfig}
+ */
+export const translations = Object.freeze({
     es: {
         "nav.home": "Inicio",
         "nav.services": "Servicios",
@@ -87,4 +101,4 @@ export const translations = {
         "faq.q4": "Where are you located?",
         "faq.a4": "We are located on the ground floor of the Ibis Hotel, Cajicá - Chía #Kilometer 2, Chía. We look forward to seeing you!"
     }
-};
+});

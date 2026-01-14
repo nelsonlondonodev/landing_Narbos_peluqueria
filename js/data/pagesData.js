@@ -1,8 +1,21 @@
 /**
- * Configuration data for pages.
- * Used by SSG (Node.js) and Client-side scripts (Browser).
+ * @typedef {Object} HeroData
+ * @property {string} title - Título H1 de la página.
+ * @property {string} subtitle - Subtítulo descriptivo.
+ * @property {string} imageSrc - Ruta de la imagen de fondo.
+ * @property {string} imageAlt - Texto alternativo de la imagen.
  */
-export const pagesData = {
+
+/**
+ * @typedef {Object.<string, {hero: HeroData}>} PagesConfig
+ */
+
+/**
+ * Configuración de contenido específico por página.
+ * Utilizado por SSG (Node.js) y scripts del cliente.
+ * @type {PagesConfig}
+ */
+export const pagesData = Object.freeze({
     'peluqueria': {
         hero: {
             title: "Peluquería en Chía: Expertos en estilo, color y bienestar",
@@ -19,5 +32,4 @@ export const pagesData = {
             imageAlt: "Servicios de barbería profesional en Chía"
         }
     }
-    // Add other pages here as needed
-};
+});
