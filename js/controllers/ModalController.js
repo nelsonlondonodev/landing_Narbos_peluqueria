@@ -78,6 +78,7 @@ export class ModalController {
         }
 
         document.body.style.overflow = "hidden";
+        document.body.classList.add('modal-open-layer-fix');
     }
 
     closeModal(modal) {
@@ -92,5 +93,6 @@ export class ModalController {
         }
 
         document.body.style.overflow = "";
+        document.body.classList.remove('modal-open-layer-fix');
     }
 }

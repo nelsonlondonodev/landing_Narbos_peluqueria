@@ -144,7 +144,7 @@ function renderMegaMenuDesktop(menuCategories) {
                 <span data-i18n="nav.services">Servicios</span>
                 <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
-             <div id="desktop-services-menu" class="absolute left-0 top-full -mt-4 pt-10 w-full hidden group-hover:block hover:block z-50">
+             <div id="desktop-services-menu" class="absolute left-0 top-full -mt-4 pt-10 w-full hidden z-50">
                  <div class="bg-white rounded-lg shadow-2xl border border-brand-medium/10 p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto w-full">
                     ${desktopMenuGrid}
                  </div>

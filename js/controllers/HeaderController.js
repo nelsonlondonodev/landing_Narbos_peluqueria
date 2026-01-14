@@ -14,9 +14,19 @@ export class HeaderController {
     }
 
     init() {
+        this.createBackdrop();
         this.initScrollEffect();
         this.initDropdowns();
         this.initScrollSpy();
+    }
+
+    createBackdrop() {
+        this.backdrop = document.createElement('div');
+        this.backdrop.id = 'desktop-menu-backdrop';
+        this.backdrop.className = 'fixed inset-0 bg-black/60 z-[40] opacity-0 pointer-events-none transition-opacity duration-300';
+        document.body.appendChild(this.backdrop);
+
+        this.backdrop.addEventListener('click', () => this.closeDropdown());
     }
 
     /**
@@ -40,17 +50,33 @@ export class HeaderController {
     initDropdowns() {
         if (!this.DOM.dropdownBtn || !this.DOM.dropdownMenu) return;
 
-        // Toggle Click
+        let hoverTimeout;
+
+        // Mouse Enter (Button)
+        this.DOM.dropdownBtn.addEventListener("mouseenter", () => {
+            clearTimeout(hoverTimeout);
+            this.openDropdown();
+        });
+
+        // Mouse Enter (Menu)
+        this.DOM.dropdownMenu.addEventListener("mouseenter", () => {
+            clearTimeout(hoverTimeout);
+        });
+
+        // Mouse Leave (Button)
+        this.DOM.dropdownBtn.addEventListener("mouseleave", () => {
+             hoverTimeout = setTimeout(() => this.closeDropdown(), 300);
+        });
+
+        // Mouse Leave (Menu)
+        this.DOM.dropdownMenu.addEventListener("mouseleave", () => {
+             hoverTimeout = setTimeout(() => this.closeDropdown(), 300);
+        });
+
+        // Click (Toggle)
         this.DOM.dropdownBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             this.toggleDropdown();
-        });
-
-        // Click Outside
-        document.addEventListener("click", (e) => {
-            if (!this.isClickInsideDropdown(e.target)) {
-                this.closeDropdown();
-            }
         });
 
         // Escape Key
@@ -69,13 +95,29 @@ export class HeaderController {
     }
 
     openDropdown() {
+        if (!this.DOM.dropdownMenu.classList.contains("hidden")) return;
+
         this.DOM.dropdownMenu.classList.remove("hidden");
         this.DOM.dropdownBtn.setAttribute("aria-expanded", "true");
+        
+        // Activar Backdrop
+        if (this.backdrop) {
+            this.backdrop.classList.remove('pointer-events-none', 'opacity-0');
+            document.body.style.overflow = 'hidden'; // Bloquear scroll
+        }
     }
 
     closeDropdown() {
+        if (this.DOM.dropdownMenu.classList.contains("hidden")) return;
+
         this.DOM.dropdownMenu.classList.add("hidden");
         this.DOM.dropdownBtn.setAttribute("aria-expanded", "false");
+
+        // Desactivar Backdrop
+        if (this.backdrop) {
+            this.backdrop.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = ''; // Restaurar scroll
+        }
     }
 
     isClickInsideDropdown(target) {

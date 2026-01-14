@@ -245,6 +245,15 @@ body.mobile-menu-open {
   animation: scaleUpModal 0.3s ease-out forwards;
 }
 
+/* Fix crítico de Stacking Context para Modales */
+body.modal-open-layer-fix .site-header,
+body.modal-open-layer-fix #app-wrapper {
+    z-index: 0 !important; 
+    pointer-events: none; /* Desactiva clics fuera del modal */
+    filter: brightness(0.5); /* Oscurece visualmente el fondo */
+    transition: filter 0.3s ease;
+}
+
 /* --- FIN: NUEVOS ESTILOS PARA MODAL DE SERVICIOS --- */
 
 /* --- INICIO: ESTILOS PARA ANIMACIÓN DE HERO --- */
