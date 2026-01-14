@@ -100,7 +100,15 @@ function initApp() {
     new MobileMenu();
     new WhatsAppButton();
     new HeaderController(); // Handles sticky/transparent header
-    new FloatingDecorations({ basePath: basePath }); // Pass calculated basePath
+    new HeaderController(); // Handles sticky/transparent header
+    
+    // Only init full animations on Home Page to avoid conflicts with Service Pages
+    const path = window.location.pathname;
+    const isHome = (path === '/' || path.endsWith('/index.html')) && basePath === './';
+    
+    if (isHome) {
+        new FloatingDecorations({ basePath: basePath }); 
+    }
     
     // 4. Initialize Functionality Components (Safe to call even if elements missing)
     new FAQAccordion('#faq');

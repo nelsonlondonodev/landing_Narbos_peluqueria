@@ -12,7 +12,7 @@
 export const getHeroHTML = ({ title, subtitle, imageSrc, imageAlt }) => {
     return `
     <div class="relative">
-        <section class="relative h-[60vh] md:h-[80vh] bg-white">
+        <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
             <img src="${imageSrc}" alt="${imageAlt}" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager">
         </section>
         
