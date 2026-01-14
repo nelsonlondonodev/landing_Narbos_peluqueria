@@ -20,29 +20,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- Specific Logic ---
 
+// Importación dinámica para evitar cargar datos innecesarios si no es barbería, 
+// o importarlos estáticamente si el bundle lo permite.
+// Para simplicidad en modules nativos:
+import { barberServices } from './data/barberServices.js';
+
 /**
  * Renders the Service Cards Grid, filtering out active service.
  */
 function initServiceGrid() {
+    // 1. Peluqueria Grid
     const hairServicesGrid = document.getElementById('hair-services-grid');
-    if (!hairServicesGrid) return;
+    if (hairServicesGrid) {
+        const currentPath = window.location.pathname;
+        const servicesToRender = getFilteredServices(currentPath);
 
-    const currentPath = window.location.pathname;
-    const servicesToRender = getFilteredServices(currentPath);
+        servicesToRender.forEach(data => {
+            const card = new ServiceCard(data);
+            hairServicesGrid.appendChild(card.render());
+        });
+    }
 
-    servicesToRender.forEach(data => {
-        const card = new ServiceCard(data);
-        hairServicesGrid.appendChild(card.render());
-    });
+    // 2. Barberia Grid
+    const barberServicesGrid = document.getElementById('barber-services-grid');
+    if (barberServicesGrid) {
+        barberServices.forEach(data => {
+             const card = new ServiceCard(data);
+             barberServicesGrid.appendChild(card.render());
+        });
+    }
 }
 
 function getFilteredServices(path) {
     if (path.includes('cortes-de-pelo')) {
         return hairSalonServices.filter(s => !s.link.includes('cortes-de-pelo'));
     }
-    if (path.includes('barberia')) {
-        return hairSalonServices.filter(s => !s.link.includes('barberia'));
-    }
+    // Logic for Barberia filtering removed from here as it now has its own grid/data logic
     return hairSalonServices;
 }
 

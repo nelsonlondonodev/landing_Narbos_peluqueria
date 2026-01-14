@@ -86,14 +86,30 @@ async function runSSG() {
             global.document = document;
             global.window = dom.window;
 
-            // A. Inyección de Servicios (Lógica existente)
-            const grid = document.getElementById('hair-services-grid');
+            // A. Inyección de Servicios (Lógica dinámica por página)
+            const gridId = pageConfig.key === 'barberia' ? 'barber-services-grid' : 'hair-services-grid';
+            const grid = document.getElementById(gridId);
+            
             if (grid) {
                 grid.innerHTML = '';
-                hairSalonServices.forEach(data => {
+                
+                // Determinar qué datos usar
+                let servicesSource = [];
+                if (pageConfig.key === 'barberia') {
+                    // Importación dinámica si es posible, o usar la importada arriba si la añadimos
+                    // Para simplificar, asumiremos que importamos todo arriba o hacemos un switch aquí
+                    const { barberServices } = await import('../js/data/barberServices.js');
+                    servicesSource = barberServices;
+                } else {
+                    // Por defecto Peluquería
+                    servicesSource = hairSalonServices;
+                }
+
+                servicesSource.forEach(data => {
                     const card = new ServiceCard(data);
                     grid.appendChild(card.render());
                 });
+                console.log(`✨ Servicios inyectados en ${gridId} para ${relativePath}`);
             }
 
             // B. Inyección de Hero (Nueva lógica)
