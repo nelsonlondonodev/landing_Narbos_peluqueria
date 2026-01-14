@@ -72,8 +72,10 @@ export class ModalController {
         modal.classList.add('modal-animation');
         
         // Animación de contenido
-        const content = modal.querySelector('div');
+        // Buscamos el contenedor del contenido real, ignorando el backdrop
+        const content = modal.querySelector('.relative.bg-white') || modal.querySelectorAll('div')[1];
         if (content) {
+            content.classList.remove('opacity-0', 'scale-95');
             content.classList.add('modal-content-animation');
         }
 
@@ -87,9 +89,10 @@ export class ModalController {
         modal.classList.add("hidden");
         modal.classList.remove('modal-animation');
         
-        const content = modal.querySelector('div');
+        const content = modal.querySelector('.relative.bg-white') || modal.querySelectorAll('div')[1];
         if (content) {
             content.classList.remove('modal-content-animation');
+            content.classList.add('opacity-0', 'scale-95');
         }
 
         // document.body.style.overflow = ""; // Removed to prevent layout jump

@@ -42,7 +42,20 @@ class ServicePageManager {
         if (barberServicesGrid) {
             barberServices.forEach(data => {
                  const card = new ServiceCard(data);
-                 barberServicesGrid.appendChild(card.render());
+                 const cardElement = card.render();
+                 
+                 // Lógica para abrir el modal si el enlace es el específico
+                 if (data.link === '#open-modal-beard') {
+                    cardElement.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        import('./controllers/ModalController.js').then(({ ModalController }) => {
+                            const modalController = new ModalController();
+                            modalController.openModal('beard-modal');
+                        });
+                    });
+                 }
+
+                 barberServicesGrid.appendChild(cardElement);
             });
         }
     }

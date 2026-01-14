@@ -23,15 +23,8 @@ export const barberServices = Object.freeze([
     {
         title: "Arreglo de Barba",
         description: "Perfilado con navaja, hidratación y ritual de toalla caliente para una experiencia relajante.",
-        link: "barberia-cortes-hombre.html#barba",
+        link: "#open-modal-beard",
         image: "../../images/peluqueria/foto_7_peluqueria.webp",
-        variant: "standard"
-    },
-    {
-        title: "Ritual Capilar Hombre",
-        description: "Tratamientos anticaída, exfoliación de cuero cabelludo y masajes relajantes.",
-        link: "barberia-cortes-hombre.html#tratamientos",
-        image: "../../images/peluqueria/foto_5_peluqueria.webp",
         variant: "standard"
     }
 ]);
