@@ -34,6 +34,18 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 3. Etiquetas Canonicals: Todas las páginas deben incluir una etiqueta <link rel="canonical" href="https://narbossalon.com/..."> que coincida exactamente con la URL final sin www.
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
+### 📝 Últimas Actualizaciones (14 de enero, 2026)
+- **Refactorización Completa de JavaScript (Clean Code):** 🏗️
+    - **Arquitectura Modular:** Se reestructuró todo el código JS del cliente en una arquitectura clara: `components/`, `controllers/`, `services/`, `data/`.
+    - **Patrones de Diseño:**
+        - **Singleton:** Implementado en `TranslationService` para gestión global de estados.
+        - **App Class:** Nueva clase `App` en `main.js` como punto de entrada único para la orquestación inicial.
+        - **ServicePageManager:** Nueva clase en `service-page.js` para gestionar la lógica específica de subpáginas.
+    - **Documentación & Tipado:** Se añadieron definiciones **JSDoc** (`@typedef`, `@param`) en todos los archivos, especialmente en la capa de datos (`js/data/*.js`) y se aplicó `Object.freeze()` para garantizar inmutabilidad.
+- **Correcciones Críticas y Mejoras:** 🛠️
+    - **Rutas Relativas Dinámicas:** Se corrigió el algoritmo `calculateBasePath` en `main.js` para soportar correctamente la navegación en páginas anidadas profundas (ej: `/servicios/peluqueria/index.html`).
+    - **Optimización de Imports:** Eliminación de dependencias circulares y duplicadas en `TranslationService`.
+
 ### 📝 Últimas Actualizaciones (12 de enero, 2026)
 - **Consistencia de Experiencia de Usuario (Service Pages):** ✨
     - **Solución de Saltos Visuales (Layout Shift):** Se corrigió definitivamente el problema de "brinco" en la sección de Preguntas Frecuentes (FAQ) en todas las páginas de servicios (`Peluquería`, `Balayage`, `Barbería`, `Cortes`, `Tratamientos`) eliminando animaciones conflictivas en bloques extensos.
