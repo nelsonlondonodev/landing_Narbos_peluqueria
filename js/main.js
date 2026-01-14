@@ -44,9 +44,15 @@ class App {
      */
     calculateBasePath() {
         const path = window.location.pathname;
-        if (path === '/' || path.endsWith('/index.html')) return './';
         
+        // Caso explícito para la raíz
+        if (path === '/' || path === '/index.html') return './';
+        
+        // Para cualquier otra ruta, contamos los segmentos de directorios para subir
+        // Eliminamos el fichero final de la ruta para obtener solo los directorios
         let dirPath = path.substring(0, path.lastIndexOf('/'));
+        
+        // Si comienza con /, lo quitamos para no contar un segmento vacío al principio
         if (dirPath.startsWith('/')) dirPath = dirPath.substring(1);
         
         if (!dirPath) return './';
