@@ -18,9 +18,9 @@ export const getHeroHTML = ({ title, subtitle, imageSrc, imageAlt }) => {
         
         <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
             <div class="container mx-auto">
-                <div class="bg-white text-brand-gray-dark backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-left">
-                    <h1 id="hero-title" class="animate-hero-element text-4xl md:text-6xl font-serif font-bold mb-4">${title}</h1>
-                    <p id="hero-subtitle" class="animate-hero-element text-lg md:text-xl mb-8 max-w-2xl">${subtitle}</p>
+                <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
+                    <h1 id="hero-title" class="animate-hero-element text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4">${title}</h1>
+                    <p id="hero-subtitle" class="animate-hero-element text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">${subtitle}</p>
                 </div>
             </div>
         </div>

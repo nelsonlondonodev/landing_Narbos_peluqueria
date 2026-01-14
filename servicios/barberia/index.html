@@ -77,22 +77,22 @@
         <div id="breadcrumbs-root"></div>
 
     <main>
-      <!-- Hero de Barbería -->
-      <div class="relative">
-          <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-gray-900">
-              <img src="../../images/peluqueria/foto_8_peluqueria.webp" alt="Barbería en Chía Narbos Salon" class="w-full h-full object-cover absolute inset-0 z-0 opacity-80" loading="eager" width="1920" height="1080">
-              <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
-          </section>
-
-          <!-- Floating Content Box -->
-          <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
-              <div class="container mx-auto">
-                  <div class="bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border-l-4 border-brand-green">
-                      <h1 class="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4">Barbería en Chía: Estilo y Tradición</h1>
-                      <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">Un espacio exclusivo diseñado para el hombre moderno. Cortes, barba y rituales de bienestar.</p>
-                  </div>
-              </div>
-          </div>
+      <!-- Hero de Barbería (SSG Injection Point) -->
+      <div id="hero-root">
+        <div class="relative">
+            <section class="relative h-[60vh] md:h-[80vh] bg-white">
+                <img src="../../images/peluqueria/foto_8_peluqueria.webp" alt="Servicios de barbería profesional en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager">
+            </section>
+            
+            <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
+                <div class="container mx-auto">
+                    <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
+                        <h1 id="hero-title" class="animate-hero-element text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4">Barbería exclusiva en Chía</h1>
+                        <p id="hero-subtitle" class="animate-hero-element text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">El espacio que mereces para cuidar tu imagen.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
 
       <!-- Sección de Servicios Manuales (Static Grid) -->
