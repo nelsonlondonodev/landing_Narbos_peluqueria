@@ -1,13 +1,13 @@
 /**
  * Main Application Script (Unified Entry Point)
  * Centralizes initialization logic for Navbar, Footer, and all interactive components.
- * Replaces script.js logic.
  */
 
 import { TranslationService } from './services/TranslationService.js';
+import { UIService } from './services/UIService.js';
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
-import { getContactFormHTML } from './components/ContactForm.js'; // Added import
+import { getContactFormHTML } from './components/ContactForm.js';
 // Components
 import { MobileMenu } from './components/MobileMenu.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
@@ -22,121 +22,120 @@ import { HeaderController } from './controllers/HeaderController.js';
 import { ModalController } from './controllers/ModalController.js';
 import { VideoPlayerController } from './controllers/VideoPlayerController.js';
 import { GalleryController } from './controllers/GalleryController.js';
-// Services
-import { UIService } from './services/UIService.js';
+// Data
 import { servicesData } from './data/servicesData.js';
 
+class App {
+    constructor() {
+        this.basePath = this.calculateBasePath();
+    }
 
-/**
- * Automatically calculates relative path to root based on current URL depth.
- */
-function calculateBasePath() {
-    const path = window.location.pathname;
-    if (path === '/' || path === '/index.html') return './';
-    
-    // get directory path (e.g. /servicios/peluqueria)
-    let dirPath = path.substring(0, path.lastIndexOf('/'));
-    if (dirPath.startsWith('/')) dirPath = dirPath.substring(1);
-    
-    if (!dirPath) return './';
-    
-    const segments = dirPath.split('/').filter(s => s.length > 0);
-    return '../'.repeat(segments.length);
+    init() {
+        this.mountLayout();
+        this.initCoreComponents();
+        this.initInteractiveComponents();
+        this.mountHomeServices();
+        this.initServices();
+    }
+
+    /**
+     * Calcula la ruta relativa a la raíz basada en la profundidad de la URL actual.
+     * @returns {string} Ruta base (e.g. './' o '../../')
+     */
+    calculateBasePath() {
+        const path = window.location.pathname;
+        if (path === '/' || path.endsWith('/index.html')) return './';
+        
+        let dirPath = path.substring(0, path.lastIndexOf('/'));
+        if (dirPath.startsWith('/')) dirPath = dirPath.substring(1);
+        
+        if (!dirPath) return './';
+        
+        const segments = dirPath.split('/').filter(s => s.length > 0);
+        return '../'.repeat(segments.length);
+    }
+
+    /**
+     * Monta la estructura estática (Navbar, Footer, ContactForm).
+     */
+    mountLayout() {
+        const navbarRoot = document.getElementById('navbar-root');
+        const footerRoot = document.getElementById('footer-root');
+        const contactRoot = document.getElementById('contact-root');
+        
+        const path = window.location.pathname;
+        const isHomePage = (path === '/' || path.endsWith('/index.html')) && this.basePath === './';
+
+        if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(this.basePath, isHomePage);
+        if (footerRoot) footerRoot.innerHTML = getFooterHTML(this.basePath);
+        if (contactRoot) contactRoot.innerHTML = getContactFormHTML();
+    }
+
+    /**
+     * Inicializa componentes esenciales (Menú, Header, WhatsApp).
+     */
+    initCoreComponents() {
+        new MobileMenu();
+        new WhatsAppButton();
+        new HeaderController();
+    }
+
+    /**
+     * Inicializa componentes de interacción (Carrusel, Modales, Video, etc.).
+     */
+    initInteractiveComponents() {
+        new FAQAccordion('#faq');
+        new ReviewsCarousel();
+        new ContactFormController();
+        new ShareButton();
+        new ModalController();
+        new VideoPlayerController();
+        new GalleryController();
+
+        // Decoraciones solo en Home
+        const path = window.location.pathname;
+        const isHome = (path === '/' || path.endsWith('/index.html')) && this.basePath === './';
+        if (isHome) {
+            new FloatingDecorations({ basePath: this.basePath });
+        }
+    }
+
+    /**
+     * Monta el grid de servicios en la página de inicio.
+     */
+    mountHomeServices() {
+        const servicesGrid = document.getElementById('services-grid');
+        if (servicesGrid && servicesData) {
+            servicesGrid.innerHTML = '';
+            servicesData.forEach(data => {
+                const card = new ServiceCard(data);
+                servicesGrid.appendChild(card.render());
+            });
+        }
+    }
+
+    /**
+     * Inicializa servicios globales (UI, Traducción).
+     */
+    initServices() {
+        new UIService();
+        
+        // TranslationService debe ser el último para bindear elementos inyectados
+        const translationService = new TranslationService();
+        translationService.init();
+    }
 }
 
-/**
- * Mounts the static layout (Navbar, Footer, ContactForm).
- */
-function mountLayout(basePath) {
-    const navbarRoot = document.getElementById('navbar-root');
-    const footerRoot = document.getElementById('footer-root');
-    const contactRoot = document.getElementById('contact-root'); // Check for contact root
-    
-    // Determine isHome for Navbar styling
-    const path = window.location.pathname;
-    const isHomePage = (path === '/' || path.endsWith('/index.html')) && basePath === './';
-
-    if (navbarRoot) {
-        navbarRoot.innerHTML = getNavbarHTML(basePath, isHomePage);
-    }
-
-    if (footerRoot) {
-        footerRoot.innerHTML = getFooterHTML(basePath);
-    }
-
-    if (contactRoot) {
-         contactRoot.innerHTML = getContactFormHTML();
-    }
-}
-
-/**
- * Mounts Home Services Grid if element exists.
- */
-function mountHomeServices() {
-    const servicesGrid = document.getElementById('services-grid');
-    if (servicesGrid && servicesData) {
-        // Clear previous content just in case
-        servicesGrid.innerHTML = '';
-        servicesData.forEach(data => {
-            const card = new ServiceCard(data);
-            servicesGrid.appendChild(card.render());
-        });
-    }
-}
-
-/**
- * Initializes the application.
- * Called automatically via DOMContentLoaded.
- */
+// Inicialización de la aplicación
 function initApp() {
-    // 1. Calculate Base Path
-    const basePath = calculateBasePath();
-    
-    // 2. Mount Layout (Navbar/Footer)
-    mountLayout(basePath);
-    
-    // 3. Initialize Global Components (depend on layout or body)
-    // Mobile Menu needs Navbar to be mounted first
-    new MobileMenu();
-    new WhatsAppButton();
-    new HeaderController(); // Handles sticky/transparent header
-    new HeaderController(); // Handles sticky/transparent header
-    
-    // Only init full animations on Home Page to avoid conflicts with Service Pages
-    const path = window.location.pathname;
-    const isHome = (path === '/' || path.endsWith('/index.html')) && basePath === './';
-    
-    if (isHome) {
-        new FloatingDecorations({ basePath: basePath }); 
-    }
-    
-    // 4. Initialize Functionality Components (Safe to call even if elements missing)
-    new FAQAccordion('#faq');
-    new ReviewsCarousel();
-    new ContactFormController();
-    new ShareButton();
-    new ModalController(); // Handles service modals if present
-    new VideoPlayerController();
-    new GalleryController();
-    
-    // 5. Mount Home Specifics
-    mountHomeServices();
-    
-    // 6. UI Service (Animations, etc)
-    new UIService();
-
-    // 7. Translation Service (Last, to bind to all injected elements)
-    const translationService = new TranslationService();
-    translationService.init();
-    translationService.bindSwitchers();
+    const app = new App();
+    app.init();
 }
 
-// Boot the app
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
     initApp();
 }
 
-// Export for debugging or manual re-init if needed
 export { initApp };

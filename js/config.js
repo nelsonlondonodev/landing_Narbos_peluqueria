@@ -1,8 +1,24 @@
 /**
+ * @typedef {Object} SocialLink
+ * @property {string} name - Nombre de la red social.
+ * @property {string} url - Enlace al perfil.
+ * @property {string} iconPath - Path del icono SVG.
+ */
+
+/**
+ * @typedef {Object} ContactInfo
+ * @property {string} phone - Teléfono de contacto.
+ * @property {string} whatsapp - Número de WhatsApp (limpio).
+ * @property {string} email - Correo electrónico.
+ * @property {string} address - Dirección física.
+ * @property {string} mapsLink - Enlace a Google Maps.
+ */
+
+/**
  * Configuración global del sitio.
  * Centraliza datos estáticos para facilitar el mantenimiento.
  */
-export const siteConfig = {
+export const siteConfig = Object.freeze({
     socialLinks: [
         {
             name: "WhatsApp",
@@ -32,4 +48,4 @@ export const siteConfig = {
         address: "Av. Pradilla # 5-18, Local 4, Chía, Cundinamarca",
         mapsLink: "https://maps.app.goo.gl/tuLinkDeMaps"
     }
-};
+});
