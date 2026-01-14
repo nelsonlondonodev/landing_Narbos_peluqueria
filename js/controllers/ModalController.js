@@ -77,7 +77,7 @@ export class ModalController {
             content.classList.add('modal-content-animation');
         }
 
-        document.body.style.overflow = "hidden";
+        // document.body.style.overflow = "hidden"; // Removed to prevent layout jump
         document.body.classList.add('modal-open-layer-fix');
     }
 
@@ -92,7 +92,7 @@ export class ModalController {
             content.classList.remove('modal-content-animation');
         }
 
-        document.body.style.overflow = "";
+        // document.body.style.overflow = ""; // Removed to prevent layout jump
         document.body.classList.remove('modal-open-layer-fix');
     }
 }

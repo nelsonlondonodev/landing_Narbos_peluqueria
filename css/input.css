@@ -92,7 +92,7 @@ h6 {
   Esto proporciona un bloqueo de scroll más robusto.
 */
 body.mobile-menu-open {
-  overflow: hidden;
+  overflow: auto;
 }
 /* --- FIN: ESTILOS PARA MENÚ MÓVIL OVERLAY --- */
 

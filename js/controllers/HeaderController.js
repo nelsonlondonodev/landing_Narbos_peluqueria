@@ -103,7 +103,7 @@ export class HeaderController {
         // Activar Backdrop
         if (this.backdrop) {
             this.backdrop.classList.remove('pointer-events-none', 'opacity-0');
-            document.body.style.overflow = 'hidden'; // Bloquear scroll
+            // document.body.style.overflow = 'hidden'; // Scroll locking removed to prevent jump
         }
     }
 
@@ -116,7 +116,7 @@ export class HeaderController {
         // Desactivar Backdrop
         if (this.backdrop) {
             this.backdrop.classList.add('opacity-0', 'pointer-events-none');
-            document.body.style.overflow = ''; // Restaurar scroll
+            // document.body.style.overflow = ''; // Scroll locking removed
         }
     }
 
