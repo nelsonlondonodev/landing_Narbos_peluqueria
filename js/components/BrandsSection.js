@@ -1,6 +1,7 @@
 /**
  * Componente reutilizable para la sección de marcas premium.
  * Renderiza un carrusel infinito con las marcas configuradas.
+ * Utiliza Web Animations API para manejar anchos variables y carga de fuentes.
  * 
  * @example
  * import { BrandsSection } from './components/BrandsSection.js';
@@ -24,68 +25,52 @@ export class BrandsSection {
     render() {
         if (!this.container || !this.brands || this.brands.length === 0) return;
 
-        // Configuración de dimensiones para cálculo de animación
-        const itemWidthMobile = 200; // px
-        const itemWidthDesktop = 250; // px
-        const uniqueItemsCount = this.brands.length;
-        
-        // Estilos para la animación del carrusel infinito
-        // La animación mueve el track hacia la izquierda el ancho total de los items únicos.
-        // Al llegar al final de esa distancia, salta a 0.
-        // Como el contenido está duplicado, el salto es invisible.
+        // Estilos base
+        // Usamos padding en los items en lugar de gap flex para facilitar el cálculo del ancho total
         const styles = `
             <style>
-                @keyframes scroll {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(calc(-${itemWidthMobile}px * ${uniqueItemsCount})); }
-                }
                 .brands-slider {
                     display: flex;
                     width: 100%;
                     overflow: hidden;
                     position: relative;
+                    /* Máscara de degradado para suavizar bordes */
+                    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+                    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
                 }
                 .brands-track {
                     display: flex;
                     align-items: center;
                     width: max-content;
-                    animation: scroll ${10 * uniqueItemsCount}s linear infinite;
-                    gap: 3rem;
+                    will-change: transform;
                 }
                 .brands-item {
                     flex-shrink: 0;
-                    width: ${itemWidthMobile}px;
+                    width: auto; /* Ancho variable según contenido */
+                    padding: 0 2rem; /* Espaciado mobile (Gap simulado) */
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
+                    box-sizing: border-box;
                 }
                 
                 @media (min-width: 768px) {
-                     @keyframes scroll {
-                        0% { transform: translateX(0); }
-                        100% { transform: translateX(calc(-${itemWidthDesktop}px * ${uniqueItemsCount})); }
-                    }
-                    .brands-track {
-                         gap: 5rem;
-                         animation: scroll ${10 * uniqueItemsCount}s linear infinite;
-                    }
                     .brands-item {
-                        width: ${itemWidthDesktop}px;
+                        padding: 0 4rem; /* Espaciado desktop más amplio */
                     }
                 }
             </style>
         `;
 
         const createBrandItem = (brand) => `
-            <div class="brands-item group cursor-default">
+            <div class="brands-item group cursor-default select-none">
                 <span class="text-3xl md:text-4xl font-serif font-bold text-gray-300 group-hover:text-brand-green transition-colors duration-300 whitespace-nowrap">${brand.name}</span>
-                <span class="block text-[0.6rem] tracking-widest text-gray-300 group-hover:text-gray-600 uppercase mt-1">${brand.sub}</span>
+                <span class="block text-[0.6rem] tracking-widest text-gray-300 group-hover:text-gray-600 uppercase mt-1 text-center">${brand.sub}</span>
             </div>
         `;
 
-        // Duplicamos la lista varias veces para asegurar un bucle infinito fluido en pantallas grandes
-        // 12 repeticiones del set completo aseguran suficiente buffer visual.
+        // Duplicamos la lista suficientes veces para cubrir pantallas grandes y buffer de scroll (12x es seguro)
         const itemsHtml = Array(12).fill(this.brands).flat().map(createBrandItem).join('');
 
         this.container.innerHTML = `
@@ -102,5 +87,40 @@ export class BrandsSection {
                 </div>
             </section>
         `;
+
+        // Iniciamos la animación una vez que las fuentes estén cargadas para asegurar medidas correctas
+        document.fonts.ready.then(() => {
+            this.startAnimation();
+        });
+    }
+
+    /**
+     * Calcula el ancho del set original de marcas e inicia la animación infinita.
+     */
+    startAnimation() {
+        const track = this.container.querySelector('.brands-track');
+        if (!track) return;
+
+        const items = track.children;
+        const uniqueCount = this.brands.length;
+        
+        // Sumamos el offsetWidth (ancho + padding) de los elementos originales únicos
+        let totalScrollWidth = 0;
+        for (let i = 0; i < uniqueCount; i++) {
+            if (items[i]) {
+                totalScrollWidth += items[i].offsetWidth;
+            }
+        }
+
+        // Animación usando Web Animations API
+        // Mueve el track hacia la izquierda exactamente el ancho de los items únicos
+        track.animate([
+            { transform: 'translateX(0)' },
+            { transform: `translateX(-${totalScrollWidth}px)` }
+        ], {
+            duration: uniqueCount * 3000, // 3 segundos por item para mantener velocidad constante
+            iterations: Infinity,
+            easing: 'linear'
+        });
     }
 }
