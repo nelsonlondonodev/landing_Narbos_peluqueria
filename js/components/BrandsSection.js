@@ -118,7 +118,7 @@ export class BrandsSection {
             { transform: 'translateX(0)' },
             { transform: `translateX(-${totalScrollWidth}px)` }
         ], {
-            duration: uniqueCount * 3000, // 3 segundos por item para mantener velocidad constante
+            duration: uniqueCount * 6000, // 6 segundos por item para (más lento y sutil)
             iterations: Infinity,
             easing: 'linear'
         });
