@@ -21,8 +21,7 @@ export const getMenuCategories = (basePath = './') => [
         title: "Peluquería",
         link: `${basePath}servicios/peluqueria/index.html`,
         items: [
-            { label: "Corte Dama", link: `${basePath}servicios/peluqueria/corte-cabello-mujer.html` },
-            { label: "Corte General", link: `${basePath}servicios/peluqueria/cortes-de-pelo-en-chia.html` },
+            { label: "Corte Dama", link: `${basePath}servicios/peluqueria/cortes-de-pelo-en-chia.html` },
             { label: "Balayage y Mechas", link: `${basePath}servicios/peluqueria/balayage-mechas-chia.html` },
             { label: "Color y Tinturas", link: `${basePath}servicios/peluqueria/color-tinturas-cabello.html` },
             { label: "Tratamientos", link: `${basePath}servicios/peluqueria/tratamientos-capilares-chia.html` }
