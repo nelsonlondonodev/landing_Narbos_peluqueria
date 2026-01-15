@@ -5,6 +5,7 @@ import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { hairSalonServices } from './data/hairSalonServices.js';
 import { barberServices } from './data/barberServices.js';
 import { hairCutStyles } from './data/hairCutStyles.js';
+import { colorStyles } from './data/colorStyles.js';
 
 /**
  * Gestor de la Página de Servicios.
@@ -46,11 +47,20 @@ class ServicePageManager {
                     }
                 }
 
+                if (window.location.pathname.includes('balayage-mechas-chia')) {
+                    if (cardElement.tagName === 'A') {
+                        cardElement.classList.add('glightbox');
+                        cardElement.setAttribute('data-gallery', 'color-gallery');
+                        cardElement.setAttribute('data-title', data.title);
+                        cardElement.setAttribute('data-description', data.description);
+                    }
+                }
+
                 hairServicesGrid.appendChild(cardElement);
             });
 
             // Init GLightbox if we added class
-            if (window.location.pathname.includes('cortes-de-pelo') && typeof GLightbox !== 'undefined') {
+            if ((window.location.pathname.includes('cortes-de-pelo') || window.location.pathname.includes('balayage-mechas-chia')) && typeof GLightbox !== 'undefined') {
                 this.lightbox = GLightbox({
                     selector: '.glightbox',
                     touchNavigation: true,
@@ -109,6 +119,9 @@ class ServicePageManager {
     getFilteredServices(path) {
         if (path.includes('cortes-de-pelo')) {
             return hairCutStyles;
+        }
+        if (path.includes('balayage-mechas-chia')) {
+            return colorStyles;
         }
         return hairSalonServices;
     }
