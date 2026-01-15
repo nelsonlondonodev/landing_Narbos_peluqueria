@@ -7,6 +7,7 @@ import { barberServices } from './data/barberServices.js';
 import { hairCutStyles } from './data/hairCutStyles.js';
 import { colorStyles } from './data/colorStyles.js';
 import { tintStyles } from './data/tintStyles.js';
+import { treatmentStyles } from './data/treatmentStyles.js';
 
 /**
  * Gestor de la Página de Servicios.
@@ -66,6 +67,15 @@ class ServicePageManager {
                     }
                 }
 
+                if (window.location.pathname.includes('tratamientos-capilares-chia')) {
+                    if (cardElement.tagName === 'A') {
+                        cardElement.classList.add('glightbox');
+                        cardElement.setAttribute('data-gallery', 'treatments-gallery');
+                        cardElement.setAttribute('data-title', data.title);
+                        cardElement.setAttribute('data-description', data.description);
+                    }
+                }
+
                 hairServicesGrid.appendChild(cardElement);
             });
 
@@ -73,7 +83,8 @@ class ServicePageManager {
             // Init GLightbox if we added class
             const isServicePage = window.location.pathname.includes('cortes-de-pelo') || 
                                   window.location.pathname.includes('balayage-mechas-chia') || 
-                                  window.location.pathname.includes('color-tinturas-cabello');
+                                  window.location.pathname.includes('color-tinturas-cabello') ||
+                                  window.location.pathname.includes('tratamientos-capilares-chia');
 
             if (isServicePage && typeof GLightbox !== 'undefined') {
                 this.lightbox = GLightbox({
@@ -140,6 +151,9 @@ class ServicePageManager {
         }
         if (path.includes('color-tinturas-cabello')) {
             return tintStyles;
+        }
+        if (path.includes('tratamientos-capilares-chia')) {
+            return treatmentStyles;
         }
         return hairSalonServices;
     }

@@ -58,6 +58,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <style>
         /* Optimización de CLS */
         #navbar-root { min-height: 80px; }
@@ -108,6 +109,34 @@
                 <!-- Grid de Servicios (Hub) -->
                 <div id="hair-services-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <!-- Services injected via JS -->
+                </div>
+            </div>
+          </section>
+
+          <!-- Sección: Marcas Premium (Trust Signals) -->
+          <section class="py-12 bg-gray-50 border-y border-gray-100">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-gray-500 uppercase tracking-[0.2em] text-xs font-bold mb-8 font-sans" data-animation="fadeInUp">Excelencia garantizada con marcas globales</p>
+                <div class="flex flex-wrap justify-center items-center gap-8 md:gap-20" data-animation="fadeInUp" data-animation-delay="0.1s">
+                    <!-- Textos tipográficos simulando logos minimalistas -->
+                    <div class="group cursor-default">
+                        <span class="text-3xl md:text-4xl font-serif font-bold text-gray-300 group-hover:text-gray-800 transition-colors duration-300">WELLA</span>
+                        <span class="block text-[0.6rem] tracking-widest text-gray-300 group-hover:text-gray-600 uppercase mt-1">Professionals</span>
+                    </div>
+                    
+                    <div class="hidden md:block w-px h-12 bg-gray-200"></div>
+
+                    <div class="group cursor-default">
+                        <span class="text-3xl md:text-4xl font-serif font-bold text-gray-300 group-hover:text-gray-800 transition-colors duration-300">Schwarzkopf</span>
+                        <span class="block text-[0.6rem] tracking-widest text-gray-300 group-hover:text-gray-600 uppercase mt-1">Professional</span>
+                    </div>
+
+                    <div class="hidden md:block w-px h-12 bg-gray-200"></div>
+
+                    <div class="group cursor-default">
+                        <span class="text-3xl md:text-4xl font-serif font-bold text-gray-300 group-hover:text-gray-800 transition-colors duration-300">L'ORÉAL</span>
+                        <span class="block text-[0.6rem] tracking-widest text-gray-300 group-hover:text-gray-600 uppercase mt-1">Paris</span>
+                    </div>
                 </div>
             </div>
           </section>
@@ -256,10 +285,11 @@
         </main>
     
     </div><!-- End #app-wrapper -->
-
+    
     <div id="footer-root"></div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
     <script type="module" src="../../js/service-page.js"></script>
   </body>
 </html>
