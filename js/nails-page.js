@@ -1,6 +1,7 @@
 import { initApp } from './main.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
+import { BrandsSectionNails } from './components/BrandsSectionNails.js';
 
 /**
  * Nails Page Logic
@@ -13,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initBreadcrumbs();
     initNailServices();
     initFloatingDecorations();
+    
+    // Inicializar carrusel de marcas de uñas
+    new BrandsSectionNails('nail-brands-root').render();
 });
 
 
