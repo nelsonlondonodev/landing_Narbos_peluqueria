@@ -32,9 +32,7 @@ export const getMenuCategories = (basePath = './') => [
         link: `${basePath}servicios/unas-spa/index.html`,
         items: [
             { label: "Acrílicas y Gel", link: `${basePath}servicios/unas-spa/unas-acrilicas-gel-chia.html` },
-            { label: "Diseño y Nail Art", link: `${basePath}servicios/unas-spa/diseno-de-unas-nail-art.html` },
-            { label: "Manicure Spa", link: `${basePath}servicios/unas-spa/unas-acrilicas-gel-chia.html#manicure` },
-            { label: "Pedicure Spa", link: `${basePath}servicios/unas-spa/unas-acrilicas-gel-chia.html#pedicure` }
+            { label: "Manicure y Pedicure", link: `${basePath}servicios/unas-spa/manicure-pedicure-chia.html` }
         ]
     },
     {
