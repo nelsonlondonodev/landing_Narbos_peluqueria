@@ -132,7 +132,14 @@ function initNailServices() {
 
     // 3. RENDERIZAR TARJETAS EN EL GRID
     if (gridContainer) {
-        gridContainer.innerHTML = servicesData.map(service => `
+        // Filtrar servicios si existe el atributo data-exclude-ids
+        const excludeIds = gridContainer.dataset.excludeIds 
+            ? gridContainer.dataset.excludeIds.split(',').map(Number) 
+            : [];
+            
+        const contentData = servicesData.filter(s => !excludeIds.includes(s.id));
+
+        gridContainer.innerHTML = contentData.map(service => `
             <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto">
                 <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
                     <img src="${service.image}" alt="${service.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
