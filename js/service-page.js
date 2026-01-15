@@ -235,7 +235,16 @@ class ServicePageManager {
 
         if (currentPath.includes('/peluqueria/')) {
             items.push({ label: 'Peluquería', link: '../../servicios/peluqueria/index.html' });
-            if (currentPath.includes('cortes-de-pelo')) items.push({ label: 'Cortes', link: '#' });
+            
+            if (currentPath.includes('cortes-de-pelo')) {
+                items.push({ label: 'Cortes', link: '#' });
+            } else if (currentPath.includes('balayage-mechas-chia')) {
+                items.push({ label: 'Balayage', link: '#' });
+            } else if (currentPath.includes('color-tinturas-cabello')) {
+                items.push({ label: 'Color', link: '#' });
+            } else if (currentPath.includes('tratamientos-capilares-chia')) {
+                items.push({ label: 'Tratamientos', link: '#' });
+            }
         } else if (currentPath.includes('/barberia/')) {
             items.push({ label: 'Barbería', link: '../../servicios/barberia/index.html' });
         } else if (currentPath.includes('/estetica/')) {
