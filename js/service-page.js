@@ -4,6 +4,7 @@ import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { hairSalonServices } from './data/hairSalonServices.js';
 import { barberServices } from './data/barberServices.js';
+import { hairCutStyles } from './data/hairCutStyles.js';
 
 /**
  * Gestor de la Página de Servicios.
@@ -33,8 +34,29 @@ class ServicePageManager {
 
             servicesToRender.forEach(data => {
                 const card = new ServiceCard(data);
-                hairServicesGrid.appendChild(card.render());
+                const cardElement = card.render();
+
+                // Logic for GLightbox (Modal Image)
+                if (window.location.pathname.includes('cortes-de-pelo')) {
+                    if (cardElement.tagName === 'A') {
+                        cardElement.classList.add('glightbox');
+                        cardElement.setAttribute('data-gallery', 'haircuts-gallery');
+                        cardElement.setAttribute('data-title', data.title);
+                        cardElement.setAttribute('data-description', data.description);
+                    }
+                }
+
+                hairServicesGrid.appendChild(cardElement);
             });
+
+            // Init GLightbox if we added class
+            if (window.location.pathname.includes('cortes-de-pelo') && typeof GLightbox !== 'undefined') {
+                this.lightbox = GLightbox({
+                    selector: '.glightbox',
+                    touchNavigation: true,
+                    loop: true
+                });
+            }
         }
 
         // 2. Grid Barbería
@@ -64,7 +86,7 @@ class ServicePageManager {
 
     getFilteredServices(path) {
         if (path.includes('cortes-de-pelo')) {
-            return hairSalonServices.filter(s => !s.link.includes('cortes-de-pelo'));
+            return hairCutStyles;
         }
         return hairSalonServices;
     }
