@@ -51,12 +51,28 @@ function initBreadcrumbs() {
     const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
     if (!breadcrumbsRoot) return;
 
+    const currentPath = window.location.pathname;
     const items = [
-        { label: 'Inicio', link: '../../index.html' },
-        { label: 'Uñas y Spa', link: '#' } 
+        { label: 'Inicio', link: '../../index.html' }
     ];
 
-    breadcrumbsRoot.innerHTML = new Breadcrumbs(items, { customClasses: 'pt-4' }).render();
+    // Determinar si estamos en el Hub de Uñas o en una subpágina
+    const isIndex = currentPath.endsWith('/unas-spa/') || currentPath.endsWith('/unas-spa/index.html');
+    
+    // Nivel 2: Hub de Uñas
+    items.push({ 
+        label: 'Uñas y Spa', 
+        link: isIndex ? '#' : '../../servicios/unas-spa/index.html' 
+    });
+
+    // Nivel 3: Subpáginas específicas
+    if (currentPath.includes('unas-acrilicas-gel-chia')) {
+        items.push({ label: 'Acrílicas y Gel', link: '#' });
+    } else if (currentPath.includes('manicure-pedicure-chia')) {
+        items.push({ label: 'Manicure y Pedicure', link: '#' });
+    }
+
+    breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
 }
 
 /* -------------------------------------------------------------------------- */
