@@ -6,6 +6,7 @@ import { hairSalonServices } from './data/hairSalonServices.js';
 import { barberServices } from './data/barberServices.js';
 import { hairCutStyles } from './data/hairCutStyles.js';
 import { colorStyles } from './data/colorStyles.js';
+import { tintStyles } from './data/tintStyles.js';
 
 /**
  * Gestor de la Página de Servicios.
@@ -56,11 +57,25 @@ class ServicePageManager {
                     }
                 }
 
+                if (window.location.pathname.includes('color-tinturas-cabello')) {
+                    if (cardElement.tagName === 'A') {
+                        cardElement.classList.add('glightbox');
+                        cardElement.setAttribute('data-gallery', 'tints-gallery');
+                        cardElement.setAttribute('data-title', data.title);
+                        cardElement.setAttribute('data-description', data.description);
+                    }
+                }
+
                 hairServicesGrid.appendChild(cardElement);
             });
 
+    
             // Init GLightbox if we added class
-            if ((window.location.pathname.includes('cortes-de-pelo') || window.location.pathname.includes('balayage-mechas-chia')) && typeof GLightbox !== 'undefined') {
+            const isServicePage = window.location.pathname.includes('cortes-de-pelo') || 
+                                  window.location.pathname.includes('balayage-mechas-chia') || 
+                                  window.location.pathname.includes('color-tinturas-cabello');
+
+            if (isServicePage && typeof GLightbox !== 'undefined') {
                 this.lightbox = GLightbox({
                     selector: '.glightbox',
                     touchNavigation: true,
@@ -122,6 +137,9 @@ class ServicePageManager {
         }
         if (path.includes('balayage-mechas-chia')) {
             return colorStyles;
+        }
+        if (path.includes('color-tinturas-cabello')) {
+            return tintStyles;
         }
         return hairSalonServices;
     }
