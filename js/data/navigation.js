@@ -38,13 +38,6 @@ export const getMenuCategories = (basePath = './') => [
         ]
     },
     {
-        title: "Barbería",
-        link: `${basePath}servicios/barberia/index.html`,
-        items: [
-            { label: "Corte y Barba", link: `${basePath}servicios/barberia/barberia-cortes-hombre.html` }
-        ]
-    },
-    {
         title: "Estética",
         link: `${basePath}servicios/estetica/index.html`,
         items: [
@@ -53,6 +46,13 @@ export const getMenuCategories = (basePath = './') => [
             { label: "Masajes Relajantes", link: `${basePath}servicios/estetica/masajes-relajantes.html` },
             { label: "Cejas y Pestañas", link: `${basePath}servicios/estetica/cejas-y-pestanas.html` },
             { label: "Depilación", link: `${basePath}servicios/depilacion/index.html` }
+        ]
+    },
+    {
+        title: "Barbería",
+        link: `${basePath}servicios/barberia/index.html`,
+        items: [
+            { label: "Corte y Barba", link: `${basePath}servicios/barberia/barberia-cortes-hombre.html` }
         ]
     }
 ];

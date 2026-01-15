@@ -36,16 +36,6 @@ export const servicesData = Object.freeze([
         animationDelay: "0.2s"
     },
     {
-        title: "Barbería",
-        i18nTitle: "service.barber.title",
-        description: "Cortes clásicos y modernos, arreglo de barba, ritual de toalla caliente y cuidado masculino.",
-        i18nDesc: "service.barber.desc",
-        icon: '<path d="M7 21h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"/><path d="M9 3v18"/><path d="M15 3v18"/>',
-        link: "/servicios/barberia/index.html",
-        image: "images/peluqueria/foto_3_peluqueria.webp",
-        animationDelay: "0.4s"
-    },
-    {
         title: "Estética",
         i18nTitle: "service.spa.title",
         description: "Faciales profundos, masajes relajantes, drenaje linfático y tratamientos corporales de bienestar.",
@@ -53,6 +43,16 @@ export const servicesData = Object.freeze([
         icon: '<path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m3 4.5a4.5 4.5 0 1 0 4.5-4.5M12 16.5V15m4.5-3H15"/>',
         link: "/servicios/estetica/index.html",
         image: "images/spa-y-estetica/foto_estetica_1.webp",
+        animationDelay: "0.4s"
+    },
+    {
+        title: "Barbería",
+        i18nTitle: "service.barber.title",
+        description: "Cortes clásicos y modernos, arreglo de barba, ritual de toalla caliente y cuidado masculino.",
+        i18nDesc: "service.barber.desc",
+        icon: '<path d="M7 21h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"/><path d="M9 3v18"/><path d="M15 3v18"/>',
+        link: "/servicios/barberia/index.html",
+        image: "images/peluqueria/foto_3_peluqueria.webp",
         animationDelay: "0.6s"
     }
 ]);
