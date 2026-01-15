@@ -50,7 +50,7 @@ export const servicesData = Object.freeze([
         i18nTitle: "service.barber.title",
         description: "Cortes clásicos y modernos, arreglo de barba, ritual de toalla caliente y cuidado masculino.",
         i18nDesc: "service.barber.desc",
-        icon: '<path d="M7 21h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"/><path d="M9 3v18"/><path d="M15 3v18"/>',
+        icon: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M7 8l10 5M7 13l10 5M7 18l6 3M11 3l6 3"/>',
         link: "/servicios/barberia/index.html",
         image: "images/peluqueria/foto_3_peluqueria.webp",
         animationDelay: "0.6s"
