@@ -2,6 +2,8 @@ import { initApp } from './main.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
+import { BrandsSection } from './components/BrandsSection.js'; // Added
+import { hairBrands } from './data/brandsData.js'; // Added
 import { hairSalonServices } from './data/hairSalonServices.js';
 import { barberServices } from './data/barberServices.js';
 import { hairCutStyles } from './data/hairCutStyles.js';
@@ -20,9 +22,18 @@ class ServicePageManager {
 
     init() {
         this.initServiceGrid();
+        this.initBrands(); // Added
         this.initFloatingDecorations();
         this.initLazyVideos();
         this.initBreadcrumbs();
+    }
+    
+    /**
+     * Inicializa la sección de marcas específicas de peluquería.
+     */
+    initBrands() {
+        // Usamos un ID específico para evitar colisiones con el global del home
+        new BrandsSection('hair-brands-root', hairBrands).render();
     }
 
     /**

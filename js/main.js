@@ -16,7 +16,8 @@ import { ReviewsCarousel } from './components/ReviewsCarousel.js';
 import { ShareButton } from './components/ShareButton.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { ServiceCard } from './components/ServiceCard.js';
-import { BrandsSection } from './components/BrandsSection.js'; // Componente de marcas premium
+import { BrandsSection } from './components/BrandsSection.js';
+import { allBrands } from './data/brandsData.js';
 
 // Controllers
 import { ContactFormController } from './controllers/ContactFormController.js';
@@ -101,7 +102,7 @@ class App {
         new GalleryController();
 
         // Inicializamos la sección de marcas (si existe el contenedor)
-        new BrandsSection('brands-section-root').render();
+        new BrandsSection('home-brands-root', allBrands).render();
 
         // Decoraciones solo en Home
         const path = window.location.pathname;

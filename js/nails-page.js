@@ -1,8 +1,9 @@
 import { initApp } from './main.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
-import { BrandsSectionNails } from './components/BrandsSectionNails.js';
+import { BrandsSection } from './components/BrandsSection.js';
 import { nailsServices } from './data/nailsServices.js';
+import { nailBrands } from './data/brandsData.js';
 
 /**
  * Nails Page Logic
@@ -18,11 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* -------------------------------------------------------------------------- */
-/*                               INITIALIZATIONS                              */
+/*                                INITIALIZATIONS                              */
 /* -------------------------------------------------------------------------- */
 
 function initBrandsCarousel() {
-    new BrandsSectionNails('nail-brands-root').render();
+    new BrandsSection('nail-brands-root', nailBrands).render();
 }
 
 function initFloatingDecorations() {
