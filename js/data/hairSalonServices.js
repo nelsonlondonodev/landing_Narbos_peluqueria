@@ -13,29 +13,29 @@
  */
 export const hairSalonServices = Object.freeze([
     {
-        title: "Cortes y estilo",
-        description: "Diseños personalizados para dama y asesoría de imagen.",
+        title: "Corte Dama",
+        description: "Diseños personalizados, puntas perfectas y cambios de look completos.",
         link: "/servicios/peluqueria/cortes-de-pelo-en-chia.html",
         image: "/images/peluqueria/foto_6_peluqueria.webp",
         variant: "standard"
     },
     {
-        title: "Barbería",
-        description: "Cortes masculinos modernos, barbas y ritual de toalla.",
-        link: "/servicios/barberia/barberia-cortes-hombre.html",
-        image: "/images/peluqueria/foto_8_peluqueria.webp", // Provisional (es de pestañas pero sirve por tono oscuro hasta tener foto real) o usamos foto_3
+        title: "Balayage y Mechas",
+        description: "Iluminaciones perfectas, rubios soñados y técnicas de degradado.",
+        link: "/servicios/peluqueria/balayage-mechas-chia.html",
+        image: "/images/peluqueria/foto_3_peluqueria.webp",
         variant: "standard"
     },
     {
-        title: "Color y balayage",
-        description: "Expertos en rubios, corrección de color y técnicas avanzadas.",
-        link: "/servicios/peluqueria/balayage-mechas-chia.html",
+        title: "Color y Tinturas",
+        description: "Tintes completos, cubrimiento de canas y retoque de raíz profesional.",
+        link: "/servicios/peluqueria/color-tinturas-cabello.html",
         image: "/images/peluqueria/foto_4_peluqueria.webp",
         variant: "standard"
     },
     {
-        title: "Salud capilar",
-        description: "Recuperación profunda, keratinas y botox capilar.",
+        title: "Tratamientos",
+        description: "Recuperación profunda, keratinas, cirugía capilar y botox.",
         link: "/servicios/peluqueria/tratamientos-capilares-chia.html",
         image: "/images/peluqueria/foto_5_peluqueria.webp",
         variant: "standard"
