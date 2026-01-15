@@ -10,6 +10,7 @@ import { hairCutStyles } from './data/hairCutStyles.js';
 import { colorStyles } from './data/colorStyles.js';
 import { tintStyles } from './data/tintStyles.js';
 import { treatmentStyles } from './data/treatmentStyles.js';
+import { estheticsServices } from './data/estheticsServices.js'; // Added
 
 /**
  * Gestor de la Página de Servicios.
@@ -149,6 +150,15 @@ class ServicePageManager {
                  }
 
                  barberServicesGrid.appendChild(cardElement);
+            });
+        }
+
+        // 3. Grid Estética
+        const aestheticsServicesGrid = document.getElementById('aesthetics-services-grid');
+        if (aestheticsServicesGrid) {
+            estheticsServices.forEach(data => {
+                const card = new ServiceCard(data);
+                aestheticsServicesGrid.appendChild(card.render());
             });
         }
     }
