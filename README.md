@@ -34,6 +34,21 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 3. Etiquetas Canonicals: Todas las páginas deben incluir una etiqueta <link rel="canonical" href="https://narbossalon.com/..."> que coincida exactamente con la URL final sin www.
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
+### 📝 Últimas Actualizaciones (15 de enero, 2026)
+- **Hub de Estética (Renovación Total):** ✨
+    - **Reestructuración Completa:** Se rediseñó la página `servicios/estetica/index.html` bajo la arquitectura estándar del sitio (`site-header`, `app-wrapper`), eliminando deuda técnica y scripts inline.
+    - **Grid de Servicios Dinámico:** Implementación de carga dinámica de servicios desde `js/data/estheticsServices.js`.
+    - **Tarjetas de Servicio Mejoradas:** Se añadieron **Iconos SVG Representativos** (Spa, Limpieza, Masaje, Cejas, Depilación) para mejorar la identificación visual de cada servicio.
+    - **Consistencia Visual:** Unificación del Hero Section (tarjeta flotante superpuesta) y activación de decoraciones 3D (hojas flotantes) para igualar la experiencia de usuario con Peluquería.
+- **Carrusel de Marcas (Refactorización):** 🤝
+    - **Lógica Unificada:** Creación del componente genérico `BrandsSection.js` y centralización de datos en `brandsData.js`.
+    - **Ancho Dinámico Inteligente:** Solución definitiva al problema de márgenes inconsistentes mediante cálculo matemático basado en el ancho real del texto.
+    - **Experiencia de Usuario:** Se redujo la velocidad de la animación para una lectura más cómoda y sutil.
+- **Botón de WhatsApp (CRO):** 💬
+    - **Tooltip Persuasivo:** Implementación de una etiqueta flotante ("¡Agenda tu cita aquí!") con animación de rebote y posicionamiento superior, diseñada para aumentar la tasa de clics sin obstruir el contenido.
+- **Navegación y UX:** 🧭
+    - **Breadcrumbs (Migas de Pan):** Corrección de lógica para garantizar rutas completas y consistentes en todas las subpáginas de Peluquería y Uñas, y soluciones de visibilidad bajo encabezados fijos.
+
 ### 📝 Últimas Actualizaciones (14 de enero, 2026)
 - **Refactorización Completa de JavaScript (Clean Code):** 🏗️
     - **Arquitectura Modular:** Se reestructuró todo el código JS del cliente en una arquitectura clara: `components/`, `controllers/`, `services/`, `data/`.
