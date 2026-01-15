@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./blog/**/*.html", "./js/**/*.js"],
+  content: ["./index.html", "./blog/**/*.html", "./servicios/**/*.html", "./js/**/*.js"],
 
 
   theme: {
@@ -25,11 +25,16 @@ module.exports = {
         sway: {
           '0%, 100%': { transform: 'rotate(-15deg)' },
           '50%': { transform: 'rotate(15deg)' },
+        },
+        'bounce-horizontal': {
+            '0%, 100%': { transform: 'translateX(0)' },
+            '50%': { transform: 'translateX(-5px)' },
         }
       },
       animation: {
         float: 'float 5s ease-in-out infinite',
         sway: 'sway 5s ease-in-out infinite',
+        'bounce-horizontal': 'bounce-horizontal 2s infinite',
       },
     }
   },

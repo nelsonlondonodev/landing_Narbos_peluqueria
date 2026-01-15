@@ -41,6 +41,13 @@ export class WhatsAppButton {
                aria-label="Chatea con nosotros en WhatsApp"
                class="whatsapp-float fixed bottom-6 right-6 z-50 group transition-transform hover:scale-110 duration-300">
                 
+                <!-- Tooltip Label -->
+                <div class="absolute right-full mr-4 top-1/2 -translate-y-1/2 whitespace-nowrap bg-white text-brand-gray-dark px-4 py-2 rounded-xl shadow-lg border border-brand-light/20 font-serif font-bold text-sm hidden md:flex items-center gap-2 animate-bounce-horizontal">
+                    <span>¡Agenda tu cita aquí!</span>
+                    <!-- Arrow -->
+                    <div class="absolute -right-1.5 top-1/2 -translate-y-1/2 w-3 h-3 bg-white border-r border-t border-brand-light/20 transform rotate-45"></div>
+                </div>
+
                 <!-- Pulse Effect Background -->
                 <span class="absolute inset-0 rounded-full bg-green-500 opacity-75 animate-ping group-hover:opacity-100"></span>
                 
