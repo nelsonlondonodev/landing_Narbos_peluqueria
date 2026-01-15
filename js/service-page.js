@@ -56,6 +56,28 @@ class ServicePageManager {
                     touchNavigation: true,
                     loop: true
                 });
+
+                // Accessibility Fix: Hide background content when modal is open using 'inert'
+                const contentElements = [
+                    document.getElementById('app-wrapper'),
+                    document.querySelector('header'),
+                    document.querySelector('footer')
+                ];
+
+                this.lightbox.on('open', () => {
+                    contentElements.forEach(el => {
+                        if (el) {
+                            el.setAttribute('inert', '');
+                            el.removeAttribute('aria-hidden'); // Prevent conflicts if library adds it
+                        }
+                    });
+                });
+
+                this.lightbox.on('close', () => {
+                    contentElements.forEach(el => {
+                        if (el) el.removeAttribute('inert');
+                    });
+                });
             }
         }
 
