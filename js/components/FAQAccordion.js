@@ -1,108 +1,164 @@
 /**
- * Módulo para manejar la lógica del acordeón de Preguntas Frecuentes.
- * Incluye animaciones suaves y accesibilidad.
+ * Componente de Acordeón para Preguntas Frecuentes.
+ * Maneja la apertura y cierre suave de elementos <details> usando Web Animations API.
+ * 
+ * Principios:
+ * - Progressive Enhancement: Funciona nativamente si falla JS.
+ * - Performance: Usa delegación de eventos y cancela animaciones redundantes.
+ * - UX: Cierra otros items automáticamente (comportamiento de acordeón).
  */
 export class FAQAccordion {
     /**
-     * @param {string} selector - Selector CSS del contenedor (e.g., '#faq').
+     * @param {string} selector - Selector CSS del contenedor padre (e.g., '#faq').
      */
     constructor(selector = '#faq') {
         this.container = document.querySelector(selector);
-        // Verificar preferencia de movimiento reducido
+        // Map para guardar referencias a las animaciones activas por elemento
+        this.animations = new WeakMap();
         this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        this.init();
+        
+        if (this.container) {
+            this.init();
+        } else {
+            console.warn(`FAQAccordion: No se encontró el contenedor con selector "${selector}"`);
+        }
     }
 
     init() {
-        if (!this.container) return;
+        this.container.addEventListener('click', (e) => {
+            const summary = e.target.closest('summary');
+            if (!summary) return;
 
-        this.detailsElements = this.container.querySelectorAll('details');
-        if (!this.detailsElements.length) return;
-
-        this.detailsElements.forEach(details => {
-            const summary = details.querySelector('summary');
+            const details = summary.parentElement;
             const content = details.querySelector('.faq-content');
 
-            if (!summary || !content) return;
+            if (!details || !content) return;
 
-            summary.addEventListener('click', (e) => this.handleToggle(e, details, content));
+            e.preventDefault();
+            this.toggle(details, content);
         });
     }
 
     /**
-     * Maneja el evento click en el summary.
+     * Alterna el estado del detalle permitiendo interrupción de animaciones.
      */
-    handleToggle(e, details, content) {
-        e.preventDefault(); // Evita el comportamiento por defecto para controlar la animación
-        
-        if (details.hasAttribute('open')) {
-            this.close(details, content);
+    toggle(details, content) {
+        const isOpen = details.hasAttribute('open');
+        const isOpening = details.classList.contains('is-opening');
+
+        // Cancelar animación previa si existe para este elemento
+        if (this.animations.has(details)) {
+            this.animations.get(details).cancel();
+        }
+
+        // Determinar la intención lógica:
+        // Si está abierto y NO se está abriendo (estado estable) -> Cerrar
+        // Si se está abriendo (animación en curso) -> Cerrar (revertir)
+        // Si está cerrado -> Abrir
+        if (isOpen && !isOpening) {
+            this.animateClose(details, content);
         } else {
-            this.open(details, content);
+            this.animateOpen(details, content);
         }
     }
 
-    /**
-     * Abre el elemento con animación.
-     */
-    open(details, content) {
-        // Cerrar otros elementos abiertos (Comportamiento de Acordeón)
+    animateOpen(details, content) {
+        // Cerrar otros (sin animación para rapidez, o con animación si se prefiere)
         this.closeOthers(details);
 
         details.setAttribute('open', '');
+        details.classList.add('is-opening');
         
-        if (this.prefersReducedMotion) return; // Saltar animación si el usuario lo prefiere
+        if (this.prefersReducedMotion) return;
 
+        // Calcular altura dinámica actual (útil si interrumpimos una animación de cierre)
+        const startHeight = content.offsetHeight;
         const endHeight = content.scrollHeight;
-        
-        content.animate(
-            [
-                { height: '0px', opacity: 0 },
-                { height: `${endHeight}px`, opacity: 1 }
-            ],
+
+        if (startHeight === endHeight) return; // Ya está abierto completamente
+
+        const animation = content.animate(
+            { 
+                height: [`${startHeight}px`, `${endHeight}px`],
+                opacity: [0, 1] // Opcional: Fade in
+            }, 
             {
                 duration: 300,
-                easing: 'ease-out'
+                easing: 'ease-out',
+                fill: 'forwards'
             }
         );
+
+        this.animations.set(details, animation);
+
+        animation.onfinish = () => {
+            details.classList.remove('is-opening');
+            animation.cancel(); // Limpia estilos inline
+            this.animations.delete(details);
+        };
+
+        animation.oncancel = () => {
+            details.classList.remove('is-opening');
+            this.animations.delete(details);
+        };
     }
 
-    /**
-     * Cierra el elemento con animación.
-     */
-    close(details, content) {
+    animateClose(details, content) {
         if (this.prefersReducedMotion) {
             details.removeAttribute('open');
             return;
         }
 
-        const startHeight = content.scrollHeight;
-
+        // Calcular altura actual (útil si interrumpimos una apertura a medias)
+        const startHeight = content.offsetHeight;
+        
         const animation = content.animate(
-            [
-                { height: `${startHeight}px`, opacity: 1 },
-                { height: '0px', opacity: 0 }
-            ],
+            { 
+                height: [`${startHeight}px`, '0px'],
+                opacity: [1, 0] // Opcional: Fade out
+            }, 
             {
                 duration: 300,
                 easing: 'ease-in'
             }
         );
 
+        this.animations.set(details, animation);
+
         animation.onfinish = () => {
             details.removeAttribute('open');
+            animation.cancel();
+            this.animations.delete(details);
+        };
+
+        animation.oncancel = () => {
+            this.animations.delete(details);
         };
     }
 
-    /**
-     * Cierra otros elementos abiertos.
-     */
     closeOthers(currentDetails) {
-        this.detailsElements.forEach(other => {
+        const allDetails = this.container.querySelectorAll('details');
+        
+        allDetails.forEach(other => {
             if (other !== currentDetails && other.hasAttribute('open')) {
-                const otherContent = other.querySelector('.faq-content');
-                if (otherContent) this.close(other, otherContent);
+                // Si ya se está animando (cerrando o abriendo), dejamos que termine o lo forzamos?
+                // Mejor: Si se está cerrando, no hacemos nada.
+                // Si está abierto estático, lo cerramos.
+                
+                if (this.animations.has(other)) {
+                    // Ya tiene animación. Asumimos que si estamos abriendo uno nuevo,
+                    // queremos que este viejo se cierre YA.
+                    // Pero si ya se está cerrando, no lo interrumpas para reiniciarlo.
+                    return; 
+                }
+
+                const content = other.querySelector('.faq-content');
+                if (content) {
+                    this.animateClose(other, content); 
+                }
             }
         });
     }
 }
+
+
