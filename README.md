@@ -34,6 +34,14 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 3. Etiquetas Canonicals: Todas las páginas deben incluir una etiqueta <link rel="canonical" href="https://narbossalon.com/..."> que coincida exactamente con la URL final sin www.
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
+
+### 📝 Últimas Actualizaciones (16 de enero, 2026)
+- **Experiencia de Usuario (Chat Widget WhatsApp):** 💬
+    - **Prevención de Errores Móviles:** Se reemplazó el enlace directo por un **Widget Interactivo** tipo "Interruptor". Esto evita que los usuarios abandonen la web por clics accidentales al hacer scroll en dispositivos móviles.
+    - **Interfaz de Chat Simbólico:** Al hacer clic, se despliega una ventana modal con estética nativa (encabezado verde, badge de verificado, mensaje de bienvenida), aumentando la confianza antes de la conversión.
+    - **Refactorización Clean Code:** El componente `WhatsAppButton.js` fue reescrito totalmente bajo principios SOLID, dividiendo la lógica en funciones pequeñas y mantenibles (`_getHeaderHTML`, `_getBodyHTML`).
+    - **Correcciones Visuales:** Solución al error de visibilidad del logo (fondo oscuro para logo blanco) y optimización de assets a formato WebP.
+
 ### 📝 Últimas Actualizaciones (15 de enero, 2026)
 - **Hub de Estética (Renovación Total):** ✨
     - **Reestructuración Completa:** Se rediseñó la página `servicios/estetica/index.html` bajo la arquitectura estándar del sitio (`site-header`, `app-wrapper`), eliminando deuda técnica y scripts inline.
