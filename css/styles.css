@@ -634,9 +634,6 @@
   .w-32 {
     width: calc(var(--spacing) * 32);
   }
-  .w-72 {
-    width: calc(var(--spacing) * 72);
-  }
   .w-80 {
     width: calc(var(--spacing) * 80);
   }
@@ -823,9 +820,6 @@
   .justify-center {
     justify-content: center;
   }
-  .gap-1 {
-    gap: calc(var(--spacing) * 1);
-  }
   .gap-1\.5 {
     gap: calc(var(--spacing) * 1.5);
   }
@@ -933,9 +927,6 @@
   .rounded-tr-lg {
     border-top-right-radius: var(--radius-lg);
   }
-  .rounded-tr-xl {
-    border-top-right-radius: var(--radius-xl);
-  }
   .rounded-b-xl {
     border-bottom-right-radius: var(--radius-xl);
     border-bottom-left-radius: var(--radius-xl);
@@ -943,14 +934,8 @@
   .rounded-br-lg {
     border-bottom-right-radius: var(--radius-lg);
   }
-  .rounded-br-xl {
-    border-bottom-right-radius: var(--radius-xl);
-  }
   .rounded-bl-lg {
     border-bottom-left-radius: var(--radius-lg);
-  }
-  .rounded-bl-xl {
-    border-bottom-left-radius: var(--radius-xl);
   }
   .border {
     border-style: var(--tw-border-style);
@@ -1161,12 +1146,6 @@
   }
   .bg-white {
     background-color: var(--color-white);
-  }
-  .bg-white\/5 {
-    background-color: color-mix(in srgb, #fff 5%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-white) 5%, transparent);
-    }
   }
   .bg-white\/20 {
     background-color: color-mix(in srgb, #fff 20%, transparent);
@@ -1977,16 +1956,6 @@
       }
     }
   }
-  .hover\:scale-110 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-scale-x: 110%;
-        --tw-scale-y: 110%;
-        --tw-scale-z: 110%;
-        scale: var(--tw-scale-x) var(--tw-scale-y);
-      }
-    }
-  }
   .hover\:bg-\[\#5a634b\] {
     &:hover {
       @media (hover: hover) {
@@ -1998,13 +1967,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: #008f6f;
-      }
-    }
-  }
-  .hover\:bg-\[\#20bd5a\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #20bd5a;
       }
     }
   }
@@ -2157,16 +2119,6 @@
       @media (hover: hover) {
         --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
         box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-      }
-    }
-  }
-  .hover\:shadow-green-500\/30 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-shadow-color: color-mix(in srgb, oklch(72.3% 0.219 149.579) 30%, transparent);
-        @supports (color: color-mix(in lab, red, red)) {
-          --tw-shadow-color: color-mix(in oklab, color-mix(in oklab, var(--color-green-500) 30%, transparent) var(--tw-shadow-alpha), transparent);
-        }
       }
     }
   }
@@ -2393,11 +2345,6 @@
       grid-row: span 2 / span 2;
     }
   }
-  .md\:flex {
-    @media (width >= 48rem) {
-      display: flex;
-    }
-  }
   .md\:hidden {
     @media (width >= 48rem) {
       display: none;
@@ -2595,16 +2542,6 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
-  .dark\:border-zinc-700 {
-    @media (prefers-color-scheme: dark) {
-      border-color: var(--color-zinc-700);
-    }
-  }
-  .dark\:border-zinc-800 {
-    @media (prefers-color-scheme: dark) {
-      border-color: var(--color-zinc-800);
-    }
-  }
   .dark\:bg-\[\#1f2c34\] {
     @media (prefers-color-scheme: dark) {
       background-color: #1f2c34;
@@ -2620,24 +2557,6 @@
       background-color: #202c33;
     }
   }
-  .dark\:bg-zinc-800 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-zinc-800);
-    }
-  }
-  .dark\:bg-zinc-900 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-zinc-900);
-    }
-  }
-  .dark\:bg-zinc-900\/50 {
-    @media (prefers-color-scheme: dark) {
-      background-color: color-mix(in srgb, oklch(21% 0.006 285.885) 50%, transparent);
-      @supports (color: color-mix(in lab, red, red)) {
-        background-color: color-mix(in oklab, var(--color-zinc-900) 50%, transparent);
-      }
-    }
-  }
   .dark\:text-\[\#202c33\] {
     @media (prefers-color-scheme: dark) {
       color: #202c33;
@@ -2651,11 +2570,6 @@
   .dark\:text-\[\#e9edef\] {
     @media (prefers-color-scheme: dark) {
       color: #e9edef;
-    }
-  }
-  .dark\:text-gray-300 {
-    @media (prefers-color-scheme: dark) {
-      color: var(--color-gray-300);
     }
   }
   .\[\&_summary\:\:-webkit-details-marker\]\:hidden {
