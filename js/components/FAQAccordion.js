@@ -8,19 +8,10 @@
  * - UX: Cierra otros items automáticamente (comportamiento de acordeón).
  */
 export class FAQAccordion {
-    /**
-     * @param {string} selector - Selector CSS del contenedor padre (e.g., '#faq').
-     */
     constructor(selector = '#faq') {
         this.container = document.querySelector(selector);
-        // Map para guardar referencias a las animaciones activas por elemento
-        this.animations = new WeakMap();
-        this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
         if (this.container) {
             this.init();
-        } else {
-            console.warn(`FAQAccordion: No se encontró el contenedor con selector "${selector}"`);
         }
     }
 
@@ -29,132 +20,115 @@ export class FAQAccordion {
             const summary = e.target.closest('summary');
             if (!summary) return;
 
-            const details = summary.parentElement;
-            const content = details.querySelector('.faq-content');
-
-            if (!details || !content) return;
-
             e.preventDefault();
-            this.toggle(details, content);
+            const details = summary.parentElement;
+            this.toggle(details);
         });
     }
 
-    /**
-     * Alterna el estado del detalle permitiendo interrupción de animaciones.
-     */
-    toggle(details, content) {
+    toggle(details) {
         const isOpen = details.hasAttribute('open');
-        const isOpening = details.classList.contains('is-opening');
+        const content = details.querySelector('.faq-content');
+        
+        if (!content) return;
 
-        // Cancelar animación previa si existe para este elemento
-        if (this.animations.has(details)) {
-            this.animations.get(details).cancel();
+        // Si está cerrado, cerramos los demás antes de abrir este
+        if (!isOpen) {
+            this.closeOthers(details);
         }
 
-        // Determinar la intención lógica:
-        // Si está abierto y NO se está abriendo (estado estable) -> Cerrar
-        // Si se está abriendo (animación en curso) -> Cerrar (revertir)
-        // Si está cerrado -> Abrir
-        if (isOpen && !isOpening) {
-            this.animateClose(details, content);
+        if (isOpen) {
+            this.close(details, content);
         } else {
-            this.animateOpen(details, content);
+            this.open(details, content);
         }
     }
 
-    animateOpen(details, content) {
-        // Cerrar otros (sin animación para rapidez, o con animación si se prefiere)
-        this.closeOthers(details);
-
+    open(details, content) {
+        // 1. Preparar navegador para renderizar contenido
         details.setAttribute('open', '');
-        details.classList.add('is-opening');
         
-        if (this.prefersReducedMotion) return;
+        // 2. Si ya estamos en transición de apertura/cierre, calculamos desde donde estamos
+        // Pero para simplificar y asegurar fluidez, usamos el truco de transición CSS
+        
+        // Cancelamos transición previa si existe (limpiando listeners viejos no es trivial sin AbortController, 
+        // pero al sobreescribir estilos el navegador maneja la interpolación visual).
+        
+        const targetHeight = content.scrollHeight;
 
-        // Calcular altura dinámica actual (útil si interrumpimos una animación de cierre)
-        const startHeight = content.offsetHeight;
-        const endHeight = content.scrollHeight;
+        // Estado inicial de animación
+        // Si estaba cerrado (height 0 o null), empezamos de 0. 
+        // Si estaba cerrándose, computamos la altura actual.
+        if (!content.style.height) {
+            content.style.height = '0px';
+            content.style.opacity = '0';
+        }
+        
+        content.style.overflow = 'hidden';
+        content.style.transition = 'height 300ms ease-out, opacity 300ms ease-out';
 
-        if (startHeight === endHeight) return; // Ya está abierto completamente
+        // Force reflow para que el navegador aplique los estilos iniciales
+        content.offsetHeight;
 
-        const animation = content.animate(
-            { 
-                height: [`${startHeight}px`, `${endHeight}px`],
-                opacity: [0, 1] // Opcional: Fade in
-            }, 
-            {
-                duration: 300,
-                easing: 'ease-out',
-                fill: 'forwards'
+        // Estado final
+        content.style.height = targetHeight + 'px';
+        content.style.opacity = '1';
+
+        // Limpieza al finalizar
+        const onTransitionEnd = (e) => {
+            if (e.propertyName !== 'height') return;
+            // Solo limpiamos si seguimos abiertos (por si hubo click rápido cerrar-abrir)
+            if (details.hasAttribute('open') && content.style.height !== '0px') {
+                content.style.height = 'auto'; // Liberamos altura para responsive
+                content.style.opacity = '';
+                content.style.transition = '';
             }
-        );
-
-        this.animations.set(details, animation);
-
-        animation.onfinish = () => {
-            details.classList.remove('is-opening');
-            animation.cancel(); // Limpia estilos inline
-            this.animations.delete(details);
+            content.removeEventListener('transitionend', onTransitionEnd);
         };
 
-        animation.oncancel = () => {
-            details.classList.remove('is-opening');
-            this.animations.delete(details);
-        };
+        content.addEventListener('transitionend', onTransitionEnd);
     }
 
-    animateClose(details, content) {
-        if (this.prefersReducedMotion) {
-            details.removeAttribute('open');
-            return;
-        }
-
-        // Calcular altura actual (útil si interrumpimos una apertura a medias)
+    close(details, content) {
+        // Fijamos la altura actual explícitamente (porque suele estar en 'auto' o '0px')
+        // Si está en 'auto', necesitamos los pixels exactos para animar hacia 0.
         const startHeight = content.offsetHeight;
         
-        const animation = content.animate(
-            { 
-                height: [`${startHeight}px`, '0px'],
-                opacity: [1, 0] // Opcional: Fade out
-            }, 
-            {
-                duration: 300,
-                easing: 'ease-in'
+        content.style.height = startHeight + 'px';
+        content.style.overflow = 'hidden';
+        content.style.transition = 'height 300ms ease-in, opacity 300ms ease-in';
+        
+        // Force reflow
+        content.offsetHeight;
+
+        // Estado final
+        content.style.height = '0px';
+        content.style.opacity = '0';
+
+        const onTransitionEnd = (e) => {
+            if (e.propertyName !== 'height') return;
+            // Solo removemos 'open' si terminamos de cerrar
+            if (content.style.height === '0px') {
+                details.removeAttribute('open');
+                content.style.height = ''; 
+                content.style.opacity = '';
+                content.style.transition = '';
             }
-        );
-
-        this.animations.set(details, animation);
-
-        animation.onfinish = () => {
-            details.removeAttribute('open');
-            animation.cancel();
-            this.animations.delete(details);
+            content.removeEventListener('transitionend', onTransitionEnd);
         };
 
-        animation.oncancel = () => {
-            this.animations.delete(details);
-        };
+        content.addEventListener('transitionend', onTransitionEnd);
     }
 
     closeOthers(currentDetails) {
         const allDetails = this.container.querySelectorAll('details');
-        
         allDetails.forEach(other => {
             if (other !== currentDetails && other.hasAttribute('open')) {
-                // Si ya se está animando (cerrando o abriendo), dejamos que termine o lo forzamos?
-                // Mejor: Si se está cerrando, no hacemos nada.
-                // Si está abierto estático, lo cerramos.
-                
-                if (this.animations.has(other)) {
-                    // Ya tiene animación. Asumimos que si estamos abriendo uno nuevo,
-                    // queremos que este viejo se cierre YA.
-                    // Pero si ya se está cerrando, no lo interrumpas para reiniciarlo.
-                    return; 
-                }
-
                 const content = other.querySelector('.faq-content');
-                if (content) {
-                    this.animateClose(other, content); 
+                // Si ya se está cerrando (height -> 0), no interrumpimos.
+                // Si está abierto (height auto o null), lo cerramos.
+                if (content && content.style.height !== '0px') {
+                    this.close(other, content);
                 }
             }
         });
