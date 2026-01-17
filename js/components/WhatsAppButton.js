@@ -37,7 +37,7 @@ export class WhatsAppButton {
     render() {
         const container = document.createElement('div');
         container.id = 'whatsapp-widget-root';
-        container.className = 'fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-sans';
+        container.className = 'fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-sans pointer-events-none';
         
         container.innerHTML = `
             ${this._getWidgetHTML()}
@@ -54,7 +54,7 @@ export class WhatsAppButton {
     _getWidgetHTML() {
         return `
             <div id="wa-chat-widget" 
-                 class="w-80 bg-[#E5DDD5] dark:bg-[#111b21] rounded-2xl shadow-2xl border border-white/20 transform transition-all duration-300 origin-bottom-right scale-0 opacity-0 invisible overflow-hidden mb-2 relative">
+                 class="w-80 bg-[#E5DDD5] dark:bg-[#111b21] pointer-events-auto rounded-2xl shadow-2xl border border-white/20 transform transition-all duration-300 origin-bottom-right scale-0 opacity-0 invisible overflow-hidden mb-2 relative">
                 ${this._getBackgroundPatternHTML()}
                 ${this._getHeaderHTML()}
                 ${this._getBodyHTML()}
@@ -152,7 +152,7 @@ export class WhatsAppButton {
         return `
             <button id="wa-toggle-btn" 
                     aria-label="Abrir chat de WhatsApp"
-                    class="group relative flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-[#25D366] rounded-full shadow-lg shadow-green-500/40 hover:shadow-green-500/60 transition-all hover:-translate-y-1">
+                    class="group relative pointer-events-auto flex items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-[#25D366] rounded-full shadow-lg shadow-green-500/40 hover:shadow-green-500/60 transition-all hover:-translate-y-1">
                 
                 <div id="wa-tooltip" class="absolute bottom-full mb-3 right-0 whitespace-nowrap bg-white text-gray-800 px-4 py-2 rounded-xl shadow-lg border border-gray-100 font-serif font-bold text-sm flex items-center gap-2 animate-bounce origin-bottom-right">
                     <span>¡Agenda tu cita aquí!</span>
