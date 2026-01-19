@@ -418,61 +418,9 @@ body.modal-open-layer-fix #app-wrapper {
 
 /* --- FIN: ESTILOS PARA SECCIÓN DE VIDEO --- */
 
-/* --- INICIO: ESTILOS PARA TARJETAS DE SERVICIO CON FONDO --- */
+/* --- FIN: ESTILOS PARA SECCIÓN DE VIDEO --- */
 
-#service-card-peluqueria::after,
-#service-card-manos-pies::after,
-#service-card-estetica::after,
-#service-card-depilacion::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.4s ease-out;
-}
-
-#service-card-peluqueria:hover::after,
-#service-card-manos-pies:hover::after,
-#service-card-estetica:hover::after,
-#service-card-depilacion:hover::after {
-  transform: scale(1.05);
-}
-
-#service-card-peluqueria::after {
-  background-image: linear-gradient(
-      rgba(20, 20, 20, 0.4),
-      rgba(20, 20, 20, 0.6)
-    ),
-    url("../images/pages/peluqueria/estilismo-barba.webp");
-}
-
-#service-card-manos-pies::after {
-  background-image: linear-gradient(
-      rgba(20, 20, 20, 0.4),
-      rgba(20, 20, 20, 0.6)
-    ),
-    url("../images/pages/unas/manicure-spa.webp");
-}
-
-#service-card-estetica::after {
-  background-image: linear-gradient(
-      rgba(20, 20, 20, 0.4),
-      rgba(20, 20, 20, 0.6)
-    ),
-    url("../images/pages/estetica/spa-hero.webp");
-}
-
-#service-card-depilacion::after {
-  background-image: linear-gradient(
-      rgba(20, 20, 20, 0.4),
-      rgba(20, 20, 20, 0.6)
-    ),
-    url("../images/pages/barberia/corte-caballero.webp");
-}
-
-/* --- FIN: ESTILOS PARA TARJETAS DE SERVICIO CON FONDO --- */
+/* --- INICIO: ESTILOS PARA BOTÓN FLOTANTE WHATSAPP --- */
 /* Estilos para el botón flotante de WhatsApp */
 .whatsapp-float {
     position: fixed;

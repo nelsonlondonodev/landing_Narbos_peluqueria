@@ -2794,30 +2794,6 @@ body.modal-open-layer-fix .site-header, body.modal-open-layer-fix #app-wrapper {
 #video-play-button:hover {
   transform: translate(-50%, -50%) scale(1.1);
 }
-#service-card-peluqueria::after, #service-card-manos-pies::after, #service-card-estetica::after, #service-card-depilacion::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.4s ease-out;
-}
-#service-card-peluqueria:hover::after, #service-card-manos-pies:hover::after, #service-card-estetica:hover::after, #service-card-depilacion:hover::after {
-  transform: scale(1.05);
-}
-#service-card-peluqueria::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/pages/peluqueria/estilismo-barba.webp");
-}
-#service-card-manos-pies::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/pages/unas/manicure-spa.webp");
-}
-#service-card-estetica::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/pages/estetica/spa-hero.webp");
-}
-#service-card-depilacion::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/pages/barberia/corte-caballero.webp");
-}
 .whatsapp-float {
   position: fixed;
   bottom: 20px;
