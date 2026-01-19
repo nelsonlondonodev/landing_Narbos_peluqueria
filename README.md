@@ -35,6 +35,16 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+
+### 📝 Últimas Actualizaciones (19 de enero, 2026)
+- **Mejoras Visuales y UX (Peluquería y Balayage):** ✨
+    - **Carruseles "Antes y Después":** Implementación de una nueva funcionalidad en el Lightbox de Balayage y Color, que permite ver múltiples imágenes (resultado y estado previo) por cada tarjeta de servicio sin saltar a servicios diferentes.
+    - **Navegación Lightbox Optimizada:** Corrección de la visibilidad de las flechas de navegación en dispositivos móviles y ajuste de la posición del botón de cierre para evitar conflictos táctiles.
+    - **Galería de Cortes:** Actualización de imágenes en las tarjetas y galería de "Cortes de Pelo", eliminando contenido repetido y añadiendo trabajos reales (Corte Bob, Capas, Pixie).
+    - **Galería de Balayage:** Enriquecimiento visual con fotos de resultados reales de corrección de color y balayage rubio, reemplazando placeholders genéricos.
+- **Optimización de Conversión (Uñas):** 💅
+    - **Hero Section Emotivo:** Actualización de la imagen principal del Hub de Uñas (`unas-spa`) por una fotografía que muestra rostro de cliente satisfecho, mejorando la conexión emocional y la confianza.
+
 ### 📝 Últimas Actualizaciones (16 de enero, 2026)
 - **Experiencia de Usuario (Chat Widget WhatsApp):** 💬
     - **Prevención de Errores Móviles:** Se reemplazó el enlace directo por un **Widget Interactivo** tipo "Interruptor". Esto evita que los usuarios abandonen la web por clics accidentales al hacer scroll en dispositivos móviles.
