@@ -26,6 +26,7 @@ class ServicePageManager {
         this.initBrands(); // Added
         this.initFloatingDecorations();
         this.initLazyVideos();
+        this.initModalTriggers();
         this.initBreadcrumbs();
     }
     
@@ -35,6 +36,26 @@ class ServicePageManager {
     initBrands() {
         // Usamos un ID específico para evitar colisiones con el global del home
         new BrandsSection('hair-brands-root', hairBrands).render();
+    }
+
+    /**
+     * Inicializa los disparadores de modales para elementos estáticos.
+     */
+    initModalTriggers() {
+        const beardTriggers = document.querySelectorAll('.js-open-beard-modal');
+        if (beardTriggers.length > 0) {
+            let modalControllerInstance;
+            beardTriggers.forEach(trigger => {
+                trigger.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    if (!modalControllerInstance) {
+                        const { ModalController } = await import('./controllers/ModalController.js');
+                        modalControllerInstance = new ModalController();
+                    }
+                    modalControllerInstance.openModal('beard-modal');
+                });
+            });
+        }
     }
 
     /**
