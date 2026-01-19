@@ -28,7 +28,7 @@ export const pagesData = Object.freeze({
          hero: {
             title: "Barbería exclusiva en Chía",
             subtitle: "El espacio que mereces para cuidar tu imagen.",
-            imageSrc: "../../images/pages/barberia/corte-caballero.webp",
+            imageSrc: "../../images/pages/barberia/barber-hero.jpg",
             imageAlt: "Servicios de barbería profesional en Chía"
         }
     }

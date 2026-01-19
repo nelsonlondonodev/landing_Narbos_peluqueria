@@ -27,7 +27,7 @@ export const nailsServices = [
         duration: '60 min',
         summary: 'Color vibrante, secado instantáneo y brillo espejo garantizado por 21 días.',
         description: 'La solución perfecta para la mujer moderna que busca manos impecables por más tiempo. Utilizamos marcas líderes mundiales como Organic Nails y Masglo Gel Evolution para asegurar un acabado profesional. El proceso incluye una preparación meticulosa de la uña (manicura en seco), aplicación de base protectora, dos capas de color intenso y un top coat de alto brillo, todo curado en lámpara LED. Olvídate de los rayones y disfruta de uñas perfectas por hasta 3 semanas.',
-        image: '../../images/pages/barberia/corte-caballero.webp' 
+        image: '../../images/pages/unas/esmaltado-semi.webp' 
     },
     {
         id: 4,

@@ -17,7 +17,7 @@ export const barberServices = Object.freeze([
         title: "Corte Caballero",
         description: "Cortes clásicos, degradados (fade) y las últimas tendencias, adaptados a tu facciones.",
         link: "barberia-cortes-hombre.html",
-        image: "../../images/pages/barberia/corte-caballero.webp",
+        image: "../../images/pages/barberia/barber-hero.jpg",
         variant: "standard"
     },
     {
