@@ -22,8 +22,8 @@ export const colorStyles = Object.freeze([
     {
         title: "Babylights & Mechas",
         description: "Reflejos finos y sutiles que aportan brillo y dimensión a tu cabello de manera delicada.",
-        link: "../../images/pages/peluqueria/facial-limpieza.webp", // Provisional o usar una específica si la hay
-        image: "../../images/pages/peluqueria/facial-limpieza.webp",
+        link: "../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp", // Provisional o usar una específica si la hay
+        image: "../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
         variant: "standard"
     },
     {

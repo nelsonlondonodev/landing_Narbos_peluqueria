@@ -16,7 +16,7 @@ export const hairSalonServices = Object.freeze([
         title: "Corte Dama",
         description: "Diseños personalizados, puntas perfectas y cambios de look completos.",
         link: "/servicios/peluqueria/cortes-de-pelo-en-chia.html",
-        image: "/images/pages/peluqueria/facial-limpieza.webp",
+        image: "/images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
         variant: "standard"
     },
     {
