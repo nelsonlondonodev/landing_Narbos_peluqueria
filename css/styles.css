@@ -1267,6 +1267,12 @@
   .object-cover {
     object-fit: cover;
   }
+  .object-left {
+    object-position: left;
+  }
+  .object-right {
+    object-position: right;
+  }
   .object-top {
     object-position: top;
   }
