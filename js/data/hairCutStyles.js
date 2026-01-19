@@ -22,8 +22,8 @@ export const hairCutStyles = Object.freeze([
     {
         title: "Capas y Movimiento",
         description: "Textura y ligereza. Perfecto para melenas largas que buscan dinamismo sin perder longitud.",
-        link: "../../images/pages/peluqueria/estilismo-barba.webp",
-        image: "../../images/pages/peluqueria/estilismo-barba.webp",
+        link: "../../images/pages/peluqueria/corte_capas_chia.jpeg",
+        image: "../../images/pages/peluqueria/corte_capas_chia.jpeg",
         variant: "standard"
     },
     {
