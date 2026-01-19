@@ -2,7 +2,6 @@ import { initApp } from './main.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { BrandsSection } from './components/BrandsSection.js';
-import { nailsServices } from './data/nailsServices.js';
 import { nailBrands } from './data/brandsData.js';
 
 /**
@@ -14,7 +13,6 @@ import { nailBrands } from './data/brandsData.js';
 document.addEventListener('DOMContentLoaded', () => {
     initBreadcrumbs();
     initFloatingDecorations();
-    initNailServicesGrid();
     initBrandsCarousel();
 });
 
