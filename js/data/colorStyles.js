@@ -42,8 +42,14 @@ export const colorStyles = Object.freeze([
     {
         title: "Corrección de Color",
         description: "Expertos en arreglar tonos indeseados y devolver la salud y el color perfecto a tu melena.",
-        link: "../../images/pages/peluqueria/color-tratamiento.webp",
-        image: "../../images/pages/peluqueria/color-tratamiento.webp",
-        variant: "standard"
+        link: "../../images/pages/peluqueria/despues_balayage_rubio_ceniza_ondulado_peluqueria_narbos_salon_spa_chia.jpeg",
+        image: "../../images/pages/peluqueria/despues_balayage_rubio_ceniza_ondulado_peluqueria_narbos_salon_spa_chia.jpeg",
+        variant: "standard",
+        galleryImages: [
+            {
+                src: "../../images/pages/peluqueria/antes-correccion-color-cabello-dañado-peluqueria-narbos-chia.jpeg",
+                title: "Antes: Cabello Procesado y Dañado en Chía"
+            }
+        ]
     }
 ]);
