@@ -15,22 +15,22 @@ export const tintStyles = Object.freeze([
     {
         title: "Tinte Completo",
         description: "Cobertura total de raíz a puntas con productos que cuidan la fibra capilar y aportan brillo intenso.",
-        link: "../../images/peluqueria/foto_4_peluqueria.webp",
-        image: "../../images/peluqueria/foto_4_peluqueria.webp",
+        link: "../../images/pages/peluqueria/color-tratamiento.webp",
+        image: "../../images/pages/peluqueria/color-tratamiento.webp",
         variant: "standard"
     },
     {
         title: "Retoque de Raíz",
         description: "Mantén tu color perfecto retocando el crecimiento en la zona de la raíz.",
-        link: "../../images/peluqueria/foto_4_peluqueria.webp", // Podríamos usar otra si hubiera una específica de raíz
-        image: "../../images/peluqueria/foto_4_peluqueria.webp",
+        link: "../../images/pages/peluqueria/color-tratamiento.webp", // Podríamos usar otra si hubiera una específica de raíz
+        image: "../../images/pages/peluqueria/color-tratamiento.webp",
         variant: "standard"
     },
     {
         title: "Cubrimiento de Canas",
         description: "Fórmulas especiales para garantizar un cubrimiento 100% de canas con un acabado natural.",
-        link: "../../images/peluqueria/foto_7_peluqueria.webp", 
-        image: "../../images/peluqueria/foto_7_peluqueria.webp",
+        link: "../../images/pages/peluqueria/estilismo-barba.webp", 
+        image: "../../images/pages/peluqueria/estilismo-barba.webp",
         variant: "standard"
     }
 ]);

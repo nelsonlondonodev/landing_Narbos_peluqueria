@@ -16,28 +16,28 @@ export const hairSalonServices = Object.freeze([
         title: "Corte Dama",
         description: "Diseños personalizados, puntas perfectas y cambios de look completos.",
         link: "/servicios/peluqueria/cortes-de-pelo-en-chia.html",
-        image: "/images/peluqueria/foto_6_peluqueria.webp",
+        image: "/images/pages/peluqueria/facial-limpieza.webp",
         variant: "standard"
     },
     {
         title: "Balayage y Mechas",
         description: "Iluminaciones perfectas, rubios soñados y técnicas de degradado.",
         link: "/servicios/peluqueria/balayage-mechas-chia.html",
-        image: "/images/peluqueria/foto_3_peluqueria.webp",
+        image: "/images/pages/peluqueria/mechas-balayage-detalle.webp",
         variant: "standard"
     },
     {
         title: "Color y Tinturas",
         description: "Tintes completos, cubrimiento de canas y retoque de raíz profesional.",
         link: "/servicios/peluqueria/color-tinturas-cabello.html",
-        image: "/images/peluqueria/foto_4_peluqueria.webp",
+        image: "/images/pages/peluqueria/color-tratamiento.webp",
         variant: "standard"
     },
     {
         title: "Tratamientos",
         description: "Recuperación profunda, keratinas, cirugía capilar y botox.",
         link: "/servicios/peluqueria/tratamientos-capilares-chia.html",
-        image: "/images/peluqueria/foto_5_peluqueria.webp",
+        image: "/images/pages/peluqueria/lavado-spa-capilar.webp",
         variant: "standard"
     }
 ]);

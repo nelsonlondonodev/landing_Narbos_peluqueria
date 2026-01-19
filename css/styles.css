@@ -2430,11 +2430,6 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
-  .md\:grid-cols-3 {
-    @media (width >= 48rem) {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
   .md\:grid-cols-4 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2812,16 +2807,16 @@ body.modal-open-layer-fix .site-header, body.modal-open-layer-fix #app-wrapper {
   transform: scale(1.05);
 }
 #service-card-peluqueria::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/peluqueria/foto_7_peluqueria.webp");
+  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/pages/peluqueria/estilismo-barba.webp");
 }
 #service-card-manos-pies::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/unas-manicure-pedicure/foto_unas_1.webp");
+  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/pages/unas/manicure-spa.webp");
 }
 #service-card-estetica::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/spa-y-estetica/foto_estetica_1.webp");
+  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/pages/estetica/spa-hero.webp");
 }
 #service-card-depilacion::after {
-  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/peluqueria/foto_8_peluqueria.webp");
+  background-image: linear-gradient( rgba(20, 20, 20, 0.4), rgba(20, 20, 20, 0.6) ), url("../images/pages/barberia/corte-caballero.webp");
 }
 .whatsapp-float {
   position: fixed;

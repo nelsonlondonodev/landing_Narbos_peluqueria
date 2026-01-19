@@ -445,7 +445,7 @@ body.modal-open-layer-fix #app-wrapper {
       rgba(20, 20, 20, 0.4),
       rgba(20, 20, 20, 0.6)
     ),
-    url("../images/peluqueria/foto_7_peluqueria.webp");
+    url("../images/pages/peluqueria/estilismo-barba.webp");
 }
 
 #service-card-manos-pies::after {
@@ -453,7 +453,7 @@ body.modal-open-layer-fix #app-wrapper {
       rgba(20, 20, 20, 0.4),
       rgba(20, 20, 20, 0.6)
     ),
-    url("../images/unas-manicure-pedicure/foto_unas_1.webp");
+    url("../images/pages/unas/manicure-spa.webp");
 }
 
 #service-card-estetica::after {
@@ -461,7 +461,7 @@ body.modal-open-layer-fix #app-wrapper {
       rgba(20, 20, 20, 0.4),
       rgba(20, 20, 20, 0.6)
     ),
-    url("../images/spa-y-estetica/foto_estetica_1.webp");
+    url("../images/pages/estetica/spa-hero.webp");
 }
 
 #service-card-depilacion::after {
@@ -469,7 +469,7 @@ body.modal-open-layer-fix #app-wrapper {
       rgba(20, 20, 20, 0.4),
       rgba(20, 20, 20, 0.6)
     ),
-    url("../images/peluqueria/foto_8_peluqueria.webp");
+    url("../images/pages/barberia/corte-caballero.webp");
 }
 
 /* --- FIN: ESTILOS PARA TARJETAS DE SERVICIO CON FONDO --- */

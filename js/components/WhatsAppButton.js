@@ -84,7 +84,7 @@ export class WhatsAppButton {
                 <div class="flex items-center gap-3">
                     <div class="relative">
                         <div class="w-10 h-10 bg-brand-gray-dark rounded-full flex items-center justify-center shadow-sm overflow-hidden p-0.5">
-                            <img src="/images/logo_narbos.webp" alt="Narbos" class="w-full h-full object-contain rounded-full" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDc1RTU0IiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0yMCAyMWEyIDIgMCAwIDEtMiAySDZhMiAyIDAgMCAxLTItMnYtN2wteC0zIDUgMyB2N3oiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4='">
+                            <img src="/images/brand/logo_narbos.webp" alt="Narbos" class="w-full h-full object-contain rounded-full" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDc1RTU0IiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0yMCAyMWEyIDIgMCAwIDEtMiAySDZhMiAyIDAgMCAxLTItMnYtN2wteC0zIDUgMyB2N3oiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4='">
                         </div>
                         <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-[#075E54] rounded-full"></span>
                     </div>

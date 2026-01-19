@@ -15,22 +15,22 @@ export const treatmentStyles = Object.freeze([
     {
         title: "Keratina & Alisados",
         description: "Alisado progresivo que elimina el frizz, reduce volumen y aporta brillo espejo.",
-        link: "../../images/peluqueria/foto_5_peluqueria.webp",
-        image: "../../images/peluqueria/foto_5_peluqueria.webp",
+        link: "../../images/pages/peluqueria/lavado-spa-capilar.webp",
+        image: "../../images/pages/peluqueria/lavado-spa-capilar.webp",
         variant: "standard"
     },
     {
         title: "Botox Capilar",
         description: "Rejuvenecimiento profundo para cabellos desgastados. Rellena la fibra y devuelve la suavidad.",
-        link: "../../images/peluqueria/foto_7_peluqueria.webp", 
-        image: "../../images/peluqueria/foto_7_peluqueria.webp",
+        link: "../../images/pages/peluqueria/estilismo-barba.webp", 
+        image: "../../images/pages/peluqueria/estilismo-barba.webp",
         variant: "standard"
     },
     {
         title: "Hidratación Profunda",
         description: "Cocktail de nutrientes para cabellos secos y sin vida. Recupera la elasticidad natural.",
-        link: "../../images/peluqueria/foto_3_peluqueria.webp",
-        image: "../../images/peluqueria/foto_3_peluqueria.webp",
+        link: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
+        image: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
         variant: "standard"
     }
 ]);

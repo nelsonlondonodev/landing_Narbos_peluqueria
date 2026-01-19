@@ -17,14 +17,14 @@ export const barberServices = Object.freeze([
         title: "Corte Caballero",
         description: "Cortes clásicos, degradados (fade) y las últimas tendencias, adaptados a tu facciones.",
         link: "barberia-cortes-hombre.html",
-        image: "../../images/peluqueria/foto_8_peluqueria.webp",
+        image: "../../images/pages/barberia/corte-caballero.webp",
         variant: "standard"
     },
     {
         title: "Arreglo de Barba",
         description: "Perfilado con navaja, hidratación y ritual de toalla caliente para una experiencia relajante.",
         link: "#open-modal-beard",
-        image: "../../images/peluqueria/foto_7_peluqueria.webp",
+        image: "../../images/pages/peluqueria/estilismo-barba.webp",
         variant: "standard"
     }
 ]);
