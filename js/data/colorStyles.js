@@ -15,16 +15,29 @@ export const colorStyles = Object.freeze([
     {
         title: "Balayage",
         description: "Degradado natural y luminoso. La técnica estrella para iluminar tu rostro con un efecto 'besado por el sol'.",
-        link: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
-        image: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
-        variant: "standard"
+        link: "../../images/pages/peluqueria/balayage_rubio_perfecto_despueschia-narbos.jpg",
+        image: "../../images/pages/peluqueria/balayage_rubio_perfecto_despueschia-narbos.jpg",
+        variant: "standard",
+        // Array de imágenes extra para el carrusel (Antes/Después)
+        galleryImages: [
+            {
+                src: "../../images/pages/peluqueria/correccion_color_antes_despues_chia.JPG",
+                title: "Antes: Corrección de Color y Diagnóstico"
+            }
+        ]
     },
     {
         title: "Babylights & Mechas",
         description: "Reflejos finos y sutiles que aportan brillo y dimensión a tu cabello de manera delicada.",
-        link: "../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp", // Provisional o usar una específica si la hay
-        image: "../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
-        variant: "standard"
+        link: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
+        image: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
+        variant: "standard",
+        galleryImages: [
+            {
+                src: "../../images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.JPG",
+                title: "Resultado: Iluminación Natural"
+            }
+        ]
     },
     {
         title: "Corrección de Color",

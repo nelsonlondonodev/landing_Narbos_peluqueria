@@ -118,6 +118,32 @@ class ServicePageManager {
                 }
 
                 hairServicesGrid.appendChild(cardElement);
+
+                // Logic for Multi-Image Carousel (Before/After)
+                if (data.galleryImages && Array.isArray(data.galleryImages) && data.galleryImages.length > 0) {
+                     // Get the unique gallery ID we just assigned (we need to regenerate or extract it)
+                     // Re-generating logic to ensure match:
+                     let prefix = 'gallery-default-';
+                     if (window.location.pathname.includes('cortes-de-pelo')) prefix = 'gallery-';
+                     if (window.location.pathname.includes('balayage-mechas-chia')) prefix = 'gallery-color-';
+                     if (window.location.pathname.includes('color-tinturas-cabello')) prefix = 'gallery-tint-';
+                     if (window.location.pathname.includes('tratamientos-capilares-chia')) prefix = 'gallery-treatment-';
+                     
+                     const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
+
+                     data.galleryImages.forEach((item, index) => {
+                         const imgUrl = typeof item === 'string' ? item : item.src;
+                         const imgTitle = typeof item === 'string' ? `${data.title} - Imagen ${index + 2}` : item.title;
+                         
+                         const hiddenLink = document.createElement('a');
+                         hiddenLink.href = imgUrl;
+                         hiddenLink.className = 'glightbox hidden'; // Hidden
+                         hiddenLink.setAttribute('data-gallery', uniqueGalleryId);
+                         hiddenLink.setAttribute('data-title', imgTitle);
+                         hiddenLink.style.display = 'none';
+                         hairServicesGrid.appendChild(hiddenLink);
+                     });
+                }
             });
 
     

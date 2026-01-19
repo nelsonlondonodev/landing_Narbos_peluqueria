@@ -487,3 +487,69 @@ body.modal-open-layer-fix #app-wrapper {
     animation: floating 3s ease-in-out infinite;
 }
 /* --- FIN: ANIMACIONES FLOTANTES --- */
+/* --- GLightbox Mobile Controls Optimization --- */
+.gbtn.prev, .gbtn.next {
+    background-color: rgba(0, 0, 0, 0.4) !important; /* Contraste mejorado */
+    border-radius: 50%;
+    margin: 10px; /* Separación del borde */
+}
+
+@media (max-width: 768px) {
+    .gbtn.prev, .gbtn.next {
+        display: flex !important; /* Forzar mostrar flechas en móvil */
+        width: 40px !important;
+        height: 40px !important;
+        top: 50% !important;
+        margin: 0 !important;
+    }
+    
+    .gbtn.prev {
+        left: 10px !important;
+    }
+    
+    .gbtn.next {
+        right: 10px !important;
+    }
+}
+
+/* --- Force GLightbox Navigation Visibility --- */
+.gbtn {
+    display: flex !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    width: 45px !important;
+    height: 45px !important;
+    top: 50% !important;
+    margin-top: -22px !important;
+    opacity: 1 !important; /* Ensure visibility */
+    transition: background-color 0.3s ease;
+}
+
+.gbtn:hover {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Icons within buttons */
+.gbtn svg {
+    width: 24px !important;
+    height: 24px !important;
+    color: white !important;
+}
+
+/* --- Fix GLightbox Close Button Position --- */
+.gclose, .glightbox-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    margin: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+    background-color: transparent !important; /* Quitar fondo oscuro si lo tenía */
+    z-index: 99999 !important;
+}
+
+.gclose svg, .glightbox-close svg {
+    width: 30px !important;
+    height: 30px !important;
+    color: white !important;
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+}
