@@ -29,8 +29,8 @@ export const hairCutStyles = Object.freeze([
     {
         title: "Corte Pixie & Cortos",
         description: "Audacia y sofisticación. Resalta tus facciones y cuello con un estilo moderno y fácil de llevar.",
-        link: "../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
-        image: "../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
+        link: "../../images/pages/peluqueria/corte_pixie_mujer_chia.jpeg",
+        image: "../../images/pages/peluqueria/corte_pixie_mujer_chia.jpeg",
         variant: "standard"
     }
 ]);

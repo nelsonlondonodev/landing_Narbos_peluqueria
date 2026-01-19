@@ -87,7 +87,9 @@ class ServicePageManager {
                 if (window.location.pathname.includes('balayage-mechas-chia')) {
                     if (cardElement.tagName === 'A') {
                         cardElement.classList.add('glightbox');
-                        cardElement.setAttribute('data-gallery', 'color-gallery');
+                        // Fix: Galería única por tarjeta
+                        const uniqueGalleryId = 'gallery-color-' + data.title.replace(/\s+/g, '-').toLowerCase();
+                        cardElement.setAttribute('data-gallery', uniqueGalleryId);
                         cardElement.setAttribute('data-title', data.title);
                         cardElement.setAttribute('data-description', data.description);
                     }
@@ -96,7 +98,9 @@ class ServicePageManager {
                 if (window.location.pathname.includes('color-tinturas-cabello')) {
                     if (cardElement.tagName === 'A') {
                         cardElement.classList.add('glightbox');
-                        cardElement.setAttribute('data-gallery', 'tints-gallery');
+                        // Fix: Galería única por tarjeta
+                        const uniqueGalleryId = 'gallery-tint-' + data.title.replace(/\s+/g, '-').toLowerCase();
+                        cardElement.setAttribute('data-gallery', uniqueGalleryId);
                         cardElement.setAttribute('data-title', data.title);
                         cardElement.setAttribute('data-description', data.description);
                     }
@@ -105,7 +109,9 @@ class ServicePageManager {
                 if (window.location.pathname.includes('tratamientos-capilares-chia')) {
                     if (cardElement.tagName === 'A') {
                         cardElement.classList.add('glightbox');
-                        cardElement.setAttribute('data-gallery', 'treatments-gallery');
+                        // Fix: Galería única por tarjeta
+                        const uniqueGalleryId = 'gallery-treatment-' + data.title.replace(/\s+/g, '-').toLowerCase();
+                        cardElement.setAttribute('data-gallery', uniqueGalleryId);
                         cardElement.setAttribute('data-title', data.title);
                         cardElement.setAttribute('data-description', data.description);
                     }
