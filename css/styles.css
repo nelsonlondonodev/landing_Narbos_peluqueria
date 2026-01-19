@@ -820,6 +820,9 @@
   .justify-center {
     justify-content: center;
   }
+  .justify-end {
+    justify-content: flex-end;
+  }
   .gap-1\.5 {
     gap: calc(var(--spacing) * 1.5);
   }
@@ -1839,6 +1842,13 @@
       }
     }
   }
+  .group-hover\:bg-brand-green {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        background-color: var(--color-brand-green);
+      }
+    }
+  }
   .group-hover\:bg-brand-light\/40 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -1885,6 +1895,13 @@
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
         color: var(--color-gray-600);
+      }
+    }
+  }
+  .group-hover\:text-white {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: var(--color-white);
       }
     }
   }

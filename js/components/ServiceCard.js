@@ -102,27 +102,33 @@ export class ServiceCard {
      * Renderiza el contenido para la variante Standard (Grids).
      */
     renderStandardContent(element) {
-        element.className = "group block bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col";
+        // Updated classes to match Hub design (Article style but applied to A/Div)
+        element.className = "group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto block text-left";
 
         const imageHtml = this.props.image ? `
-            <div class="relative h-48 overflow-hidden shrink-0">
-                <img src="${this.props.image}" alt="${this.props.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+            <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
+                <img src="${this.props.image}" alt="${this.props.title}" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
             </div>
         ` : '';
 
+        // Visual button style (span mimicking the button)
         const actionHtml = `
-            <span class="text-brand-green font-bold text-sm uppercase tracking-wider flex items-center mt-auto pt-4">
-                Ver Detalles 
-                <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-            </span>
+            <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
+                <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-all duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
+                    <span>Ver Detalles</span>
+                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </span>
+            </div>
         `;
 
         element.innerHTML = `
             ${imageHtml}
             <div class="p-6 flex flex-col flex-grow">
-                <h3 class="text-xl font-serif font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">${this.props.title}</h3>
-                <p class="text-gray-600 text-sm mb-4 flex-grow">${this.props.description}</p>
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">${this.props.title}</h3>
+                </div>
+                <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${this.props.description}</p>
                 ${actionHtml}
             </div>
         `;
