@@ -92,9 +92,9 @@
           </section>
 
           <!-- Floating Content Box -->
-          <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
+          <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
               <div class="container mx-auto">
-                  <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
+                  <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto">
                       <h1 class="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4">Estética Facial y Corporal en Chía</h1>
                       <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">Renueva tu piel y relaja tu cuerpo con nuestros servicios profesionales.</p>
                   </div>
@@ -115,8 +115,142 @@
             </div>
 
             <!-- Grid de Servicios (Hub) -->
-            <div id="aesthetics-services-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Services injected via JS -->
+            <div id="aesthetics-services-static" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Spa Facial -->
+                <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                        <img src="../../images/spa-y-estetica/foto_estetica_1.webp" alt="Spa Facial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+                        <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-gray-dark text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-white/50">
+                            90 min
+                        </span>
+                    </div>
+
+                    <div class="p-6 flex flex-col flex-grow relative">
+                        <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">Spa Facial</h3>
+                        </div>
+                        
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">Experiencia completa de relajación y rejuvenecimiento facial con productos premium para una piel radiante.</p>
+                        
+                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                            <span class="text-lg font-bold text-brand-green">$180.000</span>
+                            <a href="spa-facial-integral.html" class="group/btn relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-all duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green cursor-pointer">
+                                <span>Ver Detalles</span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2: Limpieza Facial -->
+                <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                        <img src="../../images/peluqueria/foto_6_peluqueria.webp" alt="Limpieza Facial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+                        <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-gray-dark text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-white/50">
+                            60 min
+                        </span>
+                    </div>
+
+                    <div class="p-6 flex flex-col flex-grow relative">
+                        <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">Limpieza Facial</h3>
+                        </div>
+                        
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">Protocolo de limpieza profunda para eliminar impurezas, puntos negros y revitalizar tu piel.</p>
+                        
+                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                            <span class="text-lg font-bold text-brand-green">$120.000</span>
+                            <a href="limpieza-facial.html" class="group/btn relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-all duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green cursor-pointer">
+                                <span>Ver Detalles</span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3: Masaje Relajante -->
+                <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                        <img src="../../images/peluqueria/foto_5_peluqueria.webp" alt="Masaje Relajante" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+                        <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-gray-dark text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-white/50">
+                            60 min
+                        </span>
+                    </div>
+
+                    <div class="p-6 flex flex-col flex-grow relative">
+                        <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">Masaje Relajante</h3>
+                        </div>
+                        
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">Terapia manual suave diseñada para aliviar el estrés, mejorar la circulación y promover la relajación total.</p>
+                        
+                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                            <span class="text-lg font-bold text-brand-green">$150.000</span>
+                            <a href="masajes-relajantes.html" class="group/btn relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-all duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green cursor-pointer">
+                                <span>Ver Detalles</span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 4: Cejas y Pestañas -->
+                <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                        <img src="../../images/peluqueria/foto_3_peluqueria.webp" alt="Cejas y Pestañas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+                        <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-gray-dark text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-white/50">
+                            45 min
+                        </span>
+                    </div>
+
+                    <div class="p-6 flex flex-col flex-grow relative">
+                        <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">Cejas y Pestañas</h3>
+                        </div>
+                        
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">Diseño de cejas con henna, laminado y lifting de pestañas para realzar la belleza natural de tu mirada.</p>
+                        
+                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                            <span class="text-lg font-bold text-brand-green">Desde $60.000</span>
+                            <a href="cejas-y-pestanas.html" class="group/btn relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-all duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green cursor-pointer">
+                                <span>Ver Detalles</span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 5: Depilación -->
+                <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                        <img src="../../images/peluqueria/foto_4_peluqueria.webp" alt="Depilación" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+                        <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-gray-dark text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-white/50">
+                            30 min
+                        </span>
+                    </div>
+
+                    <div class="p-6 flex flex-col flex-grow relative">
+                        <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">Depilación</h3>
+                        </div>
+                        
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">Depilación profesional con cera suave y efectiva para rostro y cuerpo, minimizando la irritación.</p>
+                        
+                        <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                            <span class="text-lg font-bold text-brand-green">Desde $30.000</span>
+                            <a href="https://wa.me/573123462618?text=Hola,%20me%20interesa%20el%20servicio%20de%20Depilaci%C3%B3n" target="_blank" class="group/btn relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-all duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green cursor-pointer">
+                                <span>Agendar</span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
       </section>
