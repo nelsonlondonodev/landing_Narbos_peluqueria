@@ -76,7 +76,9 @@ class ServicePageManager {
                 if (window.location.pathname.includes('cortes-de-pelo')) {
                     if (cardElement.tagName === 'A') {
                         cardElement.classList.add('glightbox');
-                        cardElement.setAttribute('data-gallery', 'haircuts-gallery');
+                        // Usamos un gallery ID único por tarjeta para que NO haya navegación entre cortes diferentes (sin flechas)
+                        const uniqueGalleryId = 'gallery-' + data.title.replace(/\s+/g, '-').toLowerCase();
+                        cardElement.setAttribute('data-gallery', uniqueGalleryId);
                         cardElement.setAttribute('data-title', data.title);
                         cardElement.setAttribute('data-description', data.description);
                     }
