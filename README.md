@@ -35,6 +35,39 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (January 20, 2026)
+
+### 1. Page Refactoring & Enrichment
+- **`nosotros.html`**:
+    - Refactored to use standard `#app-wrapper` and `.site-header` architecture.
+    - Implemented **dynamic hero section** injection via `main.js`.
+    - Added "Nuestros Pilares" (Values) section with micro-interactions.
+    - Added "Nuestra Trayectoria" (Timeline) section.
+    - Integrated Client Reviews Carousel (migrated from `resenas.html`).
+- **`contacto.html`**:
+    - Refactored to use standard `#app-wrapper` and `.site-header` architecture.
+    - Implemented **dynamic hero section** injection.
+    - Redesigned "Visítanos" section with premium card layout and improved map integration.
+- **Removed**: `resenas.html` (content integrated into other pages).
+
+### 2. Architecture Standardization
+- Enforced `site-header` + `app-wrapper` structure across all main pages.
+- Centralized Hero logic in `main.js` and `pagesData.js`.
+- Cleaned up obsolete inline styles and static scripts.
+
+### 2. Codebase Improvements
+- **`HeaderController.js`**: Refactored to accept dependency injection of the header element for better robustness. Added fallback logic for DOM selection.
+- **`main.js`**: Updated `initCoreComponents` to explicitly pass the header element to the controller.
+
+---
+
+## 🐛 Known Issues / Pending Tasks
+- **Header Scroll Interaction**: 
+  - **Issue**: The navigation bar on internal pages (`nosotros.html`, `contacto.html`) starts in a "scrolled" (thin) state instead of the initial Expanded state, or fails to animate correctly upon scrolling back to top.
+  - **Status**: Under investigation. Likely related to CSS initialization state or deep timing issues despite JS fixes.
+  - **Next Steps**: Debug initial CSS state and potential conflicts with `input.css` default styles vs dynamic classes.
+
+## 📂 Project Structure
 
 ### 📝 Últimas Actualizaciones (19 de enero, 2026)
 - **Mejoras Visuales y UX (Peluquería y Balayage):** ✨

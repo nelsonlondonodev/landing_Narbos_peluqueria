@@ -3,17 +3,38 @@
  * Maneja el estado del scroll, menús desplegables y scroll spy.
  */
 export class HeaderController {
-    constructor() {
+    constructor(headerElement) {
+        // Fallback de emergencia: intentar encontrar el header
         this.DOM = {
-            header: document.querySelector(".site-header"),
+            header: headerElement || document.querySelector(".site-header") || (document.getElementById('navbar-root') ? document.getElementById('navbar-root').parentElement : null),
             dropdownBtn: document.getElementById("desktop-services-btn"),
             dropdownMenu: document.getElementById("desktop-services-menu")
         };
 
-        this.init();
+        // Debug Log
+        // console.log("HeaderController: Constructor called. Header element:", this.DOM.header);
+
+        // Si tenemos el header, iniciamos inmediatamente.
+        if (this.DOM.header) {
+            this.init();
+        } else {
+             // Solo si falla la inyección directa y el selector, reintentamos
+             console.warn("HeaderController: Header not found immediately. Retrying in 500ms...");
+            setTimeout(() => {
+                this.DOM.header = document.querySelector(".site-header") || (document.getElementById('navbar-root') ? document.getElementById('navbar-root').parentElement : null);
+                
+                if (this.DOM.header) {
+                     console.log("HeaderController: Retry successful.");
+                     this.init();
+                } else {
+                     console.error("HeaderController: Retry FAILED.");
+                }
+            }, 500);
+        }
     }
 
     init() {
+        console.log("HeaderController: init() called.");
         this.createBackdrop();
         this.initScrollEffect();
         this.initDropdowns();
@@ -33,15 +54,28 @@ export class HeaderController {
      * Cambia el estilo del header al hacer scroll.
      */
     initScrollEffect() {
-        if (!this.DOM.header) return;
+        // Re-intentar seleccionar el header si no se encontró en el constructor
+        if (!this.DOM.header) {
+            this.DOM.header = document.querySelector(".site-header");
+        }
+
+        if (!this.DOM.header) {
+            console.error("HeaderController: FATAL - .site-header no encontrado en el DOM tras reintentos.");
+            return;
+        }
 
         const handleScroll = () => {
             const isScrolled = window.scrollY > 50;
+            console.log("HeaderController: Scroll Event. Y:", window.scrollY, "Scrolled Class:", isScrolled); // Uncomment for verbose debug
             this.DOM.header.classList.toggle("header-scrolled", isScrolled);
         };
 
         window.addEventListener("scroll", handleScroll);
-        handleScroll(); // Initial check
+        // Pequeño timeout para asegurar que el DOM esté estabilizado y el scroll real se lea bien
+        setTimeout(() => {
+            handleScroll();
+            // console.log("HeaderController: Initial scroll check executed.");
+        }, 100); 
     }
 
     /**
