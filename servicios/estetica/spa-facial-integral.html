@@ -114,7 +114,7 @@
             </div>
 
             <!-- Grid de Servicios (Hub) -->
-            <div id="hair-services-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div id="esthetics-services-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Services injected via JS -->
             </div>
         </div>
@@ -267,14 +267,14 @@
 
     <!-- Scripts -->
     <script type="module">
-      import { getNavbarHTML } from '../js/components/Navbar.js';
-      import { getFooterHTML } from '../js/components/Footer.js';
-      import { MobileMenu } from '../js/components/MobileMenu.js';
-      import { UIService } from '../js/services/UIService.js';
-      import { FAQAccordion } from '../js/components/FAQAccordion.js';
-      import { WhatsAppButton } from '../js/components/WhatsAppButton.js';
+      import { getNavbarHTML } from '../../js/components/Navbar.js';
+      import { getFooterHTML } from '../../js/components/Footer.js';
+      import { MobileMenu } from '../../js/components/MobileMenu.js';
+      import { UIService } from '../../js/services/UIService.js';
+      import { FAQAccordion } from '../../js/components/FAQAccordion.js';
+      import { WhatsAppButton } from '../../js/components/WhatsAppButton.js';
 
-      const basePath = '../';
+      const basePath = '../../';
       
       // 1. Inyección de Componentes Estáticos
       const navbarRoot = document.getElementById('navbar-root');
@@ -290,14 +290,14 @@
           new FAQAccordion('#faq');
           new WhatsAppButton();
 
-          // 3. Montar Servicios de Peluquería (Standard Variant)
-          const hairServicesGrid = document.getElementById('hair-services-grid');
-          if (hairServicesGrid) {
-              import('../js/components/ServiceCard.js').then(({ ServiceCard }) => {
-                  import('../js/data/hairSalonServices.js').then(({ hairSalonServices }) => {
-                      hairSalonServices.forEach(data => {
+          // 3. Montar Servicios de Estética
+          const estheticsServicesGrid = document.getElementById('esthetics-services-grid');
+          if (estheticsServicesGrid) {
+              import('../../js/components/ServiceCard.js').then(({ ServiceCard }) => {
+                  import('../../js/data/estheticsServices.js').then(({ estheticsServices }) => {
+                      estheticsServices.forEach(data => {
                           const card = new ServiceCard(data);
-                          hairServicesGrid.appendChild(card.render());
+                          estheticsServicesGrid.appendChild(card.render());
                       });
                   });
               });
