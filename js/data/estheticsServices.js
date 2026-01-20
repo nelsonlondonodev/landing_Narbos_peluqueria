@@ -34,14 +34,5 @@ export const estheticsServices = [
         link: 'cejas-y-pestanas.html',
         price: 'Desde $60.000',
         variant: 'standard'
-    },
-    {
-        title: 'Depilación',
-        description: 'Depilación profesional con cera suave y efectiva para rostro y cuerpo, minimizando la irritación.',
-        image: '../../images/pages/peluqueria/color-tratamiento.webp',
-        icon: '<path d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />',
-        link: '#',
-        price: 'Desde $30.000',
-        variant: 'standard'
     }
 ];
