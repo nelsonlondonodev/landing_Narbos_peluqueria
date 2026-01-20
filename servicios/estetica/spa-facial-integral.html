@@ -255,64 +255,8 @@
     </div> <!-- End App Wrapper -->
 
     <!-- Scripts -->
-    <script type="module">
-      import { getNavbarHTML } from '../../js/components/Navbar.js';
-      import { getFooterHTML } from '../../js/components/Footer.js';
-      import { MobileMenu } from '../../js/components/MobileMenu.js';
-      import { UIService } from '../../js/services/UIService.js';
-      import { FAQAccordion } from '../../js/components/FAQAccordion.js';
-      import { WhatsAppButton } from '../../js/components/WhatsAppButton.js';
-      import { Breadcrumbs } from '../../js/components/Breadcrumbs.js';
-      import { HeaderController } from '../../js/controllers/HeaderController.js';
-
-      const basePath = '../../';
-      
-      // 1. Inyección de Componentes Estáticos
-      const navbarRoot = document.getElementById('navbar-root');
-      if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(basePath, false);
-
-      const footerRoot = document.getElementById('footer-root');
-      if (footerRoot) footerRoot.innerHTML = getFooterHTML(basePath);
-
-      // 2. Inicialización de Lógica Específica
-      document.addEventListener('DOMContentLoaded', () => {
-          // Inicializar Header Controller para el scroll y menú
-          new HeaderController();
-
-          // Inicializar Migas de Pan dinámicas
-          const breadcrumbsData = [
-              { label: 'Inicio', link: '../../index.html' },
-              { label: 'Estética', link: 'index.html' },
-              { label: 'Spa Facial Integral', link: '#' }
-          ];
-          const breadcrumbsContainer = document.getElementById('breadcrumbs-root');
-          if (breadcrumbsContainer) {
-              // Ajustamos clases para que se comporten como en el resto del sitio, respetando el navbar fijo
-              // Solo pasamos padding-top, ya que el componente maneja el container interno.
-              breadcrumbsContainer.innerHTML = new Breadcrumbs(breadcrumbsData, { 
-                  customClasses: 'pt-28 md:pt-32' 
-              }).render();
-          }
-
-          new MobileMenu();
-          new UIService();
-          new FAQAccordion('#faq');
-          new WhatsAppButton();
-
-          // 3. Montar Servicios de Estética
-          const estheticsServicesGrid = document.getElementById('esthetics-services-grid');
-          if (estheticsServicesGrid) {
-              import('../../js/components/ServiceCard.js').then(({ ServiceCard }) => {
-                  import('../../js/data/estheticsServices.js').then(({ estheticsServices }) => {
-                      estheticsServices.forEach(data => {
-                          const card = new ServiceCard(data);
-                          estheticsServicesGrid.appendChild(card.render());
-                      });
-                  });
-              });
-          }
-      });
-    </script>
+    <!-- Scripts -->
+    <script type="module" src="../../js/service-page.js"></script>
     
   </body>
 </html>
