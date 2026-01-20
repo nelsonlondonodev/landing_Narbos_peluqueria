@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO MASTER START -->
-    <!-- SEO MASTER START -->
     <title>Estética y Spa en Chía | Masajes y Tratamientos Faciales</title>
     <meta id="meta-description" name="description" content="Relájate en nuestro Spa en Chía. Masajes relajantes, limpieza facial profunda, drenaje linfático y tratamientos corporales. ¡Reserva tu sesión de bienestar!" />
     <link rel="canonical" href="https://narbossalon.com/servicios/spa-y-estetica-facial-chia.html" />
@@ -49,7 +48,7 @@
       "description": "Servicios de spa, relajación y estética facial"
     }
     </script>
-
+    
     <link rel="stylesheet" href="../../css/styles.css?v=1.2" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
@@ -65,29 +64,35 @@
   </head>
   <body class="font-sans transition-colors duration-500">
     
-    <header class="bg-brand-green backdrop-blur-sm sticky top-0 z-50 shadow-md">
+    <header class="site-header fixed w-full top-0 z-50 transition-all duration-300 bg-transparent">
       <div id="navbar-root"></div>
     </header>
 
-    <!-- Breadcrumbs -->
-    <!-- Breadcrumbs -->
-    <div id="breadcrumbs-root" class="bg-gray-100"></div>
+    <div id="app-wrapper" class="relative w-full overflow-x-hidden">
+        <!-- Breadcrumbs (Injected by JS as absolute) -->
+        <div id="breadcrumbs-root" class="absolute top-0 left-0 w-full z-30 pointer-events-none"></div>
 
     <main>
-      <!-- Hero de Servicio (Consistente con Home) -->
-      <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden" data-floating-bg="3">
-        <img src="../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg" alt="Spa y Estética en Chía" class="w-full h-full object-cover absolute inset-0 z-0" loading="eager" width="1920" height="1080">
-        <div class="absolute inset-0 bg-black/40 z-10"></div>
-        <div class="absolute z-20 inset-0 flex items-center justify-center px-6">
-            <div class="bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-xl shadow-2xl max-w-3xl text-center" data-animation="zoomIn">
-                <h1 class="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-4">Spa Facial y Estética en Chía</h1>
-                <p class="text-lg md:text-xl text-gray-700">Renueva tu piel y relaja tu cuerpo con nuestros servicios profesionales.</p>
-            </div>
-        </div>
-      </section>
+      <!-- Hero de Servicio (Consistente con Home/Hub) -->
+      <div class="relative">
+          <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
+              <img src="../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg" alt="Spa y Estética en Chía" class="w-[100%] md:w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto md:rounded-b-xl" loading="eager" width="1920" height="1080">
+              <div class="absolute inset-0 bg-black/20 z-10 md:rounded-b-xl mx-auto w-[100%] md:w-[85%]"></div>
+          </section>
+
+          <!-- Floating Content Box -->
+          <div class="absolute z-20 top-[50%] -translate-y-[50%] left-0 right-0 px-6 pointer-events-none">
+              <div class="container mx-auto">
+                  <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto" data-animation="zoomIn">
+                       <h1 class="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4">Spa Facial y Estética en Chía</h1>
+                      <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">Renueva tu piel y relaja tu cuerpo con nuestros servicios profesionales.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
 
       <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
-      <section class="py-16 md:py-24 bg-white overflow-x-hidden">
+      <section class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24 overflow-x-hidden">
         <div class="container mx-auto px-6 max-w-screen-xl">
             <div class="text-center mb-16" data-animation="fadeInUp">
               <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
@@ -245,10 +250,10 @@
             </div>
         </div>
       </section>
-
     </main>
 
     <div id="footer-root"></div>
+    </div> <!-- End App Wrapper -->
 
     <!-- Scripts -->
     <script type="module">
@@ -283,7 +288,12 @@
           ];
           const breadcrumbsContainer = document.getElementById('breadcrumbs-root');
           if (breadcrumbsContainer) {
-              breadcrumbsContainer.innerHTML = new Breadcrumbs(breadcrumbsData, { customClasses: 'pt-24 md:pt-28' }).render();
+              // Posicionamiento absoluto para flotar sobre el header/hero
+              // Añadido 'pointer-events-auto' al primer hijo directo si Breadcrumbs renderiza uno, 
+              // pero como 'pointer-events-none' está en el pare, los enlaces deben reactivarse.
+              breadcrumbsContainer.innerHTML = new Breadcrumbs(breadcrumbsData, { 
+                  customClasses: 'pt-24 md:pt-32 px-6 container mx-auto max-w-screen-xl relative z-20 pointer-events-auto' 
+              }).render();
           }
 
           new MobileMenu();
@@ -305,5 +315,6 @@
           }
       });
     </script>
+    
   </body>
 </html>
