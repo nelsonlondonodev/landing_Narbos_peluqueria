@@ -49,5 +49,13 @@ export const pagesData = Object.freeze({
            imageSrc: "images/team/Team_1.webp", // Usaré la imagen del equipo como fondo temporalmente para probar el componente, o una textura.
            imageAlt: "Equipo de Narbo's Salon"
        }
+   },
+   contacto: {
+        hero: {
+            title: "Contáctanos",
+            subtitle: "Estamos listos para transformar tu día. Visítanos en nuestra nueva sede.",
+            imageSrc: "images/pages/home/foto_inicio2.webp",
+            imageAlt: "Recepción de Narbos Salon en Chia"
+        }
    }
 });

@@ -602,6 +602,9 @@
   .max-h-\[90vh\] {
     max-height: 90vh;
   }
+  .min-h-\[450px\] {
+    min-height: 450px;
+  }
   .min-h-full {
     min-height: 100%;
   }
@@ -1005,6 +1008,10 @@
   .border-l-4 {
     border-left-style: var(--tw-border-style);
     border-left-width: 4px;
+  }
+  .border-dashed {
+    --tw-border-style: dashed;
+    border-style: dashed;
   }
   .border-\[\#075E54\] {
     border-color: #075E54;
@@ -1891,6 +1898,13 @@
       }
     }
   }
+  .group-hover\:animate-bounce {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        animation: var(--animate-bounce);
+      }
+    }
+  }
   .group-hover\:animate-pulse {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -2556,6 +2570,11 @@
       padding: calc(var(--spacing) * 8);
     }
   }
+  .md\:p-10 {
+    @media (width >= 48rem) {
+      padding: calc(var(--spacing) * 10);
+    }
+  }
   .md\:py-24 {
     @media (width >= 48rem) {
       padding-block: calc(var(--spacing) * 24);
@@ -2626,6 +2645,11 @@
   .lg\:w-1\/2 {
     @media (width >= 64rem) {
       width: calc(1/2 * 100%);
+    }
+  }
+  .lg\:grid-cols-2 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   .lg\:grid-cols-3 {

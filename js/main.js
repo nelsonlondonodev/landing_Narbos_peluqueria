@@ -97,6 +97,7 @@ class App {
         if (path.includes('nosotros.html')) pageKey = 'nosotros';
         else if (path.includes('peluqueria')) pageKey = 'peluqueria';
         else if (path.includes('barberia')) pageKey = 'barberia';
+        else if (path.includes('contacto.html')) pageKey = 'contacto';
         // Añadir más lógica de detección según sea necesario
 
         if (pageKey && pagesData[pageKey] && pagesData[pageKey].hero) {
