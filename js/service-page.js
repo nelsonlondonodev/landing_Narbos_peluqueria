@@ -319,6 +319,8 @@ class ServicePageManager {
                 items.push({ label: 'Spa Facial Integral', link: '#' });
             } else if (currentPath.includes('limpieza-facial')) {
                 items.push({ label: 'Limpieza Facial', link: '#' });
+            } else if (currentPath.includes('masajes-relajantes')) {
+                items.push({ label: 'Masajes Relajantes', link: '#' });
             }
         } else if (currentPath.includes('/unas-spa/')) {
             items.push({ label: 'Uñas', link: '../../servicios/unas-spa/index.html' });
