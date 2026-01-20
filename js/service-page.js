@@ -209,7 +209,7 @@ class ServicePageManager {
         }
 
         // 3. Grid Estética
-        const aestheticsServicesGrid = document.getElementById('aesthetics-services-grid');
+        const aestheticsServicesGrid = document.getElementById('esthetics-services-grid');
         if (aestheticsServicesGrid) {
             estheticsServices.forEach(data => {
                 const card = new ServiceCard(data);
@@ -314,6 +314,10 @@ class ServicePageManager {
             items.push({ label: 'Barbería', link: '../../servicios/barberia/index.html' });
         } else if (currentPath.includes('/estetica/')) {
             items.push({ label: 'Estética', link: '../../servicios/estetica/index.html' });
+            
+            if (currentPath.includes('spa-facial-integral') || currentPath.includes('spa-y-estetica-facial-chia')) {
+                items.push({ label: 'Spa Facial Integral', link: '#' });
+            }
         } else if (currentPath.includes('/unas-spa/')) {
             items.push({ label: 'Uñas', link: '../../servicios/unas-spa/index.html' });
         }
