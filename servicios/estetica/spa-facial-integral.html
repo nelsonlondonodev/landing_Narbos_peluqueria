@@ -288,8 +288,9 @@
           const breadcrumbsContainer = document.getElementById('breadcrumbs-root');
           if (breadcrumbsContainer) {
               // Ajustamos clases para que se comporten como en el resto del sitio, respetando el navbar fijo
+              // Solo pasamos padding-top, ya que el componente maneja el container interno.
               breadcrumbsContainer.innerHTML = new Breadcrumbs(breadcrumbsData, { 
-                  customClasses: 'container mx-auto px-6 pt-28 pb-4 relative z-10' 
+                  customClasses: 'pt-28 md:pt-32' 
               }).render();
           }
 
