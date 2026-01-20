@@ -8,6 +8,7 @@ import { UIService } from './services/UIService.js';
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
 import { getContactFormHTML } from './components/ContactForm.js';
+import { getHeroHTML } from './components/HeroSection.js'; // Nuevo Import
 // Components
 import { MobileMenu } from './components/MobileMenu.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
@@ -27,6 +28,7 @@ import { VideoPlayerController } from './controllers/VideoPlayerController.js';
 import { GalleryController } from './controllers/GalleryController.js';
 // Data
 import { servicesData } from './data/servicesData.js';
+import { pagesData } from './data/pagesData.js'; // Nuevo Import
 
 class App {
     constructor() {
@@ -35,6 +37,7 @@ class App {
 
     init() {
         this.mountLayout();
+        this.mountHero(); // Nuevo método
         this.initCoreComponents();
         this.initInteractiveComponents();
         this.mountHomeServices();
@@ -78,6 +81,41 @@ class App {
         if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(this.basePath, isHomePage);
         if (footerRoot) footerRoot.innerHTML = getFooterHTML(this.basePath);
         if (contactRoot) contactRoot.innerHTML = getContactFormHTML();
+    }
+
+     /**
+     * Monta el Hero Section si existe el contenedor y configuración en pagesData.
+     */
+     mountHero() {
+        const heroRoot = document.getElementById('hero-root');
+        if (!heroRoot) return; // Si no hay contenedor, no hacemos nada
+
+        // Detectar página actual para buscar datos
+        const path = window.location.pathname;
+        let pageKey = null;
+
+        if (path.includes('nosotros.html')) pageKey = 'nosotros';
+        else if (path.includes('peluqueria')) pageKey = 'peluqueria';
+        else if (path.includes('barberia')) pageKey = 'barberia';
+        // Añadir más lógica de detección según sea necesario
+
+        if (pageKey && pagesData[pageKey] && pagesData[pageKey].hero) {
+            // Aseguramos que la ruta de la imagen sea correcta relativa a la página actual
+            // Simbólicamente ajustamos paths si es necesario, pero getHeroHTML inyecta el src tal cual
+            // Si las imágenes en pagesData tienen rutas relativas (../../), funcionarán solo si la estructura de carpetas coincide
+            // Para 'nosotros.html' (en raíz), '../' o '../../' podría fallar si imageSrc está hardcodeado para subdirectorios.
+            // Solución: pagesData debe tener rutas agnósticas o ajustamos aquí.
+            // Por simplicidad, asumimos que pagesData tiene la ruta correcta o la ajustamos.
+            
+            const heroData = pagesData[pageKey].hero;
+            // Ajuste simple de ruta para nosotros.html que está en la raíz
+            let imageSrc = heroData.imageSrc;
+            if (this.basePath === './' && imageSrc.startsWith('../../')) {
+                 imageSrc = imageSrc.replace('../../', './');
+            }
+
+            heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
+        }
     }
 
     /**
