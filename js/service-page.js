@@ -317,6 +317,8 @@ class ServicePageManager {
             
             if (currentPath.includes('spa-facial-integral') || currentPath.includes('spa-y-estetica-facial-chia')) {
                 items.push({ label: 'Spa Facial Integral', link: '#' });
+            } else if (currentPath.includes('limpieza-facial')) {
+                items.push({ label: 'Limpieza Facial', link: '#' });
             }
         } else if (currentPath.includes('/unas-spa/')) {
             items.push({ label: 'Uñas', link: '../../servicios/unas-spa/index.html' });
