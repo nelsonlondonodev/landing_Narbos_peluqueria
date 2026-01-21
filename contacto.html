@@ -36,11 +36,13 @@
 </head>
 <body class="font-sans transition-colors duration-500 bg-white text-brand-gray-dark">
     
-    <header class="bg-brand-green backdrop-blur-sm sticky top-0 z-50 shadow-md">
+    <!-- 1. Header fuera del wrapper -->
+    <header class="site-header">
         <div id="navbar-root"></div>
     </header>
 
-    <div id="app-wrapper">
+    <!-- 2. Wrapper principal de la aplicación -->
+    <div id="app-wrapper" class="relative w-full overflow-x-hidden">
         <main>
             <!-- Hero Section (Dynamic) -->
             <div id="hero-root"></div>
