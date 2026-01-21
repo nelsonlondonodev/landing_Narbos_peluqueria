@@ -35,6 +35,23 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (January 21, 2026)
+
+### 1. Preview Deployment System (GitHub Pages)
+- Implemented a robust build-and-deploy workflow for generating preview links via GitHub Pages.
+- **Dynamic Path Resolution**: Refactored `main.js` core logic (`App` class) to intelligently detect the application root (`appRoot`), enabling seamless support for subdirectory deployments (e.g., `/repo-name/`) while maintaining compatibility with the production root domain.
+- **SSG Asset Fix**: Enhanced `scripts/ssg.js` to automatically calculate subdirectory depth and prefix asset paths (images/links) with `../../` for deep service pages, ensuring zero-configuration deployment.
+
+### 2. SSG & SEO Expansion
+- Integrated `nosotros.html` and `contacto.html` into the Static Site Generation pipeline, ensuring critical H1 titles and Hero sections are pre-rendered for SEO.
+- **Data Cleanup**: Standardized all image paths in `pagesData.js` to be root-relative, removing fragile `../../` hardcoding.
+
+### 3. Bug Fixes
+- **Blog Generation**: Resolved `TypeError` in `scripts/generate-blog.js` caused by attempting to sort an immutable (`Object.freeze`) array.
+- **Broken Links**: Fixed 404 errors for internal service links in the Preview environment by implementing absolute path hydration on the client side.
+
+---
+
 ## 🔄 Recent Updates (January 20, 2026)
 
 ### 1. Page Refactoring & Enrichment
