@@ -33,19 +33,24 @@ import { pagesData } from './data/pagesData.js'; // Nuevo Import
 
 class App {
     constructor() {
-        // Usa la ubicación de main.js (que está en /js/main.js) para determinar la raíz de la app de forma robusta.
-        // Esto funciona tanto en dominio raíz (Hostinger) como en subcarpetas (GitHub Pages).
-        this.appRoot = new URL('../', import.meta.url).href; 
+        // Estrategia "Hardcoded Safe": Detectar explícitamente si estamos en el entorno de GitHub Pages
+        // usando el nombre del repositorio. Esto evita problemas con minificadores o import.meta.
+        const repoSegment = '/landing_Narbos_peluqueria/';
+        const path = window.location.pathname;
+        const origin = window.location.origin;
+
+        if (path.includes(repoSegment)) {
+            // Entorno GitHub Pages (Staging)
+            this.appRoot = origin + repoSegment;
+        } else {
+            // Entorno Producción (Hostinger) o Localhost
+            this.appRoot = origin + '/';
+        }
         
-        // Determinamos si estamos en la home comparando la URL actual con la raíz calculada
-        const currentUrl = window.location.href.split('#')[0].split('?')[0]; // Limpiar hash/query
-        const rootIndex = new URL('index.html', this.appRoot).href;
-        
-        // Normalizamos quitando trailing slashes para comparación
-        const cleanCurrent = currentUrl.replace(/\/$/, '');
-        const cleanRoot = this.appRoot.replace(/\/$/, '');
-        
-        this.isHomePage = (cleanCurrent === cleanRoot) || (currentUrl === rootIndex);
+        // Determinamos si estamos en la home
+        // Limpiamos la URL actual de todo excepto el path base
+        const currentPathClean = path.replace(repoSegment, '/').replace('//', '/');
+        this.isHomePage = (currentPathClean === '/' || currentPathClean === '/index.html');
     }
 
     init() {
