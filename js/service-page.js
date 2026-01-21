@@ -84,7 +84,7 @@ class ServicePageManager {
                     }
                 }
 
-                if (window.location.pathname.includes('balayage-mechas-chia')) {
+                if (window.location.pathname.includes('balayage-mechas')) {
                     if (cardElement.tagName === 'A') {
                         cardElement.classList.add('glightbox');
                         // Fix: Galería única por tarjeta
@@ -106,7 +106,7 @@ class ServicePageManager {
                     }
                 }
 
-                if (window.location.pathname.includes('tratamientos-capilares-chia')) {
+                if (window.location.pathname.includes('tratamientos-capilares')) {
                     if (cardElement.tagName === 'A') {
                         cardElement.classList.add('glightbox');
                         // Fix: Galería única por tarjeta
@@ -125,9 +125,9 @@ class ServicePageManager {
                      // Re-generating logic to ensure match:
                      let prefix = 'gallery-default-';
                      if (window.location.pathname.includes('cortes-de-pelo')) prefix = 'gallery-';
-                     if (window.location.pathname.includes('balayage-mechas-chia')) prefix = 'gallery-color-';
+                     if (window.location.pathname.includes('balayage-mechas')) prefix = 'gallery-color-';
                      if (window.location.pathname.includes('color-tinturas-cabello')) prefix = 'gallery-tint-';
-                     if (window.location.pathname.includes('tratamientos-capilares-chia')) prefix = 'gallery-treatment-';
+                     if (window.location.pathname.includes('tratamientos-capilares')) prefix = 'gallery-treatment-';
                      
                      const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
 
@@ -149,9 +149,9 @@ class ServicePageManager {
     
             // Init GLightbox if we added class
             const isServicePage = window.location.pathname.includes('cortes-de-pelo') || 
-                                  window.location.pathname.includes('balayage-mechas-chia') || 
+                                  window.location.pathname.includes('balayage-mechas') || 
                                   window.location.pathname.includes('color-tinturas-cabello') ||
-                                  window.location.pathname.includes('tratamientos-capilares-chia');
+                                  window.location.pathname.includes('tratamientos-capilares');
 
             if (isServicePage && typeof GLightbox !== 'undefined') {
                 this.lightbox = GLightbox({
@@ -222,13 +222,13 @@ class ServicePageManager {
         if (path.includes('cortes-de-pelo')) {
             return hairCutStyles;
         }
-        if (path.includes('balayage-mechas-chia')) {
+        if (path.includes('balayage-mechas')) {
             return colorStyles;
         }
         if (path.includes('color-tinturas-cabello')) {
             return tintStyles;
         }
-        if (path.includes('tratamientos-capilares-chia')) {
+        if (path.includes('tratamientos-capilares')) {
             return treatmentStyles;
         }
         return hairSalonServices;
@@ -303,11 +303,11 @@ class ServicePageManager {
             
             if (currentPath.includes('cortes-de-pelo')) {
                 items.push({ label: 'Cortes', link: '#' });
-            } else if (currentPath.includes('balayage-mechas-chia')) {
+            } else if (currentPath.includes('balayage-mechas')) {
                 items.push({ label: 'Balayage', link: '#' });
             } else if (currentPath.includes('color-tinturas-cabello')) {
                 items.push({ label: 'Color', link: '#' });
-            } else if (currentPath.includes('tratamientos-capilares-chia')) {
+            } else if (currentPath.includes('tratamientos-capilares')) {
                 items.push({ label: 'Tratamientos', link: '#' });
             }
         } else if (currentPath.includes('/barberia/')) {

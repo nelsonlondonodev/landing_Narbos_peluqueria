@@ -15,14 +15,14 @@ export const hairSalonServices = Object.freeze([
     {
         title: "Corte Dama",
         description: "Diseños personalizados, puntas perfectas y cambios de look completos.",
-        link: "/servicios/peluqueria/cortes-de-pelo-en-chia.html",
+        link: "/servicios/peluqueria/cortes-de-pelo.html",
         image: "/images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
         variant: "standard"
     },
     {
         title: "Balayage y Mechas",
         description: "Iluminaciones perfectas, rubios soñados y técnicas de degradado.",
-        link: "/servicios/peluqueria/balayage-mechas-chia.html",
+        link: "/servicios/peluqueria/balayage-mechas.html",
         image: "/images/pages/peluqueria/mechas-balayage-detalle.webp",
         variant: "standard"
     },
@@ -36,7 +36,7 @@ export const hairSalonServices = Object.freeze([
     {
         title: "Tratamientos",
         description: "Recuperación profunda, keratinas, cirugía capilar y botox.",
-        link: "/servicios/peluqueria/tratamientos-capilares-chia.html",
+        link: "/servicios/peluqueria/tratamientos-capilares.html",
         image: "/images/pages/peluqueria/lavado-spa-capilar.webp",
         variant: "standard"
     }

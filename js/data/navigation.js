@@ -21,18 +21,18 @@ export const getMenuCategories = (basePath = './') => [
         title: "Peluquería",
         link: `${basePath}servicios/peluqueria/index.html`,
         items: [
-            { label: "Corte Dama", link: `${basePath}servicios/peluqueria/cortes-de-pelo-en-chia.html` },
-            { label: "Balayage y Mechas", link: `${basePath}servicios/peluqueria/balayage-mechas-chia.html` },
+            { label: "Corte Dama", link: `${basePath}servicios/peluqueria/cortes-de-pelo.html` },
+            { label: "Balayage y Mechas", link: `${basePath}servicios/peluqueria/balayage-mechas.html` },
             { label: "Color y Tinturas", link: `${basePath}servicios/peluqueria/color-tinturas-cabello.html` },
-            { label: "Tratamientos", link: `${basePath}servicios/peluqueria/tratamientos-capilares-chia.html` }
+            { label: "Tratamientos", link: `${basePath}servicios/peluqueria/tratamientos-capilares.html` }
         ]
     },
     {
         title: "Uñas",
         link: `${basePath}servicios/unas-spa/index.html`,
         items: [
-            { label: "Acrílicas y Gel", link: `${basePath}servicios/unas-spa/unas-acrilicas-gel-chia.html` },
-            { label: "Manicure y Pedicure", link: `${basePath}servicios/unas-spa/manicure-pedicure-chia.html` }
+            { label: "Acrílicas y Gel", link: `${basePath}servicios/unas-spa/unas-acrilicas-gel.html` },
+            { label: "Manicure y Pedicure", link: `${basePath}servicios/unas-spa/manicure-pedicure.html` }
         ]
     },
     {
