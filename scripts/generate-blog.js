@@ -68,7 +68,7 @@ function generateBlog() {
         let html = fs.readFileSync(BLOG_INDEX_PATH, 'utf8');
 
         // Generar el bloque de artículos
-        const articlesHTML = articles
+        const articlesHTML = [...articles]
             .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate)) // Ordenar por fecha reciente
             .map(generateArticleCard)
             .join('\n');
