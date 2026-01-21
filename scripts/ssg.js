@@ -63,6 +63,14 @@ async function runSSG() {
             path: 'servicios/barberia/index.html',
             key: 'barberia'
         },
+        {
+            path: 'nosotros.html',
+            key: 'nosotros'
+        },
+        {
+            path: 'contacto.html',
+            key: 'contacto'
+        },
         // Mapeo para otras páginas (se irán migrando)
         { path: 'cortes-de-pelo-en-chia.html' },
         { path: 'barberia-en-chia.html' },
