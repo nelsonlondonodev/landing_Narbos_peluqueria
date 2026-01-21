@@ -4,7 +4,7 @@
  * @param {boolean} isHome - Indica si se está renderizando en la página de inicio.
  * @returns {string} HTML del componente Navbar.
  */
-import { translations } from '../data/translations.js';
+
 import { getMenuCategories } from '../data/navigation.js';
 
 /**
@@ -17,9 +17,6 @@ export function getNavbarHTML(basePath = './', isHome = true) {
     const linkPrefix = isHome ? '' : '/index.html';
     const menuCategories = getMenuCategories(basePath);
     const navLink = createNavLinkHelper(linkPrefix);
-    
-    // Preparar configuración de idioma
-    const langConfig = getLangConfig();
 
     return `
     <nav class="container mx-auto px-6 py-2 flex justify-between items-center max-w-screen-xl relative z-50">
@@ -32,15 +29,10 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             ${navLink(basePath + 'nosotros.html', 'nav.about', 'Nosotros')}
             ${navLink(basePath + 'contacto.html', 'nav.contact', 'Contacto')}
             <a href="${basePath}blog/index.html" class="text-white hover:text-brand-gold active:text-brand-gold font-medium" data-i18n="nav.blog">Blog</a>
-            
-            <!-- Desktop Language Switcher -->
-            <button id="lang-toggle-desktop" class="ml-4 border border-white/40 rounded-full px-3 py-1 text-xs font-semibold text-white hover:bg-white hover:text-brand-gray-dark transition-all duration-300 uppercase tracking-widest shadow-sm hover:shadow-lg">
-                ${langConfig.nextLangLabel}
-            </button>
         </div>
 
         <!-- Mobile Toggle -->
-        ${renderMobileToggle(langConfig.nextLangLabel)}
+        ${renderMobileToggle()}
     </nav>
     
     <!-- Mobile Menu Overlay -->
@@ -53,12 +45,6 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             ${navLink(basePath + 'nosotros.html', 'nav.about', 'Nosotros', true)}
             ${navLink(basePath + 'contacto.html', 'nav.contact', 'Contacto', true)}
             <a href="${basePath}blog/index.html" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50" data-i18n="nav.blog">Blog</a>
-            
-             <div class="mt-8 px-4">
-                 <button class="lang-toggle-mobile-internal w-full py-3 border-2 border-brand-green/20 rounded-lg text-brand-green font-bold hover:bg-brand-green hover:text-white transition-all uppercase tracking-widest text-sm">
-                    ${langConfig.currentLang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
-                 </button>
-             </div>
         </div>
     </div>
     
@@ -77,12 +63,7 @@ function createNavLinkHelper(linkPrefix) {
     };
 }
 
-function getLangConfig() {
-    const storedLang = typeof localStorage !== 'undefined' ? localStorage.getItem('user-lang') : 'es';
-    const currentLang = (storedLang || navigator.language.split('-')[0] || 'es') === 'en' ? 'en' : 'es';
-    const nextLangLabel = currentLang === 'es' ? 'EN' : 'ES';
-    return { currentLang, nextLangLabel };
-}
+
 
 function renderLogo(basePath, isHome) {
     return `
@@ -92,13 +73,9 @@ function renderLogo(basePath, isHome) {
     `;
 }
 
-function renderMobileToggle(langLabel) {
+function renderMobileToggle() {
     return `
         <div class="md:hidden flex items-center gap-4">
-             <button id="lang-toggle-mobile" class="border border-white/50 rounded-md px-2 py-1 text-xs font-bold text-white hover:bg-white/10 transition-colors uppercase">
-                ${langLabel}
-             </button>
-
              <button id="menu-btn" aria-label="Abrir menú" class="text-white focus:outline-none z-50 p-1">
                  <svg id="menu-open-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                  <svg id="menu-close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>

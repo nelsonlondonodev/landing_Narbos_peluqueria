@@ -3,7 +3,7 @@
  * Centralizes initialization logic for Navbar, Footer, and all interactive components.
  */
 
-import { TranslationService } from './services/TranslationService.js';
+
 import { UIService } from './services/UIService.js';
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
@@ -179,10 +179,6 @@ class App {
      */
     initServices() {
         new UIService();
-        
-        // TranslationService debe ser el último para bindear elementos inyectados
-        const translationService = new TranslationService();
-        translationService.init();
     }
 }
 
