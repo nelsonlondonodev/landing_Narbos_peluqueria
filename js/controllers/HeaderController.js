@@ -34,7 +34,7 @@ export class HeaderController {
     }
 
     init() {
-        console.log("HeaderController: init() called.");
+        // console.log("HeaderController: init() called.");
         this.createBackdrop();
         this.initScrollEffect();
         this.initDropdowns();
@@ -66,7 +66,7 @@ export class HeaderController {
 
         const handleScroll = () => {
             const isScrolled = window.scrollY > 50;
-            console.log("HeaderController: Scroll Event. Y:", window.scrollY, "Scrolled Class:", isScrolled); // Uncomment for verbose debug
+            // console.log("HeaderController: Scroll Event. Y:", window.scrollY, "Scrolled Class:", isScrolled); // Uncomment for verbose debug
             this.DOM.header.classList.toggle("header-scrolled", isScrolled);
         };
 
