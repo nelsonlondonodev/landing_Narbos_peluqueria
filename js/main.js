@@ -33,15 +33,25 @@ import { pagesData } from './data/pagesData.js'; // Nuevo Import
 
 class App {
     constructor() {
-        this.basePath = this.calculateBasePath();
-        const path = window.location.pathname;
-        this.isHomePage = (path === '/' || path.endsWith('/index.html')) && this.basePath === './';
+        // Usa la ubicación de main.js (que está en /js/main.js) para determinar la raíz de la app de forma robusta.
+        // Esto funciona tanto en dominio raíz (Hostinger) como en subcarpetas (GitHub Pages).
+        this.appRoot = new URL('../', import.meta.url).href; 
+        
+        // Determinamos si estamos en la home comparando la URL actual con la raíz calculada
+        const currentUrl = window.location.href.split('#')[0].split('?')[0]; // Limpiar hash/query
+        const rootIndex = new URL('index.html', this.appRoot).href;
+        
+        // Normalizamos quitando trailing slashes para comparación
+        const cleanCurrent = currentUrl.replace(/\/$/, '');
+        const cleanRoot = this.appRoot.replace(/\/$/, '');
+        
+        this.isHomePage = (cleanCurrent === cleanRoot) || (currentUrl === rootIndex);
     }
 
     init() {
         this.mountLayout();
         this.mountHero();
-        if (this.isHomePage) this.mountHomeModals(); // Montar modales solo en home
+        if (this.isHomePage) this.mountHomeModals();
         this.initCoreComponents();
         this.initInteractiveComponents();
         this.mountHomeServices();
@@ -49,44 +59,30 @@ class App {
     }
 
     /**
-     * Calcula la ruta relativa a la raíz basada en la profundidad de la URL actual.
-     * @returns {string} Ruta base (e.g. './' o '../../')
+     * Resuelve una ruta (absoluta o relativa) a la URL base correcta de la aplicación.
+     * @param {string} path - Ruta a resolver (ej: '/servicios/...' o 'images/...')
+     * @returns {string} URL absoluta correcta.
      */
-    calculateBasePath() {
-        const path = window.location.pathname;
+    resolvePath(path) {
+        if (!path) return '#';
+        if (path.startsWith('http')) return path; // Ya es absoluta
         
-        // Caso explícito para la raíz
-        if (path === '/' || path === '/index.html') return './';
-        
-        // Para cualquier otra ruta, contamos los segmentos de directorios para subir
-        // Eliminamos el fichero final de la ruta para obtener solo los directorios
-        let dirPath = path.substring(0, path.lastIndexOf('/'));
-        
-        // Si comienza con /, lo quitamos para no contar un segmento vacío al principio
-        if (dirPath.startsWith('/')) dirPath = dirPath.substring(1);
-        
-        if (!dirPath) return './';
-        
-        const segments = dirPath.split('/').filter(s => s.length > 0);
-        return '../'.repeat(segments.length);
+        // Quitamos el slash inicial si existe para concatenar limpiamente
+        const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+        return new URL(cleanPath, this.appRoot).href;
     }
 
-    /**
-     * Monta la estructura estática (Navbar, Footer, ContactForm).
-     */
     mountLayout() {
         const navbarRoot = document.getElementById('navbar-root');
         const footerRoot = document.getElementById('footer-root');
         const contactRoot = document.getElementById('contact-root');
         
-        if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(this.basePath, this.isHomePage);
-        if (footerRoot) footerRoot.innerHTML = getFooterHTML(this.basePath);
+        // Pasamos appRoot (URL absoluta) en lugar de basePath relativo
+        if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(this.appRoot, this.isHomePage);
+        if (footerRoot) footerRoot.innerHTML = getFooterHTML(this.appRoot);
         if (contactRoot) contactRoot.innerHTML = getContactFormHTML();
     }
 
-    /**
-     * Monta los modales de la página de inicio dinámicamente.
-     */
     mountHomeModals() {
         const modalsRoot = document.getElementById('modals-root');
         if (modalsRoot) {
@@ -94,14 +90,10 @@ class App {
         }
     }
 
-     /**
-     * Monta el Hero Section si existe el contenedor y configuración en pagesData.
-     */
-     mountHero() {
+    mountHero() {
         const heroRoot = document.getElementById('hero-root');
-        if (!heroRoot) return; // Si no hay contenedor, no hacemos nada
+        if (!heroRoot) return;
 
-        // Detectar página actual para buscar datos
         const path = window.location.pathname;
         let pageKey = null;
 
@@ -109,74 +101,56 @@ class App {
         else if (path.includes('peluqueria')) pageKey = 'peluqueria';
         else if (path.includes('barberia')) pageKey = 'barberia';
         else if (path.includes('contacto.html')) pageKey = 'contacto';
-        // Añadir más lógica de detección según sea necesario
 
         if (pageKey && pagesData[pageKey] && pagesData[pageKey].hero) {
-            // Aseguramos que la ruta de la imagen sea correcta relativa a la página actual
-            // Simbólicamente ajustamos paths si es necesario, pero getHeroHTML inyecta el src tal cual
-            // Si las imágenes en pagesData tienen rutas relativas (../../), funcionarán solo si la estructura de carpetas coincide
-            // Para 'nosotros.html' (en raíz), '../' o '../../' podría fallar si imageSrc está hardcodeado para subdirectorios.
-            // Solución: pagesData debe tener rutas agnósticas o ajustamos aquí.
-            // Por simplicidad, asumimos que pagesData tiene la ruta correcta o la ajustamos.
-            
             const heroData = pagesData[pageKey].hero;
-            // Ajuste simple de ruta para nosotros.html que está en la raíz
-            let imageSrc = heroData.imageSrc;
-            if (this.basePath === './' && imageSrc.startsWith('../../')) {
-                 imageSrc = imageSrc.replace('../../', './');
-            }
-
+            // Resolvemos la imagen usando appRoot para garantizar que cargue
+            const imageSrc = this.resolvePath(heroData.imageSrc);
+            
             heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
         }
     }
 
-    /**
-     * Inicializa componentes esenciales (Menú, Header, WhatsApp).
-     */
     initCoreComponents() {
         new MobileMenu();
         new WhatsAppButton();
         new HeaderController();
     }
 
-    /**
-     * Inicializa componentes de interacción (Carrusel, Modales, Video, etc.).
-     */
     initInteractiveComponents() {
         new FAQAccordion('#faq');
         new ReviewsCarousel();
         new ContactFormController();
         new ShareButton();
-        if (this.isHomePage) new ModalController(); // Solo necesitamos controlador de modales en home por ahora
+        if (this.isHomePage) new ModalController();
         new VideoPlayerController();
         new GalleryController();
 
-        // Inicializamos la sección de marcas (si existe el contenedor)
         new BrandsSection('home-brands-root', allBrands).render();
 
-        // Decoraciones solo en Home
         if (this.isHomePage) {
-            new FloatingDecorations({ basePath: this.basePath });
+            // Pasamos appRoot para assets de decoraciones
+            new FloatingDecorations({ basePath: this.appRoot });
         }
     }
 
-    /**
-     * Monta el grid de servicios en la página de inicio.
-     */
     mountHomeServices() {
         const servicesGrid = document.getElementById('services-grid');
         if (servicesGrid && servicesData) {
             servicesGrid.innerHTML = '';
             servicesData.forEach(data => {
-                const card = new ServiceCard(data);
+                // Interceptamos los datos para corregir los enlaces e imágenes
+                const processedData = {
+                    ...data,
+                    link: this.resolvePath(data.link),
+                    image: this.resolvePath(data.image)
+                };
+                const card = new ServiceCard(processedData);
                 servicesGrid.appendChild(card.render());
             });
         }
     }
 
-    /**
-     * Inicializa servicios globales (UI, Traducción).
-     */
     initServices() {
         new UIService();
     }

@@ -9,12 +9,13 @@ import { getMenuCategories } from '../data/navigation.js';
 
 /**
  * Genera el HTML de la barra de navegación.
- * @param {string} basePath - Ruta base.
+ * @param {string} basePath - URL Raíz absoluta de la app (ej: 'https://dominio/repo/').
  * @param {boolean} isHome - Página de inicio o interna.
  * @returns {string} HTML.
  */
 export function getNavbarHTML(basePath = './', isHome = true) {
-    const linkPrefix = isHome ? '' : '/index.html';
+    // Si no estamos en home, los anclas (#) deben redirigir a index.html
+    const linkPrefix = isHome ? '' : `${basePath}index.html`;
     const menuCategories = getMenuCategories(basePath);
     const navLink = createNavLinkHelper(linkPrefix);
 
