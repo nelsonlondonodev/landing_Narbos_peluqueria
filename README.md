@@ -58,14 +58,11 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 ### 2. Codebase Improvements
 - **`HeaderController.js`**: Refactored to accept dependency injection of the header element for better robustness. Added fallback logic for DOM selection.
 - **`main.js`**: Updated `initCoreComponents` to explicitly pass the header element to the controller.
+- **Cleanup**: Removed unused duplicate `barber-hero.jpg` from root directory.
 
 ---
 
-## 🐛 Known Issues / Pending Tasks
-- **Header Scroll Interaction**: 
-  - **Issue**: The navigation bar on internal pages (`nosotros.html`, `contacto.html`) starts in a "scrolled" (thin) state instead of the initial Expanded state, or fails to animate correctly upon scrolling back to top.
-  - **Status**: Under investigation. Likely related to CSS initialization state or deep timing issues despite JS fixes.
-  - **Next Steps**: Debug initial CSS state and potential conflicts with `input.css` default styles vs dynamic classes.
+
 
 ## 📂 Project Structure
 
