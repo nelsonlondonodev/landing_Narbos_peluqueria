@@ -120,12 +120,26 @@ async function runSSG() {
                 console.log(`✨ Servicios inyectados en ${gridId} para ${relativePath}`);
             }
 
-            // B. Inyección de Hero (Nueva lógica)
+            // B. Inyección de Hero (Nueva lógica con ajuste de rutas)
             if (pageConfig.key && pagesData[pageConfig.key] && pagesData[pageConfig.key].hero) {
-                const heroData = pagesData[pageConfig.key].hero;
+                // Clonamos para no mutar el objeto original
+                const heroData = { ...pagesData[pageConfig.key].hero };
                 const heroRoot = document.getElementById('hero-root');
                 
                 if (heroRoot) {
+                     // Calcular profundidad para ajustar rutas relativas
+                     let prefix = '';
+                     const dir = path.dirname(relativePath);
+                     if (dir !== '.' && dir !== '') {
+                        const depth = dir.split(/[/\\]/).length;
+                        prefix = '../'.repeat(depth);
+                     }
+
+                     // Ajustar ruta de imagen si es local
+                     if (heroData.imageSrc && !heroData.imageSrc.startsWith('http')) {
+                        heroData.imageSrc = prefix + heroData.imageSrc;
+                     }
+
                      const { getHeroHTML } = await import('../js/components/HeroSection.js');
                      heroRoot.innerHTML = getHeroHTML(heroData);
                      console.log(`✨ Hero inyectado en ${relativePath}`);
