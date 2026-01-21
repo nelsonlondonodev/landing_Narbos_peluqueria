@@ -8,7 +8,8 @@ import { UIService } from './services/UIService.js';
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
 import { getContactFormHTML } from './components/ContactForm.js';
-import { getHeroHTML } from './components/HeroSection.js'; // Nuevo Import
+import { getHeroHTML } from './components/HeroSection.js';
+import { getHomeModalsHTML } from './components/HomeModals.js'; // Nueva función para modales dinámicos
 // Components
 import { MobileMenu } from './components/MobileMenu.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
@@ -33,11 +34,14 @@ import { pagesData } from './data/pagesData.js'; // Nuevo Import
 class App {
     constructor() {
         this.basePath = this.calculateBasePath();
+        const path = window.location.pathname;
+        this.isHomePage = (path === '/' || path.endsWith('/index.html')) && this.basePath === './';
     }
 
     init() {
         this.mountLayout();
-        this.mountHero(); // Nuevo método
+        this.mountHero();
+        if (this.isHomePage) this.mountHomeModals(); // Montar modales solo en home
         this.initCoreComponents();
         this.initInteractiveComponents();
         this.mountHomeServices();
@@ -75,12 +79,19 @@ class App {
         const footerRoot = document.getElementById('footer-root');
         const contactRoot = document.getElementById('contact-root');
         
-        const path = window.location.pathname;
-        const isHomePage = (path === '/' || path.endsWith('/index.html')) && this.basePath === './';
-
-        if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(this.basePath, isHomePage);
+        if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(this.basePath, this.isHomePage);
         if (footerRoot) footerRoot.innerHTML = getFooterHTML(this.basePath);
         if (contactRoot) contactRoot.innerHTML = getContactFormHTML();
+    }
+
+    /**
+     * Monta los modales de la página de inicio dinámicamente.
+     */
+    mountHomeModals() {
+        const modalsRoot = document.getElementById('modals-root');
+        if (modalsRoot) {
+            modalsRoot.innerHTML = getHomeModalsHTML();
+        }
     }
 
      /**
@@ -136,7 +147,7 @@ class App {
         new ReviewsCarousel();
         new ContactFormController();
         new ShareButton();
-        new ModalController();
+        if (this.isHomePage) new ModalController(); // Solo necesitamos controlador de modales en home por ahora
         new VideoPlayerController();
         new GalleryController();
 
@@ -144,9 +155,7 @@ class App {
         new BrandsSection('home-brands-root', allBrands).render();
 
         // Decoraciones solo en Home
-        const path = window.location.pathname;
-        const isHome = (path === '/' || path.endsWith('/index.html')) && this.basePath === './';
-        if (isHome) {
+        if (this.isHomePage) {
             new FloatingDecorations({ basePath: this.basePath });
         }
     }
