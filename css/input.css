@@ -321,6 +321,22 @@ body.modal-open-layer-fix #app-wrapper {
 .animate__animated.is-visible {
   visibility: visible;
 }
+
+/* Custom Soft Animations to prevent layout jumps */
+@keyframes fadeInUpSmall {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate__fadeInUpSmall {
+  animation-name: fadeInUpSmall;
+}
 /* --- FIN: ESTILOS PARA ANIMACIONES CON ANIMATE.CSS --- */
 
 /* --- FIN: ESTILOS PARA ANIMACIÓN EN SECCIÓN "SOBRE NOSOTROS" --- */

@@ -2071,16 +2071,6 @@
       }
     }
   }
-  .hover\:bg-brand-green\/90 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: color-mix(in srgb, #6B755A 90%, transparent);
-        @supports (color: color-mix(in lab, red, red)) {
-          background-color: color-mix(in oklab, var(--color-brand-green) 90%, transparent);
-        }
-      }
-    }
-  }
   .hover\:bg-brand-light\/20 {
     &:hover {
       @media (hover: hover) {
@@ -2825,6 +2815,19 @@ body.modal-open-layer-fix .site-header, body.modal-open-layer-fix #app-wrapper {
 }
 .animate__animated.is-visible {
   visibility: visible;
+}
+@keyframes fadeInUpSmall {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate__fadeInUpSmall {
+  animation-name: fadeInUpSmall;
 }
 #reviews-slider-wrapper {
   display: block;

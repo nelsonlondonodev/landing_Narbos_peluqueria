@@ -45,7 +45,7 @@ function renderWhatsAppButton() {
 
 function renderForm() {
     return `
-        <form id="contact-form" action="https://formspree.io/f/xyzpdrwe" method="POST" class="max-w-xl mx-auto text-left space-y-4" data-animation="fadeInUp" data-animation-delay="0.6s">
+        <form id="contact-form" action="https://formspree.io/f/xyzpdrwe" method="POST" class="max-w-xl mx-auto text-left space-y-4" data-animation="fadeInUpSmall" data-animation-delay="0.6s">
             ${renderInputGroup('name', 'text', 'Nombre', 'formNameLabel')}
             ${renderInputGroup('email', 'email', 'Correo Electrónico', 'formEmailLabel')}
             ${renderTextareaGroup('message', 'Mensaje', 'formMessageLabel')}
