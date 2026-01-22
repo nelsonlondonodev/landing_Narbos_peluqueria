@@ -35,6 +35,19 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (January 22, 2026)
+
+### 1. Deployment Automation (GitHub Pages) 🚀
+- **Automated Deploy Command**: Added `npm run deploy` script to `package.json`.
+    - This command automates the entire process: running the build (`npm run build`) and pushing the `dist/` folder to the `gh-pages` branch using the `gh-pages` library.
+    - Zero configuration required for future updates.
+
+### 2. UI Enhancements (Google Reviews & Timeline) ✨
+- **Infinite Marquee**: Implemented a continuous, smooth-scrolling marquee for Google Reviews, displaying real customer testimonials dynamically.
+- **Timeline Updates**: Updated the "Trayectoria" section with new milestones for **2024** (Service Expansion) and **2026** (Digital Transformation).
+
+---
+
 ## 🔄 Recent Updates (January 21, 2026)
 
 ### 1. Preview Deployment System (GitHub Pages)
