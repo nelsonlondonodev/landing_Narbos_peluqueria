@@ -502,6 +502,59 @@ body.modal-open-layer-fix #app-wrapper {
 .animate-floating {
     animation: floating 3s ease-in-out infinite;
 }
+
+/* Animations for Leaves Entry */
+@keyframes leafEnterRight {
+    0% {
+        opacity: 0;
+        transform: translate(100px, -50px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes leafEnterLeft {
+    0% {
+        opacity: 0;
+        transform: translate(-100px, 50px) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+.animate-leaf-enter-right {
+    animation: leafEnterRight 1.5s ease-out forwards;
+}
+
+.animate-leaf-enter-left {
+    animation: leafEnterLeft 1.5s ease-out forwards;
+}
+
+/* Generic Fade In Up for Content */
+@keyframes fadeInUpContent {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUpContent 0.8s ease-out forwards;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+
 /* --- FIN: ANIMACIONES FLOTANTES --- */
 /* --- GLightbox Mobile Controls Optimization --- */
 .gbtn.prev, .gbtn.next {

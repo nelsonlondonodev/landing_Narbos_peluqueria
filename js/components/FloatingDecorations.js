@@ -40,10 +40,28 @@ export class FloatingDecorations {
                 const parentSection = document.getElementById(config.parent);
                 if (!parentSection) return;
 
+                // --- FIX: Prevent Duplicates ---
+                // If this parent already has a specific leaf type injected by this component, skip to avoid "double leaves".
+                // We use a specific class 'floating-decoration-leaf' to identify our own elements.
+                // We also check if the image source matches to allow multiple DIFFERENT leaves but not same ones.
+                const existingLeaves = parentSection.querySelectorAll('.floating-decoration-leaf');
+                let isDuplicate = false;
+                existingLeaves.forEach(leaf => {
+                    if (leaf.src.includes(config.img)) {
+                        isDuplicate = true;
+                    }
+                });
+
+                if (isDuplicate) return; 
+
                 this.setupParentSection(parentSection);
                 const leaf = this.createLeafElement(config);
                 
-                if (this.config.enableAnimation) {
+                // --- FIX: Animation Conflict ---
+                // Only register for parallax loop if speed is > 0.
+                // If speed is 0, we let CSS animations (like 'animate-leaf-enter-...') handle the movement 
+                // without JS overriding the 'transform' property every frame.
+                if (this.config.enableAnimation && config.speed > 0) {
                     this.registerForParallax(leaf, config);
                 }
 
@@ -80,9 +98,8 @@ export class FloatingDecorations {
         // O si queremos unificar, definimos explícitamente:
         
         if (isServicePage) {
-            // En páginas de servicios reales, ya existen decoraciones inyectadas o maquetadas.
-            // Retornamos solo la base (FAQ) para no duplicar ni romper lo existente.
-            return baseConfig;
+            // Updated: We now WANT hero injections on service pages (specifically Peluquería).
+            // Logic is handled below in the 'else' block of isHomePage.
         }
 
         // Configuración para el HERO ('inicio')
@@ -118,22 +135,41 @@ export class FloatingDecorations {
                 }
             ];
         } else {
-            // --- Internas (Nosotros/Contacto): Decoraciones Estilo Servicios (ESTÁTICAS) ---
-            // Importante: Speed 0 para que no tengan movimiento parallax, igual que en Servicios.
-            heroConfig = [
-                { 
-                    parent: 'inicio', 
-                    img: 'ui/decorations/hoja-seca-3d.webp', 
-                    speed: 0, // Sin movimiento
-                    classes: 'w-24 -right-4 top-12 md:w-40 md:-right-12 md:top-20 z-30 opacity-90 rotate-[15deg]' 
-                },
-                { 
-                    parent: 'inicio', 
-                    img: 'ui/decorations/hoja-verde-3d.webp', 
-                    speed: 0, // Sin movimiento
-                    classes: 'w-28 -left-6 top-3/4 md:w-36 md:-left-8 md:top-[60%] z-30 opacity-90 -rotate-[15deg]' 
-                }
-            ];
+            // --- Internas (Nosotros/Contacto) & Servicios (Peluquería) ---
+            
+            // Logic for Peluquería/Services specific decorations
+            if (isServicePage) {
+                 heroConfig = [
+                    { 
+                        parent: 'inicio', 
+                        img: 'ui/decorations/hoja-seca-3d.webp', 
+                        speed: 0, // CRITICAL: 0 means no parallax loop, preserving CSS animation
+                        classes: 'w-24 -right-4 top-12 md:w-56 md:-right-12 md:top-20 z-30 animate-leaf-enter-right rotate-[15deg]' 
+                    },
+                    { 
+                        parent: 'inicio', 
+                        img: 'ui/decorations/hoja-verde-3d.webp', 
+                        speed: 0, 
+                        classes: 'w-28 -left-6 top-3/4 md:w-48 md:-left-16 md:bottom-20 z-30 animate-leaf-enter-left -rotate-[15deg]' 
+                    }
+                ];
+            } else {
+                // Default Internas (Nosotros/Contacto)
+                 heroConfig = [
+                    { 
+                        parent: 'inicio', 
+                        img: 'ui/decorations/hoja-seca-3d.webp', 
+                        speed: 0, 
+                        classes: 'w-24 -right-4 top-12 md:w-40 md:-right-12 md:top-20 z-30 opacity-90 rotate-[15deg]' 
+                    },
+                    { 
+                        parent: 'inicio', 
+                        img: 'ui/decorations/hoja-verde-3d.webp', 
+                        speed: 0, 
+                        classes: 'w-28 -left-6 top-3/4 md:w-36 md:-left-8 md:top-[60%] z-30 opacity-90 -rotate-[15deg]' 
+                    }
+                ];
+            }
         }
 
         return [...heroConfig, ...baseConfig];
@@ -153,7 +189,8 @@ export class FloatingDecorations {
             leaf.onerror = null; 
         };
         leaf.alt = '';
-        leaf.className = `absolute pointer-events-none drop-shadow-2xl transition-transform duration-700 ease-out will-change-transform ${config.classes}`;
+        // Add identification class 'floating-decoration-leaf'
+        leaf.className = `floating-decoration-leaf absolute pointer-events-none drop-shadow-2xl transition-transform duration-700 ease-out will-change-transform ${config.classes}`;
         return leaf;
     }
 

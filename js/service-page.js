@@ -1,7 +1,7 @@
 import { initApp } from './main.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
-import { FloatingDecorations } from './components/FloatingDecorations.js';
+
 import { BrandsSection } from './components/BrandsSection.js'; // Added
 import { hairBrands } from './data/brandsData.js'; // Added
 import { hairSalonServices } from './data/hairSalonServices.js';
@@ -24,7 +24,7 @@ class ServicePageManager {
     init() {
         this.initServiceGrid();
         this.initBrands(); // Added
-        this.initFloatingDecorations();
+
         this.initLazyVideos();
         this.initModalTriggers();
         this.initBreadcrumbs();
@@ -234,29 +234,7 @@ class ServicePageManager {
         return hairSalonServices;
     }
 
-    /**
-     * Inicializa decoraciones flotantes 3D específicas para servicios.
-     */
-    initFloatingDecorations() {
-        new FloatingDecorations({
-            basePath: '../../',
-            enableAnimation: false, 
-            customConfig: [
-                {
-                    parent: 'inicio',
-                    img: 'ui/decorations/hoja-seca-3d.webp',
-                    speed: 0,
-                    classes: 'w-32 -right-6 top-0 md:w-56 md:-right-12 md:-top-4 rotate-12 z-10 opacity-80'
-                },
-                {
-                    parent: 'inicio',
-                    img: 'ui/decorations/hoja-verde-3d.webp',
-                    speed: 0,
-                    classes: 'w-28 -left-8 bottom-0 md:w-48 md:-left-4 md:-bottom-12 -rotate-12 z-10 opacity-80'
-                }
-            ]
-        });
-    }
+
 
     /**
      * Carga diferida de videos usando IntersectionObserver.
