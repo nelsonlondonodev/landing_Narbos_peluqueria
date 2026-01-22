@@ -35,9 +35,11 @@ function renderHeader() {
 
 function renderWhatsAppButton() {
     return `
-        <a href="https://wa.me/573123462618?text=hola, ¡Te hablo desde la web de Narbos Salón!" target="_blank" data-key="footerCta" class="inline-block bg-brand-green text-white font-bold py-2 px-6 rounded-full hover:bg-brand-green/90 transition-colors duration-300 ease-in-out mb-8" data-animation="zoomIn" data-animation-delay="0.4s">
-            Contactar por WhatsApp
-        </a>
+        <p class="text-center mb-8" data-animation="zoomIn" data-animation-delay="0.4s">
+            <a href="https://wa.me/573123462618?text=hola, ¡Te hablo desde la web de Narbos Salón!" target="_blank" class="text-brand-green hover:text-brand-gray-dark font-medium underline decoration-brand-green/30 hover:decoration-brand-gray-dark transition-all duration-300">
+                ¿Prefieres chat? Escríbenos al WhatsApp
+            </a>
+        </p>
     `;
 }
 
