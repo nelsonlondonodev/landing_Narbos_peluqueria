@@ -1633,6 +1633,12 @@
   .underline {
     text-decoration-line: underline;
   }
+  .decoration-brand-green\/30 {
+    text-decoration-color: color-mix(in srgb, #6B755A 30%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      text-decoration-color: color-mix(in oklab, var(--color-brand-green) 30%, transparent);
+    }
+  }
   .placeholder-brand-gray-light\/70 {
     &::placeholder {
       color: color-mix(in srgb, #BEC2B4 70%, transparent);
@@ -2116,6 +2122,13 @@
       }
     }
   }
+  .hover\:text-brand-gray-dark {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-brand-gray-dark);
+      }
+    }
+  }
   .hover\:text-brand-green {
     &:hover {
       @media (hover: hover) {
@@ -2141,6 +2154,13 @@
     &:hover {
       @media (hover: hover) {
         text-decoration-line: underline;
+      }
+    }
+  }
+  .hover\:decoration-brand-gray-dark {
+    &:hover {
+      @media (hover: hover) {
+        text-decoration-color: var(--color-brand-gray-dark);
       }
     }
   }
