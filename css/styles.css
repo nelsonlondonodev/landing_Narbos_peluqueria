@@ -2520,6 +2520,11 @@
       padding-block: calc(var(--spacing) * 24);
     }
   }
+  .md\:pt-48 {
+    @media (width >= 48rem) {
+      padding-top: calc(var(--spacing) * 48);
+    }
+  }
   .md\:pt-64 {
     @media (width >= 48rem) {
       padding-top: calc(var(--spacing) * 64);
