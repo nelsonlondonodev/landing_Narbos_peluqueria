@@ -59,25 +59,13 @@ export class FloatingDecorations {
     getConfigs() {
         if (this.config.customConfig) return this.config.customConfig;
 
-        const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html') && !window.location.pathname.includes('/servicios/');
-        const isInternalPage = !isHomePage;
-
-        // Configuración Base (Siempre presente en secciones comunes como FAQ o Servicios internos)
+        const path = window.location.pathname;
+        const isHomePage = path === '/' || (path.endsWith('index.html') && !path.includes('/servicios/'));
+        const isServicePage = path.includes('/servicios/') || path.includes('peluqueria') || path.includes('barberia');
+        
+        // Configuración Base (Siempre presente en secciones comunes como FAQ)
         const baseConfig = [
-             // --- Sección Servicios ---
-            { 
-                parent: 'servicios', 
-                img: 'ui/decorations/hoja-seca-3d.webp', 
-                speed: 0.08,
-                classes: 'w-24 -right-2 top-24 md:w-48 md:-right-20 md:top-12 z-20' 
-            },
-            { 
-                parent: 'servicios', 
-                img: 'ui/decorations/hoja-verde-3d.webp', 
-                speed: 0.12,
-                classes: 'w-28 -left-4 top-1/2 md:w-40 md:-left-12 md:top-[40%] z-20' 
-            },
-            // --- Sección FAQ ---
+            // --- Sección FAQ (Común en varias páginas) ---
             { 
                 parent: 'faq', 
                 img: 'ui/decorations/hoja-seca-3d.webp', 
@@ -86,41 +74,64 @@ export class FloatingDecorations {
             }
         ];
 
-        // Configuración específica para el HERO ('inicio')
+        // Si es página de servicios, NO inyectamos en 'inicio' ni 'servicios' aquí 
+        // porque asumimos que esas páginas pueden tener su propia lógica o no requieren 
+        // la inyección automática en 'inicio' de la misma manera que Contacto/Nosotros.
+        // O si queremos unificar, definimos explícitamente:
+        
+        if (isServicePage) {
+            // En páginas de servicios reales, ya existen decoraciones inyectadas o maquetadas.
+            // Retornamos solo la base (FAQ) para no duplicar ni romper lo existente.
+            return baseConfig;
+        }
+
+        // Configuración para el HERO ('inicio')
         let heroConfig = [];
 
         if (isHomePage) {
-            // --- Home: Decoraciones Grandes ---
+            // --- Home: Decoraciones Grandes (Diseño Original) ---
             heroConfig = [
                 { 
                     parent: 'inicio', 
                     img: 'ui/decorations/hoja-seca-3d.webp', 
                     speed: 0.1,
-                    classes: 'w-20 -left-4 top-[10%] opacity-70 md:w-44 md:left-[-1%] md:opacity-90 z-10' 
+                    classes: 'w-20 -left-6 top-[10%] opacity-90 md:w-44 md:left-[-2%] md:opacity-100 z-10 rotate-45' 
                 },
                 { 
                     parent: 'inicio', 
                     img: 'ui/decorations/hoja-verde-3d.webp', 
                     speed: 0.15,
-                    classes: 'w-24 -right-4 top-[40%] opacity-70 md:w-56 md:right-[15%] md:top-[35%] md:opacity-90 z-10' 
+                    classes: 'w-24 -right-6 top-[40%] opacity-90 md:w-56 md:right-[15%] md:top-[35%] md:opacity-100 z-10 -rotate-12' 
+                },
+                // La Home también tiene decoraciones en la sección de servicios (intermedia)
+                { 
+                    parent: 'servicios', 
+                    img: 'ui/decorations/hoja-seca-3d.webp', 
+                    speed: 0.08,
+                    classes: 'w-24 -right-2 top-24 md:w-48 md:-right-20 md:top-12 z-20' 
+                },
+                { 
+                    parent: 'servicios', 
+                    img: 'ui/decorations/hoja-verde-3d.webp', 
+                    speed: 0.12,
+                    classes: 'w-28 -left-4 top-1/2 md:w-40 md:-left-12 md:top-[40%] z-20' 
                 }
             ];
         } else {
-            // --- Internas (Nosotros/Contacto): Decoraciones Sutiles (Estilo Servicios) ---
-            // Reutilizamos la estética de la sección de servicios pero aplicada al contenedor 'inicio' (Hero)
-            // Aumentamos Z-Index a 40 y ajustamos posiciones para asegurar visibilidad dentro del contenedor
+            // --- Internas (Nosotros/Contacto): Decoraciones Estilo Servicios (ESTÁTICAS) ---
+            // Importante: Speed 0 para que no tengan movimiento parallax, igual que en Servicios.
             heroConfig = [
                 { 
                     parent: 'inicio', 
                     img: 'ui/decorations/hoja-seca-3d.webp', 
-                    speed: 0.08,
-                    classes: 'w-24 right-0 top-10 md:w-48 md:right-0 md:top-12 z-40 opacity-90' 
+                    speed: 0, // Sin movimiento
+                    classes: 'w-24 -right-4 top-12 md:w-40 md:-right-12 md:top-20 z-30 opacity-90 rotate-[15deg]' 
                 },
                 { 
                     parent: 'inicio', 
                     img: 'ui/decorations/hoja-verde-3d.webp', 
-                    speed: 0.12,
-                    classes: 'w-28 left-0 top-2/3 md:w-40 md:left-0 md:top-[60%] z-40 opacity-90' 
+                    speed: 0, // Sin movimiento
+                    classes: 'w-28 -left-6 top-3/4 md:w-36 md:-left-8 md:top-[60%] z-30 opacity-90 -rotate-[15deg]' 
                 }
             ];
         }
