@@ -287,8 +287,14 @@
   .top-1\/2 {
     top: calc(1/2 * 100%);
   }
+  .top-2\/3 {
+    top: calc(2/3 * 100%);
+  }
   .top-4 {
     top: calc(var(--spacing) * 4);
+  }
+  .top-10 {
+    top: calc(var(--spacing) * 10);
   }
   .top-24 {
     top: calc(var(--spacing) * 24);
@@ -2344,9 +2350,19 @@
       top: 40%;
     }
   }
+  .md\:top-\[60\%\] {
+    @media (width >= 48rem) {
+      top: 60%;
+    }
+  }
   .md\:top-\[65vh\] {
     @media (width >= 48rem) {
       top: 65vh;
+    }
+  }
+  .md\:-right-10 {
+    @media (width >= 48rem) {
+      right: calc(var(--spacing) * -10);
     }
   }
   .md\:-right-12 {
@@ -2357,6 +2373,11 @@
   .md\:-right-20 {
     @media (width >= 48rem) {
       right: calc(var(--spacing) * -20);
+    }
+  }
+  .md\:right-0 {
+    @media (width >= 48rem) {
+      right: calc(var(--spacing) * 0);
     }
   }
   .md\:right-\[15\%\] {
@@ -2379,6 +2400,11 @@
       left: calc(var(--spacing) * -12);
     }
   }
+  .md\:left-0 {
+    @media (width >= 48rem) {
+      left: calc(var(--spacing) * 0);
+    }
+  }
   .md\:left-2 {
     @media (width >= 48rem) {
       left: calc(var(--spacing) * 2);
@@ -2387,6 +2413,11 @@
   .md\:left-\[-1\%\] {
     @media (width >= 48rem) {
       left: -1%;
+    }
+  }
+  .md\:left-\[-2\%\] {
+    @media (width >= 48rem) {
+      left: -2%;
     }
   }
   .md\:col-span-1 {

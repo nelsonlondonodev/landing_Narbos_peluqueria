@@ -132,11 +132,11 @@ class App {
         new GalleryController();
 
         new BrandsSection('home-brands-root', allBrands).render();
+        
+        // Inicializar decoraciones flotantes globalmente
+        new FloatingDecorations({ basePath: this.appRoot });
 
-        if (this.isHomePage) {
-            // Pasamos appRoot para assets de decoraciones
-            new FloatingDecorations({ basePath: this.appRoot });
-        }
+
     }
 
     mountHomeServices() {

@@ -57,21 +57,14 @@ export class FloatingDecorations {
     }
 
     getConfigs() {
-        return this.config.customConfig || [
-            // --- Sección Inicio (Hero) ---
-            { 
-                parent: 'inicio', 
-                img: 'ui/decorations/hoja-seca-3d.webp', 
-                speed: 0.1,
-                classes: 'w-20 -left-4 top-[10%] opacity-70 md:w-44 md:left-[-1%] md:opacity-90 z-10' 
-            },
-            { 
-                parent: 'inicio', 
-                img: 'ui/decorations/hoja-verde-3d.webp', 
-                speed: 0.15,
-                classes: 'w-24 -right-4 top-[40%] opacity-70 md:w-56 md:right-[15%] md:top-[35%] md:opacity-90 z-10' 
-            },
-            // --- Sección Servicios ---
+        if (this.config.customConfig) return this.config.customConfig;
+
+        const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('index.html') && !window.location.pathname.includes('/servicios/');
+        const isInternalPage = !isHomePage;
+
+        // Configuración Base (Siempre presente en secciones comunes como FAQ o Servicios internos)
+        const baseConfig = [
+             // --- Sección Servicios ---
             { 
                 parent: 'servicios', 
                 img: 'ui/decorations/hoja-seca-3d.webp', 
@@ -92,6 +85,47 @@ export class FloatingDecorations {
                 classes: 'w-24 -left-8 -top-10 -rotate-45 md:w-32 md:left-2 md:top-2 md:rotate-10 z-20' 
             }
         ];
+
+        // Configuración específica para el HERO ('inicio')
+        let heroConfig = [];
+
+        if (isHomePage) {
+            // --- Home: Decoraciones Grandes ---
+            heroConfig = [
+                { 
+                    parent: 'inicio', 
+                    img: 'ui/decorations/hoja-seca-3d.webp', 
+                    speed: 0.1,
+                    classes: 'w-20 -left-4 top-[10%] opacity-70 md:w-44 md:left-[-1%] md:opacity-90 z-10' 
+                },
+                { 
+                    parent: 'inicio', 
+                    img: 'ui/decorations/hoja-verde-3d.webp', 
+                    speed: 0.15,
+                    classes: 'w-24 -right-4 top-[40%] opacity-70 md:w-56 md:right-[15%] md:top-[35%] md:opacity-90 z-10' 
+                }
+            ];
+        } else {
+            // --- Internas (Nosotros/Contacto): Decoraciones Sutiles (Estilo Servicios) ---
+            // Reutilizamos la estética de la sección de servicios pero aplicada al contenedor 'inicio' (Hero)
+            // Aumentamos Z-Index a 40 y ajustamos posiciones para asegurar visibilidad dentro del contenedor
+            heroConfig = [
+                { 
+                    parent: 'inicio', 
+                    img: 'ui/decorations/hoja-seca-3d.webp', 
+                    speed: 0.08,
+                    classes: 'w-24 right-0 top-10 md:w-48 md:right-0 md:top-12 z-40 opacity-90' 
+                },
+                { 
+                    parent: 'inicio', 
+                    img: 'ui/decorations/hoja-verde-3d.webp', 
+                    speed: 0.12,
+                    classes: 'w-28 left-0 top-2/3 md:w-40 md:left-0 md:top-[60%] z-40 opacity-90' 
+                }
+            ];
+        }
+
+        return [...heroConfig, ...baseConfig];
     }
 
     setupParentSection(element) {
