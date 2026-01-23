@@ -237,8 +237,35 @@ const versionAssets = async () => {
             fs.writeFileSync(file, content);
         }
     }
+
+    // 3. Update References in JS files (for ES Modules imports)
+    const distJsFiles = getFiles(path.join(DIST_DIR, 'js'), '.js');
     
-    log('✅ HTML references updated.');
+    for (const file of distJsFiles) {
+        let content = fs.readFileSync(file, 'utf8');
+        let changed = false;
+
+        Object.keys(mappings).forEach(originalPath => {
+            const newPath = mappings[originalPath]; 
+            const originalFilename = path.basename(originalPath); // e.g. main.js
+            const newFilename = path.basename(newPath); // e.g. main.123.js
+
+            // Regex for JS imports: matches './main.js' or '../js/main.js' inside quotes
+            // Capture groups: $1=quote, $2=prefix/path, $3=closing quote
+            const regex = new RegExp(`(['"])([^'"]*\\/)?${originalFilename.replace('.', '\\.')}(['"])`, 'g');
+            
+            if (regex.test(content)) {
+                content = content.replace(regex, `$1$2${newFilename}$3`);
+                changed = true;
+            }
+        });
+
+        if (changed) {
+            fs.writeFileSync(file, content);
+        }
+    }
+    
+    log('✅ HTML & JS references updated.');
 };
 
 /**
