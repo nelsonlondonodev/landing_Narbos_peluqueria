@@ -24,14 +24,16 @@ class ServicePageManager {
     init() {
         // Inicializar la App base explícitamente para asegurar Navbar/Footer
         try {
-            const app = new App();
-            app.mountLayout();
-            app.mountHero();
-            app.initCoreComponents();
-            app.initInteractiveComponents(); // Para FAQ, Reviews, etc.
+            this.app = new App();
+            this.app.mountLayout();
+            this.app.mountHero();
+            this.app.initCoreComponents();
+            this.app.initInteractiveComponents();
             console.log("✅ App base initialized from ServicePageManager");
         } catch (error) {
             console.error("❌ Error initializing App base from ServicePageManager:", error);
+            // Fallback lightweight app instance just for path resolution if mount fails
+            this.app = new App(); 
         }
 
         this.initServiceGrid();
@@ -87,14 +89,21 @@ class ServicePageManager {
         const servicesToRender = this.getFilteredServices(currentPath);
 
         servicesToRender.forEach(data => {
-            const card = new ServiceCard(data);
+            // Resolver ruta de imagen usando la lógica centralizada de App
+            const processedData = {
+                ...data,
+                image: this.app ? this.app.resolvePath(data.image) : data.image,
+                link: this.app ? this.app.resolvePath(data.link) : data.link
+            };
+
+            const card = new ServiceCard(processedData);
             const cardElement = card.render();
 
-            this.setupHairServiceLightbox(cardElement, data);
+            this.setupHairServiceLightbox(cardElement, processedData);
             
             hairServicesGrid.appendChild(cardElement);
 
-            this.setupHairServiceGallery(hairServicesGrid, data);
+            this.setupHairServiceGallery(hairServicesGrid, processedData);
         });
 
         this.initLightboxInstance();
@@ -105,7 +114,12 @@ class ServicePageManager {
         if (!barberServicesGrid) return;
 
         barberServices.forEach(data => {
-            const card = new ServiceCard(data);
+            const processedData = {
+                ...data,
+                image: this.app ? this.app.resolvePath(data.image) : data.image,
+                link: this.app ? this.app.resolvePath(data.link) : data.link
+            };
+            const card = new ServiceCard(processedData);
             const cardElement = card.render();
             
             // Lógica para abrir el modal si el enlace es el específico
@@ -122,7 +136,12 @@ class ServicePageManager {
         if (!aestheticsServicesGrid) return;
 
         estheticsServices.forEach(data => {
-            const card = new ServiceCard(data);
+            const processedData = {
+                ...data,
+                image: this.app ? this.app.resolvePath(data.image) : data.image,
+                link: this.app ? this.app.resolvePath(data.link) : data.link
+            };
+            const card = new ServiceCard(processedData);
             aestheticsServicesGrid.appendChild(card.render());
         });
     }
@@ -172,9 +191,12 @@ class ServicePageManager {
         const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
 
         data.galleryImages.forEach((item, index) => {
-            const imgUrl = typeof item === 'string' ? item : item.src;
+            let imgUrl = typeof item === 'string' ? item : item.src;
             const imgTitle = typeof item === 'string' ? `${data.title} - Imagen ${index + 2}` : item.title;
             
+            // Resolver ruta de imagen de galería
+            if (this.app) imgUrl = this.app.resolvePath(imgUrl);
+
             const hiddenLink = document.createElement('a');
             hiddenLink.href = imgUrl;
             hiddenLink.className = 'glightbox hidden'; 
