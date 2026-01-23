@@ -3309,35 +3309,18 @@ body.modal-open-layer-fix .site-header, body.modal-open-layer-fix #app-wrapper {
 .delay-500 {
   animation-delay: 500ms;
 }
-.gbtn.prev, .gbtn.next {
-  background-color: rgba(0, 0, 0, 0.4) !important;
-  border-radius: 50%;
-  margin: 10px;
-}
-@media (max-width: 768px) {
-  .gbtn.prev, .gbtn.next {
-    display: flex !important;
-    width: 40px !important;
-    height: 40px !important;
-    top: 50% !important;
-    margin: 0 !important;
-  }
-  .gbtn.prev {
-    left: 10px !important;
-  }
-  .gbtn.next {
-    right: 10px !important;
-  }
-}
 .gbtn {
   display: flex !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  border-radius: 50%;
   width: 45px !important;
   height: 45px !important;
   top: 50% !important;
   margin-top: -22px !important;
   opacity: 1 !important;
   transition: background-color 0.3s ease;
+  align-items: center;
+  justify-content: center;
 }
 .gbtn:hover {
   background-color: rgba(0, 0, 0, 0.8) !important;
@@ -3346,6 +3329,21 @@ body.modal-open-layer-fix .site-header, body.modal-open-layer-fix #app-wrapper {
   width: 24px !important;
   height: 24px !important;
   color: white !important;
+}
+.gbtn.prev {
+  left: 10px !important;
+  margin-left: 0 !important;
+}
+.gbtn.next {
+  right: 10px !important;
+  margin-right: 0 !important;
+}
+@media (max-width: 768px) {
+  .gbtn {
+    width: 40px !important;
+    height: 40px !important;
+    margin-top: -20px !important;
+  }
 }
 .gclose, .glightbox-close {
   position: fixed !important;
@@ -3356,6 +3354,9 @@ body.modal-open-layer-fix .site-header, body.modal-open-layer-fix #app-wrapper {
   height: 40px !important;
   background-color: transparent !important;
   z-index: 99999 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 .gclose svg, .glightbox-close svg {
   width: 30px !important;
