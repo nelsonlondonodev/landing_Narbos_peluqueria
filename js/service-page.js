@@ -62,160 +62,155 @@ class ServicePageManager {
      * Renderiza los grids de servicios correspondientes.
      */
     initServiceGrid() {
-        // 1. Grid Peluquería
+        this.initHairServices();
+        this.initBarberServices();
+        this.initEstheticsServices();
+    }
+
+    initHairServices() {
         const hairServicesGrid = document.getElementById('hair-services-grid');
-        if (hairServicesGrid) {
-            const currentPath = window.location.pathname;
-            const servicesToRender = this.getFilteredServices(currentPath);
+        if (!hairServicesGrid) return;
 
-            servicesToRender.forEach(data => {
-                const card = new ServiceCard(data);
-                const cardElement = card.render();
+        const currentPath = window.location.pathname;
+        const servicesToRender = this.getFilteredServices(currentPath);
 
-                // Logic for GLightbox (Modal Image)
-                if (window.location.pathname.includes('cortes-de-pelo')) {
-                    if (cardElement.tagName === 'A') {
-                        cardElement.classList.add('glightbox');
-                        // Usamos un gallery ID único por tarjeta para que NO haya navegación entre cortes diferentes (sin flechas)
-                        const uniqueGalleryId = 'gallery-' + data.title.replace(/\s+/g, '-').toLowerCase();
-                        cardElement.setAttribute('data-gallery', uniqueGalleryId);
-                        cardElement.setAttribute('data-title', data.title);
-                        cardElement.setAttribute('data-description', data.description);
-                    }
-                }
+        servicesToRender.forEach(data => {
+            const card = new ServiceCard(data);
+            const cardElement = card.render();
 
-                if (window.location.pathname.includes('balayage-mechas')) {
-                    if (cardElement.tagName === 'A') {
-                        cardElement.classList.add('glightbox');
-                        // Fix: Galería única por tarjeta
-                        const uniqueGalleryId = 'gallery-color-' + data.title.replace(/\s+/g, '-').toLowerCase();
-                        cardElement.setAttribute('data-gallery', uniqueGalleryId);
-                        cardElement.setAttribute('data-title', data.title);
-                        cardElement.setAttribute('data-description', data.description);
-                    }
-                }
+            this.setupHairServiceLightbox(cardElement, data);
+            
+            hairServicesGrid.appendChild(cardElement);
 
-                if (window.location.pathname.includes('color-tinturas-cabello')) {
-                    if (cardElement.tagName === 'A') {
-                        cardElement.classList.add('glightbox');
-                        // Fix: Galería única por tarjeta
-                        const uniqueGalleryId = 'gallery-tint-' + data.title.replace(/\s+/g, '-').toLowerCase();
-                        cardElement.setAttribute('data-gallery', uniqueGalleryId);
-                        cardElement.setAttribute('data-title', data.title);
-                        cardElement.setAttribute('data-description', data.description);
-                    }
-                }
+            this.setupHairServiceGallery(hairServicesGrid, data);
+        });
 
-                if (window.location.pathname.includes('tratamientos-capilares')) {
-                    if (cardElement.tagName === 'A') {
-                        cardElement.classList.add('glightbox');
-                        // Fix: Galería única por tarjeta
-                        const uniqueGalleryId = 'gallery-treatment-' + data.title.replace(/\s+/g, '-').toLowerCase();
-                        cardElement.setAttribute('data-gallery', uniqueGalleryId);
-                        cardElement.setAttribute('data-title', data.title);
-                        cardElement.setAttribute('data-description', data.description);
-                    }
-                }
+        this.initLightboxInstance();
+    }
 
-                hairServicesGrid.appendChild(cardElement);
-
-                // Logic for Multi-Image Carousel (Before/After)
-                if (data.galleryImages && Array.isArray(data.galleryImages) && data.galleryImages.length > 0) {
-                     // Get the unique gallery ID we just assigned (we need to regenerate or extract it)
-                     // Re-generating logic to ensure match:
-                     let prefix = 'gallery-default-';
-                     if (window.location.pathname.includes('cortes-de-pelo')) prefix = 'gallery-';
-                     if (window.location.pathname.includes('balayage-mechas')) prefix = 'gallery-color-';
-                     if (window.location.pathname.includes('color-tinturas-cabello')) prefix = 'gallery-tint-';
-                     if (window.location.pathname.includes('tratamientos-capilares')) prefix = 'gallery-treatment-';
-                     
-                     const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
-
-                     data.galleryImages.forEach((item, index) => {
-                         const imgUrl = typeof item === 'string' ? item : item.src;
-                         const imgTitle = typeof item === 'string' ? `${data.title} - Imagen ${index + 2}` : item.title;
-                         
-                         const hiddenLink = document.createElement('a');
-                         hiddenLink.href = imgUrl;
-                         hiddenLink.className = 'glightbox hidden'; // Hidden
-                         hiddenLink.setAttribute('data-gallery', uniqueGalleryId);
-                         hiddenLink.setAttribute('data-title', imgTitle);
-                         hiddenLink.style.display = 'none';
-                         hairServicesGrid.appendChild(hiddenLink);
-                     });
-                }
-            });
-
-    
-            // Init GLightbox if we added class
-            const isServicePage = window.location.pathname.includes('cortes-de-pelo') || 
-                                  window.location.pathname.includes('balayage-mechas') || 
-                                  window.location.pathname.includes('color-tinturas-cabello') ||
-                                  window.location.pathname.includes('tratamientos-capilares');
-
-            if (isServicePage && typeof GLightbox !== 'undefined') {
-                this.lightbox = GLightbox({
-                    selector: '.glightbox',
-                    touchNavigation: true,
-                    loop: true
-                });
-
-                // Accessibility Fix: Hide background content when modal is open using 'inert'
-                const contentElements = [
-                    document.getElementById('app-wrapper'),
-                    document.querySelector('header'),
-                    document.querySelector('footer')
-                ];
-
-                this.lightbox.on('open', () => {
-                    contentElements.forEach(el => {
-                        if (el) {
-                            el.setAttribute('inert', '');
-                            el.removeAttribute('aria-hidden'); // Prevent conflicts if library adds it
-                        }
-                    });
-                });
-
-                this.lightbox.on('close', () => {
-                    contentElements.forEach(el => {
-                        if (el) el.removeAttribute('inert');
-                    });
-                });
-            }
-        }
-
-        // 2. Grid Barbería
+    initBarberServices() {
         const barberServicesGrid = document.getElementById('barber-services-grid');
-        if (barberServicesGrid) {
-            barberServices.forEach(data => {
-                 const card = new ServiceCard(data);
-                 const cardElement = card.render();
-                 
-     // Lógica para abrir el modal si el enlace es el específico
-                 if (data.link === '#open-modal-beard') {
-                    let modalControllerInstance; 
-                    cardElement.addEventListener('click', async (e) => {
-                        e.preventDefault();
-                        if (!modalControllerInstance) {
-                            const { ModalController } = await import('./controllers/ModalController.js');
-                            modalControllerInstance = new ModalController();
-                        }
-                        modalControllerInstance.openModal('beard-modal');
-                    });
-                 }
+        if (!barberServicesGrid) return;
 
-                 barberServicesGrid.appendChild(cardElement);
-            });
-        }
+        barberServices.forEach(data => {
+            const card = new ServiceCard(data);
+            const cardElement = card.render();
+            
+            // Lógica para abrir el modal si el enlace es el específico
+            if (data.link === '#open-modal-beard') {
+                this.setupBeardModalTrigger(cardElement);
+            }
 
-        // 3. Grid Estética
+            barberServicesGrid.appendChild(cardElement);
+        });
+    }
+
+    initEstheticsServices() {
         const aestheticsServicesGrid = document.getElementById('esthetics-services-grid');
-        if (aestheticsServicesGrid) {
-            estheticsServices.forEach(data => {
-                const card = new ServiceCard(data);
-                aestheticsServicesGrid.appendChild(card.render());
+        if (!aestheticsServicesGrid) return;
+
+        estheticsServices.forEach(data => {
+            const card = new ServiceCard(data);
+            aestheticsServicesGrid.appendChild(card.render());
+        });
+    }
+
+    setupBeardModalTrigger(element) {
+        let modalControllerInstance; 
+        element.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (!modalControllerInstance) {
+                const { ModalController } = await import('./controllers/ModalController.js');
+                modalControllerInstance = new ModalController();
+            }
+            modalControllerInstance.openModal('beard-modal');
+        });
+    }
+
+    setupHairServiceLightbox(cardElement, data) {
+         if (cardElement.tagName !== 'A') return;
+
+         const path = window.location.pathname;
+         let prefix = '';
+
+         if (path.includes('cortes-de-pelo')) prefix = 'gallery-';
+         else if (path.includes('balayage-mechas')) prefix = 'gallery-color-';
+         else if (path.includes('color-tinturas-cabello')) prefix = 'gallery-tint-';
+         else if (path.includes('tratamientos-capilares')) prefix = 'gallery-treatment-';
+         else return; // Si no estamos en una de estas páginas, no configuramos lightbox
+
+         cardElement.classList.add('glightbox');
+         const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
+         
+         cardElement.setAttribute('data-gallery', uniqueGalleryId);
+         cardElement.setAttribute('data-title', data.title);
+         cardElement.setAttribute('data-description', data.description);
+    }
+
+    setupHairServiceGallery(container, data) {
+        if (!data.galleryImages || !Array.isArray(data.galleryImages) || data.galleryImages.length === 0) return;
+
+        const path = window.location.pathname;
+        let prefix = 'gallery-default-';
+        if (path.includes('cortes-de-pelo')) prefix = 'gallery-';
+        if (path.includes('balayage-mechas')) prefix = 'gallery-color-';
+        if (path.includes('color-tinturas-cabello')) prefix = 'gallery-tint-';
+        if (path.includes('tratamientos-capilares')) prefix = 'gallery-treatment-';
+
+        const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
+
+        data.galleryImages.forEach((item, index) => {
+            const imgUrl = typeof item === 'string' ? item : item.src;
+            const imgTitle = typeof item === 'string' ? `${data.title} - Imagen ${index + 2}` : item.title;
+            
+            const hiddenLink = document.createElement('a');
+            hiddenLink.href = imgUrl;
+            hiddenLink.className = 'glightbox hidden'; 
+            hiddenLink.setAttribute('data-gallery', uniqueGalleryId);
+            hiddenLink.setAttribute('data-title', imgTitle);
+            hiddenLink.style.display = 'none';
+            container.appendChild(hiddenLink);
+        });
+    }
+
+    initLightboxInstance() {
+        const isServicePage = window.location.pathname.includes('cortes-de-pelo') || 
+                              window.location.pathname.includes('balayage-mechas') || 
+                              window.location.pathname.includes('color-tinturas-cabello') ||
+                              window.location.pathname.includes('tratamientos-capilares');
+
+        if (!isServicePage || typeof GLightbox === 'undefined') return;
+
+        this.lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true
+        });
+
+        this.setupLightboxAccessibility();
+    }
+
+    setupLightboxAccessibility() {
+        const contentElements = [
+            document.getElementById('app-wrapper'),
+            document.querySelector('header'),
+            document.querySelector('footer')
+        ];
+
+        this.lightbox.on('open', () => {
+            contentElements.forEach(el => {
+                if (el) {
+                    el.setAttribute('inert', '');
+                    el.removeAttribute('aria-hidden'); 
+                }
             });
-        }
+        });
+
+        this.lightbox.on('close', () => {
+            contentElements.forEach(el => {
+                if (el) el.removeAttribute('inert');
+            });
+        });
     }
 
     getFilteredServices(path) {
@@ -274,39 +269,62 @@ class ServicePageManager {
         if (!breadcrumbsRoot) return;
 
         const currentPath = window.location.pathname;
+        const items = this.getBreadcrumbItems(currentPath);
+
+        breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
+    }
+
+    getBreadcrumbItems(currentPath) {
         const items = [{ label: 'Inicio', link: '../../index.html' }];
 
         if (currentPath.includes('/peluqueria/')) {
-            items.push({ label: 'Peluquería', link: '../../servicios/peluqueria/index.html' });
-            
-            if (currentPath.includes('cortes-de-pelo')) {
-                items.push({ label: 'Cortes', link: '#' });
-            } else if (currentPath.includes('balayage-mechas')) {
-                items.push({ label: 'Balayage', link: '#' });
-            } else if (currentPath.includes('color-tinturas-cabello')) {
-                items.push({ label: 'Color', link: '#' });
-            } else if (currentPath.includes('tratamientos-capilares')) {
-                items.push({ label: 'Tratamientos', link: '#' });
-            }
+            this.addHairBreadcrumbs(items, currentPath);
         } else if (currentPath.includes('/barberia/')) {
             items.push({ label: 'Barbería', link: '../../servicios/barberia/index.html' });
         } else if (currentPath.includes('/estetica/')) {
-            items.push({ label: 'Estética', link: '../../servicios/estetica/index.html' });
-            
-            if (currentPath.includes('spa-facial-integral') || currentPath.includes('spa-y-estetica-facial-chia')) {
-                items.push({ label: 'Spa Facial Integral', link: '#' });
-            } else if (currentPath.includes('limpieza-facial')) {
-                items.push({ label: 'Limpieza Facial', link: '#' });
-            } else if (currentPath.includes('masajes-relajantes')) {
-                items.push({ label: 'Masajes Relajantes', link: '#' });
-            } else if (currentPath.includes('cejas-y-pestanas')) {
-                items.push({ label: 'Cejas y Pestañas', link: '#' });
-            }
+            this.addEstheticsBreadcrumbs(items, currentPath);
         } else if (currentPath.includes('/unas-spa/')) {
             items.push({ label: 'Uñas', link: '../../servicios/unas-spa/index.html' });
         }
+        
+        return items;
+    }
 
-        breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
+    addHairBreadcrumbs(items, path) {
+        items.push({ label: 'Peluquería', link: '../../servicios/peluqueria/index.html' });
+        
+        const subPages = {
+            'cortes-de-pelo': 'Cortes',
+            'balayage-mechas': 'Balayage',
+            'color-tinturas-cabello': 'Color',
+            'tratamientos-capilares': 'Tratamientos'
+        };
+
+        for (const [key, label] of Object.entries(subPages)) {
+            if (path.includes(key)) {
+                items.push({ label, link: '#' });
+                break;
+            }
+        }
+    }
+
+    addEstheticsBreadcrumbs(items, path) {
+        items.push({ label: 'Estética', link: '../../servicios/estetica/index.html' });
+        
+        const subPages = {
+            'spa-facial-integral': 'Spa Facial Integral',
+            'spa-y-estetica-facial-chia': 'Spa Facial Integral',
+            'limpieza-facial': 'Limpieza Facial',
+            'masajes-relajantes': 'Masajes Relajantes',
+            'cejas-y-pestanas': 'Cejas y Pestañas'
+        };
+
+        for (const [key, label] of Object.entries(subPages)) {
+            if (path.includes(key)) {
+                items.push({ label, link: '#' });
+                break;
+            }
+        }
     }
 }
 
