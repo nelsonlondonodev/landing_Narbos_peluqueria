@@ -173,4 +173,4 @@ if (document.readyState === 'loading') {
     initApp();
 }
 
-export { initApp };
+export { initApp, App };

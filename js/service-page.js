@@ -1,4 +1,4 @@
-import { initApp } from './main.js';
+import { initApp, App } from './main.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 
@@ -22,6 +22,18 @@ class ServicePageManager {
     }
 
     init() {
+        // Inicializar la App base explícitamente para asegurar Navbar/Footer
+        try {
+            const app = new App();
+            app.mountLayout();
+            app.mountHero();
+            app.initCoreComponents();
+            app.initInteractiveComponents(); // Para FAQ, Reviews, etc.
+            console.log("✅ App base initialized from ServicePageManager");
+        } catch (error) {
+            console.error("❌ Error initializing App base from ServicePageManager:", error);
+        }
+
         this.initServiceGrid();
         this.initBrands(); // Added
 
