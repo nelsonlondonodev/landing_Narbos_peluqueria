@@ -34,21 +34,28 @@ import { pagesData } from './data/pagesData.js'; // Nuevo Import
 class App {
     constructor() {
         // Estrategia "Hardcoded Safe": Detectar explícitamente si estamos en el entorno de GitHub Pages
-        // usando el nombre del repositorio. Esto evita problemas con minificadores o import.meta.
-        const repoSegment = '/landing_Narbos_peluqueria/';
-        const path = window.location.pathname;
+        // usando el nombre del repositorio.
+        const repoSegment = '/landing_narbos_peluqueria/'; // Lower case for comparison
+        const path = window.location.pathname.toLowerCase();
         const origin = window.location.origin;
 
-        if (path.includes(repoSegment)) {
-            // Entorno GitHub Pages (Staging)
-            this.appRoot = origin + repoSegment;
+        // Comprobación flexible para GitHub Pages
+        const isGitHub = window.location.hostname.includes('github.io');
+        
+        if (isGitHub && path.includes(repoSegment)) {
+            // Entorno GitHub Pages (Staging) - Preservamos el casing original del repo en la URL
+            // Asumimos que el segmento está al principio
+            this.appRoot = origin + '/landing_Narbos_peluqueria/';
         } else {
             // Entorno Producción (Hostinger) o Localhost
             this.appRoot = origin + '/';
         }
         
+        // Debug para verificar en consola
+        console.log(`[App] Initialized. Root: ${this.appRoot}, Host: ${window.location.hostname}`);
+        
         // Determinamos si estamos en la home
-        // Limpiamos la URL actual de todo excepto el path base
+        // Normalizamos la ruta actual para saber si es index
         const currentPathClean = path.replace(repoSegment, '/').replace('//', '/');
         this.isHomePage = (currentPathClean === '/' || currentPathClean === '/index.html');
     }
