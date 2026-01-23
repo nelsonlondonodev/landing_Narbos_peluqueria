@@ -48,14 +48,23 @@ function renderSocialLinks() {
  * Renderiza la dirección del negocio.
  */
 function renderAddress() {
+    // Enlace directo a Google Maps con la ubicación exacta
+    const mapsUrl = "https://maps.app.goo.gl/WyqYyvVpWwXyJk6X6"; // Link corto si se tuviera, o query
+
+    // Usamos una query de búsqueda precisa como fallback robusto si no tenemos el CID exacto a mano, 
+    // aunque la búsqueda "Narbo's Salon Spa Chia" es muy específica.
+    // Mejor aún, usaremos una query de búsqueda codificada para asegurar compatibilidad.
+    const query = encodeURIComponent("Narbo's Salon Spa, Bajos Hotel Ibis, Chía");
+    const mapsLink = `https://www.google.com/maps/search/?api=1&query=${query}`;
+
     return `
-        <p class="flex items-start md:items-center justify-center gap-2 max-w-sm mx-auto">
-            <svg class="w-5 h-5 mt-1 md:mt-0 shrink-0 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <a href="${mapsLink}" target="_blank" rel="noopener noreferrer" class="group flex items-start md:items-center justify-center gap-2 max-w-sm mx-auto hover:text-white transition-colors duration-300" aria-label="Ver ubicación en Google Maps">
+            <svg class="w-5 h-5 mt-1 md:mt-0 shrink-0 text-brand-gold group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
-            <span class="text-left md:text-center leading-tight">Bajos del Hotel Ibis, Km 2 Vía Cajicá - Chía, Cundinamarca</span>
-        </p>
+            <span class="text-left md:text-center leading-tight border-b border-transparent group-hover:border-white/50 transition-colors duration-300">Bajos del Hotel Ibis, Km 2 Vía Cajicá - Chía, Cundinamarca</span>
+        </a>
     `;
 }
 
