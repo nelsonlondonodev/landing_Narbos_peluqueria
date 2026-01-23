@@ -14,14 +14,14 @@
  */
 export const barberServices = Object.freeze([
     {
-        title: "Corte Caballero",
+        title: "Corte caballero",
         description: "Cortes clásicos, degradados (fade) y las últimas tendencias, adaptados a tu facciones.",
         link: "barberia-cortes-hombre.html",
         image: "../../images/pages/barberia/barber-hero.jpg",
         variant: "standard"
     },
     {
-        title: "Arreglo de Barba",
+        title: "Arreglo de barba",
         description: "Perfilado con navaja, hidratación y ritual de toalla caliente para una experiencia relajante.",
         link: "#open-modal-beard",
         image: "../../images/pages/peluqueria/estilismo-barba.webp",

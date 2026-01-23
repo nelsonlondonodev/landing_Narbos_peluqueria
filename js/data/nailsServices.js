@@ -4,7 +4,7 @@
 export const nailsServices = [
     {
         id: 1,
-        title: 'Manicura Spa',
+        title: 'Manicura spa',
         price: '$35.000',
         duration: '45 min',
         summary: 'Limpieza profunda, exfoliación e hidratación para manos suaves y renovadas.',
@@ -13,7 +13,7 @@ export const nailsServices = [
     },
     {
         id: 2,
-        title: 'Pedicura Spa',
+        title: 'Pedicura spa',
         price: '$45.000',
         duration: '60 min',
         summary: 'El tratamiento ideal para pies cansados con masaje anti-estrés y cuidado estético.',
@@ -22,7 +22,7 @@ export const nailsServices = [
     },
     {
         id: 3,
-        title: 'Esmaltado Semipermanente',
+        title: 'Esmaltado semipermanente',
         price: '$55.000',
         duration: '60 min',
         summary: 'Color vibrante, secado instantáneo y brillo espejo garantizado por 21 días.',
@@ -31,7 +31,7 @@ export const nailsServices = [
     },
     {
         id: 4,
-        title: 'Uñas Acrílicas / Polygel (Esculpidas)',
+        title: 'Uñas acrílicas / Polygel (esculpidas)',
         price: '$120.000',
         duration: '120 min',
         summary: 'Extensiones artísticas con Acrílico o Polygel para unas uñas de impacto.',
@@ -40,7 +40,7 @@ export const nailsServices = [
     },
     {
         id: 5,
-        title: 'Retiro de Semipermanente',
+        title: 'Retiro de semipermanente',
         price: '$15.000',
         duration: '20 min',
         summary: 'Remoción cuidadosa del esmalte gel cuidando la salud de tu uña natural.',
@@ -49,7 +49,7 @@ export const nailsServices = [
     },
     {
         id: 6,
-        title: 'Diseños de Uñas (Nail Art)',
+        title: 'Diseños de uñas (Nail Art)',
         price: 'Desde $5.000',
         duration: '15+ min',
         summary: 'Uñas decoradas: animal print, diseños fáciles, pedrería y tendencias.',

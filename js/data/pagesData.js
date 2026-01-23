@@ -18,10 +18,10 @@
 export const pagesData = Object.freeze({
     'peluqueria': {
         hero: {
-            title: "Peluquería en Chía: Expertos en estilo, color y bienestar",
+            title: "Peluquería en Chía: expertos en estilo, color y bienestar",
             subtitle: "Expertos en realzar tu belleza con técnicas de vanguardia y productos de clase mundial.",
             imageSrc: "images/pages/peluqueria/estilismo-barba.webp",
-            imageAlt: "Servicio de Peluquería profesional en Narbo's"
+            imageAlt: "Servicio de peluquería profesional en Narbo's"
         }
     },
     barberia: {
@@ -34,7 +34,7 @@ export const pagesData = Object.freeze({
     },
     nosotros: {
         hero: {
-           title: "Nuestra Historia",
+           title: "Nuestra historia",
            subtitle: "Pasión por la belleza y el bienestar desde 2013.",
            imageSrc: "", // En nosotros.html el hero actual es solo color de fondo con SVG, no tiene imagen. Se puede ajustar HeroSection.js para manejar esto o asignar una imagen nueva. Por ahora simularemos el comportamiento actual o se usará placeholder.
            // Nota: El Hero actual de nosotros.html NO tiene imagen de fondo, es un bg-brand-green sólido con un SVG.

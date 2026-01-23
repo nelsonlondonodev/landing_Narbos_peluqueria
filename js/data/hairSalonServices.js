@@ -13,21 +13,21 @@
  */
 export const hairSalonServices = Object.freeze([
     {
-        title: "Corte Dama",
+        title: "Corte dama",
         description: "Diseños personalizados, puntas perfectas y cambios de look completos.",
         link: "/servicios/peluqueria/cortes-de-pelo.html",
         image: "/images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
         variant: "standard"
     },
     {
-        title: "Balayage y Mechas",
+        title: "Balayage y mechas",
         description: "Iluminaciones perfectas, rubios soñados y técnicas de degradado.",
         link: "/servicios/peluqueria/balayage-mechas.html",
         image: "/images/pages/peluqueria/mechas-balayage-detalle.webp",
         variant: "standard"
     },
     {
-        title: "Color y Tinturas",
+        title: "Color y tinturas",
         description: "Tintes completos, cubrimiento de canas y retoque de raíz profesional.",
         link: "/servicios/peluqueria/color-tinturas-cabello.html",
         image: "/images/pages/peluqueria/color-tratamiento.webp",
