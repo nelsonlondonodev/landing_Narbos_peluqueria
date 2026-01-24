@@ -95,11 +95,13 @@ export class ServiceCard {
 
     getOverlayIcon() {
         return `
-            <svg class="w-12 h-12 mb-4 text-white transition-colors duration-300 relative z-10 animate-floating group-hover:scale-110 drop-shadow-md" 
-                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
-                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                ${this.props.icon || ''}
-            </svg>
+            <div class="mb-4 relative z-10 animate-floating">
+                <svg class="w-12 h-12 text-white transition-colors duration-300 transition-transform duration-300 group-hover:scale-110 drop-shadow-md" 
+                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+                     fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    ${this.props.icon || ''}
+                </svg>
+            </div>
         `;
     }
 
@@ -107,8 +109,8 @@ export class ServiceCard {
      * Renderiza el contenido para la variante Standard (Grids).
      */
     renderStandardContent(element) {
-        // Updated classes to match Hub design (Article style but applied to A/Div)
-        element.className = "group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto block text-left";
+        // Updated classes: Removed transition-all, added transition-shadow.
+        element.className = "group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto block text-left";
 
         const imageHtml = this.props.image ? `
             <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
@@ -117,10 +119,10 @@ export class ServiceCard {
             </div>
         ` : '';
 
-        // Visual button style (span mimicking the button)
+        // Visual button style: Optimized transition
         const actionHtml = `
             <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
-                <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-all duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
+                <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
                     <span>Ver Detalles</span>
                     <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </span>
