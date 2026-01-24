@@ -87,11 +87,11 @@ class ServicePageManager {
         const servicesToRender = this.getFilteredServices(currentPath);
 
         servicesToRender.forEach(data => {
-            // Resolver ruta de imagen usando la lógica centralizada de App
+            // Resolver rutas usando el contexto de App (Singleton)
             const processedData = {
                 ...data,
-                image: this.app ? this.app.resolvePath(data.image) : data.image,
-                link: this.app ? this.app.resolvePath(data.link) : data.link
+                image: this.app.resolvePath(data.image), // Resolver imagen
+                link: this.app.resolvePath(data.link)    // Resolver enlace
             };
 
             const card = new ServiceCard(processedData);
@@ -114,8 +114,8 @@ class ServicePageManager {
         barberServices.forEach(data => {
             const processedData = {
                 ...data,
-                image: this.app ? this.app.resolvePath(data.image) : data.image,
-                link: this.app ? this.app.resolvePath(data.link) : data.link
+                image: this.app.resolvePath(data.image), // Resolver imagen
+                link: this.app.resolvePath(data.link)    // Resolver enlace
             };
             const card = new ServiceCard(processedData);
             const cardElement = card.render();
@@ -136,8 +136,8 @@ class ServicePageManager {
         estheticsServices.forEach(data => {
             const processedData = {
                 ...data,
-                image: this.app ? this.app.resolvePath(data.image) : data.image,
-                link: this.app ? this.app.resolvePath(data.link) : data.link
+                image: this.app.resolvePath(data.image),
+                link: this.app.resolvePath(data.link)
             };
             const card = new ServiceCard(processedData);
             aestheticsServicesGrid.appendChild(card.render());
@@ -174,6 +174,15 @@ class ServicePageManager {
          cardElement.setAttribute('data-gallery', uniqueGalleryId);
          cardElement.setAttribute('data-title', data.title);
          cardElement.setAttribute('data-description', data.description);
+         // Importante: El href original del elemento 'a' (que es la imagen principal) ya viene resuelto en 'renderStandardContent' via 'processedData.image' en ServiceCard?
+         // No, ServiceCard usa processedData.link para el href del <a> contenedor (si es link).
+         // Si queremos que el lightbox abra la imagen principal, debemos asegurarnos que el href apunte a la imagen.
+         // En el diseño actual de ServiceCard, el elemento raíz ES el <a> si hay link.
+         // PERO para lightbox, queremos que al hacer clic se abra la imagen 'data.image'.
+         // ServicePageManager sobreescribe el comportamiento estándar de navegación para el lightbox.
+         
+         // Fix: Asegurar que el href apunte a la imagen resuelta para que GLightbox la encuentre.
+         cardElement.href = this.app.resolvePath(data.image);
     }
 
     setupHairServiceGallery(container, data) {
@@ -189,14 +198,14 @@ class ServicePageManager {
         const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
 
         data.galleryImages.forEach((item, index) => {
-            let imgUrl = typeof item === 'string' ? item : item.src;
+            let imgUrlRaw = typeof item === 'string' ? item : item.src;
             const imgTitle = typeof item === 'string' ? `${data.title} - Imagen ${index + 2}` : item.title;
             
             // Resolver ruta de imagen de galería
-            if (this.app) imgUrl = this.app.resolvePath(imgUrl);
+            const imgUrl = this.app.resolvePath(imgUrlRaw);
 
             const hiddenLink = document.createElement('a');
-            hiddenLink.href = imgUrl;
+            hiddenLink.href = imgUrl; // Ruta corregida
             hiddenLink.className = 'glightbox hidden'; 
             hiddenLink.setAttribute('data-gallery', uniqueGalleryId);
             hiddenLink.setAttribute('data-title', imgTitle);

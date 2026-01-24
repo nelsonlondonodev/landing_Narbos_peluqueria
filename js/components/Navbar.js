@@ -6,6 +6,7 @@
  */
 
 import { getMenuCategories } from '../data/navigation.js';
+import { resolveAsset } from '../config.js'; // Import helper
 
 /**
  * Genera el HTML de la barra de navegación.
@@ -67,9 +68,11 @@ function createNavLinkHelper(linkPrefix) {
 
 
 function renderLogo(basePath, isHome) {
+    // Usar resolveAsset para garantizar la ruta correcta en GitHub Pages
+    const logoSrc = resolveAsset('images/brand/logo_narbos.webp');
     return `
         <a href="${isHome ? '#' : basePath + 'index.html'}" class="block group">
-             <img src="${basePath}images/brand/logo_narbos.webp" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56">
+             <img src="${logoSrc}" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56">
         </a>
     `;
 }
