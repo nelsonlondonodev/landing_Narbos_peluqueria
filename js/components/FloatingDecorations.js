@@ -1,3 +1,5 @@
+import { BASE_PATH } from '../config.js'; // Importar BASE_PATH global
+
 /**
  * Componente para manejar decoraciones flotantes con efecto Parallax.
  * Optimizado para Tailwind CSS v4 con diseño Responsivo.
@@ -5,18 +7,26 @@
 export class FloatingDecorations {
     /**
      * @param {string|Object} options - Base path string OR options object
-     * @param {string} options.basePath - Path to assets (default './')
+     * @param {string} options.basePath - Path to assets (default from config)
      * @param {boolean} options.enableAnimation - Whether to run the parallax loop (default true)
      * @param {Array} options.customConfig - Array of decoration configs to override defaults
      */
     constructor(options = {}) {
         this.config = {
-            basePath: options.basePath || './',
+            // Usar el basePath global si no se pasa uno específico
+            basePath: options.basePath || BASE_PATH, 
             enableAnimation: options.enableAnimation !== false, // Default: true
             customConfig: options.customConfig || null
         };
 
+        // Normalizar basePath para que siempre termine en / si no está vacío
         this.basePath = this.config.basePath;
+        if (this.basePath && !this.basePath.endsWith('/')) {
+            this.basePath += '/';
+        } else if (!this.basePath) {
+            this.basePath = '';
+        }
+
         this.leaves = [];
         this.init();
     }

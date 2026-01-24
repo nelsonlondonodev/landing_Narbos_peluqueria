@@ -22,22 +22,20 @@ class ServicePageManager {
     }
 
     init() {
-        // Inicializar la App base explícitamente para asegurar Navbar/Footer
-        try {
-            this.app = new App();
-            this.app.mountLayout();
-            this.app.mountHero();
-            this.app.initCoreComponents();
-            this.app.initInteractiveComponents();
-            console.log("✅ App base initialized from ServicePageManager");
-        } catch (error) {
-            console.error("❌ Error initializing App base from ServicePageManager:", error);
-            // Fallback lightweight app instance just for path resolution if mount fails
-            this.app = new App(); 
+        // Inicializar la App base explícitamente para asegurar Navbar/Footer y Configuración
+        // Ahora App maneja internamente BASE_PATH, por lo que es seguro instanciarla directamente.
+        if (!window.narbosApp) {
+             this.app = new App();
+             this.app.init(); // Inicializa layout y componentes base
+             window.narbosApp = this.app; // Singleton pattern simple
+        } else {
+            this.app = window.narbosApp;
         }
 
+        console.log("✅ ServicePageManager initialized with App context");
+
         this.initServiceGrid();
-        this.initBrands(); // Added
+        this.initBrands(); 
 
         this.initLazyVideos();
         this.initModalTriggers();

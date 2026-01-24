@@ -15,10 +15,42 @@
  */
 
 /**
+ * Configuración de entorno y Rutas Base.
+ * Detecta si estamos en GitHub Pages para ajustar las rutas de assets.
+ */
+const isGitHubPages = window.location.hostname.includes('github.io');
+const repoName = '/landing_Narbos_peluqueria'; // Nombre exacto del repositorio
+
+// En GitHub Pages, la raíz es /repo-name/. En local/dominio propio, es /.
+export const BASE_PATH = isGitHubPages ? repoName : '';
+
+/**
+ * Resuelve una ruta relativa a la ruta base del entorno actual.
+ * Útil para solucionar rutas de imágenes en GitHub Pages.
+ * @param {string} path - Ruta relativa (ej: '/images/logo.png')
+ * @returns {string} Ruta absoluta correcta (ej: '/landing_Narbos_peluqueria/images/logo.png')
+ */
+export const resolveAsset = (path) => {
+    if (!path) return '';
+    if (path.startsWith('http')) return path; // Ya es absoluta
+    
+    // Normalizar path para asegurar que empiece con /
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    
+    // Si ya tiene el prefijo del repo (por error manual o re-procesamiento), no lo añadimos de nuevo
+    if (BASE_PATH && cleanPath.startsWith(BASE_PATH)) {
+        return cleanPath;
+    }
+
+    return `${BASE_PATH}${cleanPath}`;
+};
+
+/**
  * Configuración global del sitio.
  * Centraliza datos estáticos para facilitar el mantenimiento.
  */
 export const siteConfig = Object.freeze({
+    basePath: BASE_PATH, // Exponer basePath para uso general
     socialLinks: [
         {
             name: "WhatsApp",

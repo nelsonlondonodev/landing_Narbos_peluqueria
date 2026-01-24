@@ -1,9 +1,4 @@
-/**
- * Main Application Script (Unified Entry Point)
- * Centralizes initialization logic for Navbar, Footer, and all interactive components.
- */
-
-
+import { siteConfig, BASE_PATH, resolveAsset } from './config.js'; // Importar Config y Helper
 import { UIService } from './services/UIService.js';
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
@@ -34,31 +29,27 @@ import { pagesData } from './data/pagesData.js'; // Nuevo Import
 
 class App {
     constructor() {
-        // Estrategia "Hardcoded Safe": Detectar explícitamente si estamos en el entorno de GitHub Pages
-        // usando el nombre del repositorio.
-        const repoSegment = '/landing_narbos_peluqueria/'; // Lower case for comparison
-        const path = window.location.pathname.toLowerCase();
-        const origin = window.location.origin;
-
-        // Comprobación flexible para GitHub Pages
-        const isGitHub = window.location.hostname.includes('github.io');
-        
-        if (isGitHub && path.includes(repoSegment)) {
-            // Entorno GitHub Pages (Staging) - Preservamos el casing original del repo en la URL
-            // Asumimos que el segmento está al principio
-            this.appRoot = origin + '/landing_Narbos_peluqueria/';
-        } else {
-            // Entorno Producción (Hostinger) o Localhost
-            this.appRoot = origin + '/';
-        }
+        // App Root se deriva directamente del BASE_PATH configurado
+        this.appRoot = window.location.origin + BASE_PATH + '/';
         
         // Debug para verificar en consola
         console.log(`[App] Initialized. Root: ${this.appRoot}, Host: ${window.location.hostname}`);
         
         // Determinamos si estamos en la home
-        // Normalizamos la ruta actual para saber si es index
-        const currentPathClean = path.replace(repoSegment, '/').replace('//', '/');
-        this.isHomePage = (currentPathClean === '/' || currentPathClean === '/index.html');
+        const path = window.location.pathname;
+        const currentPathClean = path.replace(BASE_PATH, '/').replace('//', '/');
+        
+        // Comprobación más robusta de Home
+        this.isHomePage = (currentPathClean === '/' || currentPathClean === '/index.html' || currentPathClean === '');
+    }
+
+    /**
+     * Resuelve una ruta (absoluta o relativa) a la URL base correcta de la aplicación.
+     * Utiliza el helper centralizado resolveAsset.
+     * @param {string} path - Ruta a resolver
+     */
+    resolvePath(path) {
+        return resolveAsset(path);
     }
 
     init() {
