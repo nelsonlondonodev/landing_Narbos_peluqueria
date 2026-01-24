@@ -25,9 +25,26 @@ html {
 
 body {
   font-family: "Montserrat", sans-serif;
-  background-color: #ffffff; /* Explicitly force white */
+  background-color: #ffffff;
   color: #1f2937;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  /* Estado inicial: Opacidad 0 para fade-in */
+  opacity: 0; 
+  transition: opacity 0.4s ease-in-out, background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Estado visible: Se añade cuando JS carga */
+body.page-is-loaded {
+    opacity: 1;
+}
+
+/* Estado salida: Se añade al hacer clic en un link */
+body.page-is-exiting {
+    opacity: 0;
+}
+
+/* Habilitar transición nativa moderna (Chrome 126+) */
+@view-transition {
+  navigation: auto;
 }
 
 /* Estilos para los títulos para aplicar la fuente serif */

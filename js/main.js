@@ -27,6 +27,7 @@ import { HeaderController } from './controllers/HeaderController.js';
 import { ModalController } from './controllers/ModalController.js';
 import { VideoPlayerController } from './controllers/VideoPlayerController.js';
 import { GalleryController } from './controllers/GalleryController.js';
+import { PageTransitionController } from './controllers/PageTransitionController.js'; // Nuevo Controller
 // Data
 import { servicesData } from './data/servicesData.js';
 import { pagesData } from './data/pagesData.js'; // Nuevo Import
@@ -127,6 +128,7 @@ class App {
         new MobileMenu();
         new WhatsAppButton();
         new HeaderController();
+        new PageTransitionController();
     }
 
     initInteractiveComponents() {
