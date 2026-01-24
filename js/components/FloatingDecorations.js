@@ -79,14 +79,24 @@ export class FloatingDecorations {
 
         const path = window.location.pathname;
         const isHomePage = path === '/' || (path.endsWith('index.html') && !path.includes('/servicios/'));
-        const isServicePage = path.includes('/servicios/') || path.includes('peluqueria') || path.includes('barberia');
         
-        // Base Config (FAQ Section)
+        // Check for specific service areas
+        const isPeluqueria = path.includes('/peluqueria');
+        const isBarberia = path.includes('/barberia');
+        const isEstetica = path.includes('/estetica');
+        const isUñas = path.includes('/unas-spa');
+        
+        const isServicePage = isPeluqueria || isBarberia || isEstetica || isUñas;
+        
+        // Define speed based on page type to prevent drifting in service pages
+        const faqSpeed = isServicePage ? 0 : 0.15;
+
+        // Base Config (FAQ Section - Common)
         const baseConfig = [
             { 
                 parent: 'faq', 
                 img: 'ui/decorations/hoja-seca-3d.webp', 
-                speed: 0.15,
+                speed: faqSpeed,
                 wrapperClasses: '-left-8 -top-10 md:left-2 md:top-2 z-20',
                 imgClasses: 'w-24 md:w-32 -rotate-45 md:rotate-10'
             }
@@ -95,7 +105,7 @@ export class FloatingDecorations {
         let heroConfig = [];
 
         if (isHomePage) {
-            // --- Home: Original Decorations ---
+            // --- Home: Elaborate Decorations ---
             heroConfig = [
                 { 
                     parent: 'inicio', 
@@ -111,7 +121,7 @@ export class FloatingDecorations {
                     wrapperClasses: '-right-6 top-[40%] md:right-[15%] md:top-[35%] z-10',
                     imgClasses: 'w-24 md:w-56 -rotate-12 opacity-90 md:opacity-100'
                 },
-                // Home Services section decorations
+                // Home specific Service Grid decorations
                 { 
                     parent: 'servicios', 
                     img: 'ui/decorations/hoja-seca-3d.webp', 
@@ -127,45 +137,43 @@ export class FloatingDecorations {
                     imgClasses: 'w-28 md:w-40' 
                 }
             ];
+        } else if (isServicePage) {
+            // --- Service Pages (Peluqueria, Barberia, etc.) ---
+            // Simpler entry animations, no parallax loop (speed: 0) to prevent layout shifting
+             heroConfig = [
+                { 
+                    parent: 'inicio', 
+                    img: 'ui/decorations/hoja-seca-3d.webp', 
+                    speed: 0, 
+                    wrapperClasses: '-right-4 top-12 md:-right-12 md:top-20 z-30',
+                    imgClasses: 'w-24 md:w-56 rotate-[15deg] animate-leaf-enter-right' 
+                },
+                { 
+                    parent: 'inicio', 
+                    img: 'ui/decorations/hoja-verde-3d.webp', 
+                    speed: 0, 
+                    wrapperClasses: '-left-6 top-3/4 md:-left-16 md:bottom-20 z-30',
+                    imgClasses: 'w-28 md:w-48 -rotate-[15deg] animate-leaf-enter-left' 
+                }
+            ];
         } else {
-            // --- Internal Pages & Services ---
-            
-            if (isServicePage) {
-                 heroConfig = [
-                    { 
-                        parent: 'inicio', 
-                        img: 'ui/decorations/hoja-seca-3d.webp', 
-                        speed: 0, 
-                        wrapperClasses: '-right-4 top-12 md:-right-12 md:top-20 z-30',
-                        imgClasses: 'w-24 md:w-56 rotate-[15deg] animate-leaf-enter-right' 
-                    },
-                    { 
-                        parent: 'inicio', 
-                        img: 'ui/decorations/hoja-verde-3d.webp', 
-                        speed: 0, 
-                        wrapperClasses: '-left-6 top-3/4 md:-left-16 md:bottom-20 z-30',
-                        imgClasses: 'w-28 md:w-48 -rotate-[15deg] animate-leaf-enter-left' 
-                    }
-                ];
-            } else {
-                // Default Internal (Nosotros/Contacto)
-                 heroConfig = [
-                    { 
-                        parent: 'inicio', 
-                        img: 'ui/decorations/hoja-seca-3d.webp', 
-                        speed: 0, 
-                        wrapperClasses: '-right-4 top-12 md:-right-12 md:top-20 z-30',
-                        imgClasses: 'w-24 md:w-40 rotate-[15deg] opacity-90'
-                    },
-                    { 
-                        parent: 'inicio', 
-                        img: 'ui/decorations/hoja-verde-3d.webp', 
-                        speed: 0, 
-                        wrapperClasses: '-left-6 top-3/4 md:-left-8 md:top-[60%] z-30',
-                        imgClasses: 'w-28 md:w-36 -rotate-[15deg] opacity-90' 
-                    }
-                ];
-            }
+            // --- Other Internal Pages (Nosotros/Contacto) ---
+             heroConfig = [
+                { 
+                    parent: 'inicio', 
+                    img: 'ui/decorations/hoja-seca-3d.webp', 
+                    speed: 0, 
+                    wrapperClasses: '-right-4 top-12 md:-right-12 md:top-20 z-30',
+                    imgClasses: 'w-24 md:w-40 rotate-[15deg] opacity-90'
+                },
+                { 
+                    parent: 'inicio', 
+                    img: 'ui/decorations/hoja-verde-3d.webp', 
+                    speed: 0, 
+                    wrapperClasses: '-left-6 top-3/4 md:-left-8 md:top-[60%] z-30',
+                    imgClasses: 'w-28 md:w-36 -rotate-[15deg] opacity-90' 
+                }
+            ];
         }
 
         return [...heroConfig, ...baseConfig];

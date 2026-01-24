@@ -231,6 +231,13 @@ body.mobile-menu-open {
 
 /* --- FIN: NUEVOS ESTILOS PARA FILTRO DE GALERÍA --- */
 
+/* Utilidad para evitar colapso del scroll en secciones FAQ cortas */
+.min-h-faq {
+  min-height: 60vh;
+  position: relative;
+  overflow: hidden;
+}
+
 /* --- INICIO: NUEVOS ESTILOS PARA MODAL DE SERVICIOS --- */
 
 @keyframes fadeInModal {

@@ -3018,6 +3018,11 @@ body.mobile-menu-open {
   background-color: #a6b199;
   color: #ffffff;
 }
+.min-h-faq {
+  min-height: 60vh;
+  position: relative;
+  overflow: hidden;
+}
 @keyframes fadeInModal {
   from {
     opacity: 0;
