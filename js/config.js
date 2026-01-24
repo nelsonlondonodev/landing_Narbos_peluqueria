@@ -32,17 +32,21 @@ export const BASE_PATH = isGitHubPages ? repoName : '';
  */
 export const resolveAsset = (path) => {
     if (!path) return '';
-    if (path.startsWith('http')) return path; // Ya es absoluta
+    if (path.startsWith('http')) return path; 
     
-    // Normalizar path para asegurar que empiece con /
-    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    // Normalizar: Quitar slash inicial para evitar duplicados al concatenar con BASE_PATH
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
     
-    // Si ya tiene el prefijo del repo (por error manual o re-procesamiento), no lo añadimos de nuevo
-    if (BASE_PATH && cleanPath.startsWith(BASE_PATH)) {
-        return cleanPath;
-    }
-
-    return `${BASE_PATH}${cleanPath}`;
+    // Si BASE_PATH está definido (GitHub Pages), lo usamos.
+    // Si no (Local), devolvemos la ruta absoluta limpia (agregando / al inicio).
+    const prefix = BASE_PATH ? BASE_PATH + '/' : '/';
+    
+    const finalPath = `${prefix}${cleanPath}`;
+    
+    // Debug en producción para verificar rutas
+    // console.log(`[ResolveAsset] Input: ${path} -> Output: ${finalPath}`);
+    
+    return finalPath;
 };
 
 /**
