@@ -81,92 +81,88 @@ export class FloatingDecorations {
         const isHomePage = path === '/' || (path.endsWith('index.html') && !path.includes('/servicios/'));
         const isServicePage = path.includes('/servicios/') || path.includes('peluqueria') || path.includes('barberia');
         
-        // Configuración Base (Siempre presente en secciones comunes como FAQ)
+        // Base Config (FAQ Section)
         const baseConfig = [
-            // --- Sección FAQ (Común en varias páginas) ---
             { 
                 parent: 'faq', 
                 img: 'ui/decorations/hoja-seca-3d.webp', 
-                speed: 0.05,
-                classes: 'w-24 -left-8 -top-10 -rotate-45 md:w-32 md:left-2 md:top-2 md:rotate-10 z-20' 
+                speed: 0.15,
+                wrapperClasses: '-left-8 -top-10 md:left-2 md:top-2 z-20',
+                imgClasses: 'w-24 md:w-32 -rotate-45 md:rotate-10'
             }
         ];
 
-        // Si es página de servicios, NO inyectamos en 'inicio' ni 'servicios' aquí 
-        // porque asumimos que esas páginas pueden tener su propia lógica o no requieren 
-        // la inyección automática en 'inicio' de la misma manera que Contacto/Nosotros.
-        // O si queremos unificar, definimos explícitamente:
-        
-        if (isServicePage) {
-            // Updated: We now WANT hero injections on service pages (specifically Peluquería).
-            // Logic is handled below in the 'else' block of isHomePage.
-        }
-
-        // Configuración para el HERO ('inicio')
         let heroConfig = [];
 
         if (isHomePage) {
-            // --- Home: Decoraciones Grandes (Diseño Original) ---
+            // --- Home: Original Decorations ---
             heroConfig = [
                 { 
                     parent: 'inicio', 
                     img: 'ui/decorations/hoja-seca-3d.webp', 
-                    speed: 0.1,
-                    classes: 'w-20 -left-6 top-[10%] opacity-90 md:w-44 md:left-[-2%] md:opacity-100 z-10 rotate-45' 
+                    speed: 0.25,
+                    wrapperClasses: '-left-6 top-[10%] md:left-[-2%] z-10',
+                    imgClasses: 'w-20 md:w-44 rotate-45 opacity-90 md:opacity-100'
                 },
                 { 
                     parent: 'inicio', 
                     img: 'ui/decorations/hoja-verde-3d.webp', 
-                    speed: 0.15,
-                    classes: 'w-24 -right-6 top-[40%] opacity-90 md:w-56 md:right-[15%] md:top-[35%] md:opacity-100 z-10 -rotate-12' 
+                    speed: 0.35,
+                    wrapperClasses: '-right-6 top-[40%] md:right-[15%] md:top-[35%] z-10',
+                    imgClasses: 'w-24 md:w-56 -rotate-12 opacity-90 md:opacity-100'
                 },
-                // La Home también tiene decoraciones en la sección de servicios (intermedia)
+                // Home Services section decorations
                 { 
                     parent: 'servicios', 
                     img: 'ui/decorations/hoja-seca-3d.webp', 
-                    speed: 0.08,
-                    classes: 'w-24 -right-2 top-24 md:w-48 md:-right-20 md:top-12 z-20' 
+                    speed: 0.2,
+                    wrapperClasses: '-right-2 top-24 md:-right-20 md:top-12 z-20',
+                    imgClasses: 'w-24 md:w-48'
                 },
                 { 
                     parent: 'servicios', 
                     img: 'ui/decorations/hoja-verde-3d.webp', 
-                    speed: 0.12,
-                    classes: 'w-28 -left-4 top-1/2 md:w-40 md:-left-12 md:top-[40%] z-20' 
+                    speed: 0.3,
+                    wrapperClasses: '-left-4 top-1/2 md:-left-12 md:top-[40%] z-20',
+                    imgClasses: 'w-28 md:w-40' 
                 }
             ];
         } else {
-            // --- Internas (Nosotros/Contacto) & Servicios (Peluquería) ---
+            // --- Internal Pages & Services ---
             
-            // Logic for Peluquería/Services specific decorations
             if (isServicePage) {
                  heroConfig = [
                     { 
                         parent: 'inicio', 
                         img: 'ui/decorations/hoja-seca-3d.webp', 
-                        speed: 0, // CRITICAL: 0 means no parallax loop, preserving CSS animation
-                        classes: 'w-24 -right-4 top-12 md:w-56 md:-right-12 md:top-20 z-30 animate-leaf-enter-right rotate-[15deg]' 
+                        speed: 0, 
+                        wrapperClasses: '-right-4 top-12 md:-right-12 md:top-20 z-30',
+                        imgClasses: 'w-24 md:w-56 rotate-[15deg] animate-leaf-enter-right' 
                     },
                     { 
                         parent: 'inicio', 
                         img: 'ui/decorations/hoja-verde-3d.webp', 
                         speed: 0, 
-                        classes: 'w-28 -left-6 top-3/4 md:w-48 md:-left-16 md:bottom-20 z-30 animate-leaf-enter-left -rotate-[15deg]' 
+                        wrapperClasses: '-left-6 top-3/4 md:-left-16 md:bottom-20 z-30',
+                        imgClasses: 'w-28 md:w-48 -rotate-[15deg] animate-leaf-enter-left' 
                     }
                 ];
             } else {
-                // Default Internas (Nosotros/Contacto)
+                // Default Internal (Nosotros/Contacto)
                  heroConfig = [
                     { 
                         parent: 'inicio', 
                         img: 'ui/decorations/hoja-seca-3d.webp', 
                         speed: 0, 
-                        classes: 'w-24 -right-4 top-12 md:w-40 md:-right-12 md:top-20 z-30 opacity-90 rotate-[15deg]' 
+                        wrapperClasses: '-right-4 top-12 md:-right-12 md:top-20 z-30',
+                        imgClasses: 'w-24 md:w-40 rotate-[15deg] opacity-90'
                     },
                     { 
                         parent: 'inicio', 
                         img: 'ui/decorations/hoja-verde-3d.webp', 
                         speed: 0, 
-                        classes: 'w-28 -left-6 top-3/4 md:w-36 md:-left-8 md:top-[60%] z-30 opacity-90 -rotate-[15deg]' 
+                        wrapperClasses: '-left-6 top-3/4 md:-left-8 md:top-[60%] z-30',
+                        imgClasses: 'w-28 md:w-36 -rotate-[15deg] opacity-90' 
                     }
                 ];
             }
@@ -182,40 +178,48 @@ export class FloatingDecorations {
     }
 
     createLeafElement(config) {
+        // Wrapper: Responsible for Position (Top/Left) and Parallax Movement (Transform)
+        const wrapper = document.createElement('div');
+        wrapper.className = `floating-decoration-wrapper absolute pointer-events-none will-change-transform ${config.wrapperClasses}`;
+        
+        // Image: Responsible for Appearance (Size, Rotation, Opacity, Entry Animation)
         const leaf = document.createElement('img');
         leaf.src = `${this.basePath}images/${config.img}`;
         leaf.onerror = () => { 
-            leaf.style.display = 'none';
-            leaf.onerror = null; 
+            wrapper.style.display = 'none';
         };
         leaf.alt = '';
-        // Add identification class 'floating-decoration-leaf'
-        leaf.className = `floating-decoration-leaf absolute pointer-events-none drop-shadow-2xl transition-transform duration-700 ease-out will-change-transform ${config.classes}`;
-        return leaf;
+        leaf.className = `floating-decoration-leaf block drop-shadow-2xl transition-transform duration-700 ease-out ${config.imgClasses}`;
+        
+        wrapper.appendChild(leaf);
+        
+        // We return the wrapper to be appended, but we also attach the element ref for parallax usage
+        wrapper._parallaxTarget = wrapper; 
+        
+        return wrapper;
     }
 
-    registerForParallax(leaf, config) {
-        leaf.setAttribute('data-speed', config.speed);
-        // Guardamos la rotación base para el parallax
-        const rotation = config.classes.includes('rotate-') ? '' : (config.parent === 'inicio' && config.img.includes('seca') ? 'rotate(45deg)' : 'rotate(-15deg)');
+    registerForParallax(wrapper, config) {
+        wrapper.setAttribute('data-speed', config.speed);
         
         this.leaves.push({
-            element: leaf,
-            speed: config.speed,
-            rotation: rotation
+            element: wrapper,
+            speed: config.speed
+            // No rotation needed here because rotation is CSS-handled on the inner image
         });
     }
 
-    adjustZIndices(parentSection, leaf, config) {
+    adjustZIndices(parentSection, wrapper, config) {
         if (parentSection.children.length > 0) {
             Array.from(parentSection.children).forEach(child => {
-               if (child !== leaf && child.nodeType === 1) {
+                // Skip our own wrapper and non-element nodes
+               if (child !== wrapper && child.nodeType === 1) {
                    const style = window.getComputedStyle(child);
                    if (style.position === 'static') {
                        child.classList.add('relative');
                    }
-                   // Si la hoja no es z-10, el contenido debe ser z-10 para estar encima
-                   if (!config.classes.includes('z-10')) {
+                   // If the decoration is not z-10 (high layer), content should be above it
+                   if (!config.wrapperClasses.includes('z-10')) {
                        child.classList.add('z-10');
                    }
                }
@@ -228,7 +232,8 @@ export class FloatingDecorations {
             const scrollY = window.scrollY;
             this.leaves.forEach(item => {
                 const yOffset = scrollY * item.speed;
-                item.element.style.transform = `${item.rotation} translateY(${yOffset}px)`;
+                // Simply move the wrapper. No need to worry about rotation/scale preservation.
+                item.element.style.transform = `translateY(${yOffset}px)`;
             });
             requestAnimationFrame(animate);
         };

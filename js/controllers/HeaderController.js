@@ -53,6 +53,10 @@ export class HeaderController {
     /**
      * Cambia el estilo del header al hacer scroll.
      */
+    /**
+     * Cambia el estilo del header al hacer scroll.
+     * Optimizado con requestAnimationFrame para evitar sobrecarga.
+     */
     initScrollEffect() {
         // Re-intentar seleccionar el header si no se encontró en el constructor
         if (!this.DOM.header) {
@@ -64,18 +68,23 @@ export class HeaderController {
             return;
         }
 
+        let ticking = false;
+
         const handleScroll = () => {
-            const isScrolled = window.scrollY > 50;
-            // console.log("HeaderController: Scroll Event. Y:", window.scrollY, "Scrolled Class:", isScrolled); // Uncomment for verbose debug
-            this.DOM.header.classList.toggle("header-scrolled", isScrolled);
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const isScrolled = window.scrollY > 50;
+                    this.DOM.header.classList.toggle("header-scrolled", isScrolled);
+                    ticking = false;
+                });
+                ticking = true;
+            }
         };
 
-        window.addEventListener("scroll", handleScroll);
-        // Pequeño timeout para asegurar que el DOM esté estabilizado y el scroll real se lea bien
-        setTimeout(() => {
-            handleScroll();
-            // console.log("HeaderController: Initial scroll check executed.");
-        }, 100); 
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        
+        // Initial check
+        handleScroll();
     }
 
     /**
@@ -137,7 +146,6 @@ export class HeaderController {
         // Activar Backdrop
         if (this.backdrop) {
             this.backdrop.classList.remove('pointer-events-none', 'opacity-0');
-            // document.body.style.overflow = 'hidden'; // Scroll locking removed to prevent jump
         }
     }
 
@@ -150,7 +158,6 @@ export class HeaderController {
         // Desactivar Backdrop
         if (this.backdrop) {
             this.backdrop.classList.add('opacity-0', 'pointer-events-none');
-            // document.body.style.overflow = ''; // Scroll locking removed
         }
     }
 
@@ -159,7 +166,8 @@ export class HeaderController {
     }
 
     /**
-     * Actualiza el enlace activo del menú según la sección visible.
+     * Actualiza el enlace activo del menú usando IntersectionObserver.
+     * Mucho más eficiente que el evento scroll.
      */
     initScrollSpy() {
         const sections = document.querySelectorAll("main section[id], footer[id]");
@@ -167,19 +175,22 @@ export class HeaderController {
 
         if (sections.length === 0 || navLinks.length === 0) return;
 
-        const handleScrollSpy = () => {
-            const scrollPosition = window.scrollY + 150;
-            
-            sections.forEach((section) => {
-                const { offsetTop, offsetHeight, id } = section;
-                if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                    this.updateActiveLink(navLinks, id);
-                }
-            });
+        // Configuración: Se activa cuando la sección cruza una línea imaginaria en el top 30% de la pantalla
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', 
+            threshold: 0
         };
 
-        window.addEventListener("scroll", handleScrollSpy);
-        handleScrollSpy();
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    this.updateActiveLink(navLinks, entry.target.id);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((section) => observer.observe(section));
     }
 
     updateActiveLink(navLinks, sectionId) {
