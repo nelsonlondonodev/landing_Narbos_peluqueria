@@ -35,6 +35,18 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (January 26, 2026)
+
+### 1. JavaScript Architecture Refactor (Clean Code) 🏗️
+- **Decoupled Logic**: Split `main.js` into `App.js` (Pure Business Logic Class) and `main.js` (Entry Point). This separation prevents side-effects when importing the App class in other scripts.
+- **Fixed Race Conditions**: Resolved a critical "double initialization" bug that caused interactive components (like FAQ Accordions) to fail on service pages. `service-page.js` and `nails-page.js` now handle App instantiation explicitly using the Singleton pattern.
+- **Build System Update**:  Added `App.js` to the cache-busting pipeline in `scripts/build.js` to ensure production users receive the latest logic updates.
+
+### 2. Content Improvements ✂️
+- **Haircut FAQ**: Updated the Frequently Asked Questions in `cortes-de-pelo.html` to be service-specific (Visagism, curly hair care, cut frequency) instead of generic content.
+
+---
+
 ## 🔄 Recent Updates (January 22, 2026)
 
 ### 1. Deployment Automation (GitHub Pages) 🚀
