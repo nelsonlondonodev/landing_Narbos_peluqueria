@@ -163,9 +163,24 @@ class App {
 
 // Inicialización de la aplicación
 function initApp() {
+    // Evitar doble inicialización si ya existe una instancia global
+    if (window.narbosApp) {
+        console.log("App already initialized explicitly.");
+        return;
+    }
+
     const app = new App();
+    // Registrar instancia globalmente ANTES de init() para bloquear otras llamadas concurrentes
+    window.narbosApp = app; 
     app.init();
 }
+
+// Lógica de auto-ejecución inteligente
+// Si este script es importado como módulo, esta lógica se ejecuta.
+// Pero queremos evitar que arranque si 'service-page.js' va a tomar el control.
+// Detectamos si estamos en una página de servicio (indicador burdo pero efectivo: service-page.js importa main.js)
+// Mejor estrategia: initApp se ejecuta en DOMContentLoaded. 
+// Para cuando el DOM esté listo, si service-page.js ya instanció la app manualmente, window.narbosApp existirá.
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
