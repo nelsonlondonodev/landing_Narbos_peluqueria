@@ -1,4 +1,4 @@
-import { initApp } from './main.js';
+import { App } from './App.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { BrandsSection } from './components/BrandsSection.js';
@@ -7,10 +7,16 @@ import { nailBrands } from './data/brandsData.js';
 /**
  * Nails Page Logic
  * Custom logic for the Nails & Spa section.
- * Global init handled by main.js.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Explicitly initialize Core App (Navbar, Footer, etc)
+    if (!window.narbosApp) {
+        const app = new App();
+        window.narbosApp = app;
+        app.init();
+    }
+
     initBreadcrumbs();
     initFloatingDecorations();
     initBrandsCarousel();

@@ -180,6 +180,7 @@ const versionAssets = async () => {
     const assetsToVersion = [
         { dir: 'css', name: 'styles.css' },
         { dir: 'js', name: 'main.js' },
+        { dir: 'js', name: 'App.js' },
         { dir: 'js', name: 'service-page.js' }
     ];
 

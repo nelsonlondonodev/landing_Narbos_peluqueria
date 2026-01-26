@@ -1,4 +1,4 @@
-import { initApp, App } from './main.js';
+import { App } from './App.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 
