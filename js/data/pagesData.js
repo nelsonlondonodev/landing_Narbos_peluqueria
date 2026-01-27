@@ -22,7 +22,74 @@ export const pagesData = Object.freeze({
             subtitle: "Expertos en realzar tu belleza con técnicas de vanguardia y productos de clase mundial.",
             imageSrc: "images/pages/peluqueria/estilismo-barba.webp",
             imageAlt: "Servicio de peluquería profesional en Narbo's"
-        }
+        },
+        gallery: [
+            {
+                type: 'video',
+                layout: 'featured-video', // 9:16 vertical on mobile, 2x2 on desktop
+                src: 'video/video_instagram_1.mp4',
+                poster: 'images/pages/peluqueria/hair-hero.jpg',
+                title: "Experiencia Narbo's",
+                subtitle: "Vive el cambio",
+                alt: "Video de experiencia en Narbo's Salon"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/peluqueria/color-tratamiento.webp',
+                title: "Color profundo",
+                alt: "Balayage y tintes de color profundo"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/mechas-balayage-detalle.webp',
+                title: "Iluminaciones",
+                alt: "Detalle de mechas balayage"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.JPG',
+                title: "Rubios",
+                alt: "Balayage rubio iluminado"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/estilismo-barba.webp',
+                title: "Cortes",
+                alt: "Cortes de diseño y estilismo"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: 'images/pages/peluqueria/narbos-salon-spa-chia-peinado-tendencia-trenzas-laterales-ondas-sueltas Large.jpeg',
+                title: "Peinados",
+                alt: "Peinados de tendencia y ondas sueltas"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/lavado-spa-capilar.webp',
+                title: "Spa Capilar",
+                alt: "Lavado y spa capilar relajante"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/imagen-balayage_chia.jpeg',
+                title: "Babylights",
+                alt: "Técnica de babylights en cabello"
+            },
+            {
+                type: 'image',
+                layout: 'square', // Originalmente era un bloque de cierre, lo dejaremos square o vertical según ajuste. En el HTML era col-span-2 md:col-span-1. Haremos square para mobile y desktop consistente.
+                src: 'images/pages/peluqueria/lavado-spa-capilar.webp', // Nota: imagen repetida en origin, verificar si usar otra.
+                title: "Tratamientos",
+                alt: "Tratamientos capilares profundos"
+            }
+        ]
     },
     barberia: {
          hero: {

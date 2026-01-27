@@ -1,16 +1,18 @@
 import { App } from './App.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
+import { getBentoGridHTML } from './components/BentoGrid.js'; // Added
+import { pagesData } from './data/pagesData.js'; // Added
 
-import { BrandsSection } from './components/BrandsSection.js'; // Added
-import { hairBrands } from './data/brandsData.js'; // Added
+import { BrandsSection } from './components/BrandsSection.js'; 
+import { hairBrands } from './data/brandsData.js'; 
 import { hairSalonServices } from './data/hairSalonServices.js';
 import { barberServices } from './data/barberServices.js';
 import { hairCutStyles } from './data/hairCutStyles.js';
 import { colorStyles } from './data/colorStyles.js';
 import { tintStyles } from './data/tintStyles.js';
 import { treatmentStyles } from './data/treatmentStyles.js';
-import { estheticsServices } from './data/estheticsServices.js'; // Added
+import { estheticsServices } from './data/estheticsServices.js'; 
 
 /**
  * Gestor de la Página de Servicios.
@@ -36,10 +38,44 @@ class ServicePageManager {
 
         this.initServiceGrid();
         this.initBrands(); 
+        
+        this.initBentoGallery(); // New Bento Grid dynamic injection
 
         this.initLazyVideos();
         this.initModalTriggers();
         this.initBreadcrumbs();
+        this.initLightboxInstance(); // Initialize Lightbox AFTER all content is injected
+    }
+
+    /**
+     * Inicializa la galería Bento Grid Dinámica.
+     */
+    initBentoGallery() {
+        const galleryContainer = document.getElementById('bento-gallery-root');
+        if (!galleryContainer) return;
+
+        const path = window.location.pathname;
+        let pageKey = null;
+
+        // Lógica simple para detectar la página actual
+        // Podría mejorarse extrayendo slugs si escala mucho
+        if (path.includes('/peluqueria') || path.includes('/cortes-de-pelo') || path.includes('index.html')) {
+             // Por simplificación actual, asumimos que 'peluqueria' es la key principal para el hub
+             // Si cortes-de-pelo tuviera su propia key en pagesData, usaríamos esa.
+             // Como editamos pagesData solo con 'peluqueria', usaremos esa si estamos en el HUB.
+             // TODO: Si 'cortes-de-pelo' necesita su propia galería dinámica, agregar key 'cortes' a pagesData.
+             if (path.includes('peluqueria') && !path.includes('cortes')) pageKey = 'peluqueria';
+        }
+
+        if (!pageKey || !pagesData[pageKey] || !pagesData[pageKey].gallery) return;
+
+        const galleryItems = pagesData[pageKey].gallery.map(item => ({
+             ...item,
+             src: this.app.resolvePath(item.src),
+             poster: item.poster ? this.app.resolvePath(item.poster) : undefined
+        }));
+
+        galleryContainer.innerHTML = getBentoGridHTML(galleryItems);
     }
     
     /**
@@ -103,8 +139,6 @@ class ServicePageManager {
 
             this.setupHairServiceGallery(hairServicesGrid, processedData);
         });
-
-        this.initLightboxInstance();
     }
 
     initBarberServices() {
