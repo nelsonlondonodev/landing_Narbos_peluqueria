@@ -111,8 +111,6 @@ export const pagesData = Object.freeze({
            // Voy a definirlo aquí, pero tendré que ver cómo HeroSection maneja la falta de imagen o si debo añadir una.
            // Dado que el usuario dijo "traer los componentes", asumiré que quiere un Hero estándar con imagen, o adaptaré el Hero.
            // Voy a usar una imagen de placeholder coherente o vacía si el componente lo permite. 
-           // Revisando el html actual, usa un bg color.
-           // Asignaré null a imageSrc y validaré en el componente o usaré una imagen de equipo.
            imageSrc: "images/team/Team_1.webp", // Usaré la imagen del equipo como fondo temporalmente para probar el componente, o una textura.
            imageAlt: "Equipo de Narbo's Salon"
        }
@@ -124,5 +122,142 @@ export const pagesData = Object.freeze({
             imageSrc: "images/pages/home/foto_inicio2.webp",
             imageAlt: "Recepción de Narbos Salon en Chia"
         }
-   }
+   },
+    'cortes-de-pelo': {
+        gallery: [
+            {
+                type: 'video',
+                layout: 'featured-video',
+                src: 'video/video_instagram_1.mp4',
+                poster: 'images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
+                title: "Experiencia Narbo's",
+                subtitle: "Vive el cambio",
+                alt: "Video de experiencia en Narbo's Salon"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/peluqueria/corte_pixie_mujer_chia.jpeg',
+                title: "Corte Pixie",
+                alt: "Corte Pixie y Pelo Corto"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/mechas-balayage-detalle.webp',
+                title: "Iluminaciones",
+                alt: "Detalle Balayage"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/corte_bob_chia.jpeg',
+                title: "Corte Bob",
+                alt: "Corte Bob en Chía"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: 'images/pages/peluqueria/corte_capas_chia.jpeg',
+                title: "Corte en Capas",
+                alt: "Corte en Capas y Movimiento"
+            }
+        ]
+    },
+    'balayage-mechas': {
+        gallery: [
+             {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
+                title: "Corte Dama",
+                alt: "Corte dama"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/Resultado-Balayage-Peluqueria-en-Chia-cerca-de-Cajica-Narbos.jpeg',
+                title: "Rubios",
+                alt: "Resultado Balayage Rubio en Chía"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/despues_balayage_rubio_ceniza_ondulado_peluqueria_narbos_salon_spa_chia.jpeg',
+                title: "Corrección",
+                alt: "Corrección de color y rubios"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/color-tratamiento.webp',
+                title: "Coloración",
+                alt: "Coloración Profesional"
+            }
+        ]
+    },
+    'color-tinturas-cabello': {
+         gallery: [
+             {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
+                title: "Corte Dama",
+                alt: "Corte dama"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/mechas-balayage-detalle.webp',
+                title: "Detalle Mechas",
+                alt: "Peinado novia" // Keeping original alt though title suggests mechas
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/color-tratamiento.webp',
+                title: "Coloración",
+                alt: "Coloración balayage"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/lavado-spa-capilar.webp',
+                title: "Tratamiento",
+                alt: "Tratamiento capilar"
+            }
+        ]
+    },
+    'tratamientos-capilares': {
+        gallery: [
+             {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
+                title: "Corte Dama",
+                alt: "Corte dama"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/mechas-balayage-detalle.webp',
+                title: "Detalle",
+                alt: "Peinado novia"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/color-tratamiento.webp',
+                title: "Coloración",
+                alt: "Coloración balayage"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/peluqueria/lavado-spa-capilar.webp',
+                title: "Spa Capilar",
+                alt: "Tratamiento capilar"
+            }
+        ]
+    }
 });

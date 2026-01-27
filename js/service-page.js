@@ -57,15 +57,12 @@ class ServicePageManager {
         const path = window.location.pathname;
         let pageKey = null;
 
-        // Lógica simple para detectar la página actual
-        // Podría mejorarse extrayendo slugs si escala mucho
-        if (path.includes('/peluqueria') || path.includes('/cortes-de-pelo') || path.includes('index.html')) {
-             // Por simplificación actual, asumimos que 'peluqueria' es la key principal para el hub
-             // Si cortes-de-pelo tuviera su propia key en pagesData, usaríamos esa.
-             // Como editamos pagesData solo con 'peluqueria', usaremos esa si estamos en el HUB.
-             // TODO: Si 'cortes-de-pelo' necesita su propia galería dinámica, agregar key 'cortes' a pagesData.
-             if (path.includes('peluqueria') && !path.includes('cortes')) pageKey = 'peluqueria';
-        }
+        // Lógica para detectar la página actual y cargar su galería específica
+        if (path.includes('cortes-de-pelo')) pageKey = 'cortes-de-pelo';
+        else if (path.includes('balayage-mechas')) pageKey = 'balayage-mechas';
+        else if (path.includes('color-tinturas-cabello')) pageKey = 'color-tinturas-cabello';
+        else if (path.includes('tratamientos-capilares')) pageKey = 'tratamientos-capilares';
+        else if (path.includes('/peluqueria') || path.includes('index.html')) pageKey = 'peluqueria';
 
         if (!pageKey || !pagesData[pageKey] || !pagesData[pageKey].gallery) return;
 
