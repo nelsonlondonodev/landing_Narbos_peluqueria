@@ -36,6 +36,7 @@ class ServicePageManager {
 
         console.log("✅ ServicePageManager initialized with App context");
 
+        this.initHero(); // Initialize Dynamic Hero Section
         this.initServiceGrid();
         this.initBrands(); 
         
@@ -73,6 +74,63 @@ class ServicePageManager {
         }));
 
         galleryContainer.innerHTML = getBentoGridHTML(galleryItems);
+    }
+
+    /**
+     * Inicializa la Sección Hero Dinámica.
+     */
+    initHero() {
+        const heroContainer = document.getElementById('services-hero-root');
+        if (!heroContainer) return;
+
+        const path = window.location.pathname;
+        let pageKey = null;
+
+        if (path.includes('cortes-de-pelo')) pageKey = 'cortes-de-pelo';
+        else if (path.includes('balayage-mechas')) pageKey = 'balayage-mechas';
+        else if (path.includes('color-tinturas-cabello')) pageKey = 'color-tinturas-cabello';
+        else if (path.includes('tratamientos-capilares')) pageKey = 'tratamientos-capilares';
+        else if (path.includes('/peluqueria') || path.includes('index.html')) {
+             // Distinguish main hub from subpages if they share structure
+             if (path.indexOf('peluqueria') > -1 && 
+                 !path.includes('cortes') && 
+                 !path.includes('balayage') && 
+                 !path.includes('color') && 
+                 !path.includes('tratamientos')) {
+                 pageKey = 'peluqueria';
+             }
+        }
+        
+        // Add specific check for Estetica
+        if (path.includes('/estetica')) pageKey = 'estetica';
+        if (path.includes('/barberia')) pageKey = 'barberia';
+        if (path.includes('/nosotros')) pageKey = 'nosotros';
+        if (path.includes('/contacto')) pageKey = 'contacto';
+
+        if (!pageKey || !pagesData[pageKey] || !pagesData[pageKey].hero) return;
+
+        const { hero } = pagesData[pageKey];
+        const imageSrc = this.app.resolvePath(hero.imageSrc);
+
+        // Generate Hero HTML
+        const html = `
+            <div class="relative">
+                <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
+                    <img src="${imageSrc}" alt="${hero.imageAlt}" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080">
+                </section>
+
+                <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
+                    <div class="container mx-auto">
+                        <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto">
+                            <h1 class="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4">${hero.title}</h1>
+                            <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">${hero.subtitle}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        heroContainer.innerHTML = html;
     }
     
     /**

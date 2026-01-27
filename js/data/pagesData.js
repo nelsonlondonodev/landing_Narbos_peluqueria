@@ -259,5 +259,13 @@ export const pagesData = Object.freeze({
                 alt: "Tratamiento capilar"
             }
         ]
+    },
+    estetica: {
+        hero: {
+            title: "Estética y Spa en Chía",
+            subtitle: "Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.",
+            imageSrc: "images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia.%20copy%20Large.jpeg",
+            imageAlt: "Tratamientos de spa y estética en Narbo's"
+        }
     }
 });
