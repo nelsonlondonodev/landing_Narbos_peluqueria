@@ -88,6 +88,10 @@ export class FloatingDecorations {
         if (this.config.customConfig) return this.config.customConfig;
 
         const path = window.location.pathname;
+
+        // --- RULE 1: No decorations on Blog pages ---
+        if (path.includes('/blog')) return [];
+
         const isHomePage = path === '/' || (path.endsWith('index.html') && !path.includes('/servicios/'));
         
         // Check for specific service areas
@@ -98,24 +102,15 @@ export class FloatingDecorations {
         
         const isServicePage = isPeluqueria || isBarberia || isEstetica || isUñas;
         
-        // Define speed based on page type to prevent drifting in service pages
-        const faqSpeed = isServicePage ? 0 : 0.15;
-
-        // Base Config (FAQ Section - Common)
-        const baseConfig = [
-            { 
-                parent: 'faq', 
-                img: 'ui/decorations/hoja-seca-3d.webp', 
-                speed: faqSpeed,
-                wrapperClasses: '-left-8 -top-10 md:left-2 md:top-2 z-20',
-                imgClasses: 'w-24 md:w-32 -rotate-45 md:rotate-10'
-            }
-        ];
-
+        // Define speed based on page type
+        // Home has movement (parallax), others are static (speed 0)
+        
         let heroConfig = [];
 
         if (isHomePage) {
-            // --- Home: Elaborate Decorations ---
+            // --- Home: Elaborate Decorations + Movement ---
+            
+            // 1. Hero Decorations
             heroConfig = [
                 { 
                     parent: 'inicio', 
@@ -131,7 +126,7 @@ export class FloatingDecorations {
                     wrapperClasses: '-right-6 top-[40%] md:right-[15%] md:top-[35%] z-10',
                     imgClasses: 'w-24 md:w-56 -rotate-12 opacity-90 md:opacity-100'
                 },
-                // Home specific Service Grid decorations
+                // 2. Service Grid Decorations (Home Only)
                 { 
                     parent: 'servicios', 
                     img: 'ui/decorations/hoja-seca-3d.webp', 
@@ -147,9 +142,28 @@ export class FloatingDecorations {
                     imgClasses: 'w-28 md:w-40' 
                 }
             ];
-        } else if (isServicePage) {
-            // --- Service Pages (Peluqueria, Barberia, etc.) ---
-            // Simpler entry animations, no parallax loop (speed: 0) to prevent layout shifting
+
+            // 3. FAQ Decorations (Home Only - Previously baseConfig)
+            // We include this directly here for clarity
+            const faqConfig = [
+                { 
+                    parent: 'faq', 
+                    img: 'ui/decorations/hoja-seca-3d.webp', 
+                    speed: 0.15,
+                    wrapperClasses: '-left-8 -top-10 md:left-2 md:top-2 z-20',
+                    imgClasses: 'w-24 md:w-32 -rotate-45 md:rotate-10'
+                }
+            ];
+
+            return [...heroConfig, ...faqConfig];
+
+        } 
+        
+        // --- Non-Home Pages (Services, Contact, About) ---
+        // STATIC decorations (Speed 0), ONLY in Hero.
+        
+        if (isServicePage) {
+            // Service Pages (Peluqueria, Barberia, etc.)
              heroConfig = [
                 { 
                     parent: 'inicio', 
@@ -167,7 +181,7 @@ export class FloatingDecorations {
                 }
             ];
         } else {
-            // --- Other Internal Pages (Nosotros/Contacto) ---
+             // Other Internal Pages (Nosotros/Contacto)
              heroConfig = [
                 { 
                     parent: 'inicio', 
@@ -186,7 +200,8 @@ export class FloatingDecorations {
             ];
         }
 
-        return [...heroConfig, ...baseConfig];
+        // Return ONLY hero config for internal pages (No FAQ leaves)
+        return heroConfig;
     }
 
     setupParentSection(element) {
