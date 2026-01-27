@@ -28,15 +28,19 @@ class ServicePageManager {
         // Ahora App maneja internamente BASE_PATH, por lo que es seguro instanciarla directamente.
         if (!window.narbosApp) {
              this.app = new App();
+             
+             // Inicializar Hero dinámico ANTES de que App arranque componentes dependientes (ej: FloatingDecorations)
+             this.initHero(); 
+
              this.app.init(); // Inicializa layout y componentes base
              window.narbosApp = this.app; // Singleton pattern simple
         } else {
             this.app = window.narbosApp;
+            this.initHero();
         }
 
         console.log("✅ ServicePageManager initialized with App context");
 
-        this.initHero(); // Initialize Dynamic Hero Section
         this.initServiceGrid();
         this.initBrands(); 
         
