@@ -119,7 +119,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Contáctanos",
             subtitle: "Estamos listos para transformar tu día. Visítanos en nuestra nueva sede.",
-            imageSrc: "images/pages/home/foto_inicio2.webp",
+            imageSrc: "images/blog/foto_fachada.webp",
             imageAlt: "Recepción de Narbos Salon en Chia"
         }
    },
