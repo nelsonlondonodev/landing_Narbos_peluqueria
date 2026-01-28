@@ -318,34 +318,38 @@ export const pagesData = Object.freeze({
         ]
     },
     'tratamientos-capilares': {
+        title: "Recuperación Capilar",
+        description: "Terapias profundas para devolver la fuerza, el brillo y la suavidad a tu cabello.",
         gallery: [
              {
                 type: 'image',
-                layout: 'square',
-                src: 'images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
-                title: "Corte Dama",
-                alt: "Corte dama"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: 'images/pages/peluqueria/mechas-balayage-detalle.webp',
-                title: "Detalle",
-                alt: "Peinado novia"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: 'images/pages/peluqueria/color-tratamiento.webp',
-                title: "Coloración",
-                alt: "Coloración balayage"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: 'images/pages/peluqueria/lavado-spa-capilar.webp',
+                layout: 'vertical',
+                src: '../../images/pages/peluqueria/lavado-spa-capilar.webp',
                 title: "Spa Capilar",
-                alt: "Tratamiento capilar"
+                subtitle: "Relajación y Salud",
+                alt: "Lavado y masaje capilar profundo"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/peluqueria/hair-hero.jpg',
+                title: "Brillo Extremo",
+                alt: "Cabello sano y brillante"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/peluqueria/color-tratamiento.webp',
+                title: "Nutrición",
+                alt: "Aplicación de tratamiento nutritivo"
+            },
+            {
+                type: 'featured-video', // Si no hay video, usaré imagen de respaldo por ahora para no romper
+                layout: 'horizontal',
+                src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-despues.jpg', // Placeholder de calidad
+                title: "Resultados Visibles",
+                subtitle: "Antes y Después",
+                alt: "Cabello recuperado tras tratamiento"
             }
         ]
     },
