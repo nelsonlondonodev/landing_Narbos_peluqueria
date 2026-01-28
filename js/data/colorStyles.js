@@ -42,13 +42,13 @@ export const colorStyles = Object.freeze([
     {
         title: "Corrección de Color",
         description: "Expertos en arreglar tonos indeseados y devolver la salud y el color perfecto a tu melena.",
-        link: "../../images/pages/peluqueria/antes-y-despues-correccion.jpg",
-        image: "../../images/pages/peluqueria/antes-y-despues-correccion.jpg",
+        link: "../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-dañado-despues.jpg",
+        image: "../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-dañado-despues.jpg",
         imageAlt: "Resultado final en Narbo’s Chía: Corrección de color exitosa",
         variant: "standard",
         galleryImages: [
             {
-                src: "../../images/pages/peluqueria/antes-correccion.jpg",
+                src: "../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-dañado-antes.jpg",
                 title: "Antes: Cabello Procesado y Dañado en Chía"
             }
         ]

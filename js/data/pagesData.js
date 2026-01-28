@@ -166,47 +166,47 @@ export const pagesData = Object.freeze({
     },
     'balayage-mechas': {
         gallery: [
-             // Caso Estrella (El original corregido - Ya tenía ../../ implicito o fallaba, pondré explícito)
+             // Caso Estrella: Corrección Rubio Extremo
              {
                 type: 'image',
                 layout: 'vertical', 
-                src: '../../images/pages/peluqueria/antes-y-despues-correccion.jpg',
+                src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-dañado-despues.jpg',
                 title: "Corrección Total",
                 subtitle: "De maltratado a rubio perfecto",
                 alt: "Resultado final: Corrección de color exitosa y diseño de balayage rubio luminoso.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/antes-correccion.jpg',
+                        src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-dañado-antes.jpg',
                         alt: 'Antes: Cabello con manchas y daño severo recuperado.'
                     }
                 ]
             },
-            // Nuevo Caso 1 (Carpeta 1) - INTERCAMBIADO para mostrar RESULTADO
+            // Caso 1: Rubio Iluminación
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/antes_despues1/caso1-despues.jpg', // Pongo el DESPUÉS aquí
+                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-despues.jpg',
                 title: "Rubio Soñado",
                 subtitle: "Iluminación balayage",
                 alt: "Diseño de color rubio con técnica balayage.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/antes_despues1/caso1-antes.jpg', // El ANTES se va al carrusel oculto
+                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-antes.jpg',
                         alt: 'Estado inicial antes del diseño de color.'
                     }
                 ]
             },
-            // Nuevo Caso 2 (Carpeta 2) - INTERCAMBIADO (Corrección final)
+            // Caso 2: Corrección Miel (Logic fixed by file renaming)
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/antes_despues2/caso2-antes.jpg', // Poniendo la otra imagen como portada
+                src: '../../images/pages/peluqueria/casos_exito/correccion-color-balayage-miel-chia-despues.jpg',
                 title: "Cambio de Look",
                 subtitle: "Renovación total",
                 alt: "Renovación de imagen con color y corte.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/antes_despues2/caso2-despues.jpg', // Poniendo la otra imagen como oculta
+                        src: '../../images/pages/peluqueria/casos_exito/correccion-color-balayage-miel-chia-antes.jpg',
                         alt: 'Antes del cambio de look.'
                     }
                 ]
