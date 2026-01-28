@@ -360,5 +360,55 @@ export const pagesData = Object.freeze({
             imageSrc: "images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia.%20copy%20Large.jpeg",
             imageAlt: "Tratamientos de spa y estética en Narbo's"
         }
+    },
+    'unas-spa': {
+        gallery: [
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/unas/manicure-spa.webp',
+                title: "Manicure Spa",
+                subtitle: "Relajación total",
+                alt: "Servicio de Manicure Spa completo"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/unas/pedicure-spa.webp',
+                title: "Pedicure Spa",
+                subtitle: "Bienestar para tus pies",
+                alt: "Pedicure Spa con masaje relajante"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/unas/esmaltado-semi.webp',
+                title: "Esmaltado Semipermanente",
+                alt: "Uñas con esmaltado de larga duración"
+            },
+            {
+                type: 'image',
+                layout: 'featured-video', // Destacado para mostrar el arte
+                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.jpeg',
+                title: "Extensiones & Nail Art",
+                subtitle: "Diseños exclusivos",
+                alt: "Uñas acrílicas y diseños artísticos personalizados"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/unas/retiro-semi.webp',
+                title: "Cuidado de Uñas",
+                alt: "Retiro profesional de esmalte y cuidado"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/unas/disenos-nailart.webp',
+                title: "Tendencias Nail Art",
+                subtitle: "Creatividad sin límites",
+                alt: "Variedad de diseños de uñas modernos"
+            }
+        ]
     }
 });

@@ -2,7 +2,9 @@ import { App } from './App.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { BrandsSection } from './components/BrandsSection.js';
+import { getBentoGridHTML } from './components/BentoGrid.js';
 import { nailBrands } from './data/brandsData.js';
+import { pagesData } from './data/pagesData.js';
 
 /**
  * Nails Page Logic
@@ -20,11 +22,51 @@ document.addEventListener('DOMContentLoaded', () => {
     initBreadcrumbs();
     initFloatingDecorations();
     initBrandsCarousel();
+    initGallery();
 });
 
 /* -------------------------------------------------------------------------- */
 /*                                INITIALIZATIONS                              */
 /* -------------------------------------------------------------------------- */
+
+function initGallery() {
+    const galleryRoot = document.getElementById('nails-gallery-root');
+    // Ensure we are accessing the correct data key 'unas-spa'
+    if (galleryRoot && pagesData && pagesData['unas-spa'] && pagesData['unas-spa'].gallery) {
+        galleryRoot.innerHTML = getBentoGridHTML(pagesData['unas-spa'].gallery);
+        
+        // Add Title manually if needed, or rely on the HTML structure
+        const titleHTML = `
+            <div class="text-center mb-12" data-animation="fadeInUp">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">Nuestros Trabajos</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">Descubre la perfección en cada detalle.</p>
+            </div>
+        `;
+        // Prepend title to grid
+        galleryRoot.insertAdjacentHTML('afterbegin', titleHTML);
+
+        initLightbox();
+    } else {
+        console.warn('Gallery root or data not found for nails page');
+    }
+}
+
+function initLightbox() {
+    // Check if GLightbox is loaded globally
+    if (typeof GLightbox !== 'undefined') {
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            zoomable: true,
+            openEffect: 'zoom',
+            closeEffect: 'zoom'
+        });
+    } else {
+        // Retry logic in case script is deferred and not yet ready
+        setTimeout(initLightbox, 100);
+    }
+}
 
 function initBrandsCarousel() {
     new BrandsSection('nail-brands-root', nailBrands).render();
