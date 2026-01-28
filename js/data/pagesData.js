@@ -211,6 +211,21 @@ export const pagesData = Object.freeze({
                     }
                 ]
             },
+            // Caso 3: Rubio Perla (Nuevo)
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-despues.jpg',
+                title: "Rubio Perla",
+                subtitle: "Corrección y diseño",
+                alt: "Balayage rubio perla con corrección de color.",
+                subImages: [
+                    {
+                        src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-antes.jpg',
+                        alt: 'Estado inicial antes del balayage rubio perla.'
+                    }
+                ]
+            },
             // Detalles y Complementos (Añadir ../../)
             {
                 type: 'image',
