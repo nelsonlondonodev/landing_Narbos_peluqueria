@@ -275,7 +275,10 @@ class ServicePageManager {
          // ServicePageManager sobreescribe el comportamiento estándar de navegación para el lightbox.
          
          // Fix: Asegurar que el href apunte a la imagen resuelta para que GLightbox la encuentre.
-         cardElement.href = this.app.resolvePath(data.image);
+         // Usamos data-href para evitar navegación accidental si falla JS
+         const finalUrl = encodeURI(this.app.resolvePath(data.image));
+         cardElement.href = 'javascript:void(0);';
+         cardElement.setAttribute('data-href', finalUrl);
     }
 
     setupHairServiceGallery(container, data) {
@@ -295,10 +298,11 @@ class ServicePageManager {
             const imgTitle = typeof item === 'string' ? `${data.title} - Imagen ${index + 2}` : item.title;
             
             // Resolver ruta de imagen de galería
-            const imgUrl = this.app.resolvePath(imgUrlRaw);
+            const imgUrl = encodeURI(this.app.resolvePath(imgUrlRaw));
 
             const hiddenLink = document.createElement('a');
-            hiddenLink.href = imgUrl; // Ruta corregida
+            hiddenLink.href = 'javascript:void(0);'; // Prevenir navegación
+            hiddenLink.setAttribute('data-href', imgUrl); // GLightbox usará esto
             hiddenLink.className = 'glightbox hidden'; 
             hiddenLink.setAttribute('data-gallery', uniqueGalleryId);
             hiddenLink.setAttribute('data-title', imgTitle);
@@ -340,11 +344,68 @@ class ServicePageManager {
                 slideEffect: 'slide'
             });
             console.log("✅ GLightbox initialized successfully with " + document.querySelectorAll('.glightbox').length + " elements.");
+            
+            // Inyectar estilos correctivos para asegurar visibilidad de controles
+            this.injectLightboxStyles();
+            
         } catch (error) {
             console.error("Error initializing GLightbox:", error);
         }
 
         this.setupLightboxAccessibility();
+    }
+
+    /**
+     * Inyecta estilos CSS críticos para forzar la visibilidad de los controles de GLightbox.
+     * Soluciona conflictos de z-index o visibilidad con Tailwind/Estilos globales.
+     */
+    injectLightboxStyles() {
+        if (document.getElementById('glightbox-critical-styles')) return;
+
+        const style = document.createElement('style');
+        style.id = 'glightbox-critical-styles';
+        style.innerHTML = `
+            .glightbox-container { z-index: 99999 !important; }
+            .gbtn { 
+                z-index: 100000 !important; 
+                display: block !important;
+                opacity: 1 !important;
+                background-color: transparent;
+            }
+            .gbtn svg {
+                width: 30px !important;
+                height: 30px !important;
+                display: block !important;
+                color: #fff !important; /* Forzar color blanco */
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            }
+            .gprev, .gnext {
+                z-index: 100000 !important;
+                background-color: rgba(0,0,0,0.3) !important;
+                border-radius: 50%;
+                width: 45px !important;
+                height: 45px !important;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+            }
+            .gclose {
+                z-index: 100000 !important;
+                top: 15px !important;
+                right: 15px !important;
+                background-color: rgba(0,0,0,0.3) !important;
+                border-radius: 50%;
+                width: 40px !important;
+                height: 40px !important;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+            }
+            .glightbox-mobile .gbtn {
+                visibility: visible !important;
+            }
+        `;
+        document.head.appendChild(style);
     }
 
     setupLightboxAccessibility() {

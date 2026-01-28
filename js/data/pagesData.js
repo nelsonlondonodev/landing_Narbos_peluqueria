@@ -169,13 +169,13 @@ export const pagesData = Object.freeze({
              {
                 type: 'image',
                 layout: 'vertical', // Row-span-2: Destacado principal
-                src: 'images/pages/peluqueria/antes-y-despues-correccion-balayage-narbos-chia Large.jpeg',
+                src: 'images/pages/peluqueria/antes-y-despues-correccion.jpg',
                 title: "Transformación Total",
                 subtitle: "Antes y Después",
                 alt: "Resultado final en Narbo’s Chía: Corrección de color exitosa, diseño de balayage rubio luminoso y ondas hidratadas.",
                 subImages: [
                     {
-                        src: 'images/pages/peluqueria/antes-correccion-color-cabello-dañado-chia Large.jpeg',
+                        src: 'images/pages/peluqueria/antes-correccion.jpg',
                         alt: 'Impresionante antes y después de cambio de look en Chía: de cabello con manchas verdes a un balayage rubio perfecto realizado por el equipo de Narbo’s.'
                     }
                 ]

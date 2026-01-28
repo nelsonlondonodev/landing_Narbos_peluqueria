@@ -47,7 +47,7 @@ function getGridItemHTML(item) {
     let hiddenLinksHTML = '';
     if (hasSubImages) {
         hiddenLinksHTML = item.subImages.map(subItem => `
-            <a href="${subItem.src}" class="glightbox hidden" data-gallery="${galleryId}" data-type="image" aria-label="${subItem.alt || ''}"></a>
+            <a href="javascript:void(0);" data-href="${subItem.src}" class="glightbox hidden" data-gallery="${galleryId}" data-type="image" aria-label="${subItem.alt || ''}"></a>
         `).join('');
     }
 
@@ -61,7 +61,7 @@ function getGridItemHTML(item) {
                 </div>
             </div>
              <!-- Lightbox Trigger -->
-            <a href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${item.type === 'video' ? 'video' : 'image'}" aria-label="${item.alt}"></a>
+            <a href="javascript:void(0);" data-href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${item.type === 'video' ? 'video' : 'image'}" aria-label="${item.alt}"></a>
             ${hiddenLinksHTML}
         </div>
     `;
