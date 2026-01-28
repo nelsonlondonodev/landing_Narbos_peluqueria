@@ -211,7 +211,7 @@ export const pagesData = Object.freeze({
                     }
                 ]
             },
-            // Caso 3: Rubio Perla (Nuevo)
+            // Caso 3: Rubio Perla
             {
                 type: 'image',
                 layout: 'vertical',
@@ -223,6 +223,21 @@ export const pagesData = Object.freeze({
                     {
                         src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-antes.jpg',
                         alt: 'Estado inicial antes del balayage rubio perla.'
+                    }
+                ]
+            },
+            // Caso 4: Rubio Dorado (Nuevo)
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-despues.jpg',
+                title: "Rubio Dorado",
+                subtitle: "Luz natural",
+                alt: "Balayage en tonos dorados cálidos.",
+                subImages: [
+                    {
+                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-antes.jpg',
+                        alt: 'Estado antes de la iluminación dorada.'
                     }
                 ]
             },

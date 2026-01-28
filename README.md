@@ -289,6 +289,52 @@ Para mantener la escalabilidad y el SEO, el proyecto cuenta con herramientas CLI
     ```
     *Lee `js/data/articles.js` y actualiza `blog/index.html`. (Se ejecuta automáticamente al hacer build).*
 
+## 🧩 Componentes Reutilizables y Guías
+
+### 🖼️ BentoGrid (Galería de Trabajos)
+Ubicación: `js/components/BentoGrid.js`
+
+Este componente genera una cuadrícula dinámica de imágenes/videos y soporta la funcionalidad premium de **"Antes y Después"**.
+
+#### ✨ Funcionalidad "Antes y Después" (Carrusel Aislado)
+Permite que una tarjeta muestre el **Resultado Final** (portada) y, al hacer clic, abra un Lightbox aislado que contiene tanto el resultado como el estado anterior.
+
+**Cómo Implementarlo:**
+En `js/data/pagesData.js`, añade un objeto al array `gallery` con la propiedad `subImages`:
+
+```javascript
+{
+    type: 'image',
+    layout: 'vertical', // Opciones: 'vertical', 'square', 'horizontal', 'featured-video'
+    src: '../../images/pages/peluqueria/casos/caso-despues.jpg', // 📸 PORTADA (Resultado Final)
+    title: "Título del Caso",
+    subtitle: "Subtítulo Descriptivo",
+    alt: "Descripción SEO del resultado",
+    
+    // 🚀 La magia ocurre aquí:
+    subImages: [
+        {
+            src: '../../images/pages/peluqueria/casos/caso-antes.jpg', // 📸 IMAGEN OCULTA (Estado Previo)
+            alt: 'Descripción del estado inicial'
+        }
+    ]
+}
+```
+
+#### 🛡️ Mecanismos de Seguridad (Robustez)
+Para evitar errores de navegación (ej: abrir la imagen JPG en una pestaña nueva si falla JS), el componente implementa **Navigation Guard**:
+1.  **Enlaces Seguros**: Los links se generan con `href="javascript:void(0)"`.
+2.  **Data Attributes**: La URL real reside en `data-href`, que es leída por GLightbox.
+3.  **Inyección CSS**: `ServicePageManager.js` inyecta estilos críticos (`!important`) para forzar la visibilidad de los botones de navegación (flechas/cerrar) sobre cualquier capa del sitio.
+
+#### 🔍 Guía de SEO para Imágenes
+*   **Ubicación**: Almacenar los casos de éxito en `images/pages/peluqueria/casos_exito/`.
+*   **Naming Convention**: Usar palabras clave descriptivas.
+    *   ❌ Mal: `IMG_2831.jpg`, `caso1-antes.jpg`
+    *   ✅ Bien: `balayage-rubio-perla-chia-antes.jpg`, `correccion-color-cabello-dañado-despues.jpg`
+
+---
+
 3.  **Compilar Proyecto (Producción):**
     ```bash
     npm run build
