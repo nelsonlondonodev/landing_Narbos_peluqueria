@@ -147,6 +147,13 @@ Para preservar el historial de indexación en Google Search Console y evitar err
         - **App Class:** Nueva clase `App` en `main.js` como punto de entrada único para la orquestación inicial.
         - **ServicePageManager:** Nueva clase en `service-page.js` para gestionar la lógica específica de subpáginas.
     - **Documentación & Tipado:** Se añadieron definiciones **JSDoc** (`@typedef`, `@param`) en todos los archivos, especialmente en la capa de datos (`js/data/*.js`) y se aplicó `Object.freeze()` para garantizar inmutabilidad.
+### 📝 Últimas Actualizaciones (28 de enero, 2026)
+- **Estandarización Visual y Funcional (Bento Grid Global):** 🖼️
+    - **Migración de Galerías:** Se reemplazaron las galerías antiguas en `Balayage`, `Color y Tinturas` y `Tratamientos Capilares` por el componente unificado **Bento Grid**, asegurando una experiencia visual consistente y premium.
+    - **Funcionalidad "Antes y Después":** Implementación de una lógica avanzada en `BentoGrid.js` que permite mostrar comparativas de casos de éxito (Portadas + Sub-imágenes ocultas) accesibles vía lightbox.
+    - **Saneamiento de Assets (SEO):** Se renombraron masivamente los archivos de imagen para eliminar caracteres especiales (`ñ`) que causaban errores 404 en servidores web estrictos, y se actualizaron todas las referencias internas en `pagesData.js` y `colorStyles.js`.
+    - **Optimización de Rutas:** Se completó la migración a rutas absolutas (`/images/...`) en la configuración de datos, eliminando la dependencia de hacks relativos (`../../`) y blindando la carga de imágenes desde cualquier nivel de profundidad de URL.
+
 - **Correcciones Críticas y Mejoras:** 🛠️
     - **Rutas Relativas Dinámicas:** Se corrigió el algoritmo `calculateBasePath` en `main.js` para soportar correctamente la navegación en páginas anidadas profundas (ej: `/servicios/peluqueria/index.html`).
     - **Optimización de Imports:** Eliminación de dependencias circulares y duplicadas en `TranslationService`.
