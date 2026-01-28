@@ -274,34 +274,46 @@ export const pagesData = Object.freeze({
         ]
     },
     'color-tinturas-cabello': {
-         gallery: [
-             {
+        title: "Expertos en Color",
+        description: "Resultados vibrantes, cobertura perfecta de canas y cuidado intensivo para tu fibra capilar.",
+        gallery: [
+            {
                 type: 'image',
-                layout: 'square',
-                src: 'images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
-                title: "Corte Dama",
-                alt: "Corte dama"
+                layout: 'vertical',
+                src: '../../images/pages/peluqueria/color-tratamiento.webp',
+                title: "Cobertura Total",
+                subtitle: "Coloración premium",
+                alt: "Tintura completa y cobertura de canas"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/peluqueria/mechas-balayage-detalle.webp',
-                title: "Detalle Mechas",
-                alt: "Peinado novia" // Keeping original alt though title suggests mechas
+                src: '../../images/pages/peluqueria/correccion_color_antes_despues_chia.JPG',
+                title: "Rubios Fríos",
+                alt: "Matización de tonos amarillos y naranjas"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-despues.jpg', 
+                title: "Brillo Espejo",
+                subtitle: "Resultados increíbles",
+                alt: "Balayage rubio brillante y saludable"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/peluqueria/lavado-spa-capilar.webp',
+                title: "Cuidado Post-Color",
+                subtitle: "Spa Capilar",
+                alt: "Tratamiento de hidratación profunda post-color"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/peluqueria/color-tratamiento.webp',
-                title: "Coloración",
-                alt: "Coloración balayage"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: 'images/pages/peluqueria/lavado-spa-capilar.webp',
-                title: "Tratamiento",
-                alt: "Tratamiento capilar"
+                src: '../../images/pages/peluqueria/Resultado-Balayage-Peluqueria-en-Chia-cerca-de-Cajica-Narbos.jpeg',
+                title: "Salud Capilar",
+                alt: "Cabello sano y brillante después del tinte"
             }
         ]
     },
