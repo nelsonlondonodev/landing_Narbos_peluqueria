@@ -226,7 +226,7 @@ export const pagesData = Object.freeze({
                     }
                 ]
             },
-            // Caso 4: Rubio Dorado (Nuevo)
+            // Caso 4: Rubio Dorado
             {
                 type: 'image',
                 layout: 'square',
@@ -238,6 +238,36 @@ export const pagesData = Object.freeze({
                     {
                         src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-antes.jpg',
                         alt: 'Estado antes de la iluminación dorada.'
+                    }
+                ]
+            },
+            // Caso 5: Rubio Tendencia (Nuevo)
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-despues.jpg',
+                title: "Rubio Tendencia",
+                subtitle: "Diseño de autor",
+                alt: "Balayage rubio tendencia 2026 realizado por expertos.",
+                subImages: [
+                    {
+                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-antes.jpg',
+                        alt: 'Antes del cambio de look de tendencia.'
+                    }
+                ]
+            },
+            // Caso 6: Rubio Iluminación (Faltante)
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-despues.jpg',
+                title: "Iluminación Sutil",
+                subtitle: "Efecto natural",
+                alt: "Balayage con técnica de iluminación suave.",
+                subImages: [
+                    {
+                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-antes.jpg',
+                        alt: 'Cabello antes de la iluminación.'
                     }
                 ]
             }
