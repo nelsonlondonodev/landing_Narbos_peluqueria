@@ -36,6 +36,8 @@ function initGallery() {
 
     if (path.includes('unas-acrilicas-gel')) {
         pageKey = 'unas-acrilicas-gel';
+    } else if (path.includes('manicure-pedicure')) {
+        pageKey = 'manicure-pedicure';
     }
 
     // Ensure we are accessing the correct data key
