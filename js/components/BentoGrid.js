@@ -13,20 +13,15 @@
  */
 function getGridItemHTML(item) {
     const layoutClasses = {
-        'featured-video': 'col-span-1 row-span-2 md:col-span-2 md:row-span-2', // Vertical en móvil, Grande en desktop
-        'vertical': 'col-span-1 row-span-2 md:col-span-1 md:row-span-2', // Vertical siempre
-        'horizontal': 'col-span-2 md:col-span-2', // Ancho siempre
-        'square': 'col-span-1' // Cuadrado normal
+        'featured-video': 'col-span-1 row-span-2 md:col-span-2 md:row-span-2', 
+        'vertical': 'col-span-1 row-span-2 md:col-span-1 md:row-span-2', 
+        'horizontal': 'col-span-2 md:col-span-2', 
+        'square': 'col-span-1' 
     };
 
     const spanClass = layoutClasses[item.layout] || layoutClasses['square'];
-    // Ajuste de ratio para que no se deforme en square/horizontal
-    // Aunque auto-rows lo controla bastante bien con object-cover.
 
     let mediaHTML = '';
-    
-    // Lazy loading attributes
-    // Usamos clases standard 'lazy-video' o loading="lazy" para imágenes
     
     if (item.type === 'video') {
         mediaHTML = `
@@ -41,6 +36,21 @@ function getGridItemHTML(item) {
         `;
     }
 
+    // Lógica para Galerías Anidadas (Antes/Después)
+    // Si hay subImages, creamos un ID único para aislar este carrusel del resto del grid.
+    // Si no, usamos 'bento-gallery' para que sea navegable junto con los demás items.
+    const hasSubImages = item.subImages && item.subImages.length > 0;
+    const galleryId = hasSubImages 
+        ? `gallery-${item.title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}-${Math.floor(Math.random() * 1000)}` 
+        : 'bento-gallery';
+
+    let hiddenLinksHTML = '';
+    if (hasSubImages) {
+        hiddenLinksHTML = item.subImages.map(subItem => `
+            <a href="${subItem.src}" class="glightbox hidden" data-gallery="${galleryId}" data-type="image" aria-label="${subItem.alt || ''}"></a>
+        `).join('');
+    }
+
     return `
         <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg">
             ${mediaHTML}
@@ -50,8 +60,9 @@ function getGridItemHTML(item) {
                     ${item.subtitle ? `<p class="text-gray-200 text-xs md:text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">${item.subtitle}</p>` : ''}
                 </div>
             </div>
-             <!-- Lightbox Trigger (Invisible full cover link) -->
-            <a href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="bento-gallery" data-type="${item.type === 'video' ? 'video' : 'image'}" aria-label="${item.alt}"></a>
+             <!-- Lightbox Trigger -->
+            <a href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${item.type === 'video' ? 'video' : 'image'}" aria-label="${item.alt}"></a>
+            ${hiddenLinksHTML}
         </div>
     `;
 }

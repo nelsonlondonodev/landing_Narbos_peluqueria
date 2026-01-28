@@ -168,31 +168,53 @@ export const pagesData = Object.freeze({
         gallery: [
              {
                 type: 'image',
-                layout: 'square',
-                src: 'images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
-                title: "Corte Dama",
-                alt: "Corte dama"
+                layout: 'vertical', // Row-span-2: Destacado principal
+                src: 'images/pages/peluqueria/antes-y-despues-correccion-balayage-narbos-chia.jpeg',
+                title: "Transformación Total",
+                subtitle: "Antes y Después",
+                alt: "Resultado final en Narbo’s Chía: Corrección de color exitosa, diseño de balayage rubio luminoso y ondas hidratadas.",
+                subImages: [
+                    {
+                        src: 'images/pages/peluqueria/antes-correccion-color-cabello-dañado-chia.jpeg',
+                        alt: 'Impresionante antes y después de cambio de look en Chía: de cabello con manchas verdes a un balayage rubio perfecto realizado por el equipo de Narbo’s.'
+                    }
+                ]
             },
             {
                 type: 'image',
-                layout: 'square',
-                src: 'images/pages/peluqueria/Resultado-Balayage-Peluqueria-en-Chia-cerca-de-Cajica-Narbos.jpeg',
-                title: "Rubios",
-                alt: "Resultado Balayage Rubio en Chía"
+                layout: 'square', // 1x1
+                src: 'images/pages/peluqueria/mechas-balayage-detalle.webp',
+                title: "Detalle Babylights",
+                alt: "Acercamiento de técnica de mechas finas"
             },
             {
                 type: 'image',
-                layout: 'square',
-                src: 'images/pages/peluqueria/despues_balayage_rubio_ceniza_ondulado_peluqueria_narbos_salon_spa_chia.jpeg',
-                title: "Corrección",
-                alt: "Corrección de color y rubios"
+                layout: 'square', // 1x1
+                src: 'images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.JPG',
+                title: "Rubio Iluminado",
+                alt: "Balayage rubio con corte en capas"
             },
             {
                 type: 'image',
-                layout: 'square',
-                src: 'images/pages/peluqueria/color-tratamiento.webp',
-                title: "Coloración",
-                alt: "Coloración Profesional"
+                layout: 'horizontal', // Col-span-2: Cierre visual ancho
+                src: 'images/pages/peluqueria/imagen-balayage_chia.jpeg',
+                title: "Diseño de Color",
+                subtitle: "Tendencias 2026",
+                alt: "Diseño de color y balayage moderno en Chía"
+            },
+            {
+                 type: 'image',
+                 layout: 'square',
+                 src: 'images/pages/peluqueria/despues_balayage_rubio_ceniza_ondulado_peluqueria_narbos_salon_spa_chia.jpeg',
+                 title: "Rubio Ceniza",
+                 alt: "Tono rubio ceniza con ondas"
+            },
+            {
+                 type: 'image',
+                 layout: 'square',
+                 src: 'images/pages/peluqueria/color-tratamiento.webp',
+                 title: "Cuidado Color",
+                 alt: "Tratamiento y coloración"
             }
         ]
     },

@@ -313,13 +313,36 @@ class ServicePageManager {
                               window.location.pathname.includes('color-tinturas-cabello') ||
                               window.location.pathname.includes('tratamientos-capilares');
 
-        if (!isServicePage || typeof GLightbox === 'undefined') return;
+        if (!isServicePage) return;
 
-        this.lightbox = GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true,
-            loop: true
-        });
+        // Mecanismo de reintento si GLightbox (CDN) aún no ha cargado
+        if (typeof GLightbox === 'undefined') {
+            console.warn("GLightbox not loaded yet, retrying in 100ms...");
+            setTimeout(() => this.initLightboxInstance(), 100);
+            return;
+        }
+
+        // Limpiar instancia previa para evitar duplicados o referencias rotas
+        if (this.lightbox) {
+            this.lightbox.destroy();
+            this.lightbox = null;
+        }
+
+        try {
+            this.lightbox = GLightbox({
+                selector: '.glightbox',
+                touchNavigation: true,
+                loop: true,
+                zoomable: true,
+                draggable: true,
+                openEffect: 'zoom',
+                closeEffect: 'zoom',
+                slideEffect: 'slide'
+            });
+            console.log("✅ GLightbox initialized successfully with " + document.querySelectorAll('.glightbox').length + " elements.");
+        } catch (error) {
+            console.error("Error initializing GLightbox:", error);
+        }
 
         this.setupLightboxAccessibility();
     }

@@ -1409,15 +1409,6 @@
   .object-cover {
     object-fit: cover;
   }
-  .object-bottom {
-    object-position: bottom;
-  }
-  .object-left {
-    object-position: left;
-  }
-  .object-right {
-    object-position: right;
-  }
   .object-top {
     object-position: top;
   }
@@ -2865,11 +2856,6 @@
   .lg\:grid-cols-4 {
     @media (width >= 64rem) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-  .xl\:col-span-2 {
-    @media (width >= 80rem) {
-      grid-column: span 2 / span 2;
     }
   }
   .dark\:bg-\[\#1f2c34\] {
