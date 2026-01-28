@@ -56,6 +56,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     
     <style>
@@ -110,16 +111,9 @@
       </section>
 
       <!-- Sección 2: Galería Específica (Fondo Marca) -->
+      <!-- Sección 2: Galería Estilo Bento Grid -->
       <section class="py-16 md:py-24 bg-brand-light/10">
-        <div class="container mx-auto px-6 max-w-screen-xl text-center">
-            <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-12" data-animation="fadeInUp">Nuestros Trabajos</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-animation="fadeInUp" data-animation-delay="0.2s">
-                <img src="../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.jpeg" alt="Diseño de uñas personalizado en Chía" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
-                <img src="../../images/pages/unas/disenos-nailart.webp" alt="Diseños Nail Art en Chía" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
-                <img src="../../images/pages/peluqueria/color-tratamiento.webp" alt="Coloración balayage" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
-                <img src="../../images/pages/peluqueria/lavado-spa-capilar.webp" alt="Tratamiento capilar" class="rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
-            </div>
-        </div>
+        <div id="nails-gallery-root" class="container mx-auto px-6 max-w-screen-xl"></div>
       </section>
 
       <!-- Marcas de Uñas -->
@@ -346,6 +340,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
     <script type="module" src="../../js/nails-page.js"></script>
   </body>
 </html>

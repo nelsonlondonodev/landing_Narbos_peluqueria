@@ -31,9 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initGallery() {
     const galleryRoot = document.getElementById('nails-gallery-root');
-    // Ensure we are accessing the correct data key 'unas-spa'
-    if (galleryRoot && pagesData && pagesData['unas-spa'] && pagesData['unas-spa'].gallery) {
-        galleryRoot.innerHTML = getBentoGridHTML(pagesData['unas-spa'].gallery);
+    const path = window.location.pathname;
+    let pageKey = 'unas-spa'; // Default
+
+    if (path.includes('unas-acrilicas-gel')) {
+        pageKey = 'unas-acrilicas-gel';
+    }
+
+    // Ensure we are accessing the correct data key
+    if (galleryRoot && pagesData && pagesData[pageKey] && pagesData[pageKey].gallery) {
+        galleryRoot.innerHTML = getBentoGridHTML(pagesData[pageKey].gallery);
         
         // Add Title manually if needed, or rely on the HTML structure
         const titleHTML = `
@@ -47,7 +54,7 @@ function initGallery() {
 
         initLightbox();
     } else {
-        console.warn('Gallery root or data not found for nails page');
+        console.warn(`Gallery root or data not found for nails page (Key: ${pageKey})`);
     }
 }
 
