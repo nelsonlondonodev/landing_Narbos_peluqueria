@@ -14,41 +14,42 @@
 export const colorStyles = Object.freeze([
     {
         title: "Balayage",
-        description: "Degradado natural y luminoso. La técnica estrella para iluminar tu rostro con un efecto 'besado por el sol'.",
-        link: "../../images/pages/peluqueria/balayage_rubio_perfecto_despueschia-narbos.jpg",
-        image: "../../images/pages/peluqueria/balayage_rubio_perfecto_despueschia-narbos.jpg",
+        description: "Técnica de barrido a mano alzada para un degradado natural de raíz a puntas. Efecto 'besada por el sol' de bajo mantenimiento.",
+        link: "#open-modal-balayage",
+        image: "/images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.JPG",
+        imageAlt: "Balayage rubio natural en Chía",
         variant: "standard",
-        // Array de imágenes extra para el carrusel (Antes/Después)
         galleryImages: [
             {
-                src: "../../images/pages/peluqueria/correccion_color_antes_despues_chia.JPG",
-                title: "Antes: Corrección de Color y Diagnóstico"
+                src: "/images/pages/peluqueria/imagen-balayage_chia.jpeg",
+                title: "Balayage Rubio Miel"
             }
         ]
     },
     {
-        title: "Babylights & Mechas",
-        description: "Reflejos finos y sutiles que aportan brillo y dimensión a tu cabello de manera delicada.",
-        link: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
-        image: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
+        title: "Babylights y Mechas",
+        description: "Micro-mechas finas desde la raíz para aportar luminosidad general y brillo sutil. Ideales para disimular canas discretamente.",
+        link: "#open-modal-babylights",
+        image: "/images/pages/peluqueria/mechas-balayage-detalle.webp",
+        imageAlt: "Babylights y mechas finas",
         variant: "standard",
         galleryImages: [
             {
-                src: "../../images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.JPG",
-                title: "Resultado: Iluminación Natural"
+                src: "/images/pages/peluqueria/mechas-balayage-detalle.webp",
+                title: "Detalle de Mechas Finas"
             }
         ]
     },
     {
         title: "Corrección de Color",
         description: "Expertos en arreglar tonos indeseados y devolver la salud y el color perfecto a tu melena.",
-        link: "../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-dañado-despues.jpg",
-        image: "../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-dañado-despues.jpg",
+        link: "/images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-despues.jpg",
+        image: "/images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-despues.jpg",
         imageAlt: "Resultado final en Narbo’s Chía: Corrección de color exitosa",
         variant: "standard",
         galleryImages: [
             {
-                src: "../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-dañado-antes.jpg",
+                src: "/images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-antes.jpg",
                 title: "Antes: Cabello Procesado y Dañado en Chía"
             }
         ]

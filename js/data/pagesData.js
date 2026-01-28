@@ -137,28 +137,28 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: 'images/pages/peluqueria/corte_pixie_mujer_chia.jpeg',
+                src: '../../images/pages/peluqueria/corte_pixie_mujer_chia.jpeg',
                 title: "Corte Pixie",
                 alt: "Corte Pixie y Pelo Corto"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/peluqueria/mechas-balayage-detalle.webp',
+                src: '../../images/pages/peluqueria/mechas-balayage-detalle.webp',
                 title: "Iluminaciones",
                 alt: "Detalle Balayage"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/peluqueria/corte_bob_chia.jpeg',
+                src: '../../images/pages/peluqueria/corte_bob_chia.jpeg',
                 title: "Corte Bob",
                 alt: "Corte Bob en Chía"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: 'images/pages/peluqueria/corte_capas_chia.jpeg',
+                src: '../../images/pages/peluqueria/corte_capas_chia.jpeg',
                 title: "Corte en Capas",
                 alt: "Corte en Capas y Movimiento"
             }
@@ -170,13 +170,13 @@ export const pagesData = Object.freeze({
              {
                 type: 'image',
                 layout: 'vertical', 
-                src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-dañado-despues.jpg',
+                src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-despues.jpg',
                 title: "Corrección Total",
                 subtitle: "De maltratado a rubio perfecto",
                 alt: "Resultado final: Corrección de color exitosa y diseño de balayage rubio luminoso.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-dañado-antes.jpg',
+                        src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-antes.jpg',
                         alt: 'Antes: Cabello con manchas y daño severo recuperado.'
                     }
                 ]
