@@ -240,37 +240,6 @@ export const pagesData = Object.freeze({
                         alt: 'Estado antes de la iluminación dorada.'
                     }
                 ]
-            },
-            // Detalles y Complementos (Añadir ../../)
-            {
-                type: 'image',
-                layout: 'horizontal', 
-                src: '../../images/pages/peluqueria/imagen-balayage_chia.jpeg',
-                title: "Tendencia 2026",
-                subtitle: "Diseño personalizado",
-                alt: "Diseño de color y balayage moderno en Chía"
-            },
-            {
-                type: 'image',
-                layout: 'square', 
-                src: '../../images/pages/peluqueria/mechas-balayage-detalle.webp',
-                title: "Detalle Técnico",
-                alt: "Acercamiento de técnica de mechas finas"
-            },
-            {
-                 type: 'image',
-                 layout: 'square',
-                 src: '../../images/pages/peluqueria/despues_balayage_rubio_ceniza_ondulado_peluqueria_narbos_salon_spa_chia.jpeg',
-                 title: "Rubio Ceniza",
-                 alt: "Tono rubio ceniza con ondas"
-            },
-            {
-                 type: 'image',
-                 layout: 'horizontal',
-                 src: '../../images/pages/peluqueria/color-tratamiento.webp',
-                 title: "Salud Capilar",
-                 subtitle: "Color seguro",
-                 alt: "Coloración profesional cuidando la fibra"
             }
         ]
     },
