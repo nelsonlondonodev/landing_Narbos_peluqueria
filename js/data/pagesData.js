@@ -166,55 +166,81 @@ export const pagesData = Object.freeze({
     },
     'balayage-mechas': {
         gallery: [
+             // Caso Estrella (El original corregido - Ya tenía ../../ implicito o fallaba, pondré explícito)
              {
                 type: 'image',
-                layout: 'vertical', // Row-span-2: Destacado principal
-                src: 'images/pages/peluqueria/antes-y-despues-correccion.jpg',
-                title: "Transformación Total",
-                subtitle: "Antes y Después",
-                alt: "Resultado final en Narbo’s Chía: Corrección de color exitosa, diseño de balayage rubio luminoso y ondas hidratadas.",
+                layout: 'vertical', 
+                src: '../../images/pages/peluqueria/antes-y-despues-correccion.jpg',
+                title: "Corrección Total",
+                subtitle: "De maltratado a rubio perfecto",
+                alt: "Resultado final: Corrección de color exitosa y diseño de balayage rubio luminoso.",
                 subImages: [
                     {
-                        src: 'images/pages/peluqueria/antes-correccion.jpg',
-                        alt: 'Impresionante antes y después de cambio de look en Chía: de cabello con manchas verdes a un balayage rubio perfecto realizado por el equipo de Narbo’s.'
+                        src: '../../images/pages/peluqueria/antes-correccion.jpg',
+                        alt: 'Antes: Cabello con manchas y daño severo recuperado.'
                     }
                 ]
             },
+            // Nuevo Caso 1 (Carpeta 1) - INTERCAMBIADO para mostrar RESULTADO
             {
                 type: 'image',
-                layout: 'square', // 1x1
-                src: 'images/pages/peluqueria/mechas-balayage-detalle.webp',
-                title: "Detalle Babylights",
-                alt: "Acercamiento de técnica de mechas finas"
+                layout: 'square',
+                src: '../../images/pages/peluqueria/antes_despues1/caso1-despues.jpg', // Pongo el DESPUÉS aquí
+                title: "Rubio Soñado",
+                subtitle: "Iluminación balayage",
+                alt: "Diseño de color rubio con técnica balayage.",
+                subImages: [
+                    {
+                        src: '../../images/pages/peluqueria/antes_despues1/caso1-antes.jpg', // El ANTES se va al carrusel oculto
+                        alt: 'Estado inicial antes del diseño de color.'
+                    }
+                ]
             },
+            // Nuevo Caso 2 (Carpeta 2) - INTERCAMBIADO para mostrar RESULTADO
             {
                 type: 'image',
-                layout: 'square', // 1x1
-                src: 'images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.JPG',
-                title: "Rubio Iluminado",
-                alt: "Balayage rubio con corte en capas"
+                layout: 'square',
+                src: '../../images/pages/peluqueria/antes_despues2/caso2-despues.jpg', // Pongo el DESPUÉS aquí
+                title: "Cambio de Look",
+                subtitle: "Renovación total",
+                alt: "Renovación de imagen con color y corte.",
+                subImages: [
+                    {
+                        src: '../../images/pages/peluqueria/antes_despues2/caso2-antes.jpg', // El ANTES se va al carrusel oculto
+                        alt: 'Antes del cambio de look.'
+                    }
+                ]
             },
+            // Detalles y Complementos (Añadir ../../)
             {
                 type: 'image',
-                layout: 'horizontal', // Col-span-2: Cierre visual ancho
-                src: 'images/pages/peluqueria/imagen-balayage_chia.jpeg',
-                title: "Diseño de Color",
-                subtitle: "Tendencias 2026",
+                layout: 'horizontal', 
+                src: '../../images/pages/peluqueria/imagen-balayage_chia.jpeg',
+                title: "Tendencia 2026",
+                subtitle: "Diseño personalizado",
                 alt: "Diseño de color y balayage moderno en Chía"
+            },
+            {
+                type: 'image',
+                layout: 'square', 
+                src: '../../images/pages/peluqueria/mechas-balayage-detalle.webp',
+                title: "Detalle Técnico",
+                alt: "Acercamiento de técnica de mechas finas"
             },
             {
                  type: 'image',
                  layout: 'square',
-                 src: 'images/pages/peluqueria/despues_balayage_rubio_ceniza_ondulado_peluqueria_narbos_salon_spa_chia.jpeg',
+                 src: '../../images/pages/peluqueria/despues_balayage_rubio_ceniza_ondulado_peluqueria_narbos_salon_spa_chia.jpeg',
                  title: "Rubio Ceniza",
                  alt: "Tono rubio ceniza con ondas"
             },
             {
                  type: 'image',
-                 layout: 'square',
-                 src: 'images/pages/peluqueria/color-tratamiento.webp',
-                 title: "Cuidado Color",
-                 alt: "Tratamiento y coloración"
+                 layout: 'horizontal',
+                 src: '../../images/pages/peluqueria/color-tratamiento.webp',
+                 title: "Salud Capilar",
+                 subtitle: "Color seguro",
+                 alt: "Coloración profesional cuidando la fibra"
             }
         ]
     },
