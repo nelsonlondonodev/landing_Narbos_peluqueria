@@ -196,17 +196,17 @@ export const pagesData = Object.freeze({
                     }
                 ]
             },
-            // Nuevo Caso 2 (Carpeta 2) - INTERCAMBIADO para mostrar RESULTADO
+            // Nuevo Caso 2 (Carpeta 2) - INTERCAMBIADO (Corrección final)
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/antes_despues2/caso2-despues.jpg', // Pongo el DESPUÉS aquí
+                src: '../../images/pages/peluqueria/antes_despues2/caso2-antes.jpg', // Poniendo la otra imagen como portada
                 title: "Cambio de Look",
                 subtitle: "Renovación total",
                 alt: "Renovación de imagen con color y corte.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/antes_despues2/caso2-antes.jpg', // El ANTES se va al carrusel oculto
+                        src: '../../images/pages/peluqueria/antes_despues2/caso2-despues.jpg', // Poniendo la otra imagen como oculta
                         alt: 'Antes del cambio de look.'
                     }
                 ]
