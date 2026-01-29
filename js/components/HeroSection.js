@@ -20,10 +20,10 @@
  * @param {string} props.imageAlt - Texto alternativo para SEO
  * @returns {string} HTML string
  */
-export const getHeroHTML = ({ title, subtitle, imageSrc, imageAlt }) => {
+export const getHeroHTML = ({ title, subtitle, imageSrc, imageAlt, variant = 'standard' }) => {
     return `
     <div class="relative">
-        ${renderHeroImage(imageSrc, imageAlt)}
+        ${renderHeroImage(imageSrc, imageAlt, variant)}
         ${renderHeroContent(title, subtitle)}
     </div>
     `;
@@ -32,10 +32,19 @@ export const getHeroHTML = ({ title, subtitle, imageSrc, imageAlt }) => {
 /**
  * Renderiza la sección de la imagen de fondo.
  */
-function renderHeroImage(src, alt) {
+function renderHeroImage(src, alt, variant) {
+    const isLogo = variant === 'logo';
+    const sectionClass = isLogo 
+        ? 'relative h-[60vh] md:h-[80vh] bg-gray-900 rounded-b-xl mx-auto w-[85%]' 
+        : 'relative h-[60vh] md:h-[80vh] bg-white';
+    
+    const imgClass = isLogo 
+        ? 'w-full h-full object-contain absolute inset-0 z-0 mx-auto p-12 opacity-80' 
+        : 'w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl';
+
     return `
-        <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-            <img src="${src}" alt="${alt}" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager">
+        <section id="inicio" class="${sectionClass}">
+            <img src="${src}" alt="${alt}" class="${imgClass}" loading="eager">
         </section>
     `;
 }
