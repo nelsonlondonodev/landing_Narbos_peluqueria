@@ -9,7 +9,7 @@ function initApp() {
     // Avoid double initialization if the app is already running
     if (window.narbosApp) return;
 
-    console.log("[Main] Initializing App...");
+    // console.log("[Main] Initializing App...");
     const app = new App();
     window.narbosApp = app; 
     app.init();
