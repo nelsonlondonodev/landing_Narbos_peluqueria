@@ -280,40 +280,40 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/color-tratamiento.webp',
-                title: "Cobertura Total",
-                subtitle: "Coloración premium",
-                alt: "Tintura completa y cobertura de canas"
+                src: '../../images/pages/peluqueria/tinte-completo-rubio-dorado.jpg',
+                title: "Tinte Completo",
+                subtitle: "Cobertura total",
+                alt: "Resultado de tinte completo rubio dorado"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/correccion_color_antes_despues_chia.JPG',
-                title: "Rubios Fríos",
-                alt: "Matización de tonos amarillos y naranjas"
+                src: '../../images/pages/peluqueria/retoque-de-raiz-tinte.jpg',
+                title: "Retoque de Raíz",
+                alt: "Mantenimiento impecable de color en raíz"
             },
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-despues.jpg', 
-                title: "Brillo Espejo",
-                subtitle: "Resultados increíbles",
-                alt: "Balayage rubio brillante y saludable"
+                src: '../../images/pages/peluqueria/cubrimiento-de-canas-natural.jpg', 
+                title: "Cubrimiento Canas",
+                subtitle: "Acabado Natural",
+                alt: "Cobertura 100% de canas con acabado natural"
             },
             {
-                type: 'image',
+                type: 'logo-card',
                 layout: 'horizontal',
-                src: '../../images/pages/peluqueria/lavado-spa-capilar.webp',
-                title: "Cuidado Post-Color",
-                subtitle: "Spa Capilar",
-                alt: "Tratamiento de hidratación profunda post-color"
+                src: '../../images/brand/logo_narbos.webp',
+                title: "Expertos en Color",
+                subtitle: "Técnica Profesional",
+                alt: "Logo Narbos Salon Colorimetría"
             },
             {
-                type: 'image',
+                type: 'logo-card',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/Resultado-Balayage-Peluqueria-en-Chia-cerca-de-Cajica-Narbos.jpeg',
+                src: '../../images/brand/logo_narbos.webp',
                 title: "Salud Capilar",
-                alt: "Cabello sano y brillante después del tinte"
+                alt: "Cuidado del cabello post-color"
             }
         ]
     },
