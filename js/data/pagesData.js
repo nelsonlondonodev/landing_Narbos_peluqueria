@@ -20,7 +20,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Peluquería en Chía: expertos en estilo, color y bienestar",
             subtitle: "Expertos en realzar tu belleza con técnicas de vanguardia y productos de clase mundial.",
-            imageSrc: "images/pages/peluqueria/estilismo-barba.webp",
+            imageSrc: "images/pages/peluqueria/hair-hero.webp",
             imageAlt: "Servicio de peluquería profesional en Narbo's"
         },
         gallery: [

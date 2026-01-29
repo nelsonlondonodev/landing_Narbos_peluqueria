@@ -137,6 +137,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     
     <style>
         /* Optimización de CLS */
@@ -156,21 +157,7 @@
 
     <main>
       <!-- Hero de Peluquería (Principal) -->
-      <div class="relative">
-          <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-              <img src="../../images/pages/peluqueria/hair-hero.webp" alt="Servicio de Peluquería profesional en Narbo's" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080">
-          </section>
-
-          <!-- Floating Content Box -->
-          <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
-              <div class="container mx-auto">
-                  <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto">
-                      <h1 class="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4 animate-fade-in-up">Peluquería en Chía: Expertos en estilo, color y bienestar</h1>
-                      <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto animate-fade-in-up delay-200">Expertos en realzar tu belleza con técnicas de vanguardia y productos de clase mundial.</p>
-                  </div>
-              </div>
-          </div>
-      </div>
+      <div id="hero-root"></div>
 
       <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
       <section id="servicios" class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
@@ -332,6 +319,7 @@
     </div> <!-- End of App Content Wrapper -->
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
     <script type="module" src="../../js/service-page.js"></script>
     
 
