@@ -69,8 +69,10 @@ class ServicePageManager {
         else if (path.includes('tratamientos-capilares')) pageKey = 'tratamientos-capilares';
         else if (path.includes('limpieza-facial')) pageKey = 'limpieza-facial';
         else if (path.includes('masajes-relajantes')) pageKey = 'masajes-relajantes';
+        else if (path.includes('cejas-y-pestanas')) pageKey = 'cejas-y-pestanas';
         else if (path.includes('/estetica')) pageKey = 'estetica';
-        else if (path.includes('/peluqueria') || path.includes('index.html')) pageKey = 'peluqueria';
+        else if (path.includes('barberia')) pageKey = 'barberia';
+        else if (path.includes('peluqueria') || path.includes('index.html')) pageKey = 'peluqueria';
 
         if (!pageKey || !pagesData[pageKey] || !pagesData[pageKey].gallery) return;
 
@@ -97,8 +99,14 @@ class ServicePageManager {
         else if (path.includes('balayage-mechas')) pageKey = 'balayage-mechas';
         else if (path.includes('color-tinturas-cabello')) pageKey = 'color-tinturas-cabello';
         else if (path.includes('tratamientos-capilares')) pageKey = 'tratamientos-capilares';
-        else if (path.includes('/peluqueria') || path.includes('index.html')) {
-             // Distinguish main hub from subpages if they share structure
+        else if (path.includes('cejas-y-pestanas')) pageKey = 'cejas-y-pestanas';
+        else if (path.includes('limpieza-facial')) pageKey = 'limpieza-facial';
+        else if (path.includes('masajes-relajantes')) pageKey = 'masajes-relajantes';
+        else if (path.includes('/estetica')) pageKey = 'estetica'; // Generic match AFTER specific pages
+        else if (path.includes('barberia')) pageKey = 'barberia';
+        else if (path.includes('nosotros')) pageKey = 'nosotros';
+        else if (path.includes('contacto')) pageKey = 'contacto';
+        else if (path.includes('peluqueria') || path.includes('index.html')) {
              if (path.indexOf('peluqueria') > -1 && 
                  !path.includes('cortes') && 
                  !path.includes('balayage') && 
@@ -107,12 +115,6 @@ class ServicePageManager {
                  pageKey = 'peluqueria';
              }
         }
-        
-        // Add specific check for Estetica
-        if (path.includes('/estetica')) pageKey = 'estetica';
-        if (path.includes('/barberia')) pageKey = 'barberia';
-        if (path.includes('/nosotros')) pageKey = 'nosotros';
-        if (path.includes('/contacto')) pageKey = 'contacto';
 
         if (!pageKey || !pagesData[pageKey] || !pagesData[pageKey].hero) return;
 

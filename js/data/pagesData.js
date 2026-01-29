@@ -429,6 +429,52 @@ export const pagesData = Object.freeze({
             }
         ]
     },
+    'cejas-y-pestanas': {
+        hero: {
+            title: "Cejas y Pestañas",
+            subtitle: "Tu mirada es tu carta de presentación. Diseños personalizados para realzar tu belleza natural con elegancia.",
+            imageSrc: "images/pages/estetica/microblading-cejas-despues.jpg",
+            imageAlt: "Cejas y pestañas perfectas en Narbo's Salon"
+        },
+        gallery: [
+             {
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/estetica/microblading-cejas-despues.jpg',
+                title: "Diseño Microblading",
+                subtitle: "Resultado Final",
+                alt: "Cejas pelo a pelo resultado final",
+                subImages: [
+                    {
+                        src: '../../images/pages/estetica/microblading-cejas-antes.jpg',
+                        alt: 'Cejas antes del procedimiento'
+                    }
+                ]
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.jpeg', // Fallback/Existing image
+                title: "Lifting de Pestañas",
+                alt: "Pestañas naturales curvadas"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg', // Generic beauty image
+                title: "Rostro Armónico",
+                alt: "Belleza facial integral"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/estetica/spa-hero.webp',
+                title: "Mirada Impactante",
+                subtitle: "Belleza Natural",
+                alt: "Cliente satisfecha con diseño de cejas"
+            }
+        ]
+    },
     'masajes-relajantes': {
         gallery: [
             {
