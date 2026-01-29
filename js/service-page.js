@@ -515,7 +515,7 @@ class ServicePageManager {
         if (currentPath.includes('/peluqueria/')) {
             this.addHairBreadcrumbs(items, currentPath);
         } else if (currentPath.includes('/barberia/')) {
-            items.push({ label: 'Barbería', link: '../../servicios/barberia/index.html' });
+            this.addBarberBreadcrumbs(items, currentPath);
         } else if (currentPath.includes('/estetica/')) {
             this.addEstheticsBreadcrumbs(items, currentPath);
         } else if (currentPath.includes('/unas-spa/')) {
@@ -533,6 +533,21 @@ class ServicePageManager {
             'balayage-mechas': 'Balayage',
             'color-tinturas-cabello': 'Color',
             'tratamientos-capilares': 'Tratamientos'
+        };
+
+        for (const [key, label] of Object.entries(subPages)) {
+            if (path.includes(key)) {
+                items.push({ label, link: '#' });
+                break;
+            }
+        }
+    }
+
+    addBarberBreadcrumbs(items, path) {
+        items.push({ label: 'Barbería', link: '../../servicios/barberia/index.html' });
+        
+        const subPages = {
+            'barberia-cortes-hombre': 'Cortes de Hombre'
         };
 
         for (const [key, label] of Object.entries(subPages)) {
