@@ -634,7 +634,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'featured-video', // Destacado para mostrar el arte
-                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.jpeg',
+                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp',
                 title: "Extensiones & Nail Art",
                 subtitle: "Diseños exclusivos",
                 alt: "Uñas acrílicas y diseños artísticos personalizados"
@@ -684,7 +684,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'featured-video', // Destacado para mostrar el arte
-                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.jpeg',
+                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp',
                 title: "Extensiones & Nail Art",
                 subtitle: "Diseños exclusivos",
                 alt: "Uñas acrílicas y diseños artísticos personalizados"
@@ -734,7 +734,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'featured-video', // Destacado para mostrar el arte
-                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.jpeg',
+                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp',
                 title: "Extensiones & Nail Art",
                 subtitle: "Diseños exclusivos",
                 alt: "Uñas acrílicas y diseños artísticos personalizados"
