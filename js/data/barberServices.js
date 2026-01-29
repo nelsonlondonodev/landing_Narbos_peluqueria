@@ -24,7 +24,7 @@ export const barberServices = Object.freeze([
         title: "Arreglo de barba",
         description: "Perfilado con navaja, hidratación y ritual de toalla caliente para una experiencia relajante.",
         link: "#open-modal-beard",
-        image: "../../images/pages/barberia/barber-hero.jpg",
-        variant: "standard"
+        image: "images/brand/logo_narbos.webp",
+        variant: "logo"
     }
 ]);
