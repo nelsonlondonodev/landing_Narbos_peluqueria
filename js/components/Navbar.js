@@ -30,7 +30,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             ${renderMegaMenuDesktop(menuCategories)}
             ${navLink(basePath + 'nosotros.html', 'nav.about', 'Nosotros')}
             ${navLink(basePath + 'contacto.html', 'nav.contact', 'Contacto')}
-            <a href="${basePath}blog/index.html" class="text-white hover:text-brand-gold active:text-brand-gold font-medium" data-i18n="nav.blog">Blog</a>
+            <a href="${basePath}blog/index.html" class="text-white hover:text-brand-gold active:text-brand-gold font-medium">Blog</a>
         </div>
 
         <!-- Mobile Toggle -->
@@ -46,7 +46,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             ${renderMegaMenuMobile(menuCategories)}
             ${navLink(basePath + 'nosotros.html', 'nav.about', 'Nosotros', true)}
             ${navLink(basePath + 'contacto.html', 'nav.contact', 'Contacto', true)}
-            <a href="${basePath}blog/index.html" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50" data-i18n="nav.blog">Blog</a>
+            <a href="${basePath}blog/index.html" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50">Blog</a>
         </div>
     </div>
     
@@ -61,7 +61,7 @@ function createNavLinkHelper(linkPrefix) {
         const baseClasses = "text-white hover:text-brand-gold active:text-brand-gold font-medium";
         const mobileClasses = "block py-2 px-4 text-lg hover:bg-brand-light/20 rounded-md active:bg-brand-light/40 text-brand-gray-dark border-b border-gray-100/50";
         const finalHref = href.startsWith('#') ? `${linkPrefix}${href}` : href;
-        return `<a href="${finalHref}" data-i18n="${key}" class="${mobile ? mobileClasses : baseClasses}">${text}</a>`;
+        return `<a href="${finalHref}" class="${mobile ? mobileClasses : baseClasses}">${text}</a>`;
     };
 }
 
@@ -120,7 +120,7 @@ function renderMegaMenuDesktop(menuCategories) {
     return `
         <div class="group h-full flex items-center static">
             <button id="desktop-services-btn" class="flex items-center text-white hover:text-brand-gold transition-colors py-4 focus:outline-none font-medium h-full relative z-10" aria-haspopup="true" aria-expanded="false">
-                <span data-i18n="nav.services">Servicios</span>
+                <span>Servicios</span>
                 <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
              
@@ -154,8 +154,8 @@ function renderMegaMenuMobile(menuCategories) {
 
     return `
         <div class="border-b border-gray-100 pb-2">
-             <button class="w-full flex justify-between items-center py-3 px-4 text-lg font-bold text-gray-500 uppercase tracking-wider hover:bg-gray-50 focus:outline-none" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('svg').classList.toggle('rotate-180');">
-                <span data-i18n="nav.services">Servicios</span>
+             <button class="mobile-services-toggle w-full flex justify-between items-center py-3 px-4 text-lg font-bold text-gray-500 uppercase tracking-wider hover:bg-gray-50 focus:outline-none">
+                <span>Servicios</span>
                 <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             <div class="hidden bg-gray-50/50 space-y-1 pb-4">

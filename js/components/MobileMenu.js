@@ -6,6 +6,7 @@
 /**
  * Componente Menú Móvil.
  * Maneja la apertura, cierre y accesibilidad del menú de navegación lateral.
+ * Ahora también gestiona el acordeón de servicios.
  */
 export class MobileMenu {
     constructor() {
@@ -16,7 +17,11 @@ export class MobileMenu {
             openIcon: document.getElementById("menu-open-icon"),
             closeIcon: document.getElementById("menu-close-icon"),
             internalCloseBtn: document.getElementById("internal-close-btn"),
-            links: document.querySelectorAll("#mobile-menu a")
+            links: document.querySelectorAll("#mobile-menu a"),
+            // Selectors don't exist yet on page load if rendered via JS? 
+            // Navbar.js renders HTML strings. App.js calls MobileMenu AFTER rendering Navbar?
+            // Yes, see App.js: this.mountHeader() then new MobileMenu().
+            serviceToggles: document.querySelectorAll(".mobile-services-toggle")
         };
         
         this.isOpen = false;
@@ -80,6 +85,17 @@ export class MobileMenu {
         // Cerrar al hacer clic en un enlace
         this.DOM.links.forEach(link => {
             link.addEventListener('click', () => this.close());
+        });
+
+        // Toggle del Acordeón de Servicios
+        this.DOM.serviceToggles.forEach(btn => {
+            btn.onclick = (e) => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('svg');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            };
         });
 
         // Cerrar al redimensionar a desktop
