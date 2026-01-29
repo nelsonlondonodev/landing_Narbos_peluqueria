@@ -38,6 +38,7 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 ## 🔄 Recent Updates (January 29, 2026)
 
 ### 1. Functional Enhancements & UX 🛠️
+- **Home Decorations Animation:** Synchronized the floating leaves animation on the Homepage (`index.html`) to match the "Enter Flow" of the inner pages (`animate-leaf-enter`), addressing the "static" or "braked" initial feel (fly-in from external sides).
 - **Dynamic Breadcrumbs Logic:** Updated `service-page.js` to intelligently handle sub-service routes (e.g., distinguishing `/barberia/cortes` from generic paths), ensuring navigation trails are accurate and complete (e.g., `Home > Barbería > Cortes de Hombre`).
 - **Placeholder Bento Grid (Barbería):** Implemented a temporary yet polished Bento Grid for the "Cortes de Hombre" page using the brand logo in varied layouts (Vertical/Square/Horizontal). This allows visualizing the final structure and layout stability while real photographic assets are produced.
 - **Service Card Branding:** Standardized the "Arreglo de Barba" service card to use the brand logo with a dark theme variant (`variant: 'logo'`) instead of incorrect generic imagery.

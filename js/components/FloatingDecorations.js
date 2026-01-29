@@ -117,14 +117,14 @@ export class FloatingDecorations {
                     img: 'ui/decorations/hoja-seca-3d.webp', 
                     speed: 0.25,
                     wrapperClasses: '-left-6 top-[10%] md:left-[-2%] z-10',
-                    imgClasses: 'w-20 md:w-44 rotate-45 opacity-90 md:opacity-100'
+                    imgClasses: 'w-20 md:w-44 rotate-45 opacity-90 md:opacity-100 animate-leaf-enter-left'
                 },
                 { 
                     parent: 'inicio', 
                     img: 'ui/decorations/hoja-verde-3d.webp', 
                     speed: 0.35,
                     wrapperClasses: '-right-6 top-[40%] md:right-[15%] md:top-[35%] z-10',
-                    imgClasses: 'w-24 md:w-56 -rotate-12 opacity-90 md:opacity-100'
+                    imgClasses: 'w-24 md:w-56 -rotate-12 opacity-90 md:opacity-100 animate-leaf-enter-right'
                 },
                 // 2. Service Grid Decorations (Home Only)
                 { 
@@ -132,14 +132,14 @@ export class FloatingDecorations {
                     img: 'ui/decorations/hoja-seca-3d.webp', 
                     speed: 0.2,
                     wrapperClasses: '-right-2 top-24 md:-right-20 md:top-12 z-20',
-                    imgClasses: 'w-24 md:w-48'
+                    imgClasses: 'w-24 md:w-48 animate-leaf-enter-right'
                 },
                 { 
                     parent: 'servicios', 
                     img: 'ui/decorations/hoja-verde-3d.webp', 
                     speed: 0.3,
                     wrapperClasses: '-left-4 top-1/2 md:-left-12 md:top-[40%] z-20',
-                    imgClasses: 'w-28 md:w-40' 
+                    imgClasses: 'w-28 md:w-40 animate-leaf-enter-left' 
                 }
             ];
 
@@ -151,7 +151,7 @@ export class FloatingDecorations {
                     img: 'ui/decorations/hoja-seca-3d.webp', 
                     speed: 0.15,
                     wrapperClasses: '-left-8 -top-10 md:left-2 md:top-2 z-20',
-                    imgClasses: 'w-24 md:w-32 -rotate-45 md:rotate-10'
+                    imgClasses: 'w-24 md:w-32 -rotate-45 md:rotate-10 animate-leaf-enter-left'
                 }
             ];
 

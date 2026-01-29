@@ -808,10 +808,6 @@
     --tw-scale-z: 100%;
     scale: var(--tw-scale-x) var(--tw-scale-y);
   }
-  .scale-x-\[-1\] {
-    --tw-scale-x: -1;
-    scale: var(--tw-scale-x) var(--tw-scale-y);
-  }
   .-rotate-12 {
     rotate: calc(12deg * -1);
   }
