@@ -59,18 +59,42 @@ export class UIService {
      */
     animateElement(element, observer) {
         const animationName = element.getAttribute("data-animation");
-        const delay = element.getAttribute("data-animation-delay");
+        const rawDelay = element.getAttribute("data-animation-delay");
+        
+        // Clean Code: Delegamos la lógica de delay responsivo a una función pura
+        const delay = this._getResponsiveDelay(rawDelay);
 
+        this._applyAnimation(element, animationName, delay);
+        observer.unobserve(element);
+    }
+
+    /**
+     * Determina el delay óptimo basándose en el ancho de pantalla.
+     * En móviles y tablets (layout vertical), eliminamos los delays escalonados 
+     * para que la interacción sea inmediata y fluida (snappy), evitando la sensación de "pausa".
+     * @param {string} delay - El delay original configurado
+     * @returns {string} El delay optimizado
+     */
+    _getResponsiveDelay(delay) {
+        // En desktop (lg:grid-cols-4), el layout es horizontal -> Mantener delay para efecto "ola".
+        // En móvil/tablet (<1024px), el layout es vertical/dos columnas -> Delay 0s para inmediatez.
+        const isDesktop = window.innerWidth >= 1024; 
+        return isDesktop ? delay : '0s';
+    }
+
+    /**
+     * Aplica las clases de animación y estilos al elemento.
+     * @private
+     */
+    _applyAnimation(element, name, delay) {
         element.classList.add("is-visible");
 
-        if (animationName) {
-            element.classList.add("animate__animated", `animate__${animationName}`);
+        if (name) {
+            element.classList.add("animate__animated", `animate__${name}`);
         }
         
         if (delay) {
             element.style.animationDelay = delay;
         }
-
-        observer.unobserve(element);
     }
 }
