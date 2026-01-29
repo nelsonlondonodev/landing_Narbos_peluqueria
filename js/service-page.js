@@ -69,6 +69,7 @@ class ServicePageManager {
         else if (path.includes('tratamientos-capilares')) pageKey = 'tratamientos-capilares';
         else if (path.includes('limpieza-facial')) pageKey = 'limpieza-facial';
         else if (path.includes('masajes-relajantes')) pageKey = 'masajes-relajantes';
+        else if (path.includes('spa-facial-integral')) pageKey = 'spa-facial-integral';
         else if (path.includes('cejas-y-pestanas')) pageKey = 'cejas-y-pestanas';
         else if (path.includes('/estetica')) pageKey = 'estetica';
         else if (path.includes('barberia')) pageKey = 'barberia';
@@ -101,6 +102,7 @@ class ServicePageManager {
         else if (path.includes('tratamientos-capilares')) pageKey = 'tratamientos-capilares';
         else if (path.includes('cejas-y-pestanas')) pageKey = 'cejas-y-pestanas';
         else if (path.includes('limpieza-facial')) pageKey = 'limpieza-facial';
+        else if (path.includes('spa-facial-integral')) pageKey = 'spa-facial-integral';
         else if (path.includes('masajes-relajantes')) pageKey = 'masajes-relajantes';
         else if (path.includes('/estetica')) pageKey = 'estetica'; // Generic match AFTER specific pages
         else if (path.includes('barberia')) pageKey = 'barberia';

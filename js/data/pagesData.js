@@ -475,6 +475,41 @@ export const pagesData = Object.freeze({
             }
         ]
     },
+    'spa-facial-integral': {
+        gallery: [
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg',
+                title: "Limpieza Profunda",
+                subtitle: "Alta Frecuencia",
+                alt: "Limpieza facial profunda con alta frecuencia"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.jpeg',
+                title: "Relax Total",
+                subtitle: "Piedras Calientes",
+                alt: "Masaje relajante con piedras calientes"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/masaje_reductor.jpeg',
+                title: "Tratamiento Corporal",
+                alt: "Masaje reductor y moldeador"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.jpeg',
+                title: "Experiencia Spa",
+                subtitle: "Bienestar y Estética",
+                alt: "Servicio de Spa Facial Completo"
+            }
+        ]
+    },
     'masajes-relajantes': {
         gallery: [
             {
