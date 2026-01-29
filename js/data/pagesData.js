@@ -359,7 +359,40 @@ export const pagesData = Object.freeze({
             subtitle: "Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.",
             imageSrc: "images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia.%20copy%20Large.jpeg",
             imageAlt: "Tratamientos de spa y estética en Narbo's"
-        }
+        },
+        gallery: [
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg',
+                title: "Limpieza Facial",
+                subtitle: "Piel Radiante",
+                alt: "Limpieza facial profunda con alta frecuencia"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.jpeg',
+                title: "Masaje Relajante",
+                subtitle: "Piedras Calientes",
+                alt: "Masaje relajante con piedras calientes"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/estetica/masaje_reductor.jpeg',
+                title: "Tratamiento Corporal",
+                alt: "Masaje reductor y moldeador"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: 'images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.jpeg',
+                title: "Depilación y Spa",
+                subtitle: "Cuidado Integral",
+                alt: "Servicios de spa y depilación en Chía"
+            }
+        ]
     },
     'unas-spa': {
         gallery: [
