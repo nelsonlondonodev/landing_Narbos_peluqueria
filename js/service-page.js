@@ -67,6 +67,7 @@ class ServicePageManager {
         else if (path.includes('balayage-mechas')) pageKey = 'balayage-mechas';
         else if (path.includes('color-tinturas-cabello')) pageKey = 'color-tinturas-cabello';
         else if (path.includes('tratamientos-capilares')) pageKey = 'tratamientos-capilares';
+        else if (path.includes('limpieza-facial')) pageKey = 'limpieza-facial';
         else if (path.includes('/estetica')) pageKey = 'estetica';
         else if (path.includes('/peluqueria') || path.includes('index.html')) pageKey = 'peluqueria';
 

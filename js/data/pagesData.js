@@ -394,6 +394,41 @@ export const pagesData = Object.freeze({
             }
         ]
     },
+    'limpieza-facial': {
+        gallery: [
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg',
+                title: "Alta Frecuencia",
+                subtitle: "Tecnología Facial",
+                alt: "Limpieza facial profunda con alta frecuencia"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.jpeg',
+                title: "Relajación Total",
+                subtitle: "Complemento ideal",
+                alt: "Tratamiento facial relajante"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/masaje_reductor.jpeg',
+                title: "Mascarilla",
+                alt: "Aplicación de mascarilla facial"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.jpeg',
+                title: "Piel Radiante",
+                subtitle: "Resultados visibles",
+                alt: "Piel luminosa y limpia"
+            }
+        ]
+    },
     'unas-spa': {
         gallery: [
             {
