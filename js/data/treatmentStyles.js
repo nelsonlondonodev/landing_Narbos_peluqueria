@@ -15,22 +15,22 @@ export const treatmentStyles = Object.freeze([
     {
         title: "Keratina & Alisados",
         description: "Alisado progresivo que elimina el frizz, reduce volumen y aporta brillo espejo.",
-        link: "../../images/pages/peluqueria/lavado-spa-capilar.webp",
-        image: "../../images/pages/peluqueria/lavado-spa-capilar.webp",
-        variant: "standard"
+        link: "../../images/brand/logo_narbos.webp",
+        image: "../../images/brand/logo_narbos.webp",
+        variant: "logo"
     },
     {
         title: "Botox Capilar",
         description: "Rejuvenecimiento profundo para cabellos desgastados. Rellena la fibra y devuelve la suavidad.",
-        link: "../../images/pages/peluqueria/estilismo-barba.webp", 
-        image: "../../images/pages/peluqueria/estilismo-barba.webp",
-        variant: "standard"
+        link: "../../images/brand/logo_narbos.webp", 
+        image: "../../images/brand/logo_narbos.webp",
+        variant: "logo"
     },
     {
         title: "Hidratación Profunda",
         description: "Cocktail de nutrientes para cabellos secos y sin vida. Recupera la elasticidad natural.",
-        link: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
-        image: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
-        variant: "standard"
+        link: "../../images/brand/logo_narbos.webp",
+        image: "../../images/brand/logo_narbos.webp",
+        variant: "logo"
     }
 ]);
