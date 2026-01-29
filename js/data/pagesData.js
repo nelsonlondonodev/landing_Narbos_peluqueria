@@ -322,33 +322,33 @@ export const pagesData = Object.freeze({
         description: "Terapias profundas para devolver la fuerza, el brillo y la suavidad a tu cabello.",
         gallery: [
              {
-                type: 'image',
+                type: 'logo-card',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/lavado-spa-capilar.webp',
+                src: '../../images/brand/logo_narbos.webp',
                 title: "Spa Capilar",
                 subtitle: "Relajación y Salud",
                 alt: "Lavado y masaje capilar profundo"
             },
             {
-                type: 'image',
+                type: 'logo-card',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/hair-hero.jpg',
+                src: '../../images/brand/logo_narbos.webp',
                 title: "Brillo Extremo",
                 alt: "Cabello sano y brillante"
             },
             {
-                type: 'image',
+                type: 'logo-card',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/color-tratamiento.webp',
+                src: '../../images/brand/logo_narbos.webp',
                 title: "Nutrición",
                 alt: "Aplicación de tratamiento nutritivo"
             },
             {
-                type: 'featured-video', // Si no hay video, usaré imagen de respaldo por ahora para no romper
+                type: 'logo-card', 
                 layout: 'horizontal',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-despues.jpg', // Placeholder de calidad
+                src: '../../images/brand/logo_narbos.webp', 
                 title: "Resultados Visibles",
-                subtitle: "Antes y Después",
+                subtitle: "Salud Capilar",
                 alt: "Cabello recuperado tras tratamiento"
             }
         ]
