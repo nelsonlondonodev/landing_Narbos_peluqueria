@@ -31,11 +31,39 @@ export class ServiceCard {
         
         if (this.props.variant === 'standard') {
             this.renderStandardContent(element);
+        } else if (this.props.variant === 'logo') {
+            this.renderLogoContent(element);
         } else {
             this.renderOverlayContent(element);
         }
 
         return element;
+    }
+
+    /**
+     * Renderiza el contenido para la variante Logo (Placeholder de marca).
+     */
+    renderLogoContent(element) {
+        element.className = "group relative bg-stone-900 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-800 flex flex-col h-full block text-left hover:-translate-y-1";
+
+        element.innerHTML = `
+            <div class="relative aspect-[4/3] flex items-center justify-center bg-stone-900 overflow-hidden shrink-0 p-8">
+                <img src="${this.props.image}" alt="${this.props.imageAlt || 'Logo'}" class="w-2/3 h-2/3 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+            </div>
+            <div class="p-6 flex flex-col flex-grow bg-white">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">${this.props.title}</h3>
+                </div>
+                <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${this.props.description}</p>
+                
+                <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
+                    <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
+                        <span>Ver Detalles</span>
+                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </span>
+                </div>
+            </div>
+        `;
     }
 
     /**

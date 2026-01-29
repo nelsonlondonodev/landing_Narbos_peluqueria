@@ -1109,6 +1109,9 @@
   .border-gray-200 {
     border-color: var(--color-gray-200);
   }
+  .border-gray-800 {
+    border-color: var(--color-gray-800);
+  }
   .border-transparent {
     border-color: transparent;
   }

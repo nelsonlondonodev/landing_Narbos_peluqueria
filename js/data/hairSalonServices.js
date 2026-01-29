@@ -37,7 +37,7 @@ export const hairSalonServices = Object.freeze([
         title: "Tratamientos",
         description: "Recuperación profunda, keratinas, cirugía capilar y botox.",
         link: "/servicios/peluqueria/tratamientos-capilares.html",
-        image: "/images/pages/peluqueria/lavado-spa-capilar.webp",
-        variant: "standard"
+        image: "/images/brand/logo_narbos.webp",
+        variant: "logo"
     }
 ]);
