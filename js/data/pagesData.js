@@ -429,6 +429,41 @@ export const pagesData = Object.freeze({
             }
         ]
     },
+    'masajes-relajantes': {
+        gallery: [
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.jpeg',
+                title: "Piedras Calientes",
+                subtitle: "Terapia térmica",
+                alt: "Masaje con piedras calientes"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.jpeg',
+                title: "Ambiente Spa",
+                subtitle: "Relax Total",
+                alt: "Ambiente relajante de spa"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/masaje_reductor.jpeg',
+                title: "Masaje Corporal",
+                alt: "Masaje reductor y relajante"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg',
+                title: "Bienestar Integral",
+                subtitle: "Cuerpo y Mente",
+                alt: "Bienestar facial y corporal"
+            }
+        ]
+    },
     'unas-spa': {
         gallery: [
             {
