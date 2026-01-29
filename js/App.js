@@ -33,7 +33,7 @@ class App {
         this.appRoot = window.location.origin + BASE_PATH + '/';
         
         // Debug para verificar en consola
-        console.log(`[App] Initialized. Root: ${this.appRoot}, Host: ${window.location.hostname}`);
+        // console.log(`[App] Initialized. Root: ${this.appRoot}, Host: ${window.location.hostname}`);
         
         // Determinamos si estamos en la home
         const path = window.location.pathname;

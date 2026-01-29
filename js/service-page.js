@@ -39,7 +39,7 @@ class ServicePageManager {
             this.initHero();
         }
 
-        console.log("✅ ServicePageManager initialized with App context");
+        // console.log("✅ ServicePageManager initialized with App context");
 
         this.initServiceGrid();
         this.initBrands(); 
@@ -365,7 +365,7 @@ class ServicePageManager {
                 closeEffect: 'zoom',
                 slideEffect: 'slide'
             });
-            console.log("✅ GLightbox initialized successfully with " + document.querySelectorAll('.glightbox').length + " elements.");
+            // console.log("✅ GLightbox initialized successfully with " + document.querySelectorAll('.glightbox').length + " elements.");
             
             // Inyectar estilos correctivos para asegurar visibilidad de controles
             this.injectLightboxStyles();
