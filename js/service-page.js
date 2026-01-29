@@ -318,18 +318,27 @@ class ServicePageManager {
         });
     }
 
-    initLightboxInstance() {
+    initLightboxInstance(retries = 0) {
         const isServicePage = window.location.pathname.includes('cortes-de-pelo') || 
                               window.location.pathname.includes('balayage-mechas') || 
                               window.location.pathname.includes('color-tinturas-cabello') ||
-                              window.location.pathname.includes('tratamientos-capilares');
+                              window.location.pathname.includes('tratamientos-capilares') ||
+                              window.location.pathname.includes('cejas-y-pestanas') ||
+                              window.location.pathname.includes('limpieza-facial') ||
+                              window.location.pathname.includes('spa-facial-integral') ||
+                              window.location.pathname.includes('masajes-relajantes') ||
+                              window.location.pathname.includes('barberia');
 
         if (!isServicePage) return;
 
         // Mecanismo de reintento si GLightbox (CDN) aún no ha cargado
         if (typeof GLightbox === 'undefined') {
-            console.warn("GLightbox not loaded yet, retrying in 100ms...");
-            setTimeout(() => this.initLightboxInstance(), 100);
+            if (retries > 50) {
+                console.warn("GLightbox failed to load after 5 seconds. Styles or Scripts might be missing in HTML.");
+                return;
+            }
+            console.warn(`GLightbox not loaded yet, retrying in 100ms... (${retries + 1}/50)`);
+            setTimeout(() => this.initLightboxInstance(retries + 1), 100);
             return;
         }
 
