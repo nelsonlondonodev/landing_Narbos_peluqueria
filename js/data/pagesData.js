@@ -350,14 +350,14 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Estética y Spa en Chía",
             subtitle: "Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.",
-            imageSrc: "images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia.%20copy%20Large.jpeg",
+            imageSrc: "images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia.%20copy%20Large.webp",
             imageAlt: "Tratamientos de spa y estética en Narbo's"
         },
         gallery: [
             {
                 type: 'image',
                 layout: 'vertical',
-                src: 'images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg',
+                src: 'images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
                 title: "Limpieza Facial",
                 subtitle: "Piel Radiante",
                 alt: "Limpieza facial profunda con alta frecuencia"
@@ -365,7 +365,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.jpeg',
+                src: 'images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.webp',
                 title: "Masaje Relajante",
                 subtitle: "Piedras Calientes",
                 alt: "Masaje relajante con piedras calientes"
@@ -373,14 +373,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/estetica/masaje_reductor.jpeg',
+                src: 'images/pages/estetica/masaje_reductor.webp',
                 title: "Tratamiento Corporal",
                 alt: "Masaje reductor y moldeador"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: 'images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.jpeg',
+                src: 'images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
                 title: "Depilación y Spa",
                 subtitle: "Cuidado Integral",
                 alt: "Servicios de spa y depilación en Chía"
@@ -392,7 +392,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
                 title: "Alta Frecuencia",
                 subtitle: "Tecnología Facial",
                 alt: "Limpieza facial profunda con alta frecuencia"
@@ -400,7 +400,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.jpeg',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.webp',
                 title: "Relajación Total",
                 subtitle: "Complemento ideal",
                 alt: "Tratamiento facial relajante"
@@ -408,14 +408,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje_reductor.jpeg',
+                src: '../../images/pages/estetica/masaje_reductor.webp',
                 title: "Mascarilla",
                 alt: "Aplicación de mascarilla facial"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.jpeg',
+                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
                 title: "Piel Radiante",
                 subtitle: "Resultados visibles",
                 alt: "Piel luminosa y limpia"
@@ -427,20 +427,20 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Cejas y Pestañas",
             subtitle: "Tu mirada es tu carta de presentación. Diseños personalizados para realzar tu belleza natural con elegancia.",
-            imageSrc: "images/pages/estetica/microblading-cejas-despues.jpg",
+            imageSrc: "images/pages/estetica/microblading-cejas-despues.webp",
             imageAlt: "Cejas y pestañas perfectas en Narbo's Salon"
         },
         gallery: [
              {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/microblading-cejas-despues.jpg',
+                src: '../../images/pages/estetica/microblading-cejas-despues.webp',
                 title: "Diseño Microblading",
                 subtitle: "Resultado Final",
                 alt: "Cejas pelo a pelo resultado final",
                 subImages: [
                     {
-                        src: '../../images/pages/estetica/microblading-cejas-antes.jpg',
+                        src: '../../images/pages/estetica/microblading-cejas-antes.webp',
                         alt: 'Cejas antes del procedimiento'
                     }
                 ]
@@ -448,14 +448,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.jpeg', // Fallback/Existing image
+                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp', // Fallback/Existing image
                 title: "Lifting de Pestañas",
                 alt: "Pestañas naturales curvadas"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg', // Generic beauty image
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp', // Generic beauty image
                 title: "Rostro Armónico",
                 alt: "Belleza facial integral"
             },
@@ -474,7 +474,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
                 title: "Limpieza Profunda",
                 subtitle: "Alta Frecuencia",
                 alt: "Limpieza facial profunda con alta frecuencia"
@@ -482,7 +482,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.jpeg',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.webp',
                 title: "Relax Total",
                 subtitle: "Piedras Calientes",
                 alt: "Masaje relajante con piedras calientes"
@@ -490,14 +490,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje_reductor.jpeg',
+                src: '../../images/pages/estetica/masaje_reductor.webp',
                 title: "Tratamiento Corporal",
                 alt: "Masaje reductor y moldeador"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.jpeg',
+                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
                 title: "Experiencia Spa",
                 subtitle: "Bienestar y Estética",
                 alt: "Servicio de Spa Facial Completo"
@@ -576,7 +576,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.jpeg',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.webp',
                 title: "Piedras Calientes",
                 subtitle: "Terapia térmica",
                 alt: "Masaje con piedras calientes"
@@ -584,7 +584,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.jpeg',
+                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
                 title: "Ambiente Spa",
                 subtitle: "Relax Total",
                 alt: "Ambiente relajante de spa"
@@ -592,14 +592,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje_reductor.jpeg',
+                src: '../../images/pages/estetica/masaje_reductor.webp',
                 title: "Masaje Corporal",
                 alt: "Masaje reductor y relajante"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.jpeg',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
                 title: "Bienestar Integral",
                 subtitle: "Cuerpo y Mente",
                 alt: "Bienestar facial y corporal"
