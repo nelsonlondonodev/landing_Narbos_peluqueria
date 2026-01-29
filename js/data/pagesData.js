@@ -510,6 +510,73 @@ export const pagesData = Object.freeze({
             }
         ]
     },
+    'barberia': {
+        gallery: [
+            {
+                type: 'logo-card',
+                layout: 'featured-video',
+                src: '../../images/brand/logo_narbos.webp',
+                title: "Experiencia Narbo's",
+                subtitle: "Vive el cambio",
+                alt: "Marca Narbos Barbería"
+            },
+            {
+                type: 'logo-card',
+                layout: 'vertical',
+                src: '../../images/brand/logo_narbos.webp',
+                title: "Calidad Premium",
+                alt: "Marca Narbos Salon"
+            },
+            {
+                type: 'logo-card',
+                layout: 'square',
+                src: '../../images/brand/logo_narbos.webp',
+                title: "Estilo",
+                alt: "Logotipo Narbos"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/barberia/barber-hero.jpg',
+                title: "Barbería Clásica",
+                alt: "Ambiente de barbería tradicional"
+            },
+            {
+                type: 'logo-card',
+                layout: 'square',
+                src: '../../images/brand/logo_narbos.webp',
+                title: "Confianza",
+                alt: "Logo Narbos"
+            },
+            {
+                type: 'logo-card',
+                layout: 'horizontal',
+                src: '../../images/brand/logo_narbos.webp',
+                title: "Profesionalismo",
+                alt: "Logo marca"
+            },
+            {
+                type: 'logo-card',
+                layout: 'square',
+                src: '../../images/brand/logo_narbos.webp',
+                title: "Bienestar",
+                alt: "Logo Spa"
+            },
+            {
+                type: 'logo-card',
+                layout: 'square',
+                src: '../../images/brand/logo_narbos.webp',
+                alt: "Logo"
+            },
+            {
+                type: 'logo-card',
+                layout: 'vertical',
+                src: '../../images/brand/logo_narbos.webp',
+                title: "Innovación",
+                alt: "Logo vertical"
+            }
+        ]
+    },
     'masajes-relajantes': {
         gallery: [
             {

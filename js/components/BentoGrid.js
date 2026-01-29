@@ -30,6 +30,13 @@ function getGridItemHTML(item) {
                 Tu navegador no soporta videos HTML5.
             </video>
         `;
+    } else if (item.type === 'logo-card') {
+        // Special type for filling space with branding
+        mediaHTML = `
+            <div class="w-full h-full bg-stone-900 flex items-center justify-center p-8 group-hover:bg-stone-800 transition-colors duration-500">
+                <img src="${item.src}" alt="${item.alt}" class="w-2/3 h-2/3 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+            </div>
+        `;
     } else {
         mediaHTML = `
             <img src="${item.src}" alt="${item.alt}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
