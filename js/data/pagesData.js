@@ -430,6 +430,7 @@ export const pagesData = Object.freeze({
         ]
     },
     'cejas-y-pestanas': {
+        galleryOptions: { isolateItems: true }, // Aísla cada item de la galería (comportamiento solicitado)
         hero: {
             title: "Cejas y Pestañas",
             subtitle: "Tu mirada es tu carta de presentación. Diseños personalizados para realzar tu belleza natural con elegancia.",

@@ -83,7 +83,8 @@ class ServicePageManager {
              poster: item.poster ? this.app.resolvePath(item.poster) : undefined
         }));
 
-        galleryContainer.innerHTML = getBentoGridHTML(galleryItems);
+        const galleryOptions = pagesData[pageKey].galleryOptions || {};
+        galleryContainer.innerHTML = getBentoGridHTML(galleryItems, galleryOptions);
     }
 
     /**

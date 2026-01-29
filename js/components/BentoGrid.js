@@ -2,16 +2,12 @@
 /**
  * Genera el HTML para un Bento Grid Item.
  * @param {Object} item - Datos del item.
- * @param {string} item.type - 'video' | 'image'
- * @param {string} item.layout - 'featured-video' | 'vertical' | 'horizontal' | 'square'
- * @param {string} item.src - Ruta del archivo
- * @param {string} [item.poster] - Poster para videos
- * @param {string} item.alt - Texto alternativo
- * @param {string} item.title - Título superpuesto
- * @param {string} [item.subtitle] - Subtítulo superpuesto
+ * @param {number} index - Índice del item para generación de IDs estables.
+ * @param {Object} options - Opciones de configuración.
+ * @param {boolean} [options.isolateItems] - Si es true, aísla cada item en su propia galería.
  * @returns {string} HTML string del item.
  */
-function getGridItemHTML(item) {
+function getGridItemHTML(item, index, options = {}) {
     const layoutClasses = {
         'featured-video': 'col-span-1 row-span-2 md:col-span-2 md:row-span-2', 
         'vertical': 'col-span-1 row-span-2 md:col-span-1 md:row-span-2', 
@@ -43,13 +39,17 @@ function getGridItemHTML(item) {
         `;
     }
 
-    // Lógica para Galerías Anidadas (Antes/Después)
-    // Si hay subImages, creamos un ID único para aislar este carrusel del resto del grid.
-    // Si no, usamos 'bento-gallery' para que sea navegable junto con los demás items.
+    // Lógica de ID de Galería (Refactorizado para limpieza y flexibilidad)
     const hasSubImages = item.subImages && item.subImages.length > 0;
-    const galleryId = hasSubImages 
-        ? `gallery-${item.title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}-${Math.floor(Math.random() * 1000)}` 
-        : 'bento-gallery';
+    
+    // Determinismo: Usar índice en lugar de random para IDs estables
+    const cleanTitle = (item.title || 'item').replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+    const uniqueId = `gallery-${cleanTitle}-${index}`;
+    const sharedId = 'bento-gallery';
+
+    // Aislamiento: Si la opción isolateItems está activa o el item tiene sub-imágenes (caso de estudio), se aísla.
+    const useUniqueId = options.isolateItems || hasSubImages;
+    const galleryId = useUniqueId ? uniqueId : sharedId;
 
     let hiddenLinksHTML = '';
     if (hasSubImages) {
@@ -77,12 +77,13 @@ function getGridItemHTML(item) {
 /**
  * Genera todo el grid Bento.
  * @param {Array} items - Lista de items.
+ * @param {Object} options - Opciones de configuración.
  * @returns {string} HTML del grid completo.
  */
-export function getBentoGridHTML(items) {
+export function getBentoGridHTML(items, options = {}) {
     if (!items || items.length === 0) return '';
 
-    const gridItemsHTML = items.map(item => getGridItemHTML(item)).join('');
+    const gridItemsHTML = items.map((item, index) => getGridItemHTML(item, index, options)).join('');
 
     return `
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[250px]" data-animation="fadeInUp" data-animation-delay="0.2s">
