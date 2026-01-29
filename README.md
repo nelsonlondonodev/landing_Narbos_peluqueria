@@ -35,6 +35,20 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (January 29, 2026)
+
+### 1. Functional Enhancements & UX 🛠️
+- **Dynamic Breadcrumbs Logic:** Updated `service-page.js` to intelligently handle sub-service routes (e.g., distinguishing `/barberia/cortes` from generic paths), ensuring navigation trails are accurate and complete (e.g., `Home > Barbería > Cortes de Hombre`).
+- **Placeholder Bento Grid (Barbería):** Implemented a temporary yet polished Bento Grid for the "Cortes de Hombre" page using the brand logo in varied layouts (Vertical/Square/Horizontal). This allows visualizing the final structure and layout stability while real photographic assets are produced.
+- **Service Card Branding:** Standardized the "Arreglo de Barba" service card to use the brand logo with a dark theme variant (`variant: 'logo'`) instead of incorrect generic imagery.
+
+### 2. Stability & Performance 🚀
+- **GLightbox Dependency Fix:** Resolved a critical "infinite retry loop" in the GLightbox loader by ensuring the library's CSS and JS dependencies are correctly injected into all service sub-pages (`estetica`, `barberia`).
+- **Grid ID Correction:** Fixed a DOM ID mismatch in the Barber page that caused the "Women's Hair Services" grid to load instead of the "Barber Services".
+- **Console Cleanup:** Removed verbose initialization logs from production code to reduce browser console noise.
+
+---
+
 ## 🔄 Recent Updates (January 26, 2026)
 
 ### 1. JavaScript Architecture Refactor (Clean Code) 🏗️
