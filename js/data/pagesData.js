@@ -762,5 +762,16 @@ export const pagesData = Object.freeze({
                 alt: "Variedad de diseños de uñas modernos"
             }
         ]
+    },
+    'barberia-cortes-hombre': {
+        gallery: [
+            { type: 'logo-card', layout: 'vertical', src: 'images/brand/logo_narbos.webp', alt: 'Corte Clásico', title: 'Corte Clásico' },
+            { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Degradado', title: 'Degradado' },
+            { type: 'logo-card', layout: 'horizontal', src: 'images/brand/logo_narbos.webp', alt: 'Perfilado', title: 'Perfilado de Barba' },
+            { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Estilo Moderno', title: 'Estilo Moderno' },
+            { type: 'logo-card', layout: 'vertical', src: 'images/brand/logo_narbos.webp', alt: 'Ritual de Barba', title: 'Ritual de Barba' },
+            { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Corte Tijera', title: 'Corte a Tijera' },
+            { type: 'logo-card', layout: 'horizontal', src: 'images/brand/logo_narbos.webp', alt: 'Acabados', title: 'Acabados Premium' }
+        ]
     }
 });

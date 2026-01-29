@@ -72,6 +72,8 @@ class ServicePageManager {
         else if (path.includes('spa-facial-integral')) pageKey = 'spa-facial-integral';
         else if (path.includes('cejas-y-pestanas')) pageKey = 'cejas-y-pestanas';
         else if (path.includes('/estetica')) pageKey = 'estetica';
+        
+        else if (path.includes('barberia-cortes-hombre')) pageKey = 'barberia-cortes-hombre';
         else if (path.includes('barberia')) pageKey = 'barberia';
         else if (path.includes('peluqueria') || path.includes('index.html')) pageKey = 'peluqueria';
 
@@ -105,7 +107,10 @@ class ServicePageManager {
         else if (path.includes('limpieza-facial')) pageKey = 'limpieza-facial';
         else if (path.includes('spa-facial-integral')) pageKey = 'spa-facial-integral';
         else if (path.includes('masajes-relajantes')) pageKey = 'masajes-relajantes';
-        else if (path.includes('/estetica')) pageKey = 'estetica'; // Generic match AFTER specific pages
+        else if (path.includes('/estetica')) pageKey = 'estetica';
+        
+        // Specific checks for Barbería sub-pages
+        else if (path.includes('barberia-cortes-hombre')) pageKey = 'barberia-cortes-hombre';
         else if (path.includes('barberia')) pageKey = 'barberia';
         else if (path.includes('nosotros')) pageKey = 'nosotros';
         else if (path.includes('contacto')) pageKey = 'contacto';
