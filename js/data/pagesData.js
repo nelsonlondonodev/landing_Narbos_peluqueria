@@ -95,7 +95,7 @@ export const pagesData = Object.freeze({
          hero: {
             title: "Barbería exclusiva en Chía",
             subtitle: "El espacio que mereces para cuidar tu imagen.",
-            imageSrc: "images/pages/barberia/barber-hero.jpg",
+            imageSrc: "images/pages/barberia/barber-hero.webp",
             imageAlt: "Servicios de barbería profesional en Chía"
         }
     },
@@ -531,7 +531,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/barberia/barber-hero.jpg',
+                src: '../../images/pages/barberia/barber-hero.webp',
                 title: "Barbería Clásica",
                 alt: "Ambiente de barbería tradicional"
             },

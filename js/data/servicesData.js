@@ -52,7 +52,7 @@ export const servicesData = Object.freeze([
         i18nDesc: "service.barber.desc",
         icon: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M7 8l10 5M7 13l10 5M7 18l6 3M11 3l6 3"/>',
         link: "/servicios/barberia/index.html",
-        image: "images/pages/barberia/barber-hero.jpg",
+        image: "images/pages/barberia/barber-hero.webp",
         animationDelay: "0.6s"
     }
 ]);
