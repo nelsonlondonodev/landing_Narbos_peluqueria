@@ -48,6 +48,19 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 - **Grid ID Correction:** Fixed a DOM ID mismatch in the Barber page that caused the "Women's Hair Services" grid to load instead of the "Barber Services".
 - **Console Cleanup:** Removed verbose initialization logs from production code to reduce browser console noise.
 
+### 3. Service Page Refactoring & Optimization (PM Session) 🏗️
+- **Centralized Logic (`ServicePageManager`):** Eliminated code duplication by implementing a robust, centralized controller that manages all service sub-pages (`Peluquería`, `Barbería`, `Estética`). It intelligently detects the current context to inject the correct data.
+- **Dynamic Hero with SSG Support:** 
+    - Replaced hardcoded Hero HTML with a dynamic `#hero-root` container.
+    - **Crucial SEO Fix:** Renamed the target ID from `services-hero-root` to `hero-root` to align with the `scripts/ssg.js` pipeline. This ensures the Hero Content (H1, Description) is **pre-rendered** during the build process, making it instantly visible to Google Bots without JavaScript.
+- **Performance (Lazy Loading):** ⚡
+    - **Smart Loading Strategy:** Implemented `loading="lazy"` on all `ServiceCard` images (Grid, Overlay, Logo variants) to prioritize bandwidth for the Critical Rendering Path.
+    - **LCP Protection:** Maintained `loading="eager"` exclusively for Hero images to ensure the Largest Contentful Paint metric remains green.
+    - **Build Metrics:** Confirmed production build sizes are highly optimized (`styles.css`: ~15KB gzipped, `service-page.js`: ~3KB gzipped).
+- **Architecture Stability:**
+    - Restored **Floating Decorations (Parallax Leaves)** logic to work seamlessly with dynamic content injection.
+    - Fixed `GLightbox` initialization errors on sub-pages by ensuring dependencies are present.
+
 ---
 
 ## 🔄 Recent Updates (January 26, 2026)
