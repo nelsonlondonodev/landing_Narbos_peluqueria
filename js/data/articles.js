@@ -19,6 +19,18 @@
  */
 const articles = [
     {
+        id: 'choque-termico-cabello-viajes-tierra-caliente',
+        date: '30 de enero de 2026',
+        isoDate: '2026-01-30',
+        category: 'Cuidado capilar',
+        title: 'Choque térmico: protege tu cabello en tus viajes | Narbo\'s',
+        description: 'Aprende a proteger tu cabello del choque térmico al viajar de la Sabana a Tierra Caliente. Rutina experta para evitar el daño por sol y cloro.',
+        image: 'articles/images/choque-termico-cabello.webp',
+        alt: 'Protección capilar para viajes entre climas de la Sabana y Tierra Caliente',
+        link: '/blog/articles/choque-termico-cabello-viajes-tierra-caliente.html',
+        featured: true
+    },
+    {
         id: 'tendencias-cabello-2026',
         date: '26 de diciembre de 2025',
         isoDate: '2025-12-26',
