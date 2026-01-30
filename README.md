@@ -36,11 +36,27 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 ## 🔄 Recent Updates (January 30, 2026)
-### 1. UI Standardization & H1 Alignment 🎨
+### 1. Blog SEO & Schema Markup Overhaul ✍️
+- **Full Schema Coverage:** Implemented `BlogPosting` JSON-LD structured data in every single blog article and the master template. This ensures rich snippet support (headline, description, author, image, date) for all current and future content.
+- **Dynamic Blog Index Schema:** The main blog page now includes a comprehensive `Blog` schema that automatically lists all published articles, creating a strong semantic link between the index and its content.
+- **SEO Title & Meta Polishing:** Optimized the "Choque térmico" article for search performance:
+    - **Title:** Shortened to ~58 characters to avoid Google truncation.
+    - **Meta Description:** Refined to ~148 characters, including primary keywords and the brand name.
+- **Asset Integrity:** Standardized canonical URLs and Open Graph tags across all 6 articles, ensuring correct asset paths and domain consistency.
+
+### 2. Privacy & Automation Logic 🤖
+- **Protected Templates:** Added `<meta name="robots" content="noindex, nofollow">` to `article.template.html` and `service.template.html` to prevent raw templates from appearing in search results.
+- **Sitemap Intelligence:** Updated `generate-sitemap.js` to automatically exclude any file containing `.template.` from the final `sitemap.xml`.
+- **Smart Article Generator:**
+    - Migrated `create-article.js` to **ES Modules** for project-wide consistency.
+    - **Self-Healing Logic:** The script now automatically removes the `noindex` tag from the template and replaces it with the dynamic `BlogPosting` Schema when generating a new post.
+- **Codebase Sanitization:** Removed obsolete `data-key` attributes from the dynamic blog generation script (`generate-blog.js`) and finalized the cleanup of internationalization remnants.
+
+### 3. UI Standardization & H1 Alignment 🎨
 - **Unified Hero Design:** Standardized the Hero Section H1 alignment across the entire site. The Homepage (`index.html`) Hero is now **centered**, matching the design language of all internal Service pages.
 - **Consistent Visuals:** Adjusted the Homepage Hero background opacity (`bg-white/90`) and styling to ensure a pixel-perfect match with the component-based Hero (`HeroSection.js`) used throughout the application.
 
-### 2. SEO Enhancements & Fixes 🔍
+### 4. Previous SEO Fixes 🔍
 - **Canonical & OG Correction:** Conducted a comprehensive audit of all service pages (`/peluqueria`, `/estetica`, `/barberia`, `/unas-spa`) and fixed critical inconsistencies in `<link rel="canonical">` and `<meta property="og:url">` tags.
     - Resolved typo: `narbosalon` -> `narbossalon` (missing 's').
     - Standardized URLs: Ensured all canonical paths correctly point to their physical file locations (e.g., `/servicios/peluqueria/` instead of `/peluqueria/`).
