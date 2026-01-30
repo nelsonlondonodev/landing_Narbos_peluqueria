@@ -636,9 +636,6 @@
   .h-\[280px\] {
     height: 280px;
   }
-  .h-auto {
-    height: auto;
-  }
   .h-full {
     height: 100%;
   }
@@ -1156,9 +1153,6 @@
   }
   .bg-\[\#eef5fa\] {
     background-color: #eef5fa;
-  }
-  .bg-black {
-    background-color: var(--color-black);
   }
   .bg-black\/10 {
     background-color: color-mix(in srgb, #000 10%, transparent);
@@ -1894,9 +1888,6 @@
   .delay-75 {
     transition-delay: 75ms;
   }
-  .delay-200 {
-    transition-delay: 200ms;
-  }
   .delay-300 {
     transition-delay: 300ms;
   }
@@ -2247,13 +2238,6 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-brand-green);
-      }
-    }
-  }
-  .hover\:text-gray-800 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-gray-800);
       }
     }
   }

@@ -35,7 +35,6 @@ class ServicePageManager {
         // Inicializar componentes
         this.initHero(); 
         this.initFloatingDecorations(); // Restaurar decoraciones tras renderizar Hero
-        this.initServiceGrid(); 
         this.initServiceGrid();
         this.initBrands(); 
         this.initBentoGallery();
