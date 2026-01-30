@@ -32,6 +32,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "mainEntity": {
+        "@type": "BeautySalon",
+        "name": "Narbo's Salón Spa",
+        "image": "https://narbossalon.com/images/pages/home/foto_inicio2.webp",
+        "telephone": "+573123462618",
+        "email": "contacto@narbossalon.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Bajos del hotel ibis, Cajicá - Chía #Kilómetro 2",
+          "addressLocality": "Chía",
+          "addressRegion": "Cundinamarca",
+          "addressCountry": "CO"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 4.8816027,
+          "longitude": -74.0412799
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "07:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Sunday", "PublicHolidays"],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        ]
+      }
+    }
+    </script>
 
 </head>
 <body class="font-sans transition-colors duration-500 bg-white text-brand-gray-dark">

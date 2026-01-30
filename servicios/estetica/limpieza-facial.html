@@ -43,6 +43,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Limpieza Facial Profunda",
+      "provider": {
+        "@type": "BeautySalon",
+        "name": "Narbo's Salón Spa"
+      },
+      "areaServed": ["Chía", "Cajicá"],
+      "description": "Limpieza facial profunda, eliminación de impurezas y rejuvenecimiento.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Tratamientos Faciales",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Limpieza Facial Profunda"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hidratación Facial"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+
     <style>
         /* Optimización de CLS */
         #navbar-root { min-height: 80px; }

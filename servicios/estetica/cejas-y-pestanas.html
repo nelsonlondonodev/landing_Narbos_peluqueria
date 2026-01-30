@@ -42,6 +42,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Cejas y Pestañas",
+      "provider": {
+        "@type": "BeautySalon",
+        "name": "Narbo's Salón Spa"
+      },
+      "areaServed": ["Chía", "Cajicá"],
+      "description": "Diseño de cejas, laminado, lifting de pestañas y micropigmentación.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cejas y Pestañas",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Diseño de Cejas y Henna"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Lifting de Pestañas"
+            }
+          }
+        ]
+      }
+    }
+    </script>
     
     <style>
         /* Optimización de CLS */
