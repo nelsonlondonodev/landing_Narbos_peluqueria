@@ -35,6 +35,23 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (January 30, 2026)
+### 1. UI Standardization & H1 Alignment 🎨
+- **Unified Hero Design:** Standardized the Hero Section H1 alignment across the entire site. The Homepage (`index.html`) Hero is now **centered**, matching the design language of all internal Service pages.
+- **Consistent Visuals:** Adjusted the Homepage Hero background opacity (`bg-white/90`) and styling to ensure a pixel-perfect match with the component-based Hero (`HeroSection.js`) used throughout the application.
+
+### 2. SEO Enhancements & Fixes 🔍
+- **Canonical & OG Correction:** Conducted a comprehensive audit of all service pages (`/peluqueria`, `/estetica`, `/barberia`, `/unas-spa`) and fixed critical inconsistencies in `<link rel="canonical">` and `<meta property="og:url">` tags.
+    - Resolved typo: `narbosalon` -> `narbossalon` (missing 's').
+    - Standardized URLs: Ensured all canonical paths correctly point to their physical file locations (e.g., `/servicios/peluqueria/` instead of `/peluqueria/`).
+- **Full Schema Markup Coverage:** Implemented JSON-LD structured data on all remaining key pages to ensure 100% SEO coverage:
+    - **About Us (`nosotros.html`):** Added `BeautySalon` and `AboutPage` schema.
+    - **Contact (`contacto.html`):** Added `ContactPage` schema with `GeoCoordinates` and `OpeningHours`.
+    - **Blog (`blog/index.html`):** Added `Blog` schema.
+    - **Aesthetics Services:** Added specific `Service` schema for "Masajes Relajantes", "Limpieza Facial", and "Cejas y Pestañas".
+
+---
+
 ## 🔄 Recent Updates (January 29, 2026)
 
 ### 1. Functional Enhancements & UX 🛠️
