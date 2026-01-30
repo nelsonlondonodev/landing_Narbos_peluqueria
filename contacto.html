@@ -36,40 +36,81 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ContactPage",
-      "mainEntity": {
-        "@type": "BeautySalon",
-        "name": "Narbo's Salón Spa",
-        "image": "https://narbossalon.com/images/pages/home/foto_inicio2.webp",
-        "telephone": "+573123462618",
-        "email": "contacto@narbossalon.com",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Bajos del hotel ibis, Cajicá - Chía #Kilómetro 2",
-          "addressLocality": "Chía",
-          "addressRegion": "Cundinamarca",
-          "addressCountry": "CO"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 4.8816027,
-          "longitude": -74.0412799
-        },
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            "opens": "07:00",
-            "closes": "20:00"
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Sunday", "PublicHolidays"],
-            "opens": "09:00",
-            "closes": "18:00"
+      "@graph": [
+        {
+          "@type": "ContactPage",
+          "mainEntity": {
+            "@type": "BeautySalon",
+            "name": "Narbo's Salón Spa",
+            "image": "https://narbossalon.com/images/pages/home/foto_inicio2.webp",
+            "telephone": "+573123462618",
+            "email": "contacto@narbossalon.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Bajos del hotel ibis, Cajicá - Chía #Kilómetro 2",
+              "addressLocality": "Chía",
+              "addressRegion": "Cundinamarca",
+              "addressCountry": "CO"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 4.8816027,
+              "longitude": -74.0412799
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "07:00",
+                "closes": "20:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Sunday", "PublicHolidays"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ]
           }
-        ]
-      }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cómo puedo agendar una cita?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Puedes agendar tu cita contactándonos directamente a través de nuestro botón de WhatsApp o llamando a nuestro número de atención. Te recomendamos reservar con al menos 24 horas de anticipación para asegurar tu espacio."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuáles son sus horarios de atención?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nuestro horario de atención es de Lunes a Sábado de 7:00 a.m. a 8:00 p.m. Domingos y festivos de 9:00 a.m. a 6:00 p.m."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué métodos de pago aceptan?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Aceptamos efectivo, transferencias bancarias (Nequi, Daviplata) y tarjetas débito/crédito."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Dónde están ubicados?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Estamos ubicados en los bajos del Hotel Ibis, Cajicá - Chía #Kilómetro 2, Chía. ¡Te esperamos!"
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 
