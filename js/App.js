@@ -26,6 +26,8 @@ import { PageTransitionController } from './controllers/PageTransitionController
 // Data
 import { servicesData } from './data/servicesData.js';
 import { pagesData } from './data/pagesData.js'; // Nuevo Import
+import { Breadcrumbs } from './components/Breadcrumbs.js';
+
 
 class App {
     constructor() {
@@ -60,6 +62,7 @@ class App {
         this.initInteractiveComponents();
         this.mountHomeServices();
         this.initServices();
+        this.initBreadcrumbs();
     }
 
     /**
@@ -158,6 +161,41 @@ class App {
 
     initServices() {
         new UIService();
+    }
+
+    initBreadcrumbs() {
+        const root = document.getElementById('breadcrumbs-root');
+        if (!root) return;
+
+        const path = window.location.pathname;
+        const items = [{
+            label: 'Inicio',
+            // Resolvemos dinámicamente el enlace a "Inicio" desde la ruta actual
+            link: this.resolvePath('index.html') 
+        }];
+
+        if (path.includes('/blog/')) {
+            items.push({
+                label: 'Blog',
+                link: this.resolvePath('blog/index.html')
+            });
+
+            // Si es un artículo (está en /blog/articles/), agregamos el título
+            if (path.includes('/articles/')) {
+                const h1 = document.querySelector('h1');
+                if (h1) {
+                    items.push({ label: h1.innerText.trim(), link: '#' });
+                }
+            }
+        } else if (path.includes('nosotros.html')) {
+            items.push({ label: 'Nosotros', link: '#' });
+        } else if (path.includes('contacto.html')) {
+            items.push({ label: 'Contacto', link: '#' });
+        }
+
+        // Si hay customClasses se pueden pasar opciones. 
+        // Por defecto 'pt-32' está bien para evitar solapamiento con el header fijo.
+        root.innerHTML = new Breadcrumbs(items).render();
     }
 }
 

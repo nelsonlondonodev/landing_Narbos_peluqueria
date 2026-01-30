@@ -10,7 +10,7 @@ export class Breadcrumbs {
      */
     constructor(items, options = {}) {
         this.items = items;
-        this.customClasses = options.customClasses || 'pt-32';
+        this.customClasses = options.customClasses || 'pt-24 md:pt-28';
         this.separatorIcon = `
             <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
@@ -26,7 +26,7 @@ export class Breadcrumbs {
         const listItemsHTML = this.items.map((item, index) => this.renderItem(item, index)).join('');
 
         return `
-            <nav aria-label="Breadcrumb" class="bg-gray-100 py-3 px-6 relative z-10 ${this.customClasses}">
+            <nav aria-label="Breadcrumb" class="bg-gray-100 py-4 px-6 relative z-10 ${this.customClasses}">
                 <div class="container mx-auto max-w-screen-xl">
                     <ol class="list-none p-0 inline-flex text-sm text-gray-600">
                         ${listItemsHTML}
