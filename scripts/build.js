@@ -208,6 +208,7 @@ const versionAssets = async () => {
 
     // 2. Update References in ALL HTML files in DIST
     const distHtmlFiles = getFiles(DIST_DIR, '.html');
+    const timestamp = Date.now();
     
     for (const file of distHtmlFiles) {
         let content = fs.readFileSync(file, 'utf8');
@@ -215,21 +216,15 @@ const versionAssets = async () => {
 
         Object.keys(mappings).forEach(originalPath => {
             const newPath = mappings[originalPath];
-            // Regex handles:
-            // 1. Matches exact filename: main.js or styles.css
-            // 2. Preceded by slash or nothing (to avoid matching domain.js)
-            // 3. Followed by quote or query string or hash
-            // We search for the BASE name mostly, but we must protect paths.
-            
-            // Logic: Search for the exact filename (e.g. styles.css) appearing in href or src attributes
             const originalFilename = path.basename(originalPath); // styles.css
             const newFilename = path.basename(newPath); // styles.a1b2.css
             
-            // Replace literal filename when strictly inside src=".../filename" or href=".../filename"
-            const regex = new RegExp(`(href="|src=")([^"]*\\/)?${originalFilename.replace('.', '\\.')}(["\\?])`, 'g');
+            // Reemplazo agresivo de referencias en HTML
+            // Busca la referencia al archivo original y añade un timestamp para forzar la recarga en Safari/iOS
+            const regex = new RegExp(`(href="|src=")([^"]*\\/)?${originalFilename.replace('.', '\\.')}(\\?[^"]*)?(")`, 'g');
             
             if (regex.test(content)) {
-                content = content.replace(regex, `$1$2${newFilename}$3`);
+                content = content.replace(regex, `$1$2${newFilename}?v=${timestamp}$4`);
                 changed = true;
             }
         });
@@ -248,15 +243,14 @@ const versionAssets = async () => {
 
         Object.keys(mappings).forEach(originalPath => {
             const newPath = mappings[originalPath]; 
-            const originalFilename = path.basename(originalPath); // e.g. main.js
-            const newFilename = path.basename(newPath); // e.g. main.123.js
+            const originalFilename = path.basename(originalPath);
+            const newFilename = path.basename(newPath);
 
-            // Regex for JS imports: matches './main.js' or '../js/main.js' inside quotes
-            // Capture groups: $1=quote, $2=prefix/path, $3=closing quote
-            const regex = new RegExp(`(['"])([^'"]*\\/)?${originalFilename.replace('.', '\\.')}(['"])`, 'g');
+            // Reemplazo en JS imports
+            const regex = new RegExp(`(['"])([^'"]*\\/)?${originalFilename.replace('.', '\\.')}(\\?[^'"]*)?(['"])`, 'g');
             
             if (regex.test(content)) {
-                content = content.replace(regex, `$1$2${newFilename}$3`);
+                content = content.replace(regex, `$1$2${newFilename}?v=${timestamp}$4`);
                 changed = true;
             }
         });
@@ -266,7 +260,7 @@ const versionAssets = async () => {
         }
     }
     
-    log('✅ HTML & JS references updated.');
+    log(`✅ HTML & JS references updated with timestamp: ${timestamp}`);
 };
 
 /**
