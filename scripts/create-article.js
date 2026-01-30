@@ -1,6 +1,10 @@
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
+import fs from 'fs';
+import path from 'path';
+import readline from 'readline';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Rutas
 const TEMPLATE_PATH = path.join(__dirname, '../blog/article.template.html');
@@ -35,6 +39,35 @@ async function createArticle() {
     // 2. Preparar el HTML
     let template = fs.readFileSync(TEMPLATE_PATH, 'utf8');
     
+    // Generar el Schema Markup dinámico
+    const schemaMarkup = `
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "${title.replace(/"/g, '\\"')}",
+      "description": "${description.replace(/"/g, '\\"')}",
+      "image": "https://narbossalon.com/blog/articles/${imagePath}",
+      "author": {
+        "@type": "Organization",
+        "name": "Narbo's Salón Spa"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Narbo's Salón Spa",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://narbossalon.com/images/brand/logo-narbos-negro.webp"
+        }
+      },
+      "datePublished": "${isoDate}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://narbossalon.com/blog/articles/${slug}.html"
+      }
+    }
+    </script>`;
+
     const htmlContent = template
         .replace(/{{TITLE}}/g, title)
         .replace(/{{SLUG}}/g, slug)
@@ -42,7 +75,8 @@ async function createArticle() {
         .replace(/{{CATEGORY}}/g, category)
         .replace(/{{DATE}}/g, displayDate)
         .replace(/{{IMAGE_PATH}}/g, `/blog/articles/${imagePath}`) // Ruta absoluta para OG tags
-        .replace(/{{IMAGE_ALT}}/g, title);
+        .replace(/{{IMAGE_ALT}}/g, title)
+        .replace('<meta name="robots" content="noindex, nofollow" />', schemaMarkup); // Reemplazamos el noindex por el Schema Real
 
     // 3. Guardar Archivo HTML
     const filename = `${slug}.html`;

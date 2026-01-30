@@ -36,8 +36,8 @@ function getHtmlFiles(dir, fileList = [], rootDir = dir) {
                 // Fix path separators for URL
                 relativePath = relativePath.split(path.sep).join('/');
                 
-                // Exclude specific files
-                if (!relativePath.includes('google') && !relativePath.includes(' Plantilla')) {
+                // Exclude specific files and templates
+                if (!relativePath.includes('google') && !relativePath.includes('.template.')) {
                      fileList.push(relativePath);
                 }
             }

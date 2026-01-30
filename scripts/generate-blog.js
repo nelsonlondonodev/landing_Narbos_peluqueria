@@ -13,23 +13,11 @@ const BLOG_INDEX_PATH = path.join(__dirname, '../blog/index.html');
  * Genera el HTML para una tarjeta de artículo
  */
 function generateArticleCard(article) {
-    const categoryHTML = article.categoryKey
-        ? `<span data-key="${article.categoryKey}">${article.category}</span>`
-        : article.category;
+    const titleHTML = `<a href="${article.link}" class="hover:text-brand-green">${article.title}</a>`;
 
-    const dateHTML = article.dateKey
-        ? `<span data-key="${article.dateKey}">${article.date}</span>`
-        : article.date;
+    const descHTML = `<p class="text-gray-700 mb-4">${article.description}</p>`;
 
-    const titleHTML = article.titleKey
-        ? `<a href="${article.link}" class="hover:text-brand-green" data-key="${article.titleKey}">${article.title}</a>`
-        : `<a href="${article.link}" class="hover:text-brand-green">${article.title}</a>`;
-
-        const descHTML = article.descriptionKey
-            ? `<p class="text-gray-700 mb-4" data-key="${article.descriptionKey}">${article.description}</p>`
-            : `<p class="text-gray-700 mb-4">${article.description}</p>`;
-
-        return `
+    return `
                 <!-- Artículo: ${article.id} -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
                   <a href="${article.link}" aria-label="Leer artículo: ${article.title.replace(/"/g, '&quot;')}">
@@ -42,7 +30,7 @@ function generateArticleCard(article) {
                   </a>
                   <div class="p-6">
                     <p class="text-sm text-gray-500 mb-2">
-                      ${categoryHTML} • ${dateHTML}
+                      ${article.category} • ${article.date}
                     </p>
                     <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
                       ${titleHTML}
@@ -51,7 +39,6 @@ function generateArticleCard(article) {
                     <a
                       href="${article.link}"
                       class="font-bold text-brand-green hover:underline"
-                      data-key="readMore"
                       aria-label="Leer más sobre ${article.title.replace(/"/g, '&quot;')}"
                       >Leer más &rarr;</a
                     >
