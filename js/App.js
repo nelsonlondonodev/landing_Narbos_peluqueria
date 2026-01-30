@@ -168,34 +168,22 @@ class App {
         if (!root) return;
 
         const path = window.location.pathname;
-        const items = [{
-            label: 'Inicio',
-            // Resolvemos dinámicamente el enlace a "Inicio" desde la ruta actual
-            link: this.resolvePath('index.html') 
-        }];
 
-        if (path.includes('/blog/')) {
-            items.push({
-                label: 'Blog',
-                link: this.resolvePath('blog/index.html')
-            });
+        // Solo renderizar si es un artículo del blog (por debajo de /blog/articles/)
+        // Nosotros, Contacto y el Hub del Blog no llevan breadcrumbs según feedback del usuario.
+        if (path.includes('/blog/articles/')) {
+            const items = [
+                { label: 'Inicio', link: this.resolvePath('index.html') },
+                { label: 'Blog', link: this.resolvePath('blog/index.html') }
+            ];
 
-            // Si es un artículo (está en /blog/articles/), agregamos el título
-            if (path.includes('/articles/')) {
-                const h1 = document.querySelector('h1');
-                if (h1) {
-                    items.push({ label: h1.innerText.trim(), link: '#' });
-                }
+            const h1 = document.querySelector('h1');
+            if (h1) {
+                items.push({ label: h1.innerText.trim(), link: '#' });
             }
-        } else if (path.includes('nosotros.html')) {
-            items.push({ label: 'Nosotros', link: '#' });
-        } else if (path.includes('contacto.html')) {
-            items.push({ label: 'Contacto', link: '#' });
+            
+            root.innerHTML = new Breadcrumbs(items).render();
         }
-
-        // Si hay customClasses se pueden pasar opciones. 
-        // Por defecto 'pt-32' está bien para evitar solapamiento con el header fijo.
-        root.innerHTML = new Breadcrumbs(items).render();
     }
 }
 
