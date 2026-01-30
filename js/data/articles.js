@@ -4,11 +4,8 @@
  * @property {string} date - Fecha legible.
  * @property {string} isoDate - Fecha en formato ISO (YYYY-MM-DD).
  * @property {string} category - Categoría visible.
- * @property {string} [categoryKey] - Clave de internacionalización para la categoría.
  * @property {string} title - Título del artículo.
- * @property {string} [titleKey] - Clave de internacionalización para el título.
  * @property {string} description - Descripción breve.
- * @property {string} [descriptionKey] - Clave de internacionalización para la descripción.
  * @property {string} image - Ruta de la imagen destacada.
  * @property {string} alt - Texto alternativo de la imagen.
  * @property {string} link - URL del artículo.
@@ -49,11 +46,8 @@ const articles = [
         date: '29 de Noviembre, 2025',
         isoDate: '2025-11-29',
         category: 'Cuidado capilar',
-        categoryKey: 'article3_CardCategory',
         title: 'Guía definitiva para el cuidado del balayage: mantén tu color radiante ✨',
-        titleKey: 'article3_CardTitle',
         description: 'Tu balayage es una inversión en tu estilo. Aprende a protegerlo con los productos y rutinas correctas para que luzca espectacular por más tiempo en el clima único de Chía.',
-        descriptionKey: 'article3_CardDesc',
         image: 'articles/images/imagen-articulo-balayage.webp',
         alt: 'Resultados profesionales de balayage en Narbo\'s Salón Spa',
         link: '/blog/articles/cuidado-del-balayage.html'
@@ -63,11 +57,8 @@ const articles = [
         date: '11 de Noviembre, 2025',
         isoDate: '2025-11-11',
         category: 'Belleza y bienestar',
-        categoryKey: 'article2_CardCategory',
         title: 'Narbo’s Salón Spa: tu epicentro de belleza en Chía, a un paso de Cajicá 🌟',
-        titleKey: 'article2_CardTitle',
         description: 'Descubre por qué Narbo\'s es la mejor opción para tus necesidades de belleza en la Sabana de Bogotá. Ubicación estratégica, parqueadero gratis y todos los servicios en un solo lugar.',
-        descriptionKey: 'article2_CardDesc',
         image: '/images/blog/foto_fachada.webp',
         alt: 'Salón de belleza y spa en Chía, cerca de Cajicá',
         link: '/blog/articles/salon-de-belleza-y-spa-en-chia-cerca-de-cajica.html'
@@ -77,11 +68,8 @@ const articles = [
         date: '20 de Octubre, 2025',
         isoDate: '2025-10-20',
         category: 'Cuidado capilar',
-        categoryKey: 'article1Category',
         title: 'Los 5 tratamientos capilares imprescindibles para el clima de Chía',
-        titleKey: 'article1Title',
         description: 'Vivir en la Sabana de Bogotá tiene su encanto, pero el clima puede ser un desafío para tu cabello. Descubre los tratamientos esenciales que ofrecemos en Narbo\'s para mantenerlo radiante.',
-        descriptionKey: 'article1Desc',
         image: '/blog/articles/images/image_blog_1.webp',
         alt: 'Tratamientos capilares para el clima de Chía',
         link: '/blog/articles/tratamientos-capilares-clima-chia.html'

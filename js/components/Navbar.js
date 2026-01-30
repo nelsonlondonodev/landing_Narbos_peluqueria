@@ -26,10 +26,10 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         
         <!-- Desktop Menu -->
         <div class="desktop-menu flex items-center space-x-8 max-md:hidden pl-8">
-            ${navLink(isHome ? '#' : basePath + 'index.html', 'nav.home', 'Inicio')}
+            ${navLink(isHome ? '#' : basePath + 'index.html', 'Inicio')}
             ${renderMegaMenuDesktop(menuCategories)}
-            ${navLink(basePath + 'nosotros.html', 'nav.about', 'Nosotros')}
-            ${navLink(basePath + 'contacto.html', 'nav.contact', 'Contacto')}
+            ${navLink(basePath + 'nosotros.html', 'Nosotros')}
+            ${navLink(basePath + 'contacto.html', 'Contacto')}
             <a href="${basePath}blog/index.html" class="text-white hover:text-brand-gold active:text-brand-gold font-medium">Blog</a>
         </div>
 
@@ -42,10 +42,10 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         ${renderMobileMenuHeader()}
         
         <div class="flex flex-col p-4 space-y-1">
-            ${navLink(isHome ? '#' : basePath + 'index.html', 'nav.home', 'Inicio', true)}
+            ${navLink(isHome ? '#' : basePath + 'index.html', 'Inicio', true)}
             ${renderMegaMenuMobile(menuCategories)}
-            ${navLink(basePath + 'nosotros.html', 'nav.about', 'Nosotros', true)}
-            ${navLink(basePath + 'contacto.html', 'nav.contact', 'Contacto', true)}
+            ${navLink(basePath + 'nosotros.html', 'Nosotros', true)}
+            ${navLink(basePath + 'contacto.html', 'Contacto', true)}
             <a href="${basePath}blog/index.html" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50">Blog</a>
         </div>
     </div>
@@ -57,7 +57,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
 // --- Helpers de Renderizado ---
 
 function createNavLinkHelper(linkPrefix) {
-    return (href, key, text, mobile = false) => {
+    return (href, text, mobile = false) => {
         const baseClasses = "text-white hover:text-brand-gold active:text-brand-gold font-medium";
         const mobileClasses = "block py-2 px-4 text-lg hover:bg-brand-light/20 rounded-md active:bg-brand-light/40 text-brand-gray-dark border-b border-gray-100/50";
         const finalHref = href.startsWith('#') ? `${linkPrefix}${href}` : href;

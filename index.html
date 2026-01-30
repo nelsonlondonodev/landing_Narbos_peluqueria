@@ -105,7 +105,7 @@
     }
     </script>
 </head>
-<body class="font-sans transition-colors duration-500 bg-white text-brand-gray-dark">
+<body class="font-sans bg-white text-brand-gray-dark">
 
     <header class="site-header">
         <div id="navbar-root"></div>
@@ -122,16 +122,16 @@
                 <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
                     <div class="container mx-auto">
                         <div class="bg-white/90 text-brand-gray-dark backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
-                            <h1 id="hero-title" data-i18n="hero.title" class="animate-hero-element text-4xl md:text-6xl font-serif font-bold mb-4">Peluquería, spa y uñas: expertos en belleza en Chía</h1>
-                            <p id="hero-subtitle" data-i18n="hero.subtitle" class="animate-hero-element text-lg md:text-xl mb-8 max-w-2xl mx-auto">Más de 11 años de experiencia transformando tu estilo y bienestar.</p>
+                            <h1 id="hero-title" class="animate-hero-element text-4xl md:text-6xl font-serif font-bold mb-4">Peluquería, spa y uñas: expertos en belleza en Chía</h1>
+                            <p id="hero-subtitle" class="animate-hero-element text-lg md:text-xl mb-8 max-w-2xl mx-auto">Más de 11 años de experiencia transformando tu estilo y bienestar.</p>
                         </div>
                     </div>
                 </div>
 
                 <section id="servicios" class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24">
                     <div class="container mx-auto px-6 max-w-screen-xl">
-                        <h2 data-i18n="services.title" class="text-3xl md:text-4xl font-serif font-bold mb-4 text-brand-gray-dark text-center" data-animation="fadeInUp">Nuestros servicios</h2>
-                        <p data-i18n="services.subtitle" class="text-lg text-brand-gray-dark/80 mb-12 max-w-3xl mx-auto text-center" data-animation="fadeInUp" data-animation-delay="0.2s">Ofrecemos una amplia gama de tratamientos con productos de alta calidad para realzar tu belleza.</p>
+                        <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-brand-gray-dark text-center" data-animation="fadeInUp">Nuestros servicios</h2>
+                        <p class="text-lg text-brand-gray-dark/80 mb-12 max-w-3xl mx-auto text-center" data-animation="fadeInUp" data-animation-delay="0.2s">Ofrecemos una amplia gama de tratamientos con productos de alta calidad para realzar tu belleza.</p>
                         
                         <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                             <!-- Services will be injected here by JS -->
@@ -146,13 +146,13 @@
 
             <section id="faq" class="py-16 md:py-24 bg-brand-light/10">
                 <div class="container mx-auto px-6 max-w-4xl">
-                    <h2 data-i18n="faq.title" class="text-3xl md:text-4xl font-serif font-bold mb-12 text-brand-gray-dark text-center">Preguntas frecuentes</h2>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-12 text-brand-gray-dark text-center">Preguntas frecuentes</h2>
                     
                     <div class="space-y-4">
                         <!-- Item 1 -->
                         <details class="group bg-white rounded-lg shadow-sm p-4 [&_summary::-webkit-details-marker]:hidden border border-brand-light/20 open:shadow-md transition-shadow duration-300">
                             <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-brand-gray-dark">
-                                <h3 data-i18n="faq.q1" class="font-bold text-lg font-serif">¿Cómo puedo agendar una cita?</h3>
+                                <h3 class="font-bold text-lg font-serif">¿Cómo puedo agendar una cita?</h3>
                                 <span class="shrink-0 rounded-full bg-brand-light/20 p-1.5 text-brand-gray-dark sm:p-3 group-hover:bg-brand-light/40 transition-colors ">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-180 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -160,7 +160,7 @@
                                 </span>
                             </summary>
                             <div class="faq-content overflow-hidden">
-                                <p data-i18n="faq.a1" class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
+                                <p class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
                                     Puedes agendar tu cita contactándonos directamente a través de nuestro botón de WhatsApp o llamando a nuestro número de atención. Te recomendamos reservar con al menos 24 horas de anticipación para asegurar tu espacio.
                                 </p>
                             </div>
@@ -169,7 +169,7 @@
                         <!-- Item 2 -->
                         <details class="group bg-white rounded-lg shadow-sm p-4 [&_summary::-webkit-details-marker]:hidden border border-brand-light/20 open:shadow-md transition-shadow duration-300">
                             <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-brand-gray-dark">
-                                <h3 data-i18n="faq.q2" class="font-bold text-lg font-serif">¿Cuáles son sus horarios de atención?</h3>
+                                <h3 class="font-bold text-lg font-serif">¿Cuáles son sus horarios de atención?</h3>
                                 <span class="shrink-0 rounded-full bg-brand-light/20 p-1.5 text-brand-gray-dark sm:p-3 group-hover:bg-brand-light/40 transition-colors ">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-180 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -177,7 +177,7 @@
                                 </span>
                             </summary>
                             <div class="faq-content overflow-hidden">
-                                 <p data-i18n="faq.a2" class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
+                                 <p class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
                                     Nuestro horario de atención es de Lunes a Sábado de 7:00 a.m. a 8:00 p.m. Domingos y festivos de 9:00 a.m. a 6:00 p.m. Revisa nuestras redes sociales para horarios especiales en temporadas.
                                 </p>
                             </div>
@@ -186,7 +186,7 @@
                         <!-- Item 3 -->
                         <details class="group bg-white rounded-lg shadow-sm p-4 [&_summary::-webkit-details-marker]:hidden border border-brand-light/20 open:shadow-md transition-shadow duration-300">
                             <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-brand-gray-dark">
-                                <h3 data-i18n="faq.q3" class="font-bold text-lg font-serif">¿Qué métodos de pago aceptan?</h3>
+                                <h3 class="font-bold text-lg font-serif">¿Qué métodos de pago aceptan?</h3>
                                 <span class="shrink-0 rounded-full bg-brand-light/20 p-1.5 text-brand-gray-dark sm:p-3 group-hover:bg-brand-light/40 transition-colors ">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-180 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -194,7 +194,7 @@
                                 </span>
                             </summary>
                             <div class="faq-content overflow-hidden">
-                                 <p data-i18n="faq.a3" class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
+                                 <p class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
                                     Aceptamos efectivo, transferencias bancarias (Nequi, Daviplata) y tarjetas débito/crédito.
                                 </p>
                             </div>
@@ -203,7 +203,7 @@
                          <!-- Item 4 -->
                         <details class="group bg-white rounded-lg shadow-sm p-4 [&_summary::-webkit-details-marker]:hidden border border-brand-light/20 open:shadow-md transition-shadow duration-300">
                             <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-brand-gray-dark">
-                                <h3 data-i18n="faq.q4" class="font-bold text-lg font-serif">¿Dónde están ubicados?</h3>
+                                <h3 class="font-bold text-lg font-serif">¿Dónde están ubicados?</h3>
                                 <span class="shrink-0 rounded-full bg-brand-light/20 p-1.5 text-brand-gray-dark sm:p-3 group-hover:bg-brand-light/40 transition-colors ">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-180 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -211,7 +211,7 @@
                                 </span>
                             </summary>
                             <div class="faq-content overflow-hidden">
-                                 <p data-i18n="faq.a4" class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
+                                 <p class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
                                     Estamos ubicados en los bajos del Hotel Ibis, Cajicá - Chía #Kilómetro 2, Chía. ¡Te esperamos!
                                 </p>
                             </div>
