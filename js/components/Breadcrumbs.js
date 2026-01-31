@@ -10,7 +10,7 @@ export class Breadcrumbs {
      */
     constructor(items, options = {}) {
         this.items = items;
-        this.customClasses = options.customClasses || 'pt-24 md:pt-28';
+        this.customClasses = options.customClasses || 'pt-28 md:pt-[136px]';
         this.separatorIcon = `
             <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
@@ -23,17 +23,58 @@ export class Breadcrumbs {
      * @returns {string} HTML string.
      */
     render() {
+        // Inyectar Schema JSON-LD para SEO automáticamente al renderizar
+        this.injectSchema();
+
         const listItemsHTML = this.items.map((item, index) => this.renderItem(item, index)).join('');
 
         return `
             <nav aria-label="Breadcrumb" class="bg-gray-100 py-4 px-6 relative z-10 ${this.customClasses}">
                 <div class="container mx-auto max-w-screen-xl">
-                    <ol class="list-none p-0 inline-flex text-sm text-gray-600">
+                    <ol class="list-none p-0 inline-flex text-sm text-gray-600 flex-wrap">
                         ${listItemsHTML}
                     </ol>
                 </div>
             </nav>
         `;
+    }
+
+    /**
+     * Inyecta datos estructurados (JSON-LD) para que Google entienda la jerarquía.
+     */
+    injectSchema() {
+        // Evitar duplicados si ya se inyectó
+        if (document.getElementById('breadcrumbs-schema')) return;
+
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": this.items.map((item, index) => {
+                // Resolver URL absoluta
+                let itemUrl = item.link;
+                if (!itemUrl || itemUrl === '#') {
+                    itemUrl = window.location.href; // Usar URL actual para el último item
+                } else {
+                    // Resolver rutas relativas (../../) a absolutas
+                    const a = document.createElement('a');
+                    a.href = itemUrl;
+                    itemUrl = a.href;
+                }
+
+                return {
+                    "@type": "ListItem",
+                    "position": index + 1,
+                    "name": item.label,
+                    "item": itemUrl
+                };
+            })
+        };
+
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = 'breadcrumbs-schema';
+        script.textContent = JSON.stringify(schema);
+        document.head.appendChild(script);
     }
 
     /**

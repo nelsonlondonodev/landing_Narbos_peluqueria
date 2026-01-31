@@ -179,7 +179,18 @@ class App {
 
             const h1 = document.querySelector('h1');
             if (h1) {
-                items.push({ label: h1.innerText.trim(), link: '#' });
+                // Usar textContent para garantizar lectura incluso con estilos (opacity: 0)
+                // Limpiar saltos de línea y espacios múltiples generados por el template HTML
+                let titleText = h1.textContent.replace(/\s+/g, ' ').trim();
+                
+                // Truncar títulos excesivamente largos para móviles
+                if (titleText.length > 25) {
+                    titleText = titleText.substring(0, 25) + '...';
+                }
+                
+                if (titleText) {
+                    items.push({ label: titleText, link: '#' });
+                }
             }
             
             root.innerHTML = new Breadcrumbs(items).render();
