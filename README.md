@@ -35,7 +35,25 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
-## 🔄 Recent Updates (January 30, 2026)
+## 🔄 Recent Updates (January 31, 2026)
+### 1. Intelligent SEO & CTR Optimization (Page-by-Page) 🚀
+*   **Rich Snippets (FAQ Schema):** Implemented `FAQPage` JSON-LD in all main service pages (Balayage, Nails, Barber, Spa, Blog). This strategically increases SERP real estate and aims to boost the current **2% CTR** by showing interactive questions/answers directly in Google results.
+*   **Advanced LocalBusiness Schema:** Upgraded the Home page schema to include specific `geo` coordinates, `priceRange`, and an expanded `areaServed` (Chía, Cajicá, Fontanar, Zipaquirá, Sopó) to dominate local search intent.
+*   **Semantic Content Reinforcement:**
+    *   **"Spa en Chía"**: Improved keyword density and semantic relevance to climb from Position 35.
+    *   **Nails**: Added explicit mentions of **Polygel and Acrylics** to target high-intent lagging keywords.
+    *   **Barber**: Reinforced proximity to **Fontanar and Cajicá** for local convenience intent.
+*   **Internal Linking Strategy:** Optimized anchor texts in the blog and index pages to pass authority to the most profitable service pages.
+
+### 2. Automated Production Pipeline 🛠️
+*   **Intelligent Cache Busting (Hashing):** Updated `scripts/build.js` to automatically generate **MD5 hashes** for key assets (`styles.css`, `main.js`, `App.js`).
+    *   References in HTML and JS are now updated dynamically during build (e.g., `styles.1be9f744.css?v=timestamp`).
+    *   This ensures zero-cache issues for users and search bots without manual intervention.
+*   **Sitemap Synchronization:** The `sitemap.xml` is now automatically validated and submitted to Google Search Console as part of the production release.
+*   **GSC Integration:** Verified the presence of new Schemas using Google's Rich Results Test and confirmed the sitemap status in Search Console.
+
+---
+
 ### 1. Blog SEO & Schema Markup Overhaul ✍️
 - **Full Schema Coverage:** Implemented `BlogPosting` JSON-LD structured data in every single blog article and the master template. This ensures rich snippet support (headline, description, author, image, date) for all current and future content.
 - **Dynamic Blog Index Schema:** The main blog page now includes a comprehensive `Blog` schema that automatically lists all published articles, creating a strong semantic link between the index and its content.
