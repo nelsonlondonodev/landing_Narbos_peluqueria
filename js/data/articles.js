@@ -25,7 +25,7 @@ const articles = [
         category: 'Cuidado capilar',
         title: 'Choque térmico: protege tu cabello en tus viajes | Narbo\'s',
         description: 'Protege tu cabello del choque térmico al viajar con consejos de Narbo\'s Salón Spa. Evita el daño por sol y cloro y mantén tu brillo ideal.',
-        image: 'articles/images/choque-termico-cabello.webp',
+        image: 'articles/images/choque-termico-moroccanoil.webp',
         alt: 'Protección capilar para viajes entre climas de la Sabana y Tierra Caliente',
         link: '/blog/articles/choque-termico-cabello-viajes-tierra-caliente.html',
         featured: true
