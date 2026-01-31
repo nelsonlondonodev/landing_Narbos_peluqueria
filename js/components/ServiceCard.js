@@ -142,7 +142,7 @@ export class ServiceCard {
 
         const imageHtml = this.props.image ? `
             <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                <img src="${this.props.image}" alt="${this.props.imageAlt || this.props.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                <img src="${this.props.image}" alt="${this.props.imageAlt || this.props.title}" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
             </div>
         ` : '';

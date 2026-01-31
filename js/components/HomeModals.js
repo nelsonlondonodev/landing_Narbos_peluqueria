@@ -83,7 +83,7 @@ const createModalHTML = (config) => `
             <h3 class="text-3xl font-serif font-bold text-brand-green mb-2">${config.title}</h3>
             ${config.subtitle ? `<p class="text-sm font-medium text-brand-gold uppercase tracking-wider mb-4">${config.subtitle}</p>` : ''}
             
-            <img src="${config.image}" alt="${config.title}" class="w-full h-48 md:h-64 object-cover rounded-lg mb-6 shadow-lg" loading="lazy">
+            <img src="${config.image}" alt="${config.title}" width="600" height="300" class="w-full h-48 md:h-64 object-cover rounded-lg mb-6 shadow-lg" loading="lazy">
             
             <div class="text-gray-700 space-y-6">
                 <p class="leading-relaxed text-gray-600">${config.description}</p>
