@@ -5,7 +5,8 @@
 export const hairBrands = [
     { name: 'Wella Professionals', sub: 'Coloración Premium' },
     { name: 'Schwarzkopf', sub: 'Tecnología Capilar' },
-    { name: "L'Oréal Professionnel", sub: 'Innovación Global' }
+    { name: "L'Oréal Professionnel", sub: 'Innovación Global' },
+    { name: 'Moroccanoil', sub: 'Tratamiento de Argán' }
 ];
 
 export const nailBrands = [
