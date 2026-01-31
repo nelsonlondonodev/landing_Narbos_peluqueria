@@ -82,36 +82,45 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [{
-        "@type": "Question",
-        "name": "¿Cuáles son sus horarios de atención?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Atendemos de Lunes a Sábado de 7:00 AM a 8:00 PM. Domingos y festivos de 9:00 AM a 6:00 PM."
+      "@type": "BeautySalon",
+      "name": "Narbo's Salón Spa",
+      "image": "https://narbossalon.com/images/pages/home/foto_inicio2.webp",
+      "@id": "https://narbossalon.com/#organization",
+      "url": "https://narbossalon.com/",
+      "telephone": "+573123462618",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bajos del Hotel Ibis, Kilómetro 2",
+        "addressLocality": "Chía",
+        "addressRegion": "Cundinamarca",
+        "postalCode": "250001",
+        "addressCountry": "CO"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 4.8617,
+        "longitude": -74.0539
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "07:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Sunday", "PublicHolidays"],
+          "opens": "09:00",
+          "closes": "18:00"
         }
-      }, {
-        "@type": "Question",
-        "name": "¿Cómo puedo agendar una cita?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Puedes agendar fácilmente a través de nuestro botón de WhatsApp en la web, llamándonos al +57 312 346 2618 o visitándonos directamente. Recomendamos reservar con anticipación."
-        }
-      }, {
-        "@type": "Question",
-        "name": "¿Dónde están ubicados?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Estamos ubicados en los bajos del Hotel Ibis, Cajicá - Chía #Kilómetro 2, Chía, Cundinamarca."
-        }
-      }, {
-         "@type": "Question",
-         "name": "¿Qué métodos de pago aceptan?",
-         "acceptedAnswer": {
-           "@type": "Answer",
-           "text": "Aceptamos efectivo, Nequi, Daviplata y todas las tarjetas de crédito y débito."
-         }
-      }]
+      ],
+      "sameAs": [
+        "https://www.instagram.com/narbossalon/",
+        "https://www.facebook.com/narbossalonspa"
+      ],
+      "areaServed": ["Chía", "Cajicá", "Zipaquirá"]
     }
     </script>
 </head>
@@ -146,8 +155,8 @@
 
                 <section id="servicios" class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24">
                     <div class="container mx-auto px-6 max-w-screen-xl">
-                        <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-brand-gray-dark text-center" data-animation="fadeInUp">Nuestros servicios</h2>
-                        <p class="text-lg text-brand-gray-dark/80 mb-12 max-w-3xl mx-auto text-center" data-animation="fadeInUp" data-animation-delay="0.2s">Ofrecemos una amplia gama de tratamientos con productos de alta calidad para realzar tu belleza.</p>
+                        <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-brand-gray-dark text-center" data-animation="fadeInUp">Tu centro de Belleza y Spa en Chía</h2>
+                        <p class="text-lg text-brand-gray-dark/80 mb-12 max-w-3xl mx-auto text-center" data-animation="fadeInUp" data-animation-delay="0.2s">Especialistas en <strong>peluquería, manicura y tratamientos de spa</strong>. Descubre por qué somos el salón de referencia en la sabana de Bogotá para el cuidado de tu imagen.</p>
                         
                         <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                             <!-- Services will be injected here by JS -->
