@@ -1,0 +1,1 @@
+import{App}from"./App.e47d2333.js?v=1769842252205";function initApp(){if(window.narbosApp)return;const n=new App;window.narbosApp=n,n.init()}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",initApp):initApp();

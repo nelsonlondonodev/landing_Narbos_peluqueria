@@ -1,0 +1,1 @@
+export const hairBrands=[{name:"Wella Professionals",sub:"Coloración Premium"},{name:"Schwarzkopf",sub:"Tecnología Capilar"},{name:"L'Oréal Professionnel",sub:"Innovación Global"}];export const nailBrands=[{name:"Organic Nails",sub:"Premium System"},{name:"Masglo",sub:"Gel Evolution"},{name:"OPI",sub:"Professional"}];export const allBrands=[...hairBrands,...nailBrands];
