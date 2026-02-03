@@ -10,6 +10,9 @@ import { JSDOM } from 'jsdom';
 import { ServiceCard } from '../js/components/ServiceCard.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { hairSalonServices } from '../js/data/hairSalonServices.js';
+import { getNavbarHTML } from '../js/components/Navbar.js';
+import { getFooterHTML } from '../js/components/Footer.js';
+import { getHomeModalsHTML } from '../js/components/HomeModals.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,6 +35,26 @@ async function runSSG() {
         global.HTMLElement = dom.window.HTMLElement;
 
         const grid = document.getElementById('services-grid');
+        
+        // A. Inyectar Navbar y Footer (Home)
+        const navbar = document.getElementById('navbar-root');
+        if (navbar) {
+             navbar.innerHTML = getNavbarHTML('./', true);
+             console.log('✨ Navbar inyectado en index.html');
+        }
+
+        const footer = document.getElementById('footer-root');
+        if (footer) {
+             footer.innerHTML = getFooterHTML('./');
+             console.log('✨ Footer inyectado en index.html');
+        }
+
+        const modals = document.getElementById('modals-root');
+        if (modals) {
+            modals.innerHTML = getHomeModalsHTML();
+            console.log('✨ Modales inyectados en index.html');
+        }
+
         if (grid) {
             servicesData.forEach(data => {
                 const card = new ServiceCard(data);
@@ -146,6 +169,28 @@ async function runSSG() {
                 } else {
                     console.warn(`⚠️ No se encontró #hero-root en ${relativePath}, saltando inyección de Hero.`);
                 }
+            }
+
+            // C. Inyección de Navbar y Footer en Subpáginas
+            // Calcular profundidad (prefix) para assets
+            let prefix = '';
+            const dir = path.dirname(relativePath);
+            if (dir !== '.' && dir !== '') {
+               const depth = dir.split(/[/\\]/).length;
+               prefix = '../'.repeat(depth);
+            }
+            
+            const navbar = document.getElementById('navbar-root');
+            if (navbar) {
+                 // isHome es false para cualquier subpágina
+                 navbar.innerHTML = getNavbarHTML(prefix || './', false);
+                 console.log(`✨ Navbar inyectado en ${relativePath}`);
+            }
+    
+            const footer = document.getElementById('footer-root');
+            if (footer) {
+                 footer.innerHTML = getFooterHTML(prefix || './');
+                 console.log(`✨ Footer inyectado en ${relativePath}`);
             }
 
 
