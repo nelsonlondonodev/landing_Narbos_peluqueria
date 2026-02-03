@@ -35,8 +35,22 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
-## 🔄 Recent Updates (January 31, 2026)
-### 1. Intelligent SEO & CTR Optimization (Page-by-Page) 🚀
+## 🔄 Recent Updates (January 31, 2026) -> Part 2
+### 1. Robust SEO & Navigation (Breadcrumbs) 🧭
+*   **Automated Schema Injection:** The `Breadcrumbs.js` component now automatically injects **JSON-LD Schema (`BreadcrumbList`)** into the page head. This ensures Google perfectly understands the site structure (e.g., Home > Blog > Article) without manual coding.
+*   **Responsive Layout:**
+    *   **Desktop:** Adjusted padding (`pt-[136px]`) for pixel-perfect vertical centering under the fixed header.
+    *   **Mobile:** Implemented aggressive title truncation (max 25 chars) and reduced height (`pt-28`) to prevent overflow and keep the UI compact.
+    *   **Logic Upgrade:** Refactored `App.js` to correctly extract H1 titles using `textContent` preventing empty items when titles have animations (`opacity: 0`).
+
+### 2. Strategic Brand Integration (Moroccanoil) 💎
+*   **Editorial Quality:** Updated the "Thermal Shock" blog article with a high-end, composite hero image (WebP) visually bridging "Sabana" (Cold) and "Tierra Caliente" (Hot), featuring the **Moroccanoil** product.
+*   **Conversion Elements:**
+    *   **In-Article CTA:** Inserted a "Recommended Product" block within the article content, driving traffic directly to WhatsApp for sales.
+    *   **Brand Authority:** Added Moroccanoil to the global `brandsData.js`, displaying it in the homepage infinite carousel to reinforce premium positioning.
+*   **Cleanups:** Removed unused assets to keep the repository lightweight.
+
+### 3. Intelligent SEO & CTR Optimization (Page-by-Page) 🚀
 *   **Rich Snippets (FAQ Schema):** Implemented `FAQPage` JSON-LD in all main service pages (Balayage, Nails, Barber, Spa, Blog). This strategically increases SERP real estate and aims to boost the current **2% CTR** by showing interactive questions/answers directly in Google results.
 *   **Advanced LocalBusiness Schema:** Upgraded the Home page schema to include specific `geo` coordinates, `priceRange`, and an expanded `areaServed` (Chía, Cajicá, Fontanar, Zipaquirá, Sopó) to dominate local search intent.
 *   **Semantic Content Reinforcement:**
@@ -45,7 +59,7 @@ Para preservar el historial de indexación en Google Search Console y evitar err
     *   **Barber**: Reinforced proximity to **Fontanar and Cajicá** for local convenience intent.
 *   **Internal Linking Strategy:** Optimized anchor texts in the blog and index pages to pass authority to the most profitable service pages.
 
-### 2. Automated Production Pipeline 🛠️
+### 4. Automated Production Pipeline 🛠️
 *   **Intelligent Cache Busting (Hashing):** Updated `scripts/build.js` to automatically generate **MD5 hashes** for key assets (`styles.css`, `main.js`, `App.js`).
     *   References in HTML and JS are now updated dynamically during build (e.g., `styles.1be9f744.css?v=timestamp`).
     *   This ensures zero-cache issues for users and search bots without manual intervention.

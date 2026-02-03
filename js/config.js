@@ -18,7 +18,7 @@
  * Configuración de entorno y Rutas Base.
  * Detecta si estamos en GitHub Pages para ajustar las rutas de assets.
  */
-const isGitHubPages = window.location.hostname.includes('github.io');
+const isGitHubPages = typeof window !== 'undefined' && window.location.hostname.includes('github.io');
 const repoName = '/landing_Narbos_peluqueria'; // Nombre exacto del repositorio
 
 // En GitHub Pages, la raíz es /repo-name/. En local/dominio propio, es /.

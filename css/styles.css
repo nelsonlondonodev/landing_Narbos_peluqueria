@@ -1589,9 +1589,6 @@
   .pt-8 {
     padding-top: calc(var(--spacing) * 8);
   }
-  .pt-24 {
-    padding-top: calc(var(--spacing) * 24);
-  }
   .pt-28 {
     padding-top: calc(var(--spacing) * 28);
   }
@@ -1600,6 +1597,9 @@
   }
   .pt-56 {
     padding-top: calc(var(--spacing) * 56);
+  }
+  .pt-\[136px\] {
+    padding-top: 136px;
   }
   .pb-2 {
     padding-bottom: calc(var(--spacing) * 2);
@@ -2900,24 +2900,9 @@
       padding-top: calc(var(--spacing) * 12);
     }
   }
-  .md\:pt-28 {
-    @media (width >= 48rem) {
-      padding-top: calc(var(--spacing) * 28);
-    }
-  }
-  .md\:pt-32 {
-    @media (width >= 48rem) {
-      padding-top: calc(var(--spacing) * 32);
-    }
-  }
   .md\:pt-36 {
     @media (width >= 48rem) {
       padding-top: calc(var(--spacing) * 36);
-    }
-  }
-  .md\:pt-40 {
-    @media (width >= 48rem) {
-      padding-top: calc(var(--spacing) * 40);
     }
   }
   .md\:pt-48 {
