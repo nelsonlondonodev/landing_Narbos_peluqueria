@@ -59,12 +59,29 @@ Para preservar el historial de indexación en Google Search Console y evitar err
     *   **Barber**: Reinforced proximity to **Fontanar and Cajicá** for local convenience intent.
 *   **Internal Linking Strategy:** Optimized anchor texts in the blog and index pages to pass authority to the most profitable service pages.
 
-### 4. Automated Production Pipeline 🛠️
-*   **Intelligent Cache Busting (Hashing):** Updated `scripts/build.js` to automatically generate **MD5 hashes** for key assets (`styles.css`, `main.js`, `App.js`).
-    *   References in HTML and JS are now updated dynamically during build (e.g., `styles.1be9f744.css?v=timestamp`).
+### 1. Mobile Performance Overhaul (JS Bundling & Hydration) ⚡️
+*   **Waterfall Elimination:** Replaced the legacy file-by-file loading with **JS Bundling using `esbuild`**.
+    *   **Before:** ~50+ sequential network requests for individual JS modules.
+    *   **After:** **1 single bundle file** (`main.xxxx.js`) per page entry point.
+    *   **Impact:** Drastic reduction in TBT (Total Blocking Time) and FCP (First Contentful Paint) on mobile devices.
+*   **Smart Hydration Logic:** Updated `App.js` to respect Server-Side Generated (SSG) content.
+    *   Now checks if the Navbar, Footer, and Hero are already present in the DOM before attempting to render them.
+    *   Prevents costly layout shifts and CPU usage during initialization.
+*   **Build Pipeline Upgrade:**
+    *   Integrated `esbuild` for high-performance bundling and minification.
+    *   Maintained hash-based cache busting for the new bundled assets.
+*   **Result:** A production-grade loading performance that eliminates the "infinite loop" feeling on slower 4G networks.
+
+### 2. Automated Production Pipeline 🛠️
+*   **Intelligent Cache Busting (Hashing):** Updated `scripts/build.js` to automatically generate **MD5 hashes** for key assets (`styles.css`, `main.js`, `service-page.js`).
+    *   References in HTML and JS are now updated dynamically during build (e.g., `main.3888907b.js?v=timestamp`).
     *   This ensures zero-cache issues for users and search bots without manual intervention.
 *   **Sitemap Synchronization:** The `sitemap.xml` is now automatically validated and submitted to Google Search Console as part of the production release.
 *   **GSC Integration:** Verified the presence of new Schemas using Google's Rich Results Test and confirmed the sitemap status in Search Console.
+
+---
+
+### 3. Robust SEO & Navigation (Breadcrumbs) 🧭
 
 ---
 

@@ -90,25 +90,29 @@ const buildCSS = async () => {
 };
 
 /**
- * Task: Build JS (Copy & Minify)
+ * Task: Build JS (Bundle with esbuild)
  */
 const buildJS = async () => {
-    log('Processing JavaScript (Modules)...');
-    const jsSrcDir = path.join(SRC_DIR, 'js');
-    const jsFiles = getFiles(jsSrcDir, '.js');
+    log('Bundling JavaScript with esbuild...');
+    
+    // Define entry points
+    const entryPoints = [
+        path.join(SRC_DIR, 'js/main.js'),
+        path.join(SRC_DIR, 'js/service-page.js')
+    ];
 
-    for (const file of jsFiles) {
-        const relativePath = path.relative(SRC_DIR, file);
-        const destPath = path.join(DIST_DIR, relativePath);
+    try {
+        // Bundle to dist/js/
+        // --bundle: bundle all dependencies
+        // --minify: minify output
+        // --format=esm: output ES modules
+        // --target=es2020: modern browsers
+        await execPromise(`npx esbuild ${entryPoints.map(e => `"${e}"`).join(' ')} --bundle --minify --format=esm --outdir="${path.join(DIST_DIR, 'js')}" --target=es2020`);
         
-        ensureDir(path.dirname(destPath));
-
-        try {
-            await execPromise(`npx terser "${file}" -o "${destPath}" -c -m`);
-        } catch (error) {
-            console.error(`Error minifying ${file}:`, error);
-            fs.copyFileSync(file, destPath);
-        }
+        log('✅ JS Bundling complete (main.js, service-page.js).', colors.green);
+    } catch (error) {
+        console.error('❌ ESBuild failed:', error);
+        throw error;
     }
 };
 
@@ -119,12 +123,7 @@ const buildHTML = async () => {
     log('Processing HTML files...');
     const htmlFiles = getFiles(SRC_DIR, '.html');
     
-    // Default ignore list for src html files that shouldn't go to dist directly if needed
-    // But currently we process all.
-    
     for (const file of htmlFiles) {
-        // Skip template files if they are in root and not meant to be pages? 
-        // For now, consistent with original script: duplicate all .html
         if (file.includes('template.html')) continue;
 
         const relativePath = path.relative(SRC_DIR, file);
@@ -175,12 +174,10 @@ const versionAssets = async () => {
     log('Applying Cache Busting (Hashing)...', colors.magenta);
     
     // Assets that act as entry points and need hashing
-    // Note: 'js/main.js' and 'js/service-page.js' are the main bundles used in HTML.
-    // CSS: 'css/styles.css'
+    // Removed App.js as it is now bundled into main.js/service-page.js
     const assetsToVersion = [
         { dir: 'css', name: 'styles.css' },
         { dir: 'js', name: 'main.js' },
-        { dir: 'js', name: 'App.js' },
         { dir: 'js', name: 'service-page.js' }
     ];
 
