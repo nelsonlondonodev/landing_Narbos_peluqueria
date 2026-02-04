@@ -87,6 +87,14 @@ const buildCSS = async () => {
     log('Building Tailwind CSS (v4)...');
     ensureDir(path.join(DIST_DIR, 'css'));
     await execPromise('npx @tailwindcss/cli -i ./css/input.css -o ./dist/css/styles.css --minify');
+    
+    // Agresive PurgeCSS Step
+    log('Running PurgeCSS...');
+    try {
+        await execPromise(`npx purgecss --css ./dist/css/styles.css --content ./dist/**/*.html ./dist/**/*.js --output ./dist/css/styles.css`);
+    } catch(err) {
+         console.warn('PurgeCSS warning:', err);
+    }
 };
 
 /**

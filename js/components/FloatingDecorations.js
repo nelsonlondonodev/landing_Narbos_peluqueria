@@ -222,6 +222,8 @@ export class FloatingDecorations {
             wrapper.style.display = 'none';
         };
         leaf.alt = '';
+        leaf.setAttribute('width', '200');
+        leaf.setAttribute('height', '200');
         leaf.className = `floating-decoration-leaf block drop-shadow-2xl transition-transform duration-700 ease-out ${config.imgClasses}`;
         
         wrapper.appendChild(leaf);

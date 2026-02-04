@@ -34,6 +34,7 @@
     "imagemin-cli": "^8.0.0",
     "imagemin-webp": "^8.0.0",
     "jsdom": "^27.4.0",
+    "purgecss": "^8.0.0",
     "svgo": "^4.0.0",
     "tailwindcss": "^4.1.18",
     "terser": "^5.43.1"
