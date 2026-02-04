@@ -35,6 +35,22 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 4, 2026) -> Part 3
+### 1. Critical Mobile LCP Optimization (Responsive Images) 🖼️
+*   **Problem:** The Hero image LCP on mobile was regressing (~10s) due to serving the full 1632px desktop image to mobile devices.
+*   **Solution:** Implemented the `srcset` and `sizes` HTML5 attributes for the Hero image.
+    *   **Mobile (<768px):** Serves `mujer-maquillaje-spa-salon-belleza-chia-mobile.webp` (768w).
+    *   **Desktop (>768px):** Serves `mujer-maquillaje-spa-salon-belleza-chia.webp` (1632w).
+*   **Smart Preload:** Updated `<link rel="preload">` to also use `imagesrcset`. This ensures the browser pre-fetches *only* the correct image version for the device viewport, drastically reducing bandwidth contention during the initial load.
+*   **SEO Upgrade:** Renamed the hero asset from generic `foto_inicio2.webp` to keyword-rich `mujer-maquillaje-spa-salon-belleza-chia.webp` and updated the `alt` text to "Mujer recibiendo maquillaje profesional..." for better image search ranking.
+
+### 2. Aggressive CSS Optimization (PurgeCSS) 🧹
+*   **Integration:** Added `PurgeCSS` to the post-build pipeline.
+*   **Mechanism:** It scans all distribution files (`dist/**/*.html`, `dist/**/*.js`) to identify used Tailwind classes and removes unused ones from `styles.css`.
+*   **Impact:** Reduced the final CSS bundle size to **~41KB**, improving render-blocking metrics.
+
+***
+
 ## 🔄 Recent Updates (January 31, 2026) -> Part 2
 ### 1. Robust SEO & Navigation (Breadcrumbs) 🧭
 *   **Automated Schema Injection:** The `Breadcrumbs.js` component now automatically injects **JSON-LD Schema (`BreadcrumbList`)** into the page head. This ensures Google perfectly understands the site structure (e.g., Home > Blog > Article) without manual coding.
