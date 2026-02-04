@@ -85,14 +85,21 @@ class App {
         const contactRoot = document.getElementById('contact-root');
         
         // Pasamos appRoot (URL absoluta) en lugar de basePath relativo
-        if (navbarRoot) navbarRoot.innerHTML = getNavbarHTML(this.appRoot, this.isHomePage);
-        if (footerRoot) footerRoot.innerHTML = getFooterHTML(this.appRoot);
-        if (contactRoot) contactRoot.innerHTML = getContactFormHTML();
+        // HYDRATION CHECK: Only render if empty (not pre-rendered by SSG)
+        if (navbarRoot && navbarRoot.children.length === 0) {
+            navbarRoot.innerHTML = getNavbarHTML(this.appRoot, this.isHomePage);
+        }
+        if (footerRoot && footerRoot.children.length === 0) {
+            footerRoot.innerHTML = getFooterHTML(this.appRoot);
+        }
+        if (contactRoot && contactRoot.children.length === 0) {
+            contactRoot.innerHTML = getContactFormHTML();
+        }
     }
 
     mountHomeModals() {
         const modalsRoot = document.getElementById('modals-root');
-        if (modalsRoot) {
+        if (modalsRoot && modalsRoot.children.length === 0) {
             modalsRoot.innerHTML = getHomeModalsHTML();
         }
     }
@@ -110,6 +117,9 @@ class App {
         else if (path.includes('contacto.html')) pageKey = 'contacto';
 
         if (pageKey && pagesData[pageKey] && pagesData[pageKey].hero) {
+            // HYDRATION CHECK
+            if (heroRoot.children.length > 0) return;
+
             const heroData = pagesData[pageKey].hero;
             // Resolvemos la imagen usando appRoot para garantizar que cargue
             const imageSrc = this.resolvePath(heroData.imageSrc);
@@ -134,12 +144,13 @@ class App {
         new VideoPlayerController();
         new GalleryController();
 
+        // Check if brands are already there (unlikely for now as they are dynamic, but good practice)
+        // BrandsSection might overwrite. It's safe for now as home-brands-root is usually empty in SSG unless we added it.
+        // Assuming BrandsSection handles its own rendering.
         new BrandsSection('home-brands-root', allBrands).render();
         
         // Inicializar decoraciones flotantes globalmente
         new FloatingDecorations({ basePath: this.appRoot });
-
-
     }
 
     mountHomeServices() {

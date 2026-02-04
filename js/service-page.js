@@ -15,6 +15,7 @@ import { colorStyles } from './data/colorStyles.js';
 import { tintStyles } from './data/tintStyles.js';
 import { treatmentStyles } from './data/treatmentStyles.js';
 import { estheticsServices } from './data/estheticsServices.js'; 
+import { ModalController } from './controllers/ModalController.js'; 
 
 /**
  * Gestor de la Página de Servicios.
@@ -164,10 +165,9 @@ class ServicePageManager {
         if (triggers.length > 0) {
             let modalControllerInstance;
             triggers.forEach(trigger => {
-                trigger.addEventListener('click', async (e) => {
+                trigger.addEventListener('click', (e) => {
                     e.preventDefault();
                     if (!modalControllerInstance) {
-                        const { ModalController } = await import('./controllers/ModalController.js');
                         modalControllerInstance = new ModalController();
                     }
                     modalControllerInstance.openModal('beard-modal');
@@ -274,10 +274,9 @@ class ServicePageManager {
 
     setupBeardModalTrigger(element) {
         let modalControllerInstance; 
-        element.addEventListener('click', async (e) => {
+        element.addEventListener('click', (e) => {
             e.preventDefault();
             if (!modalControllerInstance) {
-                const { ModalController } = await import('./controllers/ModalController.js');
                 modalControllerInstance = new ModalController();
             }
             modalControllerInstance.openModal('beard-modal');
