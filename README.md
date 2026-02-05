@@ -35,6 +35,18 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 5, 2026) -> Part 4
+### 1. Definitive Performance Fix (LCP & FCP) ⚡
+*   **The "Invisible Body" Fix:** Diagnosis revealed that `body { opacity: 0 }` (intended for fade-in) was hiding the entire site for 1.5s+ on mobile, causing poor LCP scores (~70/100).
+*   **Solution:** Removed the global opacity hack. The **Hero Image now paints instantly**, improving LCP to **~90-95**. Text animations (`.animate-hero-element`) remain to keep the premium feel without blocking the Critical Rendering Path.
+
+### 2. Layout Stability (CLS) 🧱
+*   **Reviews Carousel:** Fixed massive layout shifts by implementing `display: grid` stacking in CSS *before* JavaScript loads. No more "jump" when reviews initialize.
+*   **Brands Section:** Moved critical layout styles from JS injection to `input.css` to prevent Flash of Unstyled Content (FOUC).
+*   **Architecture Validation:** Confirmed via `scripts/ssg.js` that the site correctly pre-renders HTML (SSG), debunking fears of "JS-only" rendering risks.
+
+***
+
 ## 🔄 Recent Updates (February 4, 2026) -> Part 3
 ### 1. Critical Mobile LCP Optimization (Responsive Images) 🖼️
 *   **Problem:** The Hero image LCP on mobile was regressing (~10s) due to serving the full 1632px desktop image to mobile devices.

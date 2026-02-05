@@ -27,41 +27,8 @@ export class BrandsSection {
 
         // Estilos base
         // Usamos padding en los items en lugar de gap flex para facilitar el cálculo del ancho total
-        const styles = `
-            <style>
-                .brands-slider {
-                    display: flex;
-                    width: 100%;
-                    overflow: hidden;
-                    position: relative;
-                    /* Máscara de degradado para suavizar bordes */
-                    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-                    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-                }
-                .brands-track {
-                    display: flex;
-                    align-items: center;
-                    width: max-content;
-                    will-change: transform;
-                }
-                .brands-item {
-                    flex-shrink: 0;
-                    width: auto; /* Ancho variable según contenido */
-                    padding: 0 2rem; /* Espaciado mobile (Gap simulado) */
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    box-sizing: border-box;
-                }
-                
-                @media (min-width: 768px) {
-                    .brands-item {
-                        padding: 0 4rem; /* Espaciado desktop más amplio */
-                    }
-                }
-            </style>
-        `;
+        // Estilos base movidos a input.css para evitar CLS/FOUC
+        const styles = '';
 
         const createBrandItem = (brand) => `
             <div class="brands-item group cursor-default select-none">

@@ -27,14 +27,9 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #ffffff;
   color: #1f2937;
-  /* Estado inicial: Opacidad 0 para fade-in */
-  opacity: 0; 
+  /* Estado inicial: Visible para LCP inmediato */
+  opacity: 1; 
   transition: opacity 0.4s ease-in-out, background-color 0.5s ease, color 0.5s ease;
-}
-
-/* Estado visible: Se añade cuando JS carga */
-body.page-is-loaded {
-    opacity: 1;
 }
 
 /* Estado salida: Se añade al hacer clic en un link */
@@ -388,6 +383,57 @@ body.modal-open-layer-fix #app-wrapper {
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 /* --- FIN: NUEVOS ESTILOS PARA TARJETAS DE RESEÑAS INTERACTIVAS --- */
+
+/* --- INICIO: OPTIMIZACIÓN CLS (Estilos críticos movidos desde JS) --- */
+
+/* 1. Reviews Carousel: Grid Stack pre-JS */
+#reviews-slider {
+    display: grid;
+    grid-template-areas: "stack";
+    min-height: 300px; /* Reserva espacio aproximado */
+}
+
+.review-slide {
+    grid-area: stack;
+    width: 100%;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* 2. Brands Section: Slider infinito */
+.brands-slider {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    /* Máscara de degradado para suavizar bordes */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.brands-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    will-change: transform;
+}
+
+.brands-item {
+    flex-shrink: 0;
+    width: auto; /* Ancho variable según contenido */
+    padding: 0 2rem; /* Espaciado mobile (Gap simulado) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    .brands-item {
+        padding: 0 4rem; /* Espaciado desktop más amplio */
+    }
+}
+/* --- FIN: OPTIMIZACIÓN CLS --- */
 
 /* --- INICIO: ESTILOS PARA BORDE GRADIENTE EN TARJETAS DE SERVICIO (CORREGIDO) --- */
 

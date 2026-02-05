@@ -39,14 +39,9 @@ export class ReviewsCarousel {
     setupStyles() {
         if (!this.DOM.slider) return;
 
-        this.DOM.slider.style.display = 'grid';
-        this.DOM.slider.style.gridTemplateAreas = '"stack"';
-        
         this.DOM.slides.forEach(slide => {
             slide.style.display = ''; // Limpiar inline styles previos
-            slide.style.gridArea = 'stack';
-            slide.style.transition = 'opacity 0.5s ease-in-out';
-            slide.style.width = '100%'; 
+            // Styles now handled in CSS for CLS prevention
         });
     }
 

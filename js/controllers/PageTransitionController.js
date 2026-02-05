@@ -29,11 +29,9 @@ export class PageTransitionController {
     }
 
     handleEnterAnimation() {
-        // Pequeño delay para asegurar que el DOM pintó antes de hacer el fade-in
-        // Esto evita el "flicker" blanco inicial en algunos navegadores.
-        requestAnimationFrame(() => {
-            document.body.classList.add('page-is-loaded');
-        });
+        // Body ya es visible por defecto para mejorar LCP.
+        // No necesitamos añadir 'page-is-loaded'.
+        // Mantenemos el método por consistencia de interfaz.
     }
 
     setupExitAnimations() {
