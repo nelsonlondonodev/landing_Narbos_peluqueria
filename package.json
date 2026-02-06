@@ -11,7 +11,7 @@
     "generate:blog": "node scripts/generate-blog.js",
     "generate:sitemap": "node scripts/generate-sitemap.js",
     "build": "npm run generate:blog && npm run generate:sitemap && node scripts/build.js",
-    "deploy": "gh-pages -d dist"
+
   },
   "repository": {
     "type": "git",
