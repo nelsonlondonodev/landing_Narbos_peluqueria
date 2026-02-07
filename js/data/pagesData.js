@@ -162,6 +162,20 @@ export const pagesData = Object.freeze({
              // Caso Estrella: Corrección Rubio Extremo
              {
                 type: 'image',
+                layout: 'square',
+                src: '/images/pages/peluqueria/casos_exito/tratamiento-hidratacion-chia-despues.webp',
+                title: "Hidratación Profunda",
+                subtitle: "Tratamiento Reparador",
+                alt: "Resultado final: Cabello hidratado y saludable.",
+                subImages: [
+                    {
+                        src: '/images/pages/peluqueria/casos_exito/tratamiento-hidratacion-chia-antes.webp',
+                        alt: 'Antes: Cabello deshidratado y sin vida.'
+                    }
+                ]
+            },
+             {
+                type: 'image',
                 layout: 'vertical', 
                 src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-despues.webp',
                 title: "Corrección Total",

@@ -81,25 +81,27 @@ export class GalleryController {
     setupAccessibilityEvents() {
         if (!this.lightbox) return;
 
-        const contentElements = [
-            document.querySelector("main"),
-            document.querySelector("header"),
-            document.querySelector("footer")
-        ];
+        const appWrapper = document.getElementById("app-wrapper");
 
         this.lightbox.on('open', () => {
-            contentElements.forEach(el => {
-                if (el) {
-                    el.setAttribute('inert', '');
-                    el.removeAttribute('aria-hidden');
-                }
-            });
+            // ROBUST FIX: 
+            // 1. Remove focus from the trigger element immediately to prevent "aria-hidden" conflict.
+            if (document.activeElement instanceof HTMLElement) {
+                document.activeElement.blur();
+            }
+
+            // 2. Apply inert to the main app wrapper to hide background content from screen readers.
+            if (appWrapper) {
+                // Use a minimal delay (0) just to allow the blur to process, but rely on logic, not race conditions.
+                requestAnimationFrame(() => {
+                    appWrapper.setAttribute('inert', '');
+                    appWrapper.removeAttribute('aria-hidden'); // Ensure no stale attributes
+                });
+            }
         });
 
         this.lightbox.on('close', () => {
-            contentElements.forEach(el => {
-                if (el) el.removeAttribute('inert');
-            });
+            if (appWrapper) appWrapper.removeAttribute('inert');
         });
     }
 }
