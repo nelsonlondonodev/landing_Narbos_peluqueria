@@ -151,7 +151,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/peluqueria/corte_capas_chia.webp',
+                src: '/images/pages/peluqueria/corte_capas_chia.webp',
                 title: "Corte en Capas",
                 alt: "Corte en Capas y Movimiento"
             }
@@ -177,13 +177,13 @@ export const pagesData = Object.freeze({
              {
                 type: 'image',
                 layout: 'vertical', 
-                src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-despues.webp',
+                src: '/images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-despues.webp',
                 title: "Corrección Total",
                 subtitle: "De maltratado a rubio perfecto",
                 alt: "Resultado final: Corrección de color exitosa y diseño de balayage rubio luminoso.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-antes.webp',
+                        src: '/images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-antes.webp',
                         alt: 'Antes: Cabello con manchas y daño severo recuperado.'
                     }
                 ]
@@ -192,13 +192,13 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-despues.webp',
+                src: '/images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-despues.webp',
                 title: "Rubio Soñado",
                 subtitle: "Iluminación balayage",
                 alt: "Diseño de color rubio con técnica balayage.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-antes.webp',
+                        src: '/images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-antes.webp',
                         alt: 'Estado inicial antes del diseño de color.'
                     }
                 ]
@@ -207,13 +207,13 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/casos_exito/correccion-color-balayage-miel-chia-despues.webp',
+                src: '/images/pages/peluqueria/casos_exito/correccion-color-balayage-miel-chia-despues.webp',
                 title: "Cambio de Look",
                 subtitle: "Renovación total",
                 alt: "Renovación de imagen con color y corte.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/correccion-color-balayage-miel-chia-antes.webp',
+                        src: '/images/pages/peluqueria/casos_exito/correccion-color-balayage-miel-chia-antes.webp',
                         alt: 'Antes del cambio de look.'
                     }
                 ]
@@ -222,13 +222,13 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-despues.webp',
+                src: '/images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-despues.webp',
                 title: "Rubio Perla",
                 subtitle: "Corrección y diseño",
                 alt: "Balayage rubio perla con corrección de color.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-antes.webp',
+                        src: '/images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-antes.webp',
                         alt: 'Estado inicial antes del balayage rubio perla.'
                     }
                 ]
@@ -237,13 +237,13 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-despues.webp',
+                src: '/images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-despues.webp',
                 title: "Rubio Dorado",
                 subtitle: "Luz natural",
                 alt: "Balayage en tonos dorados cálidos.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-antes.webp',
+                        src: '/images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-antes.webp',
                         alt: 'Estado antes de la iluminación dorada.'
                     }
                 ]
@@ -252,32 +252,18 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-despues.webp',
+                src: '/images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-despues.webp',
                 title: "Rubio Tendencia",
                 subtitle: "Diseño de autor",
                 alt: "Balayage rubio tendencia 2026 realizado por expertos.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-antes.webp',
+                        src: '/images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-antes.webp',
                         alt: 'Antes del cambio de look de tendencia.'
                     }
                 ]
             },
-            // Caso 6: Rubio Iluminación (Faltante)
-            {
-                type: 'image',
-                layout: 'square',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-despues.webp',
-                title: "Iluminación Sutil",
-                subtitle: "Efecto natural",
-                alt: "Balayage con técnica de iluminación suave.",
-                subImages: [
-                    {
-                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-antes.webp',
-                        alt: 'Cabello antes de la iluminación.'
-                    }
-                ]
-            }
+
         ]
     },
     'color-tinturas-cabello': {
@@ -287,7 +273,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/tinte-completo-rubio-dorado.webp',
+                src: '/images/pages/peluqueria/tinte-completo-rubio-dorado.webp',
                 title: "Tinte Completo",
                 subtitle: "Cobertura total",
                 alt: "Resultado de tinte completo rubio dorado"
@@ -295,14 +281,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/retoque-de-raiz-tinte.webp',
+                src: '/images/pages/peluqueria/retoque-de-raiz-tinte.webp',
                 title: "Retoque de Raíz",
                 alt: "Mantenimiento impecable de color en raíz"
             },
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp', 
+                src: '/images/pages/peluqueria/cubrimiento-de-canas-natural.webp', 
                 title: "Cubrimiento Canas",
                 subtitle: "Acabado Natural",
                 alt: "Cobertura 100% de canas con acabado natural"
@@ -310,7 +296,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'logo-card',
                 layout: 'horizontal',
-                src: '../../images/brand/logo_narbos.webp',
+                src: '/images/brand/logo_narbos.webp',
                 title: "Expertos en Color",
                 subtitle: "Técnica Profesional",
                 alt: "Logo Narbos Salon Colorimetría"
