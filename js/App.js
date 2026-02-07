@@ -136,21 +136,31 @@ class App {
     }
 
     initInteractiveComponents() {
+        // Critical / Above the fold components
         new FAQAccordion('#faq');
         new ReviewsCarousel();
         new ContactFormController();
-        new ShareButton();
-        if (this.isHomePage) new ModalController();
-        new VideoPlayerController();
-        new GalleryController();
 
-        // Check if brands are already there (unlikely for now as they are dynamic, but good practice)
-        // BrandsSection might overwrite. It's safe for now as home-brands-root is usually empty in SSG unless we added it.
-        // Assuming BrandsSection handles its own rendering.
-        new BrandsSection('home-brands-root', allBrands).render();
-        
-        // Inicializar decoraciones flotantes globalmente
-        new FloatingDecorations({ basePath: this.appRoot });
+        // Defer non-critical components to free up Main Thread (TBT)
+        const loadDeferredComponents = () => {
+            new ShareButton();
+            if (this.isHomePage) new ModalController();
+            new VideoPlayerController();
+            new GalleryController();
+
+            // Brands Section
+            new BrandsSection('home-brands-root', allBrands).render();
+            
+            // Initialization of floating decorations
+            new FloatingDecorations({ basePath: this.appRoot });
+        };
+
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadDeferredComponents, { timeout: 3000 });
+        } else {
+            // Fallback for Safari/Older browsers
+            setTimeout(loadDeferredComponents, 1500);
+        }
     }
 
     mountHomeServices() {
