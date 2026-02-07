@@ -35,7 +35,15 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
-## 🔄 Recent Updates (February 5, 2026) -> Part 4
+## 🔄 Recent Updates (February 7, 2026) -> Part 5
+### 1. Service Modal Rollback & Cleanup 🧹
+*   **Reverted Experimental Features:** Rolled back the "Rich Service Modal" implementation (JS/CSS) as it did not meet the aesthetic requirements. Restored the stable version of `service-page.js` and `colorStyles.js`.
+*   **Deployment Pipeline Verification:** Confirmed that the production build uses the correct absolute paths for all assets, resolving previous 404 errors in deep links.
+*   **Git Hygiene:** Cleaned up the working directory and ensured `develop` and `main` branches are synchronized with the latest stable release.
+
+***
+
+## 🔄 Recent Updates (February 6, 2026) -> Part 4
 ### 1. Definitive Performance Fix (LCP & FCP) ⚡
 *   **The "Invisible Body" Fix:** Diagnosis revealed that `body { opacity: 0 }` (intended for fade-in) was hiding the entire site for 1.5s+ on mobile, causing poor LCP scores (~70/100).
 *   **Solution:** Removed the global opacity hack. The **Hero Image now paints instantly**, improving LCP to **~90-95**. Text animations (`.animate-hero-element`) remain to keep the premium feel without blocking the Critical Rendering Path.
