@@ -90,13 +90,15 @@ function initFloatingDecorations() {
                 parent: 'inicio',
                 img: 'ui/decorations/hoja-seca-3d.webp',
                 speed: 0,
-                classes: 'w-32 -right-6 top-0 md:w-56 md:-right-12 md:-top-4 rotate-12 z-10 opacity-80'
+                wrapperClasses: '-right-6 top-0 md:-right-12 md:-top-4 z-10',
+                imgClasses: 'w-32 md:w-56 rotate-12 opacity-80'
             },
             {
                 parent: 'inicio',
                 img: 'ui/decorations/hoja-verde-3d.webp',
                 speed: 0,
-                classes: 'w-28 -left-8 bottom-0 md:w-48 md:-left-4 md:-bottom-12 -rotate-12 z-10 opacity-80'
+                wrapperClasses: '-left-8 bottom-0 md:-left-4 md:-bottom-12 z-10',
+                imgClasses: 'w-28 md:w-48 -rotate-12 opacity-80'
             }
         ]
     });
