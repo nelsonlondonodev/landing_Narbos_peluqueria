@@ -1,3 +1,5 @@
+import { masterPrices } from './masterPrices.js';
+
 /**
  * @typedef {Object} BarberService
  * @property {string} title - Título del servicio.
@@ -14,15 +16,16 @@
  */
 export const barberServices = Object.freeze([
     {
-        title: "Corte caballero",
-        description: "Cortes clásicos, degradados (fade) y las últimas tendencias, adaptados a tu facciones.",
+        title: "Corte y Barba",
+        description: "Servicio completo: corte de cabello + perfilado de barba con ritual de toalla caliente.",
+        price: masterPrices.barber.corteBarba,
         link: "barberia-cortes-hombre.html",
         image: "../../images/pages/barberia/barber-hero.webp",
         variant: "standard"
     },
     {
         title: "Arreglo de barba",
-        description: "Perfilado con navaja, hidratación y ritual de toalla caliente para una experiencia relajante.",
+        description: "Perfilado con navaja, hidratación y ritual de toalla caliente.",
         link: "#open-modal-beard",
         image: "images/brand/logo_narbos.webp",
         variant: "logo"
