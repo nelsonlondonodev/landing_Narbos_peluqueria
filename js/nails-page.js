@@ -166,9 +166,22 @@ function initNailServicesGrid() {
 
         // Custom Click Handler logic
         if (service.link) {
-            // If it has a link, we let natural navigation happen or ensure it works
-            // ServiceCard creates an <a> tag if link is provided.
-            // We just ensure it doesn't have the modal trigger interference.
+            // Check if we are already on the potential destination page
+            const currentPath = window.location.pathname;
+            // Clean paths for comparison (remove leading slash, query params, etc if needed, but simple includes usually works)
+            
+            if (currentPath.includes(service.link)) {
+                // We are already here, so show Modal instead of reloading/navigating
+                 cardElement.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.openServiceModal(service.id);
+                });
+                cardElement.style.cursor = 'pointer';
+                cardElement.removeAttribute('href'); // Visual cue that it acts like a button
+            } else {
+                 // Normal navigation, let the <a> tag work
+            }
         } else {
             // No link, use Modal
             cardElement.addEventListener('click', (e) => {
