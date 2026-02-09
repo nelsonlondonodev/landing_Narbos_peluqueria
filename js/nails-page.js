@@ -126,9 +126,9 @@ function initBreadcrumbs() {
     });
 
     // Nivel 3: Subpáginas específicas
-    if (currentPath.includes('unas-acrilicas-gel-chia')) {
+    if (currentPath.includes('unas-acrilicas-gel')) {
         items.push({ label: 'Acrílicas y Gel', link: '#' });
-    } else if (currentPath.includes('manicure-pedicure-chia')) {
+    } else if (currentPath.includes('manicure-pedicure')) {
         items.push({ label: 'Manicure y Pedicure', link: '#' });
     }
 
