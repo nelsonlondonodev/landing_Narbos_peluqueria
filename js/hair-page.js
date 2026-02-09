@@ -155,35 +155,42 @@ function initBreadcrumbs() {
 
 function initHairServicesGrid() {
     const gridContainer = document.getElementById('hair-services-grid');
-    if (!gridContainer) return; // Must exist in HTML
+    if (!gridContainer) return;
 
     gridContainer.innerHTML = '';
-    
-    // Initialize Modal Logic via Component
+
     const serviceModal = new ServiceModal(hairPageServices);
+    const filteredServices = getFilteredServices();
 
+    renderServiceCards(gridContainer, filteredServices, serviceModal);
+}
+
+function getFilteredServices() {
     const path = window.location.pathname;
-    let categoryFilter = 'hub'; // Default for Main Page
-
-    if (path.includes('cortes-de-pelo')) categoryFilter = 'cortes';
-    if (path.includes('balayage-mechas')) categoryFilter = 'color'; // Merging balayage/color? Or separate?
-    if (path.includes('color-tinturas')) categoryFilter = 'color';
-    if (path.includes('tratamientos')) categoryFilter = 'tratamientos';
-
-    // Filter services based on Page Context
-    // We filter by 'category' property in data
-    const filteredServices = hairPageServices.filter(s => s.category === categoryFilter || (categoryFilter === 'color' && (s.category === 'balayage' || s.category === 'color'))); 
     
-    // Specific fix for "Color" vs "Balayage" pages if we want them separate or together
-    // If balayage page, maybe show only balayage? If color page, show color?
-    // Let's refine:
-    if (path.includes('balayage-mechas')) {
-         // Maybe specific logic or ID-based filtering if categories are mixed
+    if (path.includes('cortes-de-pelo')) {
+        return hairPageServices.filter(s => s.category === 'cortes');
+    }
+    
+    // Unificación de categorías Color y Balayage para ambas páginas relacionadas
+    if (path.includes('balayage-mechas') || path.includes('color-tinturas')) {
+        return hairPageServices.filter(s => s.category === 'color' || s.category === 'balayage');
+    }
+    
+    if (path.includes('tratamientos')) {
+        return hairPageServices.filter(s => s.category === 'tratamientos');
     }
 
-    filteredServices.forEach(service => {
-        const cardElement = createServiceCard(service, serviceModal);
-        gridContainer.appendChild(cardElement);
+    // Default: Hub
+    return hairPageServices.filter(s => s.category === 'hub');
+}
+
+function renderServiceCards(container, services, modalInstance) {
+    if (!services || services.length === 0) return;
+
+    services.forEach(service => {
+        const cardElement = createServiceCard(service, modalInstance);
+        container.appendChild(cardElement);
     });
 }
 
