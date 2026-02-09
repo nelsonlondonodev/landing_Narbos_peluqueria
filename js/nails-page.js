@@ -3,8 +3,10 @@ import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
+import { ServiceCard } from './components/ServiceCard.js';
 import { nailBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
+import { nailsServices } from './data/nailsServices.js';
 
 /**
  * Nails Page Logic
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFloatingDecorations();
     initBrandsCarousel();
     initGallery();
+    initNailServicesGrid();
 });
 
 /* -------------------------------------------------------------------------- */
@@ -140,50 +143,54 @@ function initNailServicesGrid() {
     const gridContainer = document.getElementById('nail-services-grid');
     if (!gridContainer) return;
 
+    // Limpiar contenido estático si lo hay
+    gridContainer.innerHTML = '';
+
     // Filter services based on data attribute
     const filteredServices = getFilteredServices(nailsServices, gridContainer.dataset.excludeIds);
     
-    // Render grid
-    gridContainer.innerHTML = filteredServices.map(createServiceCard).join('');
+    // Render grid using ServiceCard component
+    filteredServices.forEach(service => {
+        // En un SPA real, App.js resolvería rutas, aquí asumimos rutas relativas o absolutas en datos.
+        // Si las imágenes en datos son relativas a root (../../), ServiceCard las usa tal cual.
+        
+        const cardElement = new ServiceCard({
+            title: service.title,
+            description: service.summary || service.description, // Use summary for card
+            image: service.image,
+            price: service.price, // Pass price for display
+            link: '#', // Por ahora placeholder, o podemos mapear a modales
+            variant: 'standard',
+            modalId: 'service-modal' // Re-use universal modal logic via data attr + event delegation?
+        }).render();
+
+        // Custom Click Handler for Modal to maintain existing modal logic compatibility
+        // Override the link behavior manually because ServiceCard creates an anchor or div
+        // If we want to use the existing openServiceModal logic:
+        const btn = cardElement.querySelector('span.relative.inline-flex') || cardElement.querySelector('span'); 
+        // ServiceCard adds a 'Ver Detalles' button. The whole card might be a link if 'link' prop is passed.
+        // Let's modify the card element to trigger our modal function on click.
+        
+        cardElement.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.openServiceModal(service.id);
+        });
+        // Remove href to prevent navigation if it's an anchor
+        cardElement.removeAttribute('href');
+        cardElement.style.cursor = 'pointer';
+
+        gridContainer.appendChild(cardElement);
+    });
 
     // Setup Modal
-    setupModalLogic(nailsServices); // Pass full data to find any service by ID
+    setupModalLogic(nailsServices); 
 }
 
 function getFilteredServices(services, excludeString) {
     if (!excludeString) return services;
     const excludeIds = excludeString.split(',').map(Number);
     return services.filter(s => !excludeIds.includes(s.id));
-}
-
-function createServiceCard(service) {
-    return `
-        <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto">
-            <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
-                <img src="${service.image}" alt="${service.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
-                <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-gray-dark text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-white/50">
-                    ${service.duration}
-                </span>
-            </div>
-
-            <div class="p-6 flex flex-col flex-grow relative">
-                <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">${service.title}</h3>
-                </div>
-                
-                <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${service.summary}</p>
-                
-                <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
-                    <span class="text-lg font-bold text-brand-green">${service.price}</span>
-                    <button onclick="window.openServiceModal(${service.id})" class="group/btn relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-all duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green cursor-pointer">
-                        <span>Ver Detalles</span>
-                        <svg class="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-    `;
 }
 
 /* -------------------------------------------------------------------------- */

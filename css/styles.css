@@ -1251,6 +1251,9 @@
   .bg-gray-100 {
     background-color: var(--color-gray-100);
   }
+  .bg-gray-200 {
+    background-color: var(--color-gray-200);
+  }
   .bg-gray-900 {
     background-color: var(--color-gray-900);
   }
@@ -1474,6 +1477,9 @@
   .p-12 {
     padding: calc(var(--spacing) * 12);
   }
+  .px-0 {
+    padding-inline: calc(var(--spacing) * 0);
+  }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
   }
@@ -1506,6 +1512,9 @@
   }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
+  }
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
   }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
@@ -1698,6 +1707,9 @@
     @supports (color: color-mix(in lab, red, red)) {
       color: color-mix(in oklab, var(--color-brand-gray-dark) 80%, transparent);
     }
+  }
+  .text-brand-gray-light {
+    color: var(--color-brand-gray-light);
   }
   .text-brand-green {
     color: var(--color-brand-green);
@@ -2234,12 +2246,29 @@
       }
     }
   }
+  .hover\:bg-\[\#20bd5a\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #20bd5a;
+      }
+    }
+  }
   .hover\:bg-black\/30 {
     &:hover {
       @media (hover: hover) {
         background-color: color-mix(in srgb, #000 30%, transparent);
         @supports (color: color-mix(in lab, red, red)) {
           background-color: color-mix(in oklab, var(--color-black) 30%, transparent);
+        }
+      }
+    }
+  }
+  .hover\:bg-black\/40 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, #000 40%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-black) 40%, transparent);
         }
       }
     }
@@ -2478,6 +2507,11 @@
       display: inline;
     }
   }
+  .sm\:h-72 {
+    @media (width >= 40rem) {
+      height: calc(var(--spacing) * 72);
+    }
+  }
   .sm\:h-80 {
     @media (width >= 40rem) {
       height: calc(var(--spacing) * 80);
@@ -2498,6 +2532,11 @@
       max-width: var(--container-2xl);
     }
   }
+  .sm\:max-w-lg {
+    @media (width >= 40rem) {
+      max-width: var(--container-lg);
+    }
+  }
   .sm\:grid-cols-2 {
     @media (width >= 40rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2511,6 +2550,11 @@
   .sm\:p-3 {
     @media (width >= 40rem) {
       padding: calc(var(--spacing) * 3);
+    }
+  }
+  .sm\:px-8 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 8);
     }
   }
   .sm\:px-10 {

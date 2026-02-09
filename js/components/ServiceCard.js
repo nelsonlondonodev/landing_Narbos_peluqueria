@@ -12,10 +12,11 @@ export class ServiceCard {
      * @param {string} [props.link] - URL de destino
      * @param {string} [props.modalId] - ID de modal (si aplica)
      * @param {string} [props.animationDelay] - Delay de animación ("0.2s")
-     * @param {'overlay'|'standard'} [props.variant] - Estilo visual
+     * @param {'overlay'|'standard'|'logo'} [props.variant] - Estilo visual
+     * @param {string} [props.price] - Precio del servicio (Opcional)
      */
-    constructor({ title, description, icon, image, imageAlt, link, modalId, animationDelay = "0s", variant = 'overlay' }) {
-        this.props = { title, description, icon, image, imageAlt, link, modalId, animationDelay, variant };
+    constructor({ title, description, icon, image, imageAlt, link, modalId, animationDelay = "0s", variant = 'overlay', price }) {
+        this.props = { title, description, icon, image, imageAlt, link, modalId, animationDelay, variant, price };
     }
 
     /**
@@ -46,6 +47,14 @@ export class ServiceCard {
     renderLogoContent(element) {
         element.className = "group relative bg-stone-900 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-800 flex flex-col h-full block text-left hover:-translate-y-1";
 
+        const priceHtml = this.props.price ? `
+            <div class="mt-2 mb-4">
+                 <span class="inline-block bg-brand-green/10 text-brand-green font-bold px-3 py-1 rounded-full text-sm border border-brand-green/20">
+                    ${this.props.price}
+                </span>
+            </div>
+        ` : '';
+
         element.innerHTML = `
             <div class="relative aspect-[4/3] flex items-center justify-center bg-stone-900 overflow-hidden shrink-0 p-8">
                 <img src="${this.props.image}" alt="${this.props.imageAlt || 'Logo'}" loading="lazy" width="300" height="300" class="w-2/3 h-2/3 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300">
@@ -54,6 +63,9 @@ export class ServiceCard {
                 <div class="flex justify-between items-start mb-3">
                     <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">${this.props.title}</h3>
                 </div>
+                
+                ${priceHtml}
+
                 <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${this.props.description}</p>
                 
                 <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
@@ -96,6 +108,9 @@ export class ServiceCard {
         
         const backgroundHtml = this.getOverlayBackground();
         const iconHtml = this.getOverlayIcon();
+        
+        // No mostramos precio en Overlay (Home) para mantener diseño limpio, 
+        // o se podría añadir sutilmente si el usuario lo pide después.
         
         element.innerHTML = `
             ${backgroundHtml}
@@ -144,10 +159,21 @@ export class ServiceCard {
             <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
                 <img src="${this.props.image}" alt="${this.props.imageAlt || this.props.title}" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+                
+                <!-- Precio Overlay en Móvil/Desktop si se prefiere, pero aquí lo pondremos en el body para más claridad -->
             </div>
         ` : '';
 
-        // Visual button style: Optimized transition
+        // Sección de Precio Destacado
+        const priceHtml = this.props.price ? `
+            <div class="mt-2 mb-3">
+                <span class="inline-flex items-center gap-1.5 bg-brand-light/20 text-brand-green font-bold text-lg px-0 py-1 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    ${this.props.price}
+                </span>
+            </div>
+        ` : '';
+
         const actionHtml = `
             <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
                 <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
@@ -160,9 +186,12 @@ export class ServiceCard {
         element.innerHTML = `
             ${imageHtml}
             <div class="p-6 flex flex-col flex-grow">
-                <div class="flex justify-between items-start mb-3">
+                <div class="flex justify-between items-start mb-1">
                     <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">${this.props.title}</h3>
                 </div>
+                
+                ${priceHtml}
+
                 <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${this.props.description}</p>
                 ${actionHtml}
             </div>
