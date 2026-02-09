@@ -221,7 +221,8 @@ function setupModalLogic(services) {
         image: document.getElementById('modal-image'),
         duration: document.getElementById('modal-duration'),
         price: document.getElementById('modal-price'),
-        desc: document.getElementById('modal-description')
+        desc: document.getElementById('modal-description'),
+        whatsappBtn: document.getElementById('modal-whatsapp-btn') // Capture link ref
     };
 
     // Define Global Function
@@ -235,6 +236,13 @@ function setupModalLogic(services) {
         refs.price.textContent = service.price;
         // Convert Markdown bold to HTML bold
         refs.desc.innerHTML = service.description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Update WhatsApp Link Dynamically
+        if (refs.whatsappBtn) {
+            const message = encodeURIComponent(`Hola, quisiera agendar una cita para ${service.title}`);
+            const phoneNumber = '573123462618'; 
+            refs.whatsappBtn.href = `https://wa.me/${phoneNumber}?text=${message}`;
+        }
 
         modal.classList.remove('hidden');
         
