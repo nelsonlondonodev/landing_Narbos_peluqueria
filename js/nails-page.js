@@ -262,8 +262,34 @@ function setupModalLogic(services) {
     // Event Listeners
     if (refs.closeBtn) refs.closeBtn.addEventListener('click', closeModal);
     // Close Modal on Backdrop Click
-    if (refs.backdrop) {
-        refs.backdrop.addEventListener('click', closeModal);
+    // Close Modal on Outside Click (Backdrop area)
+    // The click actually lands on the scroll container or the flex wrapper, not the backdrop div itself due to z-index.
+    const scrollContainer = document.getElementById('modal-scroll-container');
+    
+    if (scrollContainer) {
+        scrollContainer.addEventListener('click', (e) => {
+            // We check if the click target is the container itself or the flex centering wrapper
+            // e.target will be the element directly clicked.
+            // If we click outside the panel, we hit either the scroll container or the flex wrapper div inside it.
+            
+            // The structure is: scrollContainer -> flexWrapper -> panel
+            // We want to close if we click on scrollContainer or flexWrapper.
+            
+            // Check if click is on the container directly
+            if (e.target.id === 'modal-scroll-container') {
+                closeModal();
+                return;
+            }
+            
+            // Or if it's on the immediate child (flex wrapper) which has no ID but we can check class or parent
+            if (e.target.parentElement && e.target.parentElement.id === 'modal-scroll-container') {
+                 // Double check it's not the panel itself (which is grandchild)
+                 // If the panel is clicked, e.target would be something inside panel, so e.target.closest('#modal-panel') would be true.
+                 if (!e.target.closest('#modal-panel')) {
+                     closeModal();
+                 }
+            }
+        });
     }
     
     // Close on ESC key
