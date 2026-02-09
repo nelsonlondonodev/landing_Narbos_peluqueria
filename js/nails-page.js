@@ -159,26 +159,25 @@ function initNailServicesGrid() {
             description: service.summary || service.description, // Use summary for card
             image: service.image,
             price: service.price, // Pass price for display
-            link: '#', // Por ahora placeholder, o podemos mapear a modales
+            link: service.link || '#', // Use actual link if available
             variant: 'standard',
-            modalId: 'service-modal' // Re-use universal modal logic via data attr + event delegation?
+            modalId: service.link ? null : 'service-modal' // Only use modal logic if no link
         }).render();
 
-        // Custom Click Handler for Modal to maintain existing modal logic compatibility
-        // Override the link behavior manually because ServiceCard creates an anchor or div
-        // If we want to use the existing openServiceModal logic:
-        const btn = cardElement.querySelector('span.relative.inline-flex') || cardElement.querySelector('span'); 
-        // ServiceCard adds a 'Ver Detalles' button. The whole card might be a link if 'link' prop is passed.
-        // Let's modify the card element to trigger our modal function on click.
-        
-        cardElement.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            window.openServiceModal(service.id);
-        });
-        // Remove href to prevent navigation if it's an anchor
-        cardElement.removeAttribute('href');
-        cardElement.style.cursor = 'pointer';
+        // Custom Click Handler logic
+        if (service.link) {
+            // If it has a link, we let natural navigation happen or ensure it works
+            // ServiceCard creates an <a> tag if link is provided.
+            // We just ensure it doesn't have the modal trigger interference.
+        } else {
+            // No link, use Modal
+            cardElement.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.openServiceModal(service.id);
+            });
+            cardElement.style.cursor = 'pointer';
+        }
 
         gridContainer.appendChild(cardElement);
     });
