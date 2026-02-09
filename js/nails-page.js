@@ -238,13 +238,14 @@ function setupModalLogic(services) {
 
         modal.classList.remove('hidden');
         
+        // Prevent layout shift
+        lockScroll();
+        
         requestAnimationFrame(() => {
             refs.backdrop.classList.remove('opacity-0');
             refs.panel.classList.remove('opacity-0', 'scale-95');
             refs.panel.classList.add('opacity-100', 'scale-100');
         });
-        
-        document.body.style.overflow = 'hidden';
     };
 
     const closeModal = () => {
@@ -254,21 +255,37 @@ function setupModalLogic(services) {
         
         setTimeout(() => {
             modal.classList.add('hidden');
-            document.body.style.overflow = '';
+            unlockScroll();
         }, 300);
     };
 
     // Event Listeners
     if (refs.closeBtn) refs.closeBtn.addEventListener('click', closeModal);
+    // Close Modal on Backdrop Click
     if (refs.backdrop) {
-        refs.backdrop.addEventListener('click', (e) => {
-            if (e.target === refs.backdrop) closeModal();
-        });
+        refs.backdrop.addEventListener('click', closeModal);
     }
     
+    // Close on ESC key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
             closeModal();
         }
     });
+
 }
+
+// Helper to prevent layout shift when hiding scrollbar
+function lockScroll() {
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = 'hidden';
+    if (scrollBarWidth > 0) {
+        document.body.style.paddingRight = `${scrollBarWidth}px`;
+    }
+}
+
+function unlockScroll() {
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+}
+
