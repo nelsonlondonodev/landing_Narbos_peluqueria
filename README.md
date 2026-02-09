@@ -35,6 +35,17 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 9, 2026)
+### 1. UX Refinement & Visual Unification 🎨
+*   **Service Card Cleanup:** Removed unwanted borders and hover outlines from the Hair Salon Hub cards (`ServiceCard.js`), complying with the request for a cleaner, "borderless" aesthetic identical to the Nails section.
+*   **Modal Consistency:** Updated the modal HTML structure in `balayage-mechas.html`, `color-tinturas-cabello.html`, and `tratamientos-capilares.html` to perfectly match the unified design established in the Nails & Spa section.
+
+### 2. Critical Bug Fixes 🐛
+*   **Treatments Page Logic:** Resolved a malformed HTML syntax error (`</div>body>`) in `tratamientos-capilares.html` that was causing the Navbar and Gallery scripts to fail silently.
+*   **Navigation Guard:** Verified and reinforced that "View Details" buttons in the Hair Hub correctly navigate to their respective sub-pages using native anchor tags.
+
+***
+
 ## 🔄 Recent Updates (February 7, 2026) -> Part 5
 ### 1. Service Modal Rollback & Cleanup 🧹
 *   **Reverted Experimental Features:** Rolled back the "Rich Service Modal" implementation (JS/CSS) as it did not meet the aesthetic requirements. Restored the stable version of `service-page.js` and `colorStyles.js`.
