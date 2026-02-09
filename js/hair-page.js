@@ -46,7 +46,7 @@ function initGallery() {
     const path = window.location.pathname;
     let pageKey = 'peluqueria'; // Default Hub
     
-    if (path.includes('cortes-de-pelo')) pageKey = 'cortes-cabello';
+    if (path.includes('cortes-de-pelo')) pageKey = 'cortes-de-pelo';
     if (path.includes('balayage-mechas')) pageKey = 'balayage-mechas'; // Check pagesData key matches
     if (path.includes('color-tinturas')) pageKey = 'color-tinturas';
     if (path.includes('tratamientos')) pageKey = 'tratamientos-capilares';

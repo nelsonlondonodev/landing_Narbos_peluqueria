@@ -89,7 +89,7 @@ export const hairPageServices = Object.freeze([
         category: 'color', // Used for both color and balayage pages if unified, or separate
         title: "Balayage",
         description: "**Degradado natural y luminoso.** Técnica a mano alzada para crear un efecto de barrido de color. Incluye decoloración, matizante y tratamiento post-color.",
-        image: "../../images/pages/peluqueria/mechas_balayage_chia.webp",
+        image: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
         price: 'Desde $450.000',
         duration: '4 - 6 horas',
         modal: true
@@ -99,7 +99,7 @@ export const hairPageServices = Object.freeze([
         category: 'color',
         title: "Babylights / Iluminaciones",
         description: "**Destellos sutiles de luz.** Mechas muy finas que imitan el brillo natural del sol en el cabello. Ideales para dar dimensión sin cambios drásticos.",
-        image: "../../images/pages/peluqueria/rubios_cenizos_chia.webp",
+        image: "../../images/pages/peluqueria/imagen-balayage_chia.webp",
         price: 'Desde $320.000',
         duration: '3 - 5 horas',
         modal: true
@@ -109,7 +109,7 @@ export const hairPageServices = Object.freeze([
         category: 'color',
         title: "Tinte Completo",
         description: "**Color uniforme y vibrante.** Aplicación de tinte global de raíz a puntas. Usamos marcas premium como Wella y L'Oréal para cuidar tu fibra.",
-        image: "../../images/pages/peluqueria/tinte_rojo_cobrizo_chia.webp",
+        image: "../../images/pages/peluqueria/tinte-completo-rubio-dorado.webp",
         price: 'Desde $200.000',
         duration: '2 horas',
         modal: true
@@ -119,7 +119,7 @@ export const hairPageServices = Object.freeze([
         category: 'color',
         title: "Retoque de Raíz",
         description: "**Mantén tu color perfecto.** Aplicación de tinte solo en el crecimiento (máximo 3cm). Incluye lavado y secado.",
-        image: "../../images/pages/peluqueria/correccion_color_chia.webp",
+        image: "../../images/pages/peluqueria/correccion_color_antes_despues_chia.webp",
         price: 'Desde $120.000',
         duration: '90 min',
         modal: true
