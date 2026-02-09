@@ -75,27 +75,18 @@ export const hairPageServices = Object.freeze([
     {
         id: 10,
         category: 'cortes',
-        title: "Corte Dama Estilizado",
+        title: "Corte para Dama",
         description: "**El corte perfecto para ti.** Incluye asesoría de imagen, lavado spa y cepillado básico. Realizamos cortes Bob, capas, rectos y en V.",
         image: "../../images/pages/peluqueria/corte_bob_chia.webp",
-        price: '$35.000',
+        price: 'Desde $35.000',
         duration: '45 min',
         modal: true
     },
-    {
-        id: 11,
-        category: 'cortes',
-        title: "Corte Bordado (Split Ender)",
-        description: "**Elimina la horquilla sin perder largo.** Esta técnica especializada corta solo las puntas abiertas que sobresalen, dejando tu cabello suave y saludable.",
-        image: "../../images/pages/peluqueria/corte_capas_chia.webp",
-        price: '$60.000',
-        duration: '60 min',
-        modal: true
-    },
+
     {
         id: 12,
         category: 'cortes',
-        title: "Cepillado Profesional",
+        title: "Cepillados",
         description: "**Luce una melena de impacto.** Incluye lavado y estilizado con secador y plancha/pinzas para ondas. Perfecto para eventos o tu día a día.",
         image: "../../images/pages/peluqueria/corte_pixie_mujer_chia.webp",
         price: 'Desde $35.000',
