@@ -153,7 +153,7 @@ export class ServiceCard {
      */
     renderStandardContent(element) {
         // Updated classes: Removed transition-all, added transition-shadow.
-        element.className = "group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto block text-left";
+        element.className = "group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none";
 
         const imageHtml = this.props.image ? `
             <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
