@@ -80,5 +80,25 @@ export const nailsServices = [
         description: 'Personaliza tu manicura con Nail Art. Desde líneas minimalistas y francesas modernas hasta diseños a mano alzada y efectos especiales.',
         image: '../../images/pages/peluqueria/lavado-spa-capilar.webp',
         link: 'manicure-pedicure.html'
+    },
+    {
+        id: 9,
+        title: 'Manicura Secado Rápido',
+        price: masterPrices.nails.manicura.secadoRapido,
+        duration: '45 min',
+        summary: 'Ideal si tienes prisa: limpieza perfecta y secado express.',
+        description: 'Disfruta de una manicura completa con esmalte de fórmula avanzada que seca en minutos. Perfecto para quienes tienen una agenda apretada pero no renuncian a la calidad.',
+        image: '../../images/pages/unas/manicure-spa.webp',
+        link: 'manicure-pedicure.html'
+    },
+    {
+        id: 10,
+        title: 'Pedicura Secado Rápido',
+        price: masterPrices.nails.pedicura.secadoRapido,
+        duration: '60 min',
+        summary: 'Pies perfectos sin tiempos de espera largos.',
+        description: 'El mismo cuidado spa para tus pies con la ventaja del secado acelerado. Sal del salón lista para continuar tu día sin preocuparte por arruinar tu esmaltado.',
+        image: '../../images/pages/unas/manicure-spa.webp',
+        link: 'manicure-pedicure.html'
     }
 ];
