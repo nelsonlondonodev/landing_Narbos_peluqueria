@@ -35,6 +35,17 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 10, 2026)
+### 1. Esthetics Section Upgrade 🧖‍♀️
+*   **Page Renaming:** Renamed `depilacion.html` to `depilacion-corporal.html` for better SEO and URL descriptiveness. Updated all internal links and references in `estheticsServices.js` and `service-page.js` to point to the new location.
+*   **Navigation Update:** Added "Depilación Corporal" as a direct link under the Esthetics menu in `navigation.js`, improving discoverability.
+
+### 2. Barber Section Enhancement 💈
+*   **Service Modals:** Implemented the standardized `ServiceModal` functionality for the Barber section (`barberia-cortes-hombre.html` and the Hub). Clicking on service cards now opens a detailed modal instead of linking to a generic page, providing a premium user experience consistent with the Esthetics section.
+*   **Expanded Service List:** Updated `barberServices.js` to include a comprehensive list of services: "Corte de Cabello", "Corte + Barba (Ritual)", "Arreglo de Barba", "Camuflaje de Canas", and "Barbería Infantil", each with specific descriptions and prices.
+
+***
+
 ## 🔄 Recent Updates (February 9, 2026)
 ### 1. UX Refinement & Visual Unification 🎨
 *   **Service Card Cleanup:** Removed unwanted borders and hover outlines from the Hair Salon Hub cards (`ServiceCard.js`), complying with the request for a cleaner, "borderless" aesthetic identical to the Nails section.
