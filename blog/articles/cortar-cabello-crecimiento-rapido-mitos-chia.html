@@ -37,7 +37,7 @@
     <!-- Robots: This will be replaced by JSON-LD Schema in production articles -->
     
     <script type="application/ld+json">
-    {
+    [{
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": "¿Cortar el cabello lo hace crecer más rápido? La verdad | Narbo's",
@@ -60,7 +60,26 @@
         "@type": "WebPage",
         "@id": "https://narbossalon.com/blog/articles/cortar-cabello-crecimiento-rapido-mitos-chia.html"
       }
-    }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "¿Cortar el cabello hace que crezca más rápido?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, el crecimiento ocurre en el folículo (raíz) y no en las puntas. Sin embargo, cortar las puntas dañadas evita que se rompan hacia arriba, lo que permite conservar el largo y que el cabello se vea más abundante y sano."
+        }
+      }, {
+        "@type": "Question",
+        "name": "¿Cada cuánto debo cortar las puntas?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Lo ideal es cada 2 o 3 meses si buscas mantenerlo sano y con forma, o cada 4 meses si estás en proceso de dejarlo crecer."
+        }
+      }]
+    }]
     </script>
     <!-- SEO MASTER END -->
 
@@ -188,6 +207,39 @@
                   >Agenda tu cita y asesoría personalizada 📲</a
                 >
               </div>
+
+              <!-- FAQ SECTION -->
+              <section id="article-faq" class="mt-16 pt-16 border-t border-gray-100 animate__animated animate__fadeInUp">
+                <h2 class="text-3xl font-serif font-bold text-gray-900 mb-8">Preguntas frecuentes</h2>
+                <div class="space-y-4">
+                    <details class="group border-b border-gray-200 pb-4">
+                        <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
+                            <span>¿Cortar el cabello hace que crezca más rápido?</span>
+                            <span class="transition-transform group-open:rotate-180">
+                                <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                            <p class="py-4">No, el crecimiento ocurre en el folículo (raíz) y no en las puntas. Sin embargo, cortar las puntas dañadas evita que se rompan hacia arriba, lo que permite conservar el largo y que el cabello se vea más abundante y sano.</p>
+                        </div>
+                    </details>
+                    <details class="group border-b border-gray-200 pb-4">
+                        <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
+                            <span>¿Cada cuánto debo cortar las puntas?</span>
+                            <span class="transition-transform group-open:rotate-180">
+                                <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </summary>
+                        <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                            <p class="py-4">Lo ideal es cada 2 o 3 meses si buscas mantenerlo sano y con forma, o cada 4 meses si estás en proceso de dejarlo crecer.</p>
+                        </div>
+                    </details>
+                </div>
+              </section>
             </div>
           </article>
 

@@ -45,7 +45,7 @@
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
-    {
+    [{
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": "Brilla esta Navidad: tendencias de belleza en Chía | Narbo's",
@@ -78,7 +78,26 @@
         "@type": "WebPage",
         "@id": "https://narbossalon.com/blog/articles/tendencias-diciembre-2025.html"
       }
-    }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "¿Cuáles son los colores tendencia para Navidad?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Los tonos miel, cobrizos suaves y el \"Rich Chocolate\" dominan la temporada para aportar calidez y elegancia."
+        }
+      }, {
+        "@type": "Question",
+        "name": "¿Con cuánta anticipación debo agendar mi cita para fin de año?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Diciembre es nuestra temporada más alta. Recomendamos agendar con al menos 1 o 2 semanas de anticipación para asegurar tu espacio."
+        }
+      }]
+    }]
     </script>
 
     <link rel="stylesheet" href="../../css/styles.css?v=1.2" />
@@ -309,6 +328,39 @@
                 <strong>peluquería y belleza en Chía, Cundinamarca</strong>.
               </p>
             </div>
+
+            <!-- FAQ SECTION -->
+            <section id="article-faq" class="mt-16 pt-16 border-t border-gray-100 animate__animated animate__fadeInUp">
+              <h2 class="text-3xl font-serif font-bold text-gray-900 mb-8">Preguntas frecuentes</h2>
+              <div class="space-y-4">
+                  <details class="group border-b border-gray-200 pb-4">
+                      <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
+                          <span>¿Cuáles son los colores tendencia para Navidad?</span>
+                          <span class="transition-transform group-open:rotate-180">
+                              <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                              </svg>
+                          </span>
+                      </summary>
+                      <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                          <p class="py-4">Los tonos miel, cobrizos suaves y el "Rich Chocolate" dominan la temporada para aportar calidez y elegancia.</p>
+                      </div>
+                  </details>
+                  <details class="group border-b border-gray-200 pb-4">
+                      <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
+                          <span>¿Con cuánta anticipación debo agendar mi cita para fin de año?</span>
+                          <span class="transition-transform group-open:rotate-180">
+                              <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                              </svg>
+                          </span>
+                      </summary>
+                      <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                          <p class="py-4">Diciembre es nuestra temporada más alta. Recomendamos agendar con al menos 1 o 2 semanas de anticipación para asegurar tu espacio.</p>
+                      </div>
+                  </details>
+              </div>
+            </section>
           </div>
         </article>
 

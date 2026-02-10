@@ -45,7 +45,7 @@
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
-    {
+    [{
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": "Guía para cuidar tu balayage y mantener el color | Narbo's",
@@ -78,7 +78,26 @@
         "@type": "WebPage",
         "@id": "https://narbossalon.com/blog/articles/cuidado-del-balayage.html"
       }
-    }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "¿Cómo evitar que el balayage se vuelva naranja?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El secreto está en usar un matizante profesional (shampoo azul o violeta) una vez por semana y evitar el agua muy caliente al lavarlo."
+        }
+      }, {
+        "@type": "Question",
+        "name": "¿El balayage daña mucho el cabello?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Al ser una técnica que no toca la raíz y se puede trabajar con aclaradores suaves, el daño es mínimo si se acompaña de tratamientos de reconstrucción post-color."
+        }
+      }]
+    }]
     </script>
     <link rel="stylesheet" href="../../css/styles.css?v=1.2" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
@@ -435,6 +454,39 @@
                 >Agenda tu cita y asesoría personalizada 📲</a
               >
             </div>
+
+            <!-- FAQ SECTION -->
+            <section id="article-faq" class="mt-16 pt-16 border-t border-gray-100 animate__animated animate__fadeInUp">
+              <h2 class="text-3xl font-serif font-bold text-gray-900 mb-8">Preguntas frecuentes</h2>
+              <div class="space-y-4">
+                  <details class="group border-b border-gray-200 pb-4">
+                      <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
+                          <span>¿Cómo evitar que el balayage se vuelva naranja?</span>
+                          <span class="transition-transform group-open:rotate-180">
+                              <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                              </svg>
+                          </span>
+                      </summary>
+                      <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                          <p class="py-4">El secreto está en usar un matizante profesional (shampoo azul o violeta) una vez por semana y evitar el agua muy caliente al lavarlo.</p>
+                      </div>
+                  </details>
+                  <details class="group border-b border-gray-200 pb-4">
+                      <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
+                          <span>¿El balayage daña mucho el cabello?</span>
+                          <span class="transition-transform group-open:rotate-180">
+                              <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                              </svg>
+                          </span>
+                      </summary>
+                      <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                          <p class="py-4">Al ser una técnica que no toca la raíz y se puede trabajar con aclaradores suaves, el daño es mínimo si se acompaña de tratamientos de reconstrucción post-color.</p>
+                      </div>
+                  </details>
+              </div>
+            </section>
           </div>
         </article>
 
