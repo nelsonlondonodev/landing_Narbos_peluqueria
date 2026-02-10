@@ -3304,30 +3304,6 @@ body.modal-open-layer-fix .site-header, body.modal-open-layer-fix #app-wrapper {
     padding: 0 4rem;
   }
 }
-#servicios .group {
-  position: relative;
-  isolation: isolate;
-}
-#servicios .group::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border: 2px solid transparent;
-  background: linear-gradient(135deg, #c5ab94, #6b755a) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  border-radius: 0.5rem;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-#servicios .group:hover::before {
-  opacity: 1;
-}
 .video-aspect-ratio {
   aspect-ratio: 9 / 16;
 }

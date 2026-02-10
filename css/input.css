@@ -435,45 +435,7 @@ body.modal-open-layer-fix #app-wrapper {
 }
 /* --- FIN: OPTIMIZACIÓN CLS --- */
 
-/* --- INICIO: ESTILOS PARA BORDE GRADIENTE EN TARJETAS DE SERVICIO (CORREGIDO) --- */
 
-/* 1. Preparamos la tarjeta. La clave es `isolation: isolate;` que crea un nuevo
-   contexto de apilamiento y soluciona el conflicto con la animación `transform`. */
-#servicios .group {
-  position: relative;
-  isolation: isolate; /* ¡Esta es la corrección clave! */
-}
-
-/* 2. Creamos el borde falso usando un pseudo-elemento ::before */
-#servicios .group::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  /* El borde se crea con la propiedad `border` y `border-image` */
-  border: 2px solid transparent;
-  background: linear-gradient(135deg, #c5ab94, #6b755a) border-box; /* Gradiente para el borde */
-
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-
-  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-
-  border-radius: 0.5rem;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-
-/* 3. Mostramos el borde gradiente al pasar el cursor sobre la tarjeta. */
-#servicios .group:hover::before {
-  opacity: 1; /* Hacemos visible el borde. */
-}
-/* --- FIN: ESTILOS PARA BORDE GRADIENTE EN TARJETAS DE SERVICIO (CORREGIDO) --- */
 
 /* --- INICIO: ESTILOS PARA SECCIÓN DE VIDEO --- */
 
