@@ -117,6 +117,19 @@ async function runSSG() {
             global.document = document;
             global.window = dom.window;
 
+            // Asegurar UTF-8 y Viewport para móvil si faltan
+            if (!document.querySelector('meta[charset]')) {
+                const meta = document.createElement('meta');
+                meta.setAttribute('charset', 'UTF-8');
+                document.head.prepend(meta);
+            }
+            if (!document.querySelector('meta[name="viewport"]')) {
+                const meta = document.createElement('meta');
+                meta.name = "viewport";
+                meta.content = "width=device-width, initial-scale=1.0";
+                document.head.appendChild(meta);
+            }
+
             // A. Inyección de Servicios (Lógica dinámica por página)
             const gridId = pageConfig.key === 'barberia' ? 'barber-services-grid' : 'hair-services-grid';
             const grid = document.getElementById(gridId);

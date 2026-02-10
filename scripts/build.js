@@ -87,13 +87,20 @@ const buildCSS = async () => {
     log('Building Tailwind CSS (v4)...');
     ensureDir(path.join(DIST_DIR, 'css'));
     await execPromise('npx @tailwindcss/cli -i ./css/input.css -o ./dist/css/styles.css --minify');
-    
-    // Agresive PurgeCSS Step
-    log('Running PurgeCSS...');
+};
+
+/**
+ * Task: Run PurgeCSS (Post-SSG)
+ * Vital for mobile menu preservation. Runs AFTER components are injected into HTML.
+ */
+const runPurgeCSS = async () => {
+    log('Running PurgeCSS (Post-SSG stabilization)...', colors.magenta);
     try {
+        // Now it scans the fully hydrated HTML files in /dist
         await execPromise(`npx purgecss --css ./dist/css/styles.css --content ./dist/**/*.html ./dist/**/*.js --output ./dist/css/styles.css`);
+        log('✅ PurgeCSS completed. CSS is now optimized and stable.', colors.green);
     } catch(err) {
-         console.warn('PurgeCSS warning:', err);
+         console.warn('⚠️ PurgeCSS warning:', err);
     }
 };
 
@@ -110,13 +117,7 @@ const buildJS = async () => {
     ];
 
     try {
-        // Bundle to dist/js/
-        // --bundle: bundle all dependencies
-        // --minify: minify output
-        // --format=esm: output ES modules
-        // --target=es2020: modern browsers
         await execPromise(`npx esbuild ${entryPoints.map(e => `"${e}"`).join(' ')} --bundle --minify --format=esm --outdir="${path.join(DIST_DIR, 'js')}" --target=es2020`);
-        
         log('✅ JS Bundling complete (main.js, service-page.js).', colors.green);
     } catch (error) {
         console.error('❌ ESBuild failed:', error);
@@ -180,19 +181,16 @@ const copyAssets = async () => {
  * Renames assets with Hash and updates all references in dist HTML
  */
 const versionAssets = async () => {
-    log('Applying Cache Busting (Hashing)...', colors.magenta);
+    log('Applying Cache Busting (Versioning)...', colors.magenta);
     
-    // Assets that act as entry points and need hashing
-    // Removed App.js as it is now bundled into main.js/service-page.js
     const assetsToVersion = [
         { dir: 'css', name: 'styles.css' },
         { dir: 'js', name: 'main.js' },
         { dir: 'js', name: 'service-page.js' }
     ];
 
-    const mappings = {}; // oldName -> newName
+    const mappings = {};
 
-    // 1. Rename files
     for (const asset of assetsToVersion) {
         const filePath = path.join(DIST_DIR, asset.dir, asset.name);
         if (fs.existsSync(filePath)) {
@@ -207,12 +205,9 @@ const versionAssets = async () => {
             mappings[`${asset.dir}/${asset.name}`] = `${asset.dir}/${newName}`;
             
             log(`- Versioned: ${asset.name} -> ${newName}`, colors.green);
-        } else {
-            console.warn(`Warning: Asset to version not found: ${filePath}`);
         }
     }
 
-    // 2. Update References in ALL HTML files in DIST
     const distHtmlFiles = getFiles(DIST_DIR, '.html');
     const timestamp = Date.now();
     
@@ -222,11 +217,9 @@ const versionAssets = async () => {
 
         Object.keys(mappings).forEach(originalPath => {
             const newPath = mappings[originalPath];
-            const originalFilename = path.basename(originalPath); // styles.css
-            const newFilename = path.basename(newPath); // styles.a1b2.css
+            const originalFilename = path.basename(originalPath); 
+            const newFilename = path.basename(newPath);
             
-            // Reemplazo agresivo de referencias en HTML
-            // Busca la referencia al archivo original y añade un timestamp para forzar la recarga en Safari/iOS
             const regex = new RegExp(`(href="|src=")([^"]*\\/)?${originalFilename.replace('.', '\\.')}(\\?[^"]*)?(")`, 'g');
             
             if (regex.test(content)) {
@@ -240,9 +233,7 @@ const versionAssets = async () => {
         }
     }
 
-    // 3. Update References in JS files (for ES Modules imports)
     const distJsFiles = getFiles(path.join(DIST_DIR, 'js'), '.js');
-    
     for (const file of distJsFiles) {
         let content = fs.readFileSync(file, 'utf8');
         let changed = false;
@@ -252,7 +243,6 @@ const versionAssets = async () => {
             const originalFilename = path.basename(originalPath);
             const newFilename = path.basename(newPath);
 
-            // Reemplazo en JS imports
             const regex = new RegExp(`(['"])([^'"]*\\/)?${originalFilename.replace('.', '\\.')}(\\?[^'"]*)?(['"])`, 'g');
             
             if (regex.test(content)) {
@@ -266,18 +256,19 @@ const versionAssets = async () => {
         }
     }
     
-    log(`✅ HTML & JS references updated with timestamp: ${timestamp}`);
+    log(`✅ Cache busting complete with timestamp: ${timestamp}`);
 };
 
 /**
  * Main Build Function
+ * REORDERED for stability: Build -> Inject (SSG) -> Purge -> Version
  */
 const runBuild = async () => {
     const startTime = Date.now();
     try {
         await clean();
         
-        // 1. Build Base Assets
+        // 1. Build Base Assets (Initial CSS, minified, without purge yet)
         await Promise.all([
             buildCSS(),
             buildJS(),
@@ -285,15 +276,20 @@ const runBuild = async () => {
             copyAssets()
         ]);
 
-        // 2. SSG Injection (Updates HTML structure)
-        log('Running SSG Injection...');
+        // 2. SSG Injection (Updates HTML structure with Navbar, Grid, etc.)
+        log('Running SSG Injection (Content Hydration)...');
         try {
             await execPromise('node scripts/ssg.js');
         } catch (error) {
-            console.error("Error in SSG step:", error);
+            console.error("❌ Error in SSG step:", error);
+            throw error;
         }
 
-        // 3. Versioning (Must be last to hash final files and update references)
+        // 3. PurgeCSS (Post-Hydration)
+        // Now PurgeCSS will see all the classes injected by SSG (like max-md:hidden)
+        await runPurgeCSS();
+
+        // 4. Versioning (Final step: hash the optimized files)
         await versionAssets();
 
         const duration = ((Date.now() - startTime) / 1000).toFixed(2);

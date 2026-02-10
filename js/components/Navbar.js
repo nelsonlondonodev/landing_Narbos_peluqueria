@@ -15,8 +15,8 @@ import { resolveAsset } from '../config.js'; // Import helper
  * @returns {string} HTML.
  */
 export function getNavbarHTML(basePath = './', isHome = true) {
-    // Si no estamos en home, los anclas (#) deben redirigir a index.html
-    const linkPrefix = isHome ? '' : `${basePath}index.html`;
+    // Si no estamos en home, los anclas (#) deben redirigir a /
+    const linkPrefix = isHome ? '' : `${basePath}`;
     const menuCategories = getMenuCategories(basePath);
     const navLink = createNavLinkHelper(linkPrefix);
 
@@ -26,11 +26,11 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         
         <!-- Desktop Menu -->
         <div class="desktop-menu flex items-center space-x-8 max-md:hidden pl-8">
-            ${navLink(isHome ? '#' : basePath + 'index.html', 'Inicio')}
+            ${navLink(isHome ? '#' : basePath, 'Inicio')}
             ${renderMegaMenuDesktop(menuCategories)}
             ${navLink(basePath + 'nosotros.html', 'Nosotros')}
             ${navLink(basePath + 'contacto.html', 'Contacto')}
-            <a href="${basePath}blog/index.html" class="text-white hover:text-brand-gold active:text-brand-gold font-medium">Blog</a>
+            <a href="${basePath}blog/" class="text-white hover:text-brand-gold active:text-brand-gold font-medium">Blog</a>
         </div>
 
         <!-- Mobile Toggle -->
@@ -46,7 +46,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             ${renderMegaMenuMobile(menuCategories)}
             ${navLink(basePath + 'nosotros.html', 'Nosotros', true)}
             ${navLink(basePath + 'contacto.html', 'Contacto', true)}
-            <a href="${basePath}blog/index.html" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50">Blog</a>
+            <a href="${basePath}blog/" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50">Blog</a>
         </div>
     </div>
     
@@ -71,7 +71,7 @@ function renderLogo(basePath, isHome) {
     // Usar resolveAsset para garantizar la ruta correcta en GitHub Pages
     const logoSrc = resolveAsset('images/brand/logo_narbos.webp');
     return `
-        <a href="${isHome ? '#' : basePath + 'index.html'}" class="block group">
+        <a href="${isHome ? '#' : basePath}" class="block group">
              <img src="${logoSrc}" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56">
         </a>
     `;

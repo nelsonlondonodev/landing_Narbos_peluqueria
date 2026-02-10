@@ -1,6 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./blog/**/*.html", "./servicios/**/*.html", "./js/**/*.js"],
+  content: ["./index.html", "./blog/**/*.html", "./servicios/**/*.html", "./js/**/*.js", "./_templates/**/*.html"],
+  safelist: [
+    'max-md:hidden',
+    'md:hidden',
+    'fixed',
+    'inset-0',
+    'z-[110]',
+    'z-[100]',
+    'translate-x-full',
+    'translate-x-0',
+    'opacity-0',
+    'opacity-100',
+    'hidden',
+    'backdrop-blur-sm',
+    'bg-black/60',
+    'overflow-y-auto',
+    'pointer-events-none',
+    'page-is-loaded',
+    'page-is-exiting'
+  ],
 
 
   theme: {
