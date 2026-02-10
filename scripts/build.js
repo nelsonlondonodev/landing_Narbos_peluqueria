@@ -161,7 +161,8 @@ const copyAssets = async () => {
         { src: 'lang', dest: 'lang' },
         { src: 'blog/articles/images', dest: 'blog/articles/images' },
         { src: 'robots.txt', dest: 'robots.txt' },
-        { src: 'sitemap.xml', dest: 'sitemap.xml' }
+        { src: 'sitemap.xml', dest: 'sitemap.xml' },
+        { src: '.htaccess', dest: '.htaccess' }
     ];
 
     for (const asset of assetsToCopy) {
@@ -235,7 +236,7 @@ const versionAssets = async () => {
         });
 
         if (changed) {
-            fs.writeFileSync(file, content);
+            fs.writeFileSync(file, content, 'utf8');
         }
     }
 
@@ -261,7 +262,7 @@ const versionAssets = async () => {
         });
 
         if (changed) {
-            fs.writeFileSync(file, content);
+            fs.writeFileSync(file, content, 'utf8');
         }
     }
     
