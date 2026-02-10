@@ -16,18 +16,48 @@ import { masterPrices } from './masterPrices.js';
  */
 export const barberServices = Object.freeze([
     {
-        title: "Corte y Barba",
-        description: "Servicio completo: corte de cabello + perfilado de barba con ritual de toalla caliente.",
-        price: masterPrices.barber.corteBarba,
-        link: "barberia-cortes-hombre.html",
+        id: 'corte-cabello',
+        title: "Corte de Cabello",
+        description: "Asesoría de imagen y corte (clásico o fade) con lavado y peinado.",
+        price: masterPrices.barber.corte || '$35.000', // Fallback if not in masterPrices
+        link: "servicios/barberia/barberia-cortes-hombre.html",
         image: "../../images/pages/barberia/barber-hero.webp",
         variant: "standard"
     },
     {
-        title: "Arreglo de barba",
+        id: 'corte-barba',
+        title: "Corte + Barba (Ritual)",
+        description: "La experiencia completa: Corte de cabello y perfilado de barba con toalla caliente.",
+        price: masterPrices.barber.corteBarba,
+        link: "servicios/barberia/barberia-cortes-hombre.html",
+        image: "../../images/pages/peluqueria/estilismo-barba.webp",
+        variant: "standard"
+    },
+    {
+        id: 'arreglo-barba',
+        title: "Arreglo de Barba",
         description: "Perfilado con navaja, hidratación y ritual de toalla caliente.",
-        link: "#open-modal-beard",
-        image: "images/brand/logo_narbos.webp",
-        variant: "logo"
+        price: '$45.000', // Estimated
+        link: "servicios/barberia/barberia-cortes-hombre.html",
+        image: "../../images/brand/logo_narbos.webp",
+        variant: "standard" // Changed from logo to standard for consistency in grid
+    },
+    {
+        id: 'camuflaje-canas',
+        title: "Camuflaje de Canas",
+        description: "Matización sutil de canas para un look rejuvenecido y natural.",
+        price: '$50.000', // Estimated
+        link: "servicios/barberia/barberia-cortes-hombre.html",
+        image: "../../images/pages/barberia/barber-hero.webp",
+        variant: "standard"
+    },
+    {
+        id: 'barberia-infantil',
+        title: "Barbería Infantil",
+        description: "Cortes modernos y clásicos para niños con paciencia y estilo.",
+        price: '$30.000', // Estimated
+        link: "servicios/barberia/barberia-cortes-hombre.html",
+        image: "../../images/pages/barberia/barber-hero.webp",
+        variant: "standard"
     }
 ]);

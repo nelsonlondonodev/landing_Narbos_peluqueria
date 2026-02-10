@@ -241,18 +241,51 @@ class ServicePageManager {
     initBarberServices() {
         const grid = document.getElementById('barber-services-grid');
         if (!grid) return;
+        
+        grid.innerHTML = '';
 
-        barberServices.forEach(data => {
+        const isCutsPage = this.pageKey === 'barberia-cortes-hombre';
+        
+        if (isCutsPage) {
+             barberServices.forEach(s => {
+                if (!s.id) s.id = s.title.replace(/\s+/g, '-').toLowerCase();
+            });
+
+            const serviceModal = new ServiceModal(barberServices);
+            this.renderBarberCards(grid, serviceModal);
+        } else {
+            this.renderBarberCards(grid, null);
+        }
+    }
+
+    renderBarberCards(grid, modalInstance) {
+        let displayServices = barberServices;
+
+        if (this.pageKey === 'barberia-cortes-hombre') {
+            displayServices = barberServices.filter(s => s.link.includes('barberia-cortes-hombre.html'));
+        }
+
+        displayServices.forEach(data => {
             const processedData = {
                 ...data,
                 image: this.app.resolvePath(data.image),
-                link: this.app.resolvePath(data.link)
+                link: modalInstance ? '#' : this.app.resolvePath(data.link),
+                id: data.id
             };
+
             const card = new ServiceCard(processedData);
             const cardElement = card.render();
-            
-            if (data.link === '#open-modal-beard') {
-                this.setupBeardModalTrigger(cardElement);
+
+            if (modalInstance) {
+               const linkEl = cardElement.querySelector('a') || cardElement;
+               if(linkEl.tagName === 'A') linkEl.removeAttribute('href');
+               
+               cardElement.style.cursor = 'pointer';
+               cardElement.addEventListener('click', (e) => {
+                   e.preventDefault();
+                   e.stopPropagation();
+                   modalInstance.open(data.id);
+               });
             }
 
             grid.appendChild(cardElement);
