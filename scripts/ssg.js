@@ -62,7 +62,7 @@ async function runSSG() {
             });
             
             // Serializar de vuelta a HTML
-            fs.writeFileSync(indexPath, dom.serialize());
+            fs.writeFileSync(indexPath, dom.serialize(), 'utf8');
             console.log('✅ index.html pre-renderizado.');
         } else {
             console.warn('⚠️ No se encontró #services-grid en index.html');
@@ -194,7 +194,7 @@ async function runSSG() {
             }
 
 
-            fs.writeFileSync(fullPath, dom.serialize());
+            fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
             console.log(`✅ ${relativePath} procesado.`);
         }
     }
