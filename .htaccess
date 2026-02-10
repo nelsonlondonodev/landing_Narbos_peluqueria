@@ -23,6 +23,16 @@ RewriteRule ^index\.html$ https://narbossalon.com/ [R=301,L]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)/index\.html\ HTTP/
 RewriteRule ^(.+)/index\.html$ https://narbossalon.com/$1/ [R=301,L]
 
+# --- REGLAS DE URLS LIMPIAS (Remover .html) ---
+# 1. Redirigir peticiones externas directas de .html a la versión limpia
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)\.html\ HTTP/
+RewriteRule ^(.+)\.html$ https://narbossalon.com/$1 [R=301,L]
+
+# 2. Mapear internamente la URL limpia al archivo físico .html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
+
 # Manejo de Cache para archivos estáticos
 <IfModule mod_expires.c>
     ExpiresActive On

@@ -47,7 +47,7 @@
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
-    {
+    [{
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": "Choque térmico: cuida tu cabello en tus viajes",
@@ -80,7 +80,26 @@
         "@type": "WebPage",
         "@id": "https://narbossalon.com/blog/articles/choque-termico-cabello-viajes-tierra-caliente.html"
       }
-    }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "¿Qué producto es indispensable para viajar a tierra caliente?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Un aceite protector con argan o mirra es clave. Actúa como un escudo contra el cloro de la piscina y el sol intenso."
+        }
+      }, {
+        "@type": "Question",
+        "name": "¿Por qué el pelo se pone \"chicle\" después de nadar?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El cloro y el sol rompen los puentes de azufre del cabello poroso. Es fundamental una terapia de recuperación profunda al regresar de tu viaje."
+        }
+      }]
+    }]
     </script>
 
     <link rel="stylesheet" href="../../css/styles.css?v=1.2" />
@@ -116,6 +135,7 @@
             >
             <h1
               class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6"
+              data-breadcrumb="Choque térmico"
             >
               De la Sabana a tierra caliente: cómo sobrevivir al «choque térmico» si viajas cada fin de semana
             </h1>
@@ -279,6 +299,39 @@
                 >Agenda tu Cita y Asesoría Personalizada 📲</a
               >
             </div>
+
+            <!-- FAQ SECTION -->
+            <section id="article-faq" class="mt-16 pt-16 border-t border-gray-100 animate__animated animate__fadeInUp">
+              <h2 class="text-3xl font-serif font-bold text-gray-900 mb-8">Preguntas frecuentes</h2>
+              <div class="space-y-4">
+                  <details class="group border-b border-gray-200 pb-4">
+                      <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
+                          <span>¿Qué producto es indispensable para viajar a tierra caliente?</span>
+                          <span class="transition-transform group-open:rotate-180">
+                              <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                              </svg>
+                          </span>
+                      </summary>
+                      <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                          <p class="py-4">Un aceite protector con argan o mirra es clave. Actúa como un escudo contra el cloro de la piscina y el sol intenso.</p>
+                      </div>
+                  </details>
+                  <details class="group border-b border-gray-200 pb-4">
+                      <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
+                          <span>¿Por qué el pelo se pone "chicle" después de nadar?</span>
+                          <span class="transition-transform group-open:rotate-180">
+                              <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                              </svg>
+                          </span>
+                      </summary>
+                      <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                          <p class="py-4">El cloro y el sol rompen los puentes de azufre del cabello poroso. Es fundamental una terapia de recuperación profunda al regresar de tu viaje.</p>
+                      </div>
+                  </details>
+              </div>
+            </section>
           </div>
         </article>
 
