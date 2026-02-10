@@ -96,7 +96,6 @@ const buildCSS = async () => {
 const runPurgeCSS = async () => {
     log('Running PurgeCSS (Post-SSG stabilization)...', colors.magenta);
     try {
-        // Now it scans the fully hydrated HTML files in /dist
         await execPromise(`npx purgecss --css ./dist/css/styles.css --content ./dist/**/*.html ./dist/**/*.js --output ./dist/css/styles.css`);
         log('✅ PurgeCSS completed. CSS is now optimized and stable.', colors.green);
     } catch(err) {

@@ -32,6 +32,7 @@ body {
   transition: opacity 0.4s ease-in-out, background-color 0.5s ease, color 0.5s ease;
 }
 
+/* purgecss start ignore */
 /* Estado entrada: Se añade vía JS al cargar */
 body.page-is-loaded {
     opacity: 1;
@@ -41,6 +42,7 @@ body.page-is-loaded {
 body.page-is-exiting {
     opacity: 0;
 }
+/* purgecss end ignore */
 
 /* Habilitar transición nativa moderna (Chrome 126+) */
 @view-transition {
@@ -128,6 +130,7 @@ body.mobile-menu-open {
   padding-bottom: 1rem; /* 16px - Start Tall */
 }
 
+/* purgecss start ignore */
 /*
   Estilos para el header cuando el usuario hace scroll.
   La clase .header-scrolled se añade vía JS (Navbar.js).
@@ -137,6 +140,7 @@ body.mobile-menu-open {
   padding-bottom: 0.5rem; /* 8px */
   background-color: rgba(107, 117, 90, 0.95); /* brand-green con más opacidad */
 }
+/* purgecss end ignore */
 
 /* 
   Estilos para el logo dentro del header.
