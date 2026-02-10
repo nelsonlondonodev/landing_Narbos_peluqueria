@@ -2,6 +2,7 @@ import { App } from './App.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
+import { getHeroHTML } from './components/HeroSection.js';
 
 import { pagesData } from './data/pagesData.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
@@ -98,6 +99,9 @@ class ServicePageManager {
     /**
      * Inicializa la Sección Hero Dinámica.
      */
+    /**
+     * Inicializa la Sección Hero Dinámica.
+     */
     initHero() {
         const heroContainer = document.getElementById('hero-root');
         if (!heroContainer || !this.pageKey) return;
@@ -106,24 +110,11 @@ class ServicePageManager {
         if (!config || !config.hero) return;
 
         const { hero } = config;
+        // Resolver ruta de imagen usando App helper
         const imageSrc = this.app.resolvePath(hero.imageSrc);
 
-        heroContainer.innerHTML = `
-            <div class="relative">
-                <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-                    <img src="${imageSrc}" alt="${hero.imageAlt}" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080">
-                </section>
-
-                <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
-                    <div class="container mx-auto">
-                        <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto">
-                            <h1 class="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4">${hero.title}</h1>
-                            <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">${hero.subtitle}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+        // Usar el componente compartido para generar HTML consistente
+        heroContainer.innerHTML = getHeroHTML({ ...hero, imageSrc });
     }
 
     /**
@@ -242,104 +233,75 @@ class ServicePageManager {
         const grid = document.getElementById('barber-services-grid');
         if (!grid) return;
         
-        grid.innerHTML = '';
-
         const isCutsPage = this.pageKey === 'barberia-cortes-hombre';
         
+        let displayServices = barberServices;
+        let serviceModal = null;
+
         if (isCutsPage) {
-             barberServices.forEach(s => {
+            // Filtrar servicios específicos para esta página
+            displayServices = barberServices.filter(s => s.link.includes('barberia-cortes-hombre.html'));
+            
+            // Garantizar IDs para el modal de detalles
+            barberServices.forEach(s => {
                 if (!s.id) s.id = s.title.replace(/\s+/g, '-').toLowerCase();
             });
 
-            const serviceModal = new ServiceModal(barberServices);
-            this.renderBarberCards(grid, serviceModal);
-        } else {
-            this.renderBarberCards(grid, null);
-        }
-    }
-
-    renderBarberCards(grid, modalInstance) {
-        let displayServices = barberServices;
-
-        if (this.pageKey === 'barberia-cortes-hombre') {
-            displayServices = barberServices.filter(s => s.link.includes('barberia-cortes-hombre.html'));
+            serviceModal = new ServiceModal(barberServices);
         }
 
-        displayServices.forEach(data => {
-            const processedData = {
-                ...data,
-                image: this.app.resolvePath(data.image),
-                link: modalInstance ? '#' : this.app.resolvePath(data.link),
-                id: data.id
-            };
-
-            const card = new ServiceCard(processedData);
-            const cardElement = card.render();
-
-            if (modalInstance) {
-               const linkEl = cardElement.querySelector('a') || cardElement;
-               if(linkEl.tagName === 'A') linkEl.removeAttribute('href');
-               
-               cardElement.style.cursor = 'pointer';
-               cardElement.addEventListener('click', (e) => {
-                   e.preventDefault();
-                   e.stopPropagation();
-                   modalInstance.open(data.id);
-               });
-            }
-
-            grid.appendChild(cardElement);
-        });
+        this._renderStandardCards(grid, displayServices, serviceModal);
     }
 
     initEstheticsServices() {
         const grid = document.getElementById('aesthetics-services-static');
         if (!grid) return;
         
-        // Limpiar contenido estático previo
-        grid.innerHTML = '';
+        const detailedPages = [
+            'spa-facial-integral', 'masajes-relajantes', 
+            'cejas-y-pestanas', 'depilacion-corporal'
+        ];
+        
+        let displayServices = estheticsServices;
+        let serviceModal = null; // Default: sin modal (usa links)
 
-        // Determinar si estamos en una página específica de servicio
-        const isSpaPage = this.pageKey === 'spa-facial-integral';
-        const isMassagePage = this.pageKey === 'masajes-relajantes';
-        const isBrowsPage = this.pageKey === 'cejas-y-pestanas';
-        const isDepilationPage = this.pageKey === 'depilacion-corporal';
+        if (detailedPages.includes(this.pageKey)) {
+             // Mapeo para filtrado según página actual
+            const filterMap = {
+                'spa-facial-integral': 'spa-facial-integral',
+                'masajes-relajantes': 'masajes-relajantes',
+                'cejas-y-pestanas': 'cejas-y-pestanas',
+                'depilacion-corporal': 'depilacion-corporal.html'
+            };
 
-        // Inicializar Modal si estamos en una subpágina
-        let serviceModal;
-        if (isSpaPage || isMassagePage || isBrowsPage || isDepilationPage) {
-            // Generar IDs si no existen en la data original (para que el modal funcione)
+            const fragment = filterMap[this.pageKey];
+            if (fragment) {
+                displayServices = estheticsServices.filter(s => s.link.includes(fragment));
+            }
+            
+            // Garantizar IDs para modal
             estheticsServices.forEach(s => {
                 if (!s.id) s.id = s.title.replace(/\s+/g, '-').toLowerCase();
             });
             
             serviceModal = new ServiceModal(estheticsServices);
-            this.renderEstheticsCards(grid, serviceModal);
-        } else {
-            // Hub General
-            this.renderEstheticsCards(grid, null);
         }
+
+        this._renderStandardCards(grid, displayServices, serviceModal);
     }
 
-    renderEstheticsCards(grid, modalInstance) {
-        // Filtrar servicios según la página actual
-        let displayServices = estheticsServices;
+    /**
+     * Renderizador genérico estandarizado para tarjetas de servicios (Barbería y Estética).
+     * @private
+     */
+    _renderStandardCards(grid, services, modalInstance = null) {
+        grid.innerHTML = '';
         
-        if (this.pageKey === 'spa-facial-integral') {
-            displayServices = estheticsServices.filter(s => s.link.includes('spa-facial-integral'));
-        } else if (this.pageKey === 'masajes-relajantes') {
-            displayServices = estheticsServices.filter(s => s.link.includes('masajes-relajantes'));
-        } else if (this.pageKey === 'cejas-y-pestanas') {
-            displayServices = estheticsServices.filter(s => s.link.includes('cejas-y-pestanas'));
-        } else if (this.pageKey === 'depilacion-corporal') {
-            displayServices = estheticsServices.filter(s => s.link.includes('depilacion-corporal.html'));
-        }
-
-        displayServices.forEach(data => {
+        services.forEach(data => {
             const processedData = {
                 ...data,
                 image: this.app.resolvePath(data.image),
-                // Si hay modal, anulamos el link para evitar navegación
+                // Si hay modal, desactivamos navegación directa
                 link: modalInstance ? '#' : this.app.resolvePath(data.link),
                 id: data.id 
             };
@@ -348,7 +310,6 @@ class ServicePageManager {
             const cardElement = card.render();
 
             if (modalInstance) {
-                // Remove href to prevent default browser behavior visual cues
                 const linkEl = cardElement.querySelector('a') || cardElement;
                 if(linkEl.tagName === 'A') linkEl.removeAttribute('href');
                 
@@ -361,17 +322,6 @@ class ServicePageManager {
             }
 
             grid.appendChild(cardElement);
-        });
-    }
-
-    setupBeardModalTrigger(element) {
-        let modalControllerInstance; 
-        element.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (!modalControllerInstance) {
-                modalControllerInstance = new ModalController();
-            }
-            modalControllerInstance.openModal('beard-modal');
         });
     }
 
@@ -563,7 +513,8 @@ class ServicePageManager {
             'spa-facial-integral': 'Spa Facial Integral',
             'limpieza-facial': 'Limpieza Facial',
             'masajes-relajantes': 'Masajes Relajantes',
-            'cejas-y-pestanas': 'Cejas y Pestañas'
+            'cejas-y-pestanas': 'Cejas y Pestañas',
+            'depilacion-corporal': 'Depilación Corporal'
          };
          if (this.pageKey && labels[this.pageKey]) {
             items.push({ label: labels[this.pageKey], link: '#' });
