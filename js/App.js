@@ -192,21 +192,19 @@ class App {
 
             const h1 = document.querySelector('h1');
             if (h1) {
-                // Usar textContent para garantizar lectura incluso con estilos (opacity: 0)
-                // Limpiar saltos de línea y espacios múltiples generados por el template HTML
-                let titleText = h1.textContent.replace(/\s+/g, ' ').trim();
+                // Priorizar atributo data-breadcrumb para versiones cortas manuales
+                const customBreadcrumb = h1.getAttribute('data-breadcrumb');
+                let titleText = customBreadcrumb || h1.textContent.replace(/\s+/g, ' ').trim();
                 
-                // Truncar títulos para evitar desbordamiento en móviles (pedido del usuario: 2-3 palabras principales)
-                if (window.innerWidth < 768) {
+                // Truncar títulos automáticos si no hay uno manual y estamos en móvil
+                if (!customBreadcrumb && window.innerWidth < 768) {
                     const words = titleText.split(/\s+/);
                     if (words.length > 3) {
                         titleText = words.slice(0, 3).join(' ') + '...';
                     }
-                } else {
-                    // En escritorio podemos ser más generosos pero igual truncamos si es excesivo
-                    if (titleText.length > 40) {
-                        titleText = titleText.substring(0, 40) + '...';
-                    }
+                } else if (!customBreadcrumb && titleText.length > 40) {
+                    // En escritorio truncamos solo si es excesivo y no hay manual
+                    titleText = titleText.substring(0, 40) + '...';
                 }
                 
                 if (titleText) {

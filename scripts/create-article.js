@@ -72,7 +72,7 @@ function generateSchemaMarkup(data) {
  * Procesa el template HTML reemplazando placeholders.
  */
 function processTemplate(data) {
-    const { title, slug, description, category, displayDate, imagePath, schemaMarkup } = data;
+    const { title, slug, description, category, displayDate, imagePath, schemaMarkup, breadcrumbTitle } = data;
     const template = fs.readFileSync(PATHS.TEMPLATE, 'utf8');
 
     return template
@@ -81,9 +81,10 @@ function processTemplate(data) {
         .replace(/{{DESCRIPTION}}/g, description)
         .replace(/{{CATEGORY}}/g, category)
         .replace(/{{DATE}}/g, displayDate)
+        .replace(/{{BREADCRUMB_TITLE}}/g, breadcrumbTitle)
         .replace(/{{IMAGE_PATH}}/g, `/blog/articles/${imagePath}`)
         .replace(/{{IMAGE_ALT}}/g, title)
-        .replace('<meta name="robots" content="noindex, nofollow" />', schemaMarkup);
+        .replace('<!-- Robots: This will be replaced by JSON-LD Schema in production articles -->', schemaMarkup);
 }
 
 /**
@@ -120,6 +121,7 @@ async function main() {
         const title = await ask('📝 Título del Artículo: ');
         const slug = await ask('🔗 Slug (URL amigable): ');
         const description = await ask('📄 Meta Descripción (SEO): ');
+        const breadcrumbTitle = await ask('🍞 Título corto para Breadcrumbs (opcional): ');
         const category = await ask('📂 Categoría: ');
         const dateInput = await ask('📅 Fecha (YYYY-MM-DD) [Hoy]: ');
 
@@ -139,7 +141,8 @@ async function main() {
         
         const htmlContent = processTemplate({
             title, slug, description, category, 
-            displayDate: display, imagePath, schemaMarkup
+            displayDate: display, imagePath, schemaMarkup,
+            breadcrumbTitle: breadcrumbTitle || title // Fallback al título completo si no hay manual
         });
 
         fs.writeFileSync(filePath, htmlContent);
