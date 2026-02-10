@@ -8,7 +8,7 @@ export const estheticsServices = [
         title: 'Limpieza Facial Básica',
         description: 'Protocolo esencial para eliminar impurezas y restaurar el equilibrio de tu piel.',
         image: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
-        link: 'limpieza-facial.html',
+        link: 'spa-facial-integral.html',
         price: masterPrices.esthetics.facial.basico,
         variant: 'standard'
     },
@@ -16,7 +16,7 @@ export const estheticsServices = [
         title: 'Microdermoabrasión',
         description: 'Exfoliación profunda que renueva la textura de la piel y atenúa manchas.',
         image: '../../images/pages/estetica/spa-hero.webp',
-        link: 'limpieza-facial.html',
+        link: 'spa-facial-integral.html',
         price: masterPrices.esthetics.facial.microdermoabrasion,
         variant: 'standard'
     },
