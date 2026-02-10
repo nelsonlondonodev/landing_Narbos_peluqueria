@@ -19,6 +19,17 @@
  */
 const articles = [
     {
+        id: 'cortar-cabello-crecimiento-rapido-mitos-chia',
+        date: '10 de febrero de 2026',
+        isoDate: '2026-02-10',
+        category: 'Cuidado Capilar',
+        title: '¿Cortar el cabello hace que crezca más rápido? La verdad detrás de las tijeras en Chía',
+        description: 'Descubre si cortar el cabello realmente acelera su crecimiento. Mitos, realidades y consejos expertos para cuidar tu melena en el clima de Chía.',
+        image: 'articles/images/image_blog_1.webp',
+        alt: '¿Cortar el cabello hace que crezca más rápido? La verdad detrás de las tijeras en Chía',
+        link: '/blog/articles/cortar-cabello-crecimiento-rapido-mitos-chia.html'
+    },
+    {
         id: 'choque-termico-cabello-viajes-tierra-caliente',
         date: '30 de enero de 2026',
         isoDate: '2026-01-30',
