@@ -77,6 +77,7 @@ class ServicePageManager {
         if (path.includes('masajes-relajantes')) return 'masajes-relajantes';
         if (path.includes('spa-facial-integral')) return 'spa-facial-integral';
         if (path.includes('cejas-y-pestanas')) return 'cejas-y-pestanas';
+        if (path.includes('depilacion')) return 'depilacion';
         if (path.includes('/estetica')) return 'estetica';
 
         // Subpáginas de Barbería
@@ -269,10 +270,11 @@ class ServicePageManager {
         const isSpaPage = this.pageKey === 'spa-facial-integral';
         const isMassagePage = this.pageKey === 'masajes-relajantes';
         const isBrowsPage = this.pageKey === 'cejas-y-pestanas';
+        const isDepilationPage = this.pageKey === 'depilacion';
 
         // Inicializar Modal si estamos en una subpágina
         let serviceModal;
-        if (isSpaPage || isMassagePage || isBrowsPage) {
+        if (isSpaPage || isMassagePage || isBrowsPage || isDepilationPage) {
             // Generar IDs si no existen en la data original (para que el modal funcione)
             estheticsServices.forEach(s => {
                 if (!s.id) s.id = s.title.replace(/\s+/g, '-').toLowerCase();
@@ -296,6 +298,8 @@ class ServicePageManager {
             displayServices = estheticsServices.filter(s => s.link.includes('masajes-relajantes'));
         } else if (this.pageKey === 'cejas-y-pestanas') {
             displayServices = estheticsServices.filter(s => s.link.includes('cejas-y-pestanas'));
+        } else if (this.pageKey === 'depilacion') {
+            displayServices = estheticsServices.filter(s => s.link.includes('depilacion.html'));
         }
 
         displayServices.forEach(data => {

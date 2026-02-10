@@ -84,20 +84,66 @@ export const estheticsServices = [
     /* -------------------------------------------------------------------------- */
     /*                                DEPILACIÓN                                  */
     /* -------------------------------------------------------------------------- */
+    /* -------------------------------------------------------------------------- */
+    /*                                DEPILACIÓN (CERA E HILO)                    */
+    /* -------------------------------------------------------------------------- */
+    // FACIAL (Cejas y Bigote)
     {
-        title: 'Depilación con Cera',
-        description: 'Cera suave y efectiva. Cejas, Axilas, Pierna completa, Bikini y más.',
-        image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder until depilation specific image
+        title: 'Depilación Cejas y Bigote (Cera)',
+        description: 'Diseño y limpieza rápida con cera suave para el rostro.',
+        image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
         link: 'servicios/estetica/cejas-y-pestanas.html',
-        price: `Desde ${masterPrices.esthetics.depilacion.cera.axilas}`,
+        price: masterPrices.esthetics.depilacion.cera.cejasBigote,
         variant: 'standard'
     },
     {
-        title: 'Depilación con Hilo (Cejas)',
-        description: 'Diseño preciso y duradero para enmarcar tu mirada.',
-        image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp',
+        title: 'Depilación con Hilo (Cejas y Bigote)',
+        description: 'Técnica milenaria para una definición precisa y duradera.',
+        image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
         link: 'servicios/estetica/cejas-y-pestanas.html',
         price: masterPrices.esthetics.depilacion.hilo.cejasBigote,
+        variant: 'standard'
+    },
+
+    // CORPORAL (Axilas, Piernas, Bikini)
+    {
+        title: 'Depilación Axilas (Cera)',
+        description: 'Piel suave y libre de vello en una zona delicada.',
+        image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
+        link: 'servicios/estetica/depilacion.html',
+        price: masterPrices.esthetics.depilacion.cera.axilas,
+        variant: 'standard'
+    },
+    {
+        title: 'Depilación Pierna Completa (Cera)',
+        description: 'Suavidad total desde los muslos hasta los tobillos.',
+        image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
+        link: 'servicios/estetica/depilacion.html',
+        price: masterPrices.esthetics.depilacion.cera.piernaCompleta,
+        variant: 'standard'
+    },
+    {
+        title: 'Depilación Media Pierna (Cera)',
+        description: 'Depilación efectiva de rodillas hacia abajo.',
+        image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
+        link: 'servicios/estetica/depilacion.html',
+        price: masterPrices.esthetics.depilacion.cera.mediaPierna,
+        variant: 'standard'
+    },
+    {
+        title: 'Depilación Bikini Parcial (Cera)',
+        description: 'Limpieza de la zona del bikini para tu comodidad.',
+        image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
+        link: 'servicios/estetica/depilacion.html',
+        price: masterPrices.esthetics.depilacion.cera.bikiniParcial,
+        variant: 'standard'
+    },
+    {
+        title: 'Depilación Bikini Completo (Cera)',
+        description: 'Depilación integral de la zona íntima con máxima higiene.',
+        image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
+        link: 'servicios/estetica/depilacion.html',
+        price: masterPrices.esthetics.depilacion.cera.bikiniCompleto,
         variant: 'standard'
     }
 ];
