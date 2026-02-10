@@ -258,8 +258,11 @@ class ServicePageManager {
     }
 
     initEstheticsServices() {
-        const grid = document.getElementById('esthetics-services-grid');
+        const grid = document.getElementById('aesthetics-services-static');
         if (!grid) return;
+        
+        // Limpiar contenido estático previo
+        grid.innerHTML = '';
 
         estheticsServices.forEach(data => {
             const processedData = {
