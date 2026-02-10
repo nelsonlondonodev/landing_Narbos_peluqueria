@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./blog/**/*.html", "./servicios/**/*.html", "./js/**/*.js"],
-
-
+  content: ["./index.html", "./blog/**/*.html", "./servicios/**/*.html", "./js/**/*.js", "./_templates/**/*.html"],
   theme: {
     extend: {
       colors: {
@@ -20,7 +18,7 @@ module.exports = {
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-50px)' }, // Movimiento vertical fuerte
+          '50%': { transform: 'translateY(-50px)' },
         },
         sway: {
           '0%, 100%': { transform: 'rotate(-15deg)' },
@@ -40,4 +38,3 @@ module.exports = {
   },
   plugins: [],
 }
-
