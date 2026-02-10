@@ -36,13 +36,24 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 ## 🔄 Recent Updates (February 10, 2026)
-### 1. Esthetics Section Upgrade 🧖‍♀️
-*   **Page Renaming:** Renamed `depilacion.html` to `depilacion-corporal.html` for better SEO and URL descriptiveness. Updated all internal links and references in `estheticsServices.js` and `service-page.js` to point to the new location.
-*   **Navigation Update:** Added "Depilación Corporal" as a direct link under the Esthetics menu in `navigation.js`, improving discoverability.
 
-### 2. Barber Section Enhancement 💈
-*   **Service Modals:** Implemented the standardized `ServiceModal` functionality for the Barber section (`barberia-cortes-hombre.html` and the Hub). Clicking on service cards now opens a detailed modal instead of linking to a generic page, providing a premium user experience consistent with the Esthetics section.
-*   **Expanded Service List:** Updated `barberServices.js` to include a comprehensive list of services: "Corte de Cabello", "Corte + Barba (Ritual)", "Arreglo de Barba", "Camuflaje de Canas", and "Barbería Infantil", each with specific descriptions and prices.
+### 1. Robust Mobile Rendering & Architecture 📱
+*   **Critical "Viewport" Fix:** Identified and resolved a fundamental issue in `index.html` where the missing `viewport` meta tag was causing mobile devices to render a "desktop miniature" view. Added standardized `viewport` and `charset` tags to the SSG pipeline for all pages.
+*   **Build Pipeline Overhaul:** Reengineered `scripts/build.js` for architectural stability. The build order is now: **Generate Assets -> SSG Injection (Content Hydration) -> PurgeCSS Optimization -> Versioning**. This ensures that components like the Navbar are physically present in the HTML before CSS optimization occurs.
+*   **Protección de Estilos Dinámicos:** Implemented a robust solution to protect dynamic CSS classes (like `page-is-loaded`, `page-is-exiting`, `nav-link-active`) from being purged. Instead of fragile manual safelists, we now use standard `/* purgecss start ignore */` comments in `input.css`, ensuring a professional and maintainable codebase.
+
+### 2. SEO & Clean Architecture 🚀
+*   **Clean URL Standard:** Removed all `index.html` references from internal links across JavaScript data files, breadcrumbs, and templates. The site now follows a professional directory-based URL structure (e.g., `/blog/` instead of `/blog/index.html`).
+*   **Google Search Console Stabilization:** 
+    *   Added the missing canonical tag to the homepage.
+    *   Updated `robots.txt` to prevent crawling of system directories (`_templates/`, `scripts/`, `js/`, etc.).
+    *   Refined `generate-sitemap.js` to generate 100% clean URLs.
+*   **Server Optimization (.htaccess):** Implemented a robust `.htaccess` for Hostinger/LiteSpeed that enforces UTF-8 encoding, GZIP compression, and handles SEO-friendly redirects (stripping `index.html` and forcing non-www).
+
+### 3. UX & Visual Premium Feel ✨
+*   **Restored Cinematic Transitions:** Fixed the "destello" effect by protecting transition classes from PurgeCSS. Navigating between pages now features a smooth fade-in/out experience once again.
+*   **Esthetics & Barber Upgrades:** Renamed pages for better SEO (`depilacion-corporal.html`) and implemented unified service modals for the Barber section, ensuring a consistent premium look and feel across all salon hubs.
+
 
 ***
 
