@@ -27,9 +27,14 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #ffffff;
   color: #1f2937;
-  /* Estado inicial: Visible para LCP inmediato */
-  opacity: 1; 
+  /* Estado inicial: Invisible para transición cinemática */
+  opacity: 0; 
   transition: opacity 0.4s ease-in-out, background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Estado entrada: Se añade vía JS al cargar */
+body.page-is-loaded {
+    opacity: 1;
 }
 
 /* Estado salida: Se añade al hacer clic en un link */
