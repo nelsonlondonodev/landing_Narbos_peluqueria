@@ -186,8 +186,8 @@ class App {
         // Nosotros, Contacto y el Hub del Blog no llevan breadcrumbs según feedback del usuario.
         if (path.includes('/blog/articles/')) {
             const items = [
-                { label: 'Inicio', link: this.resolvePath('index.html') },
-                { label: 'Blog', link: this.resolvePath('blog/index.html') }
+                { label: 'Inicio', link: this.resolvePath('') },
+                { label: 'Blog', link: this.resolvePath('blog/') }
             ];
 
             const h1 = document.querySelector('h1');

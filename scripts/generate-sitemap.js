@@ -74,13 +74,10 @@ function generateSitemap() {
         
         // Normalizar index.html a raíz '/' si es el home, o '/carpeta/'
         if (urlPath === 'index.html') {
-            urlPath = '';
-        } else if (urlPath.endsWith('index.html')) {
+            urlPath = '/';
+        } else if (urlPath.endsWith('/index.html')) {
             urlPath = urlPath.replace('index.html', '');
-        }
-
-        // Asegurar slash inicial
-        if (urlPath && !urlPath.startsWith('/')) {
+        } else if (!urlPath.startsWith('/')) {
             urlPath = '/' + urlPath;
         }
 
