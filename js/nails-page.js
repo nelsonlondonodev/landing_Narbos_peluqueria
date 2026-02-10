@@ -3,12 +3,16 @@ import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { FloatingDecorations } from './components/FloatingDecorations.js';
 import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
+import { ServiceCard } from './components/ServiceCard.js';
+import { ServiceModal } from './components/ServiceModal.js'; // Import Modal Component
 import { nailBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
+import { nailsServices } from './data/nailsServices.js';
 
 /**
  * Nails Page Logic
  * Custom logic for the Nails & Spa section.
+ * Refactored for clean code and scalability.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -19,51 +23,56 @@ document.addEventListener('DOMContentLoaded', () => {
         app.init();
     }
 
+    initPageComponents();
+});
+
+function initPageComponents() {
     initBreadcrumbs();
     initFloatingDecorations();
     initBrandsCarousel();
     initGallery();
-});
+    initNailServicesGrid();
+}
 
 /* -------------------------------------------------------------------------- */
-/*                                INITIALIZATIONS                              */
+/*                           COMPONENT INITIALIZERS                           */
 /* -------------------------------------------------------------------------- */
 
 function initGallery() {
     const galleryRoot = document.getElementById('nails-gallery-root');
-    const path = window.location.pathname;
-    let pageKey = 'unas-spa'; // Default
+    // Early return if not found
+    if (!galleryRoot) return;
 
-    if (path.includes('unas-acrilicas-gel')) {
-        pageKey = 'unas-acrilicas-gel';
-    } else if (path.includes('manicure-pedicure')) {
-        pageKey = 'manicure-pedicure';
-    }
+    const pageKey = getPageKeyFromPath(window.location.pathname);
+    const galleryData = pagesData[pageKey]?.gallery;
 
-    // Ensure we are accessing the correct data key
-    if (galleryRoot && pagesData && pagesData[pageKey] && pagesData[pageKey].gallery) {
-        galleryRoot.innerHTML = getBentoGridHTML(pagesData[pageKey].gallery);
-        
-        // Add Title manually if needed, or rely on the HTML structure
-        const titleHTML = `
-            <div class="text-center mb-12" data-animation="fadeInUp">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">Nuestros Trabajos</h2>
-                <p class="text-lg text-gray-700 max-w-2xl mx-auto">Descubre la perfección en cada detalle.</p>
-            </div>
-        `;
-        // Prepend title to grid
-        galleryRoot.insertAdjacentHTML('afterbegin', titleHTML);
-
+    if (galleryData) {
+        renderGallery(galleryRoot, galleryData);
         initLightbox();
     } else {
-        console.warn(`Gallery root or data not found for nails page (Key: ${pageKey})`);
+        console.warn(`Gallery data not found for page key: ${pageKey}`);
     }
 }
 
+function getPageKeyFromPath(path) {
+    if (path.includes('unas-acrilicas-gel')) return 'unas-acrilicas-gel';
+    if (path.includes('manicure-pedicure')) return 'manicure-pedicure';
+    return 'unas-spa'; // Default
+}
+
+function renderGallery(root, data) {
+    const titleHTML = `
+        <div class="text-center mb-12" data-animation="fadeInUp">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">Nuestros Trabajos</h2>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto">Descubre la perfección en cada detalle.</p>
+        </div>
+    `;
+    root.innerHTML = titleHTML + getBentoGridHTML(data);
+}
+
 function initLightbox() {
-    // Check if GLightbox is loaded globally
     if (typeof GLightbox !== 'undefined') {
-        const lightbox = GLightbox({
+        GLightbox({
             selector: '.glightbox',
             touchNavigation: true,
             loop: true,
@@ -72,7 +81,7 @@ function initLightbox() {
             closeEffect: 'zoom'
         });
     } else {
-        // Retry logic in case script is deferred and not yet ready
+        // Retry logic for deferred scripts
         setTimeout(initLightbox, 100);
     }
 }
@@ -90,13 +99,15 @@ function initFloatingDecorations() {
                 parent: 'inicio',
                 img: 'ui/decorations/hoja-seca-3d.webp',
                 speed: 0,
-                classes: 'w-32 -right-6 top-0 md:w-56 md:-right-12 md:-top-4 rotate-12 z-10 opacity-80'
+                wrapperClasses: '-right-6 top-0 md:-right-12 md:-top-4 z-10',
+                imgClasses: 'w-32 md:w-56 rotate-12 opacity-80'
             },
             {
                 parent: 'inicio',
                 img: 'ui/decorations/hoja-verde-3d.webp',
                 speed: 0,
-                classes: 'w-28 -left-8 bottom-0 md:w-48 md:-left-4 md:-bottom-12 -rotate-12 z-10 opacity-80'
+                wrapperClasses: '-left-8 bottom-0 md:-left-4 md:-bottom-12 z-10',
+                imgClasses: 'w-28 md:w-48 -rotate-12 opacity-80'
             }
         ]
     });
@@ -111,19 +122,18 @@ function initBreadcrumbs() {
         { label: 'Inicio', link: '../../index.html' }
     ];
 
-    // Determinar si estamos en el Hub de Uñas o en una subpágina
     const isIndex = currentPath.endsWith('/unas-spa/') || currentPath.endsWith('/unas-spa/index.html');
     
-    // Nivel 2: Hub de Uñas
+    // Level 2: Hub
     items.push({ 
         label: 'Uñas y Spa', 
         link: isIndex ? '#' : '../../servicios/unas-spa/index.html' 
     });
 
-    // Nivel 3: Subpáginas específicas
-    if (currentPath.includes('unas-acrilicas-gel-chia')) {
+    // Level 3: Subpages
+    if (currentPath.includes('unas-acrilicas-gel')) {
         items.push({ label: 'Acrílicas y Gel', link: '#' });
-    } else if (currentPath.includes('manicure-pedicure-chia')) {
+    } else if (currentPath.includes('manicure-pedicure')) {
         items.push({ label: 'Manicure y Pedicure', link: '#' });
     }
 
@@ -131,123 +141,71 @@ function initBreadcrumbs() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*                                GRID LOGIC                                  */
+/*                                GRID & MODAL                                */
 /* -------------------------------------------------------------------------- */
 
 function initNailServicesGrid() {
     const gridContainer = document.getElementById('nail-services-grid');
     if (!gridContainer) return;
 
-    // Filter services based on data attribute
-    const filteredServices = getFilteredServices(nailsServices, gridContainer.dataset.excludeIds);
+    gridContainer.innerHTML = '';
     
-    // Render grid
-    gridContainer.innerHTML = filteredServices.map(createServiceCard).join('');
+    // Initialize Modal Logic via Component
+    const serviceModal = new ServiceModal(nailsServices);
 
-    // Setup Modal
-    setupModalLogic(nailsServices); // Pass full data to find any service by ID
+    const excludeString = gridContainer.dataset.excludeIds;
+    const filteredServices = filterServices(nailsServices, excludeString);
+    
+    filteredServices.forEach(service => {
+        const cardElement = createServiceCard(service, serviceModal);
+        gridContainer.appendChild(cardElement);
+    });
 }
 
-function getFilteredServices(services, excludeString) {
+function filterServices(services, excludeString) {
     if (!excludeString) return services;
     const excludeIds = excludeString.split(',').map(Number);
     return services.filter(s => !excludeIds.includes(s.id));
 }
 
-function createServiceCard(service) {
-    return `
-        <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full isolation-auto">
-            <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
-                <img src="${service.image}" alt="${service.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
-                <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-gray-dark text-xs font-bold px-3 py-1 rounded-full shadow-sm border border-white/50">
-                    ${service.duration}
-                </span>
-            </div>
+function createServiceCard(service, modalInstance) {
+    const cardElement = new ServiceCard({
+        title: service.title,
+        description: service.summary || service.description,
+        image: service.image,
+        price: service.price,
+        link: service.link || '#',
+        variant: 'standard',
+        modalId: service.link ? null : 'service-modal'
+    }).render();
 
-            <div class="p-6 flex flex-col flex-grow relative">
-                <div class="flex justify-between items-start mb-3">
-                        <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">${service.title}</h3>
-                </div>
-                
-                <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${service.summary}</p>
-                
-                <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
-                    <span class="text-lg font-bold text-brand-green">${service.price}</span>
-                    <button onclick="window.openServiceModal(${service.id})" class="group/btn relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-all duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green cursor-pointer">
-                        <span>Ver Detalles</span>
-                        <svg class="w-4 h-4 ml-2 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                    </button>
-                </div>
-            </div>
-        </article>
-    `;
+    attachClickBehavior(cardElement, service, modalInstance);
+    return cardElement;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                MODAL LOGIC                                 */
-/* -------------------------------------------------------------------------- */
-
-function setupModalLogic(services) {
-    const modal = document.getElementById('service-modal');
-    if (!modal) return;
-
-    const refs = {
-        backdrop: document.getElementById('modal-backdrop'),
-        panel: document.getElementById('modal-panel'),
-        closeBtn: document.getElementById('close-modal-btn'),
-        title: document.getElementById('modal-title'),
-        image: document.getElementById('modal-image'),
-        duration: document.getElementById('modal-duration'),
-        price: document.getElementById('modal-price'),
-        desc: document.getElementById('modal-description')
-    };
-
-    // Define Global Function
-    window.openServiceModal = (id) => {
-        const service = services.find(s => s.id === id);
-        if (!service) return;
-
-        refs.title.textContent = service.title;
-        refs.image.src = service.image;
-        refs.duration.textContent = service.duration;
-        refs.price.textContent = service.price;
-        // Convert Markdown bold to HTML bold
-        refs.desc.innerHTML = service.description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-        modal.classList.remove('hidden');
-        
-        requestAnimationFrame(() => {
-            refs.backdrop.classList.remove('opacity-0');
-            refs.panel.classList.remove('opacity-0', 'scale-95');
-            refs.panel.classList.add('opacity-100', 'scale-100');
+function attachClickBehavior(element, service, modalInstance) {
+    if (service.link && !isCurrentPage(service.link)) {
+        // Normal navigation behavior (anchor tag works natively)
+        // No custom listener needed
+    } else {
+        // Trigger Modal: either explicitly (no link) or prevention (same page)
+        element.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            modalInstance.open(service.id);
         });
         
-        document.body.style.overflow = 'hidden';
-    };
-
-    const closeModal = () => {
-        refs.backdrop.classList.add('opacity-0');
-        refs.panel.classList.remove('opacity-100', 'scale-100');
-        refs.panel.classList.add('opacity-0', 'scale-95');
-        
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }, 300);
-    };
-
-    // Event Listeners
-    if (refs.closeBtn) refs.closeBtn.addEventListener('click', closeModal);
-    if (refs.backdrop) {
-        refs.backdrop.addEventListener('click', (e) => {
-            if (e.target === refs.backdrop) closeModal();
-        });
-    }
-    
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-            closeModal();
+        element.style.cursor = 'pointer';
+        if (service.link) {
+             element.removeAttribute('href'); // Visual consistency
         }
-    });
+    }
 }
+
+function isCurrentPage(link) {
+    const currentPath = window.location.pathname;
+    // Simple robust check
+    return currentPath.includes(link);
+}
+
+

@@ -1,59 +1,104 @@
-/**
- * Datos de los servicios de Uñas y Spa.
- */
+import { masterPrices } from './masterPrices.js';
+
 export const nailsServices = [
     {
         id: 1,
-        title: 'Manicura spa',
-        price: '$35.000',
+        title: 'Manicura Tradicional',
+        price: `Desde ${masterPrices.nails.manicura.tradicional}`,
         duration: '45 min',
-        summary: 'Limpieza profunda, exfoliación e hidratación para manos suaves y renovadas.',
-        description: 'Nuestra Manicura Spa es un ritual completo de renovación para tus manos. El servicio comienza con una limpieza detallada de cutículas y limado de uñas según tu preferencia. Continuamos con una exfoliación profunda utilizando sales minerales aromáticas para eliminar células muertas, seguida de una mascarilla hidratante nutritiva. Finalizamos con un masaje relajante de manos que activa la circulación y, por supuesto, el esmaltado tradicional con el tono que elijas de nuestra amplia gama de colores premium.',
-        image: '../../images/pages/unas/manicure-spa.webp'
+        summary: 'Limpieza, cuidado de cutículas y esmaltado clásico para el día a día.',
+        description: 'Nuestro servicio de manicura tradicional ofrece un cuidado esencial para tus manos. Incluye limpieza detallada, limado, tratamiento de cutículas y esmaltado con productos de alta calidad para un acabado pulcro y duradero.',
+        image: '../../images/pages/unas/manicure-spa.webp',
+        link: 'manicure-pedicure.html'
     },
     {
         id: 2,
-        title: 'Pedicura spa',
-        price: '$45.000',
+        title: 'Manicura Semipermanente',
+        price: `Desde ${masterPrices.nails.manicura.semipermanente}`,
         duration: '60 min',
-        summary: 'El tratamiento ideal para pies cansados con masaje anti-estrés y cuidado estético.',
-        description: 'Deleita tus pies con nuestra Pedicura Spa, diseñada no solo para embellecer sino para relajar. Disfrutarás de un baño de pies inmersivo con sales efervescentes, remoción cuidadosa de durezas y callosidades, tratamiento de cutículas y una exfoliación revitalizante. El punto culminante es nuestro masaje terapéutico diseñado para aliviar la tensión acumulada. Tus pies quedarán suaves, descansados y estéticamente perfectos con un esmaltado impecable.',
-        image: '../../images/pages/unas/manicure-spa.webp' 
+        summary: 'Color vibrante y brillo espejo garantizado por hasta 21 días.',
+        description: 'La solución perfecta para manos impecables por semanas. Usamos marcas líderes como Organic Nails y Masglo Gel Evolution. Incluye manicura en seco (rusa combinada), base protectora, color intenso y top coat de alto brillo curado en lámpara LED.',
+        image: '../../images/pages/unas/esmaltado-semi.webp',
+        link: 'manicure-pedicure.html'
     },
     {
         id: 3,
-        title: 'Esmaltado semipermanente',
-        price: '$55.000',
+        title: 'Pedicura Tradicional',
+        price: masterPrices.nails.pedicura.tradicional,
         duration: '60 min',
-        summary: 'Color vibrante, secado instantáneo y brillo espejo garantizado por 21 días.',
-        description: 'La solución perfecta para la mujer moderna que busca manos impecables por más tiempo. Utilizamos marcas líderes mundiales como Organic Nails y Masglo Gel Evolution para asegurar un acabado profesional. El proceso incluye una preparación meticulosa de la uña (manicura en seco), aplicación de base protectora, dos capas de color intenso y un top coat de alto brillo, todo curado en lámpara LED. Olvídate de los rayones y disfruta de uñas perfectas por hasta 3 semanas.',
-        image: '../../images/pages/unas/esmaltado-semi.webp' 
+        summary: 'Cuidado completo para pies: limpieza, exfoliación y esmaltado.',
+        description: 'Relaja tus pies con nuestra pedicura tradicional. Incluye baño relajante, remoción de durezas, cuidado de uñas y cutículas, hidratación básica y esmaltado perfecto.',
+        image: '../../images/pages/unas/manicure-spa.webp',
+        link: 'manicure-pedicure.html'
     },
-    {
+     {
         id: 4,
-        title: 'Uñas acrílicas / Polygel (esculpidas)',
-        price: '$120.000',
-        duration: '120 min',
-        summary: 'Extensiones artísticas con Acrílico o Polygel para unas uñas de impacto.',
-        description: 'Transforma tus manos con nuestro servicio de uñas esculpidas. Ya sea que desees mayor longitud o corregir la forma natural de tus uñas, nuestras artistas crearán estructuras perfectas (Coffin, Stiletto, Almendra, Cuadrada) utilizando **acrílico** o **Polygel** (Acrigel) de última generación, ideal para quienes buscan ligereza y resistencia. Este servicio premium incluye manicura completa, moldeado experto y esmaltado semipermanente.',
-        image: '../../images/pages/peluqueria/estilismo-barba.webp'
+        title: 'Pedicura Semipermanente',
+        price: masterPrices.nails.pedicura.semipermanente,
+        duration: '75 min',
+        summary: 'Durabilidad extrema y brillo perfecto para tus pies.',
+        description: 'Todo el cuidado de nuestra pedicura spa combinado con la durabilidad del esmaltado semipermanente. Olvídate de esperar a que se sequen las uñas y disfruta de pies perfectos inmediatamente.',
+        image: '../../images/pages/unas/manicure-spa.webp',
+        link: 'manicure-pedicure.html'
     },
     {
         id: 5,
-        title: 'Retiro de semipermanente',
-        price: '$15.000',
-        duration: '20 min',
-        summary: 'Remoción cuidadosa del esmalte gel cuidando la salud de tu uña natural.',
-        description: 'No arranques tu esmalte. Nuestro servicio de retiro profesional utiliza técnicas suaves para disolver el producto sin limar excesivamente ni dañar la capa superior de tu uña natural. Finalizamos con una aplicación de aceite de cutícula vitaminado para restaurar la hidratación.',
-        image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp'
+        title: 'Uñas Acrílicas / Polygel',
+        price: `Desde ${masterPrices.nails.extensiones.poligel}`,
+        duration: '120 min',
+        summary: 'Extensiones esculpidas para longitud y resistencia superior.',
+        description: 'Transforma tus manos con uñas esculpidas en Acrílico o Polygel. Creamos estructuras perfectas (Coffin, Stiletto, Almendra) con materiales de última generación. Incluye manicura completa y esmaltado semipermanente.',
+        image: '../../images/pages/peluqueria/estilismo-barba.webp',
+        link: 'unas-acrilicas-gel.html'
     },
     {
         id: 6,
-        title: 'Diseños de uñas (Nail Art)',
+        title: 'Uñas Press On',
+        price: masterPrices.nails.extensiones.pressOn,
+        duration: '90 min',
+        summary: 'Sistema rápido de extensión con acabado natural y aplicación semipermanente.',
+        description: 'La alternativa ideal para lucir uñas largas al instante. Aplicación profesional de tips completos con sistema soft gel y acabado semipermanente incluido.',
+        image: '../../images/pages/peluqueria/estilismo-barba.webp',
+        link: 'unas-acrilicas-gel.html'
+    },
+    {
+        id: 7,
+        title: 'Spa de Manos o Pies',
+        price: `Adicional desde ${masterPrices.nails.manicura.spa}`,
+        duration: '+20 min',
+        summary: 'Exfoliación profunda, mascarilla e hidratación intensiva.',
+        description: 'Eleva tu servicio con nuestro ritual spa. Añade exfoliación con sales minerales, mascarilla nutritiva y masaje extendido para una relajación total.',
+        image: '../../images/pages/peluqueria/lavado-spa-capilar.webp',
+        link: 'manicure-pedicure.html'
+    },
+    {
+        id: 8,
+        title: 'Diseños (Nail Art)',
         price: 'Desde $5.000',
         duration: '15+ min',
-        summary: 'Uñas decoradas: animal print, diseños fáciles, pedrería y tendencias.',
-        description: 'Personaliza tu manicura con nuestro servicio de Nail Art en Chía. Realizamos **uñas decoradas** a tu gusto: desde tendencias como **animal print**, líneas minimalistas para **uñas cortas**, efectos espejo, baby boomer, hasta "uñas decoradas fácil" y rápido si tienes poco tiempo. ¡Trae tu inspiración de Pinterest o Instagram y la haremos realidad!',
-        image: '../../images/pages/peluqueria/lavado-spa-capilar.webp'
+        summary: 'Personalización total: tendencias, mano alzada y decoración.',
+        description: 'Personaliza tu manicura con Nail Art. Desde líneas minimalistas y francesas modernas hasta diseños a mano alzada y efectos especiales.',
+        image: '../../images/pages/peluqueria/lavado-spa-capilar.webp',
+        link: 'manicure-pedicure.html'
+    },
+    {
+        id: 9,
+        title: 'Manicura Secado Rápido',
+        price: masterPrices.nails.manicura.secadoRapido,
+        duration: '45 min',
+        summary: 'Ideal si tienes prisa: limpieza perfecta y secado express.',
+        description: 'Disfruta de una manicura completa con esmalte de fórmula avanzada que seca en minutos. Perfecto para quienes tienen una agenda apretada pero no renuncian a la calidad.',
+        image: '../../images/pages/unas/manicure-spa.webp',
+        link: 'manicure-pedicure.html'
+    },
+    {
+        id: 10,
+        title: 'Pedicura Secado Rápido',
+        price: masterPrices.nails.pedicura.secadoRapido,
+        duration: '60 min',
+        summary: 'Pies perfectos sin tiempos de espera largos.',
+        description: 'El mismo cuidado spa para tus pies con la ventaja del secado acelerado. Sal del salón lista para continuar tu día sin preocuparte por arruinar tu esmaltado.',
+        image: '../../images/pages/unas/manicure-spa.webp',
+        link: 'manicure-pedicure.html'
     }
 ];

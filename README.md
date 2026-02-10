@@ -35,7 +35,37 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
-## 🔄 Recent Updates (February 5, 2026) -> Part 4
+## 🔄 Recent Updates (February 10, 2026)
+### 1. Esthetics Section Upgrade 🧖‍♀️
+*   **Page Renaming:** Renamed `depilacion.html` to `depilacion-corporal.html` for better SEO and URL descriptiveness. Updated all internal links and references in `estheticsServices.js` and `service-page.js` to point to the new location.
+*   **Navigation Update:** Added "Depilación Corporal" as a direct link under the Esthetics menu in `navigation.js`, improving discoverability.
+
+### 2. Barber Section Enhancement 💈
+*   **Service Modals:** Implemented the standardized `ServiceModal` functionality for the Barber section (`barberia-cortes-hombre.html` and the Hub). Clicking on service cards now opens a detailed modal instead of linking to a generic page, providing a premium user experience consistent with the Esthetics section.
+*   **Expanded Service List:** Updated `barberServices.js` to include a comprehensive list of services: "Corte de Cabello", "Corte + Barba (Ritual)", "Arreglo de Barba", "Camuflaje de Canas", and "Barbería Infantil", each with specific descriptions and prices.
+
+***
+
+## 🔄 Recent Updates (February 9, 2026)
+### 1. UX Refinement & Visual Unification 🎨
+*   **Service Card Cleanup:** Removed unwanted borders and hover outlines from the Hair Salon Hub cards (`ServiceCard.js`), complying with the request for a cleaner, "borderless" aesthetic identical to the Nails section.
+*   **Modal Consistency:** Updated the modal HTML structure in `balayage-mechas.html`, `color-tinturas-cabello.html`, and `tratamientos-capilares.html` to perfectly match the unified design established in the Nails & Spa section.
+
+### 2. Critical Bug Fixes 🐛
+*   **Treatments Page Logic:** Resolved a malformed HTML syntax error (`</div>body>`) in `tratamientos-capilares.html` that was causing the Navbar and Gallery scripts to fail silently.
+*   **Navigation Guard:** Verified and reinforced that "View Details" buttons in the Hair Hub correctly navigate to their respective sub-pages using native anchor tags.
+
+***
+
+## 🔄 Recent Updates (February 7, 2026) -> Part 5
+### 1. Service Modal Rollback & Cleanup 🧹
+*   **Reverted Experimental Features:** Rolled back the "Rich Service Modal" implementation (JS/CSS) as it did not meet the aesthetic requirements. Restored the stable version of `service-page.js` and `colorStyles.js`.
+*   **Deployment Pipeline Verification:** Confirmed that the production build uses the correct absolute paths for all assets, resolving previous 404 errors in deep links.
+*   **Git Hygiene:** Cleaned up the working directory and ensured `develop` and `main` branches are synchronized with the latest stable release.
+
+***
+
+## 🔄 Recent Updates (February 6, 2026) -> Part 4
 ### 1. Definitive Performance Fix (LCP & FCP) ⚡
 *   **The "Invisible Body" Fix:** Diagnosis revealed that `body { opacity: 0 }` (intended for fade-in) was hiding the entire site for 1.5s+ on mobile, causing poor LCP scores (~70/100).
 *   **Solution:** Removed the global opacity hack. The **Hero Image now paints instantly**, improving LCP to **~90-95**. Text animations (`.animate-hero-element`) remain to keep the premium feel without blocking the Critical Rendering Path.

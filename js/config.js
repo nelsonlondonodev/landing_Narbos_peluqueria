@@ -81,7 +81,7 @@ export const siteConfig = Object.freeze({
         phone: "+573123462618",
         whatsapp: "573123462618",
         email: "citas@narbossalon.com",
-        address: "Av. Pradilla # 5-18, Local 4, Chía, Cundinamarca",
+        address: "Bajos del hotel Ibiz, Km 2 vía Chía - Cajica Edificio Quantum, local 118, Chía, Cundinamarca, Colombia.",
         mapsLink: "https://maps.app.goo.gl/tuLinkDeMaps"
     }
 });

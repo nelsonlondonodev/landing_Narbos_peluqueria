@@ -29,9 +29,11 @@ export class PageTransitionController {
     }
 
     handleEnterAnimation() {
-        // Body ya es visible por defecto para mejorar LCP.
-        // No necesitamos añadir 'page-is-loaded'.
-        // Mantenemos el método por consistencia de interfaz.
+        // Trigger the fade-in animation by adding the class after a minimal delay
+        // to ensure the browser has registered the initial opacity: 0 state.
+        requestAnimationFrame(() => {
+            document.body.classList.add('page-is-loaded');
+        });
     }
 
     setupExitAnimations() {

@@ -42,18 +42,20 @@
       "@type": "Service",
       "serviceType": "Manicura y Pedicura Profesional en Chía",
       "provider": {
-        "@type": "NailSalon",
+        "@type": "BeautySalon",
         "name": "Narbo's Salón Spa",
         "url": "https://narbossalon.com/",
+        "image": "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Bajos del Hotel Ibis, Kilómetro 2",
+          "streetAddress": "Bajos del hotel Ibiz, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
           "addressLocality": "Chía",
           "addressRegion": "Cundinamarca",
+          "postalCode": "250001",
           "addressCountry": "CO"
         }
       },
-      "areaServed": ["Chía", "Cajicá", "Fontanar"],
+      "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota", "Fontanar"],
       "description": "Servicios de manicura y pedicura spa, esmaltado semipermanente, uñas acrílicas y polygel en Chía. Máxima higiene y cuidado para tus manos.",
       "brand": {
         "@type": "Brand",
@@ -62,7 +64,8 @@
       "offers": {
         "@type": "Offer",
         "priceCurrency": "COP",
-        "description": "Servicios de spa para manos y pies con masajes relajantes incluidos."
+        "availability": "https://schema.org/InStock",
+        "description": "Consultar precios y disponibilidad vía WhatsApp"
       }
     }
     </script>
@@ -150,7 +153,7 @@
 
             <!-- Grid de Servicios (Hub) -->
             <!-- Grid de Servicios (Hub) -->
-            <div id="nail-services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-exclude-ids="3,4,5,6">
+            <div id="nail-services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-exclude-ids="5,6">
                 <!-- Services injected via JS -->
             </div>
         </div>
@@ -267,7 +270,7 @@
                     </summary>
                     <div class="faq-content overflow-hidden">
                         <p class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
-                            Estamos muy cerca. Nos ubicamos en los bajos del <strong>Hotel Ibis Chía</strong> (Km 2 vía Chía-Cajicá), a solo 5 minutos del Centro Comercial Fontanar y con fácil acceso desde la variante. Contamos con parqueadero para tu comodidad.
+                            Estamos muy cerca. Nos ubicamos en los <strong>Bajos del hotel Ibiz</strong> (Km 2 vía Chía-Cajicá, Edificio Quantum, local 118), a solo 5 minutos del Centro Comercial Fontanar y con fácil acceso desde la variante. Contamos con parqueadero para tu comodidad.
                         </p>
                     </div>
                 </details>
@@ -286,7 +289,7 @@
         <!-- Backdrop -->
         <div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity opacity-0 ease-out duration-300" id="modal-backdrop"></div>
     
-        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div id="modal-scroll-container" class="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
                 <!-- Modal Panel -->
                 <div class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-2xl opacity-0 scale-95 duration-300 ease-out" id="modal-panel">
@@ -323,7 +326,7 @@
                             </div>
     
                             <div class="border-t border-gray-100 pt-6">
-                                <a href="https://wa.me/573000000000?text=Hola,%20quisiera%20agendar%20una%20cita%20para..." target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center rounded-lg bg-brand-green px-6 py-3.5 text-base font-semibold text-white shadow-lg hover:bg-[#5a634b] hover:shadow-xl hover:-translate-y-0.5 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
+                                <a id="modal-whatsapp-btn" href="https://wa.me/573123462618" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center rounded-lg bg-brand-green px-6 py-3.5 text-base font-semibold text-white shadow-lg hover:bg-[#5a634b] hover:shadow-xl hover:-translate-y-0.5 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
                                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
                                     Agendar Cita
                                 </a>

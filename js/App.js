@@ -45,14 +45,6 @@ class App {
         this.isHomePage = (currentPathClean === '/' || currentPathClean === '/index.html' || currentPathClean === '');
     }
 
-    /**
-     * Resuelve una ruta (absoluta o relativa) a la URL base correcta de la aplicación.
-     * Utiliza el helper centralizado resolveAsset.
-     * @param {string} path - Ruta a resolver
-     */
-    resolvePath(path) {
-        return resolveAsset(path);
-    }
 
     init() {
         this.mountLayout();
@@ -194,8 +186,8 @@ class App {
         // Nosotros, Contacto y el Hub del Blog no llevan breadcrumbs según feedback del usuario.
         if (path.includes('/blog/articles/')) {
             const items = [
-                { label: 'Inicio', link: this.resolvePath('index.html') },
-                { label: 'Blog', link: this.resolvePath('blog/index.html') }
+                { label: 'Inicio', link: this.resolvePath('') },
+                { label: 'Blog', link: this.resolvePath('blog/') }
             ];
 
             const h1 = document.querySelector('h1');
