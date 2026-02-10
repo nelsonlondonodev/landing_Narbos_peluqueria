@@ -68,6 +68,17 @@ export const hairPageServices = Object.freeze([
         duration: '3 - 4 horas',
         variant: "standard"
     },
+    {
+        id: 7,
+        category: 'hub',
+        title: "Shampoo",
+        description: "Limpieza profunda y revitalizante con productos profesionales. Incluye masaje capilar relajante.",
+        link: "../../servicios/peluqueria/tratamientos-capilares.html",
+        image: "../../images/pages/peluqueria/lavado-spa-capilar.webp",
+        price: 'Desde $10.000',
+        duration: '20 min',
+        variant: "standard"
+    },
 
     /* -------------------------------------------------------------------------- */
     /*                             CORTES DE PELO                                 */
@@ -169,6 +180,16 @@ export const hairPageServices = Object.freeze([
         image: "../../images/pages/peluqueria/lavado-spa-capilar.webp", // Placeholder reused
         price: 'Desde $180.000',
         duration: '2 horas',
+        modal: true
+    },
+    {
+        id: 33,
+        category: 'tratamientos',
+        title: "Shampoo",
+        description: "**Limpieza revitalizante.** Lavado profundo con masaje capilar y productos profesionales. Ideal para refrescar tu cuero cabelludo.",
+        image: "../../images/pages/peluqueria/lavado-spa-capilar.webp",
+        price: 'Desde $10.000',
+        duration: '20 min',
         modal: true
     }
 ]);
