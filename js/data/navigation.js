@@ -40,7 +40,6 @@ export const getMenuCategories = (basePath = './') => [
         link: `${basePath}servicios/estetica/index.html`,
         items: [
             { label: "Spa Facial", link: `${basePath}servicios/estetica/spa-facial-integral.html` },
-            { label: "Limpieza Facial", link: `${basePath}servicios/estetica/limpieza-facial.html` },
             { label: "Masajes Relajantes", link: `${basePath}servicios/estetica/masajes-relajantes.html` },
             { label: "Cejas y Pestañas", link: `${basePath}servicios/estetica/cejas-y-pestanas.html` }
         ]
