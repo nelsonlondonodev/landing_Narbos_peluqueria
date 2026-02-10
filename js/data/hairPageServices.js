@@ -131,7 +131,7 @@ export const hairPageServices = Object.freeze([
     {
         id: 22,
         category: 'color',
-        title: "Tinte Completo",
+        title: "Aplicación de tintes",
         description: "**Color uniforme y vibrante.** Aplicación de tinte global de raíz a puntas. Usamos marcas premium como Wella y L'Oréal para cuidar tu fibra.",
         image: "../../images/pages/peluqueria/tinte-completo-rubio-dorado.webp",
         price: 'Desde $200.000',
