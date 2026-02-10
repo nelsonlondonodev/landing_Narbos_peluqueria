@@ -130,6 +130,7 @@ class App {
     initInteractiveComponents() {
         // Critical / Above the fold components
         new FAQAccordion('#faq');
+        new FAQAccordion('#article-faq'); // Nuevo: Soporte para FAQs en artículos de blog
         new ReviewsCarousel();
         new ContactFormController();
 
