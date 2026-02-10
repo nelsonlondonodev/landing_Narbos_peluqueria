@@ -76,7 +76,7 @@ export const estheticsServices = [
         title: 'Moldeamiento Corporal',
         description: 'Tratamientos reductores y reafirmantes para definir tu silueta.',
         image: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
-        link: '#',
+        link: 'servicios/estetica/masajes-relajantes.html',
         price: `Sesión ${masterPrices.esthetics.corporal.moldeamiento}`,
         variant: 'standard'
     },
