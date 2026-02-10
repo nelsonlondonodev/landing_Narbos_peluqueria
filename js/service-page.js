@@ -16,6 +16,7 @@ import { tintStyles } from './data/tintStyles.js';
 import { treatmentStyles } from './data/treatmentStyles.js';
 import { estheticsServices } from './data/estheticsServices.js'; 
 import { ModalController } from './controllers/ModalController.js'; 
+import { ServiceModal } from './components/ServiceModal.js'; 
 
 /**
  * Gestor de la Página de Servicios.
@@ -264,14 +265,65 @@ class ServicePageManager {
         // Limpiar contenido estático previo
         grid.innerHTML = '';
 
-        estheticsServices.forEach(data => {
+        // Determinar si estamos en una página específica de servicio
+        const isSpaPage = this.pageKey === 'spa-facial-integral';
+        const isMassagePage = this.pageKey === 'masajes-relajantes';
+        const isBrowsPage = this.pageKey === 'cejas-y-pestanas';
+
+        // Inicializar Modal si estamos en una subpágina
+        let serviceModal;
+        if (isSpaPage || isMassagePage || isBrowsPage) {
+            // Generar IDs si no existen en la data original (para que el modal funcione)
+            estheticsServices.forEach(s => {
+                if (!s.id) s.id = s.title.replace(/\s+/g, '-').toLowerCase();
+            });
+            
+            serviceModal = new ServiceModal(estheticsServices);
+            this.renderEstheticsCards(grid, serviceModal);
+        } else {
+            // Hub General
+            this.renderEstheticsCards(grid, null);
+        }
+    }
+
+    renderEstheticsCards(grid, modalInstance) {
+        // Filtrar servicios según la página actual
+        let displayServices = estheticsServices;
+        
+        if (this.pageKey === 'spa-facial-integral') {
+            displayServices = estheticsServices.filter(s => s.link.includes('spa-facial-integral'));
+        } else if (this.pageKey === 'masajes-relajantes') {
+            displayServices = estheticsServices.filter(s => s.link.includes('masajes-relajantes'));
+        } else if (this.pageKey === 'cejas-y-pestanas') {
+            displayServices = estheticsServices.filter(s => s.link.includes('cejas-y-pestanas'));
+        }
+
+        displayServices.forEach(data => {
             const processedData = {
                 ...data,
                 image: this.app.resolvePath(data.image),
-                link: this.app.resolvePath(data.link)
+                // Si hay modal, anulamos el link para evitar navegación
+                link: modalInstance ? '#' : this.app.resolvePath(data.link),
+                id: data.id 
             };
+
             const card = new ServiceCard(processedData);
-            grid.appendChild(card.render());
+            const cardElement = card.render();
+
+            if (modalInstance) {
+                // Remove href to prevent default browser behavior visual cues
+                const linkEl = cardElement.querySelector('a') || cardElement;
+                if(linkEl.tagName === 'A') linkEl.removeAttribute('href');
+                
+                cardElement.style.cursor = 'pointer';
+                cardElement.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    modalInstance.open(data.id);
+                });
+            }
+
+            grid.appendChild(cardElement);
         });
     }
 
