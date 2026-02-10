@@ -110,7 +110,7 @@ export const estheticsServices = [
         title: 'Depilación Axilas (Cera)',
         description: 'Piel suave y libre de vello en una zona delicada.',
         image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
-        link: 'servicios/estetica/depilacion.html',
+        link: 'servicios/estetica/depilacion-corporal.html',
         price: masterPrices.esthetics.depilacion.cera.axilas,
         variant: 'standard'
     },
@@ -118,7 +118,7 @@ export const estheticsServices = [
         title: 'Depilación Pierna Completa (Cera)',
         description: 'Suavidad total desde los muslos hasta los tobillos.',
         image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
-        link: 'servicios/estetica/depilacion.html',
+        link: 'servicios/estetica/depilacion-corporal.html',
         price: masterPrices.esthetics.depilacion.cera.piernaCompleta,
         variant: 'standard'
     },
@@ -126,7 +126,7 @@ export const estheticsServices = [
         title: 'Depilación Media Pierna (Cera)',
         description: 'Depilación efectiva de rodillas hacia abajo.',
         image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
-        link: 'servicios/estetica/depilacion.html',
+        link: 'servicios/estetica/depilacion-corporal.html',
         price: masterPrices.esthetics.depilacion.cera.mediaPierna,
         variant: 'standard'
     },
@@ -134,7 +134,7 @@ export const estheticsServices = [
         title: 'Depilación Bikini Parcial (Cera)',
         description: 'Limpieza de la zona del bikini para tu comodidad.',
         image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
-        link: 'servicios/estetica/depilacion.html',
+        link: 'servicios/estetica/depilacion-corporal.html',
         price: masterPrices.esthetics.depilacion.cera.bikiniParcial,
         variant: 'standard'
     },
@@ -142,7 +142,7 @@ export const estheticsServices = [
         title: 'Depilación Bikini Completo (Cera)',
         description: 'Depilación integral de la zona íntima con máxima higiene.',
         image: '../../images/pages/peluqueria/mechas-balayage-detalle.webp', // Placeholder
-        link: 'servicios/estetica/depilacion.html',
+        link: 'servicios/estetica/depilacion-corporal.html',
         price: masterPrices.esthetics.depilacion.cera.bikiniCompleto,
         variant: 'standard'
     }
