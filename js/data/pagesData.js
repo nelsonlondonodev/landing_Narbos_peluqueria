@@ -389,17 +389,17 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'logo-card',
-                layout: 'horizontal',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Brillo Extremo",
-                alt: "Cabello sano y brillante"
-            },
-            {
-                type: 'logo-card',
                 layout: 'vertical',
                 src: '../../images/brand/logo_narbos.webp',
                 title: "Nutrición",
                 alt: "Aplicación de tratamiento nutritivo"
+            },
+            {
+                type: 'logo-card',
+                layout: 'horizontal',
+                src: '../../images/brand/logo_narbos.webp',
+                title: "Brillo Extremo",
+                alt: "Cabello sano y brillante"
             },
             {
                 type: 'logo-card', 
