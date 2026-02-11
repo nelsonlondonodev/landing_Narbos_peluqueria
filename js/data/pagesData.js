@@ -208,9 +208,9 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/mechas-balayage-detalle.webp',
-                title: "Iluminaciones",
-                alt: "Detalle Balayage"
+                src: '../../images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp',
+                title: "Cortes Modernos",
+                alt: "Resultado de corte profesional en Narbo's"
             },
             {
                 type: 'image',
