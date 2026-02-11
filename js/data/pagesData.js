@@ -182,6 +182,12 @@ export const pagesData = Object.freeze({
         }
    },
     'cortes-de-pelo': {
+        hero: {
+            title: "Cortes de pelo en Chía: Estilo y Tendencia",
+            subtitle: "Diseños personalizados realizados por expertos para realzar tu estilo único.",
+            imageSrc: "../../images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp",
+            imageAlt: "Corte de pelo profesional realizado en Narbo's Salon Spa"
+        },
         gallery: [
             {
                 type: 'video',
