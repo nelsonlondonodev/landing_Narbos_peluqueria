@@ -63,8 +63,8 @@ class App {
      * @returns {string} URL absoluta correcta.
      */
     resolvePath(path) {
-        if (!path) return '#';
-        if (path.startsWith('http')) return path; // Ya es absoluta
+        if (!path || path === '/') return this.appRoot; 
+        if (path.startsWith('http')) return path; 
         
         // Quitamos el slash inicial si existe para concatenar limpiamente
         const cleanPath = path.startsWith('/') ? path.slice(1) : path;
