@@ -8,7 +8,7 @@ export const hairPageServices = Object.freeze([
         title: "Corte para Dama",
         description: "Diseños personalizados, puntas perfectas y cambios de look completos.",
         link: "../../servicios/peluqueria/cortes-de-pelo.html",
-        image: "../../images/pages/peluqueria/PHOTO-2025.jpeg",
+        image: "../../images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp",
         price: 'Desde $35.000',
         duration: '45 min',
         variant: "standard"
@@ -41,7 +41,7 @@ export const hairPageServices = Object.freeze([
         title: "Balayage",
         description: "Degradado natural y luminoso. La técnica experta para rubios soñados.",
         link: "../../servicios/peluqueria/balayage-mechas.html",
-        image: "../../images/pages/peluqueria/balayage-rubio-ondas-peluqueria-chia-narbos-salon-spa-expertos-color.jpeg",
+        image: "../../images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
         price: 'Desde $450.000',
         duration: '4 - 6 horas',
         variant: "standard"
@@ -113,7 +113,7 @@ export const hairPageServices = Object.freeze([
         category: 'color', // Used for both color and balayage pages if unified, or separate
         title: "Balayage",
         description: "**Degradado natural y luminoso.** Técnica a mano alzada para crear un efecto de barrido de color. Incluye decoloración, matizante y tratamiento post-color.",
-        image: "../../images/pages/peluqueria/balayage-rubio-ondas-peluqueria-chia-narbos-salon-spa-expertos-color.jpeg",
+        image: "../../images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
         price: 'Desde $450.000',
         duration: '4 - 6 horas',
         modal: true
