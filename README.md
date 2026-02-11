@@ -35,6 +35,19 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 11, 2026)
+
+### 1. Hair Services Refactor & Cleanup 🧹
+*   **HTML Optimization:** Removed hardcoded "Nuestros Trabajos" titles and redundant SEO comments from `color-tinturas-cabello.html`, `balayage-mechas.html`, and `tratamientos-capilares.html`. The title is now exclusively injected via JavaScript (`hair-page.js`), promoting a cleaner DOM and defined single source of truth.
+*   **Visual Consistency:** Synchronized service images across the platform. Updated "Retoque de Raíz" and "Corte Dama" assets in shared data files (`hairPageServices.js`, `pagesData.js`) to ensure the user sees the same high-quality imagery in both the Service Hub and specific sub-pages.
+
+### 2. Bento Grid Layout Polish 🖼️
+*   **Gap Elimination:** Analyzed and restructured the Bento Grid layouts for "Color" and "Tratamientos" pages.
+    *   **Color Page:** Reordered gallery items to create a perfect 4-column block (Desktop) and 2-column block (Mobile), removing jagged whitespace.
+    *   **Tratamientos Page:** Adjusted item sizes (Square → Vertical/Horizontal) to mathematically fit the grid container, ensuring a solid, premium visual presentation without "Swiss cheese" gaps.
+
+***
+
 ## 🔄 Recent Updates (February 10, 2026)
 
 ### 1. Robust Mobile Rendering & Architecture 📱
