@@ -103,17 +103,30 @@ class App {
         const path = window.location.pathname;
         let pageKey = null;
 
+        // 1. Mapeo Explícito (Prioridad Alta)
         if (path.includes('nosotros.html')) pageKey = 'nosotros';
-        else if (path.includes('peluqueria')) pageKey = 'peluqueria';
-        else if (path.includes('barberia')) pageKey = 'barberia';
         else if (path.includes('contacto.html')) pageKey = 'contacto';
+        
+        // 2. Detección Dinámica Robusta (Basada en pagesData)
+        // Ordenamos las claves por longitud (descendente) para que 'cejas-y-pestanas' 
+        // se detecte antes que un posible 'cejas' o coincidencias parciales.
+        if (!pageKey) {
+            const keys = Object.keys(pagesData).sort((a, b) => b.length - a.length);
+            for (const key of keys) {
+                if (path.includes(key)) {
+                    pageKey = key;
+                    break;
+                }
+            }
+        }
 
         if (pageKey && pagesData[pageKey] && pagesData[pageKey].hero) {
-            // HYDRATION CHECK
-            if (heroRoot.children.length > 0) return;
-
+            // ROBUST FIX: Force Hydration
+            // Eliminamos la verificación (heroRoot.children.length > 0) para obligar a
+            // sobrescribir cualquier contenido estático o invisible con la versión estandarizada.
+            // Esto soluciona los problemas de H1 no visibles en Barbería y Estética.
+            
             const heroData = pagesData[pageKey].hero;
-            // Resolvemos la imagen usando appRoot para garantizar que cargue
             const imageSrc = this.resolvePath(heroData.imageSrc);
             
             heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });

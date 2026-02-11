@@ -36,7 +36,7 @@ class ServicePageManager {
         this.pageKey = this.getPageKey();
         
         // Inicializar componentes
-        this.initHero(); 
+        // this.initHero(); // Handled by App.js 
         this.initFloatingDecorations(); // Restaurar decoraciones tras renderizar Hero
         this.initServiceGrid();
         this.initBrands(); 
@@ -103,18 +103,8 @@ class ServicePageManager {
      * Inicializa la Sección Hero Dinámica.
      */
     initHero() {
-        const heroContainer = document.getElementById('hero-root');
-        if (!heroContainer || !this.pageKey) return;
-
-        const config = pagesData[this.pageKey];
-        if (!config || !config.hero) return;
-
-        const { hero } = config;
-        // Resolver ruta de imagen usando App helper
-        const imageSrc = this.app.resolvePath(hero.imageSrc);
-
-        // Usar el componente compartido para generar HTML consistente
-        heroContainer.innerHTML = getHeroHTML({ ...hero, imageSrc });
+        // DEPRECATED: Hero initialization is now centralized in App.js (mountHero)
+        // to ensure a Single Source of Truth and robust routing logic.
     }
 
     /**
