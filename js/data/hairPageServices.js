@@ -143,7 +143,7 @@ export const hairPageServices = Object.freeze([
         category: 'color',
         title: "Retoque de Raíz",
         description: "**Mantén tu color perfecto.** Aplicación de tinte solo en el crecimiento (máximo 3cm). Incluye lavado y secado.",
-        image: "../../images/pages/peluqueria/correccion_color_antes_despues_chia.webp",
+        image: "../../images/pages/peluqueria/retoque-de-raiz-tinte.webp",
         price: 'Desde $120.000',
         duration: '90 min',
         modal: true
