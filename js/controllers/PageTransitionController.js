@@ -29,11 +29,8 @@ export class PageTransitionController {
     }
 
     handleEnterAnimation() {
-        // Trigger the fade-in animation by adding the class after a minimal delay
-        // to ensure the browser has registered the initial opacity: 0 state.
-        requestAnimationFrame(() => {
-            document.body.classList.add('page-is-loaded');
-        });
+        // LCP Optimization: Body is visible by default. 
+        // No manual fade-in required here to prevent render blocking.
     }
 
     setupExitAnimations() {
