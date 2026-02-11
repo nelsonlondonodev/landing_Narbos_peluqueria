@@ -345,13 +345,6 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'image',
-                layout: 'square',
-                src: '../../images/pages/peluqueria/retoque-de-raiz-tinte.webp',
-                title: "Retoque de Raíz",
-                alt: "Mantenimiento impecable de color en raíz"
-            },
-            {
-                type: 'image',
                 layout: 'vertical',
                 src: '../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp', 
                 title: "Cubrimiento Canas",
@@ -365,6 +358,13 @@ export const pagesData = Object.freeze({
                 title: "Expertos en Color",
                 subtitle: "Técnica Profesional",
                 alt: "Logo Narbos Salon Colorimetría"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/peluqueria/retoque-de-raiz-tinte.webp',
+                title: "Retoque de Raíz",
+                alt: "Mantenimiento impecable de color en raíz"
             },
             {
                 type: 'logo-card',
@@ -389,17 +389,17 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'logo-card',
-                layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Brillo Extremo",
-                alt: "Cabello sano y brillante"
-            },
-            {
-                type: 'logo-card',
-                layout: 'square',
+                layout: 'vertical',
                 src: '../../images/brand/logo_narbos.webp',
                 title: "Nutrición",
                 alt: "Aplicación de tratamiento nutritivo"
+            },
+            {
+                type: 'logo-card',
+                layout: 'horizontal',
+                src: '../../images/brand/logo_narbos.webp',
+                title: "Brillo Extremo",
+                alt: "Cabello sano y brillante"
             },
             {
                 type: 'logo-card', 

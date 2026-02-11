@@ -35,6 +35,29 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 11, 2026)
+
+### 1. Critical SEO & Performance Restoration (The "White Screen" Fix) 🚑
+*   **Root Cause Analysis:** Investigated the sudden drop in Google Search Console metrics and PageSpeed insights. Discovered a catastrophic combination of factors:
+    1.  **Invisible Body:** `input.css` had `body { opacity: 0 }` waiting for JS to animate it in.
+    2.  **Blind Bot:** `robots.txt` explicitly blocked `/js/` and `/css/` directories.
+    3.  **Result:** Google Bot (and slow devices) couldn't load the JS to make the body visible, resulting in a **100% blank page render**.
+*   **The Fix (Robust Solution):**
+    *   **Progressive Rendering:** Removed `opacity: 0` from the critical CSS path. The site content is now **visible by default** (0ms Paint Time), and visual enhancements are added progressively.
+    *   **Unblocked Crawlers:** Updated `robots.txt` to allow full access to assets, complying with modern SEO standards.
+    *   **Lazy Hydration Architecture:** Refactored `App.js` to implement `IntersectionObserver`. Heavy components (Reviews, FAQ, Contact, Gallery) now **only initialize when scrolled into view**, drastically reducing TBT (Total Blocking Time) and freeing up the main thread for the Hero content.
+
+### 2. Hair Services Refactor & Cleanup 🧹
+*   **HTML Optimization:** Removed hardcoded "Nuestros Trabajos" titles and redundant SEO comments from `color-tinturas-cabello.html`, `balayage-mechas.html`, and `tratamientos-capilares.html`. The title is now exclusively injected via JavaScript (`hair-page.js`), promoting a cleaner DOM and defined single source of truth.
+*   **Visual Consistency:** Synchronized service images across the platform. Updated "Retoque de Raíz" and "Corte Dama" assets in shared data files (`hairPageServices.js`, `pagesData.js`) to ensure the user sees the same high-quality imagery in both the Service Hub and specific sub-pages.
+
+### 3. Bento Grid Layout Polish 🖼️
+*   **Gap Elimination:** Analyzed and restructured the Bento Grid layouts for "Color" and "Tratamientos" pages.
+    *   **Color Page:** Reordered gallery items to create a perfect 4-column block (Desktop) and 2-column block (Mobile), removing jagged whitespace.
+    *   **Tratamientos Page:** Adjusted item sizes (Square → Vertical/Horizontal) to mathematically fit the grid container, ensuring a solid, premium visual presentation without "Swiss cheese" gaps.
+
+***
+
 ## 🔄 Recent Updates (February 10, 2026)
 
 ### 1. Robust Mobile Rendering & Architecture 📱

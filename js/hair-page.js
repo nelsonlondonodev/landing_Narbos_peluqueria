@@ -5,7 +5,7 @@ import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { ServiceModal } from './components/ServiceModal.js';
-import { hairBrands } from './data/brandsData.js'; // Assuming hairBrands exits or reuse nailBrands temporarily? Ideally create hairBrands.
+import { hairBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
 import { hairPageServices } from './data/hairPageServices.js';
 
@@ -83,20 +83,10 @@ function initLightbox() {
 }
 
 function initBrandsCarousel() {
-    // Use existing brands or hair brands if duplicated/split
-    // For now we use generic brands logic, assuming ID matches HTML
     const brandsId = 'hair-brands-root';
     if (document.getElementById(brandsId)) {
-        // We can reuse nailBrands or define specific hair brands. 
-        // For simplicity reusing data logic, assuming similar brands (Wella, Loreal etc) are in data
-        // TODO: Ensure hairBrands exists in brandsData.js
-        const brands = window.hairBrands || [
-            { name: "L'Oréal", logo: "../../images/brands/loreal.webp" },
-            { name: "Wella", logo: "../../images/brands/wella.webp" },
-            { name: "Schwarzkopf", logo: "../../images/brands/schwarzkopf.webp" },
-            { name: "Olaplex", logo: "../../images/brands/olaplex.webp" }
-        ]; 
-        new BrandsSection(brandsId, brands).render();
+        // Use the imported hairBrands from data/brandsData.js
+        new BrandsSection(brandsId, hairBrands).render();
     }
 }
 

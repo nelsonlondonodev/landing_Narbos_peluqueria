@@ -27,20 +27,15 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #ffffff;
   color: #1f2937;
-  /* Estado inicial: Invisible para transición cinemática */
-  opacity: 0; 
-  transition: opacity 0.4s ease-in-out, background-color 0.5s ease, color 0.5s ease;
+  /* LCP Optimization: Content visible by default. No global fade-in. */
 }
 
-/* purgecss start ignore */
-/* Estado entrada: Se añade vía JS al cargar */
-body.page-is-loaded {
-    opacity: 1;
-}
+/* page-is-loaded removed to avoid LCP delay. Body is visible by default. */
 
 /* Estado salida: Se añade al hacer clic en un link */
 body.page-is-exiting {
     opacity: 0;
+    transition: opacity 0.4s ease-in-out;
 }
 /* purgecss end ignore */
 

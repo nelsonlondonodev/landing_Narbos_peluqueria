@@ -103,17 +103,30 @@ class App {
         const path = window.location.pathname;
         let pageKey = null;
 
+        // 1. Mapeo Explícito (Prioridad Alta)
         if (path.includes('nosotros.html')) pageKey = 'nosotros';
-        else if (path.includes('peluqueria')) pageKey = 'peluqueria';
-        else if (path.includes('barberia')) pageKey = 'barberia';
         else if (path.includes('contacto.html')) pageKey = 'contacto';
+        
+        // 2. Detección Dinámica Robusta (Basada en pagesData)
+        // Ordenamos las claves por longitud (descendente) para que 'cejas-y-pestanas' 
+        // se detecte antes que un posible 'cejas' o coincidencias parciales.
+        if (!pageKey) {
+            const keys = Object.keys(pagesData).sort((a, b) => b.length - a.length);
+            for (const key of keys) {
+                if (path.includes(key)) {
+                    pageKey = key;
+                    break;
+                }
+            }
+        }
 
         if (pageKey && pagesData[pageKey] && pagesData[pageKey].hero) {
-            // HYDRATION CHECK
-            if (heroRoot.children.length > 0) return;
-
+            // ROBUST FIX: Force Hydration
+            // Eliminamos la verificación (heroRoot.children.length > 0) para obligar a
+            // sobrescribir cualquier contenido estático o invisible con la versión estandarizada.
+            // Esto soluciona los problemas de H1 no visibles en Barbería y Estética.
+            
             const heroData = pagesData[pageKey].hero;
-            // Resolvemos la imagen usando appRoot para garantizar que cargue
             const imageSrc = this.resolvePath(heroData.imageSrc);
             
             heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
@@ -128,32 +141,67 @@ class App {
     }
 
     initInteractiveComponents() {
-        // Critical / Above the fold components
-        new FAQAccordion('#faq');
-        new FAQAccordion('#article-faq'); // Nuevo: Soporte para FAQs en artículos de blog
-        new ReviewsCarousel();
-        new ContactFormController();
+        // 1. Componentes Críticos (Header, Nav, Botones Flotantes) -> Inmediatos
+        // (Ya instanciados en initCoreComponents o montados en mountLayout)
+        
+        // 2. Componentes Pesados / Bajo el fold -> Carga Diferida con Observer
+        // Esto libera el Hilo Principal durante la carga inicial (Mejora TBT y LCP)
+        
+        // FAQ (Footer y Artículos)
+        this.observeAndInit('#faq', () => new FAQAccordion('#faq'));
+        this.observeAndInit('#article-faq', () => new FAQAccordion('#article-faq')); 
 
-        // Defer non-critical components to free up Main Thread (TBT)
-        const loadDeferredComponents = () => {
-            new ShareButton();
-            if (this.isHomePage) new ModalController();
-            new VideoPlayerController();
-            new GalleryController();
+        // Reseñas (Carrusel pesado)
+        this.observeAndInit('#reviews-slider-wrapper', () => new ReviewsCarousel());
 
-            // Brands Section
-            new BrandsSection('home-brands-root', allBrands).render();
-            
-            // Initialization of floating decorations
-            new FloatingDecorations({ basePath: this.appRoot });
-        };
+        // Contacto (Formulario)
+        this.observeAndInit('#contact-root', () => new ContactFormController());
 
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(loadDeferredComponents, { timeout: 3000 });
+        // Brands (Slider infinito)
+        this.observeAndInit('#home-brands-root', () => new BrandsSection('home-brands-root', allBrands).render());
+
+        // Galería y Videos (Media intensiva)
+        this.observeAndInit('#gallery-root', () => new GalleryController());
+        this.observeAndInit('#video-promo', () => new VideoPlayerController());
+        
+        // Decoraciones Flotantes (No críticas)
+        if (window.requestIdleCallback) {
+            requestIdleCallback(() => new FloatingDecorations({ basePath: this.appRoot }), { timeout: 4000 });
         } else {
-            // Fallback for Safari/Older browsers
-            setTimeout(loadDeferredComponents, 1500);
+            setTimeout(() => new FloatingDecorations({ basePath: this.appRoot }), 4000);
         }
+
+        // Modales de Home (Lógica de apertura)
+        if (this.isHomePage) {
+            // El controlador de modales es ligero, pero podemos diferirlo un poco
+            setTimeout(() => new ModalController(), 1000); 
+            new ShareButton();
+        }
+    }
+
+    /**
+     * Helper para Lazy Hydration.
+     * Instancia un componente solo cuando su contenedor entra en el viewport.
+     * @param {string} selector - Selector CSS del contenedor.
+     * @param {Function} initFn - Función que instancia el componente.
+     */
+    observeAndInit(selector, initFn) {
+        const element = document.querySelector(selector);
+        // Si el elemento no existe en esta página, no hacemos nada (ahorra recursos)
+        if (!element) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                // console.log(`[App] Lazy hydrating: ${selector}`);
+                initFn();
+                observer.disconnect(); // Solo necesitamos instanciar una vez
+            }
+        }, { 
+            rootMargin: '200px 0px', // Cargar 200px antes de que aparezca
+            threshold: 0.01 
+        });
+
+        observer.observe(element);
     }
 
     mountHomeServices() {

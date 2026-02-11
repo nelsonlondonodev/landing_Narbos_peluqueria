@@ -1,10 +1,6 @@
-# robots.txt para Narbo's Salón Spa
 User-agent: *
 Allow: /
 Disallow: /_templates/
-Disallow: /scripts/
-Disallow: /js/
-Disallow: /css/
 Disallow: /lang/
 
 Sitemap: https://narbossalon.com/sitemap.xml

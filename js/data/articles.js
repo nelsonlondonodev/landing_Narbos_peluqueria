@@ -25,7 +25,7 @@ const articles = [
         category: 'Cuidado Capilar',
         title: '¿Cortar el cabello hace que crezca más rápido? La verdad detrás de las tijeras en Chía',
         description: 'Descubre si cortar el cabello realmente acelera su crecimiento. Mitos, realidades y consejos expertos para cuidar tu melena en el clima de Chía.',
-        image: 'articles/images/corte-capas-crecimiento-sano.webp',
+        image: '/images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp',
         alt: 'Resultado de corte de cabello profesional en Narbo\'s Salón Spa Chía',
         link: '/blog/articles/cortar-cabello-crecimiento-rapido-mitos-chia.html'
     },

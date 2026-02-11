@@ -8,7 +8,7 @@ export const hairPageServices = Object.freeze([
         title: "Corte para Dama",
         description: "Diseños personalizados, puntas perfectas y cambios de look completos.",
         link: "../../servicios/peluqueria/cortes-de-pelo.html",
-        image: "../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
+        image: "../../images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp",
         price: 'Desde $35.000',
         duration: '45 min',
         variant: "standard"
@@ -19,7 +19,7 @@ export const hairPageServices = Object.freeze([
         title: "Cepillados",
         description: "Luce una melena de impacto. Incluye lavado y estilizado profesional.",
         link: "../../servicios/peluqueria/cortes-de-pelo.html",
-        image: "../../images/pages/peluqueria/corte_pixie_mujer_chia.webp", 
+        image: "../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp", 
         price: 'Desde $35.000',
         duration: '45 min',
         variant: "standard"
@@ -30,7 +30,7 @@ export const hairPageServices = Object.freeze([
         title: "Aplicación de Tintes",
         description: "Color uniforme y vibrante. Cubrimiento de canas y cambio total de color.",
         link: "../../servicios/peluqueria/color-tinturas-cabello.html",
-        image: "../../images/pages/peluqueria/color-tratamiento.webp",
+        image: "../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp",
         price: 'Desde $200.000',
         duration: '2 horas',
         variant: "standard"
@@ -41,7 +41,7 @@ export const hairPageServices = Object.freeze([
         title: "Balayage",
         description: "Degradado natural y luminoso. La técnica experta para rubios soñados.",
         link: "../../servicios/peluqueria/balayage-mechas.html",
-        image: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
+        image: "../../images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
         price: 'Desde $450.000',
         duration: '4 - 6 horas',
         variant: "standard"
@@ -88,7 +88,7 @@ export const hairPageServices = Object.freeze([
         category: 'cortes',
         title: "Corte para Dama",
         description: "**El corte perfecto para ti.** Incluye asesoría de imagen, lavado spa y cepillado básico. Realizamos cortes Bob, capas, rectos y en V.",
-        image: "../../images/pages/peluqueria/corte_bob_chia.webp",
+        image: "../../images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp",
         price: 'Desde $35.000',
         duration: '45 min',
         modal: true
@@ -99,7 +99,7 @@ export const hairPageServices = Object.freeze([
         category: 'cortes',
         title: "Cepillados",
         description: "**Luce una melena de impacto.** Incluye lavado y estilizado con secador y plancha/pinzas para ondas. Perfecto para eventos o tu día a día.",
-        image: "../../images/pages/peluqueria/corte_pixie_mujer_chia.webp",
+        image: "../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
         price: 'Desde $35.000',
         duration: '45 min',
         modal: true
@@ -113,7 +113,7 @@ export const hairPageServices = Object.freeze([
         category: 'color', // Used for both color and balayage pages if unified, or separate
         title: "Balayage",
         description: "**Degradado natural y luminoso.** Técnica a mano alzada para crear un efecto de barrido de color. Incluye decoloración, matizante y tratamiento post-color.",
-        image: "../../images/pages/peluqueria/mechas-balayage-detalle.webp",
+        image: "../../images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
         price: 'Desde $450.000',
         duration: '4 - 6 horas',
         modal: true
@@ -133,7 +133,7 @@ export const hairPageServices = Object.freeze([
         category: 'color',
         title: "Aplicación de tintes",
         description: "**Color uniforme y vibrante.** Aplicación de tinte global de raíz a puntas. Usamos marcas premium como Wella y L'Oréal para cuidar tu fibra.",
-        image: "../../images/pages/peluqueria/tinte-completo-rubio-dorado.webp",
+        image: "../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp",
         price: 'Desde $200.000',
         duration: '2 horas',
         modal: true
@@ -143,7 +143,7 @@ export const hairPageServices = Object.freeze([
         category: 'color',
         title: "Retoque de Raíz",
         description: "**Mantén tu color perfecto.** Aplicación de tinte solo en el crecimiento (máximo 3cm). Incluye lavado y secado.",
-        image: "../../images/pages/peluqueria/correccion_color_antes_despues_chia.webp",
+        image: "../../images/pages/peluqueria/retoque-de-raiz-tinte.webp",
         price: 'Desde $120.000',
         duration: '90 min',
         modal: true
