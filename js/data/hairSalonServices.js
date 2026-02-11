@@ -16,14 +16,14 @@ export const hairSalonServices = Object.freeze([
         title: "Corte dama",
         description: "Diseños personalizados, puntas perfectas y cambios de look completos.",
         link: "/servicios/peluqueria/cortes-de-pelo.html",
-        image: "/images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
+        image: "/images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp",
         variant: "standard"
     },
     {
         title: "Balayage y mechas",
         description: "Iluminaciones perfectas, rubios soñados y técnicas de degradado.",
         link: "/servicios/peluqueria/balayage-mechas.html",
-        image: "/images/pages/peluqueria/mechas-balayage-detalle.webp",
+        image: "/images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
         variant: "standard"
     },
     {
@@ -37,7 +37,7 @@ export const hairSalonServices = Object.freeze([
         title: "Tratamientos",
         description: "Recuperación profunda, keratinas, cirugía capilar y botox.",
         link: "/servicios/peluqueria/tratamientos-capilares.html",
-        image: "/images/brand/logo_narbos.webp",
-        variant: "logo"
+        image: "/images/pages/peluqueria/lavado-cabello-spa-capilar-narbos-salon-chia.webp",
+        variant: "standard"
     }
 ]);
