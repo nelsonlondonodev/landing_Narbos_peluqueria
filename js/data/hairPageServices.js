@@ -88,7 +88,7 @@ export const hairPageServices = Object.freeze([
         category: 'cortes',
         title: "Corte para Dama",
         description: "**El corte perfecto para ti.** Incluye asesoría de imagen, lavado spa y cepillado básico. Realizamos cortes Bob, capas, rectos y en V.",
-        image: "../../images/pages/peluqueria/corte_bob_chia.webp",
+        image: "../../images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp",
         price: 'Desde $35.000',
         duration: '45 min',
         modal: true
