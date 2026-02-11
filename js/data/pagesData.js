@@ -345,13 +345,6 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'image',
-                layout: 'square',
-                src: '../../images/pages/peluqueria/retoque-de-raiz-tinte.webp',
-                title: "Retoque de Raíz",
-                alt: "Mantenimiento impecable de color en raíz"
-            },
-            {
-                type: 'image',
                 layout: 'vertical',
                 src: '../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp', 
                 title: "Cubrimiento Canas",
@@ -365,6 +358,13 @@ export const pagesData = Object.freeze({
                 title: "Expertos en Color",
                 subtitle: "Técnica Profesional",
                 alt: "Logo Narbos Salon Colorimetría"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/peluqueria/retoque-de-raiz-tinte.webp',
+                title: "Retoque de Raíz",
+                alt: "Mantenimiento impecable de color en raíz"
             },
             {
                 type: 'logo-card',
