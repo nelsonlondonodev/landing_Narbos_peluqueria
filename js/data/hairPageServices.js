@@ -30,7 +30,7 @@ export const hairPageServices = Object.freeze([
         title: "Aplicación de Tintes",
         description: "Color uniforme y vibrante. Cubrimiento de canas y cambio total de color.",
         link: "../../servicios/peluqueria/color-tinturas-cabello.html",
-        image: "../../images/pages/peluqueria/color-tratamiento.webp",
+        image: "../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp",
         price: 'Desde $200.000',
         duration: '2 horas',
         variant: "standard"
@@ -133,7 +133,7 @@ export const hairPageServices = Object.freeze([
         category: 'color',
         title: "Aplicación de tintes",
         description: "**Color uniforme y vibrante.** Aplicación de tinte global de raíz a puntas. Usamos marcas premium como Wella y L'Oréal para cuidar tu fibra.",
-        image: "../../images/pages/peluqueria/tinte-completo-rubio-dorado.webp",
+        image: "../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp",
         price: 'Desde $200.000',
         duration: '2 horas',
         modal: true
