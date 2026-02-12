@@ -1,0 +1,97 @@
+{
+  "name": "Fidelización Narbo's",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "f576ac1f-1397-416f-b3c6-6e2ab7dc4c08/chat",
+        "options": {}
+      },
+      "id": "766b442b-689a-41f2-986a-72f31998592c",
+      "name": "Webhook (Captación)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst item = items[0].json;\n\nconst couponPrefix = 'NARBO-';\nconst randomPart = Math.random().toString(36).substring(2, 8).toUpperCase();\nconst fullCoupon = couponPrefix + randomPart;\n\nreturn [{\n  json: {\n    ...item,\n    coupon_code: fullCoupon\n  }\n}];"
+      },
+      "id": "c66d1234-789a-4bcf-a1c2-3d4e5f6g7h8i",
+      "name": "Generador de Cupón",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "clientes_fidelizacion",
+        "columns": [
+          "nombre",
+          "email",
+          "whatsapp",
+          "codigo_descuento"
+        ],
+        "values": {
+          "nombre": "={{ $node[\"Webhook (Captación)\"].json[\"name\"] }}",
+          "email": "={{ $node[\"Webhook (Captación)\"].json[\"email\"] }}",
+          "whatsapp": "={{ $node[\"Webhook (Captación)\"].json[\"whatsapp\"] }}",
+          "codigo_descuento": "={{ $node[\"Generador de Cupón\"].json[\"coupon_code\"] }}"
+        }
+      },
+      "id": "s77u88p9-90aa-4bcf-b2c3-4d5e6f7g8h9i",
+      "name": "Supabase (Guardar)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={{ $node[\"Generador de Cupón\"].json[\"coupon_code\"] }}",
+        "responseFormat": "file"
+      },
+      "id": "q99r00s1-11bb-4ccf-c3d4-5e6f7g8h9i0j",
+      "name": "Generar QR",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Webhook (Captación)": {
+      "main": [
+        [
+          {
+            "node": "Generador de Cupón",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generador de Cupón": {
+      "main": [
+        [
+          {
+            "node": "Supabase (Guardar)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase (Guardar)": {
+      "main": [
+        [
+          {
+            "node": "Generar QR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
