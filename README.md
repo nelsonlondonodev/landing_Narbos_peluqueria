@@ -47,9 +47,16 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 *   **SEO Renaming:** Standardized filenames with semantic keywords for local search intent (e.g., `unas-acrilicas-tendencia-2026-chia.webp`, `manicure-ruso-detalle-perfecto-narbos.webp`).
 *   **Automation Script:** Created `scripts/reprocess_nails.js` to automate high-quality conversions and clean up duplicate assets.
 
-### 3. Service Cards & Bento Grid Tuning 🎨
-*   **Semantic Consistency:** Updated every card in "Uñas Spa" (`nailsServices.js`) to feature a unique, service-specific image, replacing generic placeholders.
-*   **Perfect Grid Layout:** Reordered the gallery items in `pagesData.js` to solve the "whitespace gap" issue. The layout now stacks flawlessly in a **2-column block (Mobile)** and **4-column block (Desktop)**, combining Vertical, Featured, and Square items mathematically.
+### 4. Specialized FAQ & SEO Optimization (Nails) 🔍
+*   **Contextual Authority:** Replaced generic hair-related questions with specialized technical FAQs for Acrylic, Gel, and Polygel services in `unas-acrilicas-gel.html`, improving user trust and page relevance.
+*   **Rich Snippets (FAQPage Schema):** Injected JSON-LD structured data for the new FAQs to capture more real estate in search results and improve CTR.
+*   **Business Schema Upgrade:** Updated the `BeautySalon` schema with a detailed `OfferCatalog` and precise `geo` coordinates to dominate local search intent in Chía.
+
+### 5. Performance & UX Polish (PSI Alignment) ⚡
+*   **CLS Elimination (FAQ):** Resolved a visual "jump" issue by shifting from a container-wide animation to **individual staggered animations** (`fadeInUpSmall`) for each FAQ item. This aligns with the PageSpeed Insights requirement for layout stability.
+*   **Whitespace Optimization:** Reduced excessive mobile padding (`pt-56` -> `pt-24`) on all nail-related pages, fixing the gap below the floating hero box for a tighter mobile experience.
+*   **Bento Grid Packing:** Implemented the "Dual Vertical Start" pattern in `pagesData.js` for nail galleries, ensuring a mathematically perfect grid on both mobile and desktop without blank spaces.
+*   **Asset Alignment:** Verified all newly added/modified images have explicit `width` and `height` attributes to prevent Cumulative Layout Shift (CLS).
 
 ***
 
