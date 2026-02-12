@@ -112,7 +112,9 @@ const buildJS = async () => {
     // Define entry points
     const entryPoints = [
         path.join(SRC_DIR, 'js/main.js'),
-        path.join(SRC_DIR, 'js/service-page.js')
+        path.join(SRC_DIR, 'js/service-page.js'),
+        path.join(SRC_DIR, 'js/hair-page.js'),
+        path.join(SRC_DIR, 'js/nails-page.js')
     ];
 
     try {
@@ -185,7 +187,9 @@ const versionAssets = async () => {
     const assetsToVersion = [
         { dir: 'css', name: 'styles.css' },
         { dir: 'js', name: 'main.js' },
-        { dir: 'js', name: 'service-page.js' }
+        { dir: 'js', name: 'service-page.js' },
+        { dir: 'js', name: 'hair-page.js' },
+        { dir: 'js', name: 'nails-page.js' }
     ];
 
     const mappings = {};
