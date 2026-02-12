@@ -658,6 +658,14 @@ export const pagesData = Object.freeze({
                 title: "Tendencias Nail Art",
                 subtitle: "Creatividad sin límites",
                 alt: "Variedad de diseños de uñas modernos"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/unas/diseno-unas-arte-mano-alzada-chia.webp',
+                title: "Arte a Mano Alzada",
+                subtitle: "Diseño exclusivo",
+                alt: "Diseño de uñas a mano alzada en Chía"
             }
         ]
     },
