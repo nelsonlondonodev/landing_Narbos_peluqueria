@@ -623,6 +623,14 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'image',
+                layout: 'featured-video', // Movidó aquí para encajar con el vertical en móvil (1+1 cols) y escritorio (1+2+1 cols de squares)
+                src: '../../images/pages/unas/unas-acrilicas-tendencia-2026-chia.webp', // Actualizado a la imagen tendencia 2026
+                title: "Extensiones & Nail Art",
+                subtitle: "Diseños exclusivos",
+                alt: "Uñas acrílicas y diseños artísticos personalizados"
+            },
+            {
+                type: 'image',
                 layout: 'square',
                 src: '../../images/pages/unas/pedicure-spa.webp',
                 title: "Pedicure Spa",
@@ -638,11 +646,11 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'image',
-                layout: 'featured-video', // Destacado para mostrar el arte
-                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp',
-                title: "Extensiones & Nail Art",
-                subtitle: "Diseños exclusivos",
-                alt: "Uñas acrílicas y diseños artísticos personalizados"
+                layout: 'horizontal',
+                src: '../../images/pages/unas/disenos-nailart.webp',
+                title: "Tendencias Nail Art",
+                subtitle: "Creatividad sin límites",
+                alt: "Variedad de diseños de uñas modernos"
             },
             {
                 type: 'image',
@@ -650,14 +658,6 @@ export const pagesData = Object.freeze({
                 src: '../../images/pages/unas/retiro-semi.webp',
                 title: "Cuidado de Uñas",
                 alt: "Retiro profesional de esmalte y cuidado"
-            },
-            {
-                type: 'image',
-                layout: 'horizontal',
-                src: '../../images/pages/unas/disenos-nailart.webp',
-                title: "Tendencias Nail Art",
-                subtitle: "Creatividad sin límites",
-                alt: "Variedad de diseños de uñas modernos"
             },
             {
                 type: 'image',
