@@ -39,29 +39,58 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "Manicure y Pedicure",
-      "provider": {
-        "@type": "BeautySalon",
-        "name": "Narbo's Salón Spa",
-        "url": "https://narbossalon.com/",
-        "image": "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Bajos del hotel Ibiz, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
-          "addressLocality": "Chía",
-          "addressRegion": "Cundinamarca",
-          "postalCode": "250001",
-          "addressCountry": "CO"
-        }
+      "@type": "BeautySalon",
+      "name": "Narbo's Salón Spa - Uñas Acrílicas y Gel en Chía",
+      "image": [
+        "https://narbossalon.com/images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp",
+        "https://narbossalon.com/images/pages/unas/unas-acrilicas-tendencia-2026-chia.webp"
+      ],
+      "@id": "https://narbossalon.com/servicios/unas-spa/unas-acrilicas-gel.html#organization",
+      "url": "https://narbossalon.com/servicios/unas-spa/unas-acrilicas-gel.html",
+      "telephone": "+573123462618",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bajos del hotel Ibiz, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
+        "addressLocality": "Chía",
+        "addressRegion": "Cundinamarca",
+        "postalCode": "250001",
+        "addressCountry": "CO"
       },
-      "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota", "Fontanar"],
-      "description": "Cuidado de manos y pies, uñas esculpidas y spa",
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "COP",
-        "availability": "https://schema.org/InStock",
-        "description": "Consultar precios y disponibilidad vía WhatsApp"
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 4.8617,
+        "longitude": -74.0539
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Sistemas de Uñas Artificiales",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Uñas Acrílicas Profesionales",
+              "description": "Extensiones resistentes y duraderas esculpidas con productos de alta gama (Organic Nails)."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Uñas en Polygel / Acrigel",
+              "description": "Técnica híbrida ligera y resistente con acabado ultra natural."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Mantenimiento y Retoque de Sistemas",
+              "description": "Servicio de relleno y balance de estructura recomendado cada 21 días."
+            }
+          }
+        ]
       }
     }
     </script>
