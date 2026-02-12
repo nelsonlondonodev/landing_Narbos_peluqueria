@@ -37,9 +37,14 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 ## 🔄 Recent Updates (February 12, 2026)
 
-### 1. Loyalty System Automation (n8n) 🤖
-*   **Workflow Integration:** Implemented the core automation logic for the Customer Loyalty Program (`fidelizacion/workflow_n8n.json`).
-*   **Structure:** Created a scalable foundation for registering clients, issuing QR codes, and syncing data with Supabase via webhook triggers.
+### 1. Loyalty System Automation (End-to-End) 🤖
+*   **Landing Page:** Created a dedicated registration page at `/fidelizacion/` with a high-conversion form and instant feedback.
+*   **Workflow Automation (n8n):** Implemented a complete lifecycle workflow (`fidelizacion/workflow_n8n.json`):
+    *   **Webhook Trigger:** Captures user data securely from the frontend.
+    *   **Coupon Generation:** Creates unique, trackable discount codes (e.g., `NARBO-XXXX`) via custom JavaScript logic.
+    *   **QR Code Generation:** Generates a dynamic QR code containing a **"magic link"** for instant redemption validation by staff.
+    *   **Email Notification:** Sends a branded, premium HTML email to the customer with their unique code and QR attached.
+*   **Database Integration:** Stores all customer data and coupon status in **Supabase** for persistence and future validation logic.
 
 ### 2. Nail Art Gallery Overhaul (High-Fidelity) 💅
 *   **Visual Upgrade:** Replaced 9 localized gallery images with high-resolution assets (converted from "Large" JPEGs).
