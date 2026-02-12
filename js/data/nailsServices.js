@@ -18,7 +18,7 @@ export const nailsServices = [
         duration: '60 min',
         summary: 'Color vibrante y brillo espejo garantizado por hasta 21 días.',
         description: 'La solución perfecta para manos impecables por semanas. Usamos marcas líderes como Organic Nails y Masglo Gel Evolution. Incluye manicura en seco (rusa combinada), base protectora, color intenso y top coat de alto brillo curado en lámpara LED.',
-        image: '../../images/pages/unas/manicure-diseno-premium-narbos-salon-spa-chia-cundinamarca-belleza-integral.webp',
+        image: '../../images/pages/unas/manicure-ruso-detalle-perfecto-narbos.webp',
         link: 'manicure-pedicure.html'
     },
     {
@@ -58,7 +58,7 @@ export const nailsServices = [
         duration: '90 min',
         summary: 'Sistema rápido de extensión con acabado natural y aplicación semipermanente.',
         description: 'La alternativa ideal para lucir uñas largas al instante. Aplicación profesional de tips completos con sistema soft gel y acabado semipermanente incluido.',
-        image: '../../images/pages/unas/unas-en-chia-disenos-manicure-spa-narbos-salon-chia.webp',
+        image: '../../images/pages/unas/diseno-unas-elegantes-chia-narbos-spa.webp',
         link: 'unas-acrilicas-gel.html'
     },
     {
@@ -88,7 +88,7 @@ export const nailsServices = [
         duration: '45 min',
         summary: 'Ideal si tienes prisa: limpieza perfecta y secado express.',
         description: 'Disfruta de una manicura completa con esmalte de fórmula avanzada que seca en minutos. Perfecto para quienes tienen una agenda apretada pero no renuncian a la calidad.',
-        image: '../../images/pages/unas/manicure-ruso-detalle-perfecto-narbos.webp',
+        image: '../../images/pages/unas/manicure-diseno-premium-narbos-salon-spa-chia-cundinamarca-belleza-integral.webp',
         link: 'manicure-pedicure.html'
     },
     {
