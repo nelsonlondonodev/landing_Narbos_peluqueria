@@ -4,7 +4,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "f576ac1f-1397-416f-b3c6-6e2ab7dc4c08/chat",
+        "path": "fidelizacion-narbos-webhook",
         "options": {}
       },
       "id": "766b442b-689a-41f2-986a-72f31998592c",
@@ -15,7 +15,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const items = $input.all();\nconst item = items[0].json;\n\nconst couponPrefix = 'NARBO-';\nconst randomPart = Math.random().toString(36).substring(2, 8).toUpperCase();\nconst fullCoupon = couponPrefix + randomPart;\n\nreturn [{\n  json: {\n    ...item,\n    coupon_code: fullCoupon\n  }\n}];"
+        "jsCode": "const items = $input.all();const item = items[0].json;const couponPrefix = 'NARBO-';const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase();const fullCoupon = couponPrefix + randomPart;return [{json: {...item, coupon_code: fullCoupon}}];"
       },
       "id": "c66d1234-789a-4bcf-a1c2-3d4e5f6g7h8i",
       "name": "Generador de Cupón",
@@ -44,7 +44,13 @@
       "name": "Supabase (Guardar)",
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
-      "position": [650, 300]
+      "position": [650, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "1", 
+          "name": "Supabase account"
+        }
+      } 
     },
     {
       "parameters": {
@@ -93,5 +99,6 @@
         ]
       ]
     }
-  }
+  },
+  "settings": {}
 }
