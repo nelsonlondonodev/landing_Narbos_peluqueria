@@ -40,10 +40,14 @@
     {
       "@context": "https://schema.org",
       "@type": "BeautySalon",
-      "name": "Narbo's Salón Spa",
-      "image": "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
-      "@id": "https://narbossalon.com/#organization",
-      "url": "https://narbossalon.com/",
+      "name": "Narbo's Salón Spa - Uñas & Nail Art",
+      "image": [
+        "https://narbossalon.com/images/pages/unas/manicura-perfecta-tono-vino-elegante-narbos-salon-spa-chia.webp",
+        "https://narbossalon.com/images/pages/unas/unas-acrilicas-tendencia-2026-chia.webp",
+        "https://narbossalon.com/images/pages/unas/pedicure-spa-relax-experiencia-chia.webp"
+      ],
+      "@id": "https://narbossalon.com/servicios/unas-spa/#organization",
+      "url": "https://narbossalon.com/servicios/unas-spa/",
       "telephone": "+573123462618",
       "priceRange": "$$",
       "address": {
@@ -59,11 +63,50 @@
         "latitude": 4.8617,
         "longitude": -74.0539
       },
-      "department": [
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de Uñas y Spa",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Manicura Tradicional y Semipermanente",
+              "description": "Limpieza, cuidado de cutículas y esmaltado de larga duración con marcas premium."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Uñas Acrílicas y Polygel",
+              "description": "Extensiones esculpidas con las últimas tendencias de 2026 para longitud y resistencia."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Pedicura Spa Profesional",
+              "description": "Tratamiento completo de relajación y estética para pies en Chía."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Nail Art y Diseños a Mano Alzada",
+              "description": "Personalización total con diseños exclusivos y artísticos."
+            }
+          }
+        ]
+      },
+      "openingHoursSpecification": [
         {
-          "@type": "Service",
-          "serviceType": "Manicure y Pedicure",
-          "description": "Cuidado de manos y pies, uñas esculpidas y spa"
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "08:00",
+          "closes": "19:00"
         }
       ]
     }
