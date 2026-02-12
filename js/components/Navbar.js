@@ -21,7 +21,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
     const navLink = createNavLinkHelper(linkPrefix);
 
     return `
-    <nav class="container mx-auto px-6 py-2 flex justify-between items-center max-w-screen-xl relative z-50">
+    <nav class="container mx-auto px-6 flex justify-between items-center max-w-screen-xl relative z-50 min-h-[80px] md:min-h-[90px] py-1 transition-all duration-300">
         ${renderLogo(basePath, isHome)}
         
         <!-- Desktop Menu -->

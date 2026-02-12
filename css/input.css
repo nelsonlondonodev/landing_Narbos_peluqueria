@@ -126,17 +126,31 @@ body.mobile-menu-open {
   padding-bottom: 1rem; /* 16px - Start Tall */
 }
 
-/* purgecss start ignore */
 /*
   Estilos para el header cuando el usuario hace scroll.
   La clase .header-scrolled se añade vía JS (Navbar.js).
 */
 .site-header.header-scrolled {
-  padding-top: 0.5rem; /* 8px */
-  padding-bottom: 0.5rem; /* 8px */
+  padding-top: 0.4rem; /* 6px */
+  padding-bottom: 0.4rem; /* 6px */
   background-color: rgba(107, 117, 90, 0.95); /* brand-green con más opacidad */
 }
+
+/* 
+  Sincronización de la reducción del nav al hacer scroll.
+*/
+.site-header.header-scrolled nav {
+  @apply min-h-[3.5rem] py-0;
+}
 /* purgecss end ignore */
+
+/* 
+  Fix crítico para el contenedor del Navbar.
+  Garantiza el centrado vertical inclusive antes de que JS inyecte el contenido.
+*/
+#navbar-root {
+  @apply flex items-center justify-center w-full min-h-[80px];
+}
 
 /* 
   Estilos para el logo dentro del header.
