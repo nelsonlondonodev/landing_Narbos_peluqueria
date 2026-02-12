@@ -35,6 +35,24 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 12, 2026)
+
+### 1. Loyalty System Automation (n8n) 🤖
+*   **Workflow Integration:** Implemented the core automation logic for the Customer Loyalty Program (`fidelizacion/workflow_n8n.json`).
+*   **Structure:** Created a scalable foundation for registering clients, issuing QR codes, and syncing data with Supabase via webhook triggers.
+
+### 2. Nail Art Gallery Overhaul (High-Fidelity) 💅
+*   **Visual Upgrade:** Replaced 9 localized gallery images with high-resolution assets (converted from "Large" JPEGs).
+*   **Optimization Quality:** Shifted from standard compression to **Quality: 90 WebP**, eliminating blurriness while maintaining performance (~140KB size cap).
+*   **SEO Renaming:** Standardized filenames with semantic keywords for local search intent (e.g., `unas-acrilicas-tendencia-2026-chia.webp`, `manicure-ruso-detalle-perfecto-narbos.webp`).
+*   **Automation Script:** Created `scripts/reprocess_nails.js` to automate high-quality conversions and clean up duplicate assets.
+
+### 3. Service Cards & Bento Grid Tuning 🎨
+*   **Semantic Consistency:** Updated every card in "Uñas Spa" (`nailsServices.js`) to feature a unique, service-specific image, replacing generic placeholders.
+*   **Perfect Grid Layout:** Reordered the gallery items in `pagesData.js` to solve the "whitespace gap" issue. The layout now stacks flawlessly in a **2-column block (Mobile)** and **4-column block (Desktop)**, combining Vertical, Featured, and Square items mathematically.
+
+***
+
 ## 🔄 Recent Updates (February 11, 2026)
 
 ### 1. Critical SEO & Performance Restoration (The "White Screen" Fix) 🚑
