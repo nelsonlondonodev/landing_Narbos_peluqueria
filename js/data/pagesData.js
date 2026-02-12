@@ -676,96 +676,108 @@ export const pagesData = Object.freeze({
                 layout: 'vertical',
                 src: '../../images/pages/unas/manicure-spa.webp',
                 title: "Manicure Spa",
-                subtitle: "Relajación total",
+                subtitle: "Limpieza profunda",
                 alt: "Servicio de Manicure Spa completo"
             },
             {
                 type: 'image',
+                layout: 'featured-video',
+                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp',
+                title: "Nail Art & Diseño",
+                subtitle: "Arte a mano alzada",
+                alt: "Uñas acrílicas y diseños artísticos personalizados"
+            },
+            {
+                type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/pedicure-spa.webp',
-                title: "Pedicure Spa",
-                subtitle: "Bienestar para tus pies",
-                alt: "Pedicure Spa con masaje relajante"
+                src: '../../images/pages/unas/manicure-ruso-detalle-perfecto-narbos.webp',
+                title: "Manicure Ruso",
+                alt: "Detalle de manicure ruso con acabado impecable"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/unas/manicure-diseno-unas-glitter-elegantes-narbos-salon-spa-chia.webp',
+                title: "Diseño con Glitter",
+                alt: "Uñas decoradas con glitter y destellos"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/unas/disenos-nailart.webp',
+                title: "Tendencias 2026",
+                subtitle: "Creatividad extrema",
+                alt: "Variedad de diseños de uñas modernos"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/unas/diseno-unas-arte-mano-alzada-chia.webp',
+                title: "Nail Art",
+                alt: "Diseños personalizados hechos a mano"
             },
             {
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/unas/esmaltado-semi.webp',
                 title: "Esmaltado Semipermanente",
-                alt: "Uñas con esmaltado de larga duración"
-            },
-            {
-                type: 'image',
-                layout: 'featured-video', // Destacado para mostrar el arte
-                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp',
-                title: "Extensiones & Nail Art",
-                subtitle: "Diseños exclusivos",
-                alt: "Uñas acrílicas y diseños artísticos personalizados"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: '../../images/pages/unas/retiro-semi.webp',
-                title: "Cuidado de Uñas",
-                alt: "Retiro profesional de esmalte y cuidado"
-            },
-            {
-                type: 'image',
-                layout: 'horizontal',
-                src: '../../images/pages/unas/disenos-nailart.webp',
-                title: "Tendencias Nail Art",
-                subtitle: "Creatividad sin límites",
-                alt: "Variedad de diseños de uñas modernos"
+                alt: "Uñas con brillo de larga duración"
             }
         ]
     },
     'manicure-pedicure': {
-         gallery: [
+        gallery: [
             {
                 type: 'image',
                 layout: 'vertical',
                 src: '../../images/pages/unas/manicure-spa.webp',
                 title: "Manicure Spa",
                 subtitle: "Relajación total",
-                alt: "Servicio de Manicure Spa completo"
+                alt: "Sesión de manicure spa relajante"
+            },
+            {
+                type: 'image',
+                layout: 'featured-video',
+                src: '../../images/pages/unas/pedicure-spa-relax-experiencia-chia.webp',
+                title: "Pedicure Spa",
+                subtitle: "Bienestar para tus pies",
+                alt: "Experiencia completa de pedicure spa"
             },
             {
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/unas/pedicure-spa.webp',
-                title: "Pedicure Spa",
-                subtitle: "Bienestar para tus pies",
-                alt: "Pedicure Spa con masaje relajante"
+                title: "Salud y Estética",
+                alt: "Cuidado profesional de pies"
             },
             {
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/unas/esmaltado-semi.webp',
-                title: "Esmaltado Semipermanente",
-                alt: "Uñas con esmaltado de larga duración"
+                title: "Brillo Duradero",
+                alt: "Uñas perfectas por 21 días"
             },
             {
                 type: 'image',
-                layout: 'featured-video', // Destacado para mostrar el arte
-                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp',
-                title: "Extensiones & Nail Art",
-                subtitle: "Diseños exclusivos",
-                alt: "Uñas acrílicas y diseños artísticos personalizados"
+                layout: 'horizontal',
+                src: '../../images/pages/unas/manicura-perfecta-tono-vino-elegante-narbos-salon-spa-chia.webp',
+                title: "Clásicos Elegantes",
+                subtitle: "Tono vino profundo",
+                alt: "Manicura elegante en color vino"
             },
             {
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/unas/retiro-semi.webp',
-                title: "Cuidado de Uñas",
-                alt: "Retiro profesional de esmalte y cuidado"
+                title: "Cuidado Técnico",
+                alt: "Retiro seguro de semipermanente"
             },
             {
                 type: 'image',
-                layout: 'horizontal',
-                src: '../../images/pages/unas/disenos-nailart.webp',
-                title: "Tendencias Nail Art",
-                subtitle: "Creatividad sin límites",
-                alt: "Variedad de diseños de uñas modernos"
+                layout: 'square',
+                src: '../../images/pages/unas/manicure-diseno-premium-narbos-salon-spa-chia-cundinamarca-belleza-integral.webp',
+                title: "Belleza Integral",
+                alt: "Detalle de manicura de alta calidad"
             }
         ]
     },
