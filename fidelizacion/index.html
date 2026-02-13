@@ -9,15 +9,34 @@
     
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="icon" type="image/webp" href="../images/brand/favicon_narbos.webp" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    
+    <!-- Optimización LCP: Precarga del Logo -->
+    <link rel="preload" as="image" href="../images/brand/logo_narbos.webp" fetchpriority="high">
+
+    <!-- Fuentes de Google: Carga no bloqueante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    
+    <!-- CSS Externos: Carga no bloqueante -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'" />
+    
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    </noscript>
 </head>
 <body class="bg-brand-light/20 font-sans min-h-screen flex flex-col">
     
     <!-- Header Minimalista Consistente -->
     <header class="site-header flex justify-center items-center">
         <a href="../" class="transition-transform duration-300 hover:scale-105">
-            <img src="../images/brand/logo_narbos.webp" alt="Logo Narbo's" class="h-12 w-auto md:h-14">
+            <img src="../images/brand/logo_narbos.webp" 
+                 alt="Logo Narbo's" 
+                 class="h-12 w-auto md:h-14"
+                 width="280" height="56"
+                 fetchpriority="high"
+                 decoding="async">
         </a>
     </header>
 
