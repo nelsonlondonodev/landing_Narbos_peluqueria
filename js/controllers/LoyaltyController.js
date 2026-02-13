@@ -60,8 +60,21 @@ export class LoyaltyController {
      * @returns {Object}
      */
     _prepareData(formData) {
+        const rawData = Object.fromEntries(formData.entries());
+        
+        // Normalización de WhatsApp para usuarios colombianos
+        if (rawData.whatsapp) {
+            let phone = rawData.whatsapp.replace(/\D/g, ''); // Quitar todo lo que no sea número
+            // Si tiene 10 dígitos y no empieza por 57, asumimos Colombia (+57)
+            if (phone.length === 10 && !phone.startsWith('57')) {
+                rawData.whatsapp = `+57${phone}`;
+            } else if (!rawData.whatsapp.startsWith('+')) {
+                rawData.whatsapp = `+${phone}`;
+            }
+        }
+
         return {
-            ...Object.fromEntries(formData.entries()),
+            ...rawData,
             source: 'Fidelizacion Page',
             timestamp: new Date().toISOString(),
             url: window.location.href
