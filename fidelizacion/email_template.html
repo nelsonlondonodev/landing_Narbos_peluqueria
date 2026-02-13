@@ -29,8 +29,18 @@
                 <p style="margin: 10px 0 0 0; font-size: 24px; font-weight: 600; color: #5B4636;">{{ $node["Generador de Cupón"].json["coupon_code"] }}</p>
             </div>
 
+            <!-- QR Code Section -->
+            <div style="margin: 30px 0; text-align: center;">
+                <div style="display: inline-block; padding: 15px; background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://n8n.srv1033442.hstgr.cloud/webhook/canje-QR?code={{ $node['Generador de Cupón'].json['coupon_code'] }}" 
+                         alt="Código QR de Descuento" 
+                         style="width: 180px; height: 180px; display: block;">
+                </div>
+                <p style="font-size: 13px; color: #999999; margin-top: 10px;">Escanea este código en el salón</p>
+            </div>
+
             <p style="font-size: 16px; line-height: 1.6; color: #666666; margin-bottom: 10px;">
-                Presenta este código o el <b>código QR adjunto</b> en recepción para disfrutar de tu beneficio.
+                Muestra este código en recepción para disfrutar de tu beneficio exclusivo.
             </p>
             
             <a href="https://wa.me/573059298379" style="display: inline-block; background-color: #6C7053; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 30px; font-weight: 600; margin-top: 20px;">Reservar Cita</a>
