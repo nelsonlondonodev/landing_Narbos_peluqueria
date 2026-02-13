@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /_templates/
 Disallow: /lang/
+Disallow: /fidelizacion/
 
 Sitemap: https://narbossalon.com/sitemap.xml

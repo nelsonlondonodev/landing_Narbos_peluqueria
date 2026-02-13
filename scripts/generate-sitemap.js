@@ -26,7 +26,7 @@ function getHtmlFiles(dir, fileList = [], rootDir = dir) {
         const stat = fs.statSync(filePath);
 
         if (stat.isDirectory()) {
-            if (file !== 'node_modules' && file !== 'dist' && file !== '.git' && file !== '_templates' && file !== 'css' && file !== 'js' && file !== 'images' && file !== 'video' && file !== 'scripts' && file !== 'lang') {
+            if (file !== 'node_modules' && file !== 'dist' && file !== '.git' && file !== '_templates' && file !== 'css' && file !== 'js' && file !== 'images' && file !== 'video' && file !== 'scripts' && file !== 'lang' && file !== 'fidelizacion') {
                 getHtmlFiles(filePath, fileList, rootDir);
             }
         } else {
