@@ -677,3 +677,30 @@ body.modal-open-layer-fix #app-wrapper {
     filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
 }
 /* --- FIN: OPTIMIZACIÓN GLightbox --- */
+/* --- INICIO: ESTILOS PROGRAMA DE FIDELIZACIÓN --- */
+.fidelizacion-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(197, 171, 148, 0.3);
+}
+
+.loyalty-input {
+    border-bottom: 2px solid var(--color-brand-medium);
+    transition: border-color 0.3s ease;
+    @apply w-full bg-transparent p-3 outline-none;
+}
+
+.loyalty-input:focus {
+    border-bottom-color: var(--color-brand-green);
+}
+
+/* Animación spin para el botón de carga */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+/* --- FIN: ESTILOS PROGRAMA DE FIDELIZACIÓN --- */
