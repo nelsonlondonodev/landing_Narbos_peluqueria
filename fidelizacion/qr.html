@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Club Narbo's | Código QR</title>
-    <!-- Privacidad: Uso exclusivo en salón -->
+    <title>Acceso Staff | Código QR Narbo's</title>
+    <!-- Privacidad: Uso exclusivo del equipo Narbo's -->
     <meta name="robots" content="noindex, nofollow">
     
     <link rel="stylesheet" href="../css/styles.css">
@@ -19,79 +19,115 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <style>
-        .qr-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 2rem;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        .qr-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(107, 117, 90, 0.15);
+            border: 1px solid rgba(107, 117, 90, 0.1);
         }
         .qr-frame {
-            border: 8px solid #6B755A; /* brand-green color from current project */
-            border-radius: 1.5rem;
-            padding: 1rem;
+            border: 1px solid rgba(107, 117, 90, 0.2);
+            padding: 1.5rem;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+        #qr-loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #6B755A;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body class="bg-brand-light/10 font-sans min-h-screen flex flex-col items-center justify-center p-4">
+<body class="bg-[#F9FAF8] font-sans min-h-screen flex flex-col items-center justify-center p-6 sm:p-12">
 
     <!-- Header / Logo -->
-    <div class="mb-8 animate__animated animate__fadeInDown">
-        <img src="../images/brand/logo_narbos.webp" alt="Logo Narbo's" class="h-16 w-auto" width="280" height="56">
-    </div>
+    <header class="mb-12 animate__animated animate__fadeInDown">
+        <a href="../" title="Ir al inicio">
+            <img src="../images/brand/logo_narbos.webp" alt="Logo Narbo's" class="h-14 w-auto md:h-16" width="280" height="56">
+        </a>
+    </header>
 
-    <!-- Main QR Card -->
-    <main class="w-full max-w-md text-center">
-        <div class="qr-container animate__animated animate__zoomIn">
-            <h1 class="text-3xl font-serif font-bold text-brand-gray-dark mb-2">Únete al Club</h1>
-            <p class="text-brand-gray-dark/60 mb-8 font-medium">Escanea este código para registrarte y recibir tus beneficios.</p>
+    <!-- Main Content -->
+    <main class="w-full max-w-lg text-center">
+        <div class="qr-card animate__animated animate__zoomIn">
+            <div class="mb-8">
+                <span class="text-brand-green font-bold text-xs tracking-[0.3em] uppercase mb-3 block">Herramienta de Captura</span>
+                <h1 class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark leading-tight">Acceso Clientes</h1>
+                <div class="w-12 h-1 bg-brand-green/20 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <p class="text-brand-gray-dark/60 mb-10 text-sm md:text-base font-medium leading-relaxed">
+                Muestra este código al cliente para que se registre en el <span class="text-brand-green font-bold italic">Club Narbo's</span> y obtenga sus beneficios.
+            </p>
             
-            <div class="qr-frame inline-block mb-8 bg-white">
+            <div class="qr-frame relative inline-block mb-10 group transition-transform hover:scale-[1.02] duration-500">
+                <!-- Loader placeholder -->
+                <div id="qr-spinner" class="absolute inset-0 flex items-center justify-center bg-white rounded-2xl z-10">
+                    <div id="qr-loader"></div>
+                </div>
+                
                 <img id="qr-image" 
                      src="" 
                      alt="Código QR de Registro" 
-                     class="w-64 h-64 md:w-80 md:h-80"
+                     class="w-64 h-64 md:w-72 md:h-72 opacity-0 transition-opacity duration-700"
                      loading="eager">
+                
+                <!-- Overlay discreto para mejor contraste -->
+                <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-brand-green/10 rounded-full blur-xl -z-10 group-hover:scale-150 transition-transform"></div>
             </div>
 
-            <div class="space-y-2">
-                <p class="text-brand-green font-bold text-lg tracking-widest uppercase">¡Beneficios Exclusivos!</p>
-                <div class="flex justify-center gap-4 text-brand-gray-dark/40">
-                    <span class="text-xs">✨ Descuentos</span>
-                    <span class="text-xs">✨ Sorpresas</span>
-                    <span class="text-xs">✨ Puntos</span>
-                </div>
+            <div class="space-y-3 pt-4 border-t border-brand-green/5">
+                <p class="text-brand-green font-bold text-xs tracking-widest uppercase">Beneficio Activo</p>
+                <p class="text-xl font-serif font-bold text-brand-gray-dark italic">10% OFF Bienvenida</p>
             </div>
         </div>
         
-        <!-- Botón de retorno discreto -->
-        <a href="./" class="mt-8 inline-block text-brand-gray-dark/30 hover:text-brand-green transition-colors text-sm font-medium">
-            &larr; Ir al Formulario
-        </a>
+        <!-- Navegación Staff -->
+        <nav class="mt-12 space-y-4">
+            <a href="./" class="inline-flex items-center gap-2 text-brand-gray-dark/40 hover:text-brand-green transition-all text-sm font-semibold group">
+                <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                Volver al Formulario
+            </a>
+        </nav>
     </main>
 
-    <footer class="mt-12 text-brand-gray-dark/40 text-xs">
-        &copy; 2026 Narbo's Salón Spa
+    <footer class="mt-20 text-brand-gray-dark/30 text-[10px] tracking-widest uppercase font-bold">
+        &copy; 2026 Narbo's Salón Spa &bull; Acceso Privado
     </footer>
 
     <script type="module">
         /**
          * Genera el QR dinámicamente basado en la URL de la página de registro.
-         * Esto asegura que funcione en localhost, stagging y producción sin cambios manuales.
+         * Optimizamos la visualización con un loader suave.
          */
         function initQRGenerator() {
             const qrImage = document.getElementById('qr-image');
+            const qrSpinner = document.getElementById('qr-spinner');
             
-            // Forzamos la URL de producción para que sea escaneable desde cualquier móvil
-            // incluso si estamos probando en local.
             const productionUrl = 'https://narbossalon.com/fidelizacion/';
-            
-            // Codificamos la URL para el API de QR
             const encodedUrl = encodeURIComponent(productionUrl);
-            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&color=2D2D2D&format=svg&data=${encodedUrl}`;
+            
+            // Usamos SVG para máxima nitidez en cualquier pantalla
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=600x600&color=2D2D2D&format=svg&qzone=1&data=${encodedUrl}`;
+            
+            qrImage.onload = () => {
+                qrImage.classList.replace('opacity-0', 'opacity-100');
+                qrSpinner.classList.add('hidden');
+            };
             
             qrImage.src = qrApiUrl;
             
-            console.log(`[QR Generator] URL apuntando a: ${productionUrl}`);
+            console.log(`[Staff Tools] QR generado con éxito para: ${productionUrl}`);
         }
 
         document.addEventListener('DOMContentLoaded', initQRGenerator);
