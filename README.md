@@ -37,14 +37,34 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 ## 🔄 Recent Updates (February 12, 2026)
 
-### 1. Loyalty System Automation (End-to-End) 🤖
-*   **Landing Page:** Created a dedicated registration page at `/fidelizacion/` with a high-conversion form and instant feedback.
-*   **Workflow Automation (n8n):** Implemented a complete lifecycle workflow (`fidelizacion/workflow_n8n.json`):
-    *   **Webhook Trigger:** Captures user data securely from the frontend.
-    *   **Coupon Generation:** Creates unique, trackable discount codes (e.g., `NARBO-XXXX`) via custom JavaScript logic.
-    *   **QR Code Generation:** Generates a dynamic QR code containing a **"magic link"** for instant redemption validation by staff.
-    *   **Email Notification:** Sends a branded, premium HTML email to the customer with their unique code and QR attached.
-*   **Database Integration:** Stores all customer data and coupon status in **Supabase** for persistence and future validation logic.
+### 1. Loyalty System Automation (Complete) 🤖
+
+A fully automated customer retention system integrated with Supabase, n8n, and Gmail.
+
+#### 🏗️ Architecture & Flow:
+1.  **Frontend (`/fidelizacion/`):**
+    *   Registration form capturing: `Name`, `Email`, `WhatsApp`, `Birthday`.
+    *   Sends `POST` request to n8n Webhook.
+    *   Responsive design optimized for Mobile/Tablet/Desktop.
+2.  **Automation Engine (n8n):**
+    *   **Webhook:** Receives form data.
+    *   **Code Node:** Generates unique coupon (`NARBO-XXXX + Initials`).
+    *   **Supabase:** Stores customer profile (including Birthday).
+    *   **QR Generator:** Creates scan link for staff validation.
+    *   **Gmail:** Sends welcome email with coupon & QR.
+3.  **Scheduled Retention:**
+    *   **Daily Cron (8 AM):** Checks Supabase for birthdays matching today's date (`MM-DD`).
+    *   **Birthday Email:** Sends automated "15% OFF" gift to matching users.
+    *   **Reminder Email:** Checks for unredeemed coupons > 5 months old and sends a "Don't miss out" reminder.
+
+#### 🛠️ Technical Details:
+*   **Supabase Table:** `clientes_fidelizacion`
+    *   Fields: `id`, `created_at`, `nombre`, `email`, `whatsapp`, `birthday`, `codigo_descuento`, `canjeado`, `fecha_canje`.
+*   **Templates:**
+    *   `fidelizacion/birthday_email_template.html` (Uses PNG logo for Gmail compatibility).
+    *   `fidelizacion/reminder_email_template.html` (Uses PNG logo).
+*   **Staff Tools:**
+    *   `/fidelizacion/qr.html`: Private page for staff to scan customer QRs.
 
 ### 2. Nail Art Gallery Overhaul (High-Fidelity) 💅
 *   **Visual Upgrade:** Replaced 9 localized gallery images with high-resolution assets (converted from "Large" JPEGs).
