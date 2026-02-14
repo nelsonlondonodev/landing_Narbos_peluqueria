@@ -28,8 +28,8 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         <div class="desktop-menu flex items-center space-x-8 max-md:hidden pl-8">
             ${navLink(isHome ? '#' : basePath, 'Inicio')}
             ${renderMegaMenuDesktop(menuCategories)}
-            ${navLink(basePath + 'nosotros.html', 'Nosotros')}
-            ${navLink(basePath + 'contacto.html', 'Contacto')}
+            ${navLink(basePath + 'nosotros/', 'Nosotros')}
+            ${navLink(basePath + 'contacto/', 'Contacto')}
             <a href="${basePath}blog/" class="text-white hover:text-brand-gold active:text-brand-gold font-medium">Blog</a>
         </div>
 
@@ -44,8 +44,8 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         <div class="flex flex-col p-4 space-y-1">
             ${navLink(isHome ? '#' : basePath, 'Inicio', true)}
             ${renderMegaMenuMobile(menuCategories)}
-            ${navLink(basePath + 'nosotros.html', 'Nosotros', true)}
-            ${navLink(basePath + 'contacto.html', 'Contacto', true)}
+            ${navLink(basePath + 'nosotros/', 'Nosotros', true)}
+            ${navLink(basePath + 'contacto/', 'Contacto', true)}
             <a href="${basePath}blog/" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50">Blog</a>
         </div>
     </div>
