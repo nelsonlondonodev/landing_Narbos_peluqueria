@@ -43,53 +43,113 @@
     <!-- Espaciador para Header Fijo -->
     <div class="h-24 md:h-28"></div>
 
-    <main class="flex-grow flex items-center justify-center px-6 py-12">
-        <!-- Wrapper para controlar el contexto de apilamiento y animaciones -->
-        <div id="app-wrapper" class="relative w-full max-w-lg">
+    <main class="flex-grow flex items-center justify-center px-6 py-12 md:py-20">
+        <!-- Wrapper adaptativo con Grid de 2 columnas en Desktop -->
+        <div id="app-wrapper" class="relative w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
-            <div class="fidelizacion-card p-8 md:p-12 rounded-3xl shadow-2xl animate__animated animate__fadeInUp">
-                <div class="text-center mb-10">
-                    <h1 class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark mb-4">Bienvenida al Club Narbo's</h1>
-                    <p class="text-brand-gray-dark/70">Regístrate hoy y recibe un beneficio exclusivo en tu próxima visita.</p>
+            <!-- Columna Izquierda: Reglas y Beneficios (Copy persuasivo) -->
+            <div class="order-2 lg:order-1 space-y-8 animate__animated animate__fadeInLeft">
+                <div class="space-y-4">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-gray-dark leading-tight">
+                        Exclusividad y Cuidado para <span class="text-brand-green">nuestros clientes.</span>
+                    </h2>
+                    <p class="text-lg text-brand-gray-dark/70 max-w-md">
+                        El Club Narbo's es nuestra forma de decir "Gracias" por confiar tu belleza en nuestras manos.
+                    </p>
                 </div>
 
-                <!-- Formulario Refactorizado -->
-                <form id="fidelizacion-form" class="space-y-6" novalidate>
+                <div class="space-y-6">
+                    <!-- Beneficio Principal -->
+                    <div class="flex items-start gap-4 p-5 rounded-3xl bg-brand-green/5 border border-brand-green/20 shadow-sm animate__animated animate__pulse animate__infinite animate__slow">
+                        <div class="bg-brand-green p-3 rounded-2xl text-white shadow-lg shadow-brand-green/20">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-brand-gray-dark text-xl uppercase tracking-tighter text-brand-green">10% DE DESCUENTO</h3>
+                            <p class="text-sm text-brand-gray-dark/60 font-medium leading-relaxed">Recibe una atención especial de bienvenida con un 10% de descuento en tu próximo servicio.</p>
+                        </div>
+                    </div>
+
+                    <!-- Regla 1 -->
+                    <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-white/50 transition-colors border-l-4 border-transparent hover:border-brand-green/30">
+                        <div class="bg-brand-green/10 p-3 rounded-xl text-brand-green">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-brand-gray-dark italic text-lg leading-none mb-1">Solo para Clientes Recurrentes</h3>
+                            <p class="text-xs text-brand-gray-dark/60">Este beneficio es un reconocimiento a la fidelidad de quienes ya viven la experiencia Narbo's.</p>
+                        </div>
+                    </div>
+
+                    <!-- Regla 2 -->
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white shadow-sm border-l-4 border-brand-green">
+                        <div class="bg-brand-green p-3 rounded-xl text-white shadow-lg shadow-brand-green/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-brand-gray-dark italic text-lg leading-none mb-1 decoration-brand-green/30">Vigencia de 6 Meses</h3>
+                            <p class="text-xs text-brand-gray-dark/60">Cada cupón tiene una validez de seis meses a partir de su emisión en el salón.</p>
+                        </div>
+                    </div>
+
+                    <!-- Regla 3 -->
+                    <div class="flex items-start gap-4 p-4 rounded-2xl hover:bg-white/50 transition-colors border-l-4 border-transparent hover:border-brand-green/30">
+                        <div class="bg-brand-green/10 p-3 rounded-xl text-brand-green">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-brand-gray-dark italic text-lg">Cupón QR Personalizado</h3>
+                            <p class="text-sm text-brand-gray-dark/60">Recibe tu código digital y preséntalo en el salón para validar tu beneficio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Tarjeta de Formulario -->
+            <div class="order-1 lg:order-2 bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl animate__animated animate__fadeInRight relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-green/5 rounded-full blur-3xl"></div>
+
+                <div class="text-center mb-8">
+                    <p class="text-brand-green font-bold text-xs tracking-widest uppercase mb-2 ml-1 animate-pulse">Especial para ti</p>
+                    <h1 class="text-3xl font-serif font-bold text-brand-gray-dark">Club Narbo's 10% OFF</h1>
+                </div>
+
+                <!-- Formulario -->
+                <form id="fidelizacion-form" class="space-y-5" novalidate>
                     <div class="form-group">
-                        <label for="name" class="block text-sm font-bold text-brand-green uppercase tracking-wider mb-2">Nombre Completo</label>
-                        <input type="text" id="name" name="name" required class="loyalty-input" placeholder="Tu nombre...">
+                        <label for="name" class="block text-xs font-bold text-brand-gray-dark/50 uppercase tracking-widest mb-1.5 ml-1">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required class="loyalty-input w-full" placeholder="Tu nombre...">
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="block text-sm font-bold text-brand-green uppercase tracking-wider mb-2">Correo Electrónico</label>
-                        <input type="email" id="email" name="email" required class="loyalty-input" placeholder="ejemplo@correo.com">
+                        <label for="email" class="block text-xs font-bold text-brand-gray-dark/50 uppercase tracking-widest mb-1.5 ml-1">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required class="loyalty-input w-full" placeholder="ejemplo@correo.com">
                     </div>
 
                     <div class="form-group">
-                        <label for="whatsapp" class="block text-sm font-bold text-brand-green uppercase tracking-wider mb-2">WhatsApp</label>
-                        <input type="tel" id="whatsapp" name="whatsapp" required class="loyalty-input" placeholder="300 000 0000">
+                        <label for="whatsapp" class="block text-xs font-bold text-brand-gray-dark/50 uppercase tracking-widest mb-1.5 ml-1">WhatsApp</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" required class="loyalty-input w-full" placeholder="300 000 0000">
                     </div>
 
-                    <div class="pt-4">
-                        <button type="submit" id="submit-btn" class="w-full bg-brand-green text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-brand-gray-dark transition-all transform hover:-translate-y-1 focus:ring-4 focus:ring-brand-green/20 outline-none">
+                    <div class="pt-6">
+                        <button type="submit" id="submit-btn" class="w-full bg-brand-green text-white py-4 rounded-2xl font-bold text-lg shadow-xl hover:bg-brand-gray-dark transition-all transform hover:-translate-y-1 active:scale-95 focus:ring-4 focus:ring-brand-green/20 outline-none">
                             Obtener mi Descuento
                         </button>
                     </div>
                 </form>
 
-                <!-- Mensaje de éxito (Oculto inicialmente) -->
-                <div id="success-msg" class="hidden text-center py-8 animate__animated animate__zoomIn">
-                    <div class="bg-brand-green/10 p-6 rounded-2xl mb-6">
-                        <svg class="w-16 h-16 text-brand-green mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <h2 class="text-2xl font-serif font-bold text-brand-gray-dark mb-2">¡Registro Exitoso!</h2>
-                        <p class="text-brand-gray-dark/70">Revisa tu correo electrónico para descargar tu código QR personalizado.</p>
+                <!-- Mensaje de éxito (Oculto) -->
+                <div id="success-msg" class="hidden text-center py-10 animate__animated animate__zoomIn">
+                    <div class="bg-brand-green/10 p-8 rounded-3xl mb-8 border border-brand-green/20">
+                        <div class="w-20 h-20 bg-brand-green text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-brand-green/30">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-brand-gray-dark mb-3">¡Registro Éxitoso!</h2>
+                        <p class="text-brand-gray-dark/70">Tu cupón de <span class="text-brand-green font-bold text-xl leading-none">10% DE DESCUENTO</span> está en camino. Revisa tu correo y recuerda que es válido por <span class="text-brand-green font-bold">6 meses</span>.</p>
                     </div>
-                    <p class="text-sm font-medium text-brand-gray-dark italic">"Nos vemos pronto en tu próxima experiencia Narbo's"</p>
+                    <p class="text-sm font-serif italic text-brand-gray-dark/40">"Nos vemos pronto en Narbo's Salón Spa"</p>
                 </div>
             </div>
-            
         </div>
     </main>
 
