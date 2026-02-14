@@ -493,6 +493,24 @@ Para garantizar la estabilidad visual y el correcto funcionamiento del menú mó
 - **Actualización de Stack:** Se ha programado la actualización de **Tailwind CSS a la versión v4.x** para enero de 2026.
     - *Nota:* Se ha **congelado** la refactorización profunda de CSS (safelist/config) hasta esa fecha para garantizar la estabilidad del sitio durante la temporada de fin de año.
 
+### 📝 Últimas Actualizaciones (14 de febrero, 2026)
+- **Saneamiento SEO y URLs Limpias:**
+    - Se eliminaron todas las referencias físicas a `index.html` en los controladores de JavaScript (`service-page.js`, `nails-page.js`, `hair-page.js`) y el componente `Navbar.js`.
+    - Ahora el sitio utiliza al 100% rutas amigables basadas en directorios (`/servicios/peluqueria/` en lugar de `/servicios/peluqueria/index.html`), optimizando el presupuesto de rastreo de Google (Crawl Budget).
+- **Corrección de Sitemap:**
+    - Se arregló un bug crítico en el script `generate-sitemap.js` que generaba URLs malformadas (faltante de slash).
+    - El sitemap ahora se autovalida y normaliza todas las rutas antes de la exportación.
+- **Optimización Preventiva de CLS (Brands):**
+    - Se implementó una reserva de espacio (`min-height`) para el contenedor `#home-brands-root` en la home, eliminando el salto de contenido (Layout Shift) al cargar dinámicamente el carrusel de marcas premium.
+- **Producción y Cache Busting:**
+    - Se generó un nuevo Build de producción forzando la actualización de activos mediante nuevos hashes de versión (`styles.ccb77b7a.css`, `main.1c1fcd57.js`), garantizando que las mejoras de hoy sean visibles de inmediato para todos los usuarios.
+
+### 📝 Últimas Actualizaciones (13 de febrero, 2026)
+- **Finalización del Sistema de Fidelización:**
+    - Se optimizó el flujo de correos (n8n) reemplazando logos SVG por PNG para máxima compatibilidad con clientes de correo móviles.
+    - Se centralizó el código QR en el cuerpo del email y se mejoró la UX del formulario con prefijos telefónicos automáticos (`+57`).
+    - Despliegue de las reglas de seguridad `noindex` para la sección de fidelización en `robots.txt`.
+
 ### 📝 Últimas Actualizaciones (25 de diciembre, 2025)
 - **Mejoras de UX y Rendimiento (ReviewsCarousel):**
     - Se eliminó por completo el **CLS (Cumulative Layout Shift)** en el carrusel de testimonios implementando una técnica moderna de **CSS Grid Stack**.
