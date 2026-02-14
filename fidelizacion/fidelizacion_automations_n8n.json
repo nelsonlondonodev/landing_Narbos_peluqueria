@@ -1,0 +1,148 @@
+{
+  "name": "Narbo's: Automatizaciones de Retención",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": "0 8 * * *"
+      },
+      "id": "trigger-daily",
+      "name": "Cron Diario (8 AM)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "table": "clientes_fidelizacion",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "key": "birthday",
+              "operator": "equal",
+              "value": "={{ $now.format('MM-DD') }}"
+            }
+          ]
+        }
+      },
+      "id": "supabase-birthday",
+      "name": "Supabase: Buscar Cumpleaños",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [300, 200]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "table": "clientes_fidelizacion",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "key": "created_at",
+              "operator": "lessThanOrEqual",
+              "value": "={{ $now.minus({days: 150}).toISO() }}"
+            },
+            {
+              "key": "estado",
+              "operator": "equal",
+              "value": "activo"
+            }
+          ]
+        }
+      },
+      "id": "supabase-reminder",
+      "name": "Supabase: Buscar Vencimientos",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [300, 450]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $node[\"Supabase: Buscar Cumpleaños\"].json[\"email\"] }}",
+        "subject": "¡Feliz Cumpleaños! Un regalo especial de Narbo's 🎂",
+        "html": "={{ $node[\"Fetch Template Birthday\"].json[\"text\"] }}",
+        "options": {}
+      },
+      "id": "email-birthday",
+      "name": "Gmail: Enviar Regalo Cumple",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [700, 200]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $node[\"Supabase: Buscar Vencimientos\"].json[\"email\"] }}",
+        "subject": "¡Tu beneficio de Narbo's expira pronto! ⏳",
+        "html": "={{ $node[\"Fetch Template Reminder\"].json[\"text\"] }}",
+        "options": {}
+      },
+      "id": "email-reminder",
+      "name": "Gmail: Enviar Recordatorio",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [700, 450]
+    },
+    {
+      "parameters": {
+        "url": "https://narbossalon.com/fidelizacion/birthday_email_template.html",
+        "options": {}
+      },
+      "id": "fetch-birthday",
+      "name": "Fetch Template Birthday",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [500, 200]
+    },
+    {
+      "parameters": {
+        "url": "https://narbossalon.com/fidelizacion/reminder_email_template.html",
+        "options": {}
+      },
+      "id": "fetch-reminder",
+      "name": "Fetch Template Reminder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [500, 450]
+    }
+  ],
+  "connections": {
+    "Cron Diario (8 AM)": {
+      "main": [
+        [
+          { "node": "Supabase: Buscar Cumpleaños", "type": "main", "index": 0 },
+          { "node": "Supabase: Buscar Vencimientos", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Supabase: Buscar Cumpleaños": {
+      "main": [
+        [
+          { "node": "Fetch Template Birthday", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Fetch Template Birthday": {
+      "main": [
+        [
+          { "node": "Gmail: Enviar Regalo Cumple", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Supabase: Buscar Vencimientos": {
+      "main": [
+        [
+          { "node": "Fetch Template Reminder", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Fetch Template Reminder": {
+      "main": [
+        [
+          { "node": "Gmail: Enviar Recordatorio", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  }
+}
