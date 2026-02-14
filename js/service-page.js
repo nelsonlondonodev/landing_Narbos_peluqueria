@@ -91,7 +91,7 @@ class ServicePageManager {
         if (path.includes('contacto')) return 'contacto';
 
         // Hub Principal Peluquería (Fallback si está en path)
-        if (path.includes('peluqueria') || path.includes('index.html')) return 'peluqueria';
+        if (path.includes('peluqueria')) return 'peluqueria';
 
         return null; // No matching page config
     }
@@ -465,19 +465,19 @@ class ServicePageManager {
         if (!root || !this.pageKey) return;
         
         const path = window.location.pathname;
-        const items = [{ label: 'Inicio', link: '../../index.html' }];
+        const items = [{ label: 'Inicio', link: '../../' }];
 
         // Lógica simplificada basada en PageKey o Path
         if (path.includes('/peluqueria/')) this.addHairBreadcrumbs(items);
         else if (path.includes('/barberia/')) this.addBarberBreadcrumbs(items);
         else if (path.includes('/estetica/')) this.addEstheticsBreadcrumbs(items);
-        else if (path.includes('/unas-spa/')) items.push({ label: 'Uñas', link: '../../servicios/unas-spa/index.html' });
+        else if (path.includes('/unas-spa/')) items.push({ label: 'Uñas', link: '../../servicios/unas-spa/' });
 
         root.innerHTML = new Breadcrumbs(items).render();
     }
 
     addHairBreadcrumbs(items) {
-        items.push({ label: 'Peluquería', link: '../../servicios/peluqueria/index.html' });
+        items.push({ label: 'Peluquería', link: '../../servicios/peluqueria/' });
         // Mapeo PageKey -> Etiqueta
         const labels = {
             'cortes-de-pelo': 'Cortes',
@@ -491,14 +491,14 @@ class ServicePageManager {
     }
 
     addBarberBreadcrumbs(items) {
-        items.push({ label: 'Barbería', link: '../../servicios/barberia/index.html' });
+        items.push({ label: 'Barbería', link: '../../servicios/barberia/' });
         if (this.pageKey === 'barberia-cortes-hombre') {
             items.push({ label: 'Cortes de Hombre', link: '#' });
         }
     }
 
     addEstheticsBreadcrumbs(items) {
-         items.push({ label: 'Estética', link: '../../servicios/estetica/index.html' });
+         items.push({ label: 'Estética', link: '../../servicios/estetica/' });
          const labels = {
             'spa-facial-integral': 'Spa Facial Integral',
             'limpieza-facial': 'Limpieza Facial',

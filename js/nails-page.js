@@ -119,7 +119,7 @@ function initBreadcrumbs() {
 
     const currentPath = window.location.pathname;
     const items = [
-        { label: 'Inicio', link: '../../index.html' }
+        { label: 'Inicio', link: '../../' }
     ];
 
     const isIndex = currentPath.endsWith('/unas-spa/') || currentPath.endsWith('/unas-spa/index.html');
@@ -127,7 +127,7 @@ function initBreadcrumbs() {
     // Level 2: Hub
     items.push({ 
         label: 'Uñas y Spa', 
-        link: isIndex ? '#' : '../../servicios/unas-spa/index.html' 
+        link: isIndex ? '#' : '../../servicios/unas-spa/' 
     });
 
     // Level 3: Subpages

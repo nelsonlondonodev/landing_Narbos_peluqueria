@@ -119,7 +119,7 @@ function initBreadcrumbs() {
 
     const currentPath = window.location.pathname;
     const items = [
-        { label: 'Inicio', link: '../../index.html' }
+        { label: 'Inicio', link: '../../' }
     ];
 
     const isIndex = currentPath.endsWith('/peluqueria/') || currentPath.endsWith('/peluqueria/index.html');
@@ -127,7 +127,7 @@ function initBreadcrumbs() {
     // Level 2: Hub
     items.push({ 
         label: 'Peluquería', 
-        link: isIndex ? '#' : '../../servicios/peluqueria/index.html' 
+        link: isIndex ? '#' : '../../servicios/peluqueria/' 
     });
 
     // Level 3: Subpages

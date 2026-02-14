@@ -42,7 +42,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         ${renderMobileMenuHeader()}
         
         <div class="flex flex-col p-4 space-y-1">
-            ${navLink(isHome ? '#' : basePath + 'index.html', 'Inicio', true)}
+            ${navLink(isHome ? '#' : basePath, 'Inicio', true)}
             ${renderMegaMenuMobile(menuCategories)}
             ${navLink(basePath + 'nosotros.html', 'Nosotros', true)}
             ${navLink(basePath + 'contacto.html', 'Contacto', true)}

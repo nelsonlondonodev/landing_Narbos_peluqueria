@@ -72,12 +72,15 @@ function generateSitemap() {
     allHtmlFiles.forEach(file => {
         let urlPath = file;
         
-        // Normalizar index.html a raíz '/' si es el home, o '/carpeta/'
+        // 1. Normalizar index.html
         if (urlPath === 'index.html') {
             urlPath = '/';
         } else if (urlPath.endsWith('/index.html')) {
             urlPath = urlPath.replace('index.html', '');
-        } else if (!urlPath.startsWith('/')) {
+        }
+
+        // 2. Asegurar que empiece con /
+        if (!urlPath.startsWith('/')) {
             urlPath = '/' + urlPath;
         }
 
@@ -86,9 +89,6 @@ function generateSitemap() {
         if (file in priorityMap) {
             priority = priorityMap[file];
         } else if (file.includes('blog/articles')) {
-             // Los artículos se manejan mejor desde el array de datos para tener fechas reales, 
-             // pero aquí capturamos los físicos por seguridad. 
-             // Verificaremos duplicados abajo.
              priority = '0.7'; 
         }
 
