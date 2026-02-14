@@ -16,6 +16,14 @@
  * @type {PagesConfig}
  */
 export const pagesData = Object.freeze({
+    'home': {
+        metaTitle: "Narbo's Salón Spa | Peluquería, Barbería y Estética en Chía",
+        metaDescription: "Bienvenida a Narbo's Salón Spa en Chía. Expertos en Balayage, Barbería Premium, Uñas Spa y Estética Facial. Reserva tu cita hoy y vive una experiencia única.",
+    },
+    'blog': {
+        metaTitle: "Blog de Belleza y Bienestar | Consejos Narbo's Salón Chía",
+        metaDescription: "Descubre tips de cuidado capilar, tendencias en coloración, mitos sobre el corte de pelo y mucho más en el blog oficial de Narbo's Salón Spa.",
+    },
     'peluqueria': {
         hero: {
             title: "Peluquería en Chía: expertos en estilo, color y bienestar",
@@ -229,6 +237,14 @@ export const pagesData = Object.freeze({
         ]
     },
     'balayage-mechas': {
+        hero: {
+            title: "Balayage y Mechas en Chía: Expertos en Iluminación",
+            subtitle: "Técnicas avanzadas de aclaración, babylights y contornos para un rubio espectacular.",
+            imageSrc: "../../images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
+            imageAlt: "Diseño de balayage profesional en Narbo's Salon"
+        },
+        metaTitle: "Balayage y Mechas en Chía | Especialistas en Rubios | Narbo's",
+        metaDescription: "Consigue el rubio de tus sueños con nuestras técnicas de Balayage, Mechas y Babylights en Chía. Expertos en iluminación capilar y salud de tu fibra.",
         gallery: [
              // Caso Estrella: Corrección Rubio Extremo
              {
@@ -338,8 +354,14 @@ export const pagesData = Object.freeze({
         ]
     },
     'color-tinturas-cabello': {
-        title: "Expertos en Color",
-        description: "Resultados vibrantes, cobertura perfecta de canas y cuidado intensivo para tu fibra capilar.",
+        hero: {
+            title: "Color y Tinturas en Chía: Cobertura y Brillo",
+            subtitle: "Expertos en color global, retoque de raíz y cubrimiento total de canas con marcas premium.",
+            imageSrc: "../../images/pages/peluqueria/color-tintura-cabello-profesional-chia.webp",
+            imageAlt: "Servicio de coloración profesional en Narbo's"
+        },
+        metaTitle: "Coloración y Tinturas en Chía | Cubrimiento de Canas | Narbo's",
+        metaDescription: "Especialistas en tintura global, retoque de raíz y matización en Chía. Brindamos cobertura 100% de canas y brillo duradero para tu cabello.",
         gallery: [
             {
                 type: 'image',
@@ -459,6 +481,14 @@ export const pagesData = Object.freeze({
         ]
     },
     'limpieza-facial': {
+        hero: {
+            title: "Limpieza Facial Profunda en Chía",
+            subtitle: "Elimina impurezas, puntos negros y toxinas con tecnología de alta frecuencia.",
+            imageSrc: "../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp",
+            imageAlt: "Limpieza de cutis profunda en Chía"
+        },
+        metaTitle: "Limpieza Facial Profunda en Chía | Extracción e Impurezas | Narbo's",
+        metaDescription: "Recupera la pureza de tu piel con nuestra limpieza facial profunda en Chía. Alta frecuencia, extracción de puntos negros y nutrición para tu cutis.",
         gallery: [
             {
                 type: 'image',
@@ -541,6 +571,14 @@ export const pagesData = Object.freeze({
         ]
     },
     'spa-facial-integral': {
+        hero: {
+            title: "Spa Facial Integral: Rejuvenecimiento y Relax",
+            subtitle: "Rituales de bienestar para tu rostro que combinan nutrición profunda y máxima relajación.",
+            imageSrc: "../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp",
+            imageAlt: "Spa facial integral y masajes relajantes en Chía"
+        },
+        metaTitle: "Spa Facial Integral en Chía | Rejuvenecimiento y Bienestar | Narbo's",
+        metaDescription: "Vive una experiencia de lujo con nuestro Spa Facial Integral en Chía. Hidratación, masajes faciales y terapias de rejuvenecimiento en un ambiente único.",
         gallery: [
             {
                 type: 'image',
