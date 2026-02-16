@@ -72,11 +72,18 @@ function generateSitemap() {
     allHtmlFiles.forEach(file => {
         let urlPath = file;
         
-        // 1. Normalizar index.html
+        // 1. Normalizar URLs (Quitar index.html y .html)
         if (urlPath === 'index.html') {
             urlPath = '/';
-        } else if (urlPath.endsWith('/index.html')) {
+        } else {
+            // Reemplazar index.html por vacío (para carpetas)
+            urlPath = urlPath.replace('/index.html', '/');
             urlPath = urlPath.replace('index.html', '');
+            
+            // Quitar extensión .html para cumplir con URLs limpias
+            if (urlPath.endsWith('.html')) {
+                urlPath = urlPath.slice(0, -5);
+            }
         }
 
         // 2. Asegurar que empiece con /
@@ -112,7 +119,10 @@ function generateSitemap() {
     // 4. Agregar artículos del blog desde la data (para tener fechas correctas)
     // Esto es mejor que el escaneo de arriba para los posts porque tenemos la fecha de modificación real/meta.
     articles.forEach(article => {
-        const link = article.link.startsWith('/') ? article.link : `/${article.link}`;
+        let link = article.link.startsWith('/') ? article.link : `/${article.link}`;
+        if (link.endsWith('.html')) {
+            link = link.slice(0, -5);
+        }
         xml += `
   <url>
     <loc>${BASE_URL}${link}</loc>
