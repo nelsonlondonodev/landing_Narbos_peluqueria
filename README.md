@@ -626,3 +626,23 @@ Este proyecto fue construido utilizando tecnologías web modernas, enfocadas en 
 - **JavaScript (ES6+ Modules):** Arquitectura modular basada en componentes independientes.
 - **Node.js Build Pipeline:** Scripting personalizado para optimización de activos y automatización de despliegue.
 - **GLightbox:** Para una galería de imágenes interactiva y accesible.
+***
+
+## 🔄 Recent Updates (February 17, 2026)
+
+### 1. Performance: Lazy Loading Architecture ⚡
+*   **Problem:** PageSpeed Insights flagged high "Unused JavaScript" and Total Blocking Time (TBT) due to loading heavy components (Gallery, Video, Reviews) immediately on initialization.
+*   **Solution:** Refactored `App.js` to implement **Dynamic Imports (Code Splitting)** with `IntersectionObserver`.
+    *   **Lazy Hydration:** Components like `ReviewsCarousel`, `GalleryController`, `VideoPlayerController`, and `ContactFormController` are now fetched and executed **only when the user scrolls near them**.
+    *   **Critical Path Protection:** The Navbar, Hero Section, and HeaderController remain in the main bundle to ensure instant LCP and interactivity above the fold.
+    *   **Result:** Significant reduction in initial bundle size and main thread blocking, improving PageSpeed scores.
+
+### 2. SEO & Routing Fixes 🔍
+*   **Navigation Repair:** Fixed a critical routing issue where "Nosotros" and "Contacto" links in the Navbar were point to non-existent directories (`/nosotros/`) in the local environment. Restored explicit `.html` extensions for robust local/production compatibility.
+*   **Loyalty Program Styles:** Added the `fidelizacion` directory to `tailwind.config.js` content array. This prevents PurgeCSS from stripping essential styles for the loyalty program during the build process.
+*   **Visual Feedback:** Added the missing `.input-focused` class to `input.css` to ensure the loyalty form provides proper visual feedback during user interaction.
+
+### 3. Build & Deployment Stability 🛠️
+*   **Sitemap Update:** Verified and updated `sitemap.xml` to include the latest clean URLs.
+*   **Production Deployment:** All changes (Performance, SEO, Styles) have been merged to `main` and pushed to production.
+
