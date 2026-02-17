@@ -694,6 +694,11 @@ body.modal-open-layer-fix #app-wrapper {
     border-bottom-color: var(--color-brand-green);
 }
 
+.input-focused .loyalty-input {
+    border-bottom-color: var(--color-brand-green);
+    background-color: rgba(107, 117, 90, 0.05); /* brand-green muy suave */
+}
+
 /* Animación spin para el botón de carga */
 @keyframes spin {
     from { transform: rotate(0deg); }
