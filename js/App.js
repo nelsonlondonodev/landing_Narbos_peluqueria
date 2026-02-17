@@ -8,25 +8,15 @@ import { getHomeModalsHTML } from './components/HomeModals.js'; // Nueva funció
 // Components
 import { MobileMenu } from './components/MobileMenu.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
-import { FAQAccordion } from './components/FAQAccordion.js';
-import { ReviewsCarousel } from './components/ReviewsCarousel.js';
-import { ShareButton } from './components/ShareButton.js';
-import { FloatingDecorations } from './components/FloatingDecorations.js';
-import { ServiceCard } from './components/ServiceCard.js';
-import { BrandsSection } from './components/BrandsSection.js';
-import { allBrands } from './data/brandsData.js';
-
 // Controllers
-import { ContactFormController } from './controllers/ContactFormController.js';
 import { HeaderController } from './controllers/HeaderController.js';
-import { ModalController } from './controllers/ModalController.js';
-import { VideoPlayerController } from './controllers/VideoPlayerController.js';
-import { GalleryController } from './controllers/GalleryController.js';
 import { PageTransitionController } from './controllers/PageTransitionController.js'; // Nuevo Controller
 // Data
 import { servicesData } from './data/servicesData.js';
 import { pagesData } from './data/pagesData.js'; // Nuevo Import
 import { Breadcrumbs } from './components/Breadcrumbs.js';
+// ServiceCard is needed for mountHomeServices which runs on init
+import { ServiceCard } from './components/ServiceCard.js';
 
 
 class App {
@@ -148,34 +138,69 @@ class App {
         // Esto libera el Hilo Principal durante la carga inicial (Mejora TBT y LCP)
         
         // FAQ (Footer y Artículos)
-        this.observeAndInit('#faq', () => new FAQAccordion('#faq'));
-        this.observeAndInit('#article-faq', () => new FAQAccordion('#article-faq')); 
+        this.observeAndInit('#faq', async () => {
+            const { FAQAccordion } = await import('./components/FAQAccordion.js');
+            new FAQAccordion('#faq');
+        });
+        this.observeAndInit('#article-faq', async () => {
+            const { FAQAccordion } = await import('./components/FAQAccordion.js');
+            new FAQAccordion('#article-faq');
+        }); 
 
         // Reseñas (Carrusel pesado)
-        this.observeAndInit('#reviews-slider-wrapper', () => new ReviewsCarousel());
+        this.observeAndInit('#reviews-slider-wrapper', async () => {
+            const { ReviewsCarousel } = await import('./components/ReviewsCarousel.js');
+            new ReviewsCarousel();
+        });
 
         // Contacto (Formulario)
-        this.observeAndInit('#contact-root', () => new ContactFormController());
+        this.observeAndInit('#contact-root', async () => {
+            const { ContactFormController } = await import('./controllers/ContactFormController.js');
+            new ContactFormController();
+        });
 
         // Brands (Slider infinito)
-        this.observeAndInit('#home-brands-root', () => new BrandsSection('home-brands-root', allBrands).render());
+        this.observeAndInit('#home-brands-root', async () => {
+            const { BrandsSection } = await import('./components/BrandsSection.js');
+            const { allBrands } = await import('./data/brandsData.js');
+            new BrandsSection('home-brands-root', allBrands).render();
+        });
 
         // Galería y Videos (Media intensiva)
-        this.observeAndInit('#gallery-root', () => new GalleryController());
-        this.observeAndInit('#video-promo', () => new VideoPlayerController());
+        this.observeAndInit('#gallery-root', async () => {
+            const { GalleryController } = await import('./controllers/GalleryController.js');
+            new GalleryController();
+        });
+        this.observeAndInit('#video-promo', async () => {
+            const { VideoPlayerController } = await import('./controllers/VideoPlayerController.js');
+            new VideoPlayerController();
+        });
         
         // Decoraciones Flotantes (No críticas)
+        const initFloatingDecorations = async () => {
+             const { FloatingDecorations } = await import('./components/FloatingDecorations.js');
+             new FloatingDecorations({ basePath: this.appRoot });
+        };
+
         if (window.requestIdleCallback) {
-            requestIdleCallback(() => new FloatingDecorations({ basePath: this.appRoot }), { timeout: 4000 });
+            requestIdleCallback(initFloatingDecorations, { timeout: 4000 });
         } else {
-            setTimeout(() => new FloatingDecorations({ basePath: this.appRoot }), 4000);
+            setTimeout(initFloatingDecorations, 4000);
         }
 
         // Modales de Home (Lógica de apertura)
         if (this.isHomePage) {
             // El controlador de modales es ligero, pero podemos diferirlo un poco
-            setTimeout(() => new ModalController(), 1000); 
-            new ShareButton();
+            setTimeout(async () => {
+                const { ModalController } = await import('./controllers/ModalController.js');
+                new ModalController();
+            }, 1000); 
+            
+            // Share button
+            setTimeout(async () => {
+                 const { ShareButton } = await import('./components/ShareButton.js');
+                 new ShareButton();
+            }, 2000);
         }
     }
 
