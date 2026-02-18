@@ -96,6 +96,17 @@ const articles = [
         image: '/blog/articles/images/image_blog_1.webp',
         alt: 'Tratamientos capilares para el clima de Chía',
         link: '/blog/articles/tratamientos-capilares-clima-chia.html'
+    },
+    {
+        id: 'guia-relajacion-masajes-spa-chia-cajica',
+        date: '18 de febrero de 2026',
+        isoDate: '2026-02-18',
+        category: 'Bienestar y Spa',
+        title: 'Guía de Relajación: Los Mejores Masajes y Servicios de Spa en Chía y Cajicá',
+        description: '¿Estrés por la rutina? Descubre los mejores masajes relajantes y días de spa en Chía y Cajicá con Narbo\'s Salon. Libera tensiones con expertos. ¡Reserva hoy!',
+        image: '/images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
+        alt: 'Masaje relajante con piedras calientes en Narbo\'s Salon Spa Chía',
+        link: '/blog/articles/guia-relajacion-masajes-spa-chia-cajica.html'
     }
 ];
 
