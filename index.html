@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preload" as="image" href="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp" imagesrcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp 768w, images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp 1632w" imagesizes="(max-width: 768px) 100vw, 85vw" fetchpriority="high" type="image/webp">
+    <!-- LCP Optimization: Specific Preloads for Mobile & Desktop -->
+    <link rel="preload" as="image" href="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp">
+    <link rel="preload" as="image" href="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XLWJJBSDL"></script>
     <script>
@@ -127,15 +129,20 @@
         <main>
             <div class="relative">
                             <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-                    <img src="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" 
-                         srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp 768w, images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp 1632w"
-                         sizes="(max-width: 768px) 100vw, 85vw"
-                         alt="Mujer recibiendo maquillaje profesional en Narbo's Salón Spa Chía" 
-                         class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" 
-                         loading="eager" 
-                         fetchpriority="high"
-                         decoding="async"
-                         width="1632" height="918">
+                    <picture>
+                        <!-- Mobile Image (Forced for screens < 768px) -->
+                        <source media="(max-width: 768px)" srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp">
+                        <!-- Desktop Image -->
+                        <source media="(min-width: 769px)" srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp">
+                        <!-- Fallback Image -->
+                        <img src="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" 
+                             alt="Mujer recibiendo maquillaje profesional en Narbo's Salón Spa Chía" 
+                             class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" 
+                             loading="eager" 
+                             fetchpriority="high"
+                             decoding="async"
+                             width="1632" height="918">
+                    </picture>
                 </section>
                 
                 <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
