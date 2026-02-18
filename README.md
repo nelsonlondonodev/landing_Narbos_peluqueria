@@ -36,6 +36,15 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 18, 2026)
+
+### 1. SEO & Accessibility Standardization (Static H1s) 🏹
+*   **Problem:** Identified an "incongruencia" where some service pages (`/cejas-y-pestanas`, `/cortes-de-pelo`) relied on dynamic JavaScript injection for their Hero sections, hiding the critical `<h1>` tag from some crawlers.
+*   **Solution:** Refactored these pages to use **Static HTML Heroes**.
+    *   **Architecture:** The `<h1>` title and hero image are now hardcoded directly in the HTML, ensuring 0ms visibility for search engines.
+    *   **Data Integrity:** Corrected a broken image link in the Cejas y Pestañas page during the transition.
+*   **Result:** All service pages now have a consistent, SEO-first architecture with static H1 headers.
+
 ## 🔄 Recent Updates (February 12, 2026)
 
 ### 1. Loyalty System Automation (Complete) 🤖
