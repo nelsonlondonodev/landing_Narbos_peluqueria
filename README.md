@@ -45,6 +45,18 @@ Para preservar el historial de indexación en Google Search Console y evitar err
     *   **Data Integrity:** Corrected a broken image link in the Cejas y Pestañas page during the transition.
 *   **Result:** All service pages now have a consistent, SEO-first architecture with static H1 headers.
 
+### 2. Mobile Performance Deep Optimization (LCP Fix) ⚡
+*   **Problem:** Detected a 9.1s LCP on mobile due to the browser fetching the desktop hero image (1632px) on high-DPI screens.
+*   **Solution:** Implemented **Art Direction via `<picture>` tag**.
+    *   **Technique:** Used `<picture class="contents">` pattern. The `contents` class applies `display: contents`, allowing the inner `<img>` to maintain its absolute positioning relative to the section, preventing visual layout breaks.
+    *   **Preloading:** Split the `<link rel="preload">` into two separate tags with `media` queries (`max-width: 768px` vs `min-width: 769px`) to ensure ONLY the required asset is downloaded.
+*   **Result:** Mobile devices now strictly fetch the 768px optimized asset, significantly reducing LCP without compromising visual quality.
+
+### 3. SEO Health & Error Handling 🛠️
+*   **Custom 404 Page:** Implemented a premium-styled `404.html` with explicit `noindex` logic and navigation to Services.
+*   **Redirects:** Configured `.htaccess` with **301 Permament Redirects** (e.g., `depilacion.html` -> `depilacion-corporal`) to resolve Google Search Console 404 errors.
+*   **Blog Enhancement:** Integrated an FAQ section with **JSON-LD `FAQPage` Schema** into the "Guía de Relajación" article to target Voice Search and Rich Snippets.
+
 ## 🔄 Recent Updates (February 12, 2026)
 
 ### 1. Loyalty System Automation (Complete) 🤖
