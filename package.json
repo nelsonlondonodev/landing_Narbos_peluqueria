@@ -1,7 +1,7 @@
 {
-  "name": "landing_narbos_salon",
+  "name": "narbos_salon_web",
   "version": "1.0.0",
-  "description": "Landing page profesional para Narbo's Salón Spa. Sitio estático optimizado con HTML5, Tailwind CSS y Vanilla JS.",
+  "description": "Sitio web oficial y plataforma de servicios para Narbo's Salón Spa. Plataforma moderna optimizada con HTML5, Tailwind CSS y Vanilla JS.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -1,10 +1,11 @@
-Narbo's Salón Spa - Landing Page Profesional
-Este repositorio contiene el código fuente de la página web oficial de Narbo's Salón Spa, una landing page moderna, interactiva y totalmente responsiva, diseñada para atraer y servir a los clientes del salón con una experiencia de usuario excepcional.
+Narbo's Salón Spa - Sitio Web Oficial
+
+Este repositorio contiene el código fuente de la Plataforma Web Oficial de Narbo's Salón Spa, un sitio web robusto, escalable y totalmente responsivo, diseñado para ofrecer una experiencia de usuario premium y gestionar servicios avanzados.
 
 Ver Demo en Vivo (https://narbossalon.com/)
 
 ✨ Características Principales
-Este proyecto no es solo una página web estática, sino una herramienta de marketing digital completa, equipada con funcionalidades avanzadas:
+Este proyecto es una Plataforma Web Corporativa completa, equipada con funcionalidades avanzadas como reservas, blog, catálogo de servicios y automatización:
 
 🌐 Soporte Multi-idioma: Permite a los usuarios cambiar el contenido entre Español e Inglés (🇪🇸/🇬🇧). La preferencia del idioma se guarda en el navegador para futuras visitas.
 
@@ -509,7 +510,7 @@ Para garantizar la estabilidad visual y el correcto funcionamiento del menú mó
     - **Configuración de Servidor Avanzada:** Optimización de `.htaccess` con compresión Gzip y políticas de caché de 1 año para activos estáticos.
 
 ### 🔮 Roadmap & Transición 2026 (Enero)
-- **Migración a Multi-Página:** El proyecto evolucionará de una Landing Page única a una arquitectura web robusta con URLs dedicadas para cada servicio (ej: `/servicios/peluqueria.html`).
+- **Arquitectura Multi-Página:** El proyecto ha evolucionado de una Landing Page única a una arquitectura web robusta con URLs dedicadas para cada servicio (ej: `/servicios/peluqueria.html`), Blog y Fidelización.
 - **Actualización de Stack:** Se ha programado la actualización de **Tailwind CSS a la versión v4.x** para enero de 2026.
     - *Nota:* Se ha **congelado** la refactorización profunda de CSS (safelist/config) hasta esa fecha para garantizar la estabilidad del sitio durante la temporada de fin de año.
 

@@ -92,7 +92,7 @@ function generateSitemap() {
         }
 
         // Determinar prioridad
-        let priority = '0.8'; // Default para landings internas
+        let priority = '0.8'; // Default para páginas internas
         if (file in priorityMap) {
             priority = priorityMap[file];
         } else if (file.includes('blog/articles')) {
