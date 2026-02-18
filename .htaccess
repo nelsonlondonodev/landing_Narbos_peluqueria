@@ -11,9 +11,15 @@ AddType 'text/html; charset=UTF-8' .html
 AddType 'text/css; charset=UTF-8' .css
 AddType 'application/javascript; charset=UTF-8' .js
 
+# Página de error 404 personalizada
+ErrorDocument 404 /404.html
+
 # Redireccionamiento index.html a raíz (SEO)
 RewriteEngine On
 RewriteBase /
+
+# Redirecciones permanentes (301) para corregir errores 404
+RewriteRule ^servicios/estetica/depilacion(\.html)?$ /servicios/estetica/depilacion-corporal [R=301,L]
 
 # Redirigir index.html a /
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
