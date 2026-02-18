@@ -103,7 +103,7 @@ const articles = [
         isoDate: '2026-02-18',
         category: 'Bienestar y spa',
         title: 'Guía de relajación: los mejores masajes y servicios de spa en Chía y Cajicá',
-        description: '¿Estrés por la rutina? Descubre los mejores masajes relajantes y días de spa en Chía y Cajicá con Narbo\'s Salon. Libera tensiones con expertos. ¡Reserva hoy!',
+        description: 'Relájate con los mejores masajes y spa en Chía y Cajicá. Narbo\'s Salon: bienestar experto y relajación total. ¡Agenda tu cita hoy!',
         image: '/images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
         alt: 'Masaje relajante con piedras calientes en Narbo\'s Salon Spa Chía',
         link: '/blog/articles/guia-relajacion-masajes-spa-chia-cajica.html'
