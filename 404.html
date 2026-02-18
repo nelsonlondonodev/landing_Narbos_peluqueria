@@ -25,46 +25,45 @@
         #navbar-root { min-height: 80px; }
     </style>
 </head>
-<body class="font-sans bg-brand-gray-dark text-white flex flex-col min-h-screen">
+<body class="font-sans bg-white text-brand-gray-dark flex flex-col min-h-screen">
     <header class="site-header relative z-50">
         <div id="navbar-root"></div>
     </header>
 
     <div id="app-wrapper" class="relative w-full flex-grow flex flex-col">
-        <main class="flex-grow flex items-center justify-center relative overflow-hidden min-h-[70vh]">
-            <!-- Responsive Background Image -->
-            <div class="absolute inset-0 z-0">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp">
-                    <img src="/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" alt="Background" class="w-full h-full object-cover opacity-30 blur-sm scale-110 transform">
-                </picture>
-                <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-brand-gray-dark"></div>
-            </div>
-
-            <div class="relative z-10 text-center px-6 animate__animated animate__fadeIn max-w-4xl mx-auto py-20">
-                <h1 class="text-[10rem] md:text-[15rem] leading-none font-serif font-bold text-white opacity-10 select-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none w-full">404</h1>
+        <main class="flex-grow flex flex-col items-center justify-center py-24 px-6">
+            <div class="text-center max-w-3xl mx-auto space-y-8 animate__animated animate__fadeIn">
                 
-                <div class="relative">
-                    <h2 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6 animate__animated animate__fadeInUp">
+                <!-- 404 Large Text -->
+                <h1 class="text-9xl md:text-[13rem] leading-none font-serif font-bold text-brand-green/20 select-none">
+                    404
+                </h1>
+                
+                <!-- Message -->
+                <div class="space-y-6 -mt-8 md:-mt-16 relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-gray-900">
                         Ups, página no encontrada
                     </h2>
-                    <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-xl mx-auto animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
-                        Parece que el estilo que buscas no está disponible en este momento. Pero no te preocupes, en Narbo's siempre hay una solución perfecta para ti.
+                    <p class="text-lg md:text-xl text-gray-600 max-w-xl mx-auto leading-relaxed">
+                        Parece que el estilo que buscas no está disponible. <br class="hidden md:block">
+                        Pero en Narbo's siempre hay una solución perfecta para ti.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row justify-center gap-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
-                        <a href="/" class="inline-block bg-brand-green text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-brand-green-dark transition-all duration-300 transform hover:-translate-y-1 border border-transparent">
+                    <!-- Buttons -->
+                    <div class="flex flex-col sm:flex-row justify-center gap-5 pt-4">
+                        <a href="/" class="inline-block bg-brand-green text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-brand-green-dark transition-all duration-300 transform hover:-translate-y-1">
                             Volver al Inicio
                         </a>
-                        <a href="/#servicios" class="inline-block bg-transparent text-white border-2 border-white/30 font-bold py-4 px-10 rounded-full shadow-lg hover:bg-white hover:text-brand-gray-dark hover:border-white transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-sm">
+                        <a href="/#servicios" class="inline-block bg-white text-brand-green border-2 border-brand-green font-bold py-4 px-10 rounded-full shadow-md hover:bg-brand-green hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                             Ver Servicios
                         </a>
                     </div>
                 </div>
+
             </div>
         </main>
         
-        <div id="footer-root" class="relative z-20"></div>
+        <div id="footer-root"></div>
     </div>
 
     <script src="/js/main.js?v=3.0" type="module"></script>
