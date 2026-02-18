@@ -458,7 +458,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.webp',
+                src: 'images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
                 title: "Masaje Relajante",
                 subtitle: "Piedras Calientes",
                 alt: "Masaje relajante con piedras calientes"
@@ -501,7 +501,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.webp',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
                 title: "Relajación Total",
                 subtitle: "Complemento ideal",
                 alt: "Tratamiento facial relajante"
@@ -591,7 +591,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.webp',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
                 title: "Relax Total",
                 subtitle: "Piedras Calientes",
                 alt: "Masaje relajante con piedras calientes"
@@ -619,7 +619,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.webp',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
                 title: "Piedras Calientes",
                 subtitle: "Terapia térmica",
                 alt: "Masaje con piedras calientes"

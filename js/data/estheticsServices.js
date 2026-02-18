@@ -43,7 +43,7 @@ export const estheticsServices = [
     {
         title: 'Masaje Relajante',
         description: '1 hora de relajación total para desconectar cuerpo y mente.',
-        image: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.webp',
+        image: '../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
         link: 'servicios/estetica/masajes-relajantes.html',
         price: masterPrices.esthetics.corporal.masajeRelajante,
         variant: 'standard'
@@ -67,7 +67,7 @@ export const estheticsServices = [
     {
         title: 'Drenaje Linfático',
         description: 'Técnica suave que estimula la eliminación de toxinas y reduce la retención de líquidos.',
-        image: '../../images/pages/estetica/masaje-relajante-piedras-calientes-narbos-salon-spa-chia copy Large.webp',
+        image: '../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
         link: 'servicios/estetica/masajes-relajantes.html',
         price: masterPrices.esthetics.corporal.drenajeLinfatico,
         variant: 'standard'
