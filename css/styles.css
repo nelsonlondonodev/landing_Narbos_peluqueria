@@ -1634,6 +1634,9 @@
   .pt-32 {
     padding-top: calc(var(--spacing) * 32);
   }
+  .pt-40 {
+    padding-top: calc(var(--spacing) * 40);
+  }
   .pt-56 {
     padding-top: calc(var(--spacing) * 56);
   }
@@ -3196,6 +3199,11 @@
   .md\:pt-48 {
     @media (width >= 48rem) {
       padding-top: calc(var(--spacing) * 48);
+    }
+  }
+  .md\:pt-52 {
+    @media (width >= 48rem) {
+      padding-top: calc(var(--spacing) * 52);
     }
   }
   .md\:pt-64 {
