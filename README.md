@@ -664,7 +664,19 @@ Este proyecto fue construido utilizando tecnologías web modernas, enfocadas en 
 *   **Loyalty Program Styles:** Added the `fidelizacion` directory to `tailwind.config.js` content array. This prevents PurgeCSS from stripping essential styles for the loyalty program during the build process.
 *   **Visual Feedback:** Added the missing `.input-focused` class to `input.css` to ensure the loyalty form provides proper visual feedback during user interaction.
 
+
 ### 3. Build & Deployment Stability 🛠️
 *   **Sitemap Update:** Verified and updated `sitemap.xml` to include the latest clean URLs.
 *   **Production Deployment:** All changes (Performance, SEO, Styles) have been merged to `main` and pushed to production.
+
+
+## 🔄 Recent Updates (February 19, 2026)
+
+### 1. Loyalty System Optimization (Email & QR) 📧
+*   **Corporate Email Integration:** Updated all n8n workflows (`fidelizacion_automations_n8n.json` and `workflow_n8n.json`) to send emails via the corporate account `contacto@narbossalon.com` using `n8n-nodes-base.emailSend`.
+    *   Replaced deprecated Gmail nodes.
+    *   Updated templates (`birthday`, `reminder`, `welcome`) to correctly reference n8n data nodes.
+*   **QR Redemption Logic Improvement:**
+    *   Added `trim()` to the coupon code input in `canje_qr_workflow.json` to prevent failures due to invisible whitespace during scanning.
+    *   **Known Issue:** The "Redemption" workflow in n8n is currently failing at the `IF` node condition step. The node receives the data from Supabase but the logic `{{ $node["Supabase: Buscar Cupón"].json["canjeado"] }} == false` is not triggering correctly in the current execution context. **Status:** Pending fix. Work saved in `develop` branch.
 
