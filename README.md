@@ -680,3 +680,8 @@ Este proyecto fue construido utilizando tecnologías web modernas, enfocadas en 
     *   Added `trim()` to the coupon code input in `canje_qr_workflow.json` to prevent failures due to invisible whitespace during scanning.
     *   **Known Issue:** The "Redemption" workflow in n8n is currently failing at the `IF` node condition step. The node receives the data from Supabase but the logic `{{ $node["Supabase: Buscar Cupón"].json["canjeado"] }} == false` is not triggering correctly in the current execution context. **Status:** Pending fix. Work saved in `develop` branch.
 
+### 2. Mobile LCP Fix (Critical Image Resizing) ⚡
+*   **Diagnosis:** Discovered that the mobile hero image `mujer-maquillaje-spa-salon-belleza-chia-mobile.webp` was identical in size to the desktop version (1920x1080px, ~83KB), causing a 9.3s LCP on mobile due to heavy decoding and resizing load.
+*   **Fix:** Resized the asset to **768px width** using `cwebp`.
+*   **Result:** File size dropped from **83KB to 25KB** (70% reduction). Mobile devices now download a correctly sized asset, significantly improving Core Web Vitals.
+
