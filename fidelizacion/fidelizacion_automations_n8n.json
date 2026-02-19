@@ -64,49 +64,37 @@
     },
     {
       "parameters": {
-        "sendTo": "={{ $node[\"Supabase: Buscar Cumpleaños\"].json[\"email\"] }}",
+        "fromEmail": "contacto@narbossalon.com",
+        "toEmail": "={{ $node[\"Supabase: Buscar Cumpleaños\"].json[\"email\"] }}",
         "subject": "¡Feliz Cumpleaños! Un regalo especial de Narbo's 🎂",
-        "message": "={{ $node[\"Fetch Template Birthday\"].json[\"text\"] }}",
+        "html": "={{ $node[\"Fetch Template Birthday\"].json[\"text\"] }}",
         "options": {}
       },
       "id": "e2b3547d-1c62-424c-b439-411a8d6be956",
-      "name": "Gmail: Enviar Regalo Cumple",
-      "type": "n8n-nodes-base.gmail",
+      "name": "Email: Enviar Regalo Cumple",
+      "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2,
       "position": [
         1328,
         96
-      ],
-      "webhookId": "5b0960d4-c1a6-4daf-9a94-81f1236c60ac",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "lNjVIDDslMtvykTE",
-          "name": "Gmail selonel26@gmail.com"
-        }
-      }
+      ]
     },
     {
       "parameters": {
-        "sendTo": "={{ $node[\"Supabase: Buscar Vencimientos\"].json[\"email\"] }}",
+        "fromEmail": "contacto@narbossalon.com",
+        "toEmail": "={{ $node[\"Supabase: Buscar Vencimientos\"].json[\"email\"] }}",
         "subject": "¡Tu beneficio de Narbo's expira pronto! ⏳",
-        "message": "={{ $node[\"Customer\"].json[\"name\"] }}",
+        "html": "={{ $node[\"Fetch Template Reminder\"].json[\"text\"] }}",
         "options": {}
       },
       "id": "c3b68f51-9f08-478d-9d1e-45d1ff7a141f",
-      "name": "Gmail: Enviar Recordatorio",
-      "type": "n8n-nodes-base.gmail",
+      "name": "Email: Enviar Recordatorio",
+      "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2,
       "position": [
         1328,
         352
-      ],
-      "webhookId": "0f9604f4-9c82-4eb2-b774-ae1a6e2cda79",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "lNjVIDDslMtvykTE",
-          "name": "Gmail selonel26@gmail.com"
-        }
-      }
+      ]
     },
     {
       "parameters": {
