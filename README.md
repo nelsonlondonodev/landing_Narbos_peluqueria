@@ -685,3 +685,13 @@ Este proyecto fue construido utilizando tecnologías web modernas, enfocadas en 
 *   **Fix:** Resized the asset to **768px width** using `cwebp`.
 *   **Result:** File size dropped from **83KB to 25KB** (70% reduction). Mobile devices now download a correctly sized asset, significantly improving Core Web Vitals.
 
+### 3. Loyalty System Polish (QR & Email) 📧
+*   **Mobile QR Viz Fix:** 
+    *   **Problem:** The QR code in the welcome email was not rendering on some mobile devices (iPhone mail app) due to format compatibility and strict threading rules.
+    *   **Solution:** Updated the n8n email node to use the `qrserver` API with specific parameters: `format=png`, `bgcolor=ffffff`, and `qzone=1` (margin). This forces a clean PNG image readable in dark mode.
+    *   **Result:** Verified successful QR rendering on iOS and Android devices.
+*   **Workflow Robustness:**
+    *   **Crash Prevention:** Added safe navigation `($json.query.code || '').trim()` to the webhook node in `fidelizacion/canje_qr_workflow.json` to prevent crashes on empty inputs.
+    *   **Boolean Logic Fix:** Updated the "Check Status" node to handle `null` values from Supabase as `false` (unredeemed), resolving the issue where valid coupons were rejected.
+    *   **Date Format:** Standardized the redemption date timestamp to ISO 8601 (`$now.toISO()`) for Supabase compatibility.
+    *   **Mobile Response:** Added `Content-Type: text/html` headers to the webhook response nodes, ensuring the success/error messages render as a beautiful UI card on mobile instead of raw code.
