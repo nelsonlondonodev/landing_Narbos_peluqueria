@@ -458,7 +458,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/estetica/terapia-piedras-calientes-spa-chia.jpeg',
+                src: 'images/pages/estetica/terapia-piedras-calientes-spa-chia.webp',
                 title: "Masaje Relajante",
                 subtitle: "Piedras Calientes",
                 alt: "Masaje relajante con piedras calientes"
@@ -466,14 +466,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.jpeg',
+                src: 'images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
                 title: "Moldeamiento Corporal",
                 alt: "Radiofrecuencia para reducción y moldeo"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: 'images/pages/estetica/masaje-descontracturante-cuerpo-chia.jpeg',
+                src: 'images/pages/estetica/masaje-descontracturante-cuerpo-chia.webp',
                 title: "Descontracturante",
                 subtitle: "Alivio y Bienestar",
                 alt: "Masaje descontracturante profesional"
@@ -501,7 +501,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.jpeg',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
                 title: "Relajación Total",
                 subtitle: "Complemento ideal",
                 alt: "Tratamiento facial relajante"
@@ -509,14 +509,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.jpg',
+                src: '../../images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
                 title: "Mascarilla",
                 alt: "Aplicación de mascarilla facial despigmentante"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.jpeg',
+                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
                 title: "Tecnología Avanzada",
                 subtitle: "Resultados visibles",
                 alt: "Equipos de hidrofacial y microdermoabrasión"
@@ -591,7 +591,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.jpg',
+                src: '../../images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
                 title: "Despigmentante",
                 subtitle: "Mascarilla Facial",
                 alt: "Tratamiento despigmentante con mascarilla"
@@ -599,7 +599,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.jpeg',
+                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
                 title: "Hidrofacial",
                 alt: "Renovación con tecnología avanzada"
             },
@@ -619,7 +619,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.jpeg',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
                 title: "Piedras Calientes",
                 subtitle: "Terapia térmica",
                 alt: "Masaje con piedras calientes"
@@ -627,7 +627,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/terapia-piedras-calientes-spa-chia.jpeg',
+                src: '../../images/pages/estetica/terapia-piedras-calientes-spa-chia.webp',
                 title: "Ambiente Spa",
                 subtitle: "Relax Total",
                 alt: "Ambiente relajante de spa"
@@ -635,14 +635,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-descontracturante-cuerpo-chia.jpeg',
+                src: '../../images/pages/estetica/masaje-descontracturante-cuerpo-chia.webp',
                 title: "Descontracturante",
                 alt: "Masaje profundo para alivio muscular"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.jpeg',
+                src: '../../images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
                 title: "Radiofrecuencia",
                 subtitle: "Moldeamiento",
                 alt: "Tratamiento de reducción y moldeamiento"
