@@ -36,6 +36,25 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 21, 2026)
+
+### 1. Component Reliability & Bootstrapping 🛠️
+*   **Problem:** Some components like `HeaderController`, `MobileMenu`, and `GLightbox` were failing to initialize or throwing console errors when DOM elements weren't immediately available during hydration.
+*   **Solution:** Refactored core component initialization for maximum resilience.
+    *   **Silent Retries:** Implemented a retry mechanism in `MobileMenu.js` and `HeaderController.js`. If critical elements aren't found, the component retries up to 5 times (approx. 1.5s total) before failing silently.
+    *   **Fault Tolerance:** Wrapped component instantiations in `App.js` with `try-catch` blocks. If one component fails (e.g., due to a missing specific element in a sub-page), the rest of the application continues to load normally.
+    *   **GLightbox Stabilization:** Replaced the CDN with a more stable version and implemented a robust retry logic (up to 5 seconds) for the lightbox initialization, ensuring it works even on slower connections.
+
+### 2. Estetica Service Recovery & Bug Fixes 💆‍♀️
+*   **Problem:** The `masajes-relajantes.html` page was showing a blank white screen due to a syntax error.
+*   **Solution:** Identified and fixed a missing `</script>` tag in the `FAQPage` JSON-LD schema that was causing the entire page content to be interpreted as a script block.
+*   **Optimization:** Restored and updated both `spa-facial-integral.html` and `masajes-relajantes.html` with the latest layout standards.
+
+### 3. Progressive Performance & Cache Control ⚡
+*   **Non-blocking Assets:** Implemented the `media="print" onload="this.media='all'"` pattern for CSS and Google Fonts on aesthetic service pages. This prevents CSS from blocking the initial render, improving FCP (First Contentful Paint).
+*   **LCP Preloading:** Added `<link rel="preload">` for critical hero images on service pages to ensure they are discovered and downloaded early by the browser.
+*   **Global Cache Busting:** Synchronized all assets to **Version 3.5** (`?v=3.5`). This ensures that changes in styles and menu logic are immediately reflected on all devices, especially those with aggressive caching like iPhones.
+
 ## 🔄 Recent Updates (February 18, 2026)
 
 ### 1. SEO & Accessibility Standardization (Static H1s) 🏹
