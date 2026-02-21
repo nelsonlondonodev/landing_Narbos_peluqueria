@@ -247,9 +247,15 @@ class ServicePageManager {
         const grid = document.getElementById('aesthetics-services-static');
         if (!grid) return;
         
+        // El Hub principal ('estetica') ahora se carga de forma estática pura (via SSG) para mejorar SEO y LCP.
+        // No intervenimos el DOM desde el cliente para evitar Layout Shifts y TBT innecesario.
+        if (this.pageKey === 'estetica') {
+            return;
+        }
+
         const detailedPages = [
             'spa-facial-integral', 'masajes-relajantes', 
-            'cejas-y-pestanas', 'depilacion-corporal'
+            'cejas-y-pestanas', 'depilacion-corporal', 'limpieza-facial'
         ];
         
         let displayServices = estheticsServices;
@@ -261,7 +267,8 @@ class ServicePageManager {
                 'spa-facial-integral': 'spa-facial-integral',
                 'masajes-relajantes': 'masajes-relajantes',
                 'cejas-y-pestanas': 'cejas-y-pestanas',
-                'depilacion-corporal': 'depilacion-corporal.html'
+                'depilacion-corporal': 'depilacion-corporal.html',
+                'limpieza-facial': 'limpieza-facial'
             };
 
             const fragment = filterMap[this.pageKey];
