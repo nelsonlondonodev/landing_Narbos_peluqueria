@@ -646,37 +646,61 @@ export const pagesData = Object.freeze({
     },
 
     'masajes-relajantes': {
+        hero: {
+            title: "Masajes Relajantes <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Desconecta del mundo y reconecta contigo mismo. Una experiencia sensorial única para cuerpo y mente.",
+            imageSrc: "../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp",
+            imageAlt: "Masajes Relajantes con piedras calientes en Chía"
+        },
+        metaTitle: "Masajes Relajantes en Chía | Piedras Calientes y Relax | Narbo's",
+        metaDescription: "Libera el estrés y renueva tu energía con nuestros masajes relajantes en Chía. Terapia con piedras calientes, aromaterapia y técnicas descontracturantes.",
         gallery: [
             {
                 type: 'image',
-                layout: 'square',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
-                title: "Piedras Calientes",
-                subtitle: "Terapia térmica",
-                alt: "Masaje con piedras calientes"
+                layout: 'vertical',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
+                title: "Relajación Total",
+                subtitle: "Experiencia Sensorial",
+                alt: "Masaje relajante profesional en Chía"
             },
             {
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/estetica/terapia-piedras-calientes-spa-chia.webp',
-                title: "Ambiente Spa",
-                subtitle: "Relax Total",
-                alt: "Ambiente relajante de spa"
+                title: "Piedras Volcánicas",
+                subtitle: "Termoterapia",
+                alt: "Masaje con piedras calientes volcánicas"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
+                title: "Alivio de Tensión",
+                subtitle: "Masaje de Espalda",
+                alt: "Masaje enfocado en espalda con piedras calientes"
             },
             {
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/estetica/masaje-descontracturante-cuerpo-chia.webp',
                 title: "Descontracturante",
-                alt: "Masaje profundo para alivio muscular"
+                alt: "Masaje profundo de cuerpo completo"
             },
             {
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
-                title: "Radiofrecuencia",
-                subtitle: "Moldeamiento",
-                alt: "Tratamiento de reducción y moldeamiento"
+                title: "Moldeamiento",
+                subtitle: "Cuidado Corporal",
+                alt: "Tratamiento corporal estético"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/estetica/masaje_reductor.webp',
+                title: "Técnicas Especializadas",
+                subtitle: "Bienestar Corporal",
+                alt: "Masaje reductor y técnicas de spa"
             }
         ]
     },

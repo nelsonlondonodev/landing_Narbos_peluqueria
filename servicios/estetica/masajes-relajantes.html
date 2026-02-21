@@ -48,12 +48,12 @@
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      "serviceType": "Masajes Relajantes",
+      "serviceType": "Masajes Relajantes y Terapéuticos",
       "provider": {
         "@type": "BeautySalon",
         "name": "Narbo's Salón Spa",
-        "url": "https://narbossalon.com/",
-        "image": "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
+        "url": "https://narbossalon.com/servicios/estetica/masajes-relajantes.html",
+        "image": "https://narbossalon.com/images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Bajos del hotel Ibiz, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
@@ -64,13 +64,7 @@
         }
       },
       "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota", "Fontanar"],
-      "description": "Masajes relajantes, piedras calientes y aromaterapia.",
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "COP",
-        "availability": "https://schema.org/InStock",
-        "description": "Consultar precios y disponibilidad vía WhatsApp"
-      },
+      "description": "Masajes relajantes, piedras calientes volcánicas, aromaterapia y técnicas descontracturantes en un ambiente de spa exclusivo.",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Servicios de Masajes",
@@ -79,20 +73,73 @@
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Masaje Relajante Completo"
+              "name": "Masaje Relajante Clásico (1h)"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Masaje con Piedras Calientes"
+              "name": "Masaje con Piedras Volcánicas"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Masaje Descontracturante (Cuerpo o Espalda)"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Drenaje Linfático"
             }
           }
         ]
       }
     }
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia entre un masaje relajante y uno descontracturante?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El masaje relajante utiliza movimientos suaves para reducir el estrés y mejorar la circulación. El descontracturante es más profundo e intenso, enfocado en disolver nudos o contracturas musculares."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué beneficios tiene el masaje con piedras volcánicas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El calor de las piedras volcánicas penetra profundamente en los tejidos, logrando relajación muscular inmediata, aliviando dolores crónicos y equilibrando la energía corporal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es normal sentir dolor después de un masaje?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En masajes relajantes no. En descontracturantes es normal sentir una sensación de 'agujetas' durante 24-48 horas mientras el músculo libera tensión."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tipo de aceites utilizan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Utilizamos aceites vegetales hipoalergénicos enriquecidos con aceites esenciales puros como lavanda o eucalipto."
+          }
+        }
+      ]
+    }
 
     <style>
         /* Optimización de CLS */
