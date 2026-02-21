@@ -466,6 +466,22 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
+                src: 'images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
+                title: "Relax Total",
+                subtitle: "Espalda",
+                alt: "Masaje de piedras calientes espalda"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
+                title: "Despigmentante",
+                subtitle: "Mascarilla",
+                alt: "Tratamiento con mascarilla facial"
+            },
+            {
+                type: 'image',
+                layout: 'square',
                 src: 'images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
                 title: "Moldeamiento Corporal",
                 alt: "Radiofrecuencia para reducción y moldeo"
@@ -582,7 +598,7 @@ export const pagesData = Object.freeze({
         gallery: [
             {
                 type: 'image',
-                layout: 'vertical',
+                layout: 'square',
                 src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
                 title: "Limpieza Profunda",
                 subtitle: "Alta Frecuencia",
@@ -605,7 +621,7 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'image',
-                layout: 'horizontal',
+                layout: 'square',
                 src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
                 title: "Experiencia Spa",
                 subtitle: "Bienestar y Estética",
@@ -618,7 +634,7 @@ export const pagesData = Object.freeze({
         gallery: [
             {
                 type: 'image',
-                layout: 'vertical',
+                layout: 'square',
                 src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
                 title: "Piedras Calientes",
                 subtitle: "Terapia térmica",
@@ -641,7 +657,7 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'image',
-                layout: 'horizontal',
+                layout: 'square',
                 src: '../../images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
                 title: "Radiofrecuencia",
                 subtitle: "Moldeamiento",
