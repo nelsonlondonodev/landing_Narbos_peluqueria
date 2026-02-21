@@ -247,9 +247,9 @@ class ServicePageManager {
         const grid = document.getElementById('aesthetics-services-static');
         if (!grid) return;
         
-        // El Hub principal ('estetica') ahora se carga de forma estática pura (via SSG) para mejorar SEO y LCP.
-        // No intervenimos el DOM desde el cliente para evitar Layout Shifts y TBT innecesario.
-        if (this.pageKey === 'estetica') {
+        // En producción (SSG), el grid ya vendrá pre-renderizado con tarjetas.
+        // En desarrollo local (Live Server), estará vacío. Inyectarlo aquí para dev.
+        if (this.pageKey === 'estetica' && grid.children.length > 0) {
             return;
         }
 
