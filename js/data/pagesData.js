@@ -598,34 +598,49 @@ export const pagesData = Object.freeze({
         gallery: [
             {
                 type: 'image',
-                layout: 'square',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
-                title: "Limpieza Profunda",
-                subtitle: "Alta Frecuencia",
-                alt: "Limpieza facial profunda con alta frecuencia"
+                layout: 'vertical',
+                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
+                title: "Masaje Facial",
+                subtitle: "Relajación Profunda",
+                alt: "Masaje facial relajante en Narbo's"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
-                title: "Despigmentante",
-                subtitle: "Mascarilla Facial",
-                alt: "Tratamiento despigmentante con mascarilla"
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
+                title: "Alta Frecuencia",
+                subtitle: "Limpieza Profunda",
+                alt: "Limpieza facial con alta frecuencia"
             },
             {
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
                 title: "Hidrofacial",
-                alt: "Renovación con tecnología avanzada"
+                alt: "Sesión de hidrofacial profesional"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
-                title: "Experiencia Spa",
-                subtitle: "Bienestar y Estética",
-                alt: "Servicio de Spa Facial Completo"
+                src: '../../images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
+                title: "Mascarilla",
+                subtitle: "Nutrición Intensiva",
+                alt: "Mascarilla facial nutritiva"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/spa-hero.webp',
+                title: "Ambiente Spa",
+                alt: "Cabina de estética y spa"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
+                title: "Equipos de Vanguardia",
+                subtitle: "Tecnología Estética",
+                alt: "Equipamiento de hidrofacial y estética"
             }
         ]
     },
