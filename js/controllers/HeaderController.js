@@ -4,32 +4,21 @@
  */
 export class HeaderController {
     constructor(headerElement) {
-        // Fallback de emergencia: intentar encontrar el header
+        // Inicialización diferida para máxima compatibilidad con hidratación JS
         this.DOM = {
-            header: headerElement || document.querySelector(".site-header") || (document.getElementById('navbar-root') ? document.getElementById('navbar-root').parentElement : null),
-            dropdownBtn: document.getElementById("desktop-services-btn"),
-            dropdownMenu: document.getElementById("desktop-services-menu")
+            header: headerElement || document.querySelector(".site-header") || document.querySelector("header"),
+            dropdownBtn: null,
+            dropdownMenu: null
         };
 
-        // Debug Log
-        // console.log("HeaderController: Constructor called. Header element:", this.DOM.header);
-
-        // Si tenemos el header, iniciamos inmediatamente.
         if (this.DOM.header) {
             this.init();
         } else {
-             // Solo si falla la inyección directa y el selector, reintentamos
-             console.warn("HeaderController: Header not found immediately. Retrying in 500ms...");
+            // Reintento silencioso único
             setTimeout(() => {
-                this.DOM.header = document.querySelector(".site-header") || (document.getElementById('navbar-root') ? document.getElementById('navbar-root').parentElement : null);
-                
-                if (this.DOM.header) {
-                     console.log("HeaderController: Retry successful.");
-                     this.init();
-                } else {
-                     console.error("HeaderController: Retry FAILED.");
-                }
-            }, 500);
+                this.DOM.header = this.DOM.header || document.querySelector(".site-header") || document.querySelector("header");
+                if (this.DOM.header) this.init();
+            }, 1000);
         }
     }
 

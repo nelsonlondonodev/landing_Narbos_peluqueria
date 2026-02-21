@@ -124,10 +124,10 @@ class App {
     }
 
     initCoreComponents() {
-        new MobileMenu();
-        new WhatsAppButton();
-        new HeaderController();
-        new PageTransitionController();
+        try { new MobileMenu(); } catch(e) { /* silent */ }
+        try { new WhatsAppButton(); } catch(e) { /* silent */ }
+        try { new HeaderController(); } catch(e) { /* silent */ }
+        try { new PageTransitionController(); } catch(e) { /* silent */ }
     }
 
     initInteractiveComponents() {
