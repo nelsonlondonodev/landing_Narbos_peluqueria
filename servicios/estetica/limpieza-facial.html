@@ -2,13 +2,6 @@
 <html lang="es">
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XLWJJBSDL"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", "G-7XLWJJBSDL");
-    </script>
     <meta http-equiv="refresh" content="0;url=spa-facial-integral.html" />
     <meta name="robots" content="noindex, follow" />
     <link rel="canonical" href="https://narbossalon.com/servicios/estetica/spa-facial-integral.html" />
@@ -96,7 +89,33 @@
         /* Optimización de CLS */
         #navbar-root { min-height: 80px; }
     </style>
-  </head>
+  \n    <!-- GA Deferido para mejorar LCP/TBT -->
+    <script type="text/javascript">
+      const loadGA = () => {
+        if (window.gaLoaded) return;
+        window.gaLoaded = true;
+        const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-7XLWJJBSDL';
+        script.async = true;
+        document.head.appendChild(script);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7XLWJJBSDL');
+      };
+      
+      // Retrasar la carga de GA hasta que el hilo principal esté libre o el usuario interactúe
+      if (window.requestIdleCallback) {
+        requestIdleCallback(loadGA, { timeout: 4000 });
+      } else {
+        setTimeout(loadGA, 4000);
+      }
+      // Opcional: cargar Inmediatamente en la primera interacción (scroll, touch, etc)
+      ['scroll', 'touchstart', 'mousemove', 'click'].forEach(evt => 
+        document.addEventListener(evt, loadGA, { once: true, passive: true })
+      );
+    </script>
+</head>
   <body class="font-sans">
     
     <header class="site-header">
@@ -139,7 +158,7 @@
             </div>
 
             <!-- Grid de Servicios (Estética) -->
-            <div id="esthetics-services-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div id="aesthetics-services-static" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Services injected via JS -->
             </div>
         </div>

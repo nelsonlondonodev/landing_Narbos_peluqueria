@@ -161,31 +161,44 @@ async function injectHero(document, pageKey, prefix) {
  * Inyecta la grilla de servicios correspondiente.
  */
 async function injectServices(document, pageKey, prefix) {
-    const gridId = pageKey === 'barberia' ? 'barber-services-grid' : 'hair-services-grid';
+    let gridId = 'services-grid';
+    if (pageKey === 'barberia') gridId = 'barber-services-grid';
+    else if (pageKey === 'peluqueria') gridId = 'hair-services-grid';
+    else if (pageKey === 'estetica') gridId = 'aesthetics-services-static';
+
     const grid = document.getElementById(gridId) || document.getElementById('services-grid');
     
     if (!grid) return;
 
     grid.innerHTML = '';
-    let servicesSource = servicesData; // Default home
+    let servicesSource = [];
 
     if (pageKey === 'barberia') {
         const { barberServices } = await import('../js/data/barberServices.js');
         servicesSource = barberServices;
     } else if (pageKey === 'peluqueria') {
+        const { hairSalonServices } = await import('../js/data/hairSalonServices.js');
         servicesSource = hairSalonServices;
+    } else if (pageKey === 'estetica') {
+        const { estheticsServices } = await import('../js/data/estheticsServices.js');
+        servicesSource = estheticsServices;
+    } else {
+        const { servicesData } = await import('../js/data/servicesData.js');
+        servicesSource = servicesData;
     }
 
-    servicesSource.forEach(data => {
-        const processedData = {
-            ...data,
-            link: data.link.startsWith('http') ? data.link : prefix + data.link.replace(/^\//, ''),
-            image: data.image.startsWith('http') ? data.image : prefix + data.image.replace(/^\//, '')
-        };
-        const card = new ServiceCard(processedData);
-        grid.appendChild(card.render());
-    });
-    console.log(`   ✨ Servicios inyectados en #${grid.id}`);
+    if (servicesSource.length > 0) {
+        servicesSource.forEach(data => {
+            const processedData = {
+                ...data,
+                link: data.link.startsWith('http') ? data.link : prefix + data.link.replace(/^\//, ''),
+                image: data.image.startsWith('http') ? data.image : prefix + data.image.replace(/^\//, '')
+            };
+            const card = new ServiceCard(processedData);
+            grid.appendChild(card.render());
+        });
+        console.log(`   ✨ Servicios inyectados en #${grid.id}`);
+    }
 }
 
 /**

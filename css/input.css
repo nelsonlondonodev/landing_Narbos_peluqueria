@@ -1,6 +1,7 @@
 @import "tailwindcss";
 /* Force Recompile: 2026-02-11 T10:50 */
 
+/* purgecss start ignore */
 @theme {
   --color-brand-green: #6B755A;
   --color-brand-light: #DED2C4;
@@ -111,6 +112,7 @@ body.mobile-menu-open {
 }
 /* --- FIN: ESTILOS PARA MENÚ MÓVIL OVERLAY --- */
 
+/* purgecss start ignore */
 /* --- INICIO: ESTILOS PARA HEADER DINÁMICO Y NAVEGACIÓN --- */
 
 /* 

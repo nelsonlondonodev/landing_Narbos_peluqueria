@@ -25,7 +25,7 @@
             {
               "key": "codigo_descuento",
               "operator": "eq",
-              "value": "={{ $json.query.code.trim() }}"
+              "value": "={{ ($json.query.code || '').trim() }}"
             }
           ]
         }
@@ -48,7 +48,7 @@
           "conditions": [
             {
               "id": "1",
-              "leftValue": "={{ $json.canjeado }}",
+              "leftValue": "={{ $json.canjeado || false }}",
               "rightValue": "",
               "operator": {
                 "type": "boolean",
@@ -75,7 +75,7 @@
         "columns": "canjeado, fecha_canje",
         "values": {
           "canjeado": true,
-          "fecha_canje": "={{ $now }}"
+          "fecha_canje": "={{ $now.toISO() }}"
         }
       },
       "id": "supabase-update",
@@ -88,7 +88,16 @@
       "parameters": {
         "respondWith": "text",
         "responseBody": "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Canje Exitoso</title><style>body{font-family:'Montserrat',sans-serif;text-align:center;padding:20px;background:#f0fdf4;color:#166534;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}.card{background:white;padding:40px;border-radius:20px;box-shadow:0 10px 25px rgba(0,0,0,0.1);max-width:400px;width:100%}.icon{font-size:60px;margin-bottom:20px}h1{margin:0 0 10px;font-size:24px}p{margin:5px 0;color:#666}.code{font-size:28px;font-weight:bold;color:#166534;margin:20px 0;padding:15px;background:#f0fdf4;border:2px dashed #166534;border-radius:10px}</style></head><body><div class=\"card\"><div class=\"icon\">✅</div><h1>¡Descuento Aplicado!</h1><p>Cupón válido y redimido.</p><div class=\"code\">{{ $node[\"Webhook (Canje QR)\"].json.query.code }}</div><p>Cliente: <strong>{{ $node[\"Supabase: Buscar Cupón\"].json.nombre }}</strong></p></div></body></html>",
-        "options": {}
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html"
+              }
+            ]
+          }
+        }
       },
       "id": "response-success",
       "name": "HTML: Exito",
@@ -101,7 +110,15 @@
         "respondWith": "text",
         "responseBody": "<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Error de Canje</title><style>body{font-family:'Montserrat',sans-serif;text-align:center;padding:20px;background:#fef2f2;color:#991b1b;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}.card{background:white;padding:40px;border-radius:20px;box-shadow:0 10px 25px rgba(0,0,0,0.1);max-width:400px;width:100%}.icon{font-size:60px;margin-bottom:20px}h1{margin:0 0 10px;font-size:24px}p{margin:5px 0}</style></head><body><div class=\"card\"><div class=\"icon\">❌</div><h1>Cupón Inválido</h1><p>El código <strong>{{ $node[\"Webhook (Canje QR)\"].json.query.code }}</strong> no existe o ya fue usado. Verifica en el sistema.</p></div></body></html>",
         "options": {
-          "responseCode": 400
+          "responseCode": 400,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html"
+              }
+            ]
+          }
         }
       },
       "id": "response-error",

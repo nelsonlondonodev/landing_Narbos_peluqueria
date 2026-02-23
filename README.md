@@ -36,6 +36,47 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 23, 2026)
+
+### 1. Hardened Core Web Vitals (TBT & CPU Idle Time) ⚡
+*   **Problem:** Google PageSpeed Insights reported fluctuations (score drops on weekends) due to "Long Main-thread Tasks" causing high Total Blocking Time (TBT). This was traced back to the synchronous execution of Google Analytics (`gtag.js`) blocking the parser.
+*   **Solution (Deferred Analytics):** 
+    *   Removed the synchronous GA script from the `<head>` of all 31 `.html` files in the repository.
+    *   Implemented a smart, non-blocking loader script utilizing `requestIdleCallback` (with a 4-second timeout) or immediate loading upon the first user interaction (`scroll`, `touchstart`). 
+    *   This ensures GA still tracks users accurately without penalizing the initial First Contentful Paint (FCP) or freezing the mobile experience on slow 4G devices.
+
+### 2. JavaScript Code Splitting (Unused JS Reduction) ✂️
+*   **Problem:** PageSpeed warned about 60+ KiB of "Unused JavaScript" because heavy component modules (Reviews, VideoPlayer, Gallery) were being compiled into a singular, monolithic `main.bundle.js` even if they were requested dynamically.
+*   **Solution:**
+    *   Upgraded the `esbuild` configuration in `scripts/build.js` to enable `--splitting`.
+    *   Dynamic imports (`await import(...)`) introduced on Feb 17 now correctly generate isolated, independent `chunk-[hash].js` files. 
+    *   The browser now *physically* downloads only the absolute minimum Javascript necessary for the current viewport layout, saving significant bandwidth.
+
+### 3. CSS Minification & Build Pipeline Stability 🛠️
+*   **Problem:** "Minify CSS" warning reappeared. Discovered that while Tailwind initially minified the CSS, the post-processing step (`PurgeCSS`) was outputting unminified code, overriding the compression.
+*   **Solution:** 
+    *   Integrated `csso-cli` explicitly into `scripts/build.js` to run *after* PurgeCSS completes. The final `styles.css` is now guaranteed to be structurally optimized and fully minified.
+    *   Rewrote the `versionAssets()` hash function in the build script to dynamically detect and version *all* generated JS files (including dynamic chunks), preventing cache stagnation for lazy-loaded modules.
+
+## 🔄 Recent Updates (February 21, 2026)
+
+### 1. Component Reliability & Bootstrapping 🛠️
+*   **Problem:** Some components like `HeaderController`, `MobileMenu`, and `GLightbox` were failing to initialize or throwing console errors when DOM elements weren't immediately available during hydration.
+*   **Solution:** Refactored core component initialization for maximum resilience.
+    *   **Silent Retries:** Implemented a retry mechanism in `MobileMenu.js` and `HeaderController.js`. If critical elements aren't found, the component retries up to 5 times (approx. 1.5s total) before failing silently.
+    *   **Fault Tolerance:** Wrapped component instantiations in `App.js` with `try-catch` blocks. If one component fails (e.g., due to a missing specific element in a sub-page), the rest of the application continues to load normally.
+    *   **GLightbox Stabilization:** Replaced the CDN with a more stable version and implemented a robust retry logic (up to 5 seconds) for the lightbox initialization, ensuring it works even on slower connections.
+
+### 2. Estetica Service Recovery & Bug Fixes 💆‍♀️
+*   **Problem:** The `masajes-relajantes.html` page was showing a blank white screen due to a syntax error.
+*   **Solution:** Identified and fixed a missing `</script>` tag in the `FAQPage` JSON-LD schema that was causing the entire page content to be interpreted as a script block.
+*   **Optimization:** Restored and updated both `spa-facial-integral.html` and `masajes-relajantes.html` with the latest layout standards.
+
+### 3. Progressive Performance & Cache Control ⚡
+*   **Non-blocking Assets:** Implemented the `media="print" onload="this.media='all'"` pattern for CSS and Google Fonts on aesthetic service pages. This prevents CSS from blocking the initial render, improving FCP (First Contentful Paint).
+*   **LCP Preloading:** Added `<link rel="preload">` for critical hero images on service pages to ensure they are discovered and downloaded early by the browser.
+*   **Global Cache Busting:** Synchronized all assets to **Version 3.5** (`?v=3.5`). This ensures that changes in styles and menu logic are immediately reflected on all devices, especially those with aggressive caching like iPhones.
+
 ## 🔄 Recent Updates (February 18, 2026)
 
 ### 1. SEO & Accessibility Standardization (Static H1s) 🏹
@@ -685,3 +726,13 @@ Este proyecto fue construido utilizando tecnologías web modernas, enfocadas en 
 *   **Fix:** Resized the asset to **768px width** using `cwebp`.
 *   **Result:** File size dropped from **83KB to 25KB** (70% reduction). Mobile devices now download a correctly sized asset, significantly improving Core Web Vitals.
 
+### 3. Loyalty System Polish (QR & Email) 📧
+*   **Mobile QR Viz Fix:** 
+    *   **Problem:** The QR code in the welcome email was not rendering on some mobile devices (iPhone mail app) due to format compatibility and strict threading rules.
+    *   **Solution:** Updated the n8n email node to use the `qrserver` API with specific parameters: `format=png`, `bgcolor=ffffff`, and `qzone=1` (margin). This forces a clean PNG image readable in dark mode.
+    *   **Result:** Verified successful QR rendering on iOS and Android devices.
+*   **Workflow Robustness:**
+    *   **Crash Prevention:** Added safe navigation `($json.query.code || '').trim()` to the webhook node in `fidelizacion/canje_qr_workflow.json` to prevent crashes on empty inputs.
+    *   **Boolean Logic Fix:** Updated the "Check Status" node to handle `null` values from Supabase as `false` (unredeemed), resolving the issue where valid coupons were rejected.
+    *   **Date Format:** Standardized the redemption date timestamp to ISO 8601 (`$now.toISO()`) for Supabase compatibility.
+    *   **Mobile Response:** Added `Content-Type: text/html` headers to the webhook response nodes, ensuring the success/error messages render as a beautiful UI card on mobile instead of raw code.

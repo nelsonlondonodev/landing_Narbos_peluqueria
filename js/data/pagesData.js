@@ -458,7 +458,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
+                src: 'images/pages/estetica/terapia-piedras-calientes-spa-chia.webp',
                 title: "Masaje Relajante",
                 subtitle: "Piedras Calientes",
                 alt: "Masaje relajante con piedras calientes"
@@ -466,17 +466,33 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/estetica/masaje_reductor.webp',
-                title: "Tratamiento Corporal",
-                alt: "Masaje reductor y moldeador"
+                src: 'images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
+                title: "Relax Total",
+                subtitle: "Espalda",
+                alt: "Masaje de piedras calientes espalda"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
+                title: "Despigmentante",
+                subtitle: "Mascarilla",
+                alt: "Tratamiento con mascarilla facial"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: 'images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
+                title: "Moldeamiento Corporal",
+                alt: "Radiofrecuencia para reducción y moldeo"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: 'images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
-                title: "Depilación y Spa",
-                subtitle: "Cuidado Integral",
-                alt: "Servicios de spa y depilación en Chía"
+                src: 'images/pages/estetica/masaje-descontracturante-cuerpo-chia.webp',
+                title: "Descontracturante",
+                subtitle: "Alivio y Bienestar",
+                alt: "Masaje descontracturante profesional"
             }
         ]
     },
@@ -501,7 +517,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
                 title: "Relajación Total",
                 subtitle: "Complemento ideal",
                 alt: "Tratamiento facial relajante"
@@ -509,17 +525,17 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje_reductor.webp',
+                src: '../../images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
                 title: "Mascarilla",
-                alt: "Aplicación de mascarilla facial"
+                alt: "Aplicación de mascarilla facial despigmentante"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
-                title: "Piel Radiante",
+                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
+                title: "Tecnología Avanzada",
                 subtitle: "Resultados visibles",
-                alt: "Piel luminosa y limpia"
+                alt: "Equipos de hidrofacial y microdermoabrasión"
             }
         ]
     },
@@ -583,69 +599,108 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
+                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
+                title: "Masaje Facial",
+                subtitle: "Relajación Profunda",
+                alt: "Masaje facial relajante en Narbo's"
+            },
+            {
+                type: 'image',
+                layout: 'square',
                 src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
-                title: "Limpieza Profunda",
-                subtitle: "Alta Frecuencia",
-                alt: "Limpieza facial profunda con alta frecuencia"
+                title: "Alta Frecuencia",
+                subtitle: "Limpieza Profunda",
+                alt: "Limpieza facial con alta frecuencia"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
-                title: "Relax Total",
-                subtitle: "Piedras Calientes",
-                alt: "Masaje relajante con piedras calientes"
+                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
+                title: "Hidrofacial",
+                alt: "Sesión de hidrofacial profesional"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje_reductor.webp',
-                title: "Tratamiento Corporal",
-                alt: "Masaje reductor y moldeador"
+                src: '../../images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
+                title: "Mascarilla",
+                subtitle: "Nutrición Intensiva",
+                alt: "Mascarilla facial nutritiva"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/spa-hero.webp',
+                title: "Ambiente Spa",
+                alt: "Cabina de estética y spa"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
-                title: "Experiencia Spa",
-                subtitle: "Bienestar y Estética",
-                alt: "Servicio de Spa Facial Completo"
+                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
+                title: "Equipos de Vanguardia",
+                subtitle: "Tecnología Estética",
+                alt: "Equipamiento de hidrofacial y estética"
             }
         ]
     },
 
     'masajes-relajantes': {
+        hero: {
+            title: "Masajes Relajantes <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Desconecta del mundo y reconecta contigo mismo. Una experiencia sensorial única para cuerpo y mente.",
+            imageSrc: "../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp",
+            imageAlt: "Masajes Relajantes con piedras calientes en Chía"
+        },
+        metaTitle: "Masajes Relajantes en Chía | Piedras Calientes y Relax | Narbo's",
+        metaDescription: "Libera el estrés y renueva tu energía con nuestros masajes relajantes en Chía. Terapia con piedras calientes, aromaterapia y técnicas descontracturantes.",
         gallery: [
             {
                 type: 'image',
                 layout: 'vertical',
                 src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
-                title: "Piedras Calientes",
-                subtitle: "Terapia térmica",
-                alt: "Masaje con piedras calientes"
+                title: "Relajación Total",
+                subtitle: "Experiencia Sensorial",
+                alt: "Masaje relajante profesional en Chía"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
-                title: "Ambiente Spa",
-                subtitle: "Relax Total",
-                alt: "Ambiente relajante de spa"
+                src: '../../images/pages/estetica/terapia-piedras-calientes-spa-chia.webp',
+                title: "Piedras Volcánicas",
+                subtitle: "Termoterapia",
+                alt: "Masaje con piedras calientes volcánicas"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje_reductor.webp',
-                title: "Masaje Corporal",
-                alt: "Masaje reductor y relajante"
+                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
+                title: "Alivio de Tensión",
+                subtitle: "Masaje de Espalda",
+                alt: "Masaje enfocado en espalda con piedras calientes"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/masaje-descontracturante-cuerpo-chia.webp',
+                title: "Descontracturante",
+                alt: "Masaje profundo de cuerpo completo"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
+                title: "Moldeamiento",
+                subtitle: "Cuidado Corporal",
+                alt: "Tratamiento corporal estético"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
-                title: "Bienestar Integral",
-                subtitle: "Cuerpo y Mente",
-                alt: "Bienestar facial y corporal"
+                src: '../../images/pages/estetica/masaje_reductor.webp',
+                title: "Técnicas Especializadas",
+                subtitle: "Bienestar Corporal",
+                alt: "Masaje reductor y técnicas de spa"
             }
         ]
     },

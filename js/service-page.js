@@ -247,9 +247,15 @@ class ServicePageManager {
         const grid = document.getElementById('aesthetics-services-static');
         if (!grid) return;
         
+        // En producción (SSG), el grid ya vendrá pre-renderizado con tarjetas.
+        // En desarrollo local (Live Server), estará vacío. Inyectarlo aquí para dev.
+        if (this.pageKey === 'estetica' && grid.children.length > 0) {
+            return;
+        }
+
         const detailedPages = [
             'spa-facial-integral', 'masajes-relajantes', 
-            'cejas-y-pestanas', 'depilacion-corporal'
+            'cejas-y-pestanas', 'depilacion-corporal', 'limpieza-facial'
         ];
         
         let displayServices = estheticsServices;
@@ -261,7 +267,8 @@ class ServicePageManager {
                 'spa-facial-integral': 'spa-facial-integral',
                 'masajes-relajantes': 'masajes-relajantes',
                 'cejas-y-pestanas': 'cejas-y-pestanas',
-                'depilacion-corporal': 'depilacion-corporal.html'
+                'depilacion-corporal': 'depilacion-corporal.html',
+                'limpieza-facial': 'limpieza-facial'
             };
 
             const fragment = filterMap[this.pageKey];
@@ -376,17 +383,19 @@ class ServicePageManager {
         // Solo inicializar si estamos en una página válida
         if (!this.pageKey) return;
 
+        // Comprobación de GLightbox (puede demorar por CDN)
         if (typeof GLightbox === 'undefined') {
-            if (retries > 50) {
-                console.warn("GLightbox failed to load.");
+            if (retries < 50) { // Reintentar hasta 5 segundos
+                setTimeout(() => this.initLightboxInstance(retries + 1), 100);
                 return;
             }
-            setTimeout(() => this.initLightboxInstance(retries + 1), 100);
-            return;
+            // console.warn("GLightbox failed to load after retries.");
+            return; 
         }
 
+        // Limpiar instancia previa si existe
         if (this.lightbox) {
-            this.lightbox.destroy();
+            try { this.lightbox.destroy(); } catch(e) {}
             this.lightbox = null;
         }
 
@@ -403,7 +412,7 @@ class ServicePageManager {
             });
             this.injectLightboxStyles();
         } catch (error) {
-            console.error("Error initializing GLightbox:", error);
+            // console.error("Error initializing GLightbox:", error);
         }
 
         this.setupLightboxAccessibility();

@@ -7,16 +7,6 @@
     <link rel="preload" as="image" href="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp">
     <link rel="preload" as="image" href="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp">
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XLWJJBSDL"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-7XLWJJBSDL");
-    </script>
-
     <meta name="google-site-verification" content="z7iMcq4xUxxKeXpDsVU32HJ_a0jXCwyOFmZi-7vvCKs" />
 
     <title>Peluquería y Spa en Chía | Narbo's Salon Spa</title>
@@ -36,7 +26,7 @@
     <meta property="twitter:description" content="¿Buscas la mejor peluquería en Chía? Expertos en cortes, color, spa y bienestar con más de 11 años de experiencia. ¡Reserva tu cita hoy!">
     <meta property="twitter:image" content="https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp">
 
-    <link rel="stylesheet" href="css/styles.css?v=3.0">
+    <link rel="stylesheet" href="css/styles.css?v=3.5">
     <link rel="icon" type="image/webp" href="images/brand/favicon_narbos.webp">
     <meta id="meta-description" name="description" content="¿Buscas la mejor peluquería en Chía? En Narbo's Salon ofrecemos cortes expertos, color, spa y tratamientos capilares. ¡Reserva tu cita hoy mismo!">
     <style>
@@ -116,6 +106,32 @@
       ],
       "areaServed": ["Chía", "Cajicá", "Zipaquirá"]
     }
+    </script>
+\n    <!-- GA Deferido para mejorar LCP/TBT -->
+    <script type="text/javascript">
+      const loadGA = () => {
+        if (window.gaLoaded) return;
+        window.gaLoaded = true;
+        const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-7XLWJJBSDL';
+        script.async = true;
+        document.head.appendChild(script);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7XLWJJBSDL');
+      };
+      
+      // Retrasar la carga de GA hasta que el hilo principal esté libre o el usuario interactúe
+      if (window.requestIdleCallback) {
+        requestIdleCallback(loadGA, { timeout: 4000 });
+      } else {
+        setTimeout(loadGA, 4000);
+      }
+      // Opcional: cargar Inmediatamente en la primera interacción (scroll, touch, etc)
+      ['scroll', 'touchstart', 'mousemove', 'click'].forEach(evt => 
+        document.addEventListener(evt, loadGA, { once: true, passive: true })
+      );
     </script>
 </head>
 <body class="font-sans bg-white text-brand-gray-dark">
@@ -268,7 +284,7 @@
     <div id="modals-root"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
-    <script src="js/main.js?v=3.0" type="module"></script>
+    <script src="js/main.js?v=3.5" type="module"></script>
 
 </body>
 </html>

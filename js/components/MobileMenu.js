@@ -10,18 +10,17 @@
  */
 export class MobileMenu {
     constructor() {
+        // Initial DOM elements that are critical for the menu to function.
+        // Other elements are re-mapped in init() after basic checks.
         this.DOM = {
             menuBtn: document.getElementById("menu-btn"),
             mobileMenu: document.getElementById("mobile-menu"),
             backdrop: document.getElementById("menu-backdrop"),
-            openIcon: document.getElementById("menu-open-icon"),
-            closeIcon: document.getElementById("menu-close-icon"),
-            internalCloseBtn: document.getElementById("internal-close-btn"),
-            links: document.querySelectorAll("#mobile-menu a"),
-            // Selectors don't exist yet on page load if rendered via JS? 
-            // Navbar.js renders HTML strings. App.js calls MobileMenu AFTER rendering Navbar?
-            // Yes, see App.js: this.mountHeader() then new MobileMenu().
-            serviceToggles: document.querySelectorAll(".mobile-services-toggle")
+            openIcon: null, // Will be mapped in init()
+            closeIcon: null, // Will be mapped in init()
+            internalCloseBtn: null, // Will be mapped in init()
+            links: null, // Will be mapped in init()
+            serviceToggles: null // Will be mapped in init()
         };
         
         this.isOpen = false;
@@ -30,12 +29,29 @@ export class MobileMenu {
 
     /**
      * Inicializa el componente.
+     * Realiza reintentos silenciosos si los elementos DOM principales no están presentes.
      */
-    init() {
+    init(retries = 0) {
+        // Re-check critical elements on each retry
+        this.DOM.menuBtn = document.getElementById("menu-btn");
+        this.DOM.mobileMenu = document.getElementById("mobile-menu");
+        this.DOM.backdrop = document.getElementById("menu-backdrop");
+
+        // If critical elements are missing, retry silently
         if (!this.DOM.menuBtn || !this.DOM.mobileMenu) {
-            console.warn("MobileMenu: Critical elements not found in DOM.");
-            return;
+            if (retries < 5) { // Retry up to 5 times (approx 1.5s total)
+                setTimeout(() => this.init(retries + 1), 300);
+                return;
+            }
+            return; // Fallo silencioso (evita ruido en consola)
         }
+
+        // Re-mapear el resto de elementos ahora que sabemos que el menú existe
+        this.DOM.openIcon = document.getElementById("menu-open-icon");
+        this.DOM.closeIcon = document.getElementById("menu-close-icon");
+        this.DOM.internalCloseBtn = document.getElementById("internal-close-btn");
+        this.DOM.links = document.querySelectorAll("#mobile-menu a");
+        this.DOM.serviceToggles = document.querySelectorAll(".mobile-services-toggle");
 
         this.moveMenuToBody();
         this.resetInitialState();
