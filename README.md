@@ -58,6 +58,14 @@ Para preservar el historial de indexación en Google Search Console y evitar err
     *   Integrated `csso-cli` explicitly into `scripts/build.js` to run *after* PurgeCSS completes. The final `styles.css` is now guaranteed to be structurally optimized and fully minified.
     *   Rewrote the `versionAssets()` hash function in the build script to dynamically detect and version *all* generated JS files (including dynamic chunks), preventing cache stagnation for lazy-loaded modules.
 
+### 4. SEO: Google Search Console Validation (Canonical Tags) 🛡️
+*   **Context:** Received an alert from Google Search Console stating: "Página alternativa con etiqueta canónica adecuada" (Alternative page with proper canonical tag).
+*   **Analysis:** This is **NOT an error**, but rather a successful validation of our SEO defenses. 
+    *   Google found old URLs with `/index.html` or `.html` endings.
+    *   Our protective canonical tags (`<link rel="canonical" href=".../clean-url">`) properly instructed Google to ignore the physical file paths and only index the clean, canonical URLs.
+    *   Because the user clicked "Validate Fix" manually some days ago, Google re-crawled, saw the canonical tag was working exactly as intended (redirecting/ignoring the alternative), and issued this status update.
+*   **Action Taken:** No code changes were required. The `.htaccess` 301 redirects and the generated `sitemap.xml` are functioning perfectly. This note serves as documentation for future audits to safely ignore this specific GSC notification as it represents healthy, expected crawler behavior.
+
 ## 🔄 Recent Updates (February 21, 2026)
 
 ### 1. Component Reliability & Bootstrapping 🛠️
