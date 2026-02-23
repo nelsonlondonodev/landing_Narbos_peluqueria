@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Google Tag Manager -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XLWJJBSDL"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", "G-7XLWJJBSDL");
-    </script>
-
     <meta name="google-site-verification" content="z7iMcq4xUxxKeXpDsVU32HJ_a0jXCwyOFmZi-7vvCKs" />
 
     <!-- SEO MASTER START -->
@@ -103,7 +95,33 @@
         #navbar-root { min-height: 80px; }
         #breadcrumbs-root { min-height: 40px; }
     </style>
-  </head>
+  \n    <!-- GA Deferido para mejorar LCP/TBT -->
+    <script type="text/javascript">
+      const loadGA = () => {
+        if (window.gaLoaded) return;
+        window.gaLoaded = true;
+        const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-7XLWJJBSDL';
+        script.async = true;
+        document.head.appendChild(script);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7XLWJJBSDL');
+      };
+      
+      // Retrasar la carga de GA hasta que el hilo principal esté libre o el usuario interactúe
+      if (window.requestIdleCallback) {
+        requestIdleCallback(loadGA, { timeout: 4000 });
+      } else {
+        setTimeout(loadGA, 4000);
+      }
+      // Opcional: cargar Inmediatamente en la primera interacción (scroll, touch, etc)
+      ['scroll', 'touchstart', 'mousemove', 'click'].forEach(evt => 
+        document.addEventListener(evt, loadGA, { once: true, passive: true })
+      );
+    </script>
+</head>
   <body class="font-sans bg-white text-gray-900">
     <header class="site-header">
       <div id="navbar-root"></div>

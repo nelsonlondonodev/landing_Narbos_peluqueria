@@ -118,7 +118,7 @@ const buildJS = async () => {
     ];
 
     try {
-        await execPromise(`npx esbuild ${entryPoints.map(e => `"${e}"`).join(' ')} --bundle --minify --format=esm --outdir="${path.join(DIST_DIR, 'js')}" --target=es2020`);
+        await execPromise(`npx esbuild ${entryPoints.map(e => `"${e}"`).join(' ')} --bundle --splitting --minify --format=esm --outdir="${path.join(DIST_DIR, 'js')}" --target=es2020`);
         log('✅ JS Bundling complete (main.js, service-page.js).', colors.green);
     } catch (error) {
         console.error('❌ ESBuild failed:', error);
@@ -184,12 +184,12 @@ const copyAssets = async () => {
 const versionAssets = async () => {
     log('Applying Cache Busting (Versioning)...', colors.magenta);
     
+    const jsFilesDir = path.join(DIST_DIR, 'js');
+    const jsDistFiles = fs.existsSync(jsFilesDir) ? fs.readdirSync(jsFilesDir).filter(f => f.endsWith('.js')) : [];
+    
     const assetsToVersion = [
         { dir: 'css', name: 'styles.css' },
-        { dir: 'js', name: 'main.js' },
-        { dir: 'js', name: 'service-page.js' },
-        { dir: 'js', name: 'hair-page.js' },
-        { dir: 'js', name: 'nails-page.js' }
+        ...jsDistFiles.map(name => ({ dir: 'js', name }))
     ];
 
     const mappings = {};
@@ -291,6 +291,10 @@ const runBuild = async () => {
         // 3. PurgeCSS (Post-Hydration)
         // Now PurgeCSS will see all the classes injected by SSG (like max-md:hidden)
         await runPurgeCSS();
+
+        // Optimize CSS further after PurgeCSS strips out Tailwind
+        log('Minifying CSS with CSSO...', colors.magenta);
+        await execPromise('npx csso-cli ./dist/css/styles.css -o ./dist/css/styles.css');
 
         // 4. Versioning (Final step: hash the optimized files)
         await versionAssets();

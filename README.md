@@ -36,6 +36,28 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 23, 2026)
+
+### 1. Hardened Core Web Vitals (TBT & CPU Idle Time) ⚡
+*   **Problem:** Google PageSpeed Insights reported fluctuations (score drops on weekends) due to "Long Main-thread Tasks" causing high Total Blocking Time (TBT). This was traced back to the synchronous execution of Google Analytics (`gtag.js`) blocking the parser.
+*   **Solution (Deferred Analytics):** 
+    *   Removed the synchronous GA script from the `<head>` of all 31 `.html` files in the repository.
+    *   Implemented a smart, non-blocking loader script utilizing `requestIdleCallback` (with a 4-second timeout) or immediate loading upon the first user interaction (`scroll`, `touchstart`). 
+    *   This ensures GA still tracks users accurately without penalizing the initial First Contentful Paint (FCP) or freezing the mobile experience on slow 4G devices.
+
+### 2. JavaScript Code Splitting (Unused JS Reduction) ✂️
+*   **Problem:** PageSpeed warned about 60+ KiB of "Unused JavaScript" because heavy component modules (Reviews, VideoPlayer, Gallery) were being compiled into a singular, monolithic `main.bundle.js` even if they were requested dynamically.
+*   **Solution:**
+    *   Upgraded the `esbuild` configuration in `scripts/build.js` to enable `--splitting`.
+    *   Dynamic imports (`await import(...)`) introduced on Feb 17 now correctly generate isolated, independent `chunk-[hash].js` files. 
+    *   The browser now *physically* downloads only the absolute minimum Javascript necessary for the current viewport layout, saving significant bandwidth.
+
+### 3. CSS Minification & Build Pipeline Stability 🛠️
+*   **Problem:** "Minify CSS" warning reappeared. Discovered that while Tailwind initially minified the CSS, the post-processing step (`PurgeCSS`) was outputting unminified code, overriding the compression.
+*   **Solution:** 
+    *   Integrated `csso-cli` explicitly into `scripts/build.js` to run *after* PurgeCSS completes. The final `styles.css` is now guaranteed to be structurally optimized and fully minified.
+    *   Rewrote the `versionAssets()` hash function in the build script to dynamically detect and version *all* generated JS files (including dynamic chunks), preventing cache stagnation for lazy-loaded modules.
+
 ## 🔄 Recent Updates (February 21, 2026)
 
 ### 1. Component Reliability & Bootstrapping 🛠️
