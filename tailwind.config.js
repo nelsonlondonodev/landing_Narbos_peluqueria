@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./blog/**/*.html", "./servicios/**/*.html", "./fidelizacion/**/*.html", "./js/**/*.js", "./_templates/**/*.html"],
+  safelist: [
+    'mt-[90px]',
+    'md:mt-[110px]'
+  ],
   theme: {
     extend: {
       colors: {

@@ -10,9 +10,9 @@ export class Breadcrumbs {
      */
     constructor(items, options = {}) {
         this.items = items;
-        this.customClasses = options.customClasses || 'pt-28 md:pt-[136px]';
+        this.customClasses = options.customClasses || 'mt-[90px] md:mt-[110px] py-2';
         this.separatorIcon = `
-            <svg class="w-3 h-3 mx-3" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <svg class="w-3 h-3 mx-3 text-gray-400" aria-hidden="true" style="width: 12px; height: 12px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
             </svg>
         `;
@@ -29,9 +29,9 @@ export class Breadcrumbs {
         const listItemsHTML = this.items.map((item, index) => this.renderItem(item, index)).join('');
 
         return `
-            <nav aria-label="Breadcrumb" class="bg-gray-100 py-4 px-6 relative z-10 ${this.customClasses}">
-                <div class="container mx-auto max-w-screen-xl">
-                    <ol class="list-none p-0 inline-flex text-sm text-gray-600 flex-wrap">
+            <nav aria-label="Breadcrumb" class="bg-gray-100 px-6 relative z-10 border-b border-gray-200 ${this.customClasses}">
+                <div class="container mx-auto max-w-screen-xl flex items-center">
+                    <ol class="list-none p-0 inline-flex items-center text-sm text-gray-600 flex-wrap w-full">
                         ${listItemsHTML}
                     </ol>
                 </div>
@@ -114,8 +114,8 @@ export class Breadcrumbs {
      */
     renderCurrentPage(item) {
         return `
-            <li>
-                <span class="text-gray-800 font-semibold cursor-default" aria-current="page">${item.label}</span>
+            <li class="flex items-center">
+                <span class="text-gray-800 font-semibold cursor-default mt-0.5" aria-current="page">${item.label}</span>
             </li>
         `;
     }

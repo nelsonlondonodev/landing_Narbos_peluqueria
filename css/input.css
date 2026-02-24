@@ -117,33 +117,36 @@ body.mobile-menu-open {
 
 /* 
   Estilos base estandarizados para el Site Header.
-  Usa @apply para heredar utilidades de Tailwind y asegurar consistencia.
-  Forzamos 'fixed' para evitar problemas de desaparición en scroll.
+  Forzamos la barra a una altura constante para evitar problemas con las migas de pan.
+  Alto fijo: 90px en móvil, 110px en escritorio.
 */
 .site-header {
   @apply bg-brand-green backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md transition-transform duration-300;
   
-  transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-  padding-top: 1rem; /* 16px - Start Tall */
-  padding-bottom: 1rem; /* 16px - Start Tall */
+  /* Mantener transiciones de color, pero el tamaño ya no cambia */
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  height: 90px;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .site-header {
+    height: 110px;
+  }
 }
 
 /*
   Estilos para el header cuando el usuario hace scroll.
-  La clase .header-scrolled se añade vía JS (Navbar.js).
+  Solo cambia el color de fondo a uno más sólido.
 */
 .site-header.header-scrolled {
-  padding-top: 0.4rem; /* 6px */
-  padding-bottom: 0.4rem; /* 6px */
-  background-color: rgba(107, 117, 90, 0.95); /* brand-green con más opacidad */
+  background-color: rgba(107, 117, 90, 0.98); /* brand-green más sólido */
 }
 
 /* 
-  Sincronización de la reducción del nav al hacer scroll.
+  (Eliminado: Ya no se reduce la altura ni el padding del nav al hacer scroll)
 */
-.site-header.header-scrolled nav {
-  @apply min-h-[3.5rem] py-0;
-}
 /* purgecss end ignore */
 
 /* 
@@ -155,15 +158,8 @@ body.mobile-menu-open {
 }
 
 /* 
-  Estilos para el logo dentro del header.
+  Estilos para el logo dentro del header eliminados para hacerlo estático.
 */
-.site-header nav > a > img {
-  transition: height 0.3s ease-in-out;
-}
-
-.site-header.header-scrolled nav > a > img {
-  height: 3rem; /* 48px, reducido desde los 3.5rem originales */
-}
 
 /*
   Preparamos los enlaces de navegación para el efecto de la línea animada.

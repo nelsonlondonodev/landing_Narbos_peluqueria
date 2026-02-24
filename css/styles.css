@@ -492,6 +492,9 @@
   .-mt-8 {
     margin-top: calc(var(--spacing) * -8);
   }
+  .mt-0\.5 {
+    margin-top: calc(var(--spacing) * 0.5);
+  }
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
   }
@@ -521,6 +524,12 @@
   }
   .mt-20 {
     margin-top: calc(var(--spacing) * 20);
+  }
+  .mt-\[90px\] {
+    margin-top: 90px;
+  }
+  .mt-\[112px\] {
+    margin-top: 112px;
   }
   .mt-auto {
     margin-top: auto;
@@ -2960,6 +2969,16 @@
       margin-top: calc(var(--spacing) * 0);
     }
   }
+  .md\:mt-\[110px\] {
+    @media (width >= 48rem) {
+      margin-top: 110px;
+    }
+  }
+  .md\:mt-\[122px\] {
+    @media (width >= 48rem) {
+      margin-top: 122px;
+    }
+  }
   .md\:mb-24 {
     @media (width >= 48rem) {
       margin-bottom: calc(var(--spacing) * 24);
@@ -3219,11 +3238,6 @@
   .md\:pt-64 {
     @media (width >= 48rem) {
       padding-top: calc(var(--spacing) * 64);
-    }
-  }
-  .md\:pt-\[136px\] {
-    @media (width >= 48rem) {
-      padding-top: 136px;
     }
   }
   .md\:pb-24 {
@@ -3494,18 +3508,18 @@ body.mobile-menu-open {
   transition-duration: var(--tw-duration, var(--default-transition-duration));
   --tw-duration: 300ms;
   transition-duration: 300ms;
-  transition: padding 0.3s ease-in-out, background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  height: 90px;
+  display: flex;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .site-header {
+    height: 110px;
+  }
 }
 .site-header.header-scrolled {
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
-  background-color: rgba(107, 117, 90, 0.95);
-}
-.site-header.header-scrolled nav {
-  min-height: 3.5rem;
-  padding-block: calc(var(--spacing) * 0);
+  background-color: rgba(107, 117, 90, 0.98);
 }
 #navbar-root {
   display: flex;
@@ -3513,12 +3527,6 @@ body.mobile-menu-open {
   width: 100%;
   align-items: center;
   justify-content: center;
-}
-.site-header nav > a > img {
-  transition: height 0.3s ease-in-out;
-}
-.site-header.header-scrolled nav > a > img {
-  height: 3rem;
 }
 .site-header nav .desktop-menu a {
   position: relative;
