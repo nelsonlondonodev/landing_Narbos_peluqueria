@@ -539,6 +539,15 @@ export const pagesData = Object.freeze({
             }
         ]
     },
+    'depilacion-corporal': {
+        hero: {
+            title: "Depilación Corporal <span class=\"text-brand-green\">con Cera</span>",
+            subtitle: "Suavidad duradera para tu piel con técnicas higiénicas y productos de alta calidad.",
+            imageSrc: "images/brand/logo_narbos.webp",
+            imageAlt: "Depilación corporal en Narbo's Salon Spa",
+            variant: 'logo'
+        }
+    },
     'cejas-y-pestanas': {
         galleryOptions: { isolateItems: true }, // Aísla cada item de la galería (comportamiento solicitado)
         hero: {
