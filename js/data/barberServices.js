@@ -30,8 +30,8 @@ export const barberServices = Object.freeze([
         description: "La experiencia completa: Corte de cabello y perfilado de barba con toalla caliente.",
         price: masterPrices.barber.corteBarba,
         link: "servicios/barberia/barberia-cortes-hombre.html",
-        image: "../../images/pages/peluqueria/estilismo-barba.webp",
-        variant: "standard"
+        image: "../../images/brand/logo_narbos.webp",
+        variant: "logo"
     },
     {
         id: 'arreglo-barba',
@@ -40,7 +40,7 @@ export const barberServices = Object.freeze([
         price: '$45.000', // Estimated
         link: "servicios/barberia/barberia-cortes-hombre.html",
         image: "../../images/brand/logo_narbos.webp",
-        variant: "standard" // Changed from logo to standard for consistency in grid
+        variant: "logo" // Changed to logo variant for dark placeholder
     },
     {
         id: 'camuflaje-canas',

@@ -130,11 +130,11 @@ export const pagesData = Object.freeze({
                 alt: "Logotipo Narbos"
             },
             {
-                type: 'image',
+                type: 'logo-card',
                 layout: 'square',
-                src: '../../images/pages/barberia/barber-hero.webp',
+                src: '../../images/brand/logo_narbos.webp',
                 title: "Barbería Clásica",
-                alt: "Ambiente de barbería tradicional"
+                alt: "Marca Narbo's Barbería Clásica"
             },
             {
                 type: 'logo-card',
