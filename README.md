@@ -36,6 +36,28 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 25, 2026)
+
+### 1. Robust SEO Keyword Tracking System 📊
+*   **Problem:** To measure our SEO strategy accurately moving forward, we needed a snapshot of our current ranking positions for target keywords.
+*   **Solution:** Built a local JSON tracking database in the `seo_tracking/` directory.
+    *   `unas_keywords_2026_02_25.json`: Tracks rankings for "uñas" related keywords, confirming top positions for "uñas en chía" (Top 6-7), and setting a baseline (>100) for new long-tails like "unas cortas", "unas decoradas animal print", "unas decoradas facil", and "unas polygel".
+    *   `peluqueria_keywords_2026_02_25.json`: Tracks "peluquería" related queries, highlighting current success for "peluquería en chía" (Top 5) and establishing tracking for local intent variations like "peluquería abierta cerca de mi ubicación", "peluquerias cajica", and "peluquería hombres cerca de mi" (>100).
+    *   Added `.gitignore` rules to prevent tracking files from cluttering the production repository, treating them as internal analytical tools.
+
+### 2. Semantic On-Page Optimization (Long-tail / LSI Keywords) 🎯
+*   **Problem:** We identified high-potential, unranked long-tail keywords (like "uñas polygel" or "peluquería cerca de mi ubicación") that needed integration into our core hub pages without diluting existing, successful `<H1>` or `<H2>` tags.
+*   **Solution:** Seamlessly stitched these keywords into the highly contextual FAQ sections across the site.
+    *   `servicios/unas-spa/unas-acrilicas-gel.html`: Naturally updated questions and answers to extensively cover "unas polygel" as an alternative to acrylics and gel.
+    *   `servicios/unas-spa/index.html`: Leveraged the FAQ accordion to naturally fold in terms like "uñas cortas" and "uñas decoradas animal print / facil" when discussing our Nail Art capabilities.
+    *   `index.html` (Home) & `servicios/peluqueria/index.html`: Augmented the "Location" and "Hours" FAQs to include high-converting local variations: "peluquería abierta cerca de mi ubicación", "peluquerías cercanas", "peluquerias cajica", and "peluquería hombres cerca de mi".
+
+### 3. FAQPage Schema Markup (JSON-LD) Synchronization 🧠
+*   **Problem:** Modifying visible HTML FAQ content without updating the underlying structured data can lead to search engine confusion, rich result loss, or "Missing field" errors in Search Console. Some pages were completely lacking this schema.
+*   **Solution:** 
+    *   Updated the existing `@type: FAQPage` JSON-LD script in `unas-acrilicas-gel.html` to mirror the exact wording (including commas and periods) of the new *polygel* content.
+    *   Injected completely new, highly detailed `@type: FAQPage` structured data scripts into `index.html` (Landing), `servicios/peluqueria/index.html`, and `servicios/unas-spa/index.html`. This ensures Google's bots perfectly digest our new LSI and local keywords, maximizing our chances for rich snippets in the SERPs without risk of cloaking penalties.
+
 ## 🔄 Recent Updates (February 23, 2026)
 
 ### 1. Hardened Core Web Vitals (TBT & CPU Idle Time) ⚡
