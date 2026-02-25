@@ -2,3 +2,4 @@
 node_modules
 dist
 .env
+seo_tracking/
