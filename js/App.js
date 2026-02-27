@@ -17,6 +17,7 @@ import { pagesData } from './data/pagesData.js'; // Nuevo Import
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 // ServiceCard is needed for mountHomeServices which runs on init
 import { ServiceCard } from './components/ServiceCard.js';
+import { AnalyticsService } from './services/AnalyticsService.js';
 
 
 class App {
@@ -45,6 +46,7 @@ class App {
         this.mountHomeServices();
         this.initServices();
         this.initBreadcrumbs();
+        this.initAnalytics();
     }
 
     /**
@@ -289,9 +291,13 @@ class App {
             root.innerHTML = new Breadcrumbs(items).render();
         }
     }
+
+    initAnalytics() {
+        if (siteConfig.contact.googleAnalyticsId) {
+            const analytics = new AnalyticsService(siteConfig.contact.googleAnalyticsId);
+            analytics.init();
+        }
+    }
 }
-
-// End of App class definition
-
 
 export { App };

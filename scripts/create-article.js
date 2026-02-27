@@ -163,59 +163,88 @@ function updateArticlesDatabase(data) {
 /**
  * Función principal para orquestar la creación del artículo.
  */
+/**
+ * Recopila los datos del artículo mediante prompts en la consola.
+ */
+async function collectArticleData() {
+    console.log('\n✨ GENERADOR DE ARTÍCULOS - NARBO\'S SALON ✨\n');
+
+    const title = await ask('📝 Título del Artículo: ');
+    const slug = await ask('🔗 Slug (URL amigable): ');
+    const description = await ask('📄 Meta Descripción (SEO): ');
+    const breadcrumbTitle = await ask('🍞 Título corto para Breadcrumbs (opcional): ');
+    const category = await ask('📂 Categoría: ');
+    const dateInput = await ask('📅 Fecha (YYYY-MM-DD) [Hoy]: ');
+    
+    const faqs = await collectFAQs();
+
+    return { title, slug, description, breadcrumbTitle, category, dateInput, faqs };
+}
+
+/**
+ * Recopila las preguntas frecuentes una por una.
+ */
+async function collectFAQs() {
+    console.log('\n❓ SECCIÓN DE PREGUNTAS FRECUENTES (FAQ)');
+    const faqs = [];
+    let addFaq = await ask('¿Deseas añadir FAQs? (s/n): ');
+    while (addFaq.toLowerCase() === 's') {
+        const question = await ask('   Pregunta: ');
+        const answer = await ask('   Respuesta: ');
+        faqs.push({ question, answer });
+        addFaq = await ask('   ¿Añadir otra? (s/n): ');
+    }
+    return faqs;
+}
+
+/**
+ * Crea los archivos físicos y actualiza la BD.
+ */
+function createArticleFiles(data) {
+    const { title, slug, description, breadcrumbTitle, category, iso, display, faqs } = data;
+    
+    const imagePath = 'images/image_blog_1.webp'; // Relativa a blog/articles/
+    const filename = `${slug}.html`;
+    const filePath = path.join(PATHS.ARTICLES_DIR, filename);
+
+    if (fs.existsSync(filePath)) {
+        throw new Error(`El archivo ${filename} ya existe.`);
+    }
+
+    const absoluteImagePath = `blog/articles/${imagePath}`;
+    const schemaMarkup = generateSchemaMarkup({ 
+        title, description, imagePath: absoluteImagePath, 
+        isoDate: iso, slug, faqs 
+    });
+    const faqHTML = generateFAQHTML(faqs);
+    
+    const htmlContent = processTemplate({
+        title, slug, description, category, 
+        displayDate: display, imagePath, schemaMarkup,
+        breadcrumbTitle: breadcrumbTitle || title,
+        faqHTML
+    });
+
+    fs.writeFileSync(filePath, htmlContent);
+    console.log(`\n✅ Archivo creado: blog/articles/${filename}`);
+
+    updateArticlesDatabase({
+        slug, displayDate: display, isoDate: iso, 
+        category, title, description, imagePath, filename
+    });
+}
+
+/**
+ * Función principal para orquestar la creación del artículo.
+ */
 async function main() {
     try {
-        console.log('\n✨ GENERADOR DE ARTÍCULOS - NARBO\'S SALON ✨\n');
-
-        const title = await ask('📝 Título del Artículo: ');
-        const slug = await ask('🔗 Slug (URL amigable): ');
-        const description = await ask('📄 Meta Descripción (SEO): ');
-        const breadcrumbTitle = await ask('🍞 Título corto para Breadcrumbs (opcional): ');
-        const category = await ask('📂 Categoría: ');
-        const dateInput = await ask('📅 Fecha (YYYY-MM-DD) [Hoy]: ');
+        const rawData = await collectArticleData();
+        const { iso, display } = getFormattedDates(rawData.dateInput);
         
-        console.log('\n❓ SECCIÓN DE PREGUNTAS FRECUENTES (FAQ)');
-        const faqs = [];
-        let addFaq = await ask('¿Deseas añadir FAQs? (s/n): ');
-        while (addFaq.toLowerCase() === 's') {
-            const question = await ask('   Pregunta: ');
-            const answer = await ask('   Respuesta: ');
-            faqs.push({ question, answer });
-            addFaq = await ask('   ¿Añadir otra? (s/n): ');
-        }
+        createArticleFiles({ ...rawData, iso, display });
 
-        const { iso, display } = getFormattedDates(dateInput);
-        const imagePath = 'images/image_blog_1.webp'; // Relativa a blog/articles/
-        const filename = `${slug}.html`;
-        const filePath = path.join(PATHS.ARTICLES_DIR, filename);
-
-        if (fs.existsSync(filePath)) {
-            throw new Error(`El archivo ${filename} ya existe.`);
-        }
-
-        const absoluteImagePath = `blog/articles/${imagePath}`;
-        const schemaMarkup = generateSchemaMarkup({ 
-            title, description, imagePath: absoluteImagePath, 
-            isoDate: iso, slug, faqs 
-        });
-        const faqHTML = generateFAQHTML(faqs);
-        
-        const htmlContent = processTemplate({
-            title, slug, description, category, 
-            displayDate: display, imagePath, schemaMarkup,
-            breadcrumbTitle: breadcrumbTitle || title,
-            faqHTML
-        });
-
-        fs.writeFileSync(filePath, htmlContent);
-        console.log(`\n✅ Archivo creado: blog/articles/${filename}`);
-
-        updateArticlesDatabase({
-            slug, displayDate: display, isoDate: iso, 
-            category, title, description, imagePath, filename
-        });
-
-        console.log(`\n🎉 ¡Artículo listo! Edita el contenido en: blog/articles/${filename}`);
+        console.log(`\n🎉 ¡Artículo listo! Edita el contenido en: blog/articles/${rawData.slug}.html`);
 
     } catch (error) {
         console.error(`\n❌ Error: ${error.message}`);

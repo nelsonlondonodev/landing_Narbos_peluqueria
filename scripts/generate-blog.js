@@ -48,32 +48,48 @@ function generateArticleCard(article) {
 /**
  * Orquestador de la generación del blog
  */
+/**
+ * Orquestador de la generación del blog
+ */
 function generateBlog() {
     console.log('🚀 Iniciando generación del índice del blog...');
 
     try {
-        let html = fs.readFileSync(BLOG_INDEX_PATH, 'utf8');
+        const html = fs.readFileSync(BLOG_INDEX_PATH, 'utf8');
+        const articlesHTML = getArticlesHTML();
+        const updatedHtml = injectArticles(html, articlesHTML);
 
-        // Generar el bloque de artículos
-        const articlesHTML = [...articles]
-            .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate)) // Ordenar por fecha reciente
-            .map(generateArticleCard)
-            .join('\n');
-
-        // Reemplazar contenido entre marcadores
-        const regex = /<!-- ARTICLES_START -->[\s\S]*<!-- ARTICLES_END -->/;
-        const newContent = `<!-- ARTICLES_START -->${articlesHTML}\n            <!-- ARTICLES_END -->`;
-
-        if (regex.test(html)) {
-            const updatedHtml = html.replace(regex, newContent);
+        if (updatedHtml) {
             fs.writeFileSync(BLOG_INDEX_PATH, updatedHtml, 'utf8');
             console.log(`✅ Blog actualizado exitosamente con ${articles.length} artículos.`);
-        } else {
-            console.error('❌ Error: No se encontraron los marcadores <!-- ARTICLES_START --> y <!-- ARTICLES_END --> en blog/index.html');
         }
-
     } catch (error) {
         console.error('❌ Error crítico al generar el blog:', error);
+    }
+}
+
+/**
+ * Genera el bloque completo de HTML para todos los artículos.
+ */
+function getArticlesHTML() {
+    return [...articles]
+        .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))
+        .map(generateArticleCard)
+        .join('\n');
+}
+
+/**
+ * Inyecta el HTML de los artículos en el template del índice.
+ */
+function injectArticles(html, articlesHTML) {
+    const regex = /<!-- ARTICLES_START -->[\s\S]*<!-- ARTICLES_END -->/;
+    const newContent = `<!-- ARTICLES_START -->${articlesHTML}\n            <!-- ARTICLES_END -->`;
+
+    if (regex.test(html)) {
+        return html.replace(regex, newContent);
+    } else {
+        console.error('❌ Error: No se encontraron los marcadores <!-- ARTICLES_START --> y <!-- ARTICLES_END --> en blog/index.html');
+        return null;
     }
 }
 

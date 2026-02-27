@@ -82,6 +82,7 @@ export const siteConfig = Object.freeze({
         whatsapp: "573123462618",
         email: "citas@narbossalon.com",
         address: "Bajos del hotel Ibiz, Km 2 vía Chía - Cajica Edificio Quantum, local 118, Chía, Cundinamarca, Colombia.",
-        mapsLink: "https://maps.app.goo.gl/tuLinkDeMaps"
+        mapsLink: "https://maps.app.goo.gl/tuLinkDeMaps",
+        googleAnalyticsId: "G-7XLWJJBSDL"
     }
 });

@@ -142,32 +142,6 @@
       }]
     }
     </script>
-\n    <!-- GA Deferido para mejorar LCP/TBT -->
-    <script type="text/javascript">
-      const loadGA = () => {
-        if (window.gaLoaded) return;
-        window.gaLoaded = true;
-        const script = document.createElement('script');
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-7XLWJJBSDL';
-        script.async = true;
-        document.head.appendChild(script);
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-7XLWJJBSDL');
-      };
-      
-      // Retrasar la carga de GA hasta que el hilo principal esté libre o el usuario interactúe
-      if (window.requestIdleCallback) {
-        requestIdleCallback(loadGA, { timeout: 4000 });
-      } else {
-        setTimeout(loadGA, 4000);
-      }
-      // Opcional: cargar Inmediatamente en la primera interacción (scroll, touch, etc)
-      ['scroll', 'touchstart', 'mousemove', 'click'].forEach(evt => 
-        document.addEventListener(evt, loadGA, { once: true, passive: true })
-      );
-    </script>
 </head>
 <body class="font-sans bg-white text-brand-gray-dark">
 
