@@ -6,6 +6,15 @@ class AnalyticsService {
     constructor(measurementId) {
         this.measurementId = measurementId;
         this.gaLoaded = false;
+
+        // Initialize dataLayer and gtag shim immediately to avoid "reference errors"
+        // if other scripts call gtag() before the GA library is loaded.
+        if (typeof window !== 'undefined') {
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = window.gtag || function() {
+                window.dataLayer.push(arguments);
+            };
+        }
     }
 
     /**
@@ -38,10 +47,7 @@ class AnalyticsService {
         script.async = true;
         document.head.appendChild(script);
 
-        // Initialize dataLayer
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { window.dataLayer.push(arguments); }
-        window.gtag = gtag; // Make it global if needed
+        // Initialize GA tracking
 
         gtag('js', new Date());
         gtag('config', this.measurementId);
