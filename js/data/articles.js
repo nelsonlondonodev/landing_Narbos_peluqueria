@@ -19,6 +19,17 @@
  */
 const articles = [
     {
+        id: 'guia-novias-belleza-perfecta-chia',
+        date: '27 de febrero de 2026',
+        isoDate: '2026-02-27',
+        category: 'Novias y Eventos',
+        title: 'Guía para Novias: El Cronograma de Belleza Perfecto en Chía para tu Gran Día',
+        description: '¿Te casas en la Sabana? Descubre el cronograma definitivo de belleza para novias. Desde el mejor maquillaje en Chía hasta tratamientos de spa y peinados tendencia.',
+        image: 'articles/images/maquillaje-novia-profesional-chia-narbos.webp',
+        alt: 'maquillaje-de-novia-profesional-en-chia-narbon-salon',
+        link: '/blog/articles/guia-novias-belleza-perfecta-chia.html'
+    },
+    {
         id: 'cortar-cabello-crecimiento-rapido-mitos-chia',
         date: '10 de febrero de 2026',
         isoDate: '2026-02-10',
