@@ -3418,7 +3418,7 @@
     }
   }
 }
-html {
+.smooth-scroll {
   scroll-behavior: smooth;
 }
 @layer base {

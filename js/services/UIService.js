@@ -4,12 +4,38 @@
  */
 export class UIService {
     constructor() {
+        // Prevención de scroll automático del navegador al recargar
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
         this.init();
     }
 
     init() {
+        this.handleInitialScroll();
         this.initHeroAnimation();
         this.initScrollAnimations();
+        this.enableSmoothScroll();
+    }
+
+    /**
+     * Garantiza que la página inicie en el tope al recargar,
+     * evitando que el H1 quede oculto tras el navbar.
+     */
+    handleInitialScroll() {
+        if (!window.location.hash) {
+            window.scrollTo(0, 0);
+        }
+    }
+
+    /**
+     * Habilita el scroll fluido después de que la página se haya posicionado,
+     * evitando interferencias con el salto inicial de recarga.
+     */
+    enableSmoothScroll() {
+        setTimeout(() => {
+            document.documentElement.classList.add('smooth-scroll');
+        }, 500);
     }
 
     /**
@@ -19,12 +45,13 @@ export class UIService {
         const heroTitle = document.getElementById("hero-title");
         const heroSubtitle = document.getElementById("hero-subtitle");
 
+        // Delay ligeramente mayor para asegurar que el scroll inicial terminó
         if (heroTitle) {
-            setTimeout(() => heroTitle.classList.add("is-visible"), 100);
+            setTimeout(() => heroTitle.classList.add("is-visible"), 300);
         }
         
         if (heroSubtitle) {
-            setTimeout(() => heroSubtitle.classList.add("is-visible"), 400);
+            setTimeout(() => heroSubtitle.classList.add("is-visible"), 600);
         }
     }
 

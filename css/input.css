@@ -14,7 +14,7 @@
 }
 
 /* Establece el comportamiento de scroll suave para toda la página */
-html {
+.smooth-scroll {
   scroll-behavior: smooth;
 }
 
