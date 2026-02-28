@@ -29,7 +29,12 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #ffffff;
   color: #1f2937;
-  /* LCP Optimization: Content visible by default. No global fade-in. */
+  /* Elimina nodos de texto anónimos entre etiquetas block (ghost nodes de whitespace)
+     que crean un gap visual de ~25px entre el header y el primer elemento del DOM.
+     Al convertir body en flex-column, los nodos de texto son ignorados correctamente. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* page-is-loaded removed to avoid LCP delay. Body is visible by default. */
@@ -155,6 +160,30 @@ body.mobile-menu-open {
 */
 #navbar-root {
   @apply flex items-center justify-center w-full min-h-[80px];
+}
+
+/* 
+  Reserva espacio para el breadcrumb antes de que JS lo hidrate.
+  Evita CLS (salto de layout) cuando las migas de pan aparecen.
+  Equivalente al min-height de #navbar-root.
+*/
+#breadcrumbs-root {
+  min-height: 40px;
+}
+
+/* 
+  Compensa el header fixed para todo el contenido de la página.
+  Esta es la ÚNICA fuente de verdad para el offset del header.
+  Elimina la necesidad de mt- manual en Breadcrumbs o secciones Hero.
+*/
+#app-wrapper {
+  padding-top: 90px;
+}
+
+@media (min-width: 768px) {
+  #app-wrapper {
+    padding-top: 110px;
+  }
 }
 
 /* 
