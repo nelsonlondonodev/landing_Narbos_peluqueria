@@ -29,7 +29,7 @@
 <body class="bg-brand-light/20 font-sans min-h-screen flex flex-col">
     
     <!-- Header Minimalista Consistente -->
-    <header class="site-header flex justify-center items-center">
+    <header class="site-header flex justify-between items-center px-6">
         <a href="../" class="transition-transform duration-300 hover:scale-105">
             <img src="../images/brand/logo_narbos.webp" 
                  alt="Logo Narbo's" 
@@ -38,7 +38,29 @@
                  fetchpriority="high"
                  decoding="async">
         </a>
+        <button id="qr-trigger" class="flex flex-col items-center justify-center p-2 rounded-xl transition-colors hover:bg-brand-green/10 focus:outline-none" aria-label="Mostrar Código QR" title="Escanear en mi móvil">
+            <svg class="w-6 h-6 md:w-8 md:h-8 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+            <span class="text-[10px] font-bold text-brand-green mt-1">Escanear</span>
+        </button>
     </header>
+
+    <!-- Modal QR (Oculto por defecto) -->
+    <div id="qr-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-brand-gray-dark/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white p-8 rounded-3xl shadow-2xl text-center relative max-w-sm w-[90%] transform scale-95 transition-transform duration-300">
+            <button id="close-qr" class="absolute top-4 right-4 text-brand-gray-dark/50 hover:text-brand-green transition-colors p-2 focus:outline-none" aria-label="Cerrar">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 class="text-xl font-serif font-bold text-brand-gray-dark mb-2">Escanea y Únete</h3>
+            <p class="text-xs text-brand-gray-dark/70 mb-6">Abre la cámara de tu celular y escanea este código para llenarlo desde tu propio dispositivo.</p>
+            <div class="bg-white p-3 rounded-2xl shadow-inner inline-block border border-gray-100 mb-4 relative min-h-[220px]">
+                <!-- Skeleton loader -->
+                <div id="qr-skeleton" class="w-48 h-48 bg-gray-100 animate-pulse rounded-xl inset-0 m-auto absolute"></div>
+                <!-- WebP QR image (Carga diferida) -->
+                <img id="qr-image" src="" data-src="../images/fidelizacion/qr-registro.png" alt="Código QR Fidelización" class="w-48 h-48 object-contain relative z-10 opacity-0 transition-opacity duration-500 rounded-xl" onload="this.classList.remove('opacity-0'); document.getElementById('qr-skeleton').style.display='none';">
+            </div>
+            <p class="text-[10px] uppercase font-bold text-brand-green tracking-widest">+10% OFF INMEDIATO</p>
+        </div>
+    </div>
 
     <!-- Espaciador para Header Fijo -->
     <div class="h-24 md:h-28"></div>
@@ -135,8 +157,36 @@
                         </div>
 
                         <div class="form-group text-left">
-                            <label for="birthday" class="block text-[10px] md:text-xs font-bold text-brand-gray-dark/40 uppercase tracking-widest mb-1.5 ml-1 text-brand-green">Fecha de Nacimiento (Para tu regalo 🎂)</label>
-                            <input type="date" id="birthday" name="birthday" required class="loyalty-input w-full" style="color-scheme: light;">
+                            <label for="birthday" class="block text-[10px] md:text-xs font-bold text-brand-gray-dark/40 uppercase tracking-widest mb-1.5 ml-1 text-brand-green">Fecha de Nacimiento (Día/Mes/Año)</label>
+                            <div class="flex gap-2">
+                                <select id="b_day" name="b_day" required class="loyalty-input w-1/3 bg-transparent p-3 outline-none cursor-pointer appearance-none text-center">
+                                    <option value="" disabled selected>Día</option>
+                                    <script>for(let i=1;i<=31;i++) document.write(`<option value="${i.toString().padStart(2,'0')}">${i}</option>`)</script>
+                                </select>
+                                <select id="b_month" name="b_month" required class="loyalty-input w-1/3 bg-transparent p-3 outline-none cursor-pointer appearance-none text-center">
+                                    <option value="" disabled selected>Mes</option>
+                                    <option value="01">Ene</option>
+                                    <option value="02">Feb</option>
+                                    <option value="03">Mar</option>
+                                    <option value="04">Abr</option>
+                                    <option value="05">May</option>
+                                    <option value="06">Jun</option>
+                                    <option value="07">Jul</option>
+                                    <option value="08">Ago</option>
+                                    <option value="09">Sep</option>
+                                    <option value="10">Oct</option>
+                                    <option value="11">Nov</option>
+                                    <option value="12">Dic</option>
+                                </select>
+                                <select id="b_year" name="b_year" required class="loyalty-input w-1/3 bg-transparent p-3 outline-none cursor-pointer appearance-none text-center">
+                                    <option value="" disabled selected>Año</option>
+                                    <script>
+                                        const currentYear = new Date().getFullYear();
+                                        for(let i=currentYear-15;i>=currentYear-80;i--) document.write(`<option value="${i}">${i}</option>`);
+                                    </script>
+                                </select>
+                            </div>
+                            <input type="hidden" id="birthday" name="birthday">
                         </div>
 
                         <div class="pt-4">

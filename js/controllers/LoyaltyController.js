@@ -10,7 +10,17 @@ export class LoyaltyController {
             form: document.getElementById('fidelizacion-form'),
             successMsg: document.getElementById('success-msg'),
             submitBtn: document.getElementById('submit-btn'),
-            inputs: document.querySelectorAll('.form-input')
+            inputs: document.querySelectorAll('.form-input'),
+            // Nativos date selector
+            bDay: document.getElementById('b_day'),
+            bMonth: document.getElementById('b_month'),
+            bYear: document.getElementById('b_year'),
+            hiddenDate: document.getElementById('birthday'),
+            // QR Modal
+            qrTrigger: document.getElementById('qr-trigger'),
+            qrModal: document.getElementById('qr-modal'),
+            closeQr: document.getElementById('close-qr'),
+            qrImage: document.getElementById('qr-image')
         };
 
         this.WEBHOOK_URL = 'https://n8n.srv1033442.hstgr.cloud/webhook/f576ac1f-1397-416f-b3c6-6e2ab7dc4c08/chat';
@@ -23,6 +33,8 @@ export class LoyaltyController {
         if (!this.DOM.form) return;
         this.DOM.form.addEventListener('submit', (e) => this.handleSubmit(e));
         this._initInputAnimations();
+        this._initDateSelector();
+        this._initQRModal();
     }
 
     /**
@@ -147,6 +159,57 @@ export class LoyaltyController {
                     input.parentElement.classList.remove('input-focused');
                 }
             });
+        });
+    }
+
+    /**
+     * Initializes logic to combine the month, day, and year selects into the hidden date format.
+     */
+    _initDateSelector() {
+        if (!this.DOM.bDay || !this.DOM.bMonth || !this.DOM.bYear || !this.DOM.hiddenDate) return;
+
+        const updateHiddenDate = () => {
+            if (this.DOM.bDay.value && this.DOM.bMonth.value && this.DOM.bYear.value) {
+                this.DOM.hiddenDate.value = `${this.DOM.bYear.value}-${this.DOM.bMonth.value}-${this.DOM.bDay.value}`;
+            } else {
+                this.DOM.hiddenDate.value = '';
+            }
+        };
+
+        this.DOM.bDay.addEventListener('change', updateHiddenDate);
+        this.DOM.bMonth.addEventListener('change', updateHiddenDate);
+        this.DOM.bYear.addEventListener('change', updateHiddenDate);
+    }
+
+    /**
+     * Handles opening and closing of QR Modal for Staff/iPad usage inline
+     */
+    _initQRModal() {
+        if (!this.DOM.qrTrigger || !this.DOM.qrModal || !this.DOM.closeQr) return;
+
+        const openModal = () => {
+            this.DOM.qrModal.classList.remove('opacity-0', 'pointer-events-none');
+            // Animate card up
+            const card = this.DOM.qrModal.querySelector('div');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+            // Lazy load the QR image only when opened to save bandwidth on regular visits
+            if (this.DOM.qrImage && !this.DOM.qrImage.src) {
+                this.DOM.qrImage.src = this.DOM.qrImage.getAttribute('data-src');
+            }
+        };
+
+        const closeModal = () => {
+            this.DOM.qrModal.classList.add('opacity-0', 'pointer-events-none');
+            const card = this.DOM.qrModal.querySelector('div');
+            card.classList.remove('scale-100');
+            card.classList.add('scale-95');
+        };
+
+        this.DOM.qrTrigger.addEventListener('click', openModal);
+        this.DOM.closeQr.addEventListener('click', closeModal);
+        this.DOM.qrModal.addEventListener('click', (e) => {
+            if (e.target === this.DOM.qrModal) closeModal();
         });
     }
 }
