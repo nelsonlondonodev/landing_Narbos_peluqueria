@@ -33,9 +33,12 @@
     "imagemin-cli": "^8.0.0",
     "imagemin-webp": "^8.0.0",
     "jsdom": "^27.4.0",
+    "passkit-generator": "^3.5.7",
     "purgecss": "^8.0.0",
+    "qrcode": "^1.5.4",
     "svgo": "^4.0.0",
     "tailwindcss": "^4.1.18",
-    "terser": "^5.43.1"
+    "terser": "^5.43.1",
+    "uuid": "^13.0.0"
   }
 }
