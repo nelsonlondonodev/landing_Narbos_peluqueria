@@ -29,12 +29,7 @@ body {
   font-family: "Montserrat", sans-serif;
   background-color: #ffffff;
   color: #1f2937;
-  /* Elimina nodos de texto anónimos entre etiquetas block (ghost nodes de whitespace)
-     que crean un gap visual de ~25px entre el header y el primer elemento del DOM.
-     Al convertir body en flex-column, los nodos de texto son ignorados correctamente. */
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  /* LCP Optimization: Content visible by default. No global fade-in. */
 }
 
 /* page-is-loaded removed to avoid LCP delay. Body is visible by default. */
