@@ -3608,9 +3608,13 @@ body.modal-open-layer-fix .site-header, body.modal-open-layer-fix #app-wrapper {
   transform: translate(0, 0);
 }
 .animation-hidden {
+  opacity: 0;
   visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  will-change: opacity, transform;
 }
 .animate__animated.is-visible {
+  opacity: 1;
   visibility: visible;
 }
 @keyframes fadeInUpSmall {
