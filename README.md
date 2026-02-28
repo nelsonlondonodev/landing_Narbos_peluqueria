@@ -36,6 +36,28 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (February 28, 2026)
+
+### 1. Critical Bug Fix: Restore Missing `<head>` in 7 Service Pages 🚑
+
+*   **Root Cause:** The `ca298fa` commit ("remove legacy analytics from all pages") ran a batch script that, while attempting to strip out the deferred Google Analytics block, **accidentally deleted the entire `<head>` content** from 7 service pages. This left them with only an empty `<head>` tag — no CSS, no fonts, no SEO meta tags, and no Schema markup.
+
+*   **Affected Pages (all styles and layout broken):**
+    *   `servicios/estetica/index.html`
+    *   `servicios/estetica/limpieza-facial.html`
+    *   `servicios/estetica/masajes-relajantes.html`
+    *   `servicios/estetica/cejas-y-pestanas.html`
+    *   `servicios/estetica/depilacion-corporal.html`
+    *   `servicios/peluqueria/color-tinturas-cabello.html`
+    *   `servicios/peluqueria/tratamientos-capilares.html`
+
+*   **Solution (No data loss — surgical restore):**
+    *   Identified the last good commit (`bccbc98`) containing the full, intact `<head>` for each file.
+    *   Used a bash script to surgically extract the `<head>` from `bccbc98`, strip only the GA legacy block (`loadGA` script), and re-inject it into each current file — **preserving the most recent `<body>` content** (FAQ updates, hero improvements, etc.) completely intact.
+    *   All SEO meta tags, Schema JSON-LD (`Service`, `BeautySalon`, `OfferCatalog`), canonical URLs, Open Graph, Twitter Cards, CSS links, fonts, and favicon were fully restored.
+
+*   **Lesson Learned — Architecture Rule:** Batch scripts that modify multiple HTML files must be scoped with surgical `sed`/`awk` patterns that **only** target the specific block to remove (e.g., between `<!-- GA Deferido -->` and its closing `</script>`), never a broad `head` replacement. Always verify on a single file before running globally.
+
 ## 🔄 Recent Updates (February 25, 2026)
 
 ### 1. Robust SEO Keyword Tracking System 📊
