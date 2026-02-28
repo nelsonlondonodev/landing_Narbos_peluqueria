@@ -38,25 +38,32 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 ## 🔄 Recent Updates (February 28, 2026)
 
-### 1. Critical Bug Fix: Restore Missing `<head>` in 7 Service Pages 🚑
+### 1. Critical Bug Fix: Full `<head>` Restoration — 30 Pages 🚑
 
-*   **Root Cause:** The `ca298fa` commit ("remove legacy analytics from all pages") ran a batch script that, while attempting to strip out the deferred Google Analytics block, **accidentally deleted the entire `<head>` content** from 7 service pages. This left them with only an empty `<head>` tag — no CSS, no fonts, no SEO meta tags, and no Schema markup.
+*   **Root Cause:** The `ca298fa` commit ran a batch script that accidentally **deleted the entire `<head>` content** from 30 HTML files (not just 7 as initially identified). Missing `<head>` caused: broken styles, broken mobile layout (`viewport` missing → elements rendered tiny), lost SEO meta tags, lost Schema markup.
 
-*   **Affected Pages (all styles and layout broken):**
-    *   `servicios/estetica/index.html`
-    *   `servicios/estetica/limpieza-facial.html`
-    *   `servicios/estetica/masajes-relajantes.html`
-    *   `servicios/estetica/cejas-y-pestanas.html`
-    *   `servicios/estetica/depilacion-corporal.html`
-    *   `servicios/peluqueria/color-tinturas-cabello.html`
-    *   `servicios/peluqueria/tratamientos-capilares.html`
+*   **Total scope:** `servicios/barberia/`, `servicios/peluqueria/`, `servicios/unas-spa/`, `servicios/estetica/spa-facial-integral`, `blog/` (index + 8 articles), `contacto.html`, `nosotros.html`.
 
-*   **Solution (No data loss — surgical restore):**
-    *   Identified the last good commit (`bccbc98`) containing the full, intact `<head>` for each file.
-    *   Used a bash script to surgically extract the `<head>` from `bccbc98`, strip only the GA legacy block (`loadGA` script), and re-inject it into each current file — **preserving the most recent `<body>` content** (FAQ updates, hero improvements, etc.) completely intact.
-    *   All SEO meta tags, Schema JSON-LD (`Service`, `BeautySalon`, `OfferCatalog`), canonical URLs, Open Graph, Twitter Cards, CSS links, fonts, and favicon were fully restored.
+*   **Solution:** Extended the surgical bash restore script to all 30 files — extracts `<head>` from commit `bccbc98`, removes only the GA legacy block, re-injects preserving current `<body>` intact. **Commits:** `227a003`, `b7f6844`, `a5fb1dc`.
 
-*   **Lesson Learned — Architecture Rule:** Batch scripts that modify multiple HTML files must be scoped with surgical `sed`/`awk` patterns that **only** target the specific block to remove (e.g., between `<!-- GA Deferido -->` and its closing `</script>`), never a broad `head` replacement. Always verify on a single file before running globally.
+### 2. GA Legacy Script — Final Cleanup 🧹
+
+*   `blog/index.html` still had the synchronous `googletagmanager.com/gtag/js` script. Removed it. Analytics handled exclusively by `AnalyticsService` via `requestIdleCallback` (non-blocking). **Commit:** `9d029e8`.
+
+### 3. Layout & Breadcrumbs — Partial Fix ⚙️
+
+*   **`#app-wrapper`:** Added `padding-top: 90px/110px` in `input.css` — single source of truth for fixed header offset.
+*   **`#breadcrumbs-root`:** Added `min-height: 40px` to reduce CLS before JS hydration.
+*   **`Breadcrumbs.js`:** Removed hardcoded `mt-[90px] md:mt-[110px]` — component is now layout-agnostic.
+*   **CSS:** Bumped `styles.css?v=1.3` → `?v=2.0` on all service pages for cache invalidation.
+*   **`LAYOUT_GUIDE.md`:** Updated to document `#app-wrapper padding-top` as canonical header offset pattern.
+*   **⚠️ Pending:** A ~25px gap between navbar and breadcrumbs persists on pages with hardcoded heroes. Does NOT affect SEO. To investigate in next session.
+*   **Commit:** `929f6ad`
+
+### 4. Lesson Learned 📋
+
+Batch scripts modifying HTML must use surgical `sed` patterns scoped to the exact target block. **Always dry-run on one file first and validate `viewport` presence post-execution.**
+
 
 ## 🔄 Recent Updates (February 25, 2026)
 
