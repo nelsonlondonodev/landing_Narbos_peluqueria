@@ -1,0 +1,1 @@
+import{h as t}from"./chunk-C6NLO6YC.98f0e89d.js?v=1772271980123";import"./chunk-WKGVYJOO.62f6317b.js?v=1772271980123";function e(){if(window.narbosApp)return;let n=new t;window.narbosApp=n,n.init()}document.readyState==="loading"?document.addEventListener("DOMContentLoaded",e):e();

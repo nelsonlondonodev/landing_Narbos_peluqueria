@@ -1,0 +1,1 @@
+var a=[{name:"Wella Professionals",sub:"Coloraci\xF3n Premium"},{name:"Schwarzkopf",sub:"Tecnolog\xEDa Capilar"},{name:"L'Or\xE9al Professionnel",sub:"Innovaci\xF3n Global"},{name:"Moroccanoil",sub:"Tratamiento de Arg\xE1n"}],n=[{name:"Organic Nails",sub:"Premium System"},{name:"Masglo",sub:"Gel Evolution"},{name:"OPI",sub:"Professional"}],o=[...a,...n];export{a,n as b,o as c};
