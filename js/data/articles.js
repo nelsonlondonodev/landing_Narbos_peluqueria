@@ -20,12 +20,12 @@
 const articles = [
     {
         id: 'guia-novias-belleza-perfecta-chia',
-        date: '27 de febrero de 2026',
-        isoDate: '2026-02-27',
+        date: '28 de febrero de 2026',
+        isoDate: '2026-02-28',
         category: 'Novias y Eventos',
         title: 'Maquillaje en Chía para Novias: Cronograma de Belleza',
         description: '¿Te casas? Descubre el cronograma definitivo de belleza para novias. El mejor maquillaje en Chía, spa y peinados tendencia en Narbo\'s Salón Spa.',
-        image: 'articles/images/maquillaje-novia-profesional-chia-narbos.webp',
+        image: 'articles/images/maquillaje-novias-cronograma-belleza-narbos.webp',
         alt: 'maquillaje-de-novia-profesional-en-chia-narbon-salon',
         link: '/blog/articles/guia-novias-belleza-perfecta-chia.html'
     },
