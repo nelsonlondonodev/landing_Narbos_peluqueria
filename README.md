@@ -409,6 +409,14 @@ A fully automated customer retention system integrated with Supabase, n8n, and G
 
 ---
 
+## 🔄 Recent Updates (February 28, 2026)
+
+### 1. Loyalty Program Enhancements (Fidelización) 🎁
+- **Mobile-Optimized Date Selector**: Integrated `Flatpickr` via CDN on the `fidelizacion/index.html` page. Configured with `disableMobile: true` to enforce a professional, custom UI over native device pickers, significantly improving the year-selection experience for users. The internal date format consistently remains `YYYY-MM-DD` to ensure seamless integration with the N8N webhook and Supabase.
+- **QR Code Web Scanner Modal**: Added a "Scan QR" button to the unified header. Clicking this button triggers an elegant, animated modal displaying a high-contrast, lightweight (574 bytes) PNG QR code. This allows walk-in clients to easily scan and access the loyalty form from their own devices.
+
+---
+
 ## 🔄 Recent Updates (January 26, 2026)
 
 ### 1. JavaScript Architecture Refactor (Clean Code) 🏗️

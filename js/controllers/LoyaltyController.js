@@ -160,7 +160,7 @@ export class LoyaltyController {
     }
 
     /**
-     * Initializes logic to combine the month, day, and year selects into the hidden date format.
+     * Initializes Flatpickr on the birthday input to provide a user-friendly date selector.
      */
     _initDateSelector() {
         if (!this.DOM.birthdayInput) return;
