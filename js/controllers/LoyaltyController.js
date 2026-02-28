@@ -12,10 +12,7 @@ export class LoyaltyController {
             submitBtn: document.getElementById('submit-btn'),
             inputs: document.querySelectorAll('.form-input'),
             // Nativos date selector
-            bDay: document.getElementById('b_day'),
-            bMonth: document.getElementById('b_month'),
-            bYear: document.getElementById('b_year'),
-            hiddenDate: document.getElementById('birthday'),
+            birthdayInput: document.getElementById('birthday'),
             // QR Modal
             qrTrigger: document.getElementById('qr-trigger'),
             qrModal: document.getElementById('qr-modal'),
@@ -166,19 +163,18 @@ export class LoyaltyController {
      * Initializes logic to combine the month, day, and year selects into the hidden date format.
      */
     _initDateSelector() {
-        if (!this.DOM.bDay || !this.DOM.bMonth || !this.DOM.bYear || !this.DOM.hiddenDate) return;
+        if (!this.DOM.birthdayInput) return;
 
-        const updateHiddenDate = () => {
-            if (this.DOM.bDay.value && this.DOM.bMonth.value && this.DOM.bYear.value) {
-                this.DOM.hiddenDate.value = `${this.DOM.bYear.value}-${this.DOM.bMonth.value}-${this.DOM.bDay.value}`;
-            } else {
-                this.DOM.hiddenDate.value = '';
-            }
-        };
-
-        this.DOM.bDay.addEventListener('change', updateHiddenDate);
-        this.DOM.bMonth.addEventListener('change', updateHiddenDate);
-        this.DOM.bYear.addEventListener('change', updateHiddenDate);
+        // Validar si flatpickr cargó desde el CDN de forma global
+        if (typeof window.flatpickr !== 'undefined') {
+            window.flatpickr(this.DOM.birthdayInput, {
+                locale: "es", // Español
+                dateFormat: "Y-m-d", // Formato exacto que necesita tu DB/n8n sin romperse
+                altInput: true,
+                altFormat: "j \\d\\e F, Y", // Ej: 25 de noviembre, 1982
+                disableMobile: true // Obliga a usar la UI profesional de flatpickr en celulares (donde es más fácil seleccionar el año que en el nativo)
+            });
+        }
     }
 
     /**
