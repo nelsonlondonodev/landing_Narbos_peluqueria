@@ -36,6 +36,41 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (March 2, 2026)
+
+### 1. Loyalty Email QR Fix — Broken Image & Spam Prevention 📧
+
+*   **Problem:** The birthday QR email was landing in spam and the QR code image was not rendering on mobile email clients (tested on iPhone Mail, Gmail app).
+*   **Root Cause (QR):** The QR `<img>` tag was missing protective inline styles (`display:block; border:0; outline:none`) that prevent email clients from applying default borders/outlines. Additionally, the QR was left-aligned instead of centered due to a missing `text-align: center` on the container.
+*   **Root Cause (Spam):** The `@import url()` directive for Google Fonts does not work in 90% of email clients and actively penalizes the spam score.
+*   **Solution:**
+    *   Migrated QR service from `quickchart.io` to `api.qrserver.com` with explicit parameters: `format=png`, `bgcolor=ffffff`, `qzone=1`.
+    *   Added wrapper `<div>` with `display: inline-block`, white background, border-radius, and shadow — matching the working welcome email structure.
+    *   Added `text-align: center` to QR container + `display: block; border: 0; outline: none` to `<img>`.
+    *   Removed `@import url()` from both birthday and reminder email templates.
+*   **Scope:** Applied to `Email: Enviar Regalo Cumple` and `Email: Enviar Recordatorio` nodes in the `Narbo's: Automatizaciones de Retención` workflow.
+*   **Commits:** `27e388c`, `46ae36e`.
+
+### 2. QR Redemption Flow Fix — Missing Coupon Code on Success Page 🐛
+
+*   **Problem:** After confirming a coupon redemption via QR scan, the success page displayed an empty coupon code.
+*   **Root Cause:** The confirmation form in the `HTML: Confirmar` node (Estado QR workflow) only sent the database `id` as a hidden input. The success page in the `Canje QR` workflow referenced `body.codigo` to display the coupon code, which was never sent.
+*   **Solution:** Added `<input type="hidden" name="codigo">` to the confirmation form, passing the coupon code from the webhook query parameter.
+*   **Verification:** Full end-to-end flow traced across 3 workflows: Retención → Estado QR → Canje QR. Database writes to `bonos` table (`estado: "Canjeado"`, `fecha_canje: ISO timestamp`) confirmed working.
+*   **Commit:** `cca56cd`.
+
+### 3. n8n Workflow File Standardization 🗂️
+
+*   **Problem:** Local workflow JSON files had inconsistent names that didn't match their n8n workflow names, making identification error-prone.
+*   **Solution:** Renamed and synchronized all files:
+    *   `fidelizacion_automations_n8n.json` → `Narbo's_ Automatizaciones de Retención.json`
+    *   Added new `Fidelización Narbo's - Estado QR.json` (previously not tracked).
+    *   Updated `Fidelización Narbo's - Canje QR.json` and `Fidelización Narbos.json` with latest n8n exports.
+*   **Static Templates:** Updated `birthday_email_template.html` and `reminder_email_template.html` to match the corrected inline HTML in the workflows.
+*   **Commit:** `50432b1`.
+
+---
+
 ## 🔄 Recent Updates (February 28, 2026)
 
 ### 1. Critical Bug Fix: Full `<head>` Restoration — 30 Pages 🚑
