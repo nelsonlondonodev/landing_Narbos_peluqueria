@@ -57,7 +57,7 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 *   **`Breadcrumbs.js`:** Removed hardcoded `mt-[90px] md:mt-[110px]` — component is now layout-agnostic.
 *   **CSS:** Bumped `styles.css?v=1.3` → `?v=2.0` on all service pages for cache invalidation.
 *   **`LAYOUT_GUIDE.md`:** Updated to document `#app-wrapper padding-top` as canonical header offset pattern.
-*   **⚠️ Pending:** A ~25px gap between navbar and breadcrumbs persists on pages with hardcoded heroes. Does NOT affect SEO. To investigate in next session.
+
 *   **Commit:** `929f6ad`
 
 ### 4. Lesson Learned 📋
@@ -786,7 +786,7 @@ Este proyecto fue construido utilizando tecnologías web modernas, enfocadas en 
     *   Updated templates (`birthday`, `reminder`, `welcome`) to correctly reference n8n data nodes.
 *   **QR Redemption Logic Improvement:**
     *   Added `trim()` to the coupon code input in `canje_qr_workflow.json` to prevent failures due to invisible whitespace during scanning.
-    *   **Known Issue:** The "Redemption" workflow in n8n is currently failing at the `IF` node condition step. The node receives the data from Supabase but the logic `{{ $node["Supabase: Buscar Cupón"].json["canjeado"] }} == false` is not triggering correctly in the current execution context. **Status:** Pending fix. Work saved in `develop` branch.
+
 
 ### 2. Mobile LCP Fix (Critical Image Resizing) ⚡
 *   **Diagnosis:** Discovered that the mobile hero image `mujer-maquillaje-spa-salon-belleza-chia-mobile.webp` was identical in size to the desktop version (1920x1080px, ~83KB), causing a 9.3s LCP on mobile due to heavy decoding and resizing load.
