@@ -4,13 +4,25 @@ export class BusinessStatusBadge {
      */
     constructor(containerId = 'business-status-root') {
         this.container = document.getElementById(containerId);
+        this.lastState = null;
     }
     
     init() {
         if (!this.container) return;
-        this.render();
+        this.checkAndUpdate();
         // Revisar cada minuto para actualizar automáticamente si cruza la hora de cierre/apertura
-        setInterval(() => this.render(), 60000);
+        setInterval(() => this.checkAndUpdate(), 60000);
+    }
+
+    checkAndUpdate() {
+        if (!this.container) return;
+        const open = this.isOpen();
+        
+        // Solo actualizamos el DOM si el estado ha cambiado, evitando repaints molestos
+        if (this.lastState !== open) {
+            this.lastState = open;
+            this.render(open);
+        }
     }
 
     isOpen() {
@@ -38,10 +50,8 @@ export class BusinessStatusBadge {
         return false;
     }
 
-    render() {
+    render(open) {
         if (!this.container) return;
-        
-        const open = this.isOpen();
         
         const badgeClasses = open 
             ? "bg-black/40 backdrop-blur-md text-white border-white/20"
@@ -50,9 +60,8 @@ export class BusinessStatusBadge {
         const textStr = open ? "ABIERTO AHORA" : "CERRADO AHORA";
         const dotColor = open ? "bg-green-400" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,1)]";
         
-        const pingEffect = open 
-            ? `<span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${dotColor}"></span>` 
-            : `<span class="animate-pulse absolute inline-flex h-full w-full rounded-full opacity-50 ${dotColor}"></span>`;
+        // Ahora ambos estados (Abierto y Cerrado) usan la animación 'animate-ping' para dar sensación de "en vivo"
+        const pingEffect = `<span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${dotColor}"></span>`;
 
         this.container.innerHTML = `
             <div title="Horario: Lun-Sáb 7am a 8pm | Dom 9am a 6pm" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-wider uppercase border transition-all duration-300 transform hover:scale-105 ${badgeClasses}">
