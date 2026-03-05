@@ -10,8 +10,6 @@ export class BusinessStatusBadge {
     init() {
         if (!this.container) return;
         this.checkAndUpdate();
-        // Revisar cada minuto para actualizar automáticamente si cruza la hora de cierre/apertura
-        setInterval(() => this.checkAndUpdate(), 60000);
     }
 
     checkAndUpdate() {
