@@ -29,12 +29,18 @@ class App {
         // Debug para verificar en consola
         // console.log(`[App] Initialized. Root: ${this.appRoot}, Host: ${window.location.hostname}`);
         
-        // Determinamos si estamos en la home
+        this.isHomePage = this._checkIfHomePage();
+    }
+
+    /**
+     * Comprueba de manera robusta si la URL actual corresponde a la página de inicio.
+     * @returns {boolean}
+     * @private
+     */
+    _checkIfHomePage() {
         const path = window.location.pathname;
         const currentPathClean = path.replace(BASE_PATH, '/').replace('//', '/');
-        
-        // Comprobación más robusta de Home
-        this.isHomePage = (currentPathClean === '/' || currentPathClean === '/index.html' || currentPathClean === '');
+        return currentPathClean === '/' || currentPathClean === '/index.html' || currentPathClean === '';
     }
 
 
