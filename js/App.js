@@ -8,6 +8,7 @@ import { getHomeModalsHTML } from './components/HomeModals.js'; // Nueva funció
 // Components
 import { MobileMenu } from './components/MobileMenu.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
+import { BusinessStatusBadge } from './components/BusinessStatusBadge.js';
 // Controllers
 import { HeaderController } from './controllers/HeaderController.js';
 import { PageTransitionController } from './controllers/PageTransitionController.js'; // Nuevo Controller
@@ -130,6 +131,7 @@ class App {
         try { new WhatsAppButton(); } catch(e) { /* silent */ }
         try { new HeaderController(); } catch(e) { /* silent */ }
         try { new PageTransitionController(); } catch(e) { /* silent */ }
+        try { new BusinessStatusBadge().init(); } catch(e) { /* silent */ }
     }
 
     initInteractiveComponents() {
