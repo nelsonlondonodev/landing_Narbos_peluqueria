@@ -443,14 +443,14 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Estética y Spa <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.",
-            imageSrc: "images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia.%20copy%20Large.webp",
+            imageSrc: "/images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
             imageAlt: "Tratamientos de spa y estética en Narbo's"
         },
         gallery: [
             {
                 type: 'image',
                 layout: 'vertical',
-                src: 'images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
+                src: '/images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
                 title: "Limpieza Facial",
                 subtitle: "Piel Radiante",
                 alt: "Limpieza facial profunda con alta frecuencia"
@@ -500,7 +500,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Limpieza Facial Profunda <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Elimina impurezas, puntos negros y toxinas con tecnología de alta frecuencia.",
-            imageSrc: "../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp",
+            imageSrc: "../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
             imageAlt: "Limpieza de cutis profunda en Chía"
         },
         metaTitle: "Limpieza Facial Profunda en Chía | Extracción e Impurezas | Narbo's",
@@ -509,7 +509,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
                 title: "Alta Frecuencia",
                 subtitle: "Tecnología Facial",
                 alt: "Limpieza facial profunda con alta frecuencia"
@@ -581,7 +581,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp', // Generic beauty image
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp', // Generic beauty image
                 title: "Rostro Armónico",
                 alt: "Belleza facial integral"
             },
@@ -616,7 +616,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
                 title: "Alta Frecuencia",
                 subtitle: "Limpieza Profunda",
                 alt: "Limpieza facial con alta frecuencia"
