@@ -29,6 +29,12 @@ export class ContactFormController {
     async handleSubmit(e) {
         e.preventDefault();
         
+        // Valida el formulario usando la API nativa de los navegadores (honra el atributo 'required')
+        if (!e.target.checkValidity()) {
+            e.target.reportValidity();
+            return;
+        }
+
         this.updateStatus("Enviando mensaje...", "#6B755A");
 
         try {
