@@ -10,7 +10,7 @@ export class LoyaltyController {
             form: document.getElementById('fidelizacion-form'),
             successMsg: document.getElementById('success-msg'),
             submitBtn: document.getElementById('submit-btn'),
-            inputs: document.querySelectorAll('.form-input'),
+            inputs: document.querySelectorAll('.loyalty-input'),
             // Nativos date selector
             birthdayInput: document.getElementById('birthday'),
             // QR Modal
@@ -140,7 +140,11 @@ export class LoyaltyController {
      */
     _validateForm() {
         // Native validation handles most things, but we can add custom logic here
-        return this.DOM.form.checkValidity();
+        const isValid = this.DOM.form.checkValidity();
+        if (!isValid) {
+            this.DOM.form.reportValidity();
+        }
+        return isValid;
     }
 
     /**
