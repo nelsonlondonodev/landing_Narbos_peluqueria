@@ -72,7 +72,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/peluqueria/narbos-salon-spa-chia-peinado-tendencia-trenzas-laterales-ondas-sueltas Large.webp',
+                src: '/images/pages/peluqueria/narbos-salon-spa-chia-peinado-tendencia-trenzas-laterales-ondas-sueltas-large.webp',
                 title: "Peinados",
                 alt: "Peinados de tendencia y ondas sueltas"
             },
@@ -443,14 +443,14 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Estética y Spa <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.",
-            imageSrc: "images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia.%20copy%20Large.webp",
+            imageSrc: "/images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
             imageAlt: "Tratamientos de spa y estética en Narbo's"
         },
         gallery: [
             {
                 type: 'image',
                 layout: 'vertical',
-                src: 'images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
+                src: '/images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
                 title: "Limpieza Facial",
                 subtitle: "Piel Radiante",
                 alt: "Limpieza facial profunda con alta frecuencia"
@@ -500,7 +500,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Limpieza Facial Profunda <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Elimina impurezas, puntos negros y toxinas con tecnología de alta frecuencia.",
-            imageSrc: "../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp",
+            imageSrc: "../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
             imageAlt: "Limpieza de cutis profunda en Chía"
         },
         metaTitle: "Limpieza Facial Profunda en Chía | Extracción e Impurezas | Narbo's",
@@ -509,7 +509,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
                 title: "Alta Frecuencia",
                 subtitle: "Tecnología Facial",
                 alt: "Limpieza facial profunda con alta frecuencia"
@@ -574,14 +574,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp', // Fallback/Existing image
+                src: '/images/pages/estetica/masaje-facial-relajante-narbos.webp', // Fallback/Existing image
                 title: "Lifting de Pestañas",
                 alt: "Pestañas naturales curvadas"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp', // Generic beauty image
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp', // Generic beauty image
                 title: "Rostro Armónico",
                 alt: "Belleza facial integral"
             },
@@ -599,7 +599,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Spa Facial Integral: Rejuvenecimiento y <span class=\"text-brand-green\">Relax</span>",
             subtitle: "Rituales de bienestar para tu rostro que combinan nutrición profunda y máxima relajación.",
-            imageSrc: "../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp",
+            imageSrc: "/images/pages/estetica/masaje-facial-relajante-narbos.webp",
             imageAlt: "Spa facial integral y masajes relajantes en Chía"
         },
         metaTitle: "Spa Facial Integral en Chía | Rejuvenecimiento y Bienestar | Narbo's",
@@ -608,7 +608,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
+                src: '/images/pages/estetica/masaje-facial-relajante-narbos.webp',
                 title: "Masaje Facial",
                 subtitle: "Relajación Profunda",
                 alt: "Masaje facial relajante en Narbo's"
@@ -616,7 +616,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-en-chia-alta-frecuencia. copy Large.webp',
+                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
                 title: "Alta Frecuencia",
                 subtitle: "Limpieza Profunda",
                 alt: "Limpieza facial con alta frecuencia"

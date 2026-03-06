@@ -1,0 +1,124 @@
+{
+  "name": "Fidelización Narbo's - Canje QR",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "confirmar-canje",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "13424740-c03a-41ac-a037-7332d5133d59",
+      "name": "Webhook (Confirmar Canje)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        192,
+        0
+      ],
+      "webhookId": "7e8f9a2b-1a5c-4d3e-b8d9-3f5c9a7b2e1d"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "bonos",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.body.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "estado",
+              "fieldValue": "Canjeado"
+            },
+            {
+              "fieldId": "fecha_canje",
+              "fieldValue": "={{ $now.toISO() }}"
+            }
+          ]
+        }
+      },
+      "id": "038993de-c857-4cc8-9b42-83d89d09b6f8",
+      "name": "Supabase: Marcar Uso",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        400,
+        0
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "5hkYuZVAhznvx7lf",
+          "name": "Supabase Fidelizacion Narbo's Pro"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html><html><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Canje Exitoso</title><style>body{font-family:'Montserrat',sans-serif;text-align:center;padding:20px;background:#f0fdf4;color:#166534;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}.card{background:white;padding:40px;border-radius:20px;box-shadow:0 10px 25px rgba(0,0,0,0.1);max-width:400px;width:100%}.icon{font-size:60px;margin-bottom:20px}h1{margin:0 0 10px;font-size:24px}p{margin:5px 0;color:#666}.code{font-size:28px;font-weight:bold;color:#166534;margin:20px 0;padding:15px;background:#f0fdf4;border:2px dashed #166534;border-radius:10px}</style></head><body><div class=\"card\"><div class=\"icon\">✅</div><h1>¡Descuento Aplicado!</h1><p>El cupón ha sido redimido exitosamente en el sistema.</p><div class=\"code\">{{ $node[\"Webhook (Confirmar Canje)\"].json.body.codigo }}</div></div></body></html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html"
+              }
+            ]
+          }
+        }
+      },
+      "id": "6f6bdee3-89c6-4145-87df-5be43a964132",
+      "name": "HTML: Exito",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        608,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook (Confirmar Canje)": {
+      "main": [
+        [
+          {
+            "node": "Supabase: Marcar Uso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: Marcar Uso": {
+      "main": [
+        [
+          {
+            "node": "HTML: Exito",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "0495f081-e338-49d0-a191-af8f88cb9371",
+  "meta": {
+    "instanceId": "fdffcaf648a7aa062da0ec843fff869b930e75adc5303a6a19e86b840cf683f2"
+  },
+  "id": "XFVOMykaF0XBYeX3",
+  "tags": []
+}

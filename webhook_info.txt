@@ -1,2 +1,0 @@
-Method: POST
-Path: fidelizacion-narbos-webhook

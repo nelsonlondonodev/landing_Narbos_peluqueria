@@ -8,6 +8,7 @@ import { getHomeModalsHTML } from './components/HomeModals.js'; // Nueva funció
 // Components
 import { MobileMenu } from './components/MobileMenu.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
+import { BusinessStatusBadge } from './components/BusinessStatusBadge.js';
 // Controllers
 import { HeaderController } from './controllers/HeaderController.js';
 import { PageTransitionController } from './controllers/PageTransitionController.js'; // Nuevo Controller
@@ -28,12 +29,18 @@ class App {
         // Debug para verificar en consola
         // console.log(`[App] Initialized. Root: ${this.appRoot}, Host: ${window.location.hostname}`);
         
-        // Determinamos si estamos en la home
+        this.isHomePage = this._checkIfHomePage();
+    }
+
+    /**
+     * Comprueba de manera robusta si la URL actual corresponde a la página de inicio.
+     * @returns {boolean}
+     * @private
+     */
+    _checkIfHomePage() {
         const path = window.location.pathname;
         const currentPathClean = path.replace(BASE_PATH, '/').replace('//', '/');
-        
-        // Comprobación más robusta de Home
-        this.isHomePage = (currentPathClean === '/' || currentPathClean === '/index.html' || currentPathClean === '');
+        return currentPathClean === '/' || currentPathClean === '/index.html' || currentPathClean === '';
     }
 
 
@@ -130,6 +137,7 @@ class App {
         try { new WhatsAppButton(); } catch(e) { /* silent */ }
         try { new HeaderController(); } catch(e) { /* silent */ }
         try { new PageTransitionController(); } catch(e) { /* silent */ }
+        try { new BusinessStatusBadge().init(); } catch(e) { /* silent */ }
     }
 
     initInteractiveComponents() {
