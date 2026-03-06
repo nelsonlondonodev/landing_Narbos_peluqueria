@@ -72,7 +72,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/peluqueria/narbos-salon-spa-chia-peinado-tendencia-trenzas-laterales-ondas-sueltas Large.webp',
+                src: '/images/pages/peluqueria/narbos-salon-spa-chia-peinado-tendencia-trenzas-laterales-ondas-sueltas-large.webp',
                 title: "Peinados",
                 alt: "Peinados de tendencia y ondas sueltas"
             },
