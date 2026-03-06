@@ -36,6 +36,37 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (March 6, 2026)
+
+### 1. Production Image Infrastructure & 404 Fixes 🚑
+
+*   **Problem:** Numerous images (especially in the Aesthetics section) were broken on production due to spaces in filenames and incorrect relative path resolution in deep-linked service pages.
+*   **Root Cause:** The SSG (Static Site Generation) script was incorrectly concatenating relative paths (`../../images/...`), and some filenames contained spaces which caused URL encoding issues.
+*   **Solution:** 
+    *   **Normalization:** Renamed problematic image files to remove spaces and special characters.
+    *   **Root-Relative Paths:** Migrated all image references in `data/servicesData.js`, `data/estheticsServices.js`, and `data/pagesData.js` to root-relative paths (`/images/...`).
+    *   **SSG Injection Fix:** Modified `scripts/ssg.js` logic to ensure asset paths are correctly resolved during the content hydration phase.
+*   **Result:** 100% of service images and hero banners now load correctly across all navigation levels.
+
+### 2. Mandatory Cache Busting (Hashes) ⚡
+
+*   **Problem:** Clients and browsers were often stuck with old versions of CSS/JS files after a deployment, requiring manual cache clears.
+*   **Solution:** Implemented an automated **File Hashing** system in `scripts/build.js`.
+    *   **MD5 Generation:** The build script now generates unique MD5 hashes for `styles.css` and all JS bundles.
+    *   **Production Tagging:** Referenced filenames in the `dist` directory are dynamically updated (e.g., `main.848ea711.js`) and tagged with a build timestamp.
+*   **Impact:** Zero-cache issues for production users. Every deployment now forces the browser to download the absolute latest version of the site code.
+
+### 3. Legal Compliance & Data Protection (Ley 1581) ⚖️
+
+*   **Requirement:** To comply with Colombian data protection laws, all forms collecting user data must have an explicit "Opt-in" for privacy policies.
+*   **Fixes:** 
+    *   **Contact Form:** Added a mandatory "Accept Policies" checkbox to the main homepage contact form.
+    *   **Loyalty Form:** Integrated and enforced the same checkbox in the `/fidelizacion/` registration page.
+    *   **Native Validation:** Implemented `reportValidity()` in `ContactFormController.js` and `LoyaltyController.js` to trigger native browser error bubbles if the user attempts to submit without checking the box.
+*   **UX:** Improved checkbox layout with `shrink-0` and `select-none` to prevent visual distortion and accidental text selection on mobile devices (iPhone/Android).
+
+---
+
 ## 🔄 Recent Updates (March 2, 2026)
 
 ### 1. Loyalty Email QR Fix — Broken Image & Spam Prevention 📧
