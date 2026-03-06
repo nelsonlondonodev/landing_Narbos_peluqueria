@@ -574,7 +574,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp', // Fallback/Existing image
+                src: '/images/pages/estetica/masaje-facial-relajante-narbos.webp', // Fallback/Existing image
                 title: "Lifting de Pestañas",
                 alt: "Pestañas naturales curvadas"
             },
@@ -599,7 +599,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Spa Facial Integral: Rejuvenecimiento y <span class=\"text-brand-green\">Relax</span>",
             subtitle: "Rituales de bienestar para tu rostro que combinan nutrición profunda y máxima relajación.",
-            imageSrc: "../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp",
+            imageSrc: "/images/pages/estetica/masaje-facial-relajante-narbos.webp",
             imageAlt: "Spa facial integral y masajes relajantes en Chía"
         },
         metaTitle: "Spa Facial Integral en Chía | Rejuvenecimiento y Bienestar | Narbo's",
@@ -608,7 +608,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/servicio-de-spa-en-chia-masaje-facial-relajante-narbos copy Large.webp',
+                src: '/images/pages/estetica/masaje-facial-relajante-narbos.webp',
                 title: "Masaje Facial",
                 subtitle: "Relajación Profunda",
                 alt: "Masaje facial relajante en Narbo's"
