@@ -65,8 +65,8 @@
           <article>
             <header class="text-center mb-12 animate__animated animate__fadeInUp">
               <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6"
-                  data-breadcrumb="{{BREADCRUMB_TITLE}}">
-                {{TITLE}}
+                   data-breadcrumb="{{BREADCRUMB_TITLE}}">
+                {{TITLE}} <span class="text-brand-green">en Chía</span>
               </h1>
               <p class="text-lg text-gray-600">
                 <span>Por el equipo de Narbo's Salón Spa</span>
@@ -93,23 +93,30 @@
               <div class="bg-white/50 p-6 rounded-lg shadow-md mb-12 border-l-4 border-brand-green animate__animated animate__fadeInUp">
                 <h3 class="text-2xl font-serif font-bold text-gray-900 mb-4">Tabla de contenidos</h3>
                 <ol class="list-decimal list-inside space-y-2 text-lg">
-                  <!-- Los H2 del artículo se pueden listar aquí -->
-                  <li><a href="#id-del-h2" class="text-brand-green hover:underline">Sección del Artículo</a></li>
+                  <li><a href="#introduccion" class="text-brand-green hover:underline">Introducción</a></li>
+                  <li><a href="#seccion-1" class="text-brand-green hover:underline">Título de la Sección</a></li>
                 </ol>
               </div>
 
               <!-- CONTENIDO DINÁMICO -->
               <div class="article-body">
-                {{INTRO_CONTENT}}
-                {{MAIN_CONTENT}}
+                <section id="introduccion" class="mb-12">
+                  <p class="text-lg leading-relaxed mb-6">
+                    Párrafo de introducción con estilo estandarizado...
+                  </p>
+                </section>
+
+                <section id="seccion-1" class="mb-12">
+                  <h2 class="text-3xl font-serif font-bold text-gray-900 mb-6">Título de la Sección Estándar</h2>
+                  <p class="mb-4">Contenido de la sección...</p>
+                </section>
               </div>
               
               <div class="text-center mt-12 animate__animated animate__zoomIn">
                 <a
                   href="https://wa.me/573123462618?text=Hola%2C%20le%C3%AD%20su%20art%C3%ADculo%20sobre%20{{TITLE}}%20y%20quiero%20agendar%20una%20cita."
                   class="inline-block bg-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-                  >Agenda tu cita y asesoría personalizada 📲</a
-                >
+                  >Agenda tu cita y asesoría personalizada 📲</a>
               </div>
 
               <!-- FAQ SECTION -->
