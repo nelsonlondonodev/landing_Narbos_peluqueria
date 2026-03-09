@@ -36,6 +36,32 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (March 9, 2026)
+
+### 1. Blog Standardization & Semantic Hierarchy ✍️
+*   **Article Alignment:** Synchronized the "Balayage y Corrección de Color" article with the high-performing "Guía para Novias" post. 
+    *   **Typography:** Unified use of `Playfair Display` for headings and `Montserrat` for body text.
+    *   **Hierarchy:** Standardized sizes for `H1` (with `text-brand-green` highlights), `H2` (3xl), and `H3` (2xl).
+    *   **Spacing:** Implemented consistent section margins (`mb-12`) and paragraph spacing (`mb-6`) for a premium reading experience.
+*   **Master Template (`article.template.html`):** Burned these standards into the master template. Future articles will now automatically inherit the centered H1 with resalte, standardized FAQ structure, and local SEO blocks.
+
+### 2. Local SEO & Precision Mapping 🗺️
+*   **Location Correction:** Identified and fixed a precision issue in the Google Maps integration.
+    *   **Pinpointing:** Updated the map embed to point directly to **"Narbo's Salón Spa Chía"** inside the Quantum Building instead of a generic hotel pin.
+    *   **Global Sync:** Synchronized this fix across `contacto.html`, the Novias guide, and the new Balayage article.
+    *   **Address Consistency:** Verified the display of the full fiscal address: *Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118*.
+
+### 3. AI & Search Engine Optimization (FAQ Schema) 🧠
+*   **Semantic FAQs:** Implemented a new "Preguntas Frecuentes" section using native HTML5 `<details>` and `<summary>` tags—lightweight and 100% accessible.
+*   **FAQPage Schema (JSON-LD):** Injected structured data markup specifically for FAQs. This allows AI LLMs (Gemini, Perplexity) and search engines to parse and present Narbo's expertise as rich snippets or direct answers.
+*   **Redundancy Cleanup:** Permanently removed legacy category links above H1 tags across the blog to favor the cleaner, more robust breadcrumb navigation system.
+
+### 4. Code Hygiene & Maintenance 🧹
+*   **CSS Cleanup:** Removed legacy styles (e.g., `first-letter` drop caps) to maintain a modern, clean-cut aesthetic.
+*   **Git Integrity:** Performed comprehensive commits for each major architectural change, maintaining a clean and descriptive history.
+
+---
+
 ## 🔄 Recent Updates (March 6, 2026)
 
 ### 1. Production Image Infrastructure & 404 Fixes 🚑
