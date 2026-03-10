@@ -36,6 +36,23 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (March 10, 2026)
+
+### 1. Blog Content Optimization & Branding Fidelity 📸
+*   **Genuine transformation assets:** Replaced generic placeholders with real high-quality transformation cases (Before/After) from Narbo's professional portfolio (Copper to Pearly Blonde, Golden Balayage, etc.).
+*   **AI-Powered Localization:** Generated a high-fidelity hero image for the blog localized in Spanish ("ANTES", "DESPUÉS", "Cobrizo Oxidado", "Rubio Perlado").
+*   **Branding Precision:** Re-engineered the background signage in the article hero to EXACTLY match the official "Narbo's" calligraphy (stylized 'N') with a metallic golden finish and professional bokeh depth-of-field.
+
+### 2. SEO & Metadata Synchronization 🌐
+*   **Freshness Signal:** Updated publication date to **March 10, 2026** across JSON-LD Schema, article UI, and the central `articles.js` data layer.
+*   **Semantic Optimization:** Tailored `alt` tags and meta descriptions to the new technical assets to improve image search ranking for "Balayage en Chía".
+
+### 3. Workspace Integrity 🧹
+*   **404 Resolution:** Restored the original "Cuidado del Balayage" article image after accidental deletion during asset reorganization.
+*   **Asset Cleanup:** Purged unused placeholders and temporary PNG files to maintain a lean production environment.
+
+---
+
 ## 🔄 Recent Updates (March 9, 2026)
 
 ### 1. Blog Standardization & Semantic Hierarchy ✍️
