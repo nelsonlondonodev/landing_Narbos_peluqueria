@@ -19,6 +19,16 @@ export const pagesData = Object.freeze({
     'home': {
         metaTitle: "Narbo's Salón Spa | Peluquería, Barbería y Estética en Chía",
         metaDescription: "Bienvenida a Narbo's Salón Spa en Chía. Expertos en Balayage, Barbería Premium, Uñas Spa y Estética Facial. Reserva tu cita hoy y vive una experiencia única.",
+        hero: {
+            title: "Peluquería, spa y uñas: expertos en estilo <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Más de 11 años de experiencia transformando tu estilo y bienestar con una propuesta premium y personalizada.",
+            imageSrc: "images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
+            extraImages: [
+                "images/pages/peluqueria/hair-hero.webp",
+                "images/pages/unas/unas-acrilicas-tendencia-2026-chia.webp"
+            ],
+            imageAlt: "Experiencia de belleza en Narbo's Salón Spa"
+        }
     },
     'blog': {
         metaTitle: "Blog de Belleza y Bienestar | Consejos Narbo's Salón Chía",
@@ -176,9 +186,9 @@ export const pagesData = Object.freeze({
         hero: {
            title: "Nuestra <span class=\"text-brand-green\">historia</span>",
            subtitle: "Pasión por la belleza y el bienestar desde 2013.",
-           imageSrc: "images/brand/logo_narbos.webp",
-           imageAlt: "Equipo de Narbo's Salon",
-           variant: 'logo'
+           imageSrc: "images/pages/peluqueria/hair-hero.webp",
+           extraImages: ["images/brand/logo_narbos.webp"],
+           imageAlt: "Equipo de Narbo's Salon"
        }
    },
    contacto: {

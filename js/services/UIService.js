@@ -39,24 +39,25 @@ export class UIService {
     }
 
     /**
-     * Inicia las animaciones de entrada del Hero (título y subtítulo).
+     * Inicia las animaciones de entrada del Hero con escalonamiento dinámico.
      */
     initHeroAnimation() {
-        const heroTitle = document.getElementById("hero-title");
-        const heroSubtitle = document.getElementById("hero-subtitle");
-        const businessStatus = document.getElementById("business-status-root");
+        // Usamos requestAnimationFrame para asegurar que el DOM se ha actualizado
+        requestAnimationFrame(() => {
+            const heroElements = document.querySelectorAll(".animate-hero-element");
+            const businessStatus = document.getElementById("business-status-root");
 
-        // Delay ligeramente mayor para asegurar que el scroll inicial terminó
-        if (businessStatus) {
-            setTimeout(() => businessStatus.classList.add("is-visible"), 150);
-        }
-        if (heroTitle) {
-            setTimeout(() => heroTitle.classList.add("is-visible"), 300);
-        }
-        
-        if (heroSubtitle) {
-            setTimeout(() => heroSubtitle.classList.add("is-visible"), 600);
-        }
+            // Delay inicial para el badge de estado
+            if (businessStatus) {
+                setTimeout(() => businessStatus.classList.add("is-visible"), 150);
+            }
+
+            // Animación escalonada para todos los elementos del hero
+            heroElements.forEach((el, index) => {
+                const delay = 300 + (index * 150);
+                setTimeout(() => el.classList.add("is-visible"), delay);
+            });
+        });
     }
 
     /**

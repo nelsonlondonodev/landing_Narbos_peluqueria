@@ -103,7 +103,8 @@ class App {
         let pageKey = null;
 
         // 1. Mapeo Explícito (Prioridad Alta)
-        if (path.includes('nosotros.html')) pageKey = 'nosotros';
+        if (this.isHomePage) pageKey = 'home';
+        else if (path.includes('nosotros.html')) pageKey = 'nosotros';
         else if (path.includes('contacto.html')) pageKey = 'contacto';
         
         // 2. Detección Dinámica Robusta (Basada en pagesData)
@@ -128,7 +129,14 @@ class App {
             const heroData = pagesData[pageKey].hero;
             const imageSrc = this.resolvePath(heroData.imageSrc);
             
-            heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
+            // Resolve extra images if they exist
+            const extraImages = (heroData.extraImages || []).map(img => this.resolvePath(img));
+            
+            heroRoot.innerHTML = getHeroHTML({ 
+                ...heroData, 
+                imageSrc,
+                extraImages 
+            });
         }
     }
 

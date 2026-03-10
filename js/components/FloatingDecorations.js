@@ -108,25 +108,11 @@ export class FloatingDecorations {
         let heroConfig = [];
 
         if (isHomePage) {
-            // --- Home: Elaborate Decorations + Movement ---
+            // --- Home: Minimal decorations to avoid "Mess" ---
+            // We REMOVE 'inicio' leaves to let the new Split-Bento collage shine.
             
-            // 1. Hero Decorations
             heroConfig = [
-                { 
-                    parent: 'inicio', 
-                    img: 'ui/decorations/hoja-seca-3d.webp', 
-                    speed: 0.25,
-                    wrapperClasses: '-left-6 top-[10%] md:left-[-2%] z-10',
-                    imgClasses: 'w-20 md:w-44 rotate-45 opacity-90 md:opacity-100 animate-leaf-enter-left'
-                },
-                { 
-                    parent: 'inicio', 
-                    img: 'ui/decorations/hoja-verde-3d.webp', 
-                    speed: 0.35,
-                    wrapperClasses: '-right-6 top-[40%] md:right-[15%] md:top-[35%] z-10',
-                    imgClasses: 'w-24 md:w-56 -rotate-12 opacity-90 md:opacity-100 animate-leaf-enter-right'
-                },
-                // 2. Service Grid Decorations (Home Only)
+                // 1. Service Grid Decorations (Home Only)
                 { 
                     parent: 'servicios', 
                     img: 'ui/decorations/hoja-seca-3d.webp', 
