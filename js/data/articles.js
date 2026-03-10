@@ -20,8 +20,8 @@
 const articles = [
     {
         id: 'balayage-correccion-color-chia',
-        date: '8 de marzo de 2026',
-        isoDate: '2026-03-08',
+        date: '10 de marzo de 2026',
+        isoDate: '2026-03-10',
         category: 'Balayage y Color',
         title: 'Balayage y Corrección de Color en Chía: Transformaciones Reales',
         description: 'Descubre increíbles antes y después de Balayage y corrección de color en Chía. Resultados reales por expertos en Narbo\'s Salón Spa. ¡Agenda tu diagnóstico!',
