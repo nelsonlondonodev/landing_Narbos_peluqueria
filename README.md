@@ -36,6 +36,80 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (March 10, 2026)
+
+### 1. Blog Content Optimization & Branding Fidelity 📸
+*   **Genuine transformation assets:** Replaced generic placeholders with real high-quality transformation cases (Before/After) from Narbo's professional portfolio (Copper to Pearly Blonde, Golden Balayage, etc.).
+*   **AI-Powered Localization:** Generated a high-fidelity hero image for the blog localized in Spanish ("ANTES", "DESPUÉS", "Cobrizo Oxidado", "Rubio Perlado").
+*   **Branding Precision:** Re-engineered the background signage in the article hero to EXACTLY match the official "Narbo's" calligraphy (stylized 'N') with a metallic golden finish and professional bokeh depth-of-field.
+
+### 2. SEO & Metadata Synchronization 🌐
+*   **Freshness Signal:** Updated publication date to **March 10, 2026** across JSON-LD Schema, article UI, and the central `articles.js` data layer.
+*   **Semantic Optimization:** Tailored `alt` tags and meta descriptions to the new technical assets to improve image search ranking for "Balayage en Chía".
+
+### 3. Workspace Integrity 🧹
+*   **404 Resolution:** Restored the original "Cuidado del Balayage" article image after accidental deletion during asset reorganization.
+*   **Asset Cleanup:** Purged unused placeholders and temporary PNG files to maintain a lean production environment.
+
+---
+
+## 🔄 Recent Updates (March 9, 2026)
+
+### 1. Blog Standardization & Semantic Hierarchy ✍️
+*   **Article Alignment:** Synchronized the "Balayage y Corrección de Color" article with the high-performing "Guía para Novias" post. 
+    *   **Typography:** Unified use of `Playfair Display` for headings and `Montserrat` for body text.
+    *   **Hierarchy:** Standardized sizes for `H1` (with `text-brand-green` highlights), `H2` (3xl), and `H3` (2xl).
+    *   **Spacing:** Implemented consistent section margins (`mb-12`) and paragraph spacing (`mb-6`) for a premium reading experience.
+*   **Master Template (`article.template.html`):** Burned these standards into the master template. Future articles will now automatically inherit the centered H1 with resalte, standardized FAQ structure, and local SEO blocks.
+
+### 2. Local SEO & Precision Mapping 🗺️
+*   **Location Correction:** Identified and fixed a precision issue in the Google Maps integration.
+    *   **Pinpointing:** Updated the map embed to point directly to **"Narbo's Salón Spa Chía"** inside the Quantum Building instead of a generic hotel pin.
+    *   **Global Sync:** Synchronized this fix across `contacto.html`, the Novias guide, and the new Balayage article.
+    *   **Address Consistency:** Verified the display of the full fiscal address: *Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118*.
+
+### 3. AI & Search Engine Optimization (FAQ Schema) 🧠
+*   **Semantic FAQs:** Implemented a new "Preguntas Frecuentes" section using native HTML5 `<details>` and `<summary>` tags—lightweight and 100% accessible.
+*   **FAQPage Schema (JSON-LD):** Injected structured data markup specifically for FAQs. This allows AI LLMs (Gemini, Perplexity) and search engines to parse and present Narbo's expertise as rich snippets or direct answers.
+*   **Redundancy Cleanup:** Permanently removed legacy category links above H1 tags across the blog to favor the cleaner, more robust breadcrumb navigation system.
+
+### 4. Code Hygiene & Maintenance 🧹
+*   **CSS Cleanup:** Removed legacy styles (e.g., `first-letter` drop caps) to maintain a modern, clean-cut aesthetic.
+*   **Git Integrity:** Performed comprehensive commits for each major architectural change, maintaining a clean and descriptive history.
+
+---
+
+## 🔄 Recent Updates (March 6, 2026)
+
+### 1. Production Image Infrastructure & 404 Fixes 🚑
+
+*   **Problem:** Numerous images (especially in the Aesthetics section) were broken on production due to spaces in filenames and incorrect relative path resolution in deep-linked service pages.
+*   **Root Cause:** The SSG (Static Site Generation) script was incorrectly concatenating relative paths (`../../images/...`), and some filenames contained spaces which caused URL encoding issues.
+*   **Solution:** 
+    *   **Normalization:** Renamed problematic image files to remove spaces and special characters.
+    *   **Root-Relative Paths:** Migrated all image references in `data/servicesData.js`, `data/estheticsServices.js`, and `data/pagesData.js` to root-relative paths (`/images/...`).
+    *   **SSG Injection Fix:** Modified `scripts/ssg.js` logic to ensure asset paths are correctly resolved during the content hydration phase.
+*   **Result:** 100% of service images and hero banners now load correctly across all navigation levels.
+
+### 2. Mandatory Cache Busting (Hashes) ⚡
+
+*   **Problem:** Clients and browsers were often stuck with old versions of CSS/JS files after a deployment, requiring manual cache clears.
+*   **Solution:** Implemented an automated **File Hashing** system in `scripts/build.js`.
+    *   **MD5 Generation:** The build script now generates unique MD5 hashes for `styles.css` and all JS bundles.
+    *   **Production Tagging:** Referenced filenames in the `dist` directory are dynamically updated (e.g., `main.848ea711.js`) and tagged with a build timestamp.
+*   **Impact:** Zero-cache issues for production users. Every deployment now forces the browser to download the absolute latest version of the site code.
+
+### 3. Legal Compliance & Data Protection (Ley 1581) ⚖️
+
+*   **Requirement:** To comply with Colombian data protection laws, all forms collecting user data must have an explicit "Opt-in" for privacy policies.
+*   **Fixes:** 
+    *   **Contact Form:** Added a mandatory "Accept Policies" checkbox to the main homepage contact form.
+    *   **Loyalty Form:** Integrated and enforced the same checkbox in the `/fidelizacion/` registration page.
+    *   **Native Validation:** Implemented `reportValidity()` in `ContactFormController.js` and `LoyaltyController.js` to trigger native browser error bubbles if the user attempts to submit without checking the box.
+*   **UX:** Improved checkbox layout with `shrink-0` and `select-none` to prevent visual distortion and accidental text selection on mobile devices (iPhone/Android).
+
+---
+
 ## 🔄 Recent Updates (March 2, 2026)
 
 ### 1. Loyalty Email QR Fix — Broken Image & Spam Prevention 📧
