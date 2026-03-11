@@ -19,7 +19,6 @@ import { Breadcrumbs } from './components/Breadcrumbs.js';
 // ServiceCard is needed for mountHomeServices which runs on init
 import { ServiceCard } from './components/ServiceCard.js';
 import { AnalyticsService } from './services/AnalyticsService.js';
-import { getBentoGridHTML } from './components/BentoGrid.js';
 
 
 class App {
@@ -49,7 +48,6 @@ class App {
         this.mountLayout();
         this.mountHero();
         if (this.isHomePage) this.mountHomeModals();
-        if (this.isHomePage) this.mountHomeFacilitiesGallery();
         this.initCoreComponents();
         this.initInteractiveComponents();
         this.mountHomeServices();
@@ -256,24 +254,6 @@ class App {
                 servicesGrid.appendChild(card.render());
             });
         }
-    }
-
-    mountHomeFacilitiesGallery() {
-        const galleryRoot = document.getElementById('facilities-gallery-root');
-        if (!galleryRoot || !pagesData.home.facilitiesGallery) return;
-
-        const processedGallery = pagesData.home.facilitiesGallery.map(item => ({
-            ...item,
-            src: this.resolvePath(item.src)
-        }));
-
-        galleryRoot.innerHTML = getBentoGridHTML(processedGallery);
-        
-        // Setup lightbox for the new gallery
-        this.observeAndInit('#facilities-gallery-root', async () => {
-             const { GalleryController } = await import('./controllers/GalleryController.js');
-             new GalleryController();
-        });
     }
 
     initServices() {
