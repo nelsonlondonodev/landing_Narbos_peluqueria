@@ -19,6 +19,40 @@ export const pagesData = Object.freeze({
     'home': {
         metaTitle: "Narbo's Salón Spa | Peluquería, Barbería y Estética en Chía",
         metaDescription: "Bienvenida a Narbo's Salón Spa en Chía. Expertos en Balayage, Barbería Premium, Uñas Spa y Estética Facial. Reserva tu cita hoy y vive una experiencia única.",
+        facilitiesGallery: [
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '/images/pages/estetica/cabinas-spa-estetica-narbos.webp',
+                title: "Cabinas de Spa",
+                subtitle: "Relax y bienestar",
+                alt: "Nuestras cabinas de estética y spa facial integral"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '/images/pages/peluqueria/lavado-spa-capilar.webp',
+                title: "Spa Capilar",
+                subtitle: "Máxima relajación",
+                alt: "Área de lavado y spa capilar profesional"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '/images/brand/logo_narbos.webp',
+                title: "Excelencia",
+                subtitle: "Marca Narbo's",
+                alt: "Logo de Narbo's Salón Spa"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '/images/blog/foto_fachada.webp',
+                title: "Nuestra Sede en Chía",
+                subtitle: "Km 2 Vía Chía - Cajicá",
+                alt: "Fachada exterior de Narbo's Salón en el Edificio Quantum"
+            }
+        ]
     },
     'blog': {
         metaTitle: "Blog de Belleza y Bienestar | Consejos Narbo's Salón Chía",
