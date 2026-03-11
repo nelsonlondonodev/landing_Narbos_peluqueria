@@ -38,18 +38,21 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 ## 🔄 Recent Updates (March 10, 2026)
 
-### 1. Blog Content Optimization & Branding Fidelity 📸
-*   **Genuine transformation assets:** Replaced generic placeholders with real high-quality transformation cases (Before/After) from Narbo's professional portfolio (Copper to Pearly Blonde, Golden Balayage, etc.).
-*   **AI-Powered Localization:** Generated a high-fidelity hero image for the blog localized in Spanish ("ANTES", "DESPUÉS", "Cobrizo Oxidado", "Rubio Perlado").
-*   **Branding Precision:** Re-engineered the background signage in the article hero to EXACTLY match the official "Narbo's" calligraphy (stylized 'N') with a metallic golden finish and professional bokeh depth-of-field.
+### 1. Blog UX & Technical Enrichment 📸
+*   **FAQ Implementation (Blog & Article):** Added a visual FAQ section to the `blog/index.html` and the Balayage article, improving user engagement and dwell time.
+*   **Full Production Build & Sitemap Sync:** Regenerated the production sitemap, ensuring the new content is indexed with correctly prioritized URLs.
+*   **Branding & Typography Synchronization:** Standardized the use of "Narbo's" (with apostrophe) across all meta tags, titles, and article content.
 
-### 2. SEO & Metadata Synchronization 🌐
-*   **Freshness Signal:** Updated publication date to **March 10, 2026** across JSON-LD Schema, article UI, and the central `articles.js` data layer.
-*   **Semantic Optimization:** Tailored `alt` tags and meta descriptions to the new technical assets to improve image search ranking for "Balayage en Chía".
+### 2. SEO & JSON-LD Serialization 🌐
+*   **Schema Enrichment (FAQPage):** Implemented `FAQPage` schema markup on both the index and individual articles, enabling Google Rich Results.
+*   **BlogPosting Metadata:** Expanded JSON-LD with `dateModified`, precise `keywords`, and structured image arrays for better social discovery.
+*   **Social Meta Tags (OG/Twitter):** Added complete Open Graph and Twitter Card metadata to the blog index for professional social sharing.
 
-### 3. Workspace Integrity 🧹
-*   **404 Resolution:** Restored the original "Cuidado del Balayage" article image after accidental deletion during asset reorganization.
-*   **Asset Cleanup:** Purged unused placeholders and temporary PNG files to maintain a lean production environment.
+### 3. Performance & Core Web Vitals Optimization ⚡
+*   **LCP Optimization:** Implemented `<link rel="preload">` with `fetchpriority="high"` for the Balayage article's hero image.
+*   **CLS Prevention:** Added explicit `width` and `height` attributes to the main article image and optimized font-loading strategies to eliminate layout shifts.
+*   **Cache Busting:** Executed asset versioning via `npm run build` (e.g., `styles.css?v=2.1`) to guarantee immediate updates for end users.
+
 
 ---
 
