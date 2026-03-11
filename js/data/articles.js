@@ -26,7 +26,7 @@ const articles = [
         title: 'Balayage y Corrección de Color en Chía: Transformaciones Reales',
         description: 'Descubre increíbles antes y después de Balayage y corrección de color en Chía. Resultados reales por expertos en Narbo\'s Salón Spa. ¡Agenda tu diagnóstico!',
         image: '/blog/articles/images/balayage-correccion-narbos.webp',
-        alt: 'Transformación de balayage y corrección de color en Chía - Narbo\'s Salón Spa',
+        alt: 'Transformación real de balayage y corrección de color en las instalaciones de Narbo\'s Salón Spa Chía',
         link: '/blog/articles/balayage-correccion-color-chia.html',
         featured: true
     },
