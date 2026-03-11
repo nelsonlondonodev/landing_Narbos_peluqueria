@@ -443,25 +443,25 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Estética y Spa <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.",
-            imageSrc: "/images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
-            imageAlt: "Tratamientos de spa y estética en Narbo's"
+            imageSrc: "/images/pages/estetica/cabinas-spa-estetica-narbos.webp",
+            imageAlt: "Cabinas profesionales de spa y estética en Narbo's"
         },
         gallery: [
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '/images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
+                src: '/images/pages/estetica/limpieza-facial-profunda-proceso.webp',
                 title: "Limpieza Facial",
-                subtitle: "Piel Radiante",
-                alt: "Limpieza facial profunda con alta frecuencia"
+                subtitle: "Procedimiento Profesional",
+                alt: "Limpieza facial profunda realizada por experta"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/estetica/terapia-piedras-calientes-spa-chia.webp',
+                src: '/images/pages/estetica/masaje-relajante-profesional-chia.webp',
                 title: "Masaje Relajante",
-                subtitle: "Piedras Calientes",
-                alt: "Masaje relajante con piedras calientes"
+                subtitle: "Relax Total",
+                alt: "Masaje relajante profesional en cabina"
             },
             {
                 type: 'image',
@@ -509,25 +509,25 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
+                src: '/images/pages/estetica/alta-frecuencia-facial-narbos.webp',
                 title: "Alta Frecuencia",
                 subtitle: "Tecnología Facial",
-                alt: "Limpieza facial profunda con alta frecuencia"
+                alt: "Tratamiento facial con alta frecuencia"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
-                title: "Relajación Total",
-                subtitle: "Complemento ideal",
-                alt: "Tratamiento facial relajante"
+                src: '/images/pages/estetica/terapia-led-facial-chia.webp',
+                title: "Terapia LED",
+                subtitle: "Rejuvenecimiento",
+                alt: "Mascarilla LED para tratamiento facial avanzado"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
-                title: "Mascarilla",
-                alt: "Aplicación de mascarilla facial despigmentante"
+                src: '/images/pages/estetica/limpieza-facial-profunda-proceso.webp',
+                title: "Limpieza Profunda",
+                alt: "Proceso de extracción y limpieza facial"
             },
             {
                 type: 'image',
@@ -667,18 +667,18 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
-                title: "Relajación Total",
-                subtitle: "Experiencia Sensorial",
-                alt: "Masaje relajante profesional en Chía"
+                src: '/images/pages/estetica/masaje-relajante-profesional-chia.webp',
+                title: "Masaje Profesional",
+                subtitle: "Alivio de Tensión",
+                alt: "Masaje descontracturante y relajante profesional"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/terapia-piedras-calientes-spa-chia.webp',
-                title: "Piedras Volcánicas",
-                subtitle: "Termoterapia",
-                alt: "Masaje con piedras calientes volcánicas"
+                src: '/images/pages/estetica/cabinas-spa-estetica-narbos.webp',
+                title: "Nuestras Cabinas",
+                subtitle: "Ambiente Controlado",
+                alt: "Cabinas de spa privadas y relajantes"
             },
             {
                 type: 'image',

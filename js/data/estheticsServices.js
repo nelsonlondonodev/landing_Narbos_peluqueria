@@ -7,7 +7,7 @@ export const estheticsServices = [
     {
         title: 'Limpieza Facial Básica',
         description: 'Protocolo esencial para eliminar impurezas y restaurar el equilibrio de tu piel.',
-        image: '/images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
+        image: '/images/pages/estetica/limpieza-facial-profunda-proceso.webp',
         link: 'servicios/estetica/spa-facial-integral.html',
         price: masterPrices.esthetics.facial.basico,
         variant: 'standard'
@@ -43,7 +43,7 @@ export const estheticsServices = [
     {
         title: 'Masaje Relajante',
         description: '1 hora de relajación total para desconectar cuerpo y mente.',
-        image: '/images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
+        image: '/images/pages/estetica/masaje-relajante-profesional-chia.webp',
         link: 'servicios/estetica/masajes-relajantes.html',
         price: masterPrices.esthetics.corporal.masajeRelajante,
         variant: 'standard'
