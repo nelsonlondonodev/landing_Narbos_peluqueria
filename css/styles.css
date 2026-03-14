@@ -3626,7 +3626,7 @@ body {
 }
 body.page-is-exiting {
   opacity: 0;
-  transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif;
