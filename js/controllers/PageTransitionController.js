@@ -1,67 +1,103 @@
 /**
  * Controlador de Transiciones de Página.
  * Maneja la animación suave de entrada y salida entre navegaciones.
- * Implementa una estrategia híbrida:
- * 1. Native View Transitions (donde esté soportado).
- * 2. Fallback CSS Fade-In/Out para navegadores estándar.
+ * Refactorizado bajo principios de Clean Code: Pequeño, específico y robusto.
  */
 export class PageTransitionController {
     constructor() {
-        this.links = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href^="../"]');
+        this.isExiting = false;
         this.init();
     }
 
     init() {
-        // 1. Animación de Entrada (Al cargar la página)
-        this.handleEnterAnimation();
-
-        // 2. Interceptar clics para Animación de Salida
+        // Interceptar clics para Animación de Salida mediante delegación
         this.setupExitAnimations();
+        // Manejo de caché del navegador (Back/Forward)
+        this._handleBrowserCache();
+    }
 
-        // 3. Manejo de bfcache (Browser Back/Forward Cache)
-        // Necesario para que Safari/iOS no muestre la página con opacidad 0 al volver atrás.
-        window.addEventListener('pageshow', (event) => {
-            if (event.persisted) {
-                document.body.classList.remove('page-is-exiting');
-                document.body.classList.add('page-is-loaded');
+    /**
+     * Configura el listener global de clics para detectar navegaciones.
+     */
+    setupExitAnimations() {
+        document.body.addEventListener('click', (e) => {
+            if (this.isExiting) return;
+
+            const link = e.target.closest('a');
+            if (!link) return;
+
+            const href = link.getAttribute('href');
+            if (this._isLinkNavigable(link, href, e)) {
+                this._handleInternalNavigation(link.href, e);
             }
         });
     }
 
-    handleEnterAnimation() {
-        // LCP Optimization: Body is visible by default. 
-        // No manual fade-in required here to prevent render blocking.
+    /**
+     * Verifica si el enlace es candidato para una transición de salida.
+     * @private
+     */
+    _isLinkNavigable(link, href, e) {
+        if (!href) return false;
+        
+        const isSpecialProtocol = href.startsWith('#') || 
+                                 href.startsWith('javascript:') || 
+                                 href.startsWith('mailto:') || 
+                                 href.startsWith('tel:');
+        
+        const isExternalOrModifier = link.target === '_blank' || 
+                                    e.ctrlKey || e.metaKey || e.shiftKey;
+
+        return !isSpecialProtocol && !isExternalOrModifier;
     }
 
-    setupExitAnimations() {
-        document.body.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            
-            // Condiciones para ignorar navegación controlada:
-            if (!link) return;
-            if (link.target === '_blank') return; // Abre en nueva pestaña
-            if (link.getAttribute('href').startsWith('#')) return; // Es un ancla interna
-            if (link.getAttribute('href').startsWith('mailto:')) return;
-            if (link.getAttribute('href').startsWith('tel:')) return;
-            if (e.ctrlKey || e.metaKey) return; // Ctrl+Click
-            
-            // Verificar si es un enlace interno real
-            const targetUrl = new URL(link.href, window.location.origin);
-            if (targetUrl.origin !== window.location.origin) return; // Enlace externo
+    /**
+     * Valida el origen y ejecuta la transición si es un enlace interno.
+     * @private
+     */
+    _handleInternalNavigation(url, e) {
+        try {
+            const targetUrl = new URL(url, window.location.origin);
+            if (targetUrl.origin !== window.location.origin) return;
 
-            // Ejecutar transición de salida
+            this.isExiting = true;
             e.preventDefault();
-            this.animateExit(targetUrl.href);
-        });
+            this._performExitAnimation(targetUrl.href);
+        } catch (err) {
+            // Ante cualquier error de parsing, dejamos que el navegador actúe de forma nativa
+        }
     }
 
-    animateExit(url) {
+    /**
+     * Ejecuta la secuencia visual de salida y redirige.
+     * @private
+     */
+    _performExitAnimation(url) {
         document.body.classList.add('page-is-exiting');
 
-        // Esperar a que termine la duración de la transición CSS (definida en styles)
-        // Usamos un timeout ligeramente más corto que la transición CSS para evitar pantallas blancas.
+        // Redirección cronometrada con la duración de la CSS Transition (300ms)
         setTimeout(() => {
             window.location.href = url;
-        }, 300); // 300ms coincide con la duración CSS propuesta
+        }, 300);
+
+        // Fail-safe: Si la navegación no ocurre (ej. red lenta), forzar cambio a los 600ms
+        setTimeout(() => {
+            if (window.location.href !== url) {
+               window.location.href = url;
+            }
+        }, 600); 
+    }
+
+    /**
+     * Asegura que el estado visual sea correcto al volver atrás en el navegador.
+     * @private
+     */
+    _handleBrowserCache() {
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                this.isExiting = false;
+                document.body.classList.remove('page-is-exiting');
+            }
+        });
     }
 }

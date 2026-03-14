@@ -40,23 +40,11 @@ export class UIService {
 
     /**
      * Inicia las animaciones de entrada del Hero (título y subtítulo).
+     * @deprecated Ahora se maneja vía CSS puro en input.css para optimizar LCP.
      */
     initHeroAnimation() {
-        const heroTitle = document.getElementById("hero-title");
-        const heroSubtitle = document.getElementById("hero-subtitle");
-        const businessStatus = document.getElementById("business-status-root");
-
-        // Delay ligeramente mayor para asegurar que el scroll inicial terminó
-        if (businessStatus) {
-            setTimeout(() => businessStatus.classList.add("is-visible"), 150);
-        }
-        if (heroTitle) {
-            setTimeout(() => heroTitle.classList.add("is-visible"), 300);
-        }
-        
-        if (heroSubtitle) {
-            setTimeout(() => heroSubtitle.classList.add("is-visible"), 600);
-        }
+        // Mantenemos el método para compatibilidad pero delegamos a CSS
+        // console.log("[UIService] Hero animation handled via CSS.");
     }
 
     /**

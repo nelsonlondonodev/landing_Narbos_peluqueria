@@ -108,26 +108,27 @@ export const pagesData = Object.freeze({
         },
         gallery: [
             {
-                type: 'logo-card',
-                layout: 'featured-video',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Experiencia Narbo's",
-                subtitle: "Vive el cambio",
-                alt: "Marca Narbos Barbería"
-            },
-            {
-                type: 'logo-card',
+                type: 'image',
                 layout: 'vertical',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Calidad Premium",
-                alt: "Marca Narbos Salon"
+                src: '../../images/pages/barberia/corte-hombre-fade-moderno.webp',
+                title: "Corte Fade Moderno",
+                subtitle: "Degradados de Precisión",
+                alt: "Corte fade moderno realizado por barbero profesional en Chía"
             },
             {
-                type: 'logo-card',
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/barberia/ritual-barba-vaporizador-relajante.webp',
+                title: "Spa de Barba",
+                subtitle: "Relajación Total",
+                alt: "Ritual de barba con vapor ozono en Narbo's Barbería"
+            },
+            {
+                type: 'image',
                 layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Estilo",
-                alt: "Logotipo Narbos"
+                src: '../../images/pages/barberia/corte-barba-tendencia-barberia.webp',
+                title: "Diseño de Barba",
+                alt: "Perfilado y diseño de barba con técnica profesional"
             },
             {
                 type: 'logo-card',
