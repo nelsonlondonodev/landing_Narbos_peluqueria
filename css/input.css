@@ -313,28 +313,47 @@ body.modal-open-layer-fix #app-wrapper {
 
 /* --- FIN: NUEVOS ESTILOS PARA MODAL DE SERVICIOS --- */
 
-/* --- INICIO: ESTILOS PARA ANIMACIÓN DE HERO --- */
+/* --- INICIO: ESTILOS PARA ANIMACIÓN DE HERO (OPTIMIZADO LCP) --- */
 
-/* Clase inicial para los elementos que animaremos en la sección hero.
-  Empiezan invisibles y ligeramente desplazados hacia abajo.
-  La transición se aplicará a las propiedades de opacidad y transformación.
+/* 
+  Optimizamos el LCP (Largest Contentful Paint) moviendo la animación a CSS puro.
+  Esto elimina la dependencia de JavaScript para mostrar el título principal,
+  lo que reduce el tiempo de renderizado percibido drásticamente.
 */
+@keyframes heroFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-hero-element {
+  /* Iniciamos la animación inmediatamente al cargar el CSS */
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  animation: heroFadeInUp 0.8s ease-out forwards;
 }
 
-/*
-  Cuando JavaScript añada esta clase, el elemento se volverá visible
-  y volverá a su posición original, creando el efecto de animación.
-*/
-.animate-hero-element.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+/* Delays escalonados para el efecto visual sin intervenir con JS */
+#hero-title {
+  animation-delay: 0.1s;
 }
 
-/* --- FIN: ESTILOS PARA ANIMACIÓN DE HERO --- */
+#hero-subtitle {
+  animation-delay: 0.4s;
+}
+
+/* El Business Status badge también se anima por CSS */
+#business-status-root {
+  opacity: 0;
+  animation: heroFadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+/* --- FIN: ESTILOS PARA ANIMACIÓN DE HERO (OPTIMIZADO LCP) --- */
 
 /* --- INICIO: ESTILOS PARA ÍCONOS EN MODALES DE SERVICIOS --- */
 
