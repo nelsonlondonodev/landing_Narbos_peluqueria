@@ -19,50 +19,70 @@ export class PageTransitionController {
         this.setupExitAnimations();
 
         // 3. Manejo de bfcache (Browser Back/Forward Cache)
-        // Necesario para que Safari/iOS no muestre la página con opacidad 0 al volver atrás.
         window.addEventListener('pageshow', (event) => {
             if (event.persisted) {
+                this.isExiting = false;
                 document.body.classList.remove('page-is-exiting');
                 document.body.classList.add('page-is-loaded');
             }
         });
+
+        // 4. Bloqueo de doble navegación
+        this.isExiting = false;
     }
 
     handleEnterAnimation() {
         // LCP Optimization: Body is visible by default. 
-        // No manual fade-in required here to prevent render blocking.
     }
 
     setupExitAnimations() {
         document.body.addEventListener('click', (e) => {
+            if (this.isExiting) return;
+
             const link = e.target.closest('a');
-            
-            // Condiciones para ignorar navegación controlada:
             if (!link) return;
-            if (link.target === '_blank') return; // Abre en nueva pestaña
-            if (link.getAttribute('href').startsWith('#')) return; // Es un ancla interna
-            if (link.getAttribute('href').startsWith('javascript:')) return; // GLightbox / Scripts
-            if (link.getAttribute('href').startsWith('mailto:')) return;
-            if (link.getAttribute('href').startsWith('tel:')) return;
-            if (e.ctrlKey || e.metaKey) return; // Ctrl+Click
+
+            const href = link.getAttribute('href');
+            if (!href) return;
+
+            // Condiciones para ignorar navegación controlada:
+            if (link.target === '_blank' || 
+                href.startsWith('#') || 
+                href.startsWith('javascript:') || 
+                href.startsWith('mailto:') || 
+                href.startsWith('tel:') || 
+                e.ctrlKey || e.metaKey || e.shiftKey) {
+                return;
+            }
             
             // Verificar si es un enlace interno real
-            const targetUrl = new URL(link.href, window.location.origin);
-            if (targetUrl.origin !== window.location.origin) return; // Enlace externo
+            try {
+                const targetUrl = new URL(link.href, window.location.origin);
+                if (targetUrl.origin !== window.location.origin) return; // Enlace externo
 
-            // Ejecutar transición de salida
-            e.preventDefault();
-            this.animateExit(targetUrl.href);
+                // Ejecutar transición de salida
+                this.isExiting = true;
+                e.preventDefault();
+                this.animateExit(targetUrl.href);
+            } catch (err) {
+                // Si falla el parseo de URL, dejamos que el navegador maneje el clic normalmente
+            }
         });
     }
 
     animateExit(url) {
         document.body.classList.add('page-is-exiting');
 
-        // Esperar a que termine la duración de la transición CSS (definida en styles)
-        // Usamos un timeout ligeramente más corto que la transición CSS para evitar pantallas blancas.
-        setTimeout(() => {
+        // Tiempo de seguridad para la navegación
+        const timeout = setTimeout(() => {
             window.location.href = url;
-        }, 300); // 300ms coincide con la duración CSS propuesta
+        }, 300);
+
+        // Si la navegación tarda demasiado (por red), aseguramos el cambio
+        setTimeout(() => {
+            if (window.location.href !== url) {
+               window.location.href = url;
+            }
+        }, 500); 
     }
 }
