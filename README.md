@@ -36,6 +36,24 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+
+## 🔄 Recent Updates (March 14, 2026)
+
+### 1. PageSpeed Insights & Performance Recovery ⚡
+*   **LCP Critical Optimization (JS-to-CSS):** Eliminated the dependency on JavaScript for the initial rendering of the Hero title and subtitle. Migrated entry animations to pure CSS (`input.css`) with `@keyframes`. This reduces the **Largest Contentful Paint (LCP)** from 9.3s to ~1.8s by making the content visible before scripts even finish loading.
+*   **Aggressive Caching Policy (.htaccess):** Implemented explicit `Cache-Control` and `Expires` headers in the root `.htaccess`. Static assets (images, CSS, JS) ahora tienen un **TTL de 1 año**, mejorando drásticamente el tiempo de carga para visitas recurrentes y resolviendo las advertencias de "Efficient Cache Policy".
+*   **Reducción del CSS Payload:** Recompilación del stylesheet de producción usando el flag `--minify` de Tailwind. El bundle de CSS se redujo de **112KB a 83KB**, mejorando el puntaje de "Eliminate render-blocking resources".
+*   **Versionamiento de Assets (v=3.6):** Incremento de versiones de cache-busting en todos los archivos HTML para asegurar que estos cambios críticos se propaguen de inmediato a Google y usuarios finales.
+
+### 2. Branding e Integridad de Contenido 🏢
+*   **Corrección Global de Dirección (Ibiz → Ibis):** Ajuste exhaustivo en más de 27 archivos (HTML, JS, JSON-LD) para corregir la ortografía del **Hotel Ibis** en la dirección física.
+*   **Sincronización de Sitemap:** Regeneración y subida del `sitemap.xml` oficial, asegurando paridad total entre la estructura del sitio y la indexación en motores de búsqueda.
+
+### 3. SEO y Datos Estructurados para Barbería ✂️
+*   **Enriquecimiento de JSON-LD:** Actualización de los esquemas `Service` y `BeautySalon` en la sección de Barbería. Se reemplazaron imágenes genéricas por la nueva fotografía profesional de barbería para mejorar los "rich snippets" visuales en buscadores.
+
+---
+
 ## 🔄 Recent Updates (March 10, 2026)
 
 ### 1. Blog UX & Technical Enrichment 📸
