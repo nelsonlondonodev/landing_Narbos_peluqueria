@@ -41,6 +41,7 @@ export class PageTransitionController {
             if (!link) return;
             if (link.target === '_blank') return; // Abre en nueva pestaña
             if (link.getAttribute('href').startsWith('#')) return; // Es un ancla interna
+            if (link.getAttribute('href').startsWith('javascript:')) return; // GLightbox / Scripts
             if (link.getAttribute('href').startsWith('mailto:')) return;
             if (link.getAttribute('href').startsWith('tel:')) return;
             if (e.ctrlKey || e.metaKey) return; // Ctrl+Click

@@ -41,10 +41,7 @@ body.page-is-exiting {
 }
 /* purgecss end ignore */
 
-/* Habilitar transición nativa moderna (Chrome 126+) */
-@view-transition {
-  navigation: auto;
-}
+/* La transición de salida se maneja vía JS en PageTransitionController.js */
 
 /* Estilos para los títulos para aplicar la fuente serif */
 h1,
