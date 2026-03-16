@@ -24,20 +24,20 @@ export const getHeroHTML = ({
             <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-brand-green/5 via-transparent to-brand-medium/5"></div>
         </div>
 
-        <div class="container mx-auto px-6 lg:px-12 min-h-screen flex flex-col lg:grid lg:grid-cols-12 lg:gap-8 items-center py-20 lg:py-0 relative z-10">
+        <div class="container mx-auto px-6 lg:px-12 min-h-screen flex flex-col lg:flex-row items-center gap-12 pt-32 lg:pt-0 relative z-10">
             
             <!-- Columna de Texto: Fuerte y Elegante -->
-            <div class="lg:col-span-5 flex flex-col justify-center animate-hero-element mb-12 lg:mb-0">
+            <div class="w-full lg:w-1/2 flex flex-col justify-center animate-hero-element mb-12 lg:mb-0">
                 <div class="inline-flex items-center gap-3 mb-6">
                     <span class="w-12 h-[1px] bg-brand-green"></span>
                     <span class="text-xs md:text-sm font-bold tracking-[0.4em] text-brand-green uppercase">Premium Spa</span>
                 </div>
 
-                <h1 id="hero-title" class="text-5xl md:text-7xl lg:text-7xl xl:text-8xl font-serif font-medium text-brand-gray-dark leading-[0.9] tracking-tighter mb-8 max-w-lg">
+                <h1 id="hero-title" class="text-5xl md:text-7xl lg:text-7xl xl:text-8xl font-serif font-medium text-brand-gray-dark leading-[0.9] tracking-tighter mb-8">
                     ${title}
                 </h1>
                 
-                <p id="hero-subtitle" class="text-lg md:text-xl text-brand-gray-dark/60 mb-10 max-w-md leading-relaxed font-light">
+                <p id="hero-subtitle" class="text-lg md:text-xl text-brand-gray-dark/60 mb-10 leading-relaxed font-light">
                     ${subtitle}
                 </p>
                 
@@ -54,8 +54,8 @@ export const getHeroHTML = ({
             </div>
 
             <!-- Columna de Imagen: El Corazón del Cutout UI -->
-            <div class="lg:col-span-12 lg:absolute lg:top-0 lg:right-0 lg:w-3/5 lg:h-full flex items-center justify-end z-0">
-                <div class="relative w-full h-[60vh] lg:h-[85vh] group animate-hero-element" style="animation-delay: 200ms;">
+            <div class="w-full lg:w-1/2 flex items-center justify-end z-0">
+                <div class="relative w-full h-[55vh] lg:h-[80vh] group animate-hero-element" style="animation-delay: 200ms;">
                     
                     <!-- Sombra 3D profunda que sigue la forma -->
                     <div class="absolute inset-0 bg-brand-gray-dark/5 blur-3xl translate-x-10 translate-y-10 rounded-[5rem] pointer-events-none"></div>
