@@ -74,13 +74,6 @@ export const getHeroHTML = ({
 
                     <!-- Elementos Integrados en las "Muescas" -->
                     
-                    <!-- 1. Stats en la muesca superior izquierda -->
-                    <div class="absolute top-[8%] left-[2%] md:top-[12%] md:left-[5%] z-20 animate-floating">
-                        <div class="bg-white/95 backdrop-blur-md p-5 md:p-8 rounded-[2.5rem] shadow-xl border border-brand-green/5">
-                            <p class="text-brand-green font-serif text-4xl md:text-5xl font-bold leading-none">11+</p>
-                            <p class="text-brand-gray-dark/40 text-[10px] md:text-xs uppercase font-bold tracking-[0.2em] mt-2">Años de Experticia</p>
-                        </div>
-                    </div>
 
                     <!-- 2. Business Status en la muesca inferior derecha -->
                     <div class="absolute bottom-[8%] right-[2%] md:bottom-[15%] md:right-[5%] z-20">
