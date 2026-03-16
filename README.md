@@ -36,6 +36,20 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (March 16, 2026)
+
+### 1. Hero Section UX & Layout Refactor 🎨
+*   **Flexbox 50/50 Architecture:** Migrated the Hero section from a complex grid/absolute system to a robust Flexbox layout. This ensures a perfect 50/50 split between text and image on desktop, improving visual balance.
+*   **Typography Flow Optimization:** Removed fixed width constraints (`max-w-lg`, `max-w-md`) from the main H1 and paragraph. This allows the text to flow naturally within its 50% container, preventing excessive vertical stretching.
+*   **Visual De-cluttering:** Removed the "11+ Years of Experience" floating badge to reduce visual noise and highlight the premium "Cutout UI" image.
+*   **Layout Stability:** Added calibrated top padding (`pt-32` / `lg:pt-0`) and unified container heights to prevent content from sliding under the fixed Navbar, ensuring a stable Largest Contentful Paint (LCP).
+
+### 2. Code Quality & Maintainability 🛠️
+*   **CSS Logic Simplification:** Eliminated reliance on absolute positioning for core sections, opting for standard document flow that is much easier to maintain and less prone to breaking on edge-case screen sizes.
+*   **Git Integrity:** Performed focused commits for each structural improvement, strictly following clean code principles and avoiding monolithic function updates.
+
+---
+
 ## 🔄 Recent Updates (March 10, 2026)
 
 ### 1. Blog UX & Technical Enrichment 📸
