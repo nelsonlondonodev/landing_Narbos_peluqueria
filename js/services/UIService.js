@@ -54,35 +54,34 @@ export class UIService {
         const animatedElements = document.querySelectorAll("[data-animation]");
         if (animatedElements.length === 0) return;
 
-        // Optimización CLS: Si el elemento ya es visible al cargar, lo animamos de inmediato
-        // sin ocultarlo primero para evitar el parpadeo/salto visual.
-        const observerOptions = {
-            threshold: 0.05, // Umbral más sensible para móviles
-            rootMargin: '0px 0px -50px 0px' // Dispara un poco antes de entrar (prevención de demora)
-        };
-
         const observer = new IntersectionObserver(
-            (entries, observer) => {
+            (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         this.animateElement(entry.target, observer);
                     }
                 });
             },
-            observerOptions
+            {
+                threshold: 0.05,
+                rootMargin: '0px 0px -50px 0px'
+            }
         );
 
-        animatedElements.forEach((element) => {
-            const rect = element.getBoundingClientRect();
-            const isInitiallyVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        // PHASE 1: Batch Read — Collect geometry without triggering writes
+        const viewportHeight = window.innerHeight;
+        const elementsWithVisibility = Array.from(animatedElements).map(el => ({
+            el,
+            isAboveFold: el.getBoundingClientRect().top < viewportHeight
+        }));
 
-            if (isInitiallyVisible) {
-                // Si ya es visible, animarlo ya mismo
-                this.animateElement(element, observer);
+        // PHASE 2: Batch Write — Apply classes/observe without interleaving reads
+        elementsWithVisibility.forEach(({ el, isAboveFold }) => {
+            if (isAboveFold) {
+                this.animateElement(el, observer);
             } else {
-                // Si está fuera del viewport, ocultarlo para la futura animación
-                element.classList.add("animation-hidden");
-                observer.observe(element);
+                el.classList.add("animation-hidden");
+                observer.observe(el);
             }
         });
     }

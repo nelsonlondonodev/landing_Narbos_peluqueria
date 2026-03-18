@@ -19,6 +19,18 @@
  */
 const articles = [
     {
+        id: 'mitos-capilares-keratina-champu-sin-sal-agua-sabana',
+        date: '18 de marzo de 2026',
+        isoDate: '2026-03-18',
+        category: 'Cuidado capilar',
+        title: 'Mitos: keratinas, champú sin sal y agua de la Sabana',
+        description: 'Análisis objetivo sobre alisados, champú sin sal y el impacto del agua dura de Chía en tu cabello. Información técnica por expertos de Narbo\'s Salón Spa.',
+        image: '/images/pages/peluqueria/lavado-cabello-spa-capilar-narbos-salon-chia.webp',
+        alt: 'Lavado profesional y spa capilar en Narbo\'s Salón Spa Chía, ideal para tratar el impacto del agua dura y minerales de la Sabana',
+        link: '/blog/articles/mitos-capilares-keratina-champu-sin-sal-agua-sabana.html',
+        featured: true
+    },
+    {
         id: 'balayage-correccion-color-chia',
         date: '10 de marzo de 2026',
         isoDate: '2026-03-10',

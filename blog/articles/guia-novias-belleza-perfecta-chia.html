@@ -50,6 +50,9 @@
         #navbar-root { min-height: 80px; }
         #breadcrumbs-root { min-height: 40px; }
     </style>
+
+    <!-- LCP Optimization: Preload hero image -->
+    <link rel="preload" as="image" href="/blog/articles/images/maquillaje-novias-cronograma-belleza-narbos.webp" fetchpriority="high" type="image/webp">
   
 </head>
   <body class="font-sans bg-white text-gray-900">
@@ -64,7 +67,7 @@
       <main class="pb-16 md:pb-24 pt-8 md:pt-12">
         <div class="container mx-auto px-6 max-w-screen-md">
           <article>
-            <header class="text-center mb-12 animate__animated animate__fadeInUp">
+            <header class="text-center mb-12">
               <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6"
                   data-breadcrumb="Cronograma para Novias">
                 Guía para novias: el cronograma de belleza perfecto <span class="text-brand-green">en Chía para tu gran día</span>
@@ -83,9 +86,10 @@
             <img
               src="/blog/articles/images/maquillaje-novias-cronograma-belleza-narbos.webp"
               alt="maquillaje-de-novia-profesional-en-chia-narbon-salon"
-              class="w-full md:w-3/4 lg:w-1/2 mx-auto rounded-lg shadow-lg mb-12 animate__animated animate__fadeInUp"
-              style="animation-delay: 0.2s"
+              class="w-full max-w-lg mx-auto rounded-lg shadow-lg mb-12"
               loading="eager"
+              fetchpriority="high"
+              width="512" height="384"
             />
 
             <div class="prose lg:prose-xl max-w-none text-gray-800">

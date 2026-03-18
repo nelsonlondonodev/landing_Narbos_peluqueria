@@ -93,19 +93,23 @@
     }]
     </script>
 
-    <link rel="stylesheet" href="../../css/styles.css?v=1.4" />
+    <link rel="stylesheet" href="../../css/styles.css?v=2.1" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+    
+    <!-- Non-blocking CSS loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
+    
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    </noscript>
+
+    <!-- LCP Optimization: Preload hero image -->
+    <link rel="preload" as="image" href="/blog/articles/images/choque-termico-moroccanoil.webp" fetchpriority="high" type="image/webp">
 
     <style>
         /* Optimización de CLS */
@@ -125,7 +129,7 @@
       <main class="pb-16 md:pb-24 pt-8 md:pt-12">
         <div class="container mx-auto px-6 max-w-screen-md">
           <article>
-            <header class="text-center mb-12" data-animation="fadeInUp">
+            <header class="text-center mb-12">
             <h1
               class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6"
               data-breadcrumb="Choque térmico"
@@ -142,11 +146,12 @@
           </header>
 
           <img
-            src="../../blog/articles/images/choque-termico-moroccanoil.webp"
+            src="/blog/articles/images/choque-termico-moroccanoil.webp"
             alt="Aceite Moroccanoil para proteger el cabello del choque térmico entre Sabana y Tierra Caliente"
-            class="w-full md:w-3/4 lg:w-1/2 mx-auto rounded-lg shadow-lg mb-12"
-            data-animation="fadeInUp"
-            data-animation-delay="0.2s"
+            class="w-full max-w-lg mx-auto rounded-lg shadow-lg mb-12"
+            loading="eager"
+            fetchpriority="high"
+            width="512" height="384"
           />
 
           <div class="prose lg:prose-xl max-w-none text-gray-800">
