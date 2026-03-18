@@ -37,6 +37,22 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Recent Updates (March 18, 2026) - Part 3: Performance & Core Web Vitals (90+ Score) ⚡
+
+### 1. PageSpeed Insights Recovery (91% Mobile Score) 🚀
+*   **Forced Reflow Elimination:** Refactored `UIService.js` to eliminate "Layout Thrashing". Migrated from interleaved DOM reads/writes to a **Batch Read/Write pattern**. This prevents the browser from recalculating the layout multiple times during the initial render, drastically reducing Total Blocking Time (TBT).
+*   **LCP Critical Path Optimization:** Optimized the **Largest Contentful Paint (LCP)** element across all blog articles:
+    *   Removed `animate__fadeInUp` from above-the-fold content (H1 headers and Hero images). Content is now visible instantly (0ms delay).
+    *   Implemented `<link rel="preload">` with `fetchpriority="high"` for all article hero assets, ensuring they are discovered before the main CSS/JS bundle.
+*   **CLS Prevention (Layout Stability):** Added explicit `width` and `height` attributes to all article hero images, eliminating layout shifts during image loading.
+*   **Non-blocking CSS Injection:** Fixed blocking requests for `animate.css` and Google Fonts in legacy articles using the `media="print" onload` pattern.
+
+### 2. Deployment & Cache Integrity 🛰️
+*   **Production Build Synchronization:** Executed a full production build (`npm run build`) including sitemap regeneration and cache-busting hashing.
+*   **Main Branch Parity:** Synchronized `develop` into `main` and pushed to the remote repository, ensuring the optimized production environment is live on Hostinger.
+
+---
+
 ## 🔄 Recent Updates (March 18, 2026) - Part 2
 
 ### 1. Standardized Blog Image Infrastructure 🖼️
