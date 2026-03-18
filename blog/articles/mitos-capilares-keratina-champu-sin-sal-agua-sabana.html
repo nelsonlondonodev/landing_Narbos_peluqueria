@@ -102,6 +102,9 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     </noscript>
 
+    <!-- LCP Optimization: Preload hero image -->
+    <link rel="preload" as="image" href="/images/pages/peluqueria/lavado-cabello-spa-capilar-narbos-salon-chia.webp" fetchpriority="high" type="image/webp">
+
     <style>
         #navbar-root { min-height: 80px; }
         #breadcrumbs-root { min-height: 40px; }
@@ -118,7 +121,7 @@
       <main class="pb-16 md:pb-24 pt-8 md:pt-12">
         <div class="container mx-auto px-6 max-w-screen-md">
           <article>
-            <header class="text-center mb-12 animate__animated animate__fadeInUp">
+            <header class="text-center mb-12">
               <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6"
                    data-breadcrumb="Mitos capilares">
                 Mitos y realidades capilares: <span class="text-brand-green">análisis crítico de la industria</span>
@@ -136,9 +139,10 @@
             <img
               src="/images/pages/peluqueria/lavado-cabello-spa-capilar-narbos-salon-chia.webp"
               alt="Lavado profesional y spa capilar en Narbo's Salón Spa Chía, ideal para tratar el impacto del agua dura y minerales de la Sabana"
-              class="w-full max-w-lg mx-auto rounded-lg shadow-lg mb-12 animate__animated animate__fadeInUp"
-              style="animation-delay: 0.2s"
+              class="w-full max-w-lg mx-auto rounded-lg shadow-lg mb-12"
               loading="eager"
+              fetchpriority="high"
+              width="512" height="384"
             />
 
             <div class="prose lg:prose-xl max-w-none text-gray-800">
