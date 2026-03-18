@@ -37,6 +37,24 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Recent Updates (March 18, 2026)
+
+### 1. SEO Editorial & High-Authority Content ✍️
+*   **New Article Launch:** Created a technically-rich, SEO-optimized blog post: *"Mitos capilares: keratinas, champú sin sal y el agua de la Sabana"*.
+*   **Premium Visual Assets:** Generated and integrated a high-fidelity WebP hero image specifically for this article to maintain the salon's premium aesthetic.
+*   **Internal Linking Strategy:** Strategically linked to the "Tratamientos Capilares" service and utilized local keywords like "Cajicá" to distribute page authority and improve local search relevance.
+
+### 2. UI Standardization & Design System Alignment 🎨
+*   **FAQ Accordion Unification:** Refactored the custom article FAQ component to strictly follow the site's minimal design standard (border-bottom lines instead of boxes), ensuring a seamless and predictable user experience across the entire blog.
+*   **Iconography & Micro-interactions:** Synchronized SVG iconography and rotation animations with the project's established patterns.
+
+### 3. Grammar, Orthography & Brand Voice 📖
+*   **Semantic Capitalization:** Implemented a global "Sentence case" standard for all new headings (H1, H2, FAQ) to comply with Spanish grammatical norms and improve readability.
+*   **Brand Consistency:** Standardized the brand name to "Narbo's Salón Spa" across all metadata, JSON-LD schemas, and body content.
+*   **Technical Accuracy:** Refined chemical terminology (sulfates, glyoxylic acid) within the educational sections of the blog to ensure professional authority.
+
+---
+
 ## 🔄 Recent Updates (March 14, 2026)
 
 ### 1. PageSpeed Insights & Performance Recovery ⚡
