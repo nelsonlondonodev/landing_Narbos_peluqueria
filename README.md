@@ -37,6 +37,20 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Recent Updates (March 18, 2026) - Part 2
+
+### 1. Standardized Blog Image Infrastructure 🖼️
+*   **Uniform Width Standard:** Established a new visual benchmark for all 11 blog articles by unifying main image widths to `max-w-lg` (512px). This optimizes the balance between visual impact and viewport height constraints, especially for vertical/square assets.
+*   **Article Template Synchronization:** Updated `blog/article.template.html` to inherit the new image width standard, ensuring all future content remains consistent with the project's premium design system.
+*   **Visual Content Refinement:** Replaced the provisional "Hair Myths" hero image with a professional high-fidelity photo (`lavado-cabello-spa-capilar-narbos-salon-chia.webp`) from the internal asset library, improving brand authority.
+
+### 2. Cross-Channel SEO & Schema Integrity 🌐
+*   **Metadata Synchronization:** Updated the `js/data/articles.js` repository and the `blog/index.html` static grid cards to reflect the new visual assets and optimized ALT text across all channels (Web, Social, Search).
+*   **Rigorous Schema Audit:** Verified and synchronized the `BlogPosting` JSON-LD schema, Open Graph (OG), and Twitter metadata for the latest article, ensuring a 100% technical SEO score and perfect social discovery.
+*   **Canonical Shielding:** Confirmed the self-referencing canonical tag implementation as a defensive measure against duplicate content and URL parameters, preserving link equity.
+
+---
+
 ## 🔄 Recent Updates (March 18, 2026)
 
 ### 1. SEO Editorial & High-Authority Content ✍️
