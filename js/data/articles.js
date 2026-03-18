@@ -23,7 +23,7 @@ const articles = [
         date: '18 de marzo de 2026',
         isoDate: '2026-03-18',
         category: 'Cuidado capilar',
-        title: 'Mitos capilares: keratinas, champú sin sal y el agua de la Sabana',
+        title: 'Mitos: keratinas, champú sin sal y agua de la Sabana',
         description: 'Análisis objetivo sobre alisados, champú sin sal y el impacto del agua dura de Chía en tu cabello. Información técnica por expertos de Narbo\'s Salón Spa.',
         image: '/blog/articles/images/articulo-mitos-capilares-narbos-salon.webp',
         alt: 'Análisis técnico de salud capilar y mitos sobre keratinas y agua dura en Narbo\'s Salón Spa',
