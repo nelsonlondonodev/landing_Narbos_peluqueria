@@ -37,6 +37,16 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Recent Updates (March 26, 2026) - Loyalty Program Enhancement 🎁
+
+### 1. Retention Strategy Update (15% Discount)
+*   **Discount Increase:** Professionally updated the loyalty landing page (`/fidelizacion/`) to reflect a **15% welcome discount** (previously 10%).
+*   **Policy Clarification:** Integrated a mandatory service exception for **Hair Removal (Depilación)** into all UI touchpoints (Benefit cards, Success messages, and QR modals) to ensure consistency with automated email workflows.
+*   **iOS & Apple Cache Integrity:** Implemented a targeted **Cache Buster (v=3.1)** on the loyalty stylesheet to force immediate updates on iPhones and iPads, which often retain legacy CSS.
+*   **Production Deployment:** Executed a full production build (`npm run build`) and synchronized `develop` with `main` to push the 15% offer live.
+
+---
+
 ## 🔄 Recent Updates (March 18, 2026) - Part 3: Performance & Core Web Vitals (90+ Score) ⚡
 
 ### 1. PageSpeed Insights Recovery (91% Mobile Score) 🚀
