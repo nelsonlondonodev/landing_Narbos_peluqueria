@@ -570,19 +570,19 @@ export const pagesData = Object.freeze({
                 alt: "Técnica milenaria de depilación con hilo para una definición perfecta de cejas"
             },
             {
+                type: 'logo-card',
+                layout: 'square',
+                src: '/images/brand/logo_narbos.webp',
+                title: "Narbo's Excellence",
+                alt: "Sello de calidad Narbo's Salon"
+            },
+            {
                 type: 'image',
                 layout: 'horizontal',
                 src: '../../images/pages/estetica/spa-hero.webp',
                 title: "Mirada Impactante",
                 subtitle: "Belleza Natural",
                 alt: "Cliente satisfecha con diseño de cejas"
-            },
-            {
-                type: 'logo-card',
-                layout: 'square',
-                src: '/images/brand/logo_narbos.webp',
-                title: "Narbo's Excellence",
-                alt: "Sello de calidad Narbo's Salon"
             },
             {
                 type: 'logo-card',
