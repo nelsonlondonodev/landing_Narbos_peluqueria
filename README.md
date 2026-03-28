@@ -37,6 +37,20 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Recent Updates (March 28, 2026) - Architectural Modularization & SEO Blog Content 💅
+
+### 1. Nails & Spa Hub Architecture (Clean Code) 🏗️
+*   **Controller Decoupling:** Successfully refactored the `unas-spa` hub. Extracted monolithic logic into a dedicated, atomic `NailsHubController.js` to strictly govern its components.
+*   **Dynamic Modal Injection:** Augmented `ServiceModal.js` with an automated HTML fallback that completely removes the heavy hardcoded `<div>` from the bottom of physical HTML files, improving DOM cleanliness.
+*   **Data Integrity:** The Hub now fully integrates with the unified `service-page.js` dispatcher while retaining legacy features, like accurate ID exclusions (`data-exclude-ids`) for tailored service rendering in subpages.
+
+### 2. High-Converting SEO Blog Launch ("Rubios Sabana") ✍️
+*   **Topic Strategy:** Published a hyper-local, educational article addressing oxidation and hair-loss mechanisms specifically tied to the high altitude of Chía/Bogotá (Sabana).
+*   **Interactive Capability:** Coded a Vanilla JS "Oxidation Calculator" into the layout, providing readers with personalized diagnostic risk alerts based on their selected habits.
+*   **Semantic Data Mastery:** Fully mapped the article using the `BlogPosting` JSON-LD schema pattern, styled with elegant Tailwind typography (`Playfair` & `Inter`), and injected internal conversion links (Corrección de color) to bolster CTR.
+
+---
+
 ## 🔄 Recent Updates (March 26, 2026) - Loyalty Program Enhancement 🎁
 
 ### 1. Retention Strategy Update (15% Discount)
