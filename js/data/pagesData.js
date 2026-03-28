@@ -576,6 +576,20 @@ export const pagesData = Object.freeze({
                 title: "Mirada Impactante",
                 subtitle: "Belleza Natural",
                 alt: "Cliente satisfecha con diseño de cejas"
+            },
+            {
+                type: 'logo-card',
+                layout: 'square',
+                src: '/images/brand/logo_narbos.webp',
+                title: "Narbo's Excellence",
+                alt: "Sello de calidad Narbo's Salon"
+            },
+            {
+                type: 'logo-card',
+                layout: 'square',
+                src: '/images/brand/logo_narbos.webp',
+                title: "Cuidado Experto",
+                alt: "Branding Narbo's Salon Spa"
             }
         ]
     },
