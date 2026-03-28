@@ -9,16 +9,12 @@ import { FloatingDecorations } from './components/FloatingDecorations.js';
 
 import { BrandsSection } from './components/BrandsSection.js'; 
 import { hairBrands } from './data/brandsData.js'; 
-import { hairSalonServices } from './data/hairSalonServices.js';
 import { barberServices } from './data/barberServices.js';
-import { hairCutStyles } from './data/hairCutStyles.js';
-import { colorStyles } from './data/colorStyles.js';
-import { tintStyles } from './data/tintStyles.js';
-import { treatmentStyles } from './data/treatmentStyles.js';
 import { estheticsServices } from './data/estheticsServices.js'; 
 import { ServiceModal } from './components/ServiceModal.js'; 
 import { BarberHubController } from './controllers/BarberHubController.js';
 import { EstheticsHubController } from './controllers/EstheticsHubController.js';
+import { HairHubController } from './controllers/HairHubController.js';
 
 /**
  * Gestor de la Página de Servicios.
@@ -67,6 +63,16 @@ class ServicePageManager {
         ];
         if (estheticsPages.includes(this.pageKey)) {
             new EstheticsHubController(this.app, this.pageKey).init();
+            return;
+        }
+
+        // Controlador de Peluquería (Hub y Subpáginas)
+        const hairPages = [
+            'peluqueria', 'cortes-de-pelo', 'balayage-mechas', 
+            'color-tinturas-cabello', 'tratamientos-capilares'
+        ];
+        if (hairPages.includes(this.pageKey)) {
+            new HairHubController(this.app, this.pageKey).init();
             return;
         }
 
@@ -170,38 +176,11 @@ class ServicePageManager {
     }
 
     initServiceGrid() {
-        this.initHairServices();
         this.initBarberServices();
         this.initEstheticsServices();
     }
 
-    initHairServices() {
-        const grid = document.getElementById('hair-services-grid');
-        if (!grid) return;
 
-        const services = this.getServicesForCurrentPage();
-        services.forEach(data => {
-            const processedData = {
-                ...data,
-                image: this.app.resolvePath(data.image),
-                link: this.app.resolvePath(data.link)
-            };
-            const cardElement = new ServiceCard(processedData).render();
-            this.setupHairServiceLightbox(cardElement, processedData);
-            grid.appendChild(cardElement);
-            this.setupHairServiceGallery(grid, processedData);
-        });
-    }
-
-    getServicesForCurrentPage() {
-        switch (this.pageKey) {
-            case 'cortes-de-pelo': return hairCutStyles;
-            case 'balayage-mechas': return colorStyles;
-            case 'color-tinturas-cabello': return tintStyles;
-            case 'tratamientos-capilares': return treatmentStyles;
-            default: return hairSalonServices;
-        }
-    }
 
     initBarberServices() {
         const grid = document.getElementById('barber-services-grid');
@@ -240,42 +219,7 @@ class ServicePageManager {
         });
     }
 
-    setupHairServiceLightbox(cardElement, data) {
-         if (cardElement.tagName !== 'A' || !this.pageKey) return;
-         const prefixes = {
-             'cortes-de-pelo': 'gallery-',
-             'balayage-mechas': 'gallery-color-',
-             'color-tinturas-cabello': 'gallery-tint-',
-             'tratamientos-capilares': 'gallery-treatment-'
-         };
-         const prefix = prefixes[this.pageKey];
-         if (!prefix) return;
-         cardElement.classList.add('glightbox');
-         const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
-         cardElement.setAttribute('data-gallery', uniqueGalleryId);
-         cardElement.setAttribute('data-title', data.title);
-         cardElement.href = 'javascript:void(0);';
-         cardElement.setAttribute('data-href', encodeURI(this.app.resolvePath(data.image)));
-    }
 
-    setupHairServiceGallery(container, data) {
-        if (!data.galleryImages || !this.pageKey) return;
-        const prefixes = { 'cortes-de-pelo': 'gallery-', 'balayage-mechas': 'gallery-color-' };
-        const prefix = prefixes[this.pageKey] || 'gallery-default-';
-        const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
-
-        data.galleryImages.forEach((item, index) => {
-            const imgUrlRaw = typeof item === 'string' ? item : item.src;
-            const imgUrl = encodeURI(this.app.resolvePath(imgUrlRaw));
-            const hiddenLink = document.createElement('a');
-            hiddenLink.href = 'javascript:void(0);'; 
-            hiddenLink.setAttribute('data-href', imgUrl);
-            hiddenLink.className = 'glightbox hidden'; 
-            hiddenLink.setAttribute('data-gallery', uniqueGalleryId);
-            hiddenLink.style.display = 'none';
-            container.appendChild(hiddenLink);
-        });
-    }
 
     initLightboxInstance(retries = 0) {
         if (!this.pageKey || typeof GLightbox === 'undefined') {
