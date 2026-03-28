@@ -18,11 +18,12 @@ import { treatmentStyles } from './data/treatmentStyles.js';
 import { estheticsServices } from './data/estheticsServices.js'; 
 import { ServiceModal } from './components/ServiceModal.js'; 
 import { BarberHubController } from './controllers/BarberHubController.js';
+import { EstheticsHubController } from './controllers/EstheticsHubController.js';
 
 /**
  * Gestor de la Página de Servicios.
  * Coordina la inicialización específica para páginas internas (Peluquería, Barbería, etc.).
- * Refactorizado para centralizar la detección de contexto (PageKey).
+ * Refactorizado para delegar la lógica a controladores atómicos.
  */
 class ServicePageManager {
     constructor() {
@@ -59,7 +60,17 @@ class ServicePageManager {
             return;
         }
 
-        // --- Legado (Pendiente de refactorizar igual que Barbería) ---
+        // Controlador de Estética (Hub y Subpáginas)
+        const estheticsPages = [
+            'estetica', 'spa-facial-integral', 'masajes-relajantes', 
+            'cejas-y-pestanas', 'depilacion-corporal', 'limpieza-facial'
+        ];
+        if (estheticsPages.includes(this.pageKey)) {
+            new EstheticsHubController(this.app, this.pageKey).init();
+            return;
+        }
+
+        // --- Legado (Pendiente de refactorizar) ---
         this.initServiceGrid();
         this.initBentoGallery();
         this.initModalTriggers();
@@ -75,20 +86,16 @@ class ServicePageManager {
         }
     }
 
-    /**
-     * Determina la clave de la página actual basada en la URL.
-     * El orden es crítico: las subpáginas específicas deben verificarse antes que las categorías generales.
-     */
     getPageKey() {
         const path = window.location.pathname;
 
-        // Subpáginas específicas de Peluquería
+        // Peluquería
         if (path.includes('cortes-de-pelo')) return 'cortes-de-pelo';
         if (path.includes('balayage-mechas')) return 'balayage-mechas';
         if (path.includes('color-tinturas-cabello')) return 'color-tinturas-cabello';
         if (path.includes('tratamientos-capilares')) return 'tratamientos-capilares';
 
-        // Subpáginas de Estética
+        // Estética
         if (path.includes('limpieza-facial')) return 'limpieza-facial';
         if (path.includes('masajes-relajantes')) return 'masajes-relajantes';
         if (path.includes('spa-facial-integral')) return 'spa-facial-integral';
@@ -96,35 +103,19 @@ class ServicePageManager {
         if (path.includes('depilacion-corporal')) return 'depilacion-corporal';
         if (path.includes('/estetica')) return 'estetica';
 
-        // Subpáginas de Barbería
+        // Barbería
         if (path.includes('barberia-cortes-hombre')) return 'barberia-cortes-hombre';
         if (path.includes('barberia')) return 'barberia';
 
-        // Páginas Generales / Hubs
-        if (path.includes('unas-spa')) return 'unas-spa'; // Asumiendo que existe
+        // Generales
+        if (path.includes('unas-spa')) return 'unas-spa'; 
         if (path.includes('nosotros')) return 'nosotros';
         if (path.includes('contacto')) return 'contacto';
-
-        // Hub Principal Peluquería (Fallback si está en path)
         if (path.includes('peluqueria')) return 'peluqueria';
 
-        return null; // No matching page config
+        return null;
     }
 
-    /**
-     * Inicializa la Sección Hero Dinámica.
-     */
-    /**
-     * Inicializa la Sección Hero Dinámica.
-     */
-    initHero() {
-        // DEPRECATED: Hero initialization is now centralized in App.js (mountHero)
-        // to ensure a Single Source of Truth and robust routing logic.
-    }
-
-    /**
-     * Inicializa la galería Bento Grid Dinámica.
-     */
     initBentoGallery() {
         const galleryContainer = document.getElementById('bento-gallery-root');
         if (!galleryContainer || !this.pageKey) return;
@@ -142,22 +133,14 @@ class ServicePageManager {
         galleryContainer.innerHTML = getBentoGridHTML(galleryItems, galleryOptions);
     }
     
-    /**
-     * Inicializa la sección de marcas específicas de peluquería.
-     */
     initBrands() {
-        // Solo para páginas de peluquería por ahora
-        if (this.pageKey && (this.pageKey === 'peluqueria' || this.pageKey.includes('cortes') || this.pageKey.includes('balayage') || this.pageKey.includes('color'))) {
-             // Verificar si existe el contenedor antes de instanciar
+        if (this.pageKey && (this.pageKey === 'peluqueria' || this.pageKey.includes('cortes') || this.pageKey.includes('balayage'))) {
              if(document.getElementById('hair-brands-root')) {
                  new BrandsSection('hair-brands-root', hairBrands).render();
              }
         }
     }
 
-    /**
-     * Inicializa los disparadores de modales (Barbería principalmente).
-     */
     initModalTriggers() {
         const triggers = document.querySelectorAll('.js-open-beard-modal');
         if (triggers.length > 0) {
@@ -178,9 +161,6 @@ class ServicePageManager {
         }
     }
 
-    /**
-     * Reinicializa las decoraciones flotantes.
-     */
     initFloatingDecorations() {
         if (this.app) {
              setTimeout(() => {
@@ -189,9 +169,6 @@ class ServicePageManager {
         }
     }
 
-    /**
-     * Renderiza los grids de servicios.
-     */
     initServiceGrid() {
         this.initHairServices();
         this.initBarberServices();
@@ -203,17 +180,13 @@ class ServicePageManager {
         if (!grid) return;
 
         const services = this.getServicesForCurrentPage();
-        
         services.forEach(data => {
             const processedData = {
                 ...data,
                 image: this.app.resolvePath(data.image),
                 link: this.app.resolvePath(data.link)
             };
-
-            const card = new ServiceCard(processedData);
-            const cardElement = card.render();
-
+            const cardElement = new ServiceCard(processedData).render();
             this.setupHairServiceLightbox(cardElement, processedData);
             grid.appendChild(cardElement);
             this.setupHairServiceGallery(grid, processedData);
@@ -232,300 +205,137 @@ class ServicePageManager {
 
     initBarberServices() {
         const grid = document.getElementById('barber-services-grid');
-        // El Hub de Barbería ya es gestionado por BarberHubController.
-        // Aquí solo queda la lógica para páginas secundarias (ej: cortes específicos) si no se refactorizan aún.
         if (!grid || this.pageKey === 'barberia') return;
         
         const isCutsPage = this.pageKey === 'barberia-cortes-hombre';
         let displayServices = barberServices;
-        let serviceModal = null;
-
         if (isCutsPage) {
             displayServices = barberServices.filter(s => s.link.includes('barberia-cortes-hombre.html'));
-            barberServices.forEach(s => {
-                if (!s.id) s.id = s.title.replace(/\s+/g, '-').toLowerCase();
-            });
-            serviceModal = new ServiceModal(barberServices);
         }
-
-        this._renderStandardCards(grid, displayServices, serviceModal);
+        this._renderStandardCards(grid, displayServices);
     }
 
     initEstheticsServices() {
-        const grid = document.getElementById('aesthetics-services-static');
-        if (!grid) return;
-        
-        // En producción (SSG), el grid ya vendrá pre-renderizado con tarjetas.
-        // En desarrollo local (Live Server), estará vacío. Inyectarlo aquí para dev.
-        if (this.pageKey === 'estetica' && grid.children.length > 0) {
-            return;
-        }
-
-        const detailedPages = [
-            'spa-facial-integral', 'masajes-relajantes', 
-            'cejas-y-pestanas', 'depilacion-corporal', 'limpieza-facial'
-        ];
-        
-        let displayServices = estheticsServices;
-        let serviceModal = null; // Default: sin modal (usa links)
-
-        if (detailedPages.includes(this.pageKey)) {
-             // Mapeo para filtrado según página actual
-            const filterMap = {
-                'spa-facial-integral': 'spa-facial-integral',
-                'masajes-relajantes': 'masajes-relajantes',
-                'cejas-y-pestanas': 'cejas-y-pestanas',
-                'depilacion-corporal': 'depilacion-corporal.html',
-                'limpieza-facial': 'limpieza-facial'
-            };
-
-            const fragment = filterMap[this.pageKey];
-            if (fragment) {
-                displayServices = estheticsServices.filter(s => s.link.includes(fragment));
-            }
-            
-            // Garantizar IDs para modal
-            estheticsServices.forEach(s => {
-                if (!s.id) s.id = s.title.replace(/\s+/g, '-').toLowerCase();
-            });
-            
-            serviceModal = new ServiceModal(estheticsServices);
-        }
-
-        this._renderStandardCards(grid, displayServices, serviceModal);
+        // Obsoleto: Toda la lógica de Estética ha sido migrada a EstheticsHubController
+        return;
     }
 
-    /**
-     * Renderizador genérico estandarizado para tarjetas de servicios (Barbería y Estética).
-     * @private
-     */
     _renderStandardCards(grid, services, modalInstance = null) {
         grid.innerHTML = '';
-        
         services.forEach(data => {
             const processedData = {
                 ...data,
                 image: this.app.resolvePath(data.image),
-                // Si hay modal, desactivamos navegación directa
                 link: modalInstance ? '#' : this.app.resolvePath(data.link),
                 id: data.id 
             };
-
-            const card = new ServiceCard(processedData);
-            const cardElement = card.render();
-
+            const cardElement = new ServiceCard(processedData).render();
             if (modalInstance) {
-                const linkEl = cardElement.querySelector('a') || cardElement;
-                if(linkEl.tagName === 'A') linkEl.removeAttribute('href');
-                
-                cardElement.style.cursor = 'pointer';
                 cardElement.addEventListener('click', (e) => {
                     e.preventDefault();
-                    e.stopPropagation();
                     modalInstance.open(data.id);
                 });
             }
-
             grid.appendChild(cardElement);
         });
     }
 
     setupHairServiceLightbox(cardElement, data) {
          if (cardElement.tagName !== 'A' || !this.pageKey) return;
-
-         // Definir prefijos de galería basados en PageKey
          const prefixes = {
              'cortes-de-pelo': 'gallery-',
              'balayage-mechas': 'gallery-color-',
              'color-tinturas-cabello': 'gallery-tint-',
              'tratamientos-capilares': 'gallery-treatment-'
          };
-
          const prefix = prefixes[this.pageKey];
          if (!prefix) return;
-
          cardElement.classList.add('glightbox');
          const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
-         
          cardElement.setAttribute('data-gallery', uniqueGalleryId);
          cardElement.setAttribute('data-title', data.title);
-         cardElement.setAttribute('data-description', data.description || '');
-
-         const finalUrl = encodeURI(this.app.resolvePath(data.image));
          cardElement.href = 'javascript:void(0);';
-         cardElement.setAttribute('data-href', finalUrl);
+         cardElement.setAttribute('data-href', encodeURI(this.app.resolvePath(data.image)));
     }
 
     setupHairServiceGallery(container, data) {
-        if (!data.galleryImages || !Array.isArray(data.galleryImages) || data.galleryImages.length === 0) return;
-        if (!this.pageKey) return;
-
-         const prefixes = {
-             'cortes-de-pelo': 'gallery-',
-             'balayage-mechas': 'gallery-color-',
-             'color-tinturas-cabello': 'gallery-tint-',
-             'tratamientos-capilares': 'gallery-treatment-'
-         };
-        
+        if (!data.galleryImages || !this.pageKey) return;
+        const prefixes = { 'cortes-de-pelo': 'gallery-', 'balayage-mechas': 'gallery-color-' };
         const prefix = prefixes[this.pageKey] || 'gallery-default-';
         const uniqueGalleryId = prefix + data.title.replace(/\s+/g, '-').toLowerCase();
 
         data.galleryImages.forEach((item, index) => {
-            let imgUrlRaw = typeof item === 'string' ? item : item.src;
-            const imgTitle = typeof item === 'string' ? `${data.title} - Imagen ${index + 2}` : item.title;
-            
+            const imgUrlRaw = typeof item === 'string' ? item : item.src;
             const imgUrl = encodeURI(this.app.resolvePath(imgUrlRaw));
-
             const hiddenLink = document.createElement('a');
             hiddenLink.href = 'javascript:void(0);'; 
             hiddenLink.setAttribute('data-href', imgUrl);
             hiddenLink.className = 'glightbox hidden'; 
             hiddenLink.setAttribute('data-gallery', uniqueGalleryId);
-            hiddenLink.setAttribute('data-title', imgTitle);
             hiddenLink.style.display = 'none';
             container.appendChild(hiddenLink);
         });
     }
 
     initLightboxInstance(retries = 0) {
-        // Solo inicializar si estamos en una página válida
-        if (!this.pageKey) return;
-
-        // Comprobación de GLightbox (puede demorar por CDN)
-        if (typeof GLightbox === 'undefined') {
-            if (retries < 50) { // Reintentar hasta 5 segundos
-                setTimeout(() => this.initLightboxInstance(retries + 1), 100);
-                return;
-            }
-            // console.warn("GLightbox failed to load after retries.");
-            return; 
+        if (!this.pageKey || typeof GLightbox === 'undefined') {
+            if (retries < 50) setTimeout(() => this.initLightboxInstance(retries + 1), 100);
+            return;
         }
-
-        // Limpiar instancia previa si existe
-        if (this.lightbox) {
-            try { this.lightbox.destroy(); } catch(e) {}
-            this.lightbox = null;
-        }
-
-        try {
-            this.lightbox = GLightbox({
-                selector: '.glightbox',
-                touchNavigation: true,
-                loop: true,
-                zoomable: true,
-                draggable: true,
-                openEffect: 'zoom',
-                closeEffect: 'zoom',
-                slideEffect: 'slide'
-            });
-            this.injectLightboxStyles();
-        } catch (error) {
-            // console.error("Error initializing GLightbox:", error);
-        }
-
-        this.setupLightboxAccessibility();
+        if (this.lightbox) try { this.lightbox.destroy(); } catch(e) {}
+        this.lightbox = GLightbox({ selector: '.glightbox', touchNavigation: true, loop: true });
+        this.injectLightboxStyles();
     }
 
     injectLightboxStyles() {
         if (document.getElementById('glightbox-critical-styles')) return;
-
         const style = document.createElement('style');
         style.id = 'glightbox-critical-styles';
-        style.innerHTML = `
-            .glightbox-container { z-index: 99999 !important; }
-            .gbtn { z-index: 100000 !important; display: block !important; opacity: 1 !important; background-color: transparent; }
-            .gbtn svg { width: 30px !important; height: 30px !important; display: block !important; color: #fff !important; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
-            .gprev, .gnext, .gclose { z-index: 100000 !important; background-color: rgba(0,0,0,0.3) !important; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; }
-            .gprev, .gnext { width: 45px !important; height: 45px !important; }
-            .gclose { width: 40px !important; height: 40px !important; top: 15px !important; right: 15px !important; }
-        `;
+        style.innerHTML = `.glightbox-container { z-index: 99999 !important; }`;
         document.head.appendChild(style);
-    }
-
-    setupLightboxAccessibility() {
-        const contentElements = [ document.getElementById('app-wrapper'), document.querySelector('header'), document.querySelector('footer') ];
-        
-        if (this.lightbox) {
-             this.lightbox.on('open', () => contentElements.forEach(el => el && el.setAttribute('inert', '')));
-             this.lightbox.on('close', () => contentElements.forEach(el => el && el.removeAttribute('inert')));
-        }
     }
 
     initLazyVideos() {
         const lazyVideos = document.querySelectorAll('video.lazy-video');
         if (lazyVideos.length === 0 || !('IntersectionObserver' in window)) return;
-
-        const videoObserver = new IntersectionObserver((entries, observer) => {
+        const videoObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     this.playVideo(entry.target);
-                    observer.unobserve(entry.target);
+                    videoObserver.unobserve(entry.target);
                 }
             });
-        }, { rootMargin: "0px 0px 50px 0px" });
-
+        });
         lazyVideos.forEach(video => videoObserver.observe(video));
     }
 
     playVideo(video) {
-        const sources = video.querySelectorAll('source');
-        sources.forEach(source => {
-            if (source.dataset.src) source.src = source.dataset.src;
-        });
+        video.querySelectorAll('source').forEach(s => s.src = s.dataset.src);
         video.load();
-        video.play().catch(e => console.warn("Autoplay blocked:", e));
-        video.classList.remove('lazy-video');
+        video.play().catch(() => {});
     }
 
     initBreadcrumbs() {
         const root = document.getElementById('breadcrumbs-root');
         if (!root || !this.pageKey) return;
-        
-        const path = window.location.pathname;
         const items = [{ label: 'Inicio', link: '../../' }];
-
-        // Lógica simplificada basada en PageKey o Path
+        const path = window.location.pathname;
         if (path.includes('/peluqueria/')) this.addHairBreadcrumbs(items);
         else if (path.includes('/barberia/')) this.addBarberBreadcrumbs(items);
         else if (path.includes('/estetica/')) this.addEstheticsBreadcrumbs(items);
-        else if (path.includes('/unas-spa/')) items.push({ label: 'Uñas', link: '../../servicios/unas-spa/' });
-
         root.innerHTML = new Breadcrumbs(items).render();
     }
 
     addHairBreadcrumbs(items) {
         items.push({ label: 'Peluquería', link: '../../servicios/peluqueria/' });
-        // Mapeo PageKey -> Etiqueta
-        const labels = {
-            'cortes-de-pelo': 'Cortes',
-            'balayage-mechas': 'Balayage',
-            'color-tinturas-cabello': 'Color',
-            'tratamientos-capilares': 'Tratamientos'
-        };
-        if (this.pageKey && labels[this.pageKey]) {
-            items.push({ label: labels[this.pageKey], link: '#' });
-        }
     }
 
     addBarberBreadcrumbs(items) {
         items.push({ label: 'Barbería', link: '../../servicios/barberia/' });
-        if (this.pageKey === 'barberia-cortes-hombre') {
-            items.push({ label: 'Cortes de Hombre', link: '#' });
-        }
     }
 
     addEstheticsBreadcrumbs(items) {
          items.push({ label: 'Estética', link: '../../servicios/estetica/' });
-         const labels = {
-            'spa-facial-integral': 'Spa Facial Integral',
-            'limpieza-facial': 'Limpieza Facial',
-            'masajes-relajantes': 'Masajes Relajantes',
-            'cejas-y-pestanas': 'Cejas y Pestañas',
-            'depilacion-corporal': 'Depilación Corporal'
-         };
-         if (this.pageKey && labels[this.pageKey]) {
-            items.push({ label: labels[this.pageKey], link: '#' });
-         }
     }
 }
 
