@@ -565,9 +565,9 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp', // Generic beauty image
-                title: "Rostro Armónico",
-                alt: "Belleza facial integral"
+                src: '/images/pages/estetica/depilacion-hilo-facial-estetica-chia.webp', 
+                title: "Depilación con Hilo",
+                alt: "Técnica milenaria de depilación con hilo para una definición perfecta de cejas"
             },
             {
                 type: 'image',
