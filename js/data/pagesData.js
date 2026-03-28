@@ -103,25 +103,25 @@ export const pagesData = Object.freeze({
          hero: {
             title: "Barbería exclusiva <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "El espacio que mereces para cuidar tu imagen.",
-            imageSrc: "images/pages/barberia/barberia-salon-de-belleza-spa-chia.webp",
-            imageAlt: "Interior de Narbo's Barbería - Salon de Belleza y Spa en Chía"
+            imageSrc: "images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp",
+            imageAlt: "Interior de Narbo's Barbería - Salon de Belleza y Spa Premium en Chía"
         },
         gallery: [
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '/images/pages/barberia/barberia-salon-de-belleza-spa-chia.webp',
+                src: '/images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp',
                 title: "Ambiente Premium",
                 subtitle: "Comodidad y Estilo",
-                alt: "Vista interior de la barbería Narbo's Salon Spa en Chía"
+                alt: "Ambiente exclusivo en Narbo's Barbería Chía: el espacio que mereces"
             },
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '/images/pages/barberia/cortes-de-cabello-hombre-peluqueria-chia.webp',
+                src: '/images/pages/barberia/corte-cabello-caballero-profesional-chia.webp',
                 title: "Cortes de Tendencia",
                 subtitle: "Estilo Masculino",
-                alt: "Corte de cabello para hombre realizado en Narbo's Barbería"
+                alt: "Corte de cabello caballero profesional con técnica moderna en Chía"
             },
             {
                 type: 'image',
