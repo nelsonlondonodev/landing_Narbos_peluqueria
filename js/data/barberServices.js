@@ -30,8 +30,8 @@ export const barberServices = Object.freeze([
         description: "La experiencia completa: Corte de cabello y perfilado de barba con toalla caliente.",
         price: masterPrices.barber.corteBarba,
         link: "servicios/barberia/barberia-cortes-hombre.html",
-        image: "../../images/brand/logo_narbos.webp",
-        variant: "logo"
+        image: "../../images/pages/barberia/corte-barba-tendencia-barberia.webp",
+        variant: "standard"
     },
     {
         id: 'arreglo-barba',
