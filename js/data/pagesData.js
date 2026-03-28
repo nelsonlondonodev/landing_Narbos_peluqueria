@@ -145,6 +145,14 @@ export const pagesData = Object.freeze({
                 src: '../../images/pages/barberia/corte-barba-tendencia-barberia.webp',
                 title: "Diseño de Barba",
                 alt: "Perfilado y diseño de barba con técnica profesional"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '/images/pages/barberia/barbero-profesional-trabajando-narbos-chia.webp',
+                title: "Pasión por el detalle",
+                subtitle: "Servicio Experto",
+                alt: "Barbero profesional en plena acción realizando un corte clásico en Narbo's Barbería Chía"
             }
         ]
     },
