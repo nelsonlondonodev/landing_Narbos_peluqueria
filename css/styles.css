@@ -4168,6 +4168,21 @@ body.modal-open-layer-fix .site-header, body.modal-open-layer-fix #app-wrapper {
 .animate-spin {
   animation: spin 1s linear infinite;
 }
+.marquee-track {
+  animation: marquee-scroll 40s linear infinite;
+  width: max-content;
+}
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 1.5rem));
+  }
+}
+.hover\:pause-animation:hover {
+  animation-play-state: paused;
+}
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;

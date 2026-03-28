@@ -751,3 +751,25 @@ body.modal-open-layer-fix #app-wrapper {
     animation: spin 1s linear infinite;
 }
 /* --- FIN: ESTILOS PROGRAMA DE FIDELIZACIÓN --- */
+
+/* --- INICIO: SECCIÓN MARQUEE INFINITO --- */
+/* Infinite Marquee Animation Logic */
+.marquee-track {
+    animation: marquee-scroll 40s linear infinite;
+    width: max-content;
+}
+
+@keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 1.5rem)); } /* Moves half the width (original content) plus half gap */
+    /* Calculation assumes "original content width" is roughly 50% of the total track width due to duplication.
+       Actually, for perfect looping, translation should be exactly - (width of one set of items + gaps).
+       With 6 items + 6 clones, we shift by the width of the first 6 items. 
+    */
+}
+
+/* Pause on Hover */
+.hover\:pause-animation:hover {
+    animation-play-state: paused;
+}
+/* --- FIN: SECCIÓN MARQUEE INFINITO --- */
