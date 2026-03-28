@@ -21,7 +21,7 @@ export const barberServices = Object.freeze([
         description: "Asesoría de imagen y corte (clásico o fade) con lavado y peinado.",
         price: masterPrices.barber.corte || '$35.000', // Fallback if not in masterPrices
         link: "servicios/barberia/barberia-cortes-hombre.html",
-        image: "../../images/pages/barberia/barber-hero.webp",
+        image: "../../images/pages/barberia/barbero-profesional-trabajando-narbos-chia.webp",
         variant: "standard"
     },
     {
@@ -48,8 +48,8 @@ export const barberServices = Object.freeze([
         description: "Matización sutil de canas para un look rejuvenecido y natural.",
         price: '$50.000', // Estimated
         link: "servicios/barberia/barberia-cortes-hombre.html",
-        image: "../../images/pages/barberia/barber-hero.webp",
-        variant: "standard"
+        image: "../../images/brand/logo_narbos.webp",
+        variant: "logo"
     },
     {
         id: 'barberia-infantil',
@@ -57,7 +57,7 @@ export const barberServices = Object.freeze([
         description: "Cortes modernos y clásicos para niños con paciencia y estilo.",
         price: '$30.000', // Estimated
         link: "servicios/barberia/barberia-cortes-hombre.html",
-        image: "../../images/pages/barberia/barber-hero.webp",
-        variant: "standard"
+        image: "../../images/brand/logo_narbos.webp",
+        variant: "logo"
     }
 ]);
