@@ -15,6 +15,7 @@ import { ServiceModal } from './components/ServiceModal.js';
 import { BarberHubController } from './controllers/BarberHubController.js';
 import { EstheticsHubController } from './controllers/EstheticsHubController.js';
 import { HairHubController } from './controllers/HairHubController.js';
+import { NailsHubController } from './controllers/NailsHubController.js';
 
 /**
  * Gestor de la Página de Servicios.
@@ -76,6 +77,15 @@ class ServicePageManager {
             return;
         }
 
+        // Controlador de Uñas (Hub y Subpáginas)
+        const nailsPages = [
+            'unas-spa', 'unas-acrilicas-gel', 'manicure-pedicure'
+        ];
+        if (nailsPages.includes(this.pageKey)) {
+            new NailsHubController(this.app, this.pageKey).init();
+            return;
+        }
+
         // --- Legado (Pendiente de refactorizar) ---
         this.initServiceGrid();
         this.initBentoGallery();
@@ -113,8 +123,12 @@ class ServicePageManager {
         if (path.includes('barberia-cortes-hombre')) return 'barberia-cortes-hombre';
         if (path.includes('barberia')) return 'barberia';
 
-        // Generales
+        // Uñas y Spa
+        if (path.includes('unas-acrilicas-gel')) return 'unas-acrilicas-gel';
+        if (path.includes('manicure-pedicure')) return 'manicure-pedicure';
         if (path.includes('unas-spa')) return 'unas-spa'; 
+
+        // Generales
         if (path.includes('nosotros')) return 'nosotros';
         if (path.includes('contacto')) return 'contacto';
         if (path.includes('peluqueria')) return 'peluqueria';
@@ -267,6 +281,7 @@ class ServicePageManager {
         if (path.includes('/peluqueria/')) this.addHairBreadcrumbs(items);
         else if (path.includes('/barberia/')) this.addBarberBreadcrumbs(items);
         else if (path.includes('/estetica/')) this.addEstheticsBreadcrumbs(items);
+        else if (path.includes('/unas-spa/')) this.addNailsBreadcrumbs(items);
         root.innerHTML = new Breadcrumbs(items).render();
     }
 
@@ -280,6 +295,10 @@ class ServicePageManager {
 
     addEstheticsBreadcrumbs(items) {
          items.push({ label: 'Estética', link: '../../servicios/estetica/' });
+    }
+
+    addNailsBreadcrumbs(items) {
+         items.push({ label: 'Uñas y Spa', link: '../../servicios/unas-spa/' });
     }
 }
 
