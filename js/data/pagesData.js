@@ -571,7 +571,7 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'logo-card',
-                layout: 'square',
+                layout: 'logo-filler',
                 src: '/images/brand/logo_narbos.webp',
                 title: "Narbo's Excellence",
                 alt: "Sello de calidad Narbo's Salon"
@@ -586,7 +586,7 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'logo-card',
-                layout: 'square',
+                layout: 'logo-filler',
                 src: '/images/brand/logo_narbos.webp',
                 title: "Cuidado Experto",
                 alt: "Branding Narbo's Salon Spa"
