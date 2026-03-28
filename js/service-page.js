@@ -16,8 +16,8 @@ import { colorStyles } from './data/colorStyles.js';
 import { tintStyles } from './data/tintStyles.js';
 import { treatmentStyles } from './data/treatmentStyles.js';
 import { estheticsServices } from './data/estheticsServices.js'; 
-import { ModalController } from './controllers/ModalController.js'; 
 import { ServiceModal } from './components/ServiceModal.js'; 
+import { BarberHubController } from './controllers/BarberHubController.js';
 
 /**
  * Gestor de la Página de Servicios.
@@ -35,19 +35,34 @@ class ServicePageManager {
         this.initApp();
         this.pageKey = this.getPageKey();
         
-        // Inicializar componentes
-        // this.initHero(); // Handled by App.js 
-        this.initFloatingDecorations(); // Restaurar decoraciones tras renderizar Hero
-        this.initServiceGrid();
+        // --- Dispatcher Anatómico ---
+        this.initControllers();
+        
+        // --- Componentes Globales de Página ---
+        this.initFloatingDecorations(); 
         this.initBrands(); 
-        this.initBentoGallery();
-        
         this.initLazyVideos();
-        this.initModalTriggers();
         this.initBreadcrumbs();
-        
-        // Lightbox necesita esperar a que el contenido (grids/galerías) exista
         this.initLightboxInstance(); 
+    }
+
+    /**
+     * Instancia controladores específicos según la página actual.
+     * @private
+     */
+    initControllers() {
+        if (!this.pageKey) return;
+
+        // Controlador de Barbería (Hub)
+        if (this.pageKey === 'barberia') {
+            new BarberHubController(this.app).init();
+            return;
+        }
+
+        // --- Legado (Pendiente de refactorizar igual que Barbería) ---
+        this.initServiceGrid();
+        this.initBentoGallery();
+        this.initModalTriggers();
     }
 
     initApp() {
@@ -151,23 +166,23 @@ class ServicePageManager {
                 trigger.addEventListener('click', (e) => {
                     e.preventDefault();
                     if (!modalControllerInstance) {
-                        modalControllerInstance = new ModalController();
+                        import('./controllers/ModalController.js').then(m => {
+                            modalControllerInstance = new m.ModalController();
+                            modalControllerInstance.openModal('beard-modal');
+                        });
+                    } else {
+                        modalControllerInstance.openModal('beard-modal');
                     }
-                    modalControllerInstance.openModal('beard-modal');
                 });
             });
         }
-
+    }
 
     /**
      * Reinicializa las decoraciones flotantes.
-     * Necesario porque initHero() sobrescribe el HTML donde App.js las inyectó.
      */
-    }
-
     initFloatingDecorations() {
         if (this.app) {
-             // Pequeño delay para asegurar que el DOM se pintó
              setTimeout(() => {
                 new FloatingDecorations({ basePath: this.app.appRoot });
              }, 50);
@@ -199,12 +214,8 @@ class ServicePageManager {
             const card = new ServiceCard(processedData);
             const cardElement = card.render();
 
-            // Configurar Lightbox para esta tarjeta
             this.setupHairServiceLightbox(cardElement, processedData);
-            
             grid.appendChild(cardElement);
-
-            // Galería oculta para Lightbox
             this.setupHairServiceGallery(grid, processedData);
         });
     }
@@ -221,22 +232,19 @@ class ServicePageManager {
 
     initBarberServices() {
         const grid = document.getElementById('barber-services-grid');
-        if (!grid) return;
+        // El Hub de Barbería ya es gestionado por BarberHubController.
+        // Aquí solo queda la lógica para páginas secundarias (ej: cortes específicos) si no se refactorizan aún.
+        if (!grid || this.pageKey === 'barberia') return;
         
         const isCutsPage = this.pageKey === 'barberia-cortes-hombre';
-        
         let displayServices = barberServices;
         let serviceModal = null;
 
         if (isCutsPage) {
-            // Filtrar servicios específicos para esta página
             displayServices = barberServices.filter(s => s.link.includes('barberia-cortes-hombre.html'));
-            
-            // Garantizar IDs para el modal de detalles
             barberServices.forEach(s => {
                 if (!s.id) s.id = s.title.replace(/\s+/g, '-').toLowerCase();
             });
-
             serviceModal = new ServiceModal(barberServices);
         }
 
