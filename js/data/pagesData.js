@@ -145,47 +145,6 @@ export const pagesData = Object.freeze({
                 src: '../../images/pages/barberia/corte-barba-tendencia-barberia.webp',
                 title: "Diseño de Barba",
                 alt: "Perfilado y diseño de barba con técnica profesional"
-            },
-            {
-                type: 'logo-card',
-                layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Barbería Clásica",
-                alt: "Marca Narbo's Barbería Clásica"
-            },
-            {
-                type: 'logo-card',
-                layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Confianza",
-                alt: "Logo Narbos"
-            },
-            {
-                type: 'logo-card',
-                layout: 'horizontal',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Profesionalismo",
-                alt: "Logo marca"
-            },
-            {
-                type: 'logo-card',
-                layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Bienestar",
-                alt: "Logo Spa"
-            },
-            {
-                type: 'logo-card',
-                layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
-                alt: "Logo"
-            },
-            {
-                type: 'logo-card',
-                layout: 'vertical',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Innovación",
-                alt: "Logo vertical"
             }
         ]
     },
