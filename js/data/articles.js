@@ -20,8 +20,8 @@
 const articles = [
     {
         id: 'cabello-sabana-rubios-caida-estacional',
-        date: '28 de marzo de 2026',
-        isoDate: '2026-03-28',
+        date: '30 de marzo de 2026',
+        isoDate: '2026-03-30',
         category: 'Cuidado capilar',
         title: 'Cabello en la Sabana: rubios y caída estacional',
         description: "¿Por qué el rubio se oxida en Chía? ¿Es normal la caída del cabello en Bogotá? Descubre la realidad del cuidado capilar en la altura con Narbo's Salón.",
