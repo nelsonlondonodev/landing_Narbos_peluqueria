@@ -74,12 +74,23 @@ function renderAddress() {
  */
 function renderCopyright(year) {
     return `
-        © ${year} Narbo's Salón Spa.
-        <span class="block sm:inline sm:ml-1 mt-2 sm:mt-0 opacity-80 text-xs sm:text-sm">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-2 opacity-80 text-xs sm:text-sm">
+            <span>© ${year} Narbo's Salón Spa.</span>
+            <span class="hidden sm:inline text-brand-light/30">|</span>
+            ${renderVersionTag()}
+        </div>
+        <span class="block mt-2 opacity-70 text-xs text-brand-light/90">
             Hecho con ❤️ por 
             <a href="https://nelsonlondono.es" target="_blank" rel="noopener noreferrer" class="font-medium underline hover:text-white transition-colors duration-200 decoration-brand-gold/50 hover:decoration-white">
                 Nelson Londoño - Marketing y Automatización
             </a>
         </span>
     `;
+}
+/**
+ * Renderiza el distintivo de versión del proyecto.
+ * @returns {string} HTML del badge de versión.
+ */
+function renderVersionTag() {
+    return `<span class="text-brand-light/50 font-mono text-[10px]" title="Versión del Proyecto">v${siteConfig.version}</span>`;
 }

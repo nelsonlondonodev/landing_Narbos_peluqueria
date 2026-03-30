@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Blog - Narbo's Salón Spa | Consejos de Belleza en Chía</title>
-    <link rel="stylesheet" href="../css/styles.css?v=2.1" />
+    <link rel="stylesheet" href="../css/styles.css?v=2.1.5" />
     <link rel="icon" type="image/webp" href="../images/brand/favicon_narbos.webp" />
     <meta
       id="meta-description"
@@ -55,12 +55,36 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "WebPage",
+          "@id": "https://narbossalon.com/blog/#webpage",
+          "url": "https://narbossalon.com/blog/",
+          "name": "Blog - Narbo's Salón Spa | Consejos de Belleza en Chía",
+          "isPartOf": { "@id": "https://narbossalon.com/#website" },
+          "description": "Bienvenido al blog de Narbo's Salón Spa. Encuentra consejos de belleza, tendencias en balayage, uñas y cuidado personal para lucir radiante en Chía.",
+          "breadcrumb": { "@id": "https://narbossalon.com/blog/#breadcrumb" },
+          "inLanguage": "es"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://narbossalon.com/blog/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://narbossalon.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog"
+            }
+          ]
+        },
+        {
           "@type": "Blog",
           "@id": "https://narbossalon.com/blog/#blog",
-          "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://narbossalon.com/blog/"
-          },
+          "mainEntityOfPage": "https://narbossalon.com/blog/",
           "headline": "Blog de Narbo's Salón Spa",
           "description": "Consejos, tendencias y secretos de belleza de nuestros expertos en Chía.",
           "url": "https://narbossalon.com/blog/",
@@ -75,6 +99,14 @@
           "blogPost": [
             {
               "@type": "BlogPosting",
+              "headline": "Cabello en la Sabana: rubios y caída estacional",
+              "url": "https://narbossalon.com/blog/articles/cabello-sabana-rubios-caida-estacional.html",
+              "datePublished": "2026-03-30",
+              "image": "https://narbossalon.com/images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
+              "description": "¿Por qué el rubio se oxida en Chía? ¿Es normal la caída del cabello en Bogotá? Descubre la realidad del cuidado capilar en la altura con Narbo's Salón."
+            },
+            {
+              "@type": "BlogPosting",
               "headline": "Mitos capilares: keratinas, champú sin sal y el agua de la Sabana",
               "url": "https://narbossalon.com/blog/articles/mitos-capilares-keratina-champu-sin-sal-agua-sabana.html",
               "datePublished": "2026-03-18",
@@ -87,28 +119,79 @@
               "url": "https://narbossalon.com/blog/articles/balayage-correccion-color-chia.html",
               "datePublished": "2026-03-10",
               "image": "https://narbossalon.com/blog/articles/images/balayage-correccion-narbos.webp",
-              "description": "Descubre increíbles antes y después de balayage y corrección de color en Chía. Resultados reales en Narbos Salón Spa. ¡Agenda tu diagnóstico!"
+              "description": "Descubre increíbles antes y después de balayage y corrección de color en Chía. Resultados reales en Narbos Salón Spa."
             },
             {
               "@type": "BlogPosting",
               "headline": "Maquillaje en Chía para novias: cronograma de belleza",
               "url": "https://narbossalon.com/blog/articles/guia-novias-belleza-perfecta-chia.html",
               "datePublished": "2026-02-28",
-              "image": "https://narbossalon.com/blog/articles/images/maquillaje-novias-cronograma-belleza-narbos.webp"
+              "image": "https://narbossalon.com/blog/articles/images/maquillaje-novias-cronograma-belleza-narbos.webp",
+              "description": "¿Te casas? Descubre el cronograma definitivo de belleza para novias. El mejor maquillaje en Chía, spa y peinados tendencia."
             },
             {
               "@type": "BlogPosting",
               "headline": "Guía de relajación: los mejores masajes y servicios de spa en Chía y Cajicá",
               "url": "https://narbossalon.com/blog/articles/guia-relajacion-masajes-spa-chia-cajica.html",
               "datePublished": "2026-02-18",
-              "image": "https://narbossalon.com/images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp"
+              "image": "https://narbossalon.com/images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp",
+              "description": "Relájate con los mejores masajes y spa en Chía y Cajicá. Narbo's Salon: bienestar experto y relajación total."
             },
             {
               "@type": "BlogPosting",
               "headline": "¿Cortar el cabello lo hace crecer más rápido? La verdad | Narbo's",
               "url": "https://narbossalon.com/blog/articles/cortar-cabello-crecimiento-rapido-mitos-chia.html",
               "datePublished": "2026-02-10",
-              "image": "https://narbossalon.com/images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp"
+              "image": "https://narbossalon.com/images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp",
+              "description": "Descubre si cortar el cabello realmente acelera su crecimiento. Mitos, realidades y consejos expertos para cuidar tu melena en Chía."
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Choque térmico: protege tu cabello en tus viajes | Narbo's",
+              "url": "https://narbossalon.com/blog/articles/choque-termico-cabello-viajes-tierra-caliente.html",
+              "datePublished": "2026-01-30",
+              "image": "https://narbossalon.com/blog/articles/images/choque-termico-moroccanoil.webp",
+              "description": "Protege tu cabello del choque térmico al viajar con consejos de Narbo's Salón Spa. Evita el daño por sol y cloro."
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Tendencias de cabello 2026 en Chía: cortes, color y estilo",
+              "url": "https://narbossalon.com/blog/articles/tendencias-cabello-2026.html",
+              "datePublished": "2025-12-26",
+              "image": "https://narbossalon.com/blog/articles/images/balayage-honey-glow-tendencia-2026-chia-narbos.webp",
+              "description": "Descubre las tendencias de cabello 2026: Lujo silencioso, Rich Hair y el regreso del volumen en Narbo's Salón Spa."
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Brilla esta Navidad: tendencias de belleza para cerrar el año en Chía",
+              "url": "https://narbossalon.com/blog/articles/tendencias-diciembre-2025.html",
+              "datePublished": "2025-12-10",
+              "image": "https://narbossalon.com/blog/articles/images/foto-collage-narbos-salon-spa.webp",
+              "description": "Descubre las últimas tendencias en balayage, uñas y spa para lucir espectacular en las celebraciones de fin de año en Chía."
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Guía definitiva para el cuidado del balayage: mantén tu color radiante ✨",
+              "url": "https://narbossalon.com/blog/articles/cuidado-del-balayage.html",
+              "datePublished": "2025-11-29",
+              "image": "https://narbossalon.com/blog/articles/images/imagen-articulo-balayage.webp",
+              "description": "Aprende a proteger tu balayage con los productos y rutinas correctas para que luzca espectacular por más tiempo en Chía."
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Narbo’s Salón Spa: tu epicentro de belleza en Chía, a un paso de Cajicá 🌟",
+              "url": "https://narbossalon.com/blog/articles/salon-de-belleza-y-spa-en-chia-cerca-de-cajica.html",
+              "datePublished": "2025-11-11",
+              "image": "https://narbossalon.com/images/blog/foto_fachada.webp",
+              "description": "Descubre por qué Narbo's es la mejor opción para tus necesidades de belleza en la Sabana de Bogotá."
+            },
+            {
+              "@type": "BlogPosting",
+              "headline": "Los 5 tratamientos capilares imprescindibles para el clima de Chía",
+              "url": "https://narbossalon.com/blog/articles/tratamientos-capilares-clima-chia.html",
+              "datePublished": "2025-10-20",
+              "image": "https://narbossalon.com/blog/articles/images/image_blog_1.webp",
+              "description": "Descubre los tratamientos esenciales que ofrecemos en Narbo's para mantener tu cabello radiante en el clima de la Sabana."
             }
           ]
         },
@@ -175,347 +258,61 @@
             data-animation="zoomIn"
             data-animation-delay="0.2s"
           >
-            <!-- ARTICLES_START -->
-                <!-- Artículo: mitos-capilares-keratina-champu-sin-sal-agua-sabana -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/mitos-capilares-keratina-champu-sin-sal-agua-sabana.html" aria-label="Leer artículo: Mitos: keratinas, champú sin sal y agua de la Sabana">
-                    <img
-                      src="/images/pages/peluqueria/lavado-cabello-spa-capilar-narbos-salon-chia.webp"
-                      alt="Lavado profesional y spa capilar en Narbo's Salón Spa Chía, ideal para tratar el impacto del agua dura y minerales de la Sabana"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Cuidado capilar • 18 de marzo de 2026
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/mitos-capilares-keratina-champu-sin-sal-agua-sabana.html" class="hover:text-brand-green">Mitos: keratinas, champú sin sal y agua de la Sabana</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">Análisis objetivo sobre alisados, champú sin sal y el impacto del agua dura de Chía en tu cabello. Información técnica por expertos de Narbo's Salón Spa.</p>
-                    <a
-                      href="/blog/articles/mitos-capilares-keratina-champu-sin-sal-agua-sabana.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre Mitos: keratinas, champú sin sal y agua de la Sabana"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Artículo: balayage-correccion-color-chia -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/balayage-correccion-color-chia.html" aria-label="Leer artículo: Balayage y Corrección de Color en Chía: Transformaciones Reales">
-                    <img
-                      src="/blog/articles/images/balayage-correccion-narbos.webp"
-                      alt="Transformación real de balayage y corrección de color en las instalaciones de Narbo's Salón Spa Chía"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Balayage y Color • 10 de marzo de 2026
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/balayage-correccion-color-chia.html" class="hover:text-brand-green">Balayage y Corrección de Color en Chía: Transformaciones Reales</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">Descubre increíbles antes y después de Balayage y corrección de color en Chía. Resultados reales por expertos en Narbo's Salón Spa. ¡Agenda tu diagnóstico!</p>
-                    <a
-                      href="/blog/articles/balayage-correccion-color-chia.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre Balayage y Corrección de Color en Chía: Transformaciones Reales"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Artículo: guia-novias-belleza-perfecta-chia -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/guia-novias-belleza-perfecta-chia.html" aria-label="Leer artículo: Maquillaje en Chía para Novias: Cronograma de Belleza">
-                    <img
-                      src="articles/images/maquillaje-novias-cronograma-belleza-narbos.webp"
-                      alt="maquillaje-de-novia-profesional-en-chia-narbon-salon"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Novias y Eventos • 28 de febrero de 2026
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/guia-novias-belleza-perfecta-chia.html" class="hover:text-brand-green">Maquillaje en Chía para Novias: Cronograma de Belleza</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">¿Te casas? Descubre el cronograma definitivo de belleza para novias. El mejor maquillaje en Chía, spa y peinados tendencia en Narbo's Salón Spa.</p>
-                    <a
-                      href="/blog/articles/guia-novias-belleza-perfecta-chia.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre Maquillaje en Chía para Novias: Cronograma de Belleza"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Artículo: guia-relajacion-masajes-spa-chia-cajica -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/guia-relajacion-masajes-spa-chia-cajica.html" aria-label="Leer artículo: Guía de relajación: los mejores masajes y servicios de spa en Chía y Cajicá">
-                    <img
-                      src="/images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp"
-                      alt="Masaje relajante con piedras calientes en Narbo's Salon Spa Chía"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Bienestar y spa • 18 de febrero de 2026
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/guia-relajacion-masajes-spa-chia-cajica.html" class="hover:text-brand-green">Guía de relajación: los mejores masajes y servicios de spa en Chía y Cajicá</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">Relájate con los mejores masajes y spa en Chía y Cajicá. Narbo's Salon: bienestar experto y relajación total. ¡Agenda tu cita hoy!</p>
-                    <a
-                      href="/blog/articles/guia-relajacion-masajes-spa-chia-cajica.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre Guía de relajación: los mejores masajes y servicios de spa en Chía y Cajicá"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Artículo: cortar-cabello-crecimiento-rapido-mitos-chia -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/cortar-cabello-crecimiento-rapido-mitos-chia.html" aria-label="Leer artículo: ¿Cortar el cabello hace que crezca más rápido? La verdad detrás de las tijeras en Chía">
-                    <img
-                      src="/images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp"
-                      alt="Diseño de corte profesional para dama realizado en Narbo's Salón Spa Chía"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Cuidado Capilar • 10 de febrero de 2026
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/cortar-cabello-crecimiento-rapido-mitos-chia.html" class="hover:text-brand-green">¿Cortar el cabello hace que crezca más rápido? La verdad detrás de las tijeras en Chía</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">Descubre si cortar el cabello realmente acelera su crecimiento. Mitos, realidades y consejos expertos para cuidar tu melena en el clima de Chía.</p>
-                    <a
-                      href="/blog/articles/cortar-cabello-crecimiento-rapido-mitos-chia.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre ¿Cortar el cabello hace que crezca más rápido? La verdad detrás de las tijeras en Chía"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Artículo: choque-termico-cabello-viajes-tierra-caliente -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/choque-termico-cabello-viajes-tierra-caliente.html" aria-label="Leer artículo: Choque térmico: protege tu cabello en tus viajes | Narbo's">
-                    <img
-                      src="articles/images/choque-termico-moroccanoil.webp"
-                      alt="Protección capilar para viajes entre climas de la Sabana y Tierra Caliente"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Cuidado capilar • 30 de enero de 2026
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/choque-termico-cabello-viajes-tierra-caliente.html" class="hover:text-brand-green">Choque térmico: protege tu cabello en tus viajes | Narbo's</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">Protege tu cabello del choque térmico al viajar con consejos de Narbo's Salón Spa. Evita el daño por sol y cloro y mantén tu brillo ideal.</p>
-                    <a
-                      href="/blog/articles/choque-termico-cabello-viajes-tierra-caliente.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre Choque térmico: protege tu cabello en tus viajes | Narbo's"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Artículo: tendencias-cabello-2026 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/tendencias-cabello-2026.html" aria-label="Leer artículo: Tendencias de cabello 2026 en Chía: cortes, color y estilo">
-                    <img
-                      src="articles/images/balayage-honey-glow-tendencia-2026-chia-narbos.webp"
-                      alt="Tendencias de cabello 2026: Cortes, color y estilo en Narbo's Salón Spa"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Tendencias • 26 de diciembre de 2025
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/tendencias-cabello-2026.html" class="hover:text-brand-green">Tendencias de cabello 2026 en Chía: cortes, color y estilo</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">Descubre las tendencias de cabello 2026: Lujo silencioso, Rich Hair y el regreso del volumen. ¡Agenda tu cita en Narbo's Salón Spa y adelántate al estilo!</p>
-                    <a
-                      href="/blog/articles/tendencias-cabello-2026.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre Tendencias de cabello 2026 en Chía: cortes, color y estilo"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Artículo: tendencias-diciembre-2025 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/tendencias-diciembre-2025.html" aria-label="Leer artículo: Brilla esta Navidad: tendencias de belleza para cerrar el año en Chía">
-                    <img
-                      src="articles/images/foto-collage-narbos-salon-spa.webp"
-                      alt="Tendencias de belleza para fin de año en Chía"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Belleza y tendencias • 10 Diciembre 2025
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/tendencias-diciembre-2025.html" class="hover:text-brand-green">Brilla esta Navidad: tendencias de belleza para cerrar el año en Chía</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">Descubre las últimas tendencias en balayage, uñas y spa para lucir espectacular en las celebraciones de fin de año en Narbo's Salón Spa.</p>
-                    <a
-                      href="/blog/articles/tendencias-diciembre-2025.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre Brilla esta Navidad: tendencias de belleza para cerrar el año en Chía"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Artículo: cuidado-del-balayage -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/cuidado-del-balayage.html" aria-label="Leer artículo: Guía definitiva para el cuidado del balayage: mantén tu color radiante ✨">
-                    <img
-                      src="articles/images/imagen-articulo-balayage.webp"
-                      alt="Resultados profesionales de balayage en Narbo's Salón Spa"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Cuidado capilar • 29 de Noviembre, 2025
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/cuidado-del-balayage.html" class="hover:text-brand-green">Guía definitiva para el cuidado del balayage: mantén tu color radiante ✨</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">Tu balayage es una inversión en tu estilo. Aprende a protegerlo con los productos y rutinas correctas para que luzca espectacular por más tiempo en el clima único de Chía.</p>
-                    <a
-                      href="/blog/articles/cuidado-del-balayage.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre Guía definitiva para el cuidado del balayage: mantén tu color radiante ✨"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Artículo: salon-belleza-chia-cajica -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/salon-de-belleza-y-spa-en-chia-cerca-de-cajica.html" aria-label="Leer artículo: Narbo’s Salón Spa: tu epicentro de belleza en Chía, a un paso de Cajicá 🌟">
-                    <img
-                      src="/images/blog/foto_fachada.webp"
-                      alt="Salón de belleza y spa en Chía, cerca de Cajicá"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Belleza y bienestar • 11 de Noviembre, 2025
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/salon-de-belleza-y-spa-en-chia-cerca-de-cajica.html" class="hover:text-brand-green">Narbo’s Salón Spa: tu epicentro de belleza en Chía, a un paso de Cajicá 🌟</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">Descubre por qué Narbo's es la mejor opción para tus necesidades de belleza en la Sabana de Bogotá. Ubicación estratégica, parqueadero gratis y todos los servicios en un solo lugar.</p>
-                    <a
-                      href="/blog/articles/salon-de-belleza-y-spa-en-chia-cerca-de-cajica.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre Narbo’s Salón Spa: tu epicentro de belleza en Chía, a un paso de Cajicá 🌟"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-
-                <!-- Artículo: tratamientos-capilares-clima-chia -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                  <a href="/blog/articles/tratamientos-capilares-clima-chia.html" aria-label="Leer artículo: Los 5 tratamientos capilares imprescindibles para el clima de Chía">
-                    <img
-                      src="/blog/articles/images/image_blog_1.webp"
-                      alt="Tratamientos capilares para el clima de Chía"
-                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </a>
-                  <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">
-                      Cuidado capilar • 20 de Octubre, 2025
-                    </p>
-                    <h2 class="text-2xl font-serif font-bold text-gray-900 mb-3">
-                      <a href="/blog/articles/tratamientos-capilares-clima-chia.html" class="hover:text-brand-green">Los 5 tratamientos capilares imprescindibles para el clima de Chía</a>
-                    </h2>
-                    <p class="text-gray-700 mb-4">Vivir en la Sabana de Bogotá tiene su encanto, pero el clima puede ser un desafío para tu cabello. Descubre los tratamientos esenciales que ofrecemos en Narbo's para mantenerlo radiante.</p>
-                    <a
-                      href="/blog/articles/tratamientos-capilares-clima-chia.html"
-                      class="font-bold text-brand-green hover:underline"
-                      aria-label="Leer más sobre Los 5 tratamientos capilares imprescindibles para el clima de Chía"
-                      >Leer más &rarr;</a
-                    >
-                  </div>
-                </div>
-            <!-- ARTICLES_END -->
+            <!-- Artículos renderizados estáticamente desde SSG -->
           </div>
 
           <!-- FAQ SECTION PARA EL BLOG -->
           <section id="blog-faq" class="mt-20 pt-16 border-t border-gray-100" data-animation="fadeInUp">
             <h2 class="text-3xl font-serif font-bold text-gray-900 mb-8 text-center">Preguntas frecuentes del blog</h2>
             <div class="max-w-3xl mx-auto space-y-4">
-              <details class="group border-b border-gray-200 pb-4">
-                <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
-                  <span>¿Qué tipo de consejos encontraré en el blog de Narbo's?</span>
-                  <span class="transition-transform group-open:rotate-180">
-                    <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              <!-- Item 1 -->
+              <details class="group bg-white rounded-lg shadow-sm p-4 [&_summary::-webkit-details-marker]:hidden border border-brand-light/20 open:shadow-md transition-shadow duration-300">
+                <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-brand-gray-dark">
+                  <h3 class="font-bold text-lg font-serif">¿Qué tipo de consejos encontraré en el blog de Narbo's?</h3>
+                  <span class="shrink-0 rounded-full bg-brand-light/20 p-1.5 text-brand-gray-dark sm:p-3 group-hover:bg-brand-light/40 transition-colors ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-180 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                   </span>
                 </summary>
-                <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
-                  <p class="py-4">En nuestro blog compartimos tendencias actualizadas sobre balayage, corrección de color, cuidado capilar, rituales de spa y consejos de belleza profesional adaptados al clima de Chía.</p>
+                <div class="faq-content overflow-hidden">
+                  <p class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
+                    En nuestro blog compartimos tendencias actualizadas sobre balayage, corrección de color, cuidado capilar, rituales de spa y consejos de belleza profesional adaptados al clima de Chía.
+                  </p>
                 </div>
               </details>
-              <details class="group border-b border-gray-200 pb-4">
-                <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
-                  <span>¿Los casos de éxito y transformaciones son reales?</span>
-                  <span class="transition-transform group-open:rotate-180">
-                    <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              
+              <!-- Item 2 -->
+              <details class="group bg-white rounded-lg shadow-sm p-4 [&_summary::-webkit-details-marker]:hidden border border-brand-light/20 open:shadow-md transition-shadow duration-300">
+                <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-brand-gray-dark">
+                  <h3 class="font-bold text-lg font-serif">¿Los casos de éxito y transformaciones son reales?</h3>
+                  <span class="shrink-0 rounded-full bg-brand-light/20 p-1.5 text-brand-gray-dark sm:p-3 group-hover:bg-brand-light/40 transition-colors ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-180 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                   </span>
                 </summary>
-                <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
-                  <p class="py-4">Sí, absolutamente. Todas las imágenes de 'antes y después' y las transformaciones publicadas son trabajos realizados por nuestros expertos coloristas en Narbo's Salón Spa Chía.</p>
+                <div class="faq-content overflow-hidden">
+                  <p class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
+                    Sí, absolutamente. Todas las imágenes de 'antes y después' y las transformaciones publicadas son trabajos realizados por nuestros expertos coloristas en Narbo's Salón Spa Chía.
+                  </p>
                 </div>
               </details>
-              <details class="group border-b border-gray-200 pb-4">
-                <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
-                  <span>¿Puedo agendar una cita directamente desde los artículos?</span>
-                  <span class="transition-transform group-open:rotate-180">
-                    <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+
+              <!-- Item 3 -->
+              <details class="group bg-white rounded-lg shadow-sm p-4 [&_summary::-webkit-details-marker]:hidden border border-brand-light/20 open:shadow-md transition-shadow duration-300">
+                <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-brand-gray-dark">
+                  <h3 class="font-bold text-lg font-serif">¿Puedo agendar una cita directamente desde los artículos?</h3>
+                  <span class="shrink-0 rounded-full bg-brand-light/20 p-1.5 text-brand-gray-dark sm:p-3 group-hover:bg-brand-light/40 transition-colors ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-180 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                   </span>
                 </summary>
-                <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
-                  <p class="py-4">Sí, cada artículo incluye botones de contacto directo para que puedas agendar tu diagnóstico personalizado o cita de servicio vía WhatsApp de forma inmediata.</p>
+                <div class="faq-content overflow-hidden">
+                  <p class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
+                    Sí, cada artículo incluye botones de contacto directo para que puedas agendar tu diagnóstico personalizado o cita de servicio vía WhatsApp de forma inmediata.
+                  </p>
                 </div>
               </details>
             </div>

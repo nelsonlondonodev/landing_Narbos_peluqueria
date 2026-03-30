@@ -37,6 +37,47 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Recent Updates (March 30, 2026) - Blog Architecture REvolution & Automation 🚀
+
+### 1. Component-Based Blog Architecture (Vanilla JS) 🏗️
+*   **ArticleCard Component:** Implemented a reusable, atomic class `ArticleCard.js` to standardize article rendering, ensuring pixel-perfect consistency across the entire blog ecosystem.
+*   **Dynamic Hydration (CSR):** Developed `BlogController.js` to handle Client-Side Rendering in local development environments. It features **Lazy Loading** and **IntersectionObserver** to inject articles only when needed, keeping the main thread light.
+*   **Chronological Auto-Sorting:** Both the Client-Side and SSG engines now automatically sort articles by `isoDate`. No more manual ordering required in the data files.
+
+### 2. SSG Pipeline Integration (SEO Automation) 🤖
+*   **Static Injection:** Updated `ssg.js` to physically inject the article grid into the HTML during the build process. This guarantees 100% SEO visibility (Static HTML) while maintaining a modern developer experience.
+*   **Data-Driven Truth:** The `js/data/articles.js` file is now the single source of truth. Changes there automatically propagate to the index cards and metadata during `npm run build`.
+
+### 3. UI/UX Synchronization 🎨
+*   **FAQ Unification:** Refactored the Blog's FAQ section to strictly follow the Homepage design system (Shadows, borders, and brand icons), eliminating visual divergence.
+*   **Path Resilience:** Normalized all article assets to absolute paths (`/blog/articles/images/`), resolving legacy 404 errors during deep-link navigation.
+
+---
+
+## 🔄 Recent Updates (March 28, 2026) - Architectural Modularization & SEO Blog Content 💅
+
+### 1. Nails & Spa Hub Architecture (Clean Code) 🏗️
+*   **Controller Decoupling:** Successfully refactored the `unas-spa` hub. Extracted monolithic logic into a dedicated, atomic `NailsHubController.js` to strictly govern its components.
+*   **Dynamic Modal Injection:** Augmented `ServiceModal.js` with an automated HTML fallback that completely removes the heavy hardcoded `<div>` from the bottom of physical HTML files, improving DOM cleanliness.
+*   **Data Integrity:** The Hub now fully integrates with the unified `service-page.js` dispatcher while retaining legacy features, like accurate ID exclusions (`data-exclude-ids`) for tailored service rendering in subpages.
+
+### 2. High-Converting SEO Blog Launch ("Rubios Sabana") ✍️
+*   **Topic Strategy:** Published a hyper-local, educational article addressing oxidation and hair-loss mechanisms specifically tied to the high altitude of Chía/Bogotá (Sabana).
+*   **Interactive Capability:** Coded a Vanilla JS "Oxidation Calculator" into the layout, providing readers with personalized diagnostic risk alerts based on their selected habits.
+*   **Semantic Data Mastery:** Fully mapped the article using the `BlogPosting` JSON-LD schema pattern, styled with elegant Tailwind typography (`Playfair` & `Inter`), and injected internal conversion links (Corrección de color) to bolster CTR.
+
+---
+
+## 🔄 Recent Updates (March 26, 2026) - Loyalty Program Enhancement 🎁
+
+### 1. Retention Strategy Update (15% Discount)
+*   **Discount Increase:** Professionally updated the loyalty landing page (`/fidelizacion/`) to reflect a **15% welcome discount** (previously 10%).
+*   **Policy Clarification:** Integrated a mandatory service exception for **Hair Removal (Depilación)** into all UI touchpoints (Benefit cards, Success messages, and QR modals) to ensure consistency with automated email workflows.
+*   **iOS & Apple Cache Integrity:** Implemented a targeted **Cache Buster (v=3.1)** on the loyalty stylesheet to force immediate updates on iPhones and iPads, which often retain legacy CSS.
+*   **Production Deployment:** Executed a full production build (`npm run build`) and synchronized `develop` with `main` to push the 15% offer live.
+
+---
+
 ## 🔄 Recent Updates (March 18, 2026) - Part 3: Performance & Core Web Vitals (90+ Score) ⚡
 
 ### 1. PageSpeed Insights Recovery (91% Mobile Score) 🚀

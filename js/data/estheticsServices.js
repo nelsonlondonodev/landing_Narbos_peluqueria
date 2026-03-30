@@ -98,11 +98,11 @@ export const estheticsServices = [
     },
     {
         title: 'Depilación con Hilo (Cejas y Bigote)',
-        description: 'Técnica milenaria para una definición precisa y duradera.',
-        image: '/images/brand/logo_narbos.webp',
+        description: 'Técnica milenaria para una definición precisa y duradera del arco de tus cejas.',
+        image: '/images/pages/estetica/depilacion-hilo-facial-estetica-chia.webp',
         link: 'servicios/estetica/cejas-y-pestanas.html',
         price: masterPrices.esthetics.depilacion.hilo.cejasBigote,
-        variant: 'logo'
+        variant: 'standard'
     },
 
     // CORPORAL (Axilas, Piernas, Bikini)

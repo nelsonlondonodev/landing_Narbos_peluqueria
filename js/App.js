@@ -4,7 +4,6 @@ import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
 import { getContactFormHTML } from './components/ContactForm.js';
 import { getHeroHTML } from './components/HeroSection.js';
-import { getHomeModalsHTML } from './components/HomeModals.js'; // Nueva función para modales dinámicos
 // Components
 import { MobileMenu } from './components/MobileMenu.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
@@ -13,21 +12,23 @@ import { BusinessStatusBadge } from './components/BusinessStatusBadge.js';
 import { HeaderController } from './controllers/HeaderController.js';
 import { PageTransitionController } from './controllers/PageTransitionController.js'; // Nuevo Controller
 // Data
-import { servicesData } from './data/servicesData.js';
 import { pagesData } from './data/pagesData.js'; // Nuevo Import
 import { Breadcrumbs } from './components/Breadcrumbs.js';
-// ServiceCard is needed for mountHomeServices which runs on init
-import { ServiceCard } from './components/ServiceCard.js';
 import { AnalyticsService } from './services/AnalyticsService.js';
+import { HomeHubController } from './controllers/HomeHubController.js';
 
 
 class App {
     constructor() {
         // App Root se deriva directamente del BASE_PATH configurado
         this.appRoot = window.location.origin + BASE_PATH + '/';
+        this.version = siteConfig.version;
         
-        // Debug para verificar en consola
-        // console.log(`[App] Initialized. Root: ${this.appRoot}, Host: ${window.location.hostname}`);
+        // Debug para verificar en consola y soporte técnico
+        if (typeof window !== 'undefined') {
+            window.__NARBO_VERSION__ = this.version;
+            // console.log(`[App] Initialized v${this.version}. Root: ${this.appRoot}`);
+        }
         
         this.isHomePage = this._checkIfHomePage();
     }
@@ -47,10 +48,11 @@ class App {
     init() {
         this.mountLayout();
         this.mountHero();
-        if (this.isHomePage) this.mountHomeModals();
+        if (this.isHomePage) {
+            new HomeHubController(this).init();
+        }
         this.initCoreComponents();
         this.initInteractiveComponents();
-        this.mountHomeServices();
         this.initServices();
         this.initBreadcrumbs();
         this.initAnalytics();
@@ -88,12 +90,7 @@ class App {
         }
     }
 
-    mountHomeModals() {
-        const modalsRoot = document.getElementById('modals-root');
-        if (modalsRoot && modalsRoot.children.length === 0) {
-            modalsRoot.innerHTML = getHomeModalsHTML();
-        }
-    }
+
 
     mountHero() {
         const heroRoot = document.getElementById('hero-root');
@@ -147,6 +144,18 @@ class App {
         // 2. Componentes Pesados / Bajo el fold -> Carga Diferida con Observer
         // Esto libera el Hilo Principal durante la carga inicial (Mejora TBT y LCP)
         
+        // Blog Catalog
+        this.observeAndInit('#articles-grid', async () => {
+            const { BlogController } = await import('./controllers/BlogController.js');
+            new BlogController(this.appRoot);
+        });
+
+        // Página Nosotros (Marquee de reseñas y timeline)
+        this.observeAndInit('.marquee-track', async () => {
+            const { default: AboutHubController } = await import('./controllers/AboutHubController.js');
+            new AboutHubController();
+        });
+
         // FAQ (Footer y Artículos)
         this.observeAndInit('#faq', async () => {
             const { FAQAccordion } = await import('./components/FAQAccordion.js');
@@ -169,12 +178,7 @@ class App {
             new ContactFormController();
         });
 
-        // Brands (Slider infinito)
-        this.observeAndInit('#home-brands-root', async () => {
-            const { BrandsSection } = await import('./components/BrandsSection.js');
-            const { allBrands } = await import('./data/brandsData.js');
-            new BrandsSection('home-brands-root', allBrands).render();
-        });
+
 
         // Galería y Videos (Media intensiva)
         this.observeAndInit('#gallery-root', async () => {
@@ -182,8 +186,13 @@ class App {
             new GalleryController();
         });
         this.observeAndInit('#video-promo', async () => {
-            const { VideoPlayerController } = await import('./controllers/VideoPlayerController.js');
             new VideoPlayerController();
+        });
+
+        // Calculadora de Oxidación (Artículos específicos)
+        this.observeAndInit('#calculadora', async () => {
+            const { default: OxidationCalculator } = await import('./controllers/OxidationCalculator.js');
+            new OxidationCalculator();
         });
         
         // Decoraciones Flotantes (No críticas)
@@ -198,20 +207,6 @@ class App {
             setTimeout(initFloatingDecorations, 4000);
         }
 
-        // Modales de Home (Lógica de apertura)
-        if (this.isHomePage) {
-            // El controlador de modales es ligero, pero podemos diferirlo un poco
-            setTimeout(async () => {
-                const { ModalController } = await import('./controllers/ModalController.js');
-                new ModalController();
-            }, 1000); 
-            
-            // Share button
-            setTimeout(async () => {
-                 const { ShareButton } = await import('./components/ShareButton.js');
-                 new ShareButton();
-            }, 2000);
-        }
     }
 
     /**
@@ -239,22 +234,7 @@ class App {
         observer.observe(element);
     }
 
-    mountHomeServices() {
-        const servicesGrid = document.getElementById('services-grid');
-        if (servicesGrid && servicesData) {
-            servicesGrid.innerHTML = '';
-            servicesData.forEach(data => {
-                // Interceptamos los datos para corregir los enlaces e imágenes
-                const processedData = {
-                    ...data,
-                    link: this.resolvePath(data.link),
-                    image: this.resolvePath(data.image)
-                };
-                const card = new ServiceCard(processedData);
-                servicesGrid.appendChild(card.render());
-            });
-        }
-    }
+
 
     initServices() {
         new UIService();

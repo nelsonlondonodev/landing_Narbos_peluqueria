@@ -103,10 +103,26 @@ export const pagesData = Object.freeze({
          hero: {
             title: "Barbería exclusiva <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "El espacio que mereces para cuidar tu imagen.",
-            imageSrc: "images/pages/barberia/barber-hero.webp",
-            imageAlt: "Servicios de barbería profesional en Chía"
+            imageSrc: "images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp",
+            imageAlt: "Interior de Narbo's Barbería - Salon de Belleza y Spa Premium en Chía"
         },
         gallery: [
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '/images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp',
+                title: "Ambiente Premium",
+                subtitle: "Comodidad y Estilo",
+                alt: "Ambiente exclusivo en Narbo's Barbería Chía: el espacio que mereces"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '/images/pages/barberia/corte-cabello-caballero-profesional-chia.webp',
+                title: "Cortes de Tendencia",
+                subtitle: "Estilo Masculino",
+                alt: "Corte de cabello caballero profesional con técnica moderna en Chía"
+            },
             {
                 type: 'image',
                 layout: 'vertical',
@@ -131,45 +147,12 @@ export const pagesData = Object.freeze({
                 alt: "Perfilado y diseño de barba con técnica profesional"
             },
             {
-                type: 'logo-card',
+                type: 'image',
                 layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Barbería Clásica",
-                alt: "Marca Narbo's Barbería Clásica"
-            },
-            {
-                type: 'logo-card',
-                layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Confianza",
-                alt: "Logo Narbos"
-            },
-            {
-                type: 'logo-card',
-                layout: 'horizontal',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Profesionalismo",
-                alt: "Logo marca"
-            },
-            {
-                type: 'logo-card',
-                layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Bienestar",
-                alt: "Logo Spa"
-            },
-            {
-                type: 'logo-card',
-                layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
-                alt: "Logo"
-            },
-            {
-                type: 'logo-card',
-                layout: 'vertical',
-                src: '../../images/brand/logo_narbos.webp',
-                title: "Innovación",
-                alt: "Logo vertical"
+                src: '/images/pages/barberia/barbero-profesional-trabajando-narbos-chia.webp',
+                title: "Pasión por el detalle",
+                subtitle: "Servicio Experto",
+                alt: "Barbero profesional en plena acción realizando un corte clásico en Narbo's Barbería Chía"
             }
         ]
     },
@@ -582,9 +565,16 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp', // Generic beauty image
-                title: "Rostro Armónico",
-                alt: "Belleza facial integral"
+                src: '/images/pages/estetica/depilacion-hilo-facial-estetica-chia.webp', 
+                title: "Depilación con Hilo",
+                alt: "Técnica milenaria de depilación con hilo para una definición perfecta de cejas"
+            },
+            {
+                type: 'logo-card',
+                layout: 'logo-filler',
+                src: '/images/brand/logo_narbos.webp',
+                title: "Narbo's Excellence",
+                alt: "Sello de calidad Narbo's Salon"
             },
             {
                 type: 'image',
@@ -593,6 +583,13 @@ export const pagesData = Object.freeze({
                 title: "Mirada Impactante",
                 subtitle: "Belleza Natural",
                 alt: "Cliente satisfecha con diseño de cejas"
+            },
+            {
+                type: 'logo-card',
+                layout: 'logo-filler',
+                src: '/images/brand/logo_narbos.webp',
+                title: "Cuidado Experto",
+                alt: "Branding Narbo's Salon Spa"
             }
         ]
     },

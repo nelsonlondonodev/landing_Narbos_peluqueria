@@ -202,6 +202,35 @@ async function injectServices(document, pageKey, prefix) {
 }
 
 /**
+ * Inyecta la grilla de artículos correspondientes (si es blog).
+ */
+async function injectArticles(document, pageKey, prefix) {
+    if (pageKey !== 'blog') return;
+    
+    const grid = document.getElementById('articles-grid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+    
+    const { default: articles } = await import('../js/data/articles.js');
+    const { ArticleCard } = await import('../js/components/ArticleCard.js');
+    
+    if (articles && articles.length > 0) {
+        const sortedArticles = [...articles].sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
+        sortedArticles.forEach(data => {
+            const processedData = {
+                ...data,
+                link: data.link.startsWith('http') ? data.link : prefix + data.link.replace(/^\//, ''),
+                image: data.image.startsWith('http') ? data.image : prefix + data.image.replace(/^\//, '')
+            };
+            const card = new ArticleCard(processedData);
+            grid.appendChild(card.render());
+        });
+        console.log(`   ✨ Artículos inyectados estáticamente en #articles-grid`);
+    }
+}
+
+/**
  * Asegura los metadatos críticos en el head.
  */
 function ensureCriticalMeta(document) {
@@ -247,6 +276,7 @@ async function processPage(pageConfig) {
 
     await injectHero(document, pageConfig.key, prefix);
     await injectServices(document, pageConfig.key, prefix);
+    await injectArticles(document, pageConfig.key, prefix);
     await injectSEO(document, pageConfig.key, pageConfig.path);
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');

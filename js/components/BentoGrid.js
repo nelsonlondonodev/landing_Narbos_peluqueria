@@ -12,7 +12,8 @@ function getGridItemHTML(item, index, options = {}) {
         'featured-video': 'col-span-1 row-span-2 md:col-span-2 md:row-span-2', 
         'vertical': 'col-span-1 row-span-2 md:col-span-1 md:row-span-2', 
         'horizontal': 'col-span-2 md:col-span-2', 
-        'square': 'col-span-1' 
+        'square': 'col-span-1',
+        'logo-filler': 'col-span-2 md:col-span-1' 
     };
 
     const spanClass = layoutClasses[item.layout] || layoutClasses['square'];
