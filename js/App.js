@@ -146,6 +146,7 @@ class App {
         
         // Blog Catalog
         this.observeAndInit('#articles-grid', async () => {
+            const { BlogController } = await import('./controllers/BlogController.js');
             new BlogController(this.appRoot);
         });
 
