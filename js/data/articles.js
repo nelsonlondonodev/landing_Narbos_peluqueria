@@ -23,7 +23,7 @@ const articles = [
         date: '28 de marzo de 2026',
         isoDate: '2026-03-28',
         category: 'Cuidado capilar',
-        title: 'Cabello en la Sabana: Rubios y Caída Estacional',
+        title: 'Cabello en la Sabana: rubios y caída estacional',
         description: "¿Por qué el rubio se oxida en Chía? ¿Es normal la caída del cabello en Bogotá? Descubre la realidad del cuidado capilar en la altura con Narbo's Salón.",
         image: '/images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
         alt: 'Tratamiento y prevención de oxidación para cabellos rubios o tinturados en el clima de la Sabana de Bogotá',
