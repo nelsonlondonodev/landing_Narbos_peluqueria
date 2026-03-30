@@ -8,7 +8,7 @@ export const estheticsServices = [
         title: 'Limpieza Facial Básica',
         description: 'Protocolo esencial para eliminar impurezas y restaurar el equilibrio de tu piel.',
         image: '/images/pages/estetica/limpieza-facial-profunda-proceso.webp',
-        link: 'servicios/estetica/spa-facial-integral.html',
+        link: 'servicios/estetica/spa-facial-integral',
         price: masterPrices.esthetics.facial.basico,
         variant: 'standard'
     },
@@ -16,7 +16,7 @@ export const estheticsServices = [
         title: 'Microdermoabrasión',
         description: 'Exfoliación profunda que renueva la textura de la piel y atenúa manchas.',
         image: '/images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
-        link: 'servicios/estetica/spa-facial-integral.html',
+        link: 'servicios/estetica/spa-facial-integral',
         price: masterPrices.esthetics.facial.microdermoabrasion,
         variant: 'standard'
     },
@@ -24,7 +24,7 @@ export const estheticsServices = [
         title: 'Hidrofacial',
         description: 'Limpieza, hidratación y renovación profunda con tecnología avanzada.',
         image: '/images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
-        link: 'servicios/estetica/spa-facial-integral.html',
+        link: 'servicios/estetica/spa-facial-integral',
         price: masterPrices.esthetics.facial.hidroFacial,
         variant: 'standard'
     },
@@ -32,7 +32,7 @@ export const estheticsServices = [
         title: 'Tratamientos Despigmentantes',
         description: 'Protocolos especializados para unificar el tono de la piel y reducir manchas.',
         image: '/images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
-        link: 'servicios/estetica/spa-facial-integral.html',
+        link: 'servicios/estetica/spa-facial-integral',
         price: `Sesión ${masterPrices.esthetics.facial.despigmentantes}`,
         variant: 'standard'
     },
@@ -44,7 +44,7 @@ export const estheticsServices = [
         title: 'Masaje Relajante',
         description: '1 hora de relajación total para desconectar cuerpo y mente.',
         image: '/images/pages/estetica/masaje-relajante-profesional-chia.webp',
-        link: 'servicios/estetica/masajes-relajantes.html',
+        link: 'servicios/estetica/masajes-relajantes',
         price: masterPrices.esthetics.corporal.masajeRelajante,
         variant: 'standard'
     },
@@ -52,7 +52,7 @@ export const estheticsServices = [
         title: 'Masaje Descontracturante (Espalda)',
         description: 'Alivio focalizado para tensiones musculares en la zona dorsal y lumbar (35 min).',
         image: '/images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp', 
-        link: 'servicios/estetica/masajes-relajantes.html',
+        link: 'servicios/estetica/masajes-relajantes',
         price: masterPrices.esthetics.corporal.masajeDescontracturanteEspalda,
         variant: 'standard'
     },
@@ -60,7 +60,7 @@ export const estheticsServices = [
         title: 'Masaje Descontracturante (Cuerpo)',
         description: 'Terapia profunda de cuerpo completo para liberar el estrés muscular acumulado.',
         image: '/images/pages/estetica/masaje-descontracturante-cuerpo-chia.webp',
-        link: 'servicios/estetica/masajes-relajantes.html',
+        link: 'servicios/estetica/masajes-relajantes',
         price: masterPrices.esthetics.corporal.masajeDescontracturanteCuerpo,
         variant: 'standard'
     },
@@ -68,7 +68,7 @@ export const estheticsServices = [
         title: 'Drenaje Linfático',
         description: 'Técnica suave que estimula la eliminación de toxinas y reduce la retención de líquidos.',
         image: '/images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
-        link: 'servicios/estetica/masajes-relajantes.html',
+        link: 'servicios/estetica/masajes-relajantes',
         price: masterPrices.esthetics.corporal.drenajeLinfatico,
         variant: 'standard'
     },
@@ -76,7 +76,7 @@ export const estheticsServices = [
         title: 'Moldeamiento Corporal',
         description: 'Tratamientos reductores y reafirmantes para definir tu silueta.',
         image: '/images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
-        link: 'servicios/estetica/masajes-relajantes.html',
+        link: 'servicios/estetica/masajes-relajantes',
         price: `Sesión ${masterPrices.esthetics.corporal.moldeamiento}`,
         variant: 'standard'
     },
@@ -92,7 +92,7 @@ export const estheticsServices = [
         title: 'Depilación Cejas y Bigote (Cera)',
         description: 'Diseño y limpieza rápida con cera suave para el rostro.',
         image: '/images/brand/logo_narbos.webp',
-        link: 'servicios/estetica/cejas-y-pestanas.html',
+        link: 'servicios/estetica/cejas-y-pestanas',
         price: masterPrices.esthetics.depilacion.cera.cejasBigote,
         variant: 'logo'
     },
@@ -100,7 +100,7 @@ export const estheticsServices = [
         title: 'Depilación con Hilo (Cejas y Bigote)',
         description: 'Técnica milenaria para una definición precisa y duradera del arco de tus cejas.',
         image: '/images/pages/estetica/depilacion-hilo-facial-estetica-chia.webp',
-        link: 'servicios/estetica/cejas-y-pestanas.html',
+        link: 'servicios/estetica/cejas-y-pestanas',
         price: masterPrices.esthetics.depilacion.hilo.cejasBigote,
         variant: 'standard'
     },
@@ -110,7 +110,7 @@ export const estheticsServices = [
         title: 'Depilación Axilas (Cera)',
         description: 'Piel suave y libre de vello en una zona delicada.',
         image: '/images/brand/logo_narbos.webp',
-        link: 'servicios/estetica/depilacion-corporal.html',
+        link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.axilas,
         variant: 'logo'
     },
@@ -118,7 +118,7 @@ export const estheticsServices = [
         title: 'Depilación Pierna Completa (Cera)',
         description: 'Suavidad total desde los muslos hasta los tobillos.',
         image: '/images/brand/logo_narbos.webp',
-        link: 'servicios/estetica/depilacion-corporal.html',
+        link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.piernaCompleta,
         variant: 'logo'
     },
@@ -126,7 +126,7 @@ export const estheticsServices = [
         title: 'Depilación Media Pierna (Cera)',
         description: 'Depilación efectiva de rodillas hacia abajo.',
         image: '/images/brand/logo_narbos.webp',
-        link: 'servicios/estetica/depilacion-corporal.html',
+        link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.mediaPierna,
         variant: 'logo'
     },
@@ -134,7 +134,7 @@ export const estheticsServices = [
         title: 'Depilación Bikini Parcial (Cera)',
         description: 'Limpieza de la zona del bikini para tu comodidad.',
         image: '/images/brand/logo_narbos.webp',
-        link: 'servicios/estetica/depilacion-corporal.html',
+        link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.bikiniParcial,
         variant: 'logo'
     },
@@ -142,7 +142,7 @@ export const estheticsServices = [
         title: 'Depilación Bikini Completo (Cera)',
         description: 'Depilación integral de la zona íntima con máxima higiene.',
         image: '/images/brand/logo_narbos.webp',
-        link: 'servicios/estetica/depilacion-corporal.html',
+        link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.bikiniCompleto,
         variant: 'logo'
     }

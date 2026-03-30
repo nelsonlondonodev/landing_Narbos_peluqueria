@@ -6,7 +6,7 @@
  */
 
 import { getMenuCategories } from '../data/navigation.js';
-import { resolveAsset } from '../config.js'; // Import helper
+import { resolveAsset, resolveRoute } from '../config.js'; // Import helper
 
 /**
  * Genera el HTML de la barra de navegación.
@@ -28,9 +28,9 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         <div class="desktop-menu flex items-center space-x-8 max-md:hidden pl-8">
             ${navLink(isHome ? '#' : basePath, 'Inicio')}
             ${renderMegaMenuDesktop(menuCategories)}
-            ${navLink(basePath + 'nosotros.html', 'Nosotros')}
-            ${navLink(basePath + 'contacto.html', 'Contacto')}
-            <a href="${basePath}blog/" class="text-white hover:text-brand-gold active:text-brand-gold font-medium">Blog</a>
+            ${navLink(resolveRoute('nosotros'), 'Nosotros')}
+            ${navLink(resolveRoute('contacto'), 'Contacto')}
+            <a href="${resolveRoute('blog/')}" class="text-white hover:text-brand-gold active:text-brand-gold font-medium">Blog</a>
         </div>
 
         <!-- Mobile Toggle -->
@@ -44,9 +44,9 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         <div class="flex flex-col p-4 space-y-1">
             ${navLink(isHome ? '#' : basePath, 'Inicio', true)}
             ${renderMegaMenuMobile(menuCategories)}
-            ${navLink(basePath + 'nosotros.html', 'Nosotros', true)}
-            ${navLink(basePath + 'contacto.html', 'Contacto', true)}
-            <a href="${basePath}blog/" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50">Blog</a>
+            ${navLink(resolveRoute('nosotros'), 'Nosotros', true)}
+            ${navLink(resolveRoute('contacto'), 'Contacto', true)}
+            <a href="${resolveRoute('blog/')}" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50">Blog</a>
         </div>
     </div>
     
@@ -108,7 +108,7 @@ function renderMegaMenuDesktop(menuCategories) {
             <ul class="space-y-2">
                 ${cat.items.map(item => `
                     <li>
-                        <a href="${item.link}" class="text-brand-gray-dark hover:text-brand-green hover:translate-x-1 transition-all duration-200 text-sm block">
+                        <a href="${resolveRoute(item.link)}" class="text-brand-gray-dark hover:text-brand-green hover:translate-x-1 transition-all duration-200 text-sm block">
                             ${item.label}
                         </a>
                     </li>
@@ -139,11 +139,11 @@ function renderMegaMenuDesktop(menuCategories) {
 function renderMegaMenuMobile(menuCategories) {
     const mobileMenuContent = menuCategories.map(cat => `
         <div class="px-6 py-2">
-            <a href="${cat.link}" class="block font-bold text-brand-green text-base mb-2 select-none">${cat.title}</a>
+            <a href="${resolveRoute(cat.link)}" class="block font-bold text-brand-green text-base mb-2 select-none">${cat.title}</a>
             <ul class="border-l-2 border-gray-200 pl-3 space-y-2">
                 ${cat.items.map(item => `
                     <li>
-                        <a href="${item.link}" class="block text-brand-gray-dark text-sm hover:text-brand-gold">
+                        <a href="${resolveRoute(item.link)}" class="block text-brand-gray-dark text-sm hover:text-brand-gold">
                             ${item.label}
                         </a>
                     </li>

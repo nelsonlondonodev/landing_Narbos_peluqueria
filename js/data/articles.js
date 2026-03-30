@@ -27,7 +27,7 @@ const articles = [
         description: "¿Por qué el rubio se oxida en Chía? ¿Es normal la caída del cabello en Bogotá? Descubre la realidad del cuidado capilar en la altura con Narbo's Salón.",
         image: '/images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
         alt: 'Tratamiento y prevención de oxidación para cabellos rubios o tinturados en el clima de la Sabana de Bogotá',
-        link: '/blog/articles/cabello-sabana-rubios-caida-estacional.html',
+        link: '/blog/articles/cabello-sabana-rubios-caida-estacional',
         featured: true
     },
     {
@@ -39,7 +39,7 @@ const articles = [
         description: 'Análisis objetivo sobre alisados, champú sin sal y el impacto del agua dura de Chía en tu cabello. Información técnica por expertos de Narbo\'s Salón Spa.',
         image: '/images/pages/peluqueria/lavado-cabello-spa-capilar-narbos-salon-chia.webp',
         alt: 'Lavado profesional y spa capilar en Narbo\'s Salón Spa Chía, ideal para tratar el impacto del agua dura y minerales de la Sabana',
-        link: '/blog/articles/mitos-capilares-keratina-champu-sin-sal-agua-sabana.html',
+        link: '/blog/articles/mitos-capilares-keratina-champu-sin-sal-agua-sabana',
         featured: true
     },
     {
@@ -51,7 +51,7 @@ const articles = [
         description: 'Descubre increíbles antes y después de Balayage y corrección de color en Chía. Resultados reales por expertos en Narbo\'s Salón Spa. ¡Agenda tu diagnóstico!',
         image: '/blog/articles/images/balayage-correccion-narbos.webp',
         alt: 'Transformación real de balayage y corrección de color en las instalaciones de Narbo\'s Salón Spa Chía',
-        link: '/blog/articles/balayage-correccion-color-chia.html',
+        link: '/blog/articles/balayage-correccion-color-chia',
         featured: true
     },
     {
@@ -63,7 +63,7 @@ const articles = [
         description: '¿Te casas? Descubre el cronograma definitivo de belleza para novias. El mejor maquillaje en Chía, spa y peinados tendencia en Narbo\'s Salón Spa.',
         image: '/blog/articles/images/maquillaje-novias-cronograma-belleza-narbos.webp',
         alt: 'maquillaje-de-novia-profesional-en-chia-narbon-salon',
-        link: '/blog/articles/guia-novias-belleza-perfecta-chia.html'
+        link: '/blog/articles/guia-novias-belleza-perfecta-chia'
     },
     {
         id: 'cortar-cabello-crecimiento-rapido-mitos-chia',
@@ -74,7 +74,7 @@ const articles = [
         description: 'Descubre si cortar el cabello realmente acelera su crecimiento. Mitos, realidades y consejos expertos para cuidar tu melena en el clima de Chía.',
         image: '/images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp',
         alt: 'Diseño de corte profesional para dama realizado en Narbo\'s Salón Spa Chía',
-        link: '/blog/articles/cortar-cabello-crecimiento-rapido-mitos-chia.html'
+        link: '/blog/articles/cortar-cabello-crecimiento-rapido-mitos-chia'
     },
     {
         id: 'choque-termico-cabello-viajes-tierra-caliente',
@@ -85,7 +85,7 @@ const articles = [
         description: 'Protege tu cabello del choque térmico al viajar con consejos de Narbo\'s Salón Spa. Evita el daño por sol y cloro y mantén tu brillo ideal.',
         image: '/blog/articles/images/choque-termico-moroccanoil.webp',
         alt: 'Protección capilar para viajes entre climas de la Sabana y Tierra Caliente',
-        link: '/blog/articles/choque-termico-cabello-viajes-tierra-caliente.html',
+        link: '/blog/articles/choque-termico-cabello-viajes-tierra-caliente',
         featured: true
     },
     {
@@ -97,7 +97,7 @@ const articles = [
         description: 'Descubre las tendencias de cabello 2026: Lujo silencioso, Rich Hair y el regreso del volumen. ¡Agenda tu cita en Narbo\'s Salón Spa y adelántate al estilo!',
         image: '/blog/articles/images/balayage-honey-glow-tendencia-2026-chia-narbos.webp',
         alt: 'Tendencias de cabello 2026: Cortes, color y estilo en Narbo\'s Salón Spa',
-        link: '/blog/articles/tendencias-cabello-2026.html'
+        link: '/blog/articles/tendencias-cabello-2026'
     },
     {
         id: 'tendencias-diciembre-2025',
@@ -108,7 +108,7 @@ const articles = [
         description: 'Descubre las últimas tendencias en balayage, uñas y spa para lucir espectacular en las celebraciones de fin de año en Narbo\'s Salón Spa.',
         image: '/blog/articles/images/foto-collage-narbos-salon-spa.webp',
         alt: 'Tendencias de belleza para fin de año en Chía',
-        link: '/blog/articles/tendencias-diciembre-2025.html',
+        link: '/blog/articles/tendencias-diciembre-2025',
         featured: true
     },
     {
@@ -120,7 +120,7 @@ const articles = [
         description: 'Tu balayage es una inversión en tu estilo. Aprende a protegerlo con los productos y rutinas correctas para que luzca espectacular por más tiempo en el clima único de Chía.',
         image: '/blog/articles/images/imagen-articulo-balayage.webp',
         alt: 'Resultados profesionales de balayage en Narbo\'s Salón Spa',
-        link: '/blog/articles/cuidado-del-balayage.html'
+        link: '/blog/articles/cuidado-del-balayage'
     },
     {
         id: 'salon-belleza-chia-cajica',
@@ -131,7 +131,7 @@ const articles = [
         description: 'Descubre por qué Narbo\'s es la mejor opción para tus necesidades de belleza en la Sabana de Bogotá. Ubicación estratégica, parqueadero gratis y todos los servicios en un solo lugar.',
         image: '/images/blog/foto_fachada.webp',
         alt: 'Salón de belleza y spa en Chía, cerca de Cajicá',
-        link: '/blog/articles/salon-de-belleza-y-spa-en-chia-cerca-de-cajica.html'
+        link: '/blog/articles/salon-de-belleza-y-spa-en-chia-cerca-de-cajica'
     },
     {
         id: 'tratamientos-capilares-clima-chia',
@@ -142,7 +142,7 @@ const articles = [
         description: 'Vivir en la Sabana de Bogotá tiene su encanto, pero el clima puede ser un desafío para tu cabello. Descubre los tratamientos esenciales que ofrecemos en Narbo\'s para mantenerlo radiante.',
         image: '/blog/articles/images/image_blog_1.webp',
         alt: 'Tratamientos capilares para el clima de Chía',
-        link: '/blog/articles/tratamientos-capilares-clima-chia.html'
+        link: '/blog/articles/tratamientos-capilares-clima-chia'
     },
     {
         id: 'guia-relajacion-masajes-spa-chia-cajica',
@@ -153,7 +153,7 @@ const articles = [
         description: 'Relájate con los mejores masajes y spa en Chía y Cajicá. Narbo\'s Salon: bienestar experto y relajación total. ¡Agenda tu cita hoy!',
         image: '/images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
         alt: 'Masaje relajante con piedras calientes en Narbo\'s Salon Spa Chía',
-        link: '/blog/articles/guia-relajacion-masajes-spa-chia-cajica.html'
+        link: '/blog/articles/guia-relajacion-masajes-spa-chia-cajica'
     }
 ];
 

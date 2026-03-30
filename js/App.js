@@ -1,4 +1,4 @@
-import { siteConfig, BASE_PATH, resolveAsset } from './config.js'; // Importar Config y Helper
+import { siteConfig, BASE_PATH, resolveAsset, resolveRoute } from './config.js'; // Importar Config y Helper
 import { UIService } from './services/UIService.js';
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
@@ -65,10 +65,15 @@ class App {
      */
     resolvePath(path) {
         if (!path || path === '/') return this.appRoot; 
-        if (path.startsWith('http')) return path; 
         
-        // Quitamos el slash inicial si existe para concatenar limpiamente
-        const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+        // Resolvemos el path usando el algoritmo inteligente de config.js (v2.1.8)
+        const smartPath = resolveRoute(path);
+        
+        // Si no es un link externo, aseguramos que se resuelva contra el origin absoluto
+        if (smartPath.startsWith('http') && !smartPath.includes(window.location.hostname)) return smartPath;
+        
+        // Limpiamos smartPath para el constructor de URL si es necesario
+        const cleanPath = smartPath.startsWith('/') ? smartPath.slice(1) : smartPath;
         return new URL(cleanPath, this.appRoot).href;
     }
 

@@ -1,3 +1,5 @@
+import { resolveRoute } from '../config.js';
+
 /**
  * Componente Tarjeta de Artículo para el Blog.
  * Renderiza tarjetas consistentes y dinámicas con los datos del catálogo.
@@ -8,11 +10,12 @@ export class ArticleCard {
     }
 
     render() {
+        const link = resolveRoute(this.props.link);
         const element = document.createElement('div');
         element.className = "bg-white rounded-lg shadow-lg overflow-hidden group";
 
         element.innerHTML = `
-            <a href="${this.props.link}" aria-label="Leer artículo: ${this.props.title}">
+            <a href="${link}" aria-label="Leer artículo: ${this.props.title}">
                 <img
                     src="${this.props.image}"
                     alt="${this.props.alt}"
@@ -25,12 +28,12 @@ export class ArticleCard {
                     ${this.props.category} • ${this.props.date}
                 </p>
                 <h2 class="text-xl md:text-2xl font-serif font-bold text-gray-900 mb-3 leading-tight">
-                    <a href="${this.props.link}" class="hover:text-brand-green">${this.props.title}</a>
+                    <a href="${link}" class="hover:text-brand-green">${this.props.title}</a>
                 </h2>
                 <p class="text-gray-700 mb-4 line-clamp-3">${this.props.description}</p>
                 <div class="mt-auto pt-2">
                     <a
-                        href="${this.props.link}"
+                        href="${link}"
                         class="font-bold text-brand-green hover:underline inline-flex items-center"
                         aria-label="Leer más sobre ${this.props.title}"
                     >
