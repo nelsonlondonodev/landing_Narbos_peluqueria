@@ -140,6 +140,12 @@ class App {
         // 2. Componentes Pesados / Bajo el fold -> Carga Diferida con Observer
         // Esto libera el Hilo Principal durante la carga inicial (Mejora TBT y LCP)
         
+        // Blog Catalog
+        this.observeAndInit('#articles-grid', async () => {
+            const { BlogController } = await import('./controllers/BlogController.js');
+            new BlogController(this.appRoot);
+        });
+
         // FAQ (Footer y Artículos)
         this.observeAndInit('#faq', async () => {
             const { FAQAccordion } = await import('./components/FAQAccordion.js');
