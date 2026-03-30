@@ -61,7 +61,7 @@ const articles = [
         category: 'Novias y Eventos',
         title: 'Maquillaje en Chía para Novias: Cronograma de Belleza',
         description: '¿Te casas? Descubre el cronograma definitivo de belleza para novias. El mejor maquillaje en Chía, spa y peinados tendencia en Narbo\'s Salón Spa.',
-        image: 'articles/images/maquillaje-novias-cronograma-belleza-narbos.webp',
+        image: '/blog/articles/images/maquillaje-novias-cronograma-belleza-narbos.webp',
         alt: 'maquillaje-de-novia-profesional-en-chia-narbon-salon',
         link: '/blog/articles/guia-novias-belleza-perfecta-chia.html'
     },
@@ -83,7 +83,7 @@ const articles = [
         category: 'Cuidado capilar',
         title: 'Choque térmico: protege tu cabello en tus viajes | Narbo\'s',
         description: 'Protege tu cabello del choque térmico al viajar con consejos de Narbo\'s Salón Spa. Evita el daño por sol y cloro y mantén tu brillo ideal.',
-        image: 'articles/images/choque-termico-moroccanoil.webp',
+        image: '/blog/articles/images/choque-termico-moroccanoil.webp',
         alt: 'Protección capilar para viajes entre climas de la Sabana y Tierra Caliente',
         link: '/blog/articles/choque-termico-cabello-viajes-tierra-caliente.html',
         featured: true
@@ -95,7 +95,7 @@ const articles = [
         category: 'Tendencias',
         title: 'Tendencias de cabello 2026 en Chía: cortes, color y estilo',
         description: 'Descubre las tendencias de cabello 2026: Lujo silencioso, Rich Hair y el regreso del volumen. ¡Agenda tu cita en Narbo\'s Salón Spa y adelántate al estilo!',
-        image: 'articles/images/balayage-honey-glow-tendencia-2026-chia-narbos.webp',
+        image: '/blog/articles/images/balayage-honey-glow-tendencia-2026-chia-narbos.webp',
         alt: 'Tendencias de cabello 2026: Cortes, color y estilo en Narbo\'s Salón Spa',
         link: '/blog/articles/tendencias-cabello-2026.html'
     },
@@ -106,7 +106,7 @@ const articles = [
         category: 'Belleza y tendencias',
         title: 'Brilla esta Navidad: tendencias de belleza para cerrar el año en Chía',
         description: 'Descubre las últimas tendencias en balayage, uñas y spa para lucir espectacular en las celebraciones de fin de año en Narbo\'s Salón Spa.',
-        image: 'articles/images/foto-collage-narbos-salon-spa.webp',
+        image: '/blog/articles/images/foto-collage-narbos-salon-spa.webp',
         alt: 'Tendencias de belleza para fin de año en Chía',
         link: '/blog/articles/tendencias-diciembre-2025.html',
         featured: true
@@ -118,7 +118,7 @@ const articles = [
         category: 'Cuidado capilar',
         title: 'Guía definitiva para el cuidado del balayage: mantén tu color radiante ✨',
         description: 'Tu balayage es una inversión en tu estilo. Aprende a protegerlo con los productos y rutinas correctas para que luzca espectacular por más tiempo en el clima único de Chía.',
-        image: 'articles/images/imagen-articulo-balayage.webp',
+        image: '/blog/articles/images/imagen-articulo-balayage.webp',
         alt: 'Resultados profesionales de balayage en Narbo\'s Salón Spa',
         link: '/blog/articles/cuidado-del-balayage.html'
     },

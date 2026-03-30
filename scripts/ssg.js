@@ -216,7 +216,8 @@ async function injectArticles(document, pageKey, prefix) {
     const { ArticleCard } = await import('../js/components/ArticleCard.js');
     
     if (articles && articles.length > 0) {
-        articles.forEach(data => {
+        const sortedArticles = [...articles].sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
+        sortedArticles.forEach(data => {
             const processedData = {
                 ...data,
                 link: data.link.startsWith('http') ? data.link : prefix + data.link.replace(/^\//, ''),

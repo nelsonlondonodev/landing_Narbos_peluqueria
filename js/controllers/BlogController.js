@@ -18,7 +18,8 @@ export class BlogController {
         grid.innerHTML = '';
 
         if (articles && articles.length > 0) {
-            articles.forEach(data => {
+            const sortedArticles = [...articles].sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
+            sortedArticles.forEach(data => {
                 const processedData = {
                     ...data,
                     link: data.link.startsWith('http') ? data.link : this.resolvePath(data.link),
