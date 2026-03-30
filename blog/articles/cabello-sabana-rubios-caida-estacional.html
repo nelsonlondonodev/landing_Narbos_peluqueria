@@ -48,7 +48,7 @@
         "name": "Narbo's Salón Spa",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://narbossalon.com/images/brand/logo_narbos.webp"
+          "url": "https://narbossalon.com/images/brand/logo-narbos-negro.webp"
         }
       },
       "datePublished": "2026-03-30",
@@ -270,49 +270,5 @@
     </div> <!-- End app-wrapper -->
 
     <script src="../../js/main.js?v=2.1" type="module"></script>
-    <script>
-        // Lógica del Calculador de Oxidación
-        document.addEventListener('DOMContentLoaded', () => {
-             const btn = document.getElementById('calc-btn');
-             const sun = document.getElementById('calc-sun');
-             const wash = document.getElementById('calc-wash');
-             const result = document.getElementById('calc-result');
-             const title = document.getElementById('calc-title');
-             const msg = document.getElementById('calc-msg');
-
-             if(btn) {
-                 btn.addEventListener('click', () => {
-                     const sVal = sun.value;
-                     const wVal = parseInt(wash.value);
-                     
-                     let oxidacionNivel = "Baja";
-                     let riesgo = 1;
-                     
-                     if (sVal === 'high') riesgo += 2;
-                     if (sVal === 'med') riesgo += 1;
-                     if (wVal === 1) riesgo += 2; // Lavado diario con agua dura
-
-                     result.classList.remove('hidden');
-
-                     if(riesgo >= 4) {
-                         result.className = "mt-8 p-6 bg-red-50 rounded-xl shadow border-l-4 border-red-500 animate__animated animate__fadeIn";
-                         title.innerHTML = "🚨 Riesgo de Oxidación: ALTO";
-                         title.className = "text-xl font-bold mb-2 text-red-800";
-                         msg.innerHTML = "¡Cuidado! El agua dura combinada con alta exposición solar hará que tu rubio se vuelva cobrizo en menos de 2 semanas. <strong>Recomendación:</strong> Usa protector UV capilar CADA MAÑANA, lávate el cabello día de por medio, y agenda un baño de color (matizante) mensualmente con nosotros.";
-                     } else if(riesgo >= 2) {
-                         result.className = "mt-8 p-6 bg-yellow-50 rounded-xl shadow border-l-4 border-yellow-500 animate__animated animate__fadeIn";
-                         title.innerHTML = "⚠️ Riesgo de Oxidación: MODERADO";
-                         title.className = "text-xl font-bold mb-2 text-yellow-800";
-                         msg.innerHTML = "Tu cabello está expuesto. Vas a notar ligeros tonos dorados indeseados a los 20 días. <strong>Recomendación:</strong> Incorpora un shampoo corrector violeta (solo una vez por semana) y trata de lavar tu cabello un poco menos frecuente.";
-                     } else {
-                         result.className = "mt-8 p-6 bg-green-50 rounded-xl shadow border-l-4 border-green-500 animate__animated animate__fadeIn";
-                         title.innerHTML = "✨ Riesgo de Oxidación: BAJO";
-                         title.className = "text-xl font-bold mb-2 text-green-800";
-                         msg.innerHTML = "Tienes rutinas bastante seguras. Aún así, recuerda que debido al agua de la sabana, tus cutículas pueden estar sufriendo resequedad. <strong>Recomendación:</strong> Aplica semanalmente una mascarilla ácida y mantén la hidratación al máximo.";
-                     }
-                 });
-             }
-        });
-    </script>
   </body>
 </html>

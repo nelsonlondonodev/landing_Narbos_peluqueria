@@ -176,8 +176,13 @@ class App {
             new GalleryController();
         });
         this.observeAndInit('#video-promo', async () => {
-            const { VideoPlayerController } = await import('./controllers/VideoPlayerController.js');
             new VideoPlayerController();
+        });
+
+        // Calculadora de Oxidación (Artículos específicos)
+        this.observeAndInit('#calculadora', async () => {
+            const { default: OxidationCalculator } = await import('./controllers/OxidationCalculator.js');
+            new OxidationCalculator();
         });
         
         // Decoraciones Flotantes (No críticas)
