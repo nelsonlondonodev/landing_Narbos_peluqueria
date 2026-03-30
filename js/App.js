@@ -142,8 +142,13 @@ class App {
         
         // Blog Catalog
         this.observeAndInit('#articles-grid', async () => {
-            const { BlogController } = await import('./controllers/BlogController.js');
             new BlogController(this.appRoot);
+        });
+
+        // Página Nosotros (Marquee de reseñas y timeline)
+        this.observeAndInit('.marquee-track', async () => {
+            const { default: AboutHubController } = await import('./controllers/AboutHubController.js');
+            new AboutHubController();
         });
 
         // FAQ (Footer y Artículos)
