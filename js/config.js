@@ -19,16 +19,48 @@
  * Detecta si estamos en GitHub Pages para ajustar las rutas de assets.
  */
 const isGitHubPages = typeof window !== 'undefined' && window.location.hostname.includes('github.io');
-const repoName = '/landing_Narbos_peluqueria'; // Nombre exacto del repositorio
+const isDevelopment = typeof window !== 'undefined' && 
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+const repoName = '/landing_Narbos_peluqueria'; 
 
-// En GitHub Pages, la raíz es /repo-name/. En local/dominio propio, es /.
 export const BASE_PATH = isGitHubPages ? repoName : '';
 
 /**
- * Resuelve una ruta relativa a la ruta base del entorno actual.
- * Útil para solucionar rutas de imágenes en GitHub Pages.
- * @param {string} path - Ruta relativa (ej: '/images/logo.png')
- * @returns {string} Ruta absoluta correcta (ej: '/landing_Narbos_peluqueria/images/logo.png')
+ * Resuelve una ruta de navegación (URL).
+ * En desarrollo agrega .html para compatibilidad con Live Server.
+ * En producción mantiene URLs limpias para SEO.
+ * @param {string} path - Ruta base (ej: 'nosotros')
+ * @returns {string} URL terminada.
+ */
+export const resolveRoute = (path) => {
+    if (!path || path === '/' || path === '') return BASE_PATH + '/';
+    
+    // Si ya es un link externo real, no lo tocamos
+    if (path.startsWith('http') && !path.includes(window.location.hostname)) return path;
+
+    // Normalizar: Quitar el origin si existe para procesarlo internamente
+    let cleanPath = path;
+    if (path.startsWith('http')) {
+        try {
+            cleanPath = new URL(path).pathname;
+        } catch(e) { /* fallback cleanPath */ }
+    }
+    
+    // Quitar slash inicial y BASE_PATH para normalizar la ruta relativa
+    cleanPath = cleanPath.replace(BASE_PATH, '');
+    if (cleanPath.startsWith('/')) cleanPath = cleanPath.slice(1);
+    
+    // En desarrollo, si no termina en / (carpeta) y no tiene extensión, agregamos .html
+    if (isDevelopment && !cleanPath.endsWith('/') && !cleanPath.includes('.') && cleanPath !== '') {
+        return `${BASE_PATH}/${cleanPath}.html`;
+    }
+
+    return `${BASE_PATH}/${cleanPath}`;
+};
+
+/**
+ * Resuelve una ruta de asset (imágenes, fuentes, etc).
+ * @param {string} path - Ruta relativa
  */
 export const resolveAsset = (path) => {
     if (!path) return '';
@@ -54,7 +86,7 @@ export const resolveAsset = (path) => {
  * Centraliza datos estáticos para facilitar el mantenimiento.
  */
 export const siteConfig = Object.freeze({
-    version: "2.1.5", // Versión actual del proyecto (Control Maestro)
+    version: "2.1.9", // Versión actual del proyecto (Control Maestro)
     basePath: BASE_PATH, // Exponer basePath para uso general
     socialLinks: [
         {
