@@ -22,9 +22,13 @@ class App {
     constructor() {
         // App Root se deriva directamente del BASE_PATH configurado
         this.appRoot = window.location.origin + BASE_PATH + '/';
+        this.version = siteConfig.version;
         
-        // Debug para verificar en consola
-        // console.log(`[App] Initialized. Root: ${this.appRoot}, Host: ${window.location.hostname}`);
+        // Debug para verificar en consola y soporte técnico
+        if (typeof window !== 'undefined') {
+            window.__NARBO_VERSION__ = this.version;
+            // console.log(`[App] Initialized v${this.version}. Root: ${this.appRoot}`);
+        }
         
         this.isHomePage = this._checkIfHomePage();
     }

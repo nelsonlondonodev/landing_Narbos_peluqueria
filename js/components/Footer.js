@@ -77,7 +77,7 @@ function renderCopyright(year) {
         <div class="flex flex-col sm:flex-row items-center justify-center gap-2 opacity-80 text-xs sm:text-sm">
             <span>© ${year} Narbo's Salón Spa.</span>
             <span class="hidden sm:inline text-brand-light/30">|</span>
-            <span class="text-brand-light/50 font-mono text-[10px]" title="Versión del Proyecto">v${siteConfig.version}</span>
+            ${renderVersionTag()}
         </div>
         <span class="block mt-2 opacity-70 text-xs text-brand-light/90">
             Hecho con ❤️ por 
@@ -86,4 +86,11 @@ function renderCopyright(year) {
             </a>
         </span>
     `;
+}
+/**
+ * Renderiza el distintivo de versión del proyecto.
+ * @returns {string} HTML del badge de versión.
+ */
+function renderVersionTag() {
+    return `<span class="text-brand-light/50 font-mono text-[10px]" title="Versión del Proyecto">v${siteConfig.version}</span>`;
 }
