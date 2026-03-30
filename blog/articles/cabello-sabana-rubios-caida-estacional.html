@@ -89,32 +89,40 @@
       <div id="breadcrumbs-root"></div>
 
       <main class="pb-16 md:pb-24 pt-8 md:pt-12">
-        <div class="container mx-auto px-6 max-w-4xl py-12">
+        <div class="container mx-auto px-6 max-w-screen-md">
           <article>
-            
-            <header class="relative mb-12 rounded-2xl overflow-hidden shadow-2xl group animate__animated animate__fadeIn">
-               <!-- Imagen Hero Impactante -->
-               <img src="../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp" alt="Peluquería en Chía - Balayage rubio perfecto" class="w-full h-[50vh] md:h-[60vh] object-cover transition-transform duration-700 group-hover:scale-105" loading="eager" />
-               <!-- Overlay oscuro -->
-               <div class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center p-6 text-center">
-                    <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 drop-shadow-lg max-w-3xl leading-snug" data-breadcrumb="Cabello en la Sabana">
-                        Tendencias vs. Realidad: El Reto de Tener un Cabello Perfecto en la Sabana
-                    </h1>
-                    <p class="text-lg text-white/90 drop-shadow-md">
-                        Por el equipo de <span class="text-brand-green font-semibold">Narbo's Salón Spa</span> • 28 de Marzo, 2026
-                    </p>
-               </div>
+            <header class="text-center mb-12">
+              <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6" data-breadcrumb="Cabello en la Sabana">
+                Tendencias vs. Realidad: <span class="text-brand-green">El Reto de Tener un Cabello Perfecto en la Sabana</span>
+              </h1>
+              <p class="text-lg text-gray-600">
+                <span>Por el equipo de Narbo's Salón Spa</span>
+                • <span>28 de marzo de 2026</span>
+              </p>
+              
+              <div class="share-button-container mt-4 flex justify-center" 
+                   data-title="Cabello en la Sabana: Rubios y Caída Estacional | Narbos Salón Spa" 
+                   data-text="¿Por qué el rubio se oxida en Chía? Descubre la realidad del cuidado capilar en la altura con Narbo's Salón."></div>
             </header>
 
-            <div class="prose lg:prose-xl max-w-none text-slate-800">
+            <img
+              src="../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp"
+              alt="Peluquería en Chía - Balayage rubio perfecto"
+              class="w-full max-w-lg mx-auto rounded-lg shadow-lg mb-12"
+              loading="eager"
+              fetchpriority="high"
+              width="512" height="384"
+            />
+
+            <div class="prose lg:prose-xl max-w-none text-gray-800">
               
               <!-- Tabla de Contenidos -->
-              <div class="bg-gray-50/80 p-6 rounded-xl shadow-sm mb-12 border-l-4 border-brand-green animate__animated animate__fadeInUp">
+              <div class="bg-white/50 p-6 rounded-lg shadow-md mb-12 border-l-4 border-brand-green animate__animated animate__fadeInUp">
                 <h3 class="text-2xl font-serif font-bold text-gray-900 mb-4">Tabla de contenidos</h3>
-                <ol class="list-decimal list-inside space-y-2 text-lg font-medium text-brand-green">
-                  <li><a href="#rubios-sabana" class="hover:text-[#5a634b] transition-colors">Rubios en la Sabana: El reto de mantener el tono cenizo</a></li>
-                  <li><a href="#caida-estacional" class="hover:text-[#5a634b] transition-colors">La caída del cabello en Bogotá y Chía: ¿Es clima o estrés?</a></li>
-                  <li><a href="#calculadora" class="hover:text-[#5a634b] transition-colors">Calculadora de Oxidación Personal</a></li>
+                <ol class="list-decimal list-inside space-y-2 text-lg">
+                  <li><a href="#rubios-sabana" class="text-brand-green hover:underline">Rubios en la Sabana: El reto de mantener el tono cenizo</a></li>
+                  <li><a href="#caida-estacional" class="text-brand-green hover:underline">La caída del cabello en Bogotá y Chía: ¿Es clima o estrés?</a></li>
+                  <li><a href="#calculadora" class="text-brand-green hover:underline">Calculadora de Oxidación Personal</a></li>
                 </ol>
               </div>
 
@@ -232,8 +240,19 @@
                 
               </div>
               
+              <div class="text-center mt-12 animate__animated animate__zoomIn">
+                <a
+                  href="https://wa.me/573123462618?text=Hola%2C%20le%C3%AD%20el%20art%C3%ADculo%20sobre%20oxidaci%C3%B3n%20y%20ca%C3%ADda%20en%20Ch%C3%ADa.%20%C2%BFMe%20ayudan%20con%20una%20reserva%3F"
+                  class="inline-block bg-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
+                  >Agenda tu cita y asesoría personalizada 📲</a>
+              </div>
+
             </div>
           </article>
+
+          <div class="text-center mt-16 border-t pt-8">
+            <a href="/blog/" class="text-brand-green font-semibold hover:underline font-serif">&larr; Volver al blog</a>
+          </div>
         </div>
       </main>
       
