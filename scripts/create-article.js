@@ -61,7 +61,7 @@ function generateSchemaMarkup(data) {
       "datePublished": isoDate,
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://narbossalon.com/blog/articles/${slug}.html"
+        "@id": "https://narbossalon.com/blog/articles/${slug}"
       }
     };
 
@@ -152,7 +152,7 @@ function updateArticlesDatabase(data) {
         description: '${description.replace(/'/g, "\\'")}',
         image: '${imagePath}',
         alt: '${title.replace(/'/g, "\\'")}',
-        link: '/blog/articles/${filename}'
+        link: '/blog/articles/${slug}'
     },`;
 
     const updatedDb = dbContent.replace('const articles = [', `const articles = [\n${newEntry}`);
