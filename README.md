@@ -37,6 +37,23 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Recent Updates (April 03, 2026) - SEO Indexing Master & Business Continuity 🚀
+
+### 1. SEO Master Clean-up & URL Normalization 🔍
+*   **Contradictory Signal Fix:** Performed a surgical removal of all `.html` extensions from `og:url`, `twitter:url`, and JSON-LD Schema IDs across the entire project (Nosotros, Blog Index, and 12 Articles).
+*   **GSC Recovery:** Actively signaled Google Search Console by requesting a "New Validation" for the *Crawled - currently not indexed* status, now that internal metadata perfectly matches canonical and sitemap URLs.
+*   **Tracking Sanitization:** Extracted legacy static GTM (Google Tag Manager) blocks from blog articles, ensuring a cleaner, high-performance execution via the lazy-loaded `AnalyticsService`.
+
+### 2. Operations: Temporary Salon Closure 🚨
+*   **Real-time Status Control:** Implemented a date-based exception in `BusinessStatusBadge.js` to force a "CERRADO POR HOY" (Closed for Today) status for April 3rd, 2026.
+*   **Auto-Reversion Logic:** The system is programmed to automatically return to the "OPEN NOW" status tomorrow at 7:00 AM, following the regular business hours without manual intervention.
+
+### 3. Versioning & Cache Integrity (v2.2.0) ⚡
+*   **Global Cache Busting:** Executed a project-wide upgrade from `v2.1.9` to **`v2.2.0`**. Updated calls to all JS and CSS assets in every HTML file to guarantee immediate refresh for all users (mobile & desktop).
+*   **Footer Synchronization:** Successfully linked the visual version tag in the footer with the master `siteConfig.version`, providing a transparent audit trail of the project's evolution.
+
+---
+
 ## 🔄 Recent Updates (March 30, 2026) - Blog Architecture REvolution & Automation 🚀
 
 ### 1. Component-Based Blog Architecture (Vanilla JS) 🏗️
