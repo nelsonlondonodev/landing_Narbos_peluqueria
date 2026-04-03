@@ -37,6 +37,33 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🚀 Hoja de Ruta de Innovación (Roadmap 2026+)
+
+Para llevar a Narbo's Salón Spa al siguiente nivel de conversión y eficiencia, hemos trazado el siguiente plan de mejoras estratégicas:
+
+### 🌐 1. SEO & Dominio en Google (Search Engine Mastery)
+*   **Gestión Autónoma de GMB**: Auditoría y respuesta de reseñas automática/semiautomática usando IA para mantener el tono premium.
+*   **Monitoreo Real de Rankings**: Seguimiento semanal de posiciones para palabras clave locales en Chía/Cajicá.
+*   **Análisis Concurrido**: Benchmarking técnico de competidores directos para superar su velocidad y contenido.
+
+### 🤖 2. Automatizaciones de Negocio (n8n & CRM)
+*   **Agendamiento Asistido por IA**: Flujos en n8n que pre-califiquen citas en WhatsApp antes de pasar al agente humano.
+*   **Fidelización Inteligente**: Campañas de retención automáticas basadas en la última fecha de visita (Supabase + n8n).
+*   **Reportería Ejecutiva**: Resúmenes mensuales de GA4 y Search Console enviados por WhatsApp.
+
+### 🎨 3. UX & Diseño "Wow" (Visual Excellence)
+*   **Micro-interacciones Cinematográficas**: Refinamiento de animaciones y transiciones de página para una sensación "App-like".
+*   **IA-Powered Media Optimizer**: Conversión y mejora automática de activos visuales a formatos de última generación (WebP/AVIF).
+
+### 📈 4. Marketing & Conversión (CRO)
+*   **Pruebas A/B de Botones de Reserva**: Optimización del color, texto y posición de los CTAs basada en datos reales de clics.
+*   **Consultor Capilar Virtual**: Chatbot inteligente que asista a las clientas en la elección de su servicio ideal (Balayage, Keratina, Spa).
+
+### 🔧 5. Mantenimiento Quirúrgico (Code Health)
+*   **Refactorización Modular**: Limpieza continua del core para asegurar que la web sea rápida, segura y fácil de escalar a medida que el negocio crece.
+
+---
+
 ## 🔄 Recent Updates (April 03, 2026) - SEO Indexing Master & Business Continuity 🚀
 
 ### 1. SEO Master Clean-up & URL Normalization 🔍
