@@ -28,6 +28,18 @@ export class BusinessStatusBadge {
         const bogotaString = new Date().toLocaleString("en-US", { timeZone: "America/Bogota" });
         const bogotaDate = new Date(bogotaString);
         
+        // --- EXCEPCIONES DE CIERRE (Días especiales) ---
+        // Hoy 3 de Abril de 2026: Cerrado (Nelson)
+        const isSpecialClosure = bogotaDate.getFullYear() === 2026 && 
+                                 bogotaDate.getMonth() === 3 && // Abril es 3 (0-indexed)
+                                 bogotaDate.getDate() === 3;
+        
+        if (isSpecialClosure) {
+            this.specialReason = "CERRADO POR HOY";
+            return false;
+        }
+
+        this.specialReason = null;
         const day = bogotaDate.getDay(); // 0 = Domingo, 1 a 6 = Lunes a Sábado
         const hours = bogotaDate.getHours();
         const minutes = bogotaDate.getMinutes();
@@ -55,7 +67,7 @@ export class BusinessStatusBadge {
             ? "bg-black/40 backdrop-blur-md text-white border-white/20"
             : "bg-black/60 backdrop-blur-md text-white border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.5)]";
             
-        const textStr = open ? "ABIERTO AHORA" : "CERRADO AHORA";
+        const textStr = open ? "ABIERTO AHORA" : (this.specialReason || "CERRADO AHORA");
         const dotColor = open ? "bg-green-400" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,1)]";
         
         // Ahora ambos estados (Abierto y Cerrado) usan la animación 'animate-ping' para dar sensación de "en vivo"
