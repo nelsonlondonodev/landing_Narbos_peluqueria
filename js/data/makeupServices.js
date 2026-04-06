@@ -4,7 +4,7 @@ export const makeupServices = Object.freeze([
         category: 'hub',
         title: "Maquillaje Social",
         description: "**Luce espectacular en tus eventos.** Maquillaje de alta duración adaptado a tus facciones y tipo de piel.",
-        image: "../../images/pages/maquillaje/maquillaje_social_dama_1775450462083.png",
+        image: "../../images/pages/maquillaje/maquillaje-social-chia-trabajo-1.webp",
         price: 'Desde $120.000',
         duration: '60 min',
         modal: true
@@ -14,7 +14,7 @@ export const makeupServices = Object.freeze([
         category: 'hub',
         title: "Maquillaje de Novias",
         description: "**Tu día soñado merece un look perfecto.** Paquetes especiales que incluyen prueba de maquillaje y peinado. Contáctanos para asesoría VIP.",
-        image: "../../images/pages/maquillaje/maquillaje_novia_premium_1775450474215.png",
+        image: "../../images/pages/maquillaje/maquillaje-novias-y-eventos-4.webp",
         price: 'Consultar planes',
         duration: '120 min',
         modal: true
@@ -24,7 +24,7 @@ export const makeupServices = Object.freeze([
         category: 'hub',
         title: "Maquillaje Profesional Diario",
         description: "**Un look natural y elegante.** Ideal para reuniones importantes, fotos corporativas o simplemente sentirte hermosa en tu día a día.",
-        image: "../../images/pages/maquillaje/maquillaje_profesional_hero_1775450449119.png",
+        image: "../../images/pages/maquillaje/maquillaje-profesional-chia-narbos-spa.webp",
         price: 'Desde $80.000',
         duration: '45 min',
         modal: true
