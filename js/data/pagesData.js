@@ -160,9 +160,8 @@ export const pagesData = Object.freeze({
         hero: {
            title: "Nuestra <span class=\"text-brand-green\">historia</span>",
            subtitle: "Pasión por la belleza y el bienestar desde 2013.",
-           imageSrc: "images/brand/logo_narbos.webp",
-           imageAlt: "Equipo de Narbo's Salon",
-           variant: 'logo'
+           imageSrc: "images/nosotros/narbos-team-hero.webp",
+           imageAlt: "Equipo de profesionales de Narbo's Salón Spa Chía"
        }
    },
    contacto: {
