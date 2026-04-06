@@ -2,6 +2,8 @@ import { App } from './App.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { ServiceModal } from './components/ServiceModal.js';
+import { getBentoGridHTML } from './components/BentoGrid.js';
+import { pagesData } from './data/pagesData.js';
 import { makeupServices } from './data/makeupServices.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,6 +28,7 @@ function initCoreApp() {
 function initPageComponents() {
     initBreadcrumbs();
     initMakeupServicesGrid();
+    initGallery();
 }
 
 /**
@@ -122,4 +125,22 @@ function attachModalEvent(cardElement, serviceId, modalInstance) {
     });
     cardElement.style.cursor = 'pointer';
     cardElement.removeAttribute('href');
+}
+
+/**
+ * Inicializa la galería Bento inyectando el HTML generado
+ */
+function initGallery() {
+    const galleryRoot = document.getElementById('makeup-gallery-root');
+    if (!galleryRoot) return;
+
+    const galleryData = pagesData['maquillaje']?.gallery;
+    if (galleryData) {
+        galleryRoot.innerHTML = getBentoGridHTML(galleryData);
+        // La librería GLightbox suele auto-inicializarse o requiere ser llamada si se carga defer,
+        // pero verificamos si existe.
+        if (typeof GLightbox !== 'undefined') {
+            GLightbox({ selector: '.glightbox', touchNavigation: true, loop: true });
+        }
+    }
 }
