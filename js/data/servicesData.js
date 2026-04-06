@@ -52,7 +52,7 @@ export const servicesData = Object.freeze([
         i18nDesc: "service.makeup.desc",
         icon: '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>',
         link: "/servicios/maquillaje/",
-        image: "images/pages/maquillaje/maquillaje_profesional_hero_1775450449119.png",
+        image: "images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
         animationDelay: "0.5s"
     },
     {
