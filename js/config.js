@@ -86,7 +86,7 @@ export const resolveAsset = (path) => {
  * Centraliza datos estáticos para facilitar el mantenimiento.
  */
 export const siteConfig = Object.freeze({
-    version: "2.2.0", // Versión actual del proyecto (Control Maestro)
+    version: "2.3.0", // Versión actual del proyecto (Control Maestro)
     basePath: BASE_PATH, // Exponer basePath para uso general
     socialLinks: [
         {
@@ -114,7 +114,7 @@ export const siteConfig = Object.freeze({
         phone: "+573123462618",
         whatsapp: "573123462618",
         email: "citas@narbossalon.com",
-        address: "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118, Chía, Cundinamarca, Colombia.",
+        address: "Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118, Chía, Cundinamarca, Colombia.",
         mapsLink: "https://maps.app.goo.gl/tuLinkDeMaps",
         googleAnalyticsId: "G-7XLWJJBSDL"
     }
