@@ -107,7 +107,7 @@ function getOverlayHTML(item) {
 /**
  * Genera el HTML unitario de un card para el Bento. Ensambla todas sus partes.
  */
-function getGridItemHTML(item, index, options = {}, extraStretchClass = '') {
+function getGridItemHTML(item, index, options = {}) {
     const spanClass = getSpanClass(item.layout);
     const galleryId = getGalleryId(item, index, options);
     
@@ -119,7 +119,7 @@ function getGridItemHTML(item, index, options = {}, extraStretchClass = '') {
     const triggerDataType = item.type === 'video' ? 'video' : 'image';
 
     return `
-        <div class="${spanClass}${extraStretchClass} relative group overflow-hidden rounded-2xl shadow-lg">
+        <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg">
             ${mediaHTML}
             ${overlayHTML}
             <!-- Lightbox Trigger -->
@@ -130,14 +130,14 @@ function getGridItemHTML(item, index, options = {}, extraStretchClass = '') {
 }
 
 /**
- * Simula el comportamiento del CSS Grid y devuelve un objeto matemático del layout.
- * Determina cuántas columnas reales se usan (optimalCols).
+ * Simula el comportamiento del CSS Grid.
+ * Determina cuántas columnas reales se usan para colapsar grids incompletos en ancho.
  */
-function getGridMath(items) {
+function calculateOptimalColumns(items) {
     const grid = [];
     let maxColUsed = -1;
 
-    items.forEach((item, index) => {
+    items.forEach((item) => {
         const { w, h } = getLayoutDimensions(item.layout);
         let r = 0;
         let placed = false;
@@ -171,7 +171,7 @@ function getGridMath(items) {
     });
     
     const optimalCols = maxColUsed + 1 < 1 ? 4 : maxColUsed + 1;
-    return { optimalCols };
+    return optimalCols;
 }
 
 /**
@@ -180,25 +180,9 @@ function getGridMath(items) {
 export function getBentoGridHTML(items, options = {}) {
     if (!items || items.length === 0) return '';
 
-    const { optimalCols } = getGridMath(items);
-
-    const gridItemsHTML = items.map((item, index) => {
-        let spanClass = getSpanClass(item.layout);
-        let galleryId = getGalleryId(item, index, options);
-        let mediaHTML = getMediaContentHTML(item);
-        let overlayHTML = getOverlayHTML(item);
-        let hiddenLinksHTML = getHiddenSubImagesHTML(item, galleryId);
-        let triggerDataType = item.type === 'video' ? 'video' : 'image';
-        
-        return `
-            <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg">
-                ${mediaHTML}
-                ${overlayHTML}
-                <a href="javascript:void(0);" data-href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${triggerDataType}" aria-label="${item.alt}"></a>
-                ${hiddenLinksHTML}
-            </div>
-        `;
-    }).join('');
+    const gridItemsHTML = items.map((item, index) => getGridItemHTML(item, index, options)).join('');
+    
+    const optimalCols = calculateOptimalColumns(items);
 
     const gridColsOptions = {
         1: 'md:grid-cols-1',
