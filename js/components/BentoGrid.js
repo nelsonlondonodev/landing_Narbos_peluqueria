@@ -7,22 +7,53 @@
  * @param {boolean} [options.isolateItems] - Si es true, aísla cada item en su propia galería.
  * @returns {string} HTML string del item.
  */
-function getGridItemHTML(item, index, options = {}) {
-    const layoutClasses = {
-        'featured-video': 'col-span-1 row-span-2 md:col-span-2 md:row-span-2', 
-        'vertical': 'col-span-1 row-span-2 md:col-span-1 md:row-span-2', 
-        'horizontal': 'col-span-2 md:col-span-2', 
-        'square': 'col-span-1',
-        'logo-filler': 'col-span-2 md:col-span-1' 
-    };
+// Constantes de Layout
+const LAYOUT_CLASSES = {
+    'featured-video': 'col-span-1 row-span-2 md:col-span-2 md:row-span-2', 
+    'vertical': 'col-span-1 row-span-2 md:col-span-1 md:row-span-2', 
+    'horizontal': 'col-span-2 md:col-span-2', 
+    'square': 'col-span-1',
+    'logo-filler': 'col-span-2 md:col-span-1' 
+};
 
-    const spanClass = layoutClasses[item.layout] || layoutClasses['square'];
+/**
+ * Devuelve la clase de Layout correspondiente.
+ */
+function getSpanClass(layout) {
+    return LAYOUT_CLASSES[layout] || LAYOUT_CLASSES['square'];
+}
 
-    let mediaHTML = '';
+/**
+ * Devuelve las dimensiones lógicas (ancho y alto en celdas) de un layout.
+ */
+function getLayoutDimensions(layout) {
+    let w = 1, h = 1;
+    if (layout === 'featured-video' || layout === 'horizontal') w = 2;
+    if (layout === 'featured-video' || layout === 'vertical') h = 2;
+    return { w, h };
+}
+
+/**
+ * Genera el ID único para la galería agrupando por sub-imágenes u opciones.
+ */
+function getGalleryId(item, index, options) {
+    const hasSubImages = !!(item.subImages && item.subImages.length > 0);
+    const cleanTitle = (item.title || 'item').replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
     
+    const uniqueId = `gallery-${cleanTitle}-${index}`;
+    const sharedId = 'bento-gallery';
+
+    return (options.isolateItems || hasSubImages) ? uniqueId : sharedId;
+}
+
+/**
+ * Genera el HTML interno dependiendo del tipo de recurso (Video, Logo o Imagen).
+ */
+function getMediaContentHTML(item) {
     if (item.type === 'video') {
-        mediaHTML = `
-            <div class="video-container relative w-full h-full cursor-pointer group/video" onclick="this.innerHTML = '<video autoplay controls playsinline class=\'w-full h-full object-cover\'><source src=\'${item.src}\' type=\'video/mp4\'></video>'">
+        const videoHTML = `<video autoplay controls playsinline class='w-full h-full object-cover'><source src='${item.src}' type='video/mp4'></video>`;
+        return `
+            <div class="video-container relative w-full h-full cursor-pointer group/video" onclick="this.innerHTML = '${videoHTML}'">
                 <img src="${item.poster}" alt="${item.alt}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover/video:bg-black/30 transition-colors">
                     <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/40 group-hover/video:scale-110 transition-transform duration-300">
@@ -31,49 +62,68 @@ function getGridItemHTML(item, index, options = {}) {
                 </div>
             </div>
         `;
-    } else if (item.type === 'logo-card') {
-        // Special type for filling space with branding
-        mediaHTML = `
+    } 
+    
+    if (item.type === 'logo-card') {
+        return `
             <div class="w-full h-full bg-stone-900 flex items-center justify-center p-8 group-hover:bg-stone-800 transition-colors duration-500">
                 <img src="${item.src}" alt="${item.alt}" class="w-2/3 h-2/3 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300">
             </div>
         `;
-    } else {
-        mediaHTML = `
-            <img src="${item.src}" alt="${item.alt}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-        `;
     }
 
-    // Lógica de ID de Galería (Refactorizado para limpieza y flexibilidad)
-    const hasSubImages = item.subImages && item.subImages.length > 0;
+    return `<img src="${item.src}" alt="${item.alt}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">`;
+}
+
+/**
+ * Genera los links ocultos de sub-imágenes para ser enlazados por el lightbox.
+ */
+function getHiddenSubImagesHTML(item, galleryId) {
+    if (!item.subImages || item.subImages.length === 0) return '';
+    return item.subImages.map(subItem => `
+        <a href="javascript:void(0);" data-href="${subItem.src}" class="glightbox hidden" data-gallery="${galleryId}" data-type="image" aria-label="${subItem.alt || ''}"></a>
+    `).join('');
+}
+
+/**
+ * Genera los textos flotantes (título y subtítulo) sobre el componente de la cuadrícula.
+ */
+function getOverlayHTML(item) {
+    if (!item.title && !item.subtitle) return '';
+
+    const titleHTML = item.title ? `<p class="text-white font-serif font-bold text-sm md:text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-300">${item.title}</p>` : '';
+    const subtitleHTML = item.subtitle ? `<p class="text-gray-200 text-xs md:text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">${item.subtitle}</p>` : '';
+
+    return `
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-6">
+            <div>
+                ${titleHTML}
+                ${subtitleHTML}
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Genera el HTML unitario de un card para el Bento. Ensambla todas sus partes.
+ */
+function getGridItemHTML(item, index, options = {}) {
+    const spanClass = getSpanClass(item.layout);
+    const galleryId = getGalleryId(item, index, options);
     
-    // Determinismo: Usar índice en lugar de random para IDs estables
-    const cleanTitle = (item.title || 'item').replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
-    const uniqueId = `gallery-${cleanTitle}-${index}`;
-    const sharedId = 'bento-gallery';
-
-    // Aislamiento: Si la opción isolateItems está activa o el item tiene sub-imágenes (caso de estudio), se aísla.
-    const useUniqueId = options.isolateItems || hasSubImages;
-    const galleryId = useUniqueId ? uniqueId : sharedId;
-
-    let hiddenLinksHTML = '';
-    if (hasSubImages) {
-        hiddenLinksHTML = item.subImages.map(subItem => `
-            <a href="javascript:void(0);" data-href="${subItem.src}" class="glightbox hidden" data-gallery="${galleryId}" data-type="image" aria-label="${subItem.alt || ''}"></a>
-        `).join('');
-    }
+    // Armado de componentes internos
+    const mediaHTML = getMediaContentHTML(item);
+    const overlayHTML = getOverlayHTML(item);
+    const hiddenLinksHTML = getHiddenSubImagesHTML(item, galleryId);
+    
+    const triggerDataType = item.type === 'video' ? 'video' : 'image';
 
     return `
         <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg">
             ${mediaHTML}
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 md:p-6">
-                <div>
-                    ${item.title ? `<p class="text-white font-serif font-bold text-sm md:text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-300">${item.title}</p>` : ''}
-                    ${item.subtitle ? `<p class="text-gray-200 text-xs md:text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">${item.subtitle}</p>` : ''}
-                </div>
-            </div>
-             <!-- Lightbox Trigger -->
-            <a href="javascript:void(0);" data-href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${item.type === 'video' ? 'video' : 'image'}" aria-label="${item.alt}"></a>
+            ${overlayHTML}
+            <!-- Lightbox Trigger -->
+            <a href="javascript:void(0);" data-href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${triggerDataType}" aria-label="${item.alt}"></a>
             ${hiddenLinksHTML}
         </div>
     `;
@@ -81,21 +131,14 @@ function getGridItemHTML(item, index, options = {}) {
 
 /**
  * Simula el comportamiento del CSS Grid para determinar cuántas columnas reales se usan.
- * Evita el problema estético de áreas vacías a la derecha en grids que no suman 4 columnas.
+ * Evita huecos en grids donde faltan ítems para completar 4 columnas.
  */
 function calculateOptimalColumns(items) {
-    const layoutDimensions = items.map(item => {
-        let w = 1, h = 1;
-        if (item.layout === 'featured-video' || item.layout === 'horizontal') w = 2;
-        if (item.layout === 'featured-video' || item.layout === 'vertical') h = 2;
-        return { w, h };
-    });
-
     const grid = [];
     let maxColUsed = -1;
 
-    for (let k = 0; k < layoutDimensions.length; k++) {
-        let { w, h } = layoutDimensions[k];
+    items.forEach(item => {
+        const { w, h } = getLayoutDimensions(item.layout);
         let r = 0;
         let placed = false;
         
@@ -118,41 +161,35 @@ function calculateOptimalColumns(items) {
                             grid[r+i][c+j] = true; 
                         }
                     }
-                    if (c + w - 1 > maxColUsed) {
-                        maxColUsed = c + w - 1;
-                    }
+                    if (c + w - 1 > maxColUsed) { maxColUsed = c + w - 1; }
                     placed = true;
                     break;
                 }
             }
             if (!placed) r++;
         }
-    }
+    });
     
     const optimalCols = maxColUsed + 1;
     return optimalCols < 1 ? 4 : optimalCols;
 }
 
 /**
- * Genera todo el grid Bento.
- * @param {Array} items - Lista de items.
- * @param {Object} options - Opciones de configuración.
- * @returns {string} HTML del grid completo.
+ * Función principal que orquesta y retorna todo el layout Bento
  */
 export function getBentoGridHTML(items, options = {}) {
     if (!items || items.length === 0) return '';
 
     const gridItemsHTML = items.map((item, index) => getGridItemHTML(item, index, options)).join('');
-
     const optimalCols = calculateOptimalColumns(items);
     
-    // Mapeo seguro para que el compilador JIT de Tailwind CSS extraiga las clases
     const gridColsOptions = {
         1: 'md:grid-cols-1',
         2: 'md:grid-cols-2',
         3: 'md:grid-cols-3',
         4: 'md:grid-cols-4'
     };
+    
     const dynamicGridClass = gridColsOptions[optimalCols] || 'md:grid-cols-4';
 
     return `
