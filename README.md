@@ -64,7 +64,26 @@ Para llevar a Narbo's Salón Spa al siguiente nivel de conversión y eficiencia,
 
 ---
 
-## 🔄 Recent Updates (April 03, 2026) - SEO Indexing Master & Business Continuity 🚀
+## 🔄 Recent Updates (April 06, 2026) - Premium Aesthetics & Grammar Audit 💄
+
+### 1. Makeup Hub Optimization (Visual Excellence) ✨
+*   **Bento Grid Implementation:** Migrated the legacy gallery to a high-fidelity **Bento Grid** for "Maquillaje profesional". Implemented the "Dual Vertical Start" pattern to ensure a mathematically perfect, premium layout on both mobile and desktop.
+*   **Hero Section Standardization:** Refactored the Makeup Hero to match the "Floating Box" premium design of the Home and Barber pages.
+*   **Asset Synchronization:** Fixed 404 errors for service cards by correctly mapping the new high-resolution hero images in `servicesData.js`.
+
+### 2. Full Spanish Grammar Audit (Linguistic Precision) 📖
+*   **Sentence Case Enforcement:** Conducted a surgical audit across the entire Makeup page (H1, H2, H3, and Gallery) to ensure compliance with Spanish grammatical norms. 
+    *   **Corrected:** "Maquillaje Profesional" ❌ → **"Maquillaje profesional"** ✅.
+    *   **Corrected:** "Nuestros Servicios de Maquillaje" ❌ → **"Nuestros servicios de maquillaje en Chía"** ✅.
+*   **Data Integrity:** Normalized all titles and subtitles in `js/data/pagesData.js` and `js/data/makeupServices.js` to eliminate unnecessary capitalization in adjectives (social, artístico, diario).
+
+### 3. Technical Stability & Build Synchronization 🛠️
+*   **PagesData Enrichment:** Manually injected the missing `hero` object in `pagesData.js` for the makeup route, ensuring `App.js` can perform Client-Side Hydration without losing styling.
+*   **SSG Pipeline Executed:** Ran a full production build (`node scripts/ssg.js`) to propagate all JSON-LD and UI changes to the static HTML files.
+
+---
+
+
 
 ### 1. SEO Master Clean-up & URL Normalization 🔍
 *   **Contradictory Signal Fix:** Performed a surgical removal of all `.html` extensions from `og:url`, `twitter:url`, and JSON-LD Schema IDs across the entire project (Nosotros, Blog Index, and 12 Articles).
