@@ -5,20 +5,32 @@ import { ServiceModal } from './components/ServiceModal.js';
 import { makeupServices } from './data/makeupServices.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Explicitly initialize Core App (Navbar, Footer, etc)
+    initCoreApp();
+    initPageComponents();
+});
+
+/**
+ * Inicializa la aplicación principal (Navbar, Footer, etc.) si no existe
+ */
+function initCoreApp() {
     if (!window.narbosApp) {
         const app = new App();
         window.narbosApp = app;
         app.init();
     }
-    initPageComponents();
-});
+}
 
+/**
+ * Inicializa los componentes individuales de la página
+ */
 function initPageComponents() {
     initBreadcrumbs();
     initMakeupServicesGrid();
 }
 
+/**
+ * Configura y renderiza los Breadcrumbs
+ */
 function initBreadcrumbs() {
     const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
     if (!breadcrumbsRoot) return;
@@ -30,34 +42,84 @@ function initBreadcrumbs() {
     breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                GRID & MODAL                                */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Configura el contenedor principal del Grid de servicios
+ */
 function initMakeupServicesGrid() {
     const gridContainer = document.getElementById('makeup-services-grid');
     if (!gridContainer) return;
+    
     gridContainer.innerHTML = '';
 
     const serviceModal = new ServiceModal(makeupServices);
-    const services = makeupServices.filter(s => s.category === 'hub');
+    const hubServices = getHubServices();
+
+    renderServiceCards(gridContainer, hubServices, serviceModal);
+}
+
+/**
+ * Obtiene los servicios filtrados para la pantalla principal (Hub)
+ * @returns {Array} Servicios de categoría 'hub'
+ */
+function getHubServices() {
+    return makeupServices.filter(s => s.category === 'hub');
+}
+
+/**
+ * Renderiza múltiples tarjetas en un contenedor dado
+ * @param {HTMLElement} container - Contenedor DOM
+ * @param {Array} services - Lista de servicios a renderizar
+ * @param {ServiceModal} modalInstance - Instancia del modal para inyección
+ */
+function renderServiceCards(container, services, modalInstance) {
+    if (!services || services.length === 0) return;
 
     services.forEach(service => {
-        const cardElement = new ServiceCard({
-            title: service.title,
-            description: service.description,
-            image: service.image,
-            price: service.price,
-            link: service.link || '#',
-            variant: service.variant || 'standard',
-            modalId: service.modal ? 'service-modal' : null
-        }).render();
-
-        if (service.modal) {
-            cardElement.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                serviceModal.open(service.id);
-            });
-            cardElement.style.cursor = 'pointer';
-            cardElement.removeAttribute('href');
-        }
-        gridContainer.appendChild(cardElement);
+        const cardElement = createServiceCard(service, modalInstance);
+        container.appendChild(cardElement);
     });
+}
+
+/**
+ * Crea el elemento DOM individual de una tarjeta de servicio
+ * @param {Object} service - Objeto de datos del servicio
+ * @param {ServiceModal} modalInstance - Instancia del modal
+ * @returns {HTMLElement} Elemento DOM construido
+ */
+function createServiceCard(service, modalInstance) {
+    const isModal = !!service.modal;
+
+    const cardElement = new ServiceCard({
+        title: service.title,
+        description: service.description,
+        image: service.image,
+        price: service.price,
+        link: service.link || '#',
+        variant: service.variant || 'standard',
+        modalId: isModal ? 'service-modal' : null
+    }).render();
+
+    if (isModal) attachModalEvent(cardElement, service.id, modalInstance);
+
+    return cardElement;
+}
+
+/**
+ * Agrega el listener de eventos para abrir el modal
+ * @param {HTMLElement} cardElement - Elemento que recibe el clic
+ * @param {number} serviceId - Id del servicio atado al modal
+ * @param {ServiceModal} modalInstance - Gestor del modal
+ */
+function attachModalEvent(cardElement, serviceId, modalInstance) {
+    cardElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        modalInstance.open(serviceId);
+    });
+    cardElement.style.cursor = 'pointer';
+    cardElement.removeAttribute('href');
 }
