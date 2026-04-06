@@ -80,6 +80,60 @@ function getGridItemHTML(item, index, options = {}) {
 }
 
 /**
+ * Simula el comportamiento del CSS Grid para determinar cuántas columnas reales se usan.
+ * Evita el problema estético de áreas vacías a la derecha en grids que no suman 4 columnas.
+ */
+function calculateOptimalColumns(items) {
+    const layoutDimensions = items.map(item => {
+        let w = 1, h = 1;
+        if (item.layout === 'featured-video' || item.layout === 'horizontal') w = 2;
+        if (item.layout === 'featured-video' || item.layout === 'vertical') h = 2;
+        return { w, h };
+    });
+
+    const grid = [];
+    let maxColUsed = -1;
+
+    for (let k = 0; k < layoutDimensions.length; k++) {
+        let { w, h } = layoutDimensions[k];
+        let r = 0;
+        let placed = false;
+        
+        while (!placed) {
+            if (!grid[r]) grid[r] = [false, false, false, false];
+            
+            for (let c = 0; c <= 4 - w; c++) {
+                let empty = true;
+                for (let i = 0; i < h; i++) {
+                    if (!grid[r+i]) grid[r+i] = [false, false, false, false];
+                    for (let j = 0; j < w; j++) {
+                        if (grid[r+i][c+j]) { empty = false; break; }
+                    }
+                    if (!empty) break;
+                }
+                
+                if (empty) {
+                    for (let i = 0; i < h; i++) {
+                        for (let j = 0; j < w; j++) { 
+                            grid[r+i][c+j] = true; 
+                        }
+                    }
+                    if (c + w - 1 > maxColUsed) {
+                        maxColUsed = c + w - 1;
+                    }
+                    placed = true;
+                    break;
+                }
+            }
+            if (!placed) r++;
+        }
+    }
+    
+    const optimalCols = maxColUsed + 1;
+    return optimalCols < 1 ? 4 : optimalCols;
+}
+
+/**
  * Genera todo el grid Bento.
  * @param {Array} items - Lista de items.
  * @param {Object} options - Opciones de configuración.
@@ -90,8 +144,19 @@ export function getBentoGridHTML(items, options = {}) {
 
     const gridItemsHTML = items.map((item, index) => getGridItemHTML(item, index, options)).join('');
 
+    const optimalCols = calculateOptimalColumns(items);
+    
+    // Mapeo seguro para que el compilador JIT de Tailwind CSS extraiga las clases
+    const gridColsOptions = {
+        1: 'md:grid-cols-1',
+        2: 'md:grid-cols-2',
+        3: 'md:grid-cols-3',
+        4: 'md:grid-cols-4'
+    };
+    const dynamicGridClass = gridColsOptions[optimalCols] || 'md:grid-cols-4';
+
     return `
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[250px]" data-animation="fadeInUp" data-animation-delay="0.2s">
+        <div class="grid grid-cols-2 ${dynamicGridClass} gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[250px] grid-flow-row-dense" data-animation="fadeInUp" data-animation-delay="0.2s">
             ${gridItemsHTML}
         </div>
     `;
