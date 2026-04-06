@@ -49,8 +49,7 @@ export const getMenuCategories = (basePath = './') => [
         title: "Maquillaje",
         link: `${basePath}servicios/maquillaje/`,
         items: [
-            { label: "Maquillaje Profesional", link: `${basePath}servicios/maquillaje/` },
-            { label: "Novias y Eventos", link: `${basePath}servicios/maquillaje/` }
+            { label: "Todo en Maquillaje", link: `${basePath}servicios/maquillaje/` }
         ]
     },
     {
