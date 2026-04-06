@@ -46,13 +46,23 @@ export const servicesData = Object.freeze([
         animationDelay: "0.4s"
     },
     {
+        title: "Maquillaje",
+        i18nTitle: "service.makeup.title",
+        description: "Maquillaje profesional para toda ocasión: novias, social, editorial y quinceañeras en Chía.",
+        i18nDesc: "service.makeup.desc",
+        icon: '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>',
+        link: "/servicios/maquillaje/",
+        image: "images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
+        animationDelay: "0.5s"
+    },
+    {
         title: "Barbería",
         i18nTitle: "service.barber.title",
         description: "Cortes clásicos y modernos, arreglo de barba, ritual de toalla caliente y cuidado masculino.",
         i18nDesc: "service.barber.desc",
         icon: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M7 8l10 5M7 13l10 5M7 18l6 3M11 3l6 3"/>',
         link: "/servicios/barberia/",
-        image: "images/pages/barberia/barber-hero.webp",
+        image: "images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp",
         animationDelay: "0.6s"
     }
 ]);

@@ -37,6 +37,69 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🚀 Hoja de Ruta de Innovación (Roadmap 2026+)
+
+Para llevar a Narbo's Salón Spa al siguiente nivel de conversión y eficiencia, hemos trazado el siguiente plan de mejoras estratégicas:
+
+### 🌐 1. SEO & Dominio en Google (Search Engine Mastery)
+*   **Gestión Autónoma de GMB (Fase 1 - En Progreso)**: ✅ Infraestructura base creada (`scripts/gmb-orchestrator.js`). Pendiente configuración de credenciales API. Auditoría y respuesta de reseñas automática/semiautomática usando IA.
+*   **Monitoreo Real de Rankings**: Seguimiento semanal de posiciones para palabras clave locales en Chía/Cajicá.
+*   **Análisis Concurrido**: Benchmarking técnico de competidores directos para superar su velocidad y contenido.
+
+### 🤖 2. Automatizaciones de Negocio (n8n & CRM)
+*   **Agendamiento Asistido por IA**: Flujos en n8n que pre-califiquen citas en WhatsApp antes de pasar al agente humano.
+*   **Fidelización Inteligente**: Campañas de retención automáticas basadas en la última fecha de visita (Supabase + n8n).
+*   **Reportería Ejecutiva**: Resúmenes mensuales de GA4 y Search Console enviados por WhatsApp.
+
+### 🎨 3. UX & Diseño "Wow" (Visual Excellence)
+*   **Micro-interacciones Cinematográficas**: Refinamiento de animaciones y transiciones de página para una sensación "App-like".
+*   **IA-Powered Media Optimizer**: Conversión y mejora automática de activos visuales a formatos de última generación (WebP/AVIF).
+
+### 📈 4. Marketing & Conversión (CRO)
+*   **Pruebas A/B de Botones de Reserva**: Optimización del color, texto y posición de los CTAs basada en datos reales de clics.
+*   **Consultor Capilar Virtual**: Chatbot inteligente que asista a las clientas en la elección de su servicio ideal (Balayage, Keratina, Spa).
+
+### 🔧 5. Mantenimiento Quirúrgico (Code Health)
+*   **Refactorización Modular**: Limpieza continua del core para asegurar que la web sea rápida, segura y fácil de escalar a medida que el negocio crece.
+
+---
+
+## 🔄 Recent Updates (April 06, 2026) - Premium Aesthetics & Grammar Audit 💄
+
+### 1. Makeup Hub Optimization (Visual Excellence) ✨
+*   **Bento Grid Implementation:** Migrated the legacy gallery to a high-fidelity **Bento Grid** for "Maquillaje profesional". Implemented the "Dual Vertical Start" pattern to ensure a mathematically perfect, premium layout on both mobile and desktop.
+*   **Hero Section Standardization:** Refactored the Makeup Hero to match the "Floating Box" premium design of the Home and Barber pages.
+*   **Asset Synchronization:** Fixed 404 errors for service cards by correctly mapping the new high-resolution hero images in `servicesData.js`.
+
+### 2. Full Spanish Grammar Audit (Linguistic Precision) 📖
+*   **Sentence Case Enforcement:** Conducted a surgical audit across the entire Makeup page (H1, H2, H3, and Gallery) to ensure compliance with Spanish grammatical norms. 
+    *   **Corrected:** "Maquillaje Profesional" ❌ → **"Maquillaje profesional"** ✅.
+    *   **Corrected:** "Nuestros Servicios de Maquillaje" ❌ → **"Nuestros servicios de maquillaje en Chía"** ✅.
+*   **Data Integrity:** Normalized all titles and subtitles in `js/data/pagesData.js` and `js/data/makeupServices.js` to eliminate unnecessary capitalization in adjectives (social, artístico, diario).
+
+### 3. Technical Stability & Build Synchronization 🛠️
+*   **PagesData Enrichment:** Manually injected the missing `hero` object in `pagesData.js` for the makeup route, ensuring `App.js` can perform Client-Side Hydration without losing styling.
+*   **SSG Pipeline Executed:** Ran a full production build (`node scripts/ssg.js`) to propagate all JSON-LD and UI changes to the static HTML files.
+
+---
+
+
+
+### 1. SEO Master Clean-up & URL Normalization 🔍
+*   **Contradictory Signal Fix:** Performed a surgical removal of all `.html` extensions from `og:url`, `twitter:url`, and JSON-LD Schema IDs across the entire project (Nosotros, Blog Index, and 12 Articles).
+*   **GSC Recovery:** Actively signaled Google Search Console by requesting a "New Validation" for the *Crawled - currently not indexed* status, now that internal metadata perfectly matches canonical and sitemap URLs.
+*   **Tracking Sanitization:** Extracted legacy static GTM (Google Tag Manager) blocks from blog articles, ensuring a cleaner, high-performance execution via the lazy-loaded `AnalyticsService`.
+
+### 2. Operations: Temporary Salon Closure 🚨
+*   **Real-time Status Control:** Implemented a date-based exception in `BusinessStatusBadge.js` to force a "CERRADO POR HOY" (Closed for Today) status for April 3rd, 2026.
+*   **Auto-Reversion Logic:** The system is programmed to automatically return to the "OPEN NOW" status tomorrow at 7:00 AM, following the regular business hours without manual intervention.
+
+### 3. Versioning & Cache Integrity (v2.2.0) ⚡
+*   **Global Cache Busting:** Executed a project-wide upgrade from `v2.1.9` to **`v2.2.0`**. Updated calls to all JS and CSS assets in every HTML file to guarantee immediate refresh for all users (mobile & desktop).
+*   **Footer Synchronization:** Successfully linked the visual version tag in the footer with the master `siteConfig.version`, providing a transparent audit trail of the project's evolution.
+
+---
+
 ## 🔄 Recent Updates (March 30, 2026) - Blog Architecture REvolution & Automation 🚀
 
 ### 1. Component-Based Blog Architecture (Vanilla JS) 🏗️

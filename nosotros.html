@@ -16,7 +16,7 @@
     <meta property="og:description" content="Más de 11 años dedicados al arte de la belleza y el bienestar en Chía." />
     <meta property="og:image" content="https://narbossalon.com/images/team/Team_1.webp" />
 
-    <link rel="stylesheet" href="css/styles.css?v=2.2.0" />
+    <link rel="stylesheet" href="css/styles.css?v=2.3.0" />
     <link rel="icon" type="image/webp" href="images/brand/favicon_narbos.webp" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,6 +31,11 @@
       "@graph": [
         {
           "@type": "AboutPage",
+          "@id": "https://narbossalon.com/nosotros#webpage",
+          "url": "https://narbossalon.com/nosotros",
+          "name": "Sobre Nosotros | Narbo's Salón Spa Chía",
+          "description": "Expertos en belleza y bienestar en Chía con más de 11 años de trayectoria.",
+          "breadcrumb": { "@id": "https://narbossalon.com/nosotros#breadcrumb" },
           "mainEntity": {
             "@type": "BeautySalon",
             "name": "Narbo's Salón Spa",
@@ -38,16 +43,14 @@
             "url": "https://narbossalon.com/",
             "telephone": "+573123462618",
             "image": [
-              "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
+              "https://narbossalon.com/images/nosotros/narbos-team-hero.webp",
               "https://narbossalon.com/images/nosotros/peluqueria-chia-recepcion.webp",
-              "https://narbossalon.com/images/nosotros/salon-de-belleza-chia-zona-espera-narbos.webp",
-              "https://narbossalon.com/images/pages/estetica/cabinas-spa-estetica-narbos.webp"
+              "https://narbossalon.com/images/nosotros/salon-de-belleza-chia-zona-espera-narbos.webp"
             ],
-            "foundingDate": "2013",
-            "description": "Expertos en belleza y bienestar en Chía con más de 11 años de trayectoria. Peluquería, Spa y Estética.",
+            "priceRange": "$$",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
+              "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118",
               "addressLocality": "Chía",
               "addressRegion": "Cundinamarca",
               "postalCode": "250001",
@@ -58,12 +61,20 @@
               "latitude": 4.8617,
               "longitude": -74.0539
             },
-            "priceRange": "$$",
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "5.0",
-              "reviewCount": "292"
-            }
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "07:00",
+                "closes": "20:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Sunday", "PublicHolidays"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ]
           }
         },
         {
@@ -98,13 +109,14 @@
               "name": "¿Dónde están ubicados?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Estamos ubicados en los Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118, Chía, Cundinamarca, Colombia. ¡Te esperamos!"
+                "text": "Estamos ubicados en los Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118, Chía, Cundinamarca, Colombia. ¡Te esperamos!"
               }
             }
           ]
         },
         {
           "@type": "BreadcrumbList",
+          "@id": "https://narbossalon.com/nosotros#breadcrumb",
           "itemListElement": [
             {
               "@type": "ListItem",
@@ -134,19 +146,14 @@
 
     <!-- 2. Wrapper principal de la aplicación -->
     <div id="app-wrapper" class="relative w-full overflow-x-hidden">
-        <main>
+        <main id="main-content">
             <!-- Hero Section (Dynamic) -->
             <div id="hero-root"></div>
 
-        <!-- Contenido Nosotros (Intro + Timeline) -->
-            <section class="py-16 md:py-24 overflow-x-hidden bg-white">
-                <div class="container mx-auto px-6 max-w-screen-xl">
-                    
-            
-            <!-- Introducción -->
-            <section class="py-20 bg-white">
+            <!-- Introducción y Pilares -->
+            <section class="py-20 bg-white" aria-labelledby="intro-title">
                 <div class="container mx-auto px-6 max-w-4xl text-center">
-                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-8 animate__animated animate__fadeInUp">
+                    <h2 id="intro-title" class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mt-8 md:mt-12 mb-8 animate__animated animate__fadeInUp">
                         Más de una década realzando tu belleza
                     </h2>
                     <p class="text-xl leading-relaxed text-brand-gray-dark/80 mb-12 animate__animated animate__fadeInUp animate__delay-1s">
@@ -201,15 +208,17 @@
                         </div>
 
                     </div>
+                </div>
+            </section>
 
-                    <!-- Nuestra Trayectoria (Timeline Renovado) -->
-                    <section class="py-16 bg-white relative overflow-hidden">
-                        <div class="container mx-auto px-6 max-w-5xl">
-                            <div class="text-center mb-16">
-                                <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-6">Nuestra Historia</h2>
-                                <div class="w-24 h-1 bg-brand-green mx-auto rounded-full"></div>
-                                <p class="mt-6 text-brand-gray-dark/80 max-w-2xl mx-auto">Un viaje de pasión, aprendizaje y crecimiento constante.</p>
-                            </div>
+            <!-- Nuestra Trayectoria -->
+            <section class="py-16 bg-white relative overflow-hidden" aria-labelledby="timeline-title">
+                <div class="container mx-auto px-6 max-w-5xl">
+                    <div class="text-center mb-16">
+                        <h2 id="timeline-title" class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-6">Nuestra Historia</h2>
+                        <div class="w-24 h-1 bg-brand-green mx-auto rounded-full"></div>
+                        <p class="mt-6 text-brand-gray-dark/80 max-w-2xl mx-auto">Un viaje de pasión, aprendizaje y crecimiento constante.</p>
+                    </div>
 
                             <div class="relative">
                                 <!-- Línea central del timeline -->
@@ -350,18 +359,14 @@
 
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </section>
-
                 </div>
             </section>
 
-             <!-- Sección de Instalaciones (Nuestras Instalaciones) -->
-             <section class="py-20 md:py-28 bg-white overflow-hidden relative border-t border-brand-light/20">
+             <!-- Sección de Instalaciones -->
+             <section class="py-20 md:py-28 bg-white overflow-hidden relative border-t border-brand-light/20" aria-labelledby="installations-title">
                 <div class="container mx-auto px-6 max-w-screen-xl">
                     <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-4 animate__animated animate__fadeInUp">
+                        <h2 id="installations-title" class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-4 animate__animated animate__fadeInUp">
                             Nuestras Instalaciones
                         </h2>
                         <div class="w-24 h-1 bg-brand-green mx-auto rounded-full mb-6"></div>
@@ -422,10 +427,10 @@
                 </div>
              </section>
 
-             <!-- Sección de Reseñas (Infinite Marquee) -->
-             <section class="py-20 md:py-28 bg-brand-green/5 overflow-hidden">
+             <!-- Sección de Reseñas -->
+             <section class="py-20 md:py-28 bg-brand-green/5 overflow-hidden" aria-labelledby="reviews-title">
                 <div class="container mx-auto px-6 max-w-screen-xl mb-12 text-center">
-                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-4">Lo que dicen nuestros clientes</h2>
+                    <h2 id="reviews-title" class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-4">Lo que dicen nuestros clientes</h2>
                     
                     <div class="flex items-center justify-center gap-2 mb-6">
                          <div class="flex text-yellow-500">
@@ -454,7 +459,7 @@
                     <div class="marquee-track flex gap-6 py-4 hover:pause-animation">
                          
                          <!-- Card 1 -->
-                         <div class="w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                         <a href="https://maps.app.goo.gl/8pDqswcCCBYCfeqX6" target="_blank" rel="noopener noreferrer" class="block w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                              <div class="flex items-start justify-between mb-4">
                                  <div class="flex items-center gap-3">
                                      <div class="w-10 h-10 rounded-full bg-orange-600 text-white flex items-center justify-center font-bold text-lg">L</div>
@@ -469,10 +474,10 @@
                              <p class="text-brand-gray-dark/80 text-sm leading-relaxed">
                                  "Excelente servicio, muy buena atención y profesionalismo, me realicé cambio de color con Cristian y me encantó..."
                              </p>
-                         </div>
+                         </a>
 
                          <!-- Card 2 -->
-                         <div class="w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                         <a href="https://maps.app.goo.gl/8pDqswcCCBYCfeqX6" target="_blank" rel="noopener noreferrer" class="block w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                              <div class="flex items-start justify-between mb-4">
                                  <div class="flex items-center gap-3">
                                      <div class="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-lg">T</div>
@@ -487,10 +492,10 @@
                              <p class="text-brand-gray-dark/80 text-sm leading-relaxed">
                                  "Una maravilla la experiencia, total dedicación, cuidado y profesionalismo. Recomendado siempre, además dan tips de cuidado..."
                              </p>
-                         </div>
+                         </a>
 
                          <!-- Card 3 -->
-                         <div class="w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                         <a href="https://maps.app.goo.gl/8pDqswcCCBYCfeqX6" target="_blank" rel="noopener noreferrer" class="block w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                              <div class="flex items-start justify-between mb-4">
                                  <div class="flex items-center gap-3">
                                      <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg">A</div>
@@ -505,10 +510,10 @@
                              <p class="text-brand-gray-dark/80 text-sm leading-relaxed">
                                  "Muy buen servicio, excelente resultado."
                              </p>
-                         </div>
+                         </a>
 
                          <!-- Card 4 -->
-                         <div class="w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                         <a href="https://maps.app.goo.gl/8pDqswcCCBYCfeqX6" target="_blank" rel="noopener noreferrer" class="block w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                              <div class="flex items-start justify-between mb-4">
                                  <div class="flex items-center gap-3">
                                      <div class="w-10 h-10 rounded-full bg-pink-600 text-white flex items-center justify-center font-bold text-lg">M</div>
@@ -523,10 +528,10 @@
                              <p class="text-brand-gray-dark/80 text-sm leading-relaxed">
                                  "Narbos: Alex el Mejor para Color 🙂 gracias Mafe G"
                              </p>
-                         </div>
+                         </a>
 
                          <!-- Card 5 -->
-                         <div class="w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                         <a href="https://maps.app.goo.gl/8pDqswcCCBYCfeqX6" target="_blank" rel="noopener noreferrer" class="block w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                              <div class="flex items-start justify-between mb-4">
                                  <div class="flex items-center gap-3">
                                      <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-lg">A</div>
@@ -541,10 +546,10 @@
                              <p class="text-brand-gray-dark/80 text-sm leading-relaxed">
                                  "Cristian es una maravilla. cálido y profesional."
                              </p>
-                         </div>
+                         </a>
 
                          <!-- Card 6 -->
-                         <div class="w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                         <a href="https://maps.app.goo.gl/8pDqswcCCBYCfeqX6" target="_blank" rel="noopener noreferrer" class="block w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                              <div class="flex items-start justify-between mb-4">
                                  <div class="flex items-center gap-3">
                                      <div class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-bold text-lg">G</div>
@@ -559,7 +564,7 @@
                              <p class="text-brand-gray-dark/80 text-sm leading-relaxed">
                                  "La asesoría de Cristian excelente y la atención Excelente."
                              </p>
-                         </div>
+                         </a>
                          
                          <!-- Se clonan dinámicamente vía AboutHubController para optimizar el peso del DOM y SEO Performance -->
                     </div>
@@ -569,10 +574,10 @@
              </section>
 
             <!-- Video Section -->
-            <section class="py-16 md:py-24 bg-gray-50">
+            <section class="py-16 md:py-24 bg-gray-50" aria-labelledby="video-title">
                 <div class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center">
                         <div class="text-left">
-                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark mb-4">Descubre nuestro estilo</h2>
+                        <h2 id="video-title" class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark mb-4">Descubre nuestro estilo</h2>
                         <p class="text-brand-gray-dark/80 mb-8 text-lg">
                             Sumérgete en el ambiente de Narbo's. Mira nuestros últimos trabajos, transformaciones y momentos especiales directamente desde nuestro Instagram.
                         </p>
