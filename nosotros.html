@@ -134,19 +134,14 @@
 
     <!-- 2. Wrapper principal de la aplicación -->
     <div id="app-wrapper" class="relative w-full overflow-x-hidden">
-        <main>
+        <main id="main-content">
             <!-- Hero Section (Dynamic) -->
             <div id="hero-root"></div>
 
-        <!-- Contenido Nosotros (Intro + Timeline) -->
-            <section class="py-16 md:py-24 overflow-x-hidden bg-white">
-                <div class="container mx-auto px-6 max-w-screen-xl">
-                    
-            
-            <!-- Introducción -->
-            <section class="py-20 bg-white">
+            <!-- Introducción y Pilares -->
+            <section class="py-20 bg-white" aria-labelledby="intro-title">
                 <div class="container mx-auto px-6 max-w-4xl text-center">
-                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-8 animate__animated animate__fadeInUp">
+                    <h2 id="intro-title" class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-8 animate__animated animate__fadeInUp">
                         Más de una década realzando tu belleza
                     </h2>
                     <p class="text-xl leading-relaxed text-brand-gray-dark/80 mb-12 animate__animated animate__fadeInUp animate__delay-1s">
@@ -201,15 +196,17 @@
                         </div>
 
                     </div>
+                </div>
+            </section>
 
-                    <!-- Nuestra Trayectoria (Timeline Renovado) -->
-                    <section class="py-16 bg-white relative overflow-hidden">
-                        <div class="container mx-auto px-6 max-w-5xl">
-                            <div class="text-center mb-16">
-                                <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-6">Nuestra Historia</h2>
-                                <div class="w-24 h-1 bg-brand-green mx-auto rounded-full"></div>
-                                <p class="mt-6 text-brand-gray-dark/80 max-w-2xl mx-auto">Un viaje de pasión, aprendizaje y crecimiento constante.</p>
-                            </div>
+            <!-- Nuestra Trayectoria -->
+            <section class="py-16 bg-white relative overflow-hidden" aria-labelledby="timeline-title">
+                <div class="container mx-auto px-6 max-w-5xl">
+                    <div class="text-center mb-16">
+                        <h2 id="timeline-title" class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-6">Nuestra Historia</h2>
+                        <div class="w-24 h-1 bg-brand-green mx-auto rounded-full"></div>
+                        <p class="mt-6 text-brand-gray-dark/80 max-w-2xl mx-auto">Un viaje de pasión, aprendizaje y crecimiento constante.</p>
+                    </div>
 
                             <div class="relative">
                                 <!-- Línea central del timeline -->
@@ -350,18 +347,14 @@
 
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </section>
-
                 </div>
             </section>
 
-             <!-- Sección de Instalaciones (Nuestras Instalaciones) -->
-             <section class="py-20 md:py-28 bg-white overflow-hidden relative border-t border-brand-light/20">
+             <!-- Sección de Instalaciones -->
+             <section class="py-20 md:py-28 bg-white overflow-hidden relative border-t border-brand-light/20" aria-labelledby="installations-title">
                 <div class="container mx-auto px-6 max-w-screen-xl">
                     <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-4 animate__animated animate__fadeInUp">
+                        <h2 id="installations-title" class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-4 animate__animated animate__fadeInUp">
                             Nuestras Instalaciones
                         </h2>
                         <div class="w-24 h-1 bg-brand-green mx-auto rounded-full mb-6"></div>
@@ -422,10 +415,10 @@
                 </div>
              </section>
 
-             <!-- Sección de Reseñas (Infinite Marquee) -->
-             <section class="py-20 md:py-28 bg-brand-green/5 overflow-hidden">
+             <!-- Sección de Reseñas -->
+             <section class="py-20 md:py-28 bg-brand-green/5 overflow-hidden" aria-labelledby="reviews-title">
                 <div class="container mx-auto px-6 max-w-screen-xl mb-12 text-center">
-                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-4">Lo que dicen nuestros clientes</h2>
+                    <h2 id="reviews-title" class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-4">Lo que dicen nuestros clientes</h2>
                     
                     <div class="flex items-center justify-center gap-2 mb-6">
                          <div class="flex text-yellow-500">
@@ -569,10 +562,10 @@
              </section>
 
             <!-- Video Section -->
-            <section class="py-16 md:py-24 bg-gray-50">
+            <section class="py-16 md:py-24 bg-gray-50" aria-labelledby="video-title">
                 <div class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center">
                         <div class="text-left">
-                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark mb-4">Descubre nuestro estilo</h2>
+                        <h2 id="video-title" class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark mb-4">Descubre nuestro estilo</h2>
                         <p class="text-brand-gray-dark/80 mb-8 text-lg">
                             Sumérgete en el ambiente de Narbo's. Mira nuestros últimos trabajos, transformaciones y momentos especiales directamente desde nuestro Instagram.
                         </p>
