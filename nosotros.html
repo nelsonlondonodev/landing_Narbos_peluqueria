@@ -31,6 +31,11 @@
       "@graph": [
         {
           "@type": "AboutPage",
+          "@id": "https://narbossalon.com/nosotros#webpage",
+          "url": "https://narbossalon.com/nosotros",
+          "name": "Sobre Nosotros | Narbo's Salón Spa Chía",
+          "description": "Expertos en belleza y bienestar en Chía con más de 11 años de trayectoria.",
+          "breadcrumb": { "@id": "https://narbossalon.com/nosotros#breadcrumb" },
           "mainEntity": {
             "@type": "BeautySalon",
             "name": "Narbo's Salón Spa",
@@ -38,16 +43,14 @@
             "url": "https://narbossalon.com/",
             "telephone": "+573123462618",
             "image": [
-              "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
+              "https://narbossalon.com/images/nosotros/narbos-team-hero.webp",
               "https://narbossalon.com/images/nosotros/peluqueria-chia-recepcion.webp",
-              "https://narbossalon.com/images/nosotros/salon-de-belleza-chia-zona-espera-narbos.webp",
-              "https://narbossalon.com/images/pages/estetica/cabinas-spa-estetica-narbos.webp"
+              "https://narbossalon.com/images/nosotros/salon-de-belleza-chia-zona-espera-narbos.webp"
             ],
-            "foundingDate": "2013",
-            "description": "Expertos en belleza y bienestar en Chía con más de 11 años de trayectoria. Peluquería, Spa y Estética.",
+            "priceRange": "$$",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
+              "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118",
               "addressLocality": "Chía",
               "addressRegion": "Cundinamarca",
               "postalCode": "250001",
@@ -58,12 +61,20 @@
               "latitude": 4.8617,
               "longitude": -74.0539
             },
-            "priceRange": "$$",
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "5.0",
-              "reviewCount": "292"
-            }
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "07:00",
+                "closes": "20:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Sunday", "PublicHolidays"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ]
           }
         },
         {
@@ -98,13 +109,14 @@
               "name": "¿Dónde están ubicados?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Estamos ubicados en los Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118, Chía, Cundinamarca, Colombia. ¡Te esperamos!"
+                "text": "Estamos ubicados en los Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118, Chía, Cundinamarca, Colombia. ¡Te esperamos!"
               }
             }
           ]
         },
         {
           "@type": "BreadcrumbList",
+          "@id": "https://narbossalon.com/nosotros#breadcrumb",
           "itemListElement": [
             {
               "@type": "ListItem",
