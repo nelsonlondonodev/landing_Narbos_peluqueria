@@ -2,7 +2,7 @@ export const makeupServices = Object.freeze([
     {
         id: 1,
         category: 'hub',
-        title: "Maquillaje Social",
+        title: "Maquillaje social",
         description: "Luce espectacular en tus eventos. Maquillaje de alta duración adaptado a tus facciones y tipo de piel.",
         image: "../../images/pages/maquillaje/maquillaje-social-chia-trabajo-1.webp",
         price: 'Desde $120.000',
@@ -22,7 +22,7 @@ export const makeupServices = Object.freeze([
     {
         id: 3,
         category: 'hub',
-        title: "Maquillaje Profesional Diario",
+        title: "Maquillaje profesional diario",
         description: "Un look natural y elegante. Ideal para reuniones importantes, fotos corporativas o simplemente sentirte hermosa en tu día a día.",
         image: "../../images/pages/maquillaje/maquillaje-profesional-chia-narbos-spa.webp",
         price: 'Desde $80.000',

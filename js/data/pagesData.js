@@ -893,13 +893,19 @@ export const pagesData = Object.freeze({
         ]
     },
     maquillaje: {
+        hero: {
+            title: "Maquillaje profesional <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Realza tu belleza natural para tu evento perfecto.",
+            imageSrc: "../../images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
+            imageAlt: "Maquillaje profesional en Narbo's Salon Spa"
+        },
         gallery: [
             {
                 type: 'image',
                 layout: 'featured-video',
                 src: '../../images/pages/maquillaje/maquillaje-social-chia-trabajo-1.webp',
-                title: "Maquillaje de Ojos",
-                subtitle: "Tonos Tierra",
+                title: "Maquillaje de ojos",
+                subtitle: "Tonos tierra",
                 alt: "Maquillaje social profesional con sombras cálidas"
             },
             {
@@ -913,30 +919,30 @@ export const pagesData = Object.freeze({
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/maquillaje/maquillaje-y-pestanas-chia-3.webp',
-                title: "Mirada Impactante",
-                subtitle: "Pestañas & Makeup",
+                title: "Mirada impactante",
+                subtitle: "Pestañas & makeup",
                 alt: "Extensiones de pestañas y maquillaje profesional"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
                 src: '../../images/pages/maquillaje/maquillaje-novias-y-eventos-4.webp',
-                title: "Novias y Eventos",
-                subtitle: "Tonos Neutros",
+                title: "Novias y eventos",
+                subtitle: "Tonos neutros",
                 alt: "Sombras neutras y elegantes para eventos especiales"
             },
             {
                 type: 'image',
                 layout: 'vertical',
                 src: '../../images/pages/maquillaje/maquillaje-social-tendencia-chia.webp',
-                title: "Tendencias Sociales",
+                title: "Tendencias sociales",
                 alt: "Chica arreglándose para evento social"
             },
             {
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/maquillaje/maquillaje-artistico-eventos-chia.webp',
-                title: "Look Artístico",
+                title: "Look artístico",
                 alt: "Maquillaje para fiestas y eventos de noche"
             },
             {
@@ -950,15 +956,15 @@ export const pagesData = Object.freeze({
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/maquillaje/maquillaje-social-peinado-grados-chia-narbos-salon-spa.webp',
-                title: "Para tus Grados",
-                subtitle: "Combo Peinado",
+                title: "Para tus grados",
+                subtitle: "Combo peinado",
                 alt: "Maquillaje especial y peinado para ceremonia de grados"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
                 src: '../../images/pages/maquillaje/maquillaje-profesional-peluquerias-en-chia-narbos-salon.webp',
-                title: "Centros de Belleza",
+                title: "Centros de belleza",
                 subtitle: "Acabados de lujo",
                 alt: "Técnicas de preparación de piel previas al maquillaje"
             },
@@ -966,14 +972,14 @@ export const pagesData = Object.freeze({
                 type: 'image',
                 layout: 'square',
                 src: '../../images/pages/maquillaje/maquillaje-social-peinado-narbos-salon-spa-chia.webp',
-                title: "Armonía Facial",
+                title: "Armonía facial",
                 alt: "Maquillaje de contorno e iluminación profesional"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
                 src: '../../images/pages/maquillaje/retoque-maquillaje-mejores-peluquerias-chia-salon-de-belleza.webp',
-                title: "El Toque Final",
+                title: "El toque final",
                 subtitle: "Detalles impecables",
                 alt: "Retoque de maquillaje en sala de belleza premium"
             }
