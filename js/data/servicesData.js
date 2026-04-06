@@ -46,6 +46,16 @@ export const servicesData = Object.freeze([
         animationDelay: "0.4s"
     },
     {
+        title: "Maquillaje",
+        i18nTitle: "service.makeup.title",
+        description: "Maquillaje profesional para toda ocasión: novias, social, editorial y quinceañeras en Chía.",
+        i18nDesc: "service.makeup.desc",
+        icon: '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>',
+        link: "/servicios/maquillaje/",
+        image: "images/pages/maquillaje/maquillaje_profesional_hero_1775450449119.png",
+        animationDelay: "0.5s"
+    },
+    {
         title: "Barbería",
         i18nTitle: "service.barber.title",
         description: "Cortes clásicos y modernos, arreglo de barba, ritual de toalla caliente y cuidado masculino.",
