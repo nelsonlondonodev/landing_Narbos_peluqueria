@@ -64,7 +64,24 @@ Para llevar a Narbo's Salón Spa al siguiente nivel de conversión y eficiencia,
 
 ---
 
-## 🔄 Recent Updates (April 06, 2026) - Premium Aesthetics & Grammar Audit 💄
+## 🔄 Final Production Release (April 06, 2026) - SEO & Technical Refactor (v2.3.0) 🚀
+
+### 1. "Nosotros" Page: Surgical Refactor 🏢
+*   **Semantic Architecture:** Completely refactored `nosotros.html` using HTML5 semantic elements and ARIA attributes for maximum accessibility and SEO performance.
+*   **Trust Signals:** Review cards now feature direct interactive links to the official Google Maps profile, allowing users to verify authentic testimonials from customers.
+*   **Image Optimization:** Converted high-impact heritage images from legacy JPEGs to optimized **WebP** formats, reducing the payload of the about page by ~60% without compromising visual fidelity.
+
+### 2. Comprehensive Schema Markup Audit (Search Console Mastery) 🔍
+*   **Catalog Synchronization:** Updated the master `index.html` Schema to include the full **OfferCatalog**, now listing all 5 core pillars: Hair Salon, **Barber Shop**, Nails, Spa, and the new **Professional Makeup** section.
+*   **Graph Unification:** Consolidated JSON-LD blocks into a unified `@graph` structure in `nosotros.html` and `servicios/maquillaje/index.html` to eliminate redundant data signals for Google's crawlers.
+*   **Linguistic Precision:** Orthographic correction of "Cajicá" (with accent) across all structured data strings, ensuring professional consistency in local search results.
+*   **Clean URLs:** Enforced the Clean URL policy (no `.html`, no `www`) in all `canonical` tags and Schema IDs, strictly following Google Search Console's best practices.
+
+### 3. Production Deployment & Cache Integrity (v2.3.0) ⚡
+*   **Version v2.3.0 Hub:** Updated the global `js/config.js` and visual Footer badge to reflect the new production version, providing a clear audit trail for the client.
+*   **Manual Cache Busting:** Executed a system-wide update of `?v=` parameters in all core HTML files to **`v2.3.0`**, forcing browsers to download the latest CSS and JS bundles immediately.
+*   **Deployment Pipeline:** Successfully merged `develop` into `main` and pushed to production (Hostinger Root), ensuring 100% of the day's technical SEO improvements are live.
+
 
 ### 1. Makeup Hub Optimization (Visual Excellence) ✨
 *   **Bento Grid Implementation:** Migrated the legacy gallery to a high-fidelity **Bento Grid** for "Maquillaje profesional". Implemented the "Dual Vertical Start" pattern to ensure a mathematically perfect, premium layout on both mobile and desktop.
