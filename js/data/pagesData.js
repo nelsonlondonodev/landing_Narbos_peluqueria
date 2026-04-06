@@ -891,5 +891,40 @@ export const pagesData = Object.freeze({
             { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Corte Tijera', title: 'Corte a Tijera' },
             { type: 'logo-card', layout: 'horizontal', src: 'images/brand/logo_narbos.webp', alt: 'Acabados', title: 'Acabados Premium' }
         ]
+    },
+    maquillaje: {
+        gallery: [
+            {
+                type: 'image',
+                layout: 'featured-video',
+                src: '../../images/pages/maquillaje/maquillaje-social-chia-trabajo-1.webp',
+                title: "Maquillaje de Ojos",
+                subtitle: "Tonos Tierras",
+                alt: "Maquillaje social profesional con sombras cálidas"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-ojos-ahumados-narbos-2.webp',
+                title: "Smokey Eyes",
+                alt: "Maquillaje de noche ahumado intenso en Chía"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-y-pestanas-chia-3.webp',
+                title: "Mirada Impactante",
+                subtitle: "Pestañas & Makeup",
+                alt: "Extensiones de pestañas y maquillaje profesional"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/maquillaje/maquillaje-novias-y-eventos-4.webp',
+                title: "Novias y Eventos",
+                subtitle: "Tonos Neutros",
+                alt: "Sombras neutras y elegantes para eventos especiales"
+            }
+        ]
     }
 });
