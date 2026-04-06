@@ -127,24 +127,26 @@
         <div id="breadcrumbs-root"></div>
 
     <main>
-      <!-- Hero de Servicio -->
-      <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0">
-            <img src="../../images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp" alt="Maquillaje Profesional en Chía" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
+      <!-- Hero de Maquillaje (Consistencia con Home/Barbería) -->
+      <div id="hero-root">
+        <div class="relative">
+            <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
+                <img src="../../images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp" alt="Maquillaje Profesional en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager">
+            </section>
+            
+            <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
+                <div class="container mx-auto">
+                    <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto">
+                        <h1 id="hero-title" class="animate-hero-element text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-4">Maquillaje Profesional <span class="text-brand-green">en Chía</span></h1>
+                        <p id="hero-subtitle" class="animate-hero-element text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">Realza tu belleza natural para tu evento perfecto.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="relative z-10 text-center px-6 mt-16">
-            <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-6 drop-shadow-lg" data-animation="fadeInUp">
-                Maquillaje Profesional en Chía
-            </h1>
-            <p class="text-xl md:text-2xl text-white/90 drop-shadow max-w-2xl mx-auto" data-animation="fadeInUp" style="animation-delay: 0.2s;">
-                Realza tu belleza natural para tu evento perfecto.
-            </p>
-        </div>
-      </section>
+      </div>
 
       <!-- Sección 1: Grid de Servicios -->
-      <section class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24 overflow-x-hidden">
+      <section class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
         <div class="container mx-auto px-6 max-w-screen-xl">
             <div class="text-center mb-16" data-animation="fadeInUp">
               <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">
