@@ -924,6 +924,58 @@ export const pagesData = Object.freeze({
                 title: "Novias y Eventos",
                 subtitle: "Tonos Neutros",
                 alt: "Sombras neutras y elegantes para eventos especiales"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/maquillaje/maquillaje-social-tendencia-chia.webp',
+                title: "Tendencias Sociales",
+                alt: "Chica arreglándose para evento social"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-artistico-eventos-chia.webp',
+                title: "Look Artístico",
+                alt: "Maquillaje para fiestas y eventos de noche"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-profesional-chia-narbos-spa.webp',
+                title: "Profesionalismo",
+                alt: "Estudio de maquillaje profesional Narbo's"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/maquillaje/maquillaje-profesional-peluquerias-en-chia-narbos-salon.webp',
+                title: "Centros de Belleza",
+                subtitle: "Acabados de lujo",
+                alt: "Técnicas de preparación de piel previas al maquillaje"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-social-peinado-grados-chia-narbos-salon-spa.webp',
+                title: "Para tus Grados",
+                subtitle: "Combo peinado",
+                alt: "Maquillaje especial y peinado para ceremonia de grados"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-social-peinado-narbos-salon-spa-chia.webp',
+                title: "Armonía Facial",
+                alt: "Maquillaje de contorno e iluminación profesional"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/maquillaje/retoque-maquillaje-mejores-peluquerias-chia-salon-de-belleza.webp',
+                title: "El Toque Final",
+                subtitle: "Detalles impecables",
+                alt: "Retoque de maquillaje en sala de belleza premium"
             }
         ]
     }
