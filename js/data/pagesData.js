@@ -948,19 +948,19 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'image',
-                layout: 'horizontal',
-                src: '../../images/pages/maquillaje/maquillaje-profesional-peluquerias-en-chia-narbos-salon.webp',
-                title: "Centros de Belleza",
-                subtitle: "Acabados de lujo",
-                alt: "Técnicas de preparación de piel previas al maquillaje"
-            },
-            {
-                type: 'image',
                 layout: 'square',
                 src: '../../images/pages/maquillaje/maquillaje-social-peinado-grados-chia-narbos-salon-spa.webp',
                 title: "Para tus Grados",
                 subtitle: "Combo peinado",
                 alt: "Maquillaje especial y peinado para ceremonia de grados"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/maquillaje/maquillaje-profesional-peluquerias-en-chia-narbos-salon.webp',
+                title: "Centros de Belleza",
+                subtitle: "Acabados de lujo",
+                alt: "Técnicas de preparación de piel previas al maquillaje"
             },
             {
                 type: 'image',

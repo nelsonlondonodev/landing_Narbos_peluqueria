@@ -107,7 +107,7 @@ function getOverlayHTML(item) {
 /**
  * Genera el HTML unitario de un card para el Bento. Ensambla todas sus partes.
  */
-function getGridItemHTML(item, index, options = {}) {
+function getGridItemHTML(item, index, options = {}, extraStretchClass = '') {
     const spanClass = getSpanClass(item.layout);
     const galleryId = getGalleryId(item, index, options);
     
@@ -119,7 +119,7 @@ function getGridItemHTML(item, index, options = {}) {
     const triggerDataType = item.type === 'video' ? 'video' : 'image';
 
     return `
-        <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg">
+        <div class="${spanClass}${extraStretchClass} relative group overflow-hidden rounded-2xl shadow-lg">
             ${mediaHTML}
             ${overlayHTML}
             <!-- Lightbox Trigger -->
@@ -130,14 +130,15 @@ function getGridItemHTML(item, index, options = {}) {
 }
 
 /**
- * Simula el comportamiento del CSS Grid para determinar cuántas columnas reales se usan.
- * Evita huecos en grids donde faltan ítems para completar 4 columnas.
+ * Simula el comportamiento del CSS Grid y devuelve un objeto matemático del layout.
+ * Determina cuántas columnas reales se usan (optimalCols) y cuántas debe estirarse el último ítem (stretchCols).
  */
-function calculateOptimalColumns(items) {
+function getGridMath(items) {
     const grid = [];
     let maxColUsed = -1;
+    let lastItemPos = null;
 
-    items.forEach(item => {
+    items.forEach((item, index) => {
         const { w, h } = getLayoutDimensions(item.layout);
         let r = 0;
         let placed = false;
@@ -163,6 +164,9 @@ function calculateOptimalColumns(items) {
                     }
                     if (c + w - 1 > maxColUsed) { maxColUsed = c + w - 1; }
                     placed = true;
+                    if (index === items.length - 1) {
+                         lastItemPos = { r, c, w, h };
+                    }
                     break;
                 }
             }
@@ -170,8 +174,23 @@ function calculateOptimalColumns(items) {
         }
     });
     
-    const optimalCols = maxColUsed + 1;
-    return optimalCols < 1 ? 4 : optimalCols;
+    const optimalCols = maxColUsed + 1 < 1 ? 4 : maxColUsed + 1;
+    let stretchCols = 0;
+
+    if (lastItemPos) {
+        let canStretch = true;
+        for (let c = lastItemPos.c + lastItemPos.w; c < optimalCols; c++) {
+            for (let i = 0; i < lastItemPos.h; i++) {
+                if (grid[lastItemPos.r + i] && grid[lastItemPos.r + i][c]) {
+                    canStretch = false; break;
+                }
+            }
+            if (!canStretch) break;
+            stretchCols++;
+        }
+    }
+
+    return { optimalCols, stretchCols, lastItemWidth: lastItemPos ? lastItemPos.w : 1 };
 }
 
 /**
@@ -180,9 +199,32 @@ function calculateOptimalColumns(items) {
 export function getBentoGridHTML(items, options = {}) {
     if (!items || items.length === 0) return '';
 
-    const gridItemsHTML = items.map((item, index) => getGridItemHTML(item, index, options)).join('');
-    const optimalCols = calculateOptimalColumns(items);
-    
+    const { optimalCols, stretchCols, lastItemWidth } = getGridMath(items);
+
+    const gridItemsHTML = items.map((item, index) => {
+        let spanClass = getSpanClass(item.layout);
+        let galleryId = getGalleryId(item, index, options);
+        let mediaHTML = getMediaContentHTML(item);
+        let overlayHTML = getOverlayHTML(item);
+        let hiddenLinksHTML = getHiddenSubImagesHTML(item, galleryId);
+        let triggerDataType = item.type === 'video' ? 'video' : 'image';
+        
+        let inlineStyle = '';
+        if (index === items.length - 1 && stretchCols > 0) {
+            let newW = lastItemWidth + stretchCols;
+            inlineStyle = ` style="grid-column: span ${newW} / span ${newW};"`;
+        }
+
+        return `
+            <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg"${inlineStyle}>
+                ${mediaHTML}
+                ${overlayHTML}
+                <a href="javascript:void(0);" data-href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${triggerDataType}" aria-label="${item.alt}"></a>
+                ${hiddenLinksHTML}
+            </div>
+        `;
+    }).join('');
+
     const gridColsOptions = {
         1: 'md:grid-cols-1',
         2: 'md:grid-cols-2',
