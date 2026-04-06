@@ -29,76 +29,135 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "BeautySalon",
-      "name": "Narbo's Salón Spa",
-      "image": "https://narbossalon.com/images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
-      "@id": "https://narbossalon.com/#organization",
-      "url": "https://narbossalon.com/servicios/maquillaje/",
-      "telephone": "+573123462618",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118",
-        "addressLocality": "Chía",
-        "addressRegion": "Cundinamarca",
-        "postalCode": "250001",
-        "addressCountry": "CO"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 4.8617,
-        "longitude": -74.0539
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Servicios de Maquillaje",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Maquillaje Social",
-              "description": "Luce espectacular en tus eventos. Maquillaje de alta duración adaptado a tus facciones."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Maquillaje de Novias",
-              "description": "Tu día soñado merece un look perfecto con prueba incluida."
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://narbossalon.com/servicios/maquillaje/#webpage",
+          "url": "https://narbossalon.com/servicios/maquillaje/",
+          "name": "Maquillaje Profesional en Chía | Novias y Social - Narbo's",
+          "description": "Maquillaje social y para novias en Chía. Expertos en belleza para eventos especiales.",
+          "breadcrumb": { "@id": "https://narbossalon.com/servicios/maquillaje/#breadcrumb" },
+          "mainEntity": {
+            "@type": "BeautySalon",
+            "name": "Narbo's Salón Spa",
+            "@id": "https://narbossalon.com/#organization",
+            "url": "https://narbossalon.com/",
+            "telephone": "+573123462618",
+            "image": "https://narbossalon.com/images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118",
+              "addressLocality": "Chía",
+              "addressRegion": "Cundinamarca",
+              "postalCode": "250001",
+              "addressCountry": "CO"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 4.8617,
+              "longitude": -74.0539
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "07:00",
+                "closes": "20:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Sunday", "PublicHolidays"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Servicios de Maquillaje",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Maquillaje Social",
+                    "description": "Luce espectacular en tus eventos. Maquillaje de alta duración adaptado a tus facciones."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Maquillaje de Novias",
+                    "description": "Tu día soñado merece un look perfecto con prueba incluida."
+                  }
+                }
+              ]
             }
           }
-        ]
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [{
-        "@type": "Question",
-        "name": "¿El maquillaje dura toda la fiesta?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí, utilizamos productos profesionales de alta gama y técnicas de fijación que garantizan que tu maquillaje social o de novia dure intacto durante todo tu evento, resistiendo lágrimas, abrazos y baile."
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿El maquillaje dura toda la fiesta?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, utilizamos productos profesionales de alta gama y técnicas de fijación que garantizan que tu maquillaje social o de novia dure intacto durante todo tu evento, resistiendo lágrimas, abrazos y baile."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Incluyen pestañas postizas en el servicio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, todos nuestros servicios de maquillaje profesional incluyen la aplicación de pestañas postizas (de tira o punto por punto, según el look deseado y tu preferencia) para realzar tu mirada."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Tienen paquetes para novias?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "¡Por supuesto! Ofrecemos paquetes completos para novias que incluyen prueba previa de maquillaje y peinado, preparación de la piel el día del evento y asesoría integral para que luzcas radiante."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Dónde están ubicados para maquillaje en Chía?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Estamos ubicados en los Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118, Chía, Cundinamarca, Colombia. Nuestro estudio cuenta con ambiente VIP e iluminación profesional."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://narbossalon.com/servicios/maquillaje/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://narbossalon.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Servicios",
+              "item": "https://narbossalon.com/servicios/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Maquillaje",
+              "item": "https://narbossalon.com/servicios/maquillaje/"
+            }
+          ]
         }
-      }, {
-        "@type": "Question",
-        "name": "¿Incluyen pestañas postizas en el servicio?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí, todos nuestros servicios de maquillaje profesional incluyen la aplicación de pestañas postizas (de tira o punto por punto, según el look deseado y tu preferencia) para realzar tu mirada."
-        }
-      }, {
-        "@type": "Question",
-        "name": "¿Tienen paquetes para novias?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "¡Por supuesto! Ofrecemos paquetes completos para novias que incluyen prueba previa de maquillaje y peinado, preparación de la piel el día del evento y asesoría integral para que luzcas radiante."
-        }
-      }]
+      ]
     }
     </script>
     
