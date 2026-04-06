@@ -12,7 +12,7 @@ export const makeupServices = Object.freeze([
     {
         id: 2,
         category: 'hub',
-        title: "Maquillaje de Novias",
+        title: "Maquillaje de Novia",
         description: "Tu día soñado merece un look perfecto. Paquetes especiales que incluyen prueba de maquillaje y peinado. Contáctanos para asesoría VIP.",
         image: "../../images/pages/maquillaje/maquillaje-novias-y-eventos-4.webp",
         price: 'Consultar planes',

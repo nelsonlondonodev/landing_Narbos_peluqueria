@@ -899,7 +899,7 @@ export const pagesData = Object.freeze({
                 layout: 'featured-video',
                 src: '../../images/pages/maquillaje/maquillaje-social-chia-trabajo-1.webp',
                 title: "Maquillaje de Ojos",
-                subtitle: "Tonos Tierras",
+                subtitle: "Tonos Tierra",
                 alt: "Maquillaje social profesional con sombras cálidas"
             },
             {
@@ -951,7 +951,7 @@ export const pagesData = Object.freeze({
                 layout: 'square',
                 src: '../../images/pages/maquillaje/maquillaje-social-peinado-grados-chia-narbos-salon-spa.webp',
                 title: "Para tus Grados",
-                subtitle: "Combo peinado",
+                subtitle: "Combo Peinado",
                 alt: "Maquillaje especial y peinado para ceremonia de grados"
             },
             {
