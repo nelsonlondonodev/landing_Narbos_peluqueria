@@ -36,6 +36,23 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Recent Updates (April 7, 2026)
+
+### 1. "Visual Poetry" Hero Section Refactor (V3) 🎨
+*   **Asymmetric Diagonal Notch UI:** Implemented a sophisticated `clip-path` architecture with diagonal notches:
+    *   **Top-Right Notch:** Houses the dynamic **Business Status Badge** (Open/Closed), replacing legacy decorative arrows.
+    *   **Bottom-Left Notch:** Integrates the **GMB Trust Indicator** (+500 Reviews) with an overlapping avatar style inspired by modern editorial designs (Pinterest style).
+*   **Penetrating Element Philosophy:** Removed standard image borders and padding, allowing budgets and avatars to "penetrate" the image canvas for a high-end, interconnected aesthetic.
+*   **Minimalist Depuration:** Radically cleaned the Hero UI by removing:
+    *   Secondary taglines ("Premium Experience").
+    *   Social icon rows and CTA buttons (Service links).
+    *   Floating favicons and overlapping brand logos.
+*   **Visual Performance & Hygiene:** 
+    *   **LCP Optimization:** Applied `<link rel="preload">` and `fetchpriority="high"` for the main Hero asset.
+    *   **De-cluttering:** Disabled `FloatingDecorations` (leaves) in this branch to maintain the "Visual Poetry" purity.
+
+---
+
 ## 🔄 Recent Updates (March 16, 2026)
 
 ### 1. Hero Section UX & Layout Refactor 🎨
