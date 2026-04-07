@@ -304,9 +304,6 @@
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
-  .-top-6 {
-    top: calc(var(--spacing) * -6);
-  }
   .-top-10 {
     top: calc(var(--spacing) * -10);
   }
@@ -330,6 +327,9 @@
   }
   .top-24 {
     top: calc(var(--spacing) * 24);
+  }
+  .top-\[-2\%\] {
+    top: -2%;
   }
   .top-\[-10\%\] {
     top: -10%;
@@ -2376,8 +2376,8 @@
     -webkit-user-select: none;
     user-select: none;
   }
-  .\[clip-path\:polygon\(0\%_0\%\,100\%_0\%\,100\%_80\%\,85\%_80\%\,85\%_100\%\,18\%_100\%\,18\%_80\%\,0\%_80\%\)\] {
-    clip-path: polygon(0% 0%,100% 0%,100% 80%,85% 80%,85% 100%,18% 100%,18% 80%,0% 80%);
+  .\[clip-path\:polygon\(0\%_0\%\,82\%_0\%\,82\%_18\%\,100\%_18\%\,100\%_100\%\,18\%_100\%\,18\%_82\%\,0\%_82\%\)\] {
+    clip-path: polygon(0% 0%,82% 0%,82% 18%,100% 18%,100% 100%,18% 100%,18% 82%,0% 82%);
   }
   .group-open\:-rotate-180 {
     &:is(:where(.group):is([open], :popover-open, :open) *) {
