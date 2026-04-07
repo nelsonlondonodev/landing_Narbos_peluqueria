@@ -194,7 +194,8 @@ class App {
             new VideoPlayerController();
         });
         
-        // Decoraciones Flotantes (No críticas)
+        // Decoraciones Flotantes (No críticas para esta versión minimalista)
+        /*
         const initFloatingDecorations = async () => {
              const { FloatingDecorations } = await import('./components/FloatingDecorations.js');
              new FloatingDecorations({ basePath: this.appRoot });
@@ -205,6 +206,7 @@ class App {
         } else {
             setTimeout(initFloatingDecorations, 4000);
         }
+        */
 
         // Modales de Home (Lógica de apertura)
         if (this.isHomePage) {
