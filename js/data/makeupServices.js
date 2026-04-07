@@ -25,7 +25,7 @@ export const makeupServices = Object.freeze([
         title: "Maquillaje profesional diario",
         description: "Un look natural y elegante. Ideal para reuniones importantes, fotos corporativas o simplemente sentirte hermosa en tu día a día.",
         image: "../../images/pages/maquillaje/maquillaje-profesional-chia-narbos-spa.webp",
-        price: 'Desde $80.000',
+        price: 'Desde $95.000',
         duration: '45 min',
         modal: true
     }

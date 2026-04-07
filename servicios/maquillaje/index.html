@@ -23,6 +23,9 @@
     <meta property="twitter:title" content="Maquillaje Profesional en Chía | Novias y Social" />
     <meta property="twitter:description" content="Maquillaje social y para novias en Chía. Expertos en belleza para eventos especiales. Luce un maquillaje profesional cerca de ti." />
     <meta property="twitter:image" content="https://narbossalon.com/images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp" />
+    
+    <!-- Critical Assets Preload -->
+    <link rel="preload" as="image" href="../../images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp" fetchpriority="high">
     <!-- SEO MASTER END -->
 
     <!-- Schema Markup -->
@@ -74,14 +77,19 @@
             ],
             "hasOfferCatalog": {
               "@type": "OfferCatalog",
-              "name": "Servicios de Maquillaje",
+              "name": "Servicios de Maquillaje en Chía",
               "itemListElement": [
                 {
                   "@type": "Offer",
                   "itemOffered": {
                     "@type": "Service",
                     "name": "Maquillaje Social",
-                    "description": "Luce espectacular en tus eventos. Maquillaje de alta duración adaptado a tus facciones."
+                    "description": "Luce espectacular en tus eventos. Maquillaje de alta duración adaptado a tus facciones y tipo de piel.",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "120000",
+                      "priceCurrency": "COP"
+                    }
                   }
                 },
                 {
@@ -89,7 +97,26 @@
                   "itemOffered": {
                     "@type": "Service",
                     "name": "Maquillaje de Novias",
-                    "description": "Tu día soñado merece un look perfecto con prueba incluida."
+                    "description": "Tu día soñado merece un look perfecto con prueba incluida. Paquetes especiales y asesoría VIP.",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "0",
+                      "priceCurrency": "COP",
+                      "description": "Consultar planes personalizados"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Maquillaje Profesional Diario",
+                    "description": "Look natural y elegante ideal para reuniones importantes, fotos corporativas o el día a día.",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "95000",
+                      "priceCurrency": "COP"
+                    }
                   }
                 }
               ]
@@ -190,7 +217,7 @@
       <div id="hero-root">
         <div class="relative">
             <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-                <img src="../../images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp" alt="Maquillaje Profesional en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager">
+                <img src="../../images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp" alt="Maquillaje Profesional en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" fetchpriority="high">
             </section>
             
             <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
