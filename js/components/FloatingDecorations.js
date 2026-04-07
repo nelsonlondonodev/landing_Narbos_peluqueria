@@ -99,8 +99,9 @@ export class FloatingDecorations {
         const isBarberia = path.includes('/barberia');
         const isEstetica = path.includes('/estetica');
         const isUñas = path.includes('/unas-spa');
+        const isMaquillaje = path.includes('/maquillaje');
         
-        const isServicePage = isPeluqueria || isBarberia || isEstetica || isUñas;
+        const isServicePage = isPeluqueria || isBarberia || isEstetica || isUñas || isMaquillaje;
         
         // Define speed based on page type
         // Home has movement (parallax), others are static (speed 0)
