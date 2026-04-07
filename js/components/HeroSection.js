@@ -19,69 +19,100 @@ export const getHeroHTML = ({
     return `
     <section id="inicio" class="relative w-full bg-[#FDFBF9] overflow-hidden" aria-label="Introducción narbo's">
         
-        <!-- Fondo Abstracto Premium -->
-        <div class="absolute inset-0 z-0 pointer-events-none opacity-30">
-            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-brand-green/5 via-transparent to-brand-medium/5"></div>
+        <!-- Fondo Abstracto Editorial -->
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+            <div class="absolute top-[-10%] right-[-5%] w-[50%] h-[120%] bg-brand-green/10 blur-[120px] rounded-full rotate-12"></div>
         </div>
 
-        <div class="container mx-auto px-6 lg:px-12 min-h-screen flex flex-col lg:flex-row items-center gap-12 pt-32 lg:pt-0 relative z-10">
+        <div class="container mx-auto px-6 lg:px-12 min-h-screen flex flex-col lg:flex-row items-center gap-16 py-32 lg:py-0 relative z-10">
             
-            <!-- Columna de Texto: Fuerte y Elegante -->
-            <div class="w-full lg:w-1/2 flex flex-col justify-center animate-hero-element mb-12 lg:mb-0">
-                <div class="inline-flex items-center gap-3 mb-6">
-                    <span class="w-12 h-[1px] bg-brand-green"></span>
-                    <span class="text-xs md:text-sm font-bold tracking-[0.4em] text-brand-green uppercase">Premium Spa</span>
+            <!-- COLOUMNA IZQUIERDA: CONTENIDO Y CONFIANZA -->
+            <div class="w-full lg:w-[45%] flex flex-col justify-center animate-hero-element">
+                <div class="inline-flex items-center gap-3 mb-8">
+                    <span class="w-12 h-[2px] bg-brand-green"></span>
+                    <span class="text-xs md:text-sm font-bold tracking-[0.5em] text-brand-green uppercase">Premium Experience</span>
                 </div>
 
-                <h1 id="hero-title" class="text-5xl md:text-7xl lg:text-7xl xl:text-8xl font-serif font-medium text-brand-gray-dark leading-[0.9] tracking-tighter mb-8">
+                <!-- H1 Intacto para SEO -->
+                <h1 id="hero-title" class="text-5xl md:text-7xl lg:text-8xl font-serif font-black text-brand-gray-dark leading-[0.85] tracking-tightest mb-8">
                     ${title}
                 </h1>
                 
-                <p id="hero-subtitle" class="text-lg md:text-xl text-brand-gray-dark/60 mb-10 leading-relaxed font-light">
+                <p id="hero-subtitle" class="text-lg md:text-xl text-brand-gray-dark/70 mb-8 max-w-lg leading-relaxed font-normal">
                     ${subtitle}
                 </p>
+
+                <!-- Fila Social (Visual Poetry Style) -->
+                <div class="flex items-center gap-4 mb-12">
+                    <div class="flex -space-x-2">
+                        <span class="w-10 h-10 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-[10px] font-bold">IG</span>
+                        <span class="w-10 h-10 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-[10px] font-bold">FB</span>
+                        <span class="w-10 h-10 rounded-full border-2 border-white bg-gray-300 flex items-center justify-center text-[10px] font-bold">TK</span>
+                        <span class="w-10 h-10 rounded-full border-2 border-white bg-brand-green text-white flex items-center justify-center text-[10px] font-bold">+</span>
+                    </div>
+                    <span class="text-xs font-bold text-brand-gray-dark/40 tracking-widest uppercase">Síguenos</span>
+                </div>
                 
+                <!-- Trust Indicators (GMB Data) -->
+                <div class="grid grid-cols-2 gap-8 mb-12 border-t border-gray-100 pt-10">
+                    <div>
+                        <div class="text-4xl md:text-5xl font-serif font-black text-brand-gray-dark tracking-tighter">4.9 ⭐</div>
+                        <div class="h-1 w-12 bg-brand-green mt-2"></div>
+                        <div class="text-xs font-bold text-brand-gray-dark/40 uppercase mt-3 tracking-widest">Google Rating</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl md:text-5xl font-serif font-black text-brand-gray-dark tracking-tighter">+500</div>
+                        <div class="h-1 w-12 bg-brand-green mt-2"></div>
+                        <div class="text-xs font-bold text-brand-gray-dark/40 uppercase mt-3 tracking-widest">Reseñas Reales</div>
+                    </div>
+                </div>
+
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-6">
-                    <a href="${ctaLink}" class="px-10 py-5 bg-brand-green text-white rounded-full font-bold text-lg text-center shadow-xl shadow-brand-green/20 hover:bg-brand-gray-dark transition-all hover:-translate-y-1 active:scale-95">
+                    <a href="${ctaLink}" class="px-12 py-5 bg-brand-gray-dark text-white rounded-full font-bold text-lg text-center shadow-2xl hover:bg-brand-green transition-all hover:scale-105 active:scale-95">
                         ${ctaText}
-                    </a>
-                    
-                    <a href="https://wa.me/573123462618" class="group flex items-center justify-center gap-2 text-brand-green font-bold text-lg">
-                        <span>Agendar Ahora</span>
-                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </a>
                 </div>
             </div>
 
-            <!-- Columna de Imagen: El Corazón del Cutout UI -->
-            <div class="w-full lg:w-1/2 flex items-center justify-end z-0">
-                <div class="relative w-full h-[55vh] lg:h-[80vh] group animate-hero-element" style="animation-delay: 200ms;">
-                    
-                    <!-- Sombra 3D profunda que sigue la forma -->
-                    <div class="absolute inset-0 bg-brand-gray-dark/5 blur-3xl translate-x-10 translate-y-10 rounded-[5rem] pointer-events-none"></div>
+            <!-- COLUMNA DERECHA: EL RECORTE POÉTICO -->
+            <div class="w-full lg:w-[55%] flex items-center justify-center relative">
+                
+                <!-- Fondo Sólido de Respaldo -->
+                <div class="absolute inset-0 bg-brand-green/20 rounded-[4rem] rotate-3 scale-95 -z-10 blur-xl opacity-50"></div>
 
-                    <!-- El Contenedor con el Recorte (Clip-path) -->
-                    <!-- El recorte crea muescas en la esquina superior izquierda y abajo derecha -->
-                    <div class="w-full h-full overflow-hidden bg-white border-[12px] border-white shadow-2xl transition-all duration-700
-                                [clip-path:polygon(15%_0%,100%_0%,100%_80%,85%_80%,85%_100%,0%_100%,0%_20%,15%_20%)]
-                                rounded-[3rem] lg:rounded-[6rem]">
+                <div class="relative w-full max-w-2xl h-[60vh] lg:h-[85vh] group animate-hero-element" style="animation-delay: 200ms;">
+                    
+                    <!-- Contenedor con Notch UI (Muescas Circulares) -->
+                    <div class="w-full h-full p-4 lg:p-6 bg-white shadow-2xl rounded-[3.5rem] relative overflow-hidden">
                         
-                        <img src="${imageSrc}" alt="${imageAlt}" class="w-full h-full object-cover transition-transform duration-1000 scale-105 group-hover:scale-100 grayscale-[0.2] group-hover:grayscale-0">
-                        
-                        <!-- Overlay sutil -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60 pointer-events-none"></div>
+                        <!-- El Recorte Visual -->
+                        <div class="w-full h-full rounded-[2.5rem] overflow-hidden relative
+                                    [clip-path:polygon(0%_0%,100%_0%,100%_75%,85%_75%,85%_100%,0%_100%)]">
+                            
+                            <img src="${imageSrc}" alt="${imageAlt}" class="w-full h-full object-cover transition-transform duration-1000 scale-105 group-hover:scale-110">
+                            
+                            <!-- Overlay Gradiente -->
+                            <div class="absolute inset-0 bg-gradient-to-tr from-brand-gray-dark/40 via-transparent to-transparent pointer-events-none"></div>
+                        </div>
+
+                        <!-- 1. Notch: Business Status (Incrustado en la muesca inferior derecha) -->
+                        <div class="absolute bottom-6 right-6 z-30">
+                            <div id="business-status-root" class="bg-white p-3 rounded-full shadow-2xl scale-125 border-4 border-[#FDFBF9]"></div>
+                        </div>
+
+                        <!-- 2. Notch: Badge de Calidad (Incrustado arriba a la derecha) -->
+                        <div class="absolute top-10 right-10 z-30 transform hover:scale-110 transition-transform">
+                             <div class="bg-brand-gray-dark text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl border-4 border-white">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                             </div>
+                        </div>
                     </div>
 
-                    <!-- Elementos Integrados en las "Muescas" -->
-                    
-
-                    <!-- 2. Business Status en la muesca inferior derecha -->
-                    <div class="absolute bottom-[8%] right-[2%] md:bottom-[15%] md:right-[5%] z-20">
-                        <div id="business-status-root" class="bg-white p-2 rounded-full shadow-2xl ring-8 ring-[#FDFBF9] transform scale-110 md:scale-125"></div>
+                    <!-- Elementos Flotantes que salen del borde -->
+                    <div class="absolute -left-10 top-1/4 w-24 h-24 bg-white p-4 rounded-3xl shadow-2xl -rotate-12 animate-bounce-slow">
+                        <img src="../../images/brand/favicon_narbos.webp" alt="Verified" class="w-full h-full object-contain opacity-40">
                     </div>
 
-                    <!-- Decoración extra: El "puzzle piece" faltante -->
-                    <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-brand-green/10 rounded-full blur-2xl z-0"></div>
                 </div>
             </div>
         </div>
