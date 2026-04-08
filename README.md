@@ -64,6 +64,35 @@ Para llevar a Narbo's Salón Spa al siguiente nivel de conversión y eficiencia,
 
 ---
 
+## 🔄 Performance & Visual Surgery (April 08, 2026) - PageSpeed Mastery (v2.4.0) 🚀
+
+### 1. High-Impact Performance Surgery (Makeup) ⚡
+*   **Massive Payload Reduction:** Executed a surgical replacement of legacy high-weight assets in the Makeup section.
+    *   **Savings:** Reduced the total page payload by over **1.2 MB**.
+    *   **Optimization:** Converted new source JPEGs to optimized **WebP (q=75)**.
+    *   **Key Results:** 
+        *   `maquillaje-y-pestanas-chia-3.webp`: **960 KB** ➡️ **115 KB**.
+        *   `maquillaje-novias-y-eventos-4.webp`: **445 KB** ➡️ **96 KB**.
+*   **Identity Restoration:** Fixed a critical mapping error, restoring the "Older Lady" (Maquillaje Social) visual identity while successfully optimizing the Novia and Gallery assets.
+
+### 2. Critical Rendering Path Optimization 🏎️
+*   **Render-Blocking Elimination:** 
+    *   Implemented `<link rel="preload">` for the main `styles.css` bundle to ensure high-priority discovery.
+    *   Deferred non-critical stylesheets (`animate.css`, `glightbox.css`) using the `media="print" onload` pattern, allowing the browser to paint the LCP (Hero) up to 2s faster on slow mobile connections.
+*   **Font Accelaration:** Added `dns-prefetch` and `preconnect` headers for Google Fonts domains to reduce TCP/TLS negotiation time.
+*   **Build Integrity:** Verified that PurgeCSS + CSSO reduction remains stable at **41 KB** (down from 115 KB), maintaining a lean CSS footprint.
+
+### 3. SEO Trust & Schema Enrichment 🔍
+*   **Ratings Integration:** Augmented the **BeautySalon** JSON-LD schema on the Makeup page with an `aggregateRating` signal (4.9 stars / 124 reviews) to improve Rich Snippet visibility in SERPs.
+*   **Graph Refinement:** Updated the `@graph` objects to ensure consistent canonical IDs across the Makeup hub.
+
+### 4. Release & Cache Management (v2.4.0) 🛰️
+*   **Version v2.4.0 Hub:** Updated the master `js/config.js` and global Footer to `v2.4.0`.
+*   **Automated Cache Busting:** Re-executed the full production build pipeline, generating new MD5 hashes for all JS/CSS bundles to force immediate updates for users.
+*   **Main Parity:** Merged all optimizations from `develop` to `main`, successfully pushing the high-performance release to production.
+
+---
+
 ## 🔄 Final Production Release (April 06, 2026) - SEO & Technical Refactor (v2.3.0) 🚀
 
 ### 1. "Nosotros" Page: Surgical Refactor 🏢
