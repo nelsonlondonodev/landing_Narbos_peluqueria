@@ -86,7 +86,7 @@ export const resolveAsset = (path) => {
  * Centraliza datos estáticos para facilitar el mantenimiento.
  */
 export const siteConfig = Object.freeze({
-    version: "2.3.1", // Versión actual del proyecto (Control Maestro)
+    version: "2.4.0", // Versión actual del proyecto (Control Maestro)
     basePath: BASE_PATH, // Exponer basePath para uso general
     socialLinks: [
         {
