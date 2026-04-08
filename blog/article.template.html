@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager / Analytics -->
     <meta name="google-site-verification" content="z7iMcq4xUxxKeXpDsVU32HJ_a0jXCwyOFmZi-7vvCKs" />
 
     <!-- SEO MASTER START -->
@@ -30,28 +30,30 @@
     <meta name="robots" content="noindex, nofollow" />
     <!-- SEO MASTER END -->
 
-    <link rel="stylesheet" href="../../css/styles.css?v=2.2.0" />
+    <link rel="stylesheet" href="../../css/styles.css?v=2.4.0" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <!-- Optimización de Fuentes y CSS Externos -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
     
     <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     </noscript>
 
     <style>
-        /* Optimización de CLS */
+        /* Optimización de CLS y Estilos Base */
         #navbar-root { min-height: 80px; }
-        #breadcrumbs-root { min-height: 40px; }
+        #breadcrumbs-root { min-height: 48px; }
+        .prose h2 { margin-top: 2rem; margin-bottom: 1rem; }
+        .prose p { margin-bottom: 1.5rem; line-height: 1.8; }
     </style>
-  \n</head>
-  <body class="font-sans bg-white text-gray-900">
+</head>
+  <body class="font-sans bg-white text-slate-800">
     <header class="site-header">
       <div id="navbar-root"></div>
     </header>
@@ -63,10 +65,10 @@
       <main class="pb-16 md:pb-24 pt-8 md:pt-12">
         <div class="container mx-auto px-6 max-w-screen-md">
           <article>
-            <header class="text-center mb-12 animate__animated animate__fadeInUp">
-              <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6"
+            <header class="text-center mb-12 animate__animated animate__fadeIn">
+              <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6 leading-tight"
                    data-breadcrumb="{{BREADCRUMB_TITLE}}">
-                {{TITLE}} <span class="text-brand-green">en Chía</span>
+                {{TITLE}}
               </h1>
               <p class="text-lg text-gray-600">
                 <span>Por el equipo de Narbo's Salón Spa</span>
@@ -74,7 +76,7 @@
               </p>
               
               <!-- Botón de Compartir -->
-              <div class="share-button-container mt-4 flex justify-center" 
+              <div class="share-button-container mt-6 flex justify-center" 
                    data-title="{{TITLE}} | Narbo's Salón Spa" 
                    data-text="{{DESCRIPTION}}"></div>
             </header>
@@ -82,7 +84,7 @@
             <img
               src="{{IMAGE_PATH}}"
               alt="{{IMAGE_ALT}}"
-              class="w-full max-w-lg mx-auto rounded-lg shadow-lg mb-12 animate__animated animate__fadeInUp"
+              class="w-full max-w-lg mx-auto rounded-2xl shadow-xl mb-12 animate__animated animate__fadeInUp"
               style="animation-delay: 0.2s"
               loading="eager"
             />
@@ -90,32 +92,18 @@
             <div class="prose lg:prose-xl max-w-none text-gray-800">
               
               <!-- Tabla de Contenidos -->
-              <div class="bg-white/50 p-6 rounded-lg shadow-md mb-12 border-l-4 border-brand-green animate__animated animate__fadeInUp">
-                <h3 class="text-2xl font-serif font-bold text-gray-900 mb-4">Tabla de contenidos</h3>
-                <ol class="list-decimal list-inside space-y-2 text-lg">
-                  <li><a href="#introduccion" class="text-brand-green hover:underline">Introducción</a></li>
-                  <li><a href="#seccion-1" class="text-brand-green hover:underline">Título de la Sección</a></li>
-                </ol>
-              </div>
+              {{TOC}}
 
-              <!-- CONTENIDO DINÁMICO -->
+              <!-- CONTENIDO DEL ARTÍCULO -->
               <div class="article-body">
-                <section id="introduccion" class="mb-12">
-                  <p class="text-lg leading-relaxed mb-6">
-                    Párrafo de introducción con estilo estandarizado...
-                  </p>
-                </section>
-
-                <section id="seccion-1" class="mb-12">
-                  <h2 class="text-3xl font-serif font-bold text-gray-900 mb-6">Título de la Sección Estándar</h2>
-                  <p class="mb-4">Contenido de la sección...</p>
-                </section>
+                {{ARTICLE_CONTENT}}
               </div>
               
+              <!-- CTA de agendamiento -->
               <div class="text-center mt-12 animate__animated animate__zoomIn">
                 <a
                   href="https://wa.me/573123462618?text=Hola%2C%20le%C3%AD%20su%20art%C3%ADculo%20sobre%20{{TITLE}}%20y%20quiero%20agendar%20una%20cita."
-                  class="inline-block bg-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
+                  class="inline-block bg-brand-green text-white font-bold py-4 px-10 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
                   >Agenda tu cita y asesoría personalizada 📲</a>
               </div>
 
@@ -133,6 +121,6 @@
       <div id="footer-root"></div>
     </div> <!-- End app-wrapper -->
 
-    <script src="../../js/main.js?v=2.2.0" type="module"></script>
+    <script src="../../js/main.js?v=2.4.0" type="module"></script>
   </body>
 </html>
