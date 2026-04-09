@@ -25,7 +25,7 @@
     <meta property="twitter:image" content="https://narbossalon.com/images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp" />
     <!-- SEO MASTER END -->
 
-    <!-- Schema Markup -->
+    <!-- Schema Markup: Unified @graph for WebPage, Service Catalog and FAQs -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -39,62 +39,92 @@
           "breadcrumb": { "@id": "https://narbossalon.com/servicios/peluqueria/color-tinturas-cabello/#breadcrumb" },
           "mainEntity": {
             "@type": "Service",
-            "name": "Coloración Profesional",
-            "description": "Servicios de tintura profesional en Chía con marcas premium (Wella, Schwarzkopf). Cobertura total de canas y cambio de look.",
-            "provider": {
-                "@id": "https://narbossalon.com/#organization"
-            },
-            "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota", "Fontanar"],
+            "name": "Coloración Profesional en Chía",
+            "description": "Expertos en tinturas, balayage y cubrimiento de canas en Chía. Usamos productos premium (Wella, Loreal, Schwarzkopf) con tecnología Plex.",
+            "provider": { "@id": "https://narbossalon.com/#organization" },
+            "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota"],
             "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "Catálogo de Tinturas",
+                "name": "Servicios de Color",
                 "itemListElement": [
                     {
                         "@type": "Offer",
-                        "itemOffered": {
-                            "@type": "Service",
-                            "name": "Aplicación de tintes",
-                            "description": "Color global uniforme de raíz a puntas."
-                        },
-                        "price": "200000",
-                        "priceCurrency": "COP"
+                        "itemOffered": { "@type": "Service", "name": "Balayage", "description": "Técnica de degradado natural con luz solar." },
+                        "price": "450000", "priceCurrency": "COP"
                     },
                     {
                         "@type": "Offer",
-                        "itemOffered": {
-                            "@type": "Service",
-                            "name": "Retoque de Raíz",
-                            "description": "Mantenimiento de color en el crecimiento (máximo 3cm)."
-                        },
-                        "price": "120000",
-                        "priceCurrency": "COP"
+                        "itemOffered": { "@type": "Service", "name": "Babylights / Iluminaciones", "description": "Micro-mechas para brillo natural y dimensión." },
+                        "price": "320000", "priceCurrency": "COP"
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": { "@type": "Service", "name": "Tinte Global", "description": "Color uniforme de raíz a puntas y cobertura de canas." },
+                        "price": "200000", "priceCurrency": "COP"
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": { "@type": "Service", "name": "Retoque de Raíz", "description": "Mantenimiento de color en el crecimiento." },
+                        "price": "120000", "priceCurrency": "COP"
                     }
                 ]
             }
           }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cubren las canas totalmente sin que el color se vea artificial?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Usamos técnicas de multitonalidad para devolverle al cabello sus reflejos naturales, evitando el efecto mate artificial."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué marcas manejan? ¿Tienen opciones sin amoniaco?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Trabajamos con Wella, L'Oréal y Schwarzkopf. Ofrecemos líneas premium sin amoniaco ideales para cueros cabelludos sensibles."
+              }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Cuál es la diferencia entre Tinte Permanente y Baño de Color?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "El Tinte Permanente cubre canas al 100% y aclara raíces. El Baño de Color es más suave, ideal para matizar y dar brillo sin efecto raíz marcado."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Cuánto tiempo dura una cita de color completo?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Un retoque de raíz toma aprox. 1.5 horas. Un servicio de Balayage o Color completo puede tomar entre 2 a 3 horas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Pueden corregir un color manchado o que no me gustó?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "¡Sí! Somos expertos en corrección de color. Realizamos diagnósticos de fibra capilar para garantizar resultados seguros y hermosos."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "¿Dónde están ubicados? ¿Están cerca de Cajicá?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "En los Bajos del hotel Ibis, Km 2 vía Chía - Cajicá, Edificio Quantum. Muy cerca de Fontanar y accesible desde Cajicá."
+                }
+            }
+          ]
         }
       ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [{
-        "@type": "Question",
-        "name": "¿Cubren las canas totalmente sin que el color se vea artificial?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí. Nos especializamos en canas rebeldes usando técnicas de multitonalidad para devolverle al cabello sus reflejos naturales, evitando el efecto mate artificial."
-        }
-      }, {
-        "@type": "Question",
-        "name": "¿Qué marcas manejan? ¿Tienen opciones sin amoniaco?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Trabajamos con Wella, L'Oréal y Schwarzkopf. Ofrecemos líneas premium sin amoniaco ideales para cueros cabelludos sensibles o cuidado intensivo."
-        }
-      }]
     }
     </script>
 
