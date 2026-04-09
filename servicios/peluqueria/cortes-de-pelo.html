@@ -29,30 +29,51 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "Cortes de Pelo",
-      "provider": {
-        "@type": "BeautySalon",
-        "name": "Narbo's Salón Spa",
-        "url": "https://narbossalon.com/",
-        "image": "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
-          "addressLocality": "Chía",
-          "addressRegion": "Cundinamarca",
-          "postalCode": "250001",
-          "addressCountry": "CO"
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo/#webpage",
+          "url": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo",
+          "name": "Cortes de Pelo en Chía | Estilo y Tendencias para Dama",
+          "description": "Expertos en cortes de pelo para dama en Chía y Cajicá. Asesoría de imagen personalizada y las últimas tendencias. ¡Reserva en Narbo's Salón!",
+          "breadcrumb": { "@id": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo/#breadcrumb" },
+          "mainEntity": {
+            "@type": "Service",
+            "name": "Cortes de Pelo",
+            "description": "Expertos en cortes de pelo para dama en Chía y Cajicá. Asesoría de imagen personalizada y las últimas tendencias.",
+            "provider": {
+                "@id": "https://narbossalon.com/#organization"
+            },
+            "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota", "Fontanar"],
+            "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Catálogo de Cortes y Estilizado",
+                "itemListElement": [
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "Service",
+                            "name": "Corte para Dama",
+                            "description": "Incluye asesoría de imagen, lavado spa y cepillado básico."
+                        },
+                        "price": "35000",
+                        "priceCurrency": "COP"
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "Service",
+                            "name": "Cepillados",
+                            "description": "Incluye lavado y estilizado profesional con secador y plancha."
+                        },
+                        "price": "35000",
+                        "priceCurrency": "COP"
+                    }
+                ]
+            }
+          }
         }
-      },
-      "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota", "Fontanar"],
-      "description": "Cortes de cabello para dama, caballeros y niños en Chía.",
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "COP",
-        "availability": "https://schema.org/InStock",
-        "description": "Consultar precios y disponibilidad vía WhatsApp"
-      }
+      ]
     }
     </script>
     
