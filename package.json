@@ -32,7 +32,7 @@
     "html-minifier": "^4.0.0",
     "imagemin-cli": "^8.0.0",
     "imagemin-webp": "^8.0.0",
-    "jsdom": "^27.4.0",
+    "jsdom": "25.0.0",
     "passkit-generator": "^3.5.7",
     "purgecss": "^8.0.0",
     "qrcode": "^1.5.4",
