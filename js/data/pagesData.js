@@ -808,6 +808,8 @@ export const pagesData = Object.freeze({
         ]
     },
     'unas-spa': {
+        metaTitle: "Uñas y Spa en Chía | Manicure, Pedicure y Nail Art - Narbo's",
+        metaDescription: "Spa de uñas en Chía y Cajicá. Expertos en manicure, pedicure, uñas acrílicas, gel, polygel y diseños de uñas exclusivos. ¡Agenda tu cita de bienestar!",
         gallery: [
             {
                 type: 'image',
