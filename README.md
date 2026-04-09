@@ -64,7 +64,26 @@ Para llevar a Narbo's Salón Spa al siguiente nivel de conversión y eficiencia,
 
 ---
 
-## 🔄 Performance & Visual Surgery (April 08, 2026) - PageSpeed Mastery (v2.4.0) 🚀
+## 🔄 Performance & SEO Optimization (April 09, 2026) - Color & Technical Integrity 🚀
+
+### 1. "Color y Tinturas" Page: Surgical Optimization 🎨
+*   **SSG Static Injection:** Implemented full static injection for the service catalog in `color-tinturas-cabello.html`. The grid is now 100% visible on the first paint, eliminating JS-rendering delays and improving SEO discoverability.
+*   **Premium Design Restoration:** Reimplemented the "Visual Poetry" hero layout (50/50 overlap, glassmorphism content box, and 3D decorative leaves) after the refactor to maintain the brand's high-end aesthetic.
+*   **SEO & Schema Synchronization:** 
+    *   Unified the Schema Markup into a single `@graph` block.
+    *   Injected the full catalog of 4 core color services and restored the 6 official FAQs for maximum rich snippet coverage.
+*   **Asset Correction:** Fixed 404 errors for decorative leaves by mapping correct paths to `/images/ui/decorations/hoja-seca-3d.webp`.
+
+### 2. Data & Logic Hygiene 🧹
+*   **Markdown Eridication:** Mass-replaced all Markdown bold syntax (`**`) with semantic HTML `<strong>` tags across the entire `js/data/hairPageServices.js` database. This ensures clean rendering in both cards and modals.
+*   **JS Grid Protection:** Modified `js/hair-page.js` (`initHairServicesGrid`) to detect existing static content. The script now "hydrates" existing HTML instead of wiping and re-rendering, preserving manual SSG optimizations while maintaining functionality.
+
+### 3. Workflow & Stability 🧘‍♂️
+*   **Pre-staging Audit:** Performed visual and technical audits for both "Color" and "Tratamientos" pages.
+*   **Git Stabilization:** Reverted experimental changes to "Tratamientos" to maintain a stable environment at session end, keeping the perfected "Color" page as the new production standard.
+
+---
+
 
 ### 1. High-Impact Performance Surgery (Makeup) ⚡
 *   **Massive Payload Reduction:** Executed a surgical replacement of legacy high-weight assets in the Makeup section.
