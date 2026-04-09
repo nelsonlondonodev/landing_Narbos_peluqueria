@@ -29,77 +29,88 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "BeautySalon",
-      "name": "Narbo's Salón Spa",
-      "image": "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
-      "@id": "https://narbossalon.com/#organization",
-      "url": "https://narbossalon.com/",
-      "telephone": "+573123462618",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
-        "addressLocality": "Chía",
-        "addressRegion": "Cundinamarca",
-        "postalCode": "250001",
-        "addressCountry": "CO"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 4.8617,
-        "longitude": -74.0539
-      },
-      "openingHoursSpecification": [
+      "@graph": [
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          "opens": "07:00",
-          "closes": "20:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Sunday",
-            "PublicHolidays"
-          ],
-          "opens": "09:00",
-          "closes": "18:00"
-        }
-      ],
-      "department": [
-        {
-            "@type": "Service",
-            "serviceType": "Peluquería",
-            "description": "Cortes de cabello y estilismo profesional",
-            "provider": {
-                "@type": "BeautySalon",
-                "name": "Narbo's Salón Spa"
+          "@type": "WebPage",
+          "@id": "https://narbossalon.com/servicios/peluqueria/#webpage",
+          "url": "https://narbossalon.com/servicios/peluqueria/",
+          "name": "Peluquería en Chía y Cajicá | Barbería, uñas y spa cerca de ti",
+          "description": "Peluquería en Chía y Cajicá cerca de Fontanar. Expertos en cortes, balayage, barbería, maquillaje y uñas. ¡Reserva tu cita en Narbo's Salón!",
+          "breadcrumb": { "@id": "https://narbossalon.com/peluqueria/#breadcrumb" },
+          "mainEntity": {
+            "@type": "BeautySalon",
+            "name": "Narbo's Salón Spa",
+            "image": "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
+            "@id": "https://narbossalon.com/#organization",
+            "url": "https://narbossalon.com/",
+            "telephone": "+573123462618",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
+              "addressLocality": "Chía",
+              "addressRegion": "Cundinamarca",
+              "postalCode": "250001",
+              "addressCountry": "CO"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 4.8617,
+              "longitude": -74.0539
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "07:00",
+                "closes": "20:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Sunday", "PublicHolidays"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ],
+            "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Servicios de Peluquería Profesional",
+                "itemListElement": [
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "Service",
+                            "name": "Corte dama",
+                            "description": "Diseños personalizados, puntas perfectas y cambios de look completos."
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "Service",
+                            "name": "Balayage y mechas",
+                            "description": "Iluminaciones perfectas, rubios soñados y técnicas de degradado."
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "Service",
+                            "name": "Color y tinturas",
+                            "description": "Tintes completos, cubrimiento de canas y retoque de raíz profesional."
+                        }
+                    },
+                    {
+                        "@type": "Offer",
+                        "itemOffered": {
+                            "@type": "Service",
+                            "name": "Tratamientos",
+                            "description": "Recuperación profunda, keratinas, cirugía capilar y botox."
+                        }
+                    }
+                ]
             }
-        },
-         {
-            "@type": "Service",
-            "serviceType": "Coloración",
-            "description": "Balayage, Babylights y tintes de alta calidad",
-            "provider": {
-                "@type": "BeautySalon",
-                "name": "Narbo's Salón Spa"
-            }
-        },
-         {
-            "@type": "Service",
-            "serviceType": "Tratamientos Capilares",
-            "description": "Keratina, Botox capilar y recuperación profunda",
-            "provider": {
-                "@type": "BeautySalon",
-                "name": "Narbo's Salón Spa"
-            }
+          }
         }
       ]
     }
