@@ -46,6 +46,9 @@ async function getPagesConfig() {
         { path: 'servicios/unas-spa/manicure-pedicure.html', key: 'manicure-pedicure' },
         { path: 'servicios/unas-spa/unas-acrilicas-gel.html', key: 'unas-acrilicas-gel' },
 
+        // Maquillaje Específico
+        { path: 'servicios/maquillaje/index.html', key: 'maquillaje' },
+
         // Rutas legacy o alias
         { path: 'cortes-de-pelo-en-chia.html', key: 'cortes-de-pelo' },
         { path: 'balayage-y-color-en-chia.html', key: 'balayage-mechas' },
@@ -165,6 +168,7 @@ async function injectServices(document, pageKey, prefix) {
     if (pageKey === 'barberia') gridId = 'barber-services-grid';
     else if (pageKey === 'peluqueria') gridId = 'hair-services-grid';
     else if (pageKey === 'estetica') gridId = 'aesthetics-services-static';
+    else if (pageKey === 'maquillaje') gridId = 'makeup-services-grid';
 
     const grid = document.getElementById(gridId) || document.getElementById('services-grid');
     
@@ -182,6 +186,9 @@ async function injectServices(document, pageKey, prefix) {
     } else if (pageKey === 'estetica') {
         const { estheticsServices } = await import('../js/data/estheticsServices.js');
         servicesSource = estheticsServices;
+    } else if (pageKey === 'maquillaje') {
+        const { makeupServices } = await import('../js/data/makeupServices.js');
+        servicesSource = makeupServices;
     } else {
         const { servicesData } = await import('../js/data/servicesData.js');
         servicesSource = servicesData;

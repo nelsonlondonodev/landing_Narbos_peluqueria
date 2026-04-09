@@ -24,6 +24,101 @@ export const pagesData = Object.freeze({
         metaTitle: "Blog de Belleza y Bienestar | Consejos Narbo's Salón Chía",
         metaDescription: "Descubre tips de cuidado capilar, tendencias en coloración, mitos sobre el corte de pelo y mucho más en el blog oficial de Narbo's Salón Spa.",
     },
+    'maquillaje': {
+        metaTitle: "Maquillaje Profesional en Chía | Novias y Social - Narbo's",
+        metaDescription: "Maquillaje social y para novias en Chía. Expertos en belleza para eventos especiales. Luce un maquillaje profesional cerca de ti. ¡Reserva hoy!",
+        hero: {
+            title: "Maquillaje profesional <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Realza tu belleza natural para tu evento perfecto.",
+            imageSrc: "../../images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
+            imageAlt: "Maquillaje profesional en Narbo's Salon Spa"
+        },
+        gallery: [
+            {
+                type: 'image',
+                layout: 'featured-video',
+                src: '../../images/pages/maquillaje/maquillaje-social-chia-trabajo-1.webp',
+                title: "Maquillaje de ojos",
+                subtitle: "Tonos tierra",
+                alt: "Maquillaje social profesional con sombras cálidas"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-ojos-ahumados-narbos-2.webp',
+                title: "Smokey Eyes",
+                alt: "Maquillaje de noche ahumado intenso en Chía"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-y-pestanas-chia-3.webp',
+                title: "Mirada impactante",
+                subtitle: "Pestañas & makeup",
+                alt: "Extensiones de pestañas y maquillaje profesional"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/maquillaje/maquillaje-novias-y-eventos-4.webp',
+                title: "Novias y eventos",
+                subtitle: "Tonos neutros",
+                alt: "Sombras neutras y elegantes para eventos especiales"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '../../images/pages/maquillaje/maquillaje-social-tendencia-chia.webp',
+                title: "Tendencias sociales",
+                alt: "Chica arreglándose para evento social"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-artistico-eventos-chia.webp',
+                title: "Look artístico",
+                alt: "Maquillaje para fiestas y eventos de noche"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-profesional-chia-narbos-spa.webp',
+                title: "Profesionalismo",
+                alt: "Estudio de maquillaje profesional Narbo's"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-social-peinado-grados-chia-narbos-salon-spa.webp',
+                title: "Para tus grados",
+                subtitle: "Combo peinado",
+                alt: "Maquillaje especial y peinado para ceremonia de grados"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/maquillaje/maquillaje-profesional-peluquerias-en-chia-narbos-salon.webp',
+                title: "Centros de belleza",
+                subtitle: "Acabados de lujo",
+                alt: "Técnicas de preparación de piel previas al maquillaje"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '../../images/pages/maquillaje/maquillaje-social-peinado-narbos-salon-spa-chia.webp',
+                title: "Armonía facial",
+                alt: "Maquillaje de contorno e iluminación profesional"
+            },
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: '../../images/pages/maquillaje/retoque-maquillaje-mejores-peluquerias-chia-salon-de-belleza.webp',
+                title: "El toque final",
+                subtitle: "Detalles impecables",
+                alt: "Retoque de maquillaje en sala de belleza premium"
+            }
+        ]
+    },
     'peluqueria': {
         hero: {
             title: "Peluquería en Chía: expertos en estilo, color <span class=\"text-brand-green\">y bienestar</span>",
@@ -889,99 +984,6 @@ export const pagesData = Object.freeze({
             { type: 'logo-card', layout: 'vertical', src: 'images/brand/logo_narbos.webp', alt: 'Ritual de Barba', title: 'Ritual de Barba' },
             { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Corte Tijera', title: 'Corte a Tijera' },
             { type: 'logo-card', layout: 'horizontal', src: 'images/brand/logo_narbos.webp', alt: 'Acabados', title: 'Acabados Premium' }
-        ]
-    },
-    maquillaje: {
-        hero: {
-            title: "Maquillaje profesional <span class=\"text-brand-green\">en Chía</span>",
-            subtitle: "Realza tu belleza natural para tu evento perfecto.",
-            imageSrc: "../../images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
-            imageAlt: "Maquillaje profesional en Narbo's Salon Spa"
-        },
-        gallery: [
-            {
-                type: 'image',
-                layout: 'featured-video',
-                src: '../../images/pages/maquillaje/maquillaje-social-chia-trabajo-1.webp',
-                title: "Maquillaje de ojos",
-                subtitle: "Tonos tierra",
-                alt: "Maquillaje social profesional con sombras cálidas"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-ojos-ahumados-narbos-2.webp',
-                title: "Smokey Eyes",
-                alt: "Maquillaje de noche ahumado intenso en Chía"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-y-pestanas-chia-3.webp',
-                title: "Mirada impactante",
-                subtitle: "Pestañas & makeup",
-                alt: "Extensiones de pestañas y maquillaje profesional"
-            },
-            {
-                type: 'image',
-                layout: 'horizontal',
-                src: '../../images/pages/maquillaje/maquillaje-novias-y-eventos-4.webp',
-                title: "Novias y eventos",
-                subtitle: "Tonos neutros",
-                alt: "Sombras neutras y elegantes para eventos especiales"
-            },
-            {
-                type: 'image',
-                layout: 'vertical',
-                src: '../../images/pages/maquillaje/maquillaje-social-tendencia-chia.webp',
-                title: "Tendencias sociales",
-                alt: "Chica arreglándose para evento social"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-artistico-eventos-chia.webp',
-                title: "Look artístico",
-                alt: "Maquillaje para fiestas y eventos de noche"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-profesional-chia-narbos-spa.webp',
-                title: "Profesionalismo",
-                alt: "Estudio de maquillaje profesional Narbo's"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-social-peinado-grados-chia-narbos-salon-spa.webp',
-                title: "Para tus grados",
-                subtitle: "Combo peinado",
-                alt: "Maquillaje especial y peinado para ceremonia de grados"
-            },
-            {
-                type: 'image',
-                layout: 'horizontal',
-                src: '../../images/pages/maquillaje/maquillaje-profesional-peluquerias-en-chia-narbos-salon.webp',
-                title: "Centros de belleza",
-                subtitle: "Acabados de lujo",
-                alt: "Técnicas de preparación de piel previas al maquillaje"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-social-peinado-narbos-salon-spa-chia.webp',
-                title: "Armonía facial",
-                alt: "Maquillaje de contorno e iluminación profesional"
-            },
-            {
-                type: 'image',
-                layout: 'horizontal',
-                src: '../../images/pages/maquillaje/retoque-maquillaje-mejores-peluquerias-chia-salon-de-belleza.webp',
-                title: "El toque final",
-                subtitle: "Detalles impecables",
-                alt: "Retoque de maquillaje en sala de belleza premium"
-            }
         ]
     }
 });
