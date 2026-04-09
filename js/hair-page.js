@@ -147,11 +147,22 @@ function initHairServicesGrid() {
     const gridContainer = document.getElementById('hair-services-grid');
     if (!gridContainer) return;
 
-    gridContainer.innerHTML = '';
+    // Check if the container already has content (SSG Check)
+    const hasStaticContent = gridContainer.children.length > 0 && 
+                             gridContainer.querySelector('[id^="service-card-"]');
 
     const serviceModal = new ServiceModal(hairPageServices);
     const filteredServices = getFilteredServices();
 
+    if (hasStaticContent) {
+        // CONTENT ALREADY INJECTED (SSG)
+        // We only initialize the modal logic to attach listeners to static cards
+        serviceModal.init();
+        return;
+    }
+
+    // Default Case: Dynamic rendering if empty
+    gridContainer.innerHTML = '';
     renderServiceCards(gridContainer, filteredServices, serviceModal);
 }
 

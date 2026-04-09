@@ -62,8 +62,7 @@ export class ServiceModal {
         if (this.refs.price) this.refs.price.textContent = service.price;
         
         if (this.refs.desc) {
-            // Convert Markdown bold to HTML bold
-            this.refs.desc.innerHTML = service.description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            this.refs.desc.innerHTML = service.description;
         }
 
         if (this.refs.whatsappBtn) {
