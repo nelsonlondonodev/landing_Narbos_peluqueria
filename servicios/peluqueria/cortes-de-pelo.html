@@ -87,6 +87,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <link rel="preload" as="image" href="../../images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp" />
     <style>
         /* Optimización de CLS */
         #navbar-root { min-height: 80px; }
@@ -136,7 +137,57 @@
 
             <!-- Grid de Servicios (Hub) -->
             <div id="hair-services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Services injected via JS -->
+                <!-- Corte para Dama -->
+                <div id="service-card-10" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0 cursor-pointer" data-animation="zoomIn" data-modal-target="10">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
+                        <img src="../../images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp" alt="Corte para Dama" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">Corte para Dama</h3>
+                        </div>
+                        <div class="mt-2 mb-3">
+                            <span class="inline-flex items-center gap-1.5 bg-brand-light/20 text-brand-green font-bold text-lg px-0 py-1 rounded-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                Desde $35.000
+                            </span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed"><strong>El corte perfecto para ti.</strong> Incluye asesoría de imagen, lavado spa y cepillado básico. Realizamos cortes Bob, capas, rectos y en V.</p>
+                        <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
+                            <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
+                                <span>Ver Detalles</span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cepillados -->
+                <div id="service-card-12" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0 cursor-pointer" data-animation="zoomIn" data-modal-target="12">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
+                        <img src="../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp" alt="Cepillados" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="text-xl font-serif font-bold text-gray-900 group-hover:text-brand-green transition-colors leading-tight">Cepillados</h3>
+                        </div>
+                        <div class="mt-2 mb-3">
+                            <span class="inline-flex items-center gap-1.5 bg-brand-light/20 text-brand-green font-bold text-lg px-0 py-1 rounded-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                Desde $35.000
+                            </span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed"><strong>Luce una melena de impacto.</strong> Incluye lavado y estilizado con secador y plancha/pinzas para ondas. Perfecto para eventos o tu día a día.</p>
+                        <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
+                            <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
+                                <span>Ver Detalles</span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
       </section>
