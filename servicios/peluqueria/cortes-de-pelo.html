@@ -99,19 +99,27 @@
     }
     </script>
 
-    <link rel="stylesheet" href="../../css/styles.css?v=1.4" />
+    <link rel="stylesheet" href="../../css/styles.css?v=2.5.1" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-    <link rel="preload" as="image" href="../../images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" media="print" onload="this.media='all'">
+    
+    <!-- LCP Optimization -->
+    <link rel="preload" as="image" href="../../images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp" fetchpriority="high" type="image/webp" />
+
     <style>
-        /* Optimización de CLS */
+        /* Optimización de CLS: Reserva de espacio para componentes dinámicos */
         #navbar-root { min-height: 80px; }
+        #inicio { min-height: 60vh; background: #f9f9f9; }
+        @media (min-width: 768px) { #inicio { min-height: 80vh; } }
+        #hair-services-grid { min-height: 600px; }
     </style>
 </head>
   <body class="font-sans">
@@ -128,20 +136,20 @@
         <div id="breadcrumbs-root"></div>
 
         <main>
-            <!-- Hero de Servicio (Estático para SEO) -->
-            <div class="relative h-[60vh] md:h-[80vh] bg-white">
+            <!-- Hero de Servicio -->
+            <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
                 <img src="../../images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp" alt="Corte de pelo profesional en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080">
                 
                 <!-- Floating Content Box -->
                 <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
                     <div class="container mx-auto">
-                        <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
+                        <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 animate__animated animate__fadeInUp">
                             <h1 class="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-4">Cortes de pelo en Chía: Estilo y <span class="text-brand-green">Tendencia</span></h1>
                             <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">Diseños personalizados realizados por expertos para realzar tu estilo único.</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
                 <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
                 <section class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
@@ -329,9 +337,9 @@
     <div id="footer-root"></div>
     
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-    <script type="module" src="../../js/main.js?v=2.5.0"></script>
-    <script type="module" src="../../js/hair-page.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
+    <script type="module" src="../../js/main.js?v=2.5.1"></script>
+    <script type="module" src="../../js/hair-page.js?v=2.5.1"></script>
 
     <!-- Modal de Servicios (Unified Style) -->
     <div id="service-modal" class="relative z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -386,7 +394,5 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-    <script type="module" src="../../js/hair-page.js"></script>
   </body>
 </html>
