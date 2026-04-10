@@ -173,18 +173,27 @@
     }
     </script>
 
-    <link rel="stylesheet" href="../../css/styles.css?v=1.4" />
+    <link rel="stylesheet" href="../../css/styles.css?v=2.5.1" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
+
+    <!-- LCP Optimization: Preload Hero Image -->
+    <link rel="preload" as="image" href="../../images/pages/peluqueria/hair-hero.webp" fetchpriority="high" type="image/webp">
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" media="print" onload="this.media='all'">
     
     <style>
-        /* Optimización de CLS */
+        /* Optimización de CLS: Reserva de espacio para componentes dinámicos */
         #navbar-root { min-height: 80px; }
+        #hero-root { min-height: 60vh; background: #f9f9f9; }
+        @media (min-width: 768px) { #hero-root { min-height: 80vh; } }
+        #hair-services-grid { min-height: 1000px; }
     </style>
 </head>
   <body class="font-sans">
@@ -439,9 +448,9 @@
     </div> <!-- End of App Content Wrapper -->
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-    <script type="module" src="../../js/main.js?v=2.5.0"></script>
-    <script type="module" src="../../js/hair-page.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
+    <script type="module" src="../../js/main.js?v=2.5.1"></script>
+    <script type="module" src="../../js/hair-page.js?v=2.5.1"></script>
 
     <!-- Service Modal -->
     <div id="service-modal" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true">
