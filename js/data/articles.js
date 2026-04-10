@@ -19,7 +19,7 @@
  */
 const articles = [
     {
-        id: 'guia-cuidado-capilar-sabana-viento-casco-frio',
+        id: 'cuidado-capilar-sabana-viento-casco-frio',
         date: '10 de abril de 2026',
         isoDate: '2026-04-10',
         category: 'Cuidado Capilar',
@@ -27,7 +27,7 @@ const articles = [
         description: 'Vivir o desplazarse por la Sabana de Bogotá implica enfrentar desafíos climáticos únicos. Guía técnica de supervivencia capilar para el viento y el frío.',
         image: '/images/pages/peluqueria/narbos-salon-spa-chia-peinado-tendencia-trenzas-laterales-ondas-sueltas-large.webp',
         alt: 'Cuidado capilar y peinados resistentes al viento en la Sabana de Bogotá',
-        link: '/blog/articles/guia-cuidado-capilar-sabana-viento-casco-frio.html',
+        link: '/blog/articles/cuidado-capilar-sabana-viento-casco-frio.html',
         featured: true
     },
     {
