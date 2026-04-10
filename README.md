@@ -37,6 +37,28 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Performance & SEO Optimization (April 10, 2026) - Peluquería Hub & Cache Integrity (v2.5.1) 🚀
+
+### 1. Hairdressing Section: Strategic Performance Audit ✂️
+*   **Comprehensive Optimization:** Executed a block-level performance audit for the entire Hairdressing hub:
+    *   **Balayage:** Implemented high-priority LCP preloading and advanced pre-connections.
+    *   **Color & Tinturas:** Fixed critical 404 image errors, removed legacy duplicate leaf decorations, and restored the premium "Visual Poetry" layout.
+    *   **Cortes de Pelo:** Eliminated redundant script injections and achieved a consistent **100/100 Mobile score** in PageSpeed Insights.
+    *   **Tratamientos Capilares:** Configured high-priority image preloading and non-blocking resource delivery.
+*   **CLS Elimination:** Standardized `min-height` skeletons for headers and hero sections across the hub to prevent layout shifts during hydration.
+
+### 2. Cache-Busting Synchronization (v2.5.1) 🛰️
+*   **Version v2.5.1 Alignment:** Conducted a project-wide upgrade to **Version 2.5.1**.
+    *   Updated all core assets (JS/CSS) in Home, Peluquería Index, and all sub-service pages.
+    *   Implemented the new `?v=2.5.1` standard for all script and style calls to force immediate updates for all users.
+*   **Build Pipeline Stability:** Re-executed the production build script (`npm run build`) to generate fresh MD5 hashes and synchronize the sitemap with the latest clean-URL structure.
+
+### 3. Production Deployment 🏗️
+*   **Live Release:** Successfully merged all performance gains from `develop` into `main` and pushed to the production environment (Hostinger).
+*   **Sanity Audit:** Verified the stability of the latest article templates and confirmed that all production URLs are correctly resolved without 404s or styling regressing.
+
+---
+
 ## 🚀 Hoja de Ruta de Innovación (Roadmap 2026+)
 
 Para llevar a Narbo's Salón Spa al siguiente nivel de conversión y eficiencia, hemos trazado el siguiente plan de mejoras estratégicas:
