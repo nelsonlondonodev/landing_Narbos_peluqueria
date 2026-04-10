@@ -20,8 +20,8 @@
 const articles = [
     {
         id: 'guia-cuidado-capilar-sabana-viento-casco-frio',
-        date: '8 de abril de 2026',
-        isoDate: '2026-04-08',
+        date: '10 de abril de 2026',
+        isoDate: '2026-04-10',
         category: 'Cuidado Capilar',
         title: 'Guía de cuidado capilar en la Sabana: viento, casco y frío',
         description: 'Vivir o desplazarse por la Sabana de Bogotá implica enfrentar desafíos climáticos únicos. Guía técnica de supervivencia capilar para el viento y el frío.',
