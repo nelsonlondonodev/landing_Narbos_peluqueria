@@ -437,7 +437,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Color y Tinturas en Chía: Cobertura y <span class=\"text-brand-green\">Brillo</span>",
             subtitle: "Expertos en color global, retoque de raíz y cubrimiento total de canas con marcas premium.",
-            imageSrc: "../../images/pages/peluqueria/color-tintura-cabello-profesional-chia.webp",
+            imageSrc: "../../images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp",
             imageAlt: "Servicio de coloración profesional en Narbo's"
         },
         metaTitle: "Coloración y Tinturas en Chía | Cubrimiento de Canas | Narbo's",
