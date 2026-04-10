@@ -82,12 +82,11 @@ class App {
         const footerRoot = document.getElementById('footer-root');
         const contactRoot = document.getElementById('contact-root');
         
-        // Pasamos appRoot (URL absoluta) en lugar de basePath relativo
-        // HYDRATION CHECK: Only render if empty (not pre-rendered by SSG)
-        if (navbarRoot && navbarRoot.children.length === 0) {
+        // FORCE HYDRATION: Clear existing content to avoid layout issues from partial refactors
+        if (navbarRoot) {
             navbarRoot.innerHTML = getNavbarHTML(this.appRoot, this.isHomePage);
         }
-        if (footerRoot && footerRoot.children.length === 0) {
+        if (footerRoot) {
             footerRoot.innerHTML = getFooterHTML(this.appRoot);
         }
         if (contactRoot && contactRoot.children.length === 0) {

@@ -16,12 +16,14 @@ import { hairPageServices } from './data/hairPageServices.js';
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Explicitly initialize Core App (Navbar, Footer, etc)
+    // App initialization is now handled globally by main.js to ensure consistency
+    /*
     if (!window.narbosApp) {
         const app = new App();
         window.narbosApp = app;
         app.init();
     }
+    */
 
     initPageComponents();
 });
