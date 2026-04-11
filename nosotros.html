@@ -21,8 +21,18 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'" />
+
+    <!-- Estilos Críticos en Línea (Layout Stability & UX) -->
+    <style>
+        :root { --brand-green: #2d5a27; }
+        .hero-placeholder { min-height: 80vh; background-color: #f9fafb; display: flex; align-items: flex-end; }
+        @media (max-width: 768px) { .hero-placeholder { min-height: 70vh; } }
+        #hero-root { contain: layout; }
+        .timeline-container { min-height: 600px; }
+        .marquee-track { min-height: 200px; }
+    </style>
     
     <!-- Schema Markup -->
     <script type="application/ld+json">
@@ -147,8 +157,22 @@
     <!-- 2. Wrapper principal de la aplicación -->
     <div id="app-wrapper" class="relative w-full overflow-x-hidden">
         <main id="main-content">
-            <!-- Hero Section (Dynamic) -->
-            <div id="hero-root"></div>
+            <!-- Hero Section (Static Optimized) -->
+            <div id="hero-root" class="relative">
+                <div class="relative">
+                    <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
+                        <img src="images/nosotros/narbos-team-hero.webp" alt="Equipo de profesionales de Narbo's Salón Spa Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" fetchpriority="high">
+                    </section>
+                    <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
+                        <div class="container mx-auto">
+                            <div class="bg-white/90 text-brand-gray-dark backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto">
+                                <h1 id="hero-title" class="animate-hero-element text-4xl md:text-6xl font-serif font-bold mb-4">Nuestra <span class="text-brand-green">historia</span></h1>
+                                <p id="hero-subtitle" class="animate-hero-element text-lg md:text-xl mb-8 max-w-2xl mx-auto">Pasión por la belleza y el bienestar desde 2013.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Introducción y Pilares -->
             <section class="py-20 bg-white" aria-labelledby="intro-title">
@@ -213,7 +237,7 @@
 
             <!-- Nuestra Trayectoria -->
             <section class="py-16 bg-white relative overflow-hidden" aria-labelledby="timeline-title">
-                <div class="container mx-auto px-6 max-w-5xl">
+                <div class="container mx-auto px-6 max-w-5xl timeline-container">
                     <div class="text-center mb-16">
                         <h2 id="timeline-title" class="text-3xl md:text-5xl font-serif font-bold text-brand-gray-dark mb-6">Nuestra Historia</h2>
                         <div class="w-24 h-1 bg-brand-green mx-auto rounded-full"></div>
