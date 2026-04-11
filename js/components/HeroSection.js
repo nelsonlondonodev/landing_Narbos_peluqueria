@@ -44,7 +44,7 @@ function renderHeroImage(src, alt, variant) {
 
     return `
         <section id="inicio" class="${sectionClass}">
-            <img src="${src}" alt="${alt}" class="${imgClass}" loading="eager">
+            <img src="${src}" alt="${alt}" class="${imgClass}" loading="eager" fetchpriority="high">
         </section>
     `;
 }

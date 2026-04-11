@@ -90,18 +90,22 @@
     }
     </script>
     
-    <link rel="stylesheet" href="../../css/styles.css?v=2.5.0" />
+    <link rel="preload" as="image" href="../../images/pages/estetica/cabinas-spa-estetica-narbos.webp" fetchpriority="high" />
+    <link rel="stylesheet" href="../../css/styles.css?v=2.5.2" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" media="print" onload="this.media='all'" />
     
     <style>
-        /* Optimización de CLS */
+        /* Optimización de CLS y LCP */
         #navbar-root { min-height: 80px; }
+        #hero-root { min-height: 60vh; background: #fff; }
+        @media (min-width: 768px) { #hero-root { min-height: 80vh; } }
+        #breadcrumbs-root { min-height: 40px; }
     </style>
 </head>
   <body class="font-sans">
@@ -115,9 +119,22 @@
         <div id="breadcrumbs-root"></div>
 
     <main>
-      <!-- Hero de Servicio (Consistente con Home) -->
-      <!-- Hero de Servicio (Consistente con Home) -->
-      <div id="hero-root" class="relative"></div>
+      <!-- Hero de Servicio (Inyectado estáticamente para LCP) -->
+      <div id="hero-root" class="relative">
+        <div class="relative">
+          <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
+            <img src="../../images/pages/estetica/cabinas-spa-estetica-narbos.webp" alt="Cabinas profesionales de spa y estética en Narbo's" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" fetchpriority="high">
+          </section>
+          <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
+            <div class="container mx-auto">
+              <div class="bg-white/90 text-brand-gray-dark backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto">
+                <h1 id="hero-title" class="animate-hero-element text-4xl md:text-6xl font-serif font-bold mb-4">Estética y Spa <span class="text-brand-green">en Chía</span></h1>
+                <p id="hero-subtitle" class="animate-hero-element text-lg md:text-xl mb-8 max-w-2xl mx-auto">Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
       <section class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
