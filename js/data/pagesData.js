@@ -626,7 +626,30 @@ export const pagesData = Object.freeze({
             imageSrc: "images/brand/logo_narbos.webp",
             imageAlt: "Depilación corporal en Narbo's Salon Spa",
             variant: 'logo'
-        }
+        },
+        gallery: [
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: '/images/pages/estetica/limpieza-facial-profunda-proceso.webp',
+                title: "Higiene Total",
+                alt: "Protocolos de bioseguridad en depilación"
+            },
+            {
+                type: 'image',
+                layout: 'square',
+                src: '/images/pages/estetica/spa-hero.webp',
+                title: "Piel Suave",
+                alt: "Resultado de piel suave post-depilación"
+            },
+            {
+                type: 'logo-card',
+                layout: 'horizontal',
+                src: '/images/brand/logo_narbos.webp',
+                title: "Narbo's Estética",
+                alt: "Logo Narbo's Salon"
+            }
+        ]
     },
     'cejas-y-pestanas': {
         galleryOptions: { isolateItems: true }, // Aísla cada item de la galería (comportamiento solicitado)

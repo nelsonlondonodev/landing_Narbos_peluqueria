@@ -19,7 +19,7 @@ export class EstheticsHubController {
             'spa-facial-integral': 'spa-facial-integral',
             'masajes-relajantes': 'masajes-relajantes',
             'cejas-y-pestanas': 'cejas-y-pestanas',
-            'depilacion-corporal': 'depilacion-corporal.html',
+            'depilacion-corporal': 'depilacion-corporal',
             'limpieza-facial': 'limpieza-facial'
         };
     }
