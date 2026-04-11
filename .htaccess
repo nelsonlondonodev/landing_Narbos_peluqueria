@@ -35,9 +35,17 @@ RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)\.html\ HTTP/
 RewriteRule ^(.+)\.html$ https://narbossalon.com/$1 [R=301,L]
 
 # 2. Mapear internamente la URL limpia al archivo físico .html
+# Maneja tanto /pago como /pago/ para servir pago.html
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.html -f
-RewriteRule ^(.*)$ $1.html [NC,L]
+RewriteCond %{REQUEST_URI} ^/(.+)/?$
+RewriteCond %{DOCUMENT_ROOT}/%1.html -f
+RewriteRule ^([^/]+)/?$ $1.html [NC,L]
+
+# Caso para subdirectorios (ej: /servicios/peluqueria/cortes-de-pelo/)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^/(.+)/?$
+RewriteCond %{DOCUMENT_ROOT}/%1.html -f
+RewriteRule ^(.*)/?$ $1.html [NC,L]
 
 # Manejo de Cache para archivos estáticos (Optimizado para PageSpeed)
 <IfModule mod_expires.c>

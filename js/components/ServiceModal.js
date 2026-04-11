@@ -40,11 +40,54 @@ export class ServiceModal {
             this.refs.scrollContainer.addEventListener('click', (e) => this.handleOutsideClick(e));
         }
 
+        // Global Delegation for Modal Triggers (Fix for SSG & Dynamic cards)
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-modal-target]');
+            if (trigger) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Extraer el ID del servicio del propio id del elemento (formato: service-card-ID)
+                // O buscar un atributo data-service-id si existe.
+                const triggerId = trigger.id.replace('service-card-', '');
+                
+                // Intentar abrir por el ID descriptivo o buscar por el ID de data
+                const serviceId = this._resolveServiceId(triggerId);
+                if (serviceId !== null) {
+                    this.open(serviceId);
+                }
+            }
+        });
+
         document.addEventListener('keydown', (e) => {
+            // Support Enter/Space for non-button triggers
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('[data-modal-target]')) {
+                e.preventDefault();
+                e.target.closest('[data-modal-target]').click();
+            }
+
             if (e.key === 'Escape' && !this.modal.classList.contains('hidden')) {
                 this.close();
             }
         });
+    }
+
+    /**
+     * Resuelve el ID numérico del servicio a partir del ID descriptivo del DOM.
+     * @private
+     */
+    _resolveServiceId(domId) {
+        // En hair-pageServices, el id es numérico (ej: 10, 12)
+        // Intentamos encontrar el servicio que coincida con el domId convertido o viceversa
+        const service = this.services.find(s => 
+            s.id.toString() === domId || 
+            this._toKebabCase(s.title) === domId
+        );
+        return service ? service.id : null;
+    }
+
+    _toKebabCase(str) {
+        return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 -]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-");
     }
 
     open(id) {

@@ -24,8 +24,9 @@ export class ServiceCard {
      * @returns {HTMLElement}
      */
     render() {
-        const isLink = !!this.props.link;
-        const tag = isLink ? 'a' : 'div';
+        const isLink = !!this.props.link && this.props.link !== '#';
+        const isModal = !!this.props.modalId;
+        const tag = isLink ? 'a' : (isModal ? 'button' : 'div');
         const element = document.createElement(tag);
 
         this.applyAttributes(element, isLink);
@@ -71,7 +72,7 @@ export class ServiceCard {
                 <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
                     <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
                         <span>Ver Detalles</span>
-                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </span>
                 </div>
             </div>
@@ -91,10 +92,14 @@ export class ServiceCard {
 
         if (isLink) {
             element.href = this.props.link;
-            element.setAttribute('aria-label', `Ver detalles de ${this.props.title}`);
+            element.setAttribute('aria-label', `Ir a ${this.props.title}`);
         } else if (this.props.modalId) {
-            element.setAttribute('role', 'button');
-            element.setAttribute('tabindex', '0');
+            if (element.tagName === 'BUTTON') {
+                element.type = "button";
+            } else {
+                element.setAttribute('role', 'button');
+                element.setAttribute('tabindex', '0');
+            }
             element.setAttribute('aria-label', `Ver detalles de ${this.props.title}`);
             element.setAttribute('data-modal-target', this.props.modalId);
         }
@@ -168,7 +173,7 @@ export class ServiceCard {
         const priceHtml = this.props.price ? `
             <div class="mt-2 mb-3">
                 <span class="inline-flex items-center gap-1.5 bg-brand-light/20 text-brand-green font-bold text-lg px-0 py-1 rounded-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                     ${this.props.price}
                 </span>
             </div>
@@ -178,7 +183,7 @@ export class ServiceCard {
             <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
                 <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
                     <span>Ver Detalles</span>
-                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </span>
             </div>
         `;
