@@ -37,7 +37,25 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Performance & SEO Optimization (April 11, 2026) - Service Hub Optimization & Cache Stability (v2.5.2) 🚀
+
+### 1. Multi-Page Performance Overhaul: Static Hero & CLS Surgery ⚡
+*   **Nosotros & Contacto:** Implemented static hero injection, eliminating LCP delays. Standardized critical inline CSS to reserve layout space and achieve a **0 CLS score**.
+*   **Depilación Corporal:** 
+    *   **Static Hero & Breadcrumbs:** Pre-rendered the hero section and navigation trail to eliminate hydration jumps.
+    *   **SEO Precision:** Optimized the `<title>` tag (54 chars) and social metadata to prevent SERP truncation.
+    *   **Restoration:** Fixed a logic mismatch in the Esthetics controller, restoring all missing service cards and the bento gallery.
+*   **Global Critical Rendering Path:** Migrated Google Fonts and Animate.css to a non-blocking `media="print"` pattern across all optimized pages.
+
+### 2. Infrastructure & Cache Integrity (v2.5.2) 🛰️
+*   **Version v2.5.2 Sync:** Updated all core assets and file references to the new version standard (`?v=2.5.2`).
+*   **Routing Reliability:** Fixed a critical `.htaccess` bug where URLs with trailing slashes `/` caused internal 500/404 errors due to conflicting directory names.
+*   **Build Pipeline:** Executed a full production build (`npm run build`) to synchronize the blog index, sitemap, and generate fresh cache-busting timestamps.
+
+---
+
 ## 🔄 Performance & SEO Optimization (April 10, 2026) - Peluquería Hub & Cache Integrity (v2.5.1) 🚀
+
 
 ### 1. Hairdressing Section: Strategic Performance Audit ✂️
 *   **Comprehensive Optimization:** Executed a block-level performance audit for the entire Hairdressing hub:
