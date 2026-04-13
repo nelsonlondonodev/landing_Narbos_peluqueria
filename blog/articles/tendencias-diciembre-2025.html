@@ -88,6 +88,9 @@
     }]
     </script>
 
+    <!-- LCP Optimization -->
+    <link rel="preload" as="image" href="images/foto-collage-narbos-salon-spa.webp" fetchpriority="high" type="image/webp" />
+    <link rel="preload" href="../../css/styles.css?v=2.5.0" as="style" />
     <link rel="stylesheet" href="../../css/styles.css?v=2.5.0" />
     <link
       rel="icon"
@@ -97,14 +100,22 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap"
       rel="stylesheet"
+      media="print" onload="this.media='all'"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      media="print" onload="this.media='all'"
     />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    </noscript>
 
     <style>
         /* Optimización de CLS */
@@ -145,7 +156,10 @@
             alt="Tendencias de belleza para fin de año en Chía, incluyendo balayage y diseños de uñas."
             class="w-full max-w-lg mx-auto rounded-lg shadow-lg mb-12 animate__animated animate__fadeInUp"
             style="animation-delay: 0.2s"
-            loading="lazy"
+            loading="eager"
+            fetchpriority="high"
+            width="512"
+            height="384"
           />
           <div
             class="prose lg:prose-xl max-w-none text-gray-800"
