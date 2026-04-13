@@ -37,6 +37,25 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Performance & SEO Optimization (April 13, 2026) - Full Scale LCP Recovery & GSC Stabilization (v2.6.0) 🚀
+
+### 1. Google Search Console Schema Fixes 🔍
+*   **BreadcrumbList Resolution:** Addressed Google Search Console warnings regarding missing `itemListElement` inside `BreadcrumbList` schemas.
+*   **Data Injection:** Surgically injected fully compliant, 3-level deep JSON-LD breadcrumb arrays into the entire `Peluquería` hub and the `Blog` index, securing Rich Snippet viability and resolving ranking blockers.
+
+### 2. Comprehensive Mobile LCP Optimization (Blog Hub) ⚡
+*   **100% Blog Coverage:** Optimized all 13 articles under `/blog/articles/` to score 90+ on mobile PageSpeed Insights.
+*   **LCP Prioritization:** Added `<link rel="preload" as="image" fetchpriority="high">` to all hero banners and replaced `loading="lazy"` with `loading="eager"` to eliminate Largest Contentful Paint delays.
+*   **CLS Eradication:** Hardcoded physical `width="512"` and `height="384"` attributes on hero images to prevent layout shifts (CLS) on 3G/4G connections.
+*   **Non-Blocking Rendering:** Deferred heavy Google Fonts and `animate.css` using the `media="print" onload="this.media='all'"` technique, immediately unblocking the browser's first paint.
+
+### 3. Build & Deployment Architecture (v2.6.0) 🛠️
+*   **Dynamic Cache-Buster:** Refactored `scripts/apply-version.js` to automatically parse and inherit the global version directly from `package.json`. No more manual variable tracking!
+*   **System-Wide Version Bump:** Upgraded the application to **Version 2.6.0** (modified `package.json` and `js/config.js`), forcing a synchronized cache expiration in clients browsers.
+*   **Footer Tagging:** Verified the new standard seamlessly translates to the visual Footer (`siteConfig.version`), ensuring all updates are instantly transparent.
+
+---
+
 ## 🔄 Performance & SEO Optimization (April 11, 2026) - Service Hub Optimization & Cache Stability (v2.5.2) 🚀
 
 ### 1. Multi-Page Performance Overhaul: Static Hero & CLS Surgery ⚡
