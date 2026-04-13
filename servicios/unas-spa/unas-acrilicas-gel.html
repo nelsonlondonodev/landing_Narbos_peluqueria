@@ -124,11 +124,17 @@
     <link rel="stylesheet" href="../../css/styles.css?v=1.4" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
+    <!-- LCP Optimization: Preload Hero Image -->
+    <link rel="preload" as="image" href="../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp" fetchpriority="high" type="image/webp">
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
     
     <style>
         /* Optimización de CLS */
@@ -149,7 +155,7 @@
     <main>
       <div class="relative">
         <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-            <img src="../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp" alt="Diseños de Uñas Personalizadas en Narbos Salon Spa" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1080" height="1440">
+            <img src="../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp" alt="Diseños de Uñas Personalizadas en Narbos Salon Spa" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" fetchpriority="high" width="1080" height="1440">
         </section>
 
         <!-- Floating Content Box -->
