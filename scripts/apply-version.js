@@ -3,10 +3,14 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Configuración
-const NEW_VERSION = "2.5.0";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '..');
+
+const packageJsonPath = path.join(ROOT_DIR, 'package.json');
+const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+const NEW_VERSION = pkg.version;
+
 
 const FILES_TO_UPDATE = [
     'index.html',

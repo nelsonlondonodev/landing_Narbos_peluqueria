@@ -1,6 +1,6 @@
 {
   "name": "narbos_salon_web",
-  "version": "2.5.2",
+  "version": "2.6.0",
   "description": "Sitio web oficial y plataforma de servicios para Narbo's Salón Spa. Plataforma moderna optimizada con HTML5, Tailwind CSS y Vanilla JS.",
   "main": "index.js",
   "scripts": {
