@@ -27,54 +27,93 @@
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          "@id": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo/#webpage",
-          "url": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo",
-          "name": "Cortes de Pelo en Chía | Estilo y Tendencias para Dama",
-          "description": "Expertos en cortes de pelo para dama en Chía y Cajicá. Asesoría de imagen personalizada y las últimas tendencias. ¡Reserva en Narbo's Salón!",
-          "breadcrumb": { "@id": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo/#breadcrumb" },
-          "mainEntity": {
-            "@type": "Service",
-            "name": "Cortes de Pelo",
-            "description": "Expertos en cortes de pelo para dama en Chía y Cajicá. Asesoría de imagen personalizada y las últimas tendencias.",
-            "provider": {
-                "@id": "https://narbossalon.com/#organization"
+      "@type": "WebPage",
+      "@id": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo/#webpage",
+      "url": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo",
+      "name": "Cortes de Pelo en Chía | Estilo y Tendencias para Dama",
+      "description": "Expertos en cortes de pelo para dama en Chía y Cajicá. Asesoría de imagen personalizada y las últimas tendencias. ¡Reserva en Narbo's Salón!",
+      "breadcrumb": {
+        "@id": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo/#breadcrumb"
+      },
+      "mainEntity": {
+        "@type": "Service",
+        "name": "Cortes de Pelo",
+        "description": "Expertos en cortes de pelo para dama en Chía y Cajicá. Asesoría de imagen personalizada y las últimas tendencias.",
+        "provider": {
+          "@id": "https://narbossalon.com/#organization"
+        },
+        "areaServed": [
+          "Chía",
+          "Cajicá",
+          "Zipaquirá",
+          "Sopó",
+          "Cota",
+          "Fontanar"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Catálogo de Cortes y Estilizado",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Corte para Dama",
+                "description": "Incluye asesoría de imagen, lavado spa y cepillado básico."
+              },
+              "price": "35000",
+              "priceCurrency": "COP"
             },
-            "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota", "Fontanar"],
-            "hasOfferCatalog": {
-                "@type": "OfferCatalog",
-                "name": "Catálogo de Cortes y Estilizado",
-                "itemListElement": [
-                    {
-                        "@type": "Offer",
-                        "itemOffered": {
-                            "@type": "Service",
-                            "name": "Corte para Dama",
-                            "description": "Incluye asesoría de imagen, lavado spa y cepillado básico."
-                        },
-                        "price": "35000",
-                        "priceCurrency": "COP"
-                    },
-                    {
-                        "@type": "Offer",
-                        "itemOffered": {
-                            "@type": "Service",
-                            "name": "Cepillados",
-                            "description": "Incluye lavado y estilizado profesional con secador y plancha."
-                        },
-                        "price": "35000",
-                        "priceCurrency": "COP"
-                    }
-                ]
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Cepillados",
+                "description": "Incluye lavado y estilizado profesional con secador y plancha."
+              },
+              "price": "35000",
+              "priceCurrency": "COP"
             }
-          }
+          ]
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://narbossalon.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "https://narbossalon.com/servicios/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Peluquería",
+          "item": "https://narbossalon.com/servicios/peluqueria/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Cortes De Pelo",
+          "item": "https://narbossalon.com/servicios/peluqueria/cortes-de-pelo"
         }
       ]
     }
+  ]
+}
     </script>
     
     <!-- Video Schema for Google Indexing -->

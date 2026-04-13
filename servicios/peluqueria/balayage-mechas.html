@@ -27,64 +27,103 @@
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          "@id": "https://narbossalon.com/servicios/peluqueria/balayage-mechas/#webpage",
-          "url": "https://narbossalon.com/servicios/peluqueria/balayage-mechas",
-          "name": "Balayage y Mechas en Chía | Especialistas en Rubios | Narbo's",
-          "description": "Consigue el rubio de tus sueños con nuestras técnicas de Balayage, Mechas y Babylights en Chía. Expertos en iluminación capilar y salud de tu fibra.",
-          "breadcrumb": { "@id": "https://narbossalon.com/servicios/peluqueria/balayage-mechas/#breadcrumb" },
-          "mainEntity": {
-            "@type": "Service",
-            "name": "Balayage y Coloración Profesional",
-            "description": "Técnicas avanzadas de Balayage, Babylights y Mechas en Chía. Resultados profesionales con cuidado capilar.",
-            "provider": {
-                "@id": "https://narbossalon.com/#organization"
+      "@type": "WebPage",
+      "@id": "https://narbossalon.com/servicios/peluqueria/balayage-mechas/#webpage",
+      "url": "https://narbossalon.com/servicios/peluqueria/balayage-mechas",
+      "name": "Balayage y Mechas en Chía | Especialistas en Rubios | Narbo's",
+      "description": "Consigue el rubio de tus sueños con nuestras técnicas de Balayage, Mechas y Babylights en Chía. Expertos en iluminación capilar y salud de tu fibra.",
+      "breadcrumb": {
+        "@id": "https://narbossalon.com/servicios/peluqueria/balayage-mechas/#breadcrumb"
+      },
+      "mainEntity": {
+        "@type": "Service",
+        "name": "Balayage y Coloración Profesional",
+        "description": "Técnicas avanzadas de Balayage, Babylights y Mechas en Chía. Resultados profesionales con cuidado capilar.",
+        "provider": {
+          "@id": "https://narbossalon.com/#organization"
+        },
+        "areaServed": [
+          "Chía",
+          "Cajicá",
+          "Zipaquirá",
+          "Sopó",
+          "Cota",
+          "Fontanar"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Catálogo de Coloración",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Balayage",
+                "description": "Técnica de degradado natural a mano alzada."
+              },
+              "price": "450000",
+              "priceCurrency": "COP"
             },
-            "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota", "Fontanar"],
-            "hasOfferCatalog": {
-                "@type": "OfferCatalog",
-                "name": "Catálogo de Coloración",
-                "itemListElement": [
-                    {
-                        "@type": "Offer",
-                        "itemOffered": {
-                            "@type": "Service",
-                            "name": "Balayage",
-                            "description": "Técnica de degradado natural a mano alzada."
-                        },
-                        "price": "450000",
-                        "priceCurrency": "COP"
-                    },
-                    {
-                        "@type": "Offer",
-                        "itemOffered": {
-                            "@type": "Service",
-                            "name": "Babylights",
-                            "description": "Micro-mechas para una iluminación sutil y natural."
-                        },
-                        "price": "320000",
-                        "priceCurrency": "COP"
-                    },
-                    {
-                        "@type": "Offer",
-                        "itemOffered": {
-                            "@type": "Service",
-                            "name": "Aplicación de Tintes",
-                            "description": "Color global uniforme con productos premium."
-                        },
-                        "price": "200000",
-                        "priceCurrency": "COP"
-                    }
-                ]
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Babylights",
+                "description": "Micro-mechas para una iluminación sutil y natural."
+              },
+              "price": "320000",
+              "priceCurrency": "COP"
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Aplicación de Tintes",
+                "description": "Color global uniforme con productos premium."
+              },
+              "price": "200000",
+              "priceCurrency": "COP"
             }
-          }
+          ]
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://narbossalon.com/servicios/peluqueria/balayage-mechas/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://narbossalon.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "https://narbossalon.com/servicios/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Peluquería",
+          "item": "https://narbossalon.com/servicios/peluqueria/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Balayage Mechas",
+          "item": "https://narbossalon.com/servicios/peluqueria/balayage-mechas"
         }
       ]
     }
+  ]
+}
     </script>
     <script type="application/ld+json">
     {
