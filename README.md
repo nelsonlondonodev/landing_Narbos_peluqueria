@@ -37,6 +37,23 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 
 
 
+## 🔄 Business Hours Update (April 15, 2026) - Sunday Closure Implementation (v2.6.1) 🏠
+
+### 1. Operations: Sunday/Holiday Closure 🚨
+*   **Business Logic:** Refactored `js/components/BusinessStatusBadge.js` to explicitly handle Sunday closure. Added a specific "CERRADO DOMINGOS" status message to provide clear feedback to users.
+*   **Visual Schedule:** Updated the visual "Horario de atención" card in `contacto.html` and other pages to show Sunday as **Cerrado** (highlighted with `text-red-500` for prominence).
+*   **FAQ Content:** Synchronized all visible FAQ answers across `index.html`, `contacto.html`, and `nosotros.html` to reflect the new rest day.
+
+### 2. SEO & Technical Synchronization 🔍
+*   **Massive Schema Audit:** Performed a surgical removal of Sunday from `openingHoursSpecification` across the entire project, including the Home, Contact, About, and all Service Hubs (Makeup, Hairdressing).
+*   **Rich Snippet Protection:** Updated JSON-LD `@graph` structures to ensure Google Search Console and local search results accurately reflect that the business is closed on Sundays, preventing potential customer confusion and improving SEO consistency.
+
+### 3. Versioning & Integrity (v2.6.1) 🛰️
+*   **Version v2.6.1 Sync:** Committed all changes to the `develop` branch.
+*   **Clean Workspace:** Verified that no "Domingo" or "Sunday" references remain in the context of open hours in the codebase.
+
+---
+
 ## 🔄 Performance & SEO Optimization (April 13, 2026) - Full Scale LCP Recovery & GSC Stabilization (v2.6.0) 🚀
 
 ### 1. Google Search Console Schema Fixes 🔍
