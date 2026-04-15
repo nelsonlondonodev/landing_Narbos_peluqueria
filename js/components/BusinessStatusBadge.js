@@ -40,12 +40,19 @@ export class BusinessStatusBadge {
         }
 
         this.specialReason = null;
+        // --- LÓGICA DE DÍAS (Lunes a Sábado) ---
         const day = bogotaDate.getDay(); // 0 = Domingo, 1 a 6 = Lunes a Sábado
         const hours = bogotaDate.getHours();
         const minutes = bogotaDate.getMinutes();
         
         // Valor decimal de la hora (ej: 7:30 = 7.5) para facilitar la comparación
         const timeValue = hours + (minutes / 60);
+
+        // Domingos y Festivos: CERRADO
+        if (day === 0) {
+            this.specialReason = "CERRADO DOMINGOS";
+            return false;
+        }
 
         // Horarios oficiales de Narbo's Salon Spa:
         // Lunes a Sábado (1-6): 07:00 a 20:00
