@@ -52,10 +52,6 @@ export class BusinessStatusBadge {
         if (day >= 1 && day <= 6) {
             return timeValue >= 7 && timeValue < 20;
         } 
-        // Domingos (0): 09:00 a 18:00
-        else if (day === 0) {
-            return timeValue >= 9 && timeValue < 18;
-        }
         
         return false;
     }
@@ -74,7 +70,7 @@ export class BusinessStatusBadge {
         const pingEffect = `<span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${dotColor}"></span>`;
 
         this.container.innerHTML = `
-            <div title="Horario: Lun-Sáb 7am a 8pm | Dom 9am a 6pm" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-wider uppercase border transition-all duration-300 transform hover:scale-105 ${badgeClasses}">
+            <div title="Horario: Lun-Sáb 7am a 8pm | Domingos: CERRADO" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-wider uppercase border transition-all duration-300 transform hover:scale-105 ${badgeClasses}">
                 <span class="relative flex h-1.5 w-1.5 md:h-2 md:w-2">
                   ${pingEffect}
                   <span class="relative inline-flex rounded-full h-1.5 w-1.5 md:h-2 md:w-2 ${dotColor}"></span>
