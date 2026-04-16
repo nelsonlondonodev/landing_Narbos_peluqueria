@@ -200,7 +200,8 @@
     }
     </script>
 
-    <link rel="stylesheet" href="../../css/styles.css?v=2.5.1" />
+    <link rel="preload" href="../../css/styles.css?v=2.6.0" as="style" />
+    <link rel="stylesheet" href="../../css/styles.css?v=2.6.0" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
     <!-- LCP Optimization: Preload Hero Image -->
@@ -258,7 +259,7 @@
                 <!-- Corte dama -->
                 <a id="service-card-corte-dama" href="/servicios/peluqueria/cortes-de-pelo" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0" data-animation="zoomIn" aria-label="Ver detalles de Corte dama">
                     <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                        <img src="/images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp" alt="Corte dama" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                        <img src="/images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp" alt="Corte dama" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -278,7 +279,7 @@
                 <!-- Balayage y mechas -->
                 <a id="service-card-balayage-y-mechas" href="/servicios/peluqueria/balayage-mechas" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0" data-animation="zoomIn" aria-label="Ver detalles de Balayage y mechas">
                     <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                        <img src="/images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp" alt="Balayage y mechas" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                        <img src="/images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp" alt="Balayage y mechas" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -298,7 +299,7 @@
                 <!-- Color y tinturas -->
                 <a id="service-card-color-y-tinturas" href="/servicios/peluqueria/color-tinturas-cabello" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0" data-animation="zoomIn" aria-label="Ver detalles de Color y tinturas">
                     <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                        <img src="/images/pages/peluqueria/color-tratamiento.webp" alt="Color y tinturas" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                        <img src="/images/pages/peluqueria/color-tratamiento.webp" alt="Color y tinturas" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -318,7 +319,7 @@
                 <!-- Tratamientos -->
                 <a id="service-card-tratamientos" href="/servicios/peluqueria/tratamientos-capilares" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0" data-animation="zoomIn" aria-label="Ver detalles de Tratamientos">
                     <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                        <img src="/images/pages/peluqueria/lavado-cabello-spa-capilar-narbos-salon-chia.webp" alt="Tratamientos" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                        <img src="/images/pages/peluqueria/lavado-cabello-spa-capilar-narbos-salon-chia.webp" alt="Tratamientos" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -476,8 +477,8 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
-    <script type="module" src="../../js/main.js?v=2.5.1"></script>
-    <script type="module" src="../../js/hair-page.js?v=2.5.1"></script>
+    <script type="module" src="../../js/main.js?v=2.6.0"></script>
+    <script type="module" src="../../js/hair-page.js?v=2.6.0"></script>
 
     <!-- Service Modal -->
     <div id="service-modal" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true">
