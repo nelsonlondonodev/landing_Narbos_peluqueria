@@ -36,6 +36,25 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Performance & SEO Optimization (April 16, 2026) - The "Green PageSpeed" Marathon (v2.6.1) 🚀
+
+### 1. Project-Wide Performance Audit (10 Tandas) ⚡
+*   **Total Coverage:** Systematically audited and optimized **every single page** of the project, including the Home, Nosotros, all 5 Service Hubs, and over 12 sub-service pages.
+*   **LCP Recovery (The "Green" Goal):** Achieved Desktop scores of **90-100** and significantly improved Mobile scores by applying the new `v2.6.x` performance standard.
+*   **Aggressive Asset Preloading:** Implemented `<link rel="preload" as="image" fetchpriority="high">` for all hero banners and `<link rel="preload" as="style">` for the main `styles.css`.
+*   **Non-Blocking Rendering:** Deep-refactored the critical path by moving Google Fonts, `animate.css`, and `glightbox` to an asynchronous loading pattern (`media="print" onload="this.media='all'"`).
+
+### 2. Service Pages Deep Optimization 💆‍♀️✂️💅
+*   **Universal v2.6.1 Standard:** Synchronized all service pages (Peluquería, Estética, Barbería, Maquillaje, Uñas) with standardized cache-busting and prioritized image decoding (`decoding="async"`).
+*   **Nails & Esthetics Rescue:** Resolved critical LCP bottlenecks (up to 9s delay) caused by missing preloads and heavy synchronus fonts.
+*   **Clean Hydration:** Refined component injection to ensure zero layout shift (CLS) during JavaScript bootup.
+
+### 3. Release Architecture & Cache Buster Automation (v2.6.1) 🛠️
+*   **Intelligent Cache Buster:** Upgraded `scripts/apply-version.js` with a recursive file crawler that automatically detects and updates **every HTML file** in the project with the latest version hash.
+*   **Global Version Sync:** Unified `package.json`, `js/config.js`, and the visual Footer to **v2.6.1**, forcing a project-wide cache refresh for all users.
+*   **Production Deployment:** Successfully executed a full production build (`npm run build`) and merged all performance gains into the `main` branch for Hostinger deployment.
+
+---
 
 ## 🔄 Business Hours Update (April 15, 2026) - Sunday Closure Implementation (v2.6.1) 🏠
 
