@@ -210,23 +210,25 @@
                         </div>
 
                         <!-- Columna Derecha: Mapa -->
-                        <div class="h-full min-h-[450px] relative rounded-2xl overflow-hidden shadow-2xl animate__animated animate__fadeInRight bg-gray-100 flex items-center justify-center group" id="map-container">
+                        <div class="h-full min-h-[450px] relative rounded-2xl overflow-hidden shadow-2xl animate__animated animate__fadeInRight bg-gray-50 flex items-center justify-center group" id="map-container">
                             <!-- Placeholder del Mapa para optimizar PageSpeed -->
                             <div id="map-placeholder" class="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 text-center transition-opacity duration-500">
-                                <div class="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-gray-100 flex flex-col items-center">
+                                <!-- Imagen de fondo (Z-0) -->
+                                <img src="images/ubicacion/fachada-edificio-quantum-narbos.webp" alt="Mapa de ubicación Narbo's" class="absolute inset-0 w-full h-full object-cover opacity-20 filter grayscale z-0" loading="lazy">
+                                
+                                <!-- Contenido (Z-10) -->
+                                <div class="relative z-10 bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-xl border border-gray-100 flex flex-col items-center max-w-sm">
                                     <div class="bg-brand-green/10 p-4 rounded-full text-brand-green mb-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                                         </svg>
                                     </div>
                                     <h4 class="text-xl font-serif font-bold text-brand-gray-dark mb-2">Mapa Interactivo</h4>
-                                    <p class="text-sm text-brand-gray-dark/60 mb-6 max-w-xs">Para mejorar tu experiencia de navegación, el mapa se cargará al hacer clic.</p>
-                                    <button onclick="loadGoogleMap()" class="bg-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-brand-gray-dark transition-all duration-300 transform hover:scale-105 active:scale-95">
+                                    <p class="text-sm text-brand-gray-dark/70 mb-6">Para mejorar tu experiencia, el mapa se cargará al hacer clic en el botón.</p>
+                                    <button onclick="loadGoogleMap()" class="cursor-pointer bg-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-brand-gray-dark transition-all duration-300 transform hover:scale-105 active:scale-95">
                                         Cargar Mapa de Ubicación
                                     </button>
                                 </div>
-                                <!-- Imagen de fondo estática -->
-                                <img src="images/ubicacion/fachada-edificio-quantum-narbos.webp" alt="Mapa de ubicación Narbo's" class="absolute inset-0 w-full h-full object-cover opacity-20 filter grayscale" loading="lazy">
                             </div>
                             
                             <script>
@@ -241,11 +243,13 @@
                                     iframe.allowFullscreen = "";
                                     iframe.referrerPolicy = "no-referrer-when-downgrade";
                                     
-                                    placeholder.style.opacity = '0';
-                                    setTimeout(() => {
-                                        placeholder.remove();
-                                        container.appendChild(iframe);
-                                    }, 500);
+                                    if (placeholder) {
+                                        placeholder.style.opacity = '0';
+                                        setTimeout(() => {
+                                            placeholder.remove();
+                                            container.appendChild(iframe);
+                                        }, 500);
+                                    }
                                 }
                             </script>
                         </div>
