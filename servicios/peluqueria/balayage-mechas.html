@@ -154,7 +154,8 @@
     }
     </script>
 
-    <link rel="stylesheet" href="../../css/styles.css?v=2.5.1" />
+    <link rel="preload" href="../../css/styles.css?v=2.6.0" as="style" />
+    <link rel="stylesheet" href="../../css/styles.css?v=2.6.0" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -190,7 +191,7 @@
           <div class="relative">
               <!-- Hero de Servicio (Consistente con Home) -->
               <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-                <img src="../../images/pages/peluqueria/color-tratamiento.webp" alt="Balayage y Color en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080">
+                <img src="../../images/pages/peluqueria/color-tratamiento.webp" alt="Balayage y Color en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080" fetchpriority="high" decoding="async">
               </section>
 
               <!-- Floating Content Box -->
@@ -221,7 +222,7 @@
                     <!-- Balayage -->
                     <div id="service-card-20" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0 cursor-pointer" data-animation="zoomIn" data-modal-target="20">
                         <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                            <img src="../../images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp" alt="Balayage" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            <img src="../../images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp" alt="Balayage" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
@@ -247,7 +248,7 @@
                     <!-- Babylights / Iluminaciones -->
                     <div id="service-card-21" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0 cursor-pointer" data-animation="zoomIn" data-modal-target="21">
                         <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                            <img src="../../images/pages/peluqueria/imagen-balayage_chia.webp" alt="Babylights / Iluminaciones" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            <img src="../../images/pages/peluqueria/imagen-balayage_chia.webp" alt="Babylights / Iluminaciones" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
@@ -273,7 +274,7 @@
                     <!-- Aplicación de tintes -->
                     <div id="service-card-22" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0 cursor-pointer" data-animation="zoomIn" data-modal-target="22">
                         <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                            <img src="../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp" alt="Aplicación de tintes" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            <img src="../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp" alt="Aplicación de tintes" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
@@ -299,7 +300,7 @@
                     <!-- Retoque de Raíz -->
                     <div id="service-card-23" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0 cursor-pointer" data-animation="zoomIn" data-modal-target="23">
                         <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                            <img src="../../images/pages/peluqueria/retoque-de-raiz-tinte.webp" alt="Retoque de Raíz" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            <img src="../../images/pages/peluqueria/retoque-de-raiz-tinte.webp" alt="Retoque de Raíz" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
@@ -460,8 +461,8 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
-    <script type="module" src="../../js/main.js?v=2.5.1"></script>
-    <script type="module" src="../../js/hair-page.js?v=2.5.1"></script>
+    <script type="module" src="../../js/main.js?v=2.6.0"></script>
+    <script type="module" src="../../js/hair-page.js?v=2.6.0"></script>
 
     <!-- Modal de Servicios (Unified Style) -->
     <div id="service-modal" class="relative z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
