@@ -138,7 +138,9 @@
     }
     </script>
     
-    <link rel="stylesheet" href="../../css/styles.css?v=1.4" />
+    <link rel="preload" as="image" href="../../images/pages/unas/pedicure-spa.webp" fetchpriority="high" type="image/webp" />
+    <link rel="preload" href="../../css/styles.css?v=2.6.0" as="style" />
+    <link rel="stylesheet" href="../../css/styles.css?v=2.6.0" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -165,7 +167,7 @@
     <main>
       <div class="relative">
         <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-            <img src="../../images/pages/unas/pedicure-spa.webp" alt="Manicure y Pedicure en Chía con Rostro Sonriente" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080">
+            <img src="../../images/pages/unas/pedicure-spa.webp" alt="Manicure y Pedicure en Chía con Rostro Sonriente" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080" fetchpriority="high" decoding="async">
         </section>
 
         <!-- Floating Content Box -->
@@ -196,7 +198,7 @@
                 <!-- Manicura Tradicional -->
                 <div id="service-card-manicura-tradicional" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0" data-animation="zoomIn" role="button" tabindex="0" aria-label="Ver detalles de Manicura Tradicional" data-modal-target="1">
                     <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                        <img src="../../images/pages/unas/manicura-perfecta-tono-vino-elegante-narbos-salon-spa-chia.webp" alt="Manicura Tradicional" loading="lazy" width="400" height="300" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                        <img src="../../images/pages/unas/manicura-perfecta-tono-vino-elegante-narbos-salon-spa-chia.webp" alt="Manicura Tradicional" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
@@ -582,6 +584,7 @@
 
     <!-- Scripts -->
     <!-- Scripts -->
-    <script type="module" src="../../js/service-page.js"></script>
+    <script type="module" src="../../js/main.js?v=2.6.0"></script>
+    <script type="module" src="../../js/service-page.js?v=2.6.0"></script>
   </body>
 </html>
