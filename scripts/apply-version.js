@@ -12,26 +12,28 @@ const pkg = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 const NEW_VERSION = pkg.version;
 
 
-const FILES_TO_UPDATE = [
-    'index.html',
-    'nosotros.html',
-    'servicios/peluqueria/tratamientos-capilares.html',
-    'servicios/peluqueria/color-tinturas-cabello.html',
-    'servicios/estetica/index.html',
-    'servicios/estetica/cejas-y-pestanas.html',
-    'servicios/estetica/limpieza-facial.html',
-    'servicios/estetica/depilacion-corporal.html',
-    'blog/index.html'
-];
-
-// Opcionalmente buscar todos los .html en blog/articles/
-const blogArticlesDir = path.join(ROOT_DIR, 'blog', 'articles');
-if (fs.existsSync(blogArticlesDir)) {
-    const articles = fs.readdirSync(blogArticlesDir)
-        .filter(file => file.endsWith('.html'))
-        .map(file => `blog/articles/${file}`);
-    FILES_TO_UPDATE.push(...articles);
+/**
+ * Función recursiva para obtener todos los archivos .html del proyecto,
+ * excluyendo node_modules, dist y carpetas ocultas.
+ */
+function getAllHtmlFiles(dir, fileList = []) {
+    const files = fs.readdirSync(dir);
+    files.forEach(file => {
+        const filePath = path.join(dir, file);
+        if (fs.statSync(filePath).isDirectory()) {
+            if (file !== 'node_modules' && file !== 'dist' && !file.startsWith('.') && file !== 'video' && file !== 'images') {
+                getAllHtmlFiles(filePath, fileList);
+            }
+        } else {
+            if (file.endsWith('.html')) {
+                fileList.push(path.relative(ROOT_DIR, filePath));
+            }
+        }
+    });
+    return fileList;
 }
+
+const FILES_TO_UPDATE = getAllHtmlFiles(ROOT_DIR);
 
 console.log(`🚀 Iniciando Cache Buster v${NEW_VERSION}...`);
 
