@@ -16,6 +16,7 @@
     <meta property="og:description" content="Más de 11 años dedicados al arte de la belleza y el bienestar en Chía." />
     <meta property="og:image" content="https://narbossalon.com/images/team/Team_1.webp" />
 
+    <link rel="preload" href="css/styles.css?v=2.6.0" as="style" />
     <link rel="stylesheet" href="css/styles.css?v=2.6.0" />
     <link rel="icon" type="image/webp" href="images/brand/favicon_narbos.webp" />
 
@@ -155,7 +156,7 @@
             <div id="hero-root" class="relative">
                 <div class="relative">
                     <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-                        <img src="images/nosotros/narbos-team-hero.webp" alt="Equipo de profesionales de Narbo's Salón Spa Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" fetchpriority="high">
+                        <img src="images/nosotros/narbos-team-hero.webp" alt="Equipo de profesionales de Narbo's Salón Spa Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" fetchpriority="high" decoding="async">
                     </section>
                     <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
                         <div class="container mx-auto">
@@ -401,6 +402,7 @@
                                      alt="Recepción de la peluquería en Chía Narbo's Salón" 
                                      loading="lazy"
                                      width="800" height="600"
+                                     decoding="async"
                                      class="w-full h-full object-cover object-center transform group-hover:scale-[1.03] transition-transform duration-700 ease-in-out" />
                             </div>
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -606,7 +608,7 @@
                     </div>
                     <div class="flex justify-center">
                             <div class="relative overflow-hidden max-w-xs bg-white rounded-xl shadow-2xl p-2 video-aspect-ratio">
-                            <video class="w-full h-full object-cover rounded-lg" src="video/video_instagram_1.mp4" controls muted playsinline poster="images/video_galeria/imagen_video_instagram.webp">
+                            <video class="w-full h-full object-cover rounded-lg" src="video/video_instagram_1.mp4" controls muted playsinline preload="none" poster="images/video_galeria/imagen_video_instagram.webp">
                                 Tu navegador no soporta el tag de video.
                             </video>
                         </div>
