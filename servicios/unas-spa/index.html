@@ -30,74 +30,113 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "BeautySalon",
-      "name": "Narbo's Salón Spa - Uñas & Nail Art",
-      "image": [
-        "https://narbossalon.com/images/pages/unas/manicura-perfecta-tono-vino-elegante-narbos-salon-spa-chia.webp",
-        "https://narbossalon.com/images/pages/unas/unas-acrilicas-tendencia-2026-chia.webp",
-        "https://narbossalon.com/images/pages/unas/pedicure-spa-relax-experiencia-chia.webp"
-      ],
-      "@id": "https://narbossalon.com/servicios/unas-spa/#organization",
-      "url": "https://narbossalon.com/servicios/unas-spa/",
-      "telephone": "+573123462618",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
-        "addressLocality": "Chía",
-        "addressRegion": "Cundinamarca",
-        "postalCode": "250001",
-        "addressCountry": "CO"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 4.8617,
-        "longitude": -74.0539
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Servicios de Uñas y Spa",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Manicura Tradicional y Semipermanente",
-              "description": "Limpieza, cuidado de cutículas y esmaltado de larga duración con marcas premium."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Uñas Acrílicas y Polygel",
-              "description": "Extensiones esculpidas con las últimas tendencias de 2026 para longitud y resistencia."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Pedicura Spa Profesional",
-              "description": "Tratamiento completo de relajación y estética para pies en Chía."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Nail Art y Diseños a Mano Alzada",
-              "description": "Personalización total con diseños exclusivos y artísticos."
-            }
-          }
-        ]
-      },
-      "openingHoursSpecification": [
+      "@graph": [
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "08:00",
-          "closes": "19:00"
+          "@type": "WebPage",
+          "@id": "https://narbossalon.com/servicios/unas-spa/#webpage",
+          "url": "https://narbossalon.com/servicios/unas-spa/",
+          "name": "Uñas y Spa en Chía | Manicure, Pedicure y Nail Art - Narbo's",
+          "description": "Spa de uñas en Chía y Cajicá. Expertos en manicure, pedicure, uñas acrílicas, gel, polygel y diseños de uñas exclusivos. ¡Agenda tu cita de bienestar!",
+          "breadcrumb": {
+            "@id": "https://narbossalon.com/servicios/unas-spa/#breadcrumb"
+          },
+          "mainEntity": {
+            "@id": "https://narbossalon.com/servicios/unas-spa/#organization"
+          }
+        },
+        {
+          "@type": "BeautySalon",
+          "name": "Narbo's Salón Spa - Uñas & Nail Art",
+          "image": [
+            "https://narbossalon.com/images/pages/unas/manicure-spa.webp"
+          ],
+          "@id": "https://narbossalon.com/servicios/unas-spa/#organization",
+          "url": "https://narbossalon.com/servicios/unas-spa/",
+          "telephone": "+573123462618",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
+            "addressLocality": "Chía",
+            "addressRegion": "Cundinamarca",
+            "postalCode": "250001",
+            "addressCountry": "CO"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 4.8617,
+            "longitude": -74.0539
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Uñas y Spa",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Manicura Tradicional y Semipermanente",
+                  "description": "Limpieza, cuidado de cutículas y esmaltado de larga duración con marcas premium."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Uñas Acrílicas y Polygel",
+                  "description": "Extensiones esculpidas con las últimas tendencias de 2026 para longitud y resistencia."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Pedicura Spa Profesional",
+                  "description": "Tratamiento completo de relajación y estética para pies en Chía."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Nail Art y Diseños a Mano Alzada",
+                  "description": "Personalización total con diseños exclusivos y artísticos."
+                }
+              }
+            ]
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "08:00",
+              "closes": "20:00"
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://narbossalon.com/servicios/unas-spa/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://narbossalon.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Servicios",
+              "item": "https://narbossalon.com/servicios/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Uñas & Spa",
+              "item": "https://narbossalon.com/servicios/unas-spa/"
+            }
+          ]
         }
       ]
     }

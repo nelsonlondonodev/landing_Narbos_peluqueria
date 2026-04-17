@@ -29,64 +29,105 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "BeautySalon",
-      "name": "Narbo's Salón Spa",
-      "image": "https://narbossalon.com/images/pages/estetica/cabinas-spa-estetica-narbos.webp",
-      "@id": "https://narbossalon.com/#organization",
-      "url": "https://narbossalon.com/servicios/estetica/",
-      "telephone": "+573123462618",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
-        "addressLocality": "Chía",
-        "addressRegion": "Cundinamarca",
-        "postalCode": "250001",
-        "addressCountry": "CO"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 4.8617,
-        "longitude": -74.0539
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Servicios de Estética y Spa",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Spa Facial Integral",
-              "description": "Limpieza profunda, hidratación y aparatología facial avanzada."
-            }
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://narbossalon.com/servicios/estetica/#webpage",
+          "url": "https://narbossalon.com/servicios/estetica/",
+          "name": "Estética y Spa en Chía | Tratamientos Faciales y Corporales",
+          "description": "Centro de estética en Chía cerca de Cajicá. Limpieza facial, masajes relajantes, spa facial integral y depilación corporal en Narbo's Salón Spa.",
+          "breadcrumb": {
+            "@id": "https://narbossalon.com/servicios/estetica/#breadcrumb"
           },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Masajes Relajantes",
-              "description": "Terapias manuales, piedras calientes y descontracturantes para el bienestar corporal."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Diseño de Cejas y Pestañas",
-              "description": "Lifting de pestañas, diseño de cejas con henna y laminado."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Depilación Corporal con Cera",
-              "description": "Depilación efectiva y suave para todas las áreas del cuerpo."
-            }
+          "mainEntity": {
+            "@id": "https://narbossalon.com/#organization"
           }
-        ]
-      }
+        },
+        {
+          "@type": "BeautySalon",
+          "name": "Narbo's Salón Spa",
+          "image": "https://narbossalon.com/images/pages/estetica/cabinas-spa-estetica-narbos.webp",
+          "@id": "https://narbossalon.com/#organization",
+          "url": "https://narbossalon.com/servicios/estetica/",
+          "telephone": "+573123462618",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
+            "addressLocality": "Chía",
+            "addressRegion": "Cundinamarca",
+            "postalCode": "250001",
+            "addressCountry": "CO"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 4.8617,
+            "longitude": -74.0539
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Estética y Spa",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Spa Facial Integral",
+                  "description": "Limpieza profunda con tecnología avanzada para una piel radiante."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Masajes Relajantes",
+                  "description": "Experiencia de bienestar y desconexión total para cuerpo y mente."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Limpieza Facial",
+                  "description": "Tratamientos personalizados según tu tipo de piel."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Depilación Corporal",
+                  "description": "Sistemas suaves y efectivos para una piel sedosa."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://narbossalon.com/servicios/estetica/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://narbossalon.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Servicios",
+              "item": "https://narbossalon.com/servicios/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Estética",
+              "item": "https://narbossalon.com/servicios/estetica/"
+            }
+          ]
+        }
+      ]
     }
     </script>
     

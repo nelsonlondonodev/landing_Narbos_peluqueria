@@ -29,67 +29,105 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "BeautySalon",
-      "name": "Narbo's Barbería Chía",
-      "image": [
-        "https://narbossalon.com/images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp",
-        "https://narbossalon.com/images/pages/barberia/corte-hombre-fade-moderno.webp",
-        "https://narbossalon.com/images/pages/barberia/corte-barba-tendencia-barberia.webp",
-        "https://narbossalon.com/images/pages/barberia/ritual-barba-vaporizador-relajante.webp"
-      ],
-      "@id": "https://narbossalon.com/servicios/barberia/#organization",
-      "url": "https://narbossalon.com/servicios/barberia/",
-      "telephone": "+573123462618",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
-        "addressLocality": "Chía",
-        "addressRegion": "Cundinamarca",
-        "postalCode": "250001",
-        "addressCountry": "CO"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 4.8617,
-        "longitude": -74.0539
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Servicios de Barbería",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Corte de Cabello",
-              "price": "35000",
-              "priceCurrency": "COP",
-              "description": "Asesoría de imagen y corte (clásico o fade) con lavado y peinado."
-            }
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": "https://narbossalon.com/servicios/barberia/#webpage",
+          "url": "https://narbossalon.com/servicios/barberia/",
+          "name": "Barbería en Chía y Cajicá | Cortes de Hombre y Barba - Narbo's",
+          "description": "Barbería en Chía y Cajicá. Zona exclusiva para hombres: Cortes de tendencia, ritual de barba con toalla caliente y cuidado premium.",
+          "breadcrumb": {
+            "@id": "https://narbossalon.com/servicios/barberia/#breadcrumb"
           },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Corte + Barba (Ritual)",
-              "price": "75000",
-              "priceCurrency": "COP",
-              "description": "La experiencia completa: Corte de cabello y perfilado de barba con toalla caliente."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Arreglo de Barba",
-              "price": "45000",
-              "priceCurrency": "COP",
-              "description": "Perfilado con navaja, hidratación y ritual de toalla caliente."
-            }
+          "mainEntity": {
+            "@id": "https://narbossalon.com/servicios/barberia/#organization"
           }
-        ]
-      }
+        },
+        {
+          "@type": "BeautySalon",
+          "name": "Narbo's Barbería Chía",
+          "image": [
+            "https://narbossalon.com/images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp"
+          ],
+          "@id": "https://narbossalon.com/servicios/barberia/#organization",
+          "url": "https://narbossalon.com/servicios/barberia/",
+          "telephone": "+573123462618",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
+            "addressLocality": "Chía",
+            "addressRegion": "Cundinamarca",
+            "postalCode": "250001",
+            "addressCountry": "CO"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 4.8617,
+            "longitude": -74.0539
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Barbería",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Corte de Cabello",
+                  "price": "35000",
+                  "priceCurrency": "COP",
+                  "description": "Asesoría de imagen y corte (clásico o fade) con lavado y peinado."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Corte + Barba (Ritual)",
+                  "price": "75000",
+                  "priceCurrency": "COP",
+                  "description": "La experiencia completa: Corte de cabello y perfilado de barba con toalla caliente."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Arreglo de Barba",
+                  "price": "45000",
+                  "priceCurrency": "COP",
+                  "description": "Perfilado con navaja, hidratación y ritual de toalla caliente."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://narbossalon.com/servicios/barberia/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://narbossalon.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Servicios",
+              "item": "https://narbossalon.com/servicios/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Barbería",
+              "item": "https://narbossalon.com/servicios/barberia/"
+            }
+          ]
+        }
+      ]
     }
     </script>
     <script type="application/ld+json">
