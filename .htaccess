@@ -1,70 +1,70 @@
 # Configuración de Narbo's Salón Spa
-# Forzar codificación UTF-8 para evitar caracteres extraños
-AddDefaultCharset UTF-8
+# v2.6.2 - Optimización SEO y URLs Limpias
 
+# Forzar codificación UTF-8
+AddDefaultCharset UTF-8
 <IfModule mod_mime.c>
     AddCharset UTF-8 .html .css .js .xml .json .rss
 </IfModule>
 
-# Forzar Type para asegurar interpretación correcta
+# Tipos de archivos
 AddType 'text/html; charset=UTF-8' .html
 AddType 'text/css; charset=UTF-8' .css
 AddType 'application/javascript; charset=UTF-8' .js
 
-# Página de error 404 personalizada
+# Página de error 404
 ErrorDocument 404 /404.html
 
-# Redireccionamiento index.html a raíz (SEO)
-RewriteEngine On
-RewriteBase /
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
 
-# Redirecciones permanentes (301) para corregir errores 404
-RewriteRule ^servicios/estetica/depilacion(\.html)?$ /servicios/estetica/depilacion-corporal [R=301,L]
+    # 1. Forzar HTTPS (Protección y SEO)
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Redirigir index.html a /
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/
-RewriteRule ^index\.html$ https://narbossalon.com/ [R=301,L]
+    # 2. Redirigir index.html a / (Raíz y Subcarpetas)
+    # Ejemplo: /blog/index.html -> /blog/
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+/)?index\.html\ HTTP/
+    RewriteRule ^(.+/)?index\.html$ /%1 [R=301,L]
 
-# Asegurar que las subcarpetas /index.html también redirijan ala carpeta limpia
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)/index\.html\ HTTP/
-RewriteRule ^(.+)/index\.html$ https://narbossalon.com/$1/ [R=301,L]
+    # 3. Quitar extensión .html de la URL (Redirección externa 301)
+    # Ejemplo: /contacto.html -> /contacto
+    RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+    RewriteRule ^ /%1 [R=301,L,NE]
 
-# --- REGLAS DE URLS LIMPIAS (Remover .html) ---
-# 1. Redirigir peticiones externas directas de .html a la versión limpia
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)\.html\ HTTP/
-RewriteRule ^(.+)\.html$ https://narbossalon.com/$1 [R=301,L]
+    # 4. Normalizar Trailing Slash (Quitar barra en archivos, mantener en carpetas)
+    # Esto evita contenido duplicado para GSC
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} ^(.+)/$
+    RewriteRule ^(.+)/$ /%1 [R=301,L]
 
-# 2. Mapear internamente la URL limpia al archivo físico .html
-# Maneja /pago y /pago/ de forma robusta
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} ^/(.+)/?$
-RewriteCond %{DOCUMENT_ROOT}/%1.html -f
-RewriteRule ^(.*)$ %1.html [L]
+    # 5. Mapeo Interno (Servir archivos .html sin mostrar la extensión)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+    RewriteRule ^(.*)$ $1.html [L]
 
-# Manejo de Cache para archivos estáticos (Optimizado para PageSpeed)
+    # --- Redirecciones Específicas de Legacy/Errores ---
+    RewriteRule ^servicios/estetica/depilacion$ /servicios/estetica/depilacion-corporal [R=301,L]
+</IfModule>
+
+# Manejo de Cache (Optimizado para PageSpeed v2)
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
     
-    # HTML: No cache por defecto para asegurar frescura (o cache corto)
     ExpiresByType text/html "access plus 0 seconds"
-    
-    # CSS y JS: 1 año (se recomienda usar versionamiento ?v=X en el HTML)
     ExpiresByType text/css "access plus 1 year"
     ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType text/javascript "access plus 1 year"
-    
-    # Imágenes y Media: 1 año
     ExpiresByType image/webp "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/x-icon "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType video/mp4 "access plus 1 year"
 </IfModule>
 
-# Forzar Headers como respaldo para mod_expires
 <IfModule mod_headers.c>
     <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|js|css|swf|mp4|svg)$">
         Header set Cache-Control "max-age=31536000, public"
@@ -72,18 +72,17 @@ RewriteRule ^(.*)$ %1.html [L]
     <FilesMatch "\.(html|htm)$">
         Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
     </FilesMatch>
+    
+    # Seguridad Básica
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# Habilitar GZIP (Compresión para velocidad)
+# Compresión GZIP
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/plain
-    AddOutputFilterByType DEFLATE text/html
-    AddOutputFilterByType DEFLATE text/xml
-    AddOutputFilterByType DEFLATE text/css
-    AddOutputFilterByType DEFLATE text/javascript
-    AddOutputFilterByType DEFLATE application/javascript
-    AddOutputFilterByType DEFLATE application/x-javascript
-    AddOutputFilterByType DEFLATE application/json
-    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json application/xml
     AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
