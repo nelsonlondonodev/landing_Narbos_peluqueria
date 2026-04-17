@@ -276,29 +276,50 @@ class ServicePageManager {
     initBreadcrumbs() {
         const root = document.getElementById('breadcrumbs-root');
         if (!root || !this.pageKey) return;
-        const items = [{ label: 'Inicio', link: '../../' }];
+
+        const items = [{ label: 'Inicio', link: this.app.resolvePath('/') }];
         const path = window.location.pathname;
-        if (path.includes('/peluqueria/')) this.addHairBreadcrumbs(items);
-        else if (path.includes('/barberia/')) this.addBarberBreadcrumbs(items);
-        else if (path.includes('/estetica/')) this.addEstheticsBreadcrumbs(items);
-        else if (path.includes('/unas-spa/')) this.addNailsBreadcrumbs(items);
+
+        // Añadir Categoría (Hub)
+        if (path.includes('/peluqueria/')) {
+            items.push({ label: 'Peluquería', link: this.app.resolvePath('/servicios/peluqueria/') });
+        } else if (path.includes('/barberia/')) {
+            items.push({ label: 'Barbería', link: this.app.resolvePath('/servicios/barberia/') });
+        } else if (path.includes('/estetica/')) {
+            items.push({ label: 'Estética', link: this.app.resolvePath('/servicios/estetica/') });
+        } else if (path.includes('/unas-spa/')) {
+            items.push({ label: 'Uñas y Spa', link: this.app.resolvePath('/servicios/unas-spa/') });
+        }
+
+        // Añadir Página Actual si es una subpágina
+        const isHubPage = path.endsWith('/index.html') || path.endsWith('/') || 
+                         path.endsWith('/peluqueria') || path.endsWith('/barberia') || 
+                         path.endsWith('/estetica') || path.endsWith('/unas-spa');
+
+        if (!isHubPage) {
+            const pageConfig = pagesData[this.pageKey];
+            let label = this.pageKey.replace(/-/g, ' '); // Fallback
+            
+            // Intentar obtener label de h1 o data-breadcrumb
+            const h1 = document.querySelector('h1');
+            if (h1 && h1.dataset.breadcrumb) {
+                label = h1.dataset.breadcrumb;
+            } else if (pageConfig && pageConfig.hero && pageConfig.hero.title) {
+                // Limpiar HTML de títulos si es necesario
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = pageConfig.hero.title;
+                label = tempDiv.textContent || tempDiv.innerText || label;
+            }
+            
+            // Capitalizar si es el fallback
+            if (label === this.pageKey.replace(/-/g, ' ')) {
+                label = label.charAt(0).toUpperCase() + label.slice(1);
+            }
+
+            items.push({ label: label, link: '#' });
+        }
+
         root.innerHTML = new Breadcrumbs(items).render();
-    }
-
-    addHairBreadcrumbs(items) {
-        items.push({ label: 'Peluquería', link: '../../servicios/peluqueria/' });
-    }
-
-    addBarberBreadcrumbs(items) {
-        items.push({ label: 'Barbería', link: '../../servicios/barberia/' });
-    }
-
-    addEstheticsBreadcrumbs(items) {
-         items.push({ label: 'Estética', link: '../../servicios/estetica/' });
-    }
-
-    addNailsBreadcrumbs(items) {
-         items.push({ label: 'Uñas y Spa', link: '../../servicios/unas-spa/' });
     }
 }
 

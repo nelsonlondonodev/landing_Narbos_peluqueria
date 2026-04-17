@@ -1003,6 +1003,12 @@ export const pagesData = Object.freeze({
         ]
     },
     'barberia-cortes-hombre': {
+        hero: {
+            title: "Barbería y Estilismo <span class=\"text-brand-green\">Masculino</span>",
+            subtitle: "Cortes modernos, barbas impecables y un ambiente diseñado para ti.",
+            imageSrc: "../../images/pages/barberia/corte-hombre-fade-moderno.webp",
+            imageAlt: "Corte de cabello masculino profesional en Narbo's"
+        },
         gallery: [
             { type: 'logo-card', layout: 'vertical', src: 'images/brand/logo_narbos.webp', alt: 'Corte Clásico', title: 'Corte Clásico' },
             { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Degradado', title: 'Degradado' },
