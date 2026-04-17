@@ -1,3 +1,5 @@
+import { resolveRoute } from '../config.js';
+
 /**
  * Controlador de Transiciones de Página.
  * Maneja la animación suave de entrada y salida entre navegaciones.
@@ -60,9 +62,13 @@ export class PageTransitionController {
             const targetUrl = new URL(url, window.location.origin);
             if (targetUrl.origin !== window.location.origin) return;
 
+            // Resolvemos la ruta (añadirá .html solo si estamos en local)
+            const resolvedPath = resolveRoute(targetUrl.pathname);
+            const finalUrl = resolvedPath + targetUrl.search + targetUrl.hash;
+
             this.isExiting = true;
             e.preventDefault();
-            this._performExitAnimation(targetUrl.href);
+            this._performExitAnimation(finalUrl);
         } catch (err) {
             // Ante cualquier error de parsing, dejamos que el navegador actúe de forma nativa
         }
