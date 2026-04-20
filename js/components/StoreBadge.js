@@ -1,4 +1,4 @@
-export class BusinessStatusBadge {
+export class StoreBadge {
     /**
      * @param {string} containerId - El ID del elemento donde se inyectará el componente
      */
@@ -24,15 +24,31 @@ export class BusinessStatusBadge {
     }
 
     isOpen() {
-        // Obtenemos la hora actual en la zona horaria de Colombia (UTC-5)
-        const bogotaString = new Date().toLocaleString("en-US", { timeZone: "America/Bogota" });
-        const bogotaDate = new Date(bogotaString);
+        // Forma robusta compatible con Safari y navegadores móviles para forzar UTC-5 (Bogotá)
+        const now = new Date();
+        const options = { timeZone: 'America/Bogota', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false };
+        const formatter = new Intl.DateTimeFormat('en-US', options);
+        
+        // Obtener las partes formateadas directamente para evitar parseos de string (que fallan en Safari)
+        const parts = formatter.formatToParts(now);
+        const getPart = (type) => parseInt(parts.find(p => p.type === type).value, 10);
+        
+        const bYear = getPart('year');
+        const bMonth = getPart('month'); // formatter.formatToParts month is 1-12
+        const bDayOfMonth = getPart('day');
+        const bHour = getPart('hour') === 24 ? 0 : getPart('hour');
+        const bMinute = getPart('minute');
+        
+        // Calcular el día de la semana para Colombia de manera precisa
+        // JavaScript Date.UTC method uses month 0-11
+        const utcBogota = new Date(Date.UTC(bYear, bMonth - 1, bDayOfMonth));
+        const dayOfWeek = utcBogota.getUTCDay(); // 0 = Domingo, 1 a 6 = Lunes a Sábado
         
         // --- EXCEPCIONES DE CIERRE (Días especiales) ---
         // Hoy 3 de Abril de 2026: Cerrado (Nelson)
-        const isSpecialClosure = bogotaDate.getFullYear() === 2026 && 
-                                 bogotaDate.getMonth() === 3 && // Abril es 3 (0-indexed)
-                                 bogotaDate.getDate() === 3;
+        const isSpecialClosure = bYear === 2026 && 
+                                 bMonth === 4 && // Abril es 4
+                                 bDayOfMonth === 3;
         
         if (isSpecialClosure) {
             this.specialReason = "CERRADO POR HOY";
@@ -41,22 +57,18 @@ export class BusinessStatusBadge {
 
         this.specialReason = null;
         // --- LÓGICA DE DÍAS (Lunes a Sábado) ---
-        const day = bogotaDate.getDay(); // 0 = Domingo, 1 a 6 = Lunes a Sábado
-        const hours = bogotaDate.getHours();
-        const minutes = bogotaDate.getMinutes();
-        
         // Valor decimal de la hora (ej: 7:30 = 7.5) para facilitar la comparación
-        const timeValue = hours + (minutes / 60);
+        const timeValue = bHour + (bMinute / 60);
 
         // Domingos y Festivos: CERRADO
-        if (day === 0) {
+        if (dayOfWeek === 0) {
             this.specialReason = "CERRADO DOMINGOS";
             return false;
         }
 
         // Horarios oficiales de Narbo's Salon Spa:
         // Lunes a Sábado (1-6): 07:00 a 20:00
-        if (day >= 1 && day <= 6) {
+        if (dayOfWeek >= 1 && dayOfWeek <= 6) {
             return timeValue >= 7 && timeValue < 20;
         } 
         
