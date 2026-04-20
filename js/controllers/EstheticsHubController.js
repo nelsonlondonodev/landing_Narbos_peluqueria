@@ -39,11 +39,23 @@ export class EstheticsHubController {
         const grid = document.getElementById('aesthetics-services-static');
         if (!grid) return;
 
-        // Si el grid ya tiene contenido (inyectado por SSG), evitamos doble renderizado en producción
-        if (this.pageKey === 'estetica' && grid.children.length > 0) return;
-
         const { services, modalInstance } = this.getProcessedServices();
         
+        // Si el grid ya tiene contenido (inyectado por SSG o de forma nativa), evitar destruir el DOM (LCP/TBT Fix)
+        if (grid.children.length > 0) {
+            if (modalInstance) {
+                // Recuperar y asociar lógica a las tarjetas que ya fueron renderizadas en HTML
+                const cards = grid.querySelectorAll('[id^="service-card-"]');
+                cards.forEach(card => {
+                    const serviceId = card.getAttribute('data-modal-target');
+                    if (serviceId) {
+                        this.attachModalLogic(card, modalInstance, serviceId);
+                    }
+                });
+            }
+            return;
+        }
+
         grid.innerHTML = '';
         const fragment = document.createDocumentFragment();
 
