@@ -29,11 +29,25 @@ export class NailsHubController {
         const gridContainer = document.getElementById('nail-services-grid');
         if (!gridContainer) return;
 
-        gridContainer.innerHTML = '';
-        
         // Modal instance
         const serviceModal = new ServiceModal(nailsServices);
 
+        // ROBUST FIX: Evitar destrucción de SSG (Mejora drástica de TBT y LCP)
+        if (gridContainer.children.length > 0) {
+            Array.from(gridContainer.children).forEach(element => {
+                const targetId = Number(element.dataset.modalTarget);
+                if (targetId) {
+                    const serviceConfig = nailsServices.find(s => s.id === targetId);
+                    if (serviceConfig) {
+                        this.attachClickBehavior(element, serviceConfig, serviceModal);
+                    }
+                }
+            });
+            return;
+        }
+
+        gridContainer.innerHTML = '';
+        
         const excludeString = gridContainer.dataset.excludeIds;
         const filteredServices = this.filterServices(nailsServices, excludeString);
         
