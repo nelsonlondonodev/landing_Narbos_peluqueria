@@ -49,8 +49,10 @@
         /* Optimización de CLS y Estilos Base */
         #navbar-root { min-height: 80px; }
         #breadcrumbs-root { min-height: 48px; }
-        .prose h2 { margin-top: 2rem; margin-bottom: 1rem; }
-        .prose p { margin-bottom: 1.5rem; line-height: 1.8; }
+        .prose h2 { margin-top: 3rem; margin-bottom: 1.25rem; font-family: 'Playfair Display', serif; }
+        .prose h3 { margin-top: 2rem; margin-bottom: 1rem; color: #1a202c; }
+        .prose p { margin-bottom: 1.5rem; line-height: 1.8; color: #4a5568; }
+        .highlight-box { background: #fdfaf3; border-left: 4px solid #6b7a5a; padding: 2rem; border-radius: 0.75rem; margin: 2rem 0; }
     </style>
 </head>
   <body class="font-sans bg-white text-slate-800">
@@ -89,7 +91,7 @@
               loading="eager"
             />
 
-            <div class="prose lg:prose-xl max-w-none text-gray-800">
+            <div class="prose prose-lg max-w-none text-gray-700">
               
               <!-- Tabla de Contenidos -->
               {{TOC}}
@@ -108,7 +110,28 @@
               </div>
 
               <!-- FAQ SECTION -->
-              {{FAQ_SECTION}}
+              <section id="faq-section" class="mt-20 pt-16 border-t border-gray-100">
+                <h2 class="text-3xl font-serif font-bold text-gray-900 mb-10 text-center">Preguntas frecuentes</h2>
+                <div id="article-faq" class="max-w-3xl mx-auto space-y-4">
+                  <!-- FAQ 1 TEMPLATE -->
+                  <details class="group bg-white rounded-lg shadow-sm p-4 [&_summary::-webkit-details-marker]:hidden border border-brand-light/20 open:shadow-md transition-shadow duration-300">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-brand-gray-dark">
+                      <h3 class="font-bold text-lg font-serif">{{PREGUNTA_1}}</h3>
+                      <span class="shrink-0 rounded-full bg-brand-light/20 p-1.5 text-brand-gray-dark sm:p-3 group-hover:bg-brand-light/40 transition-colors ">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-180 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                    </summary>
+                    <div class="faq-content overflow-hidden">
+                      <p class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
+                        {{RESPUESTA_1}}
+                      </p>
+                    </div>
+                  </details>
+                  <!-- Añade más items de FAQ copiando este detalle -->
+                </div>
+              </section>
             </div>
           </article>
 
