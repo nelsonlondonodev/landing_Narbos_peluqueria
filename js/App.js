@@ -121,15 +121,16 @@ class App {
         }
 
         if (pageKey && pagesData[pageKey] && pagesData[pageKey].hero) {
-            // ROBUST FIX: Force Hydration
-            // Eliminamos la verificación (heroRoot.children.length > 0) para obligar a
-            // sobrescribir cualquier contenido estático o invisible con la versión estandarizada.
-            // Esto soluciona los problemas de H1 no visibles en Barbería y Estética.
+            // ROBUST FIX V2: Evitar sobrescritura si el Hero ya tiene contenido real (SSG o HTML estático)
+            // Verificamos si existe un H1 renderizado para comprobar que no es un contenedor vacío
+            const hasStaticHero = heroRoot.querySelector('h1');
             
-            const heroData = pagesData[pageKey].hero;
-            const imageSrc = this.resolvePath(heroData.imageSrc);
-            
-            heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
+            if (!hasStaticHero) {
+                const heroData = pagesData[pageKey].hero;
+                const imageSrc = this.resolvePath(heroData.imageSrc);
+                
+                heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
+            }
         }
     }
 
