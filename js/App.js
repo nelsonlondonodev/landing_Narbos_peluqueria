@@ -7,7 +7,7 @@ import { getHeroHTML } from './components/HeroSection.js';
 // Components
 import { MobileMenu } from './components/MobileMenu.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
-import { BusinessStatusBadge } from './components/BusinessStatusBadge.js';
+import { StoreBadge } from './components/StoreBadge.js';
 // Controllers
 import { HeaderController } from './controllers/HeaderController.js';
 import { PageTransitionController } from './controllers/PageTransitionController.js'; // Nuevo Controller
@@ -121,15 +121,16 @@ class App {
         }
 
         if (pageKey && pagesData[pageKey] && pagesData[pageKey].hero) {
-            // ROBUST FIX: Force Hydration
-            // Eliminamos la verificación (heroRoot.children.length > 0) para obligar a
-            // sobrescribir cualquier contenido estático o invisible con la versión estandarizada.
-            // Esto soluciona los problemas de H1 no visibles en Barbería y Estética.
+            // ROBUST FIX V2: Evitar sobrescritura si el Hero ya tiene contenido real (SSG o HTML estático)
+            // Verificamos si existe un H1 renderizado para comprobar que no es un contenedor vacío
+            const hasStaticHero = heroRoot.querySelector('h1');
             
-            const heroData = pagesData[pageKey].hero;
-            const imageSrc = this.resolvePath(heroData.imageSrc);
-            
-            heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
+            if (!hasStaticHero) {
+                const heroData = pagesData[pageKey].hero;
+                const imageSrc = this.resolvePath(heroData.imageSrc);
+                
+                heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
+            }
         }
     }
 
@@ -138,7 +139,7 @@ class App {
         try { new WhatsAppButton(); } catch(e) { /* silent */ }
         try { new HeaderController(); } catch(e) { /* silent */ }
         try { new PageTransitionController(); } catch(e) { /* silent */ }
-        try { new BusinessStatusBadge().init(); } catch(e) { /* silent */ }
+        try { new StoreBadge().init(); } catch(e) { /* silent */ }
     }
 
     initInteractiveComponents() {

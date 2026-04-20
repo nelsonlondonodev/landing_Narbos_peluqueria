@@ -36,6 +36,36 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Performance & SEO Optimization (April 20, 2026) - LCP & TBT Surgical Fixes for Spa Hubs 🚀
+
+### 1. Static HTML Injection for LCP Recovery (Uñas & Estética) ⚡
+*   **The Problem:** PageSpeed Insights reported high LCP (2.6s - 7.6s) and significant TBT across Nail and Aesthetic service pages. The root cause was `innerHTML` DOM trashing and dynamic JavaScript rendering of service cards blocking the parser.
+*   **Surgical Fixes:**
+    *   **Nails Hub:** Extracted and physically injected the HTML grid for `unas-acrilicas-gel.html` (2 cards) and `manicure-pedicure.html` (8 cards).
+    *   **Esthetics Hub:** Hardcoded the top 3 macro-categories (Facial, Corporal, Depilación) directly into `/servicios/estetica/index.html` to instantly unblock the main thread.
+    *   **Spa Facial:** Pre-rendered the 4 core facial services directly into `spa-facial-integral.html`.
+*   **Controller Resilience:** Refactored `EstheticsHubController.js` and `NailsHubController.js` to detect pre-existing static DOM nodes. The scripts now purely "hydrate" the HTML (attaching Modal listeners) without destructive `innerHTML = ''` operations.
+*   **Result:** Reduced structural TBT to near 0ms, eliminated CLS layout shifts, and positioned these URLs to achieve the 90+ Green Score milestone on mobile.
+
+---
+
+## 🔄 Navigation & SEO Hierarchy Fix (April 17, 2026) - The " Swiss Watch" Navigation (v2.6.2) 🚀
+### 1. Multi-Level Breadcrumb Re-engineering 🧭
+*   **Hierarchical Logic:** Refactored the `js/service-page.js` controller to support a dynamic 3-level hierarchy (Inicio > Hub > Sub-página). 
+*   **Directory Cleanup:** Surgically removed the invalid "Servicios" intermediate link from the navigation trail. This prevents users and Google bots from landing on empty server directories, resolving a critical indexing risk.
+*   **Semantic Labeling:** Implemented `data-breadcrumb` attribute support on `<h1>` tags across all service sub-pages (Hair, Nails, Aesthetics, Barber). This allows for precise, aesthetic labels (e.g., "Cortes de Hombre" instead of long SEO titles) in the navigation bar.
+
+### 2. Global Schema & JSON-LD Synchronization 🔍
+*   **Graph Standardization:** Updated the `@graph` JSON-LD blocks in all 4 Service Hubs and over 10 sub-pages to match the new simplified hierarchy, ensuring 100% coherence between what the user sees and what Google indexes.
+*   **BreadcrumbList Validation:** Re-calculated `itemListElement` positions in all structured data instances, securing a clean bill of health for rich snippet visibility in SERPs.
+
+### 3. Release & Deployment (v2.6.2) 🛠️
+*   **Global Version Bump:** Synchronized the entire project to **v2.6.2** (`package.json`, `js/config.js`, and visual Footer), triggering a mandatory cache refresh for all production users.
+*   **Cache Buster Generation:** Executed a full production build (`npm run build`) generating a fresh timestamp-based hash (`1776408126715`) to guarantee immediate asset updates.
+*   **Main Branch Parity:** Successfully merged all navigation and SEO fixes into the `main` branch, ensuring a stable and optimized production environment on Hostinger.
+
+---
+
 ## 🔄 Performance & SEO Optimization (April 16, 2026) - The "Green PageSpeed" Marathon (v2.6.1) 🚀
 
 ### 1. Project-Wide Performance Audit (10 Tandas) ⚡
