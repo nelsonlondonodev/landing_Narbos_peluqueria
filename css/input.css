@@ -1,5 +1,11 @@
 @import "tailwindcss";
-/* Force Recompile: 2026-02-11 T10:50 */
+@source "../index.html";
+@source "../js/**/*.js";
+@source "../servicios/**/*.html";
+@source "../blog/**/*.html";
+@source "../_templates/**/*.html";
+
+/* Force Recompile: 2026-04-25 T08:40 */
 
 /* purgecss start ignore */
 @theme {

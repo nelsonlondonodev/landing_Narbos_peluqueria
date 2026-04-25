@@ -18,7 +18,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
     // Si no estamos en home, los anclas (#) deben redirigir a /
     const linkPrefix = isHome ? '' : `${basePath}`;
     const menuCategories = getMenuCategories(basePath);
-    const navLink = createNavLinkHelper(linkPrefix);
+    const navLink = createNavLinkHelper(linkPrefix, basePath);
 
     return `
     <nav class="container mx-auto px-6 flex justify-between items-center max-w-screen-xl relative z-50 h-full w-full transition-all duration-300">
@@ -27,10 +27,10 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         <!-- Desktop Menu -->
         <div class="desktop-menu flex items-center space-x-8 max-md:hidden pl-8">
             ${navLink(isHome ? '#' : basePath, 'Inicio')}
-            ${renderMegaMenuDesktop(menuCategories)}
-            ${navLink(resolveRoute('nosotros'), 'Nosotros')}
-            ${navLink(resolveRoute('contacto'), 'Contacto')}
-            <a href="${resolveRoute('blog/')}" class="text-white hover:text-brand-gold active:text-brand-gold font-medium">Blog</a>
+            ${renderMegaMenuDesktop(menuCategories, basePath)}
+            ${navLink(resolveRoute('nosotros', basePath), 'Nosotros')}
+            ${navLink(resolveRoute('contacto', basePath), 'Contacto')}
+            <a href="${resolveRoute('blog/', basePath)}" class="text-white hover:text-brand-gold active:text-brand-gold font-medium">Blog</a>
         </div>
 
         <!-- Mobile Toggle -->
@@ -43,10 +43,10 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         
         <div class="flex flex-col p-4 space-y-1">
             ${navLink(isHome ? '#' : basePath, 'Inicio', true)}
-            ${renderMegaMenuMobile(menuCategories)}
-            ${navLink(resolveRoute('nosotros'), 'Nosotros', true)}
-            ${navLink(resolveRoute('contacto'), 'Contacto', true)}
-            <a href="${resolveRoute('blog/')}" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50">Blog</a>
+            ${renderMegaMenuMobile(menuCategories, basePath)}
+            ${navLink(resolveRoute('nosotros', basePath), 'Nosotros', true)}
+            ${navLink(resolveRoute('contacto', basePath), 'Contacto', true)}
+            <a href="${resolveRoute('blog/', basePath)}" class="block py-3 px-4 text-lg hover:bg-gray-50 rounded-md text-brand-gray-dark border-b border-gray-100/50">Blog</a>
         </div>
     </div>
     
@@ -56,7 +56,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
 
 // --- Helpers de Renderizado ---
 
-function createNavLinkHelper(linkPrefix) {
+function createNavLinkHelper(linkPrefix, basePath) {
     return (href, text, mobile = false) => {
         const baseClasses = "text-white hover:text-brand-gold active:text-brand-gold font-medium";
         const mobileClasses = "block py-2 px-4 text-lg hover:bg-brand-light/20 rounded-md active:bg-brand-light/40 text-brand-gray-dark border-b border-gray-100/50";
@@ -68,8 +68,8 @@ function createNavLinkHelper(linkPrefix) {
 
 
 function renderLogo(basePath, isHome) {
-    // Usar resolveAsset para garantizar la ruta correcta en GitHub Pages
-    const logoSrc = resolveAsset('images/brand/logo_narbos.webp');
+    // Usar resolveAsset para garantizar la ruta correcta
+    const logoSrc = resolveAsset('images/brand/logo_narbos.webp', basePath);
     return `
         <a href="${isHome ? '#' : basePath}" class="block group">
              <img src="${logoSrc}" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56">
@@ -99,7 +99,7 @@ function renderMobileMenuHeader() {
     `;
 }
 
-function renderMegaMenuDesktop(menuCategories) {
+function renderMegaMenuDesktop(menuCategories, basePath) {
     const desktopMenuGrid = menuCategories.map(cat => `
         <div class="flex flex-col space-y-3">
             <a href="${cat.link}" class="font-serif font-bold text-brand-green uppercase tracking-wider text-base border-b-2 border-brand-gold/30 pb-2 hover:text-brand-gold transition-colors block">
@@ -108,7 +108,7 @@ function renderMegaMenuDesktop(menuCategories) {
             <ul class="space-y-2">
                 ${cat.items.map(item => `
                     <li>
-                        <a href="${resolveRoute(item.link)}" class="text-brand-gray-dark hover:text-brand-green hover:translate-x-1 transition-all duration-200 text-sm block">
+                        <a href="${resolveRoute(item.link, basePath)}" class="text-brand-gray-dark hover:text-brand-green hover:translate-x-1 transition-all duration-200 text-sm block">
                             ${item.label}
                         </a>
                     </li>
@@ -136,14 +136,14 @@ function renderMegaMenuDesktop(menuCategories) {
     `;
 }
 
-function renderMegaMenuMobile(menuCategories) {
+function renderMegaMenuMobile(menuCategories, basePath) {
     const mobileMenuContent = menuCategories.map(cat => `
         <div class="px-6 py-2">
-            <a href="${resolveRoute(cat.link)}" class="block font-bold text-brand-green text-base mb-2 select-none">${cat.title}</a>
+            <a href="${resolveRoute(cat.link, basePath)}" class="block font-bold text-brand-green text-base mb-2 select-none">${cat.title}</a>
             <ul class="border-l-2 border-gray-200 pl-3 space-y-2">
                 ${cat.items.map(item => `
                     <li>
-                        <a href="${resolveRoute(item.link)}" class="block text-brand-gray-dark text-sm hover:text-brand-gold">
+                        <a href="${resolveRoute(item.link, basePath)}" class="block text-brand-gray-dark text-sm hover:text-brand-gold">
                             ${item.label}
                         </a>
                     </li>

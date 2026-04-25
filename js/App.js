@@ -61,20 +61,14 @@ class App {
     /**
      * Resuelve una ruta (absoluta o relativa) a la URL base correcta de la aplicación.
      * @param {string} path - Ruta a resolver (ej: '/servicios/...' o 'images/...')
-     * @returns {string} URL absoluta correcta.
+     * @returns {string} URL resuelta.
      */
     resolvePath(path) {
-        if (!path || path === '/') return this.appRoot; 
+        if (!path || path === '/') return this.isHomePage ? './' : this.appRoot; 
         
-        // Resolvemos el path usando el algoritmo inteligente de config.js (v2.1.8)
-        const smartPath = resolveRoute(path);
-        
-        // Si no es un link externo, aseguramos que se resuelva contra el origin absoluto
-        if (smartPath.startsWith('http') && !smartPath.includes(window.location.hostname)) return smartPath;
-        
-        // Limpiamos smartPath para el constructor de URL si es necesario
-        const cleanPath = smartPath.startsWith('/') ? smartPath.slice(1) : smartPath;
-        return new URL(cleanPath, this.appRoot).href;
+        // Resolvemos usando la lógica inteligente de config.js
+        // Pasamos this.appRoot como prefijo si estamos en modo hidratación
+        return resolveRoute(path, this.appRoot);
     }
 
     mountLayout() {
@@ -85,8 +79,9 @@ class App {
         // INTELLIGENT HYDRATION: Solo inyectamos si el contenedor está vacío.
         // Si el SSG ya puso el contenido, el JS no debe destruirlo.
         if (navbarRoot && navbarRoot.children.length === 0) {
-            // console.log("[App] Injecting Navbar (Container was empty)");
             navbarRoot.innerHTML = getNavbarHTML(this.appRoot, this.isHomePage);
+        } else {
+            console.log("✅ [App] Navbar del SSG detectado. Saltando inyección para evitar parpadeo.");
         }
         
         if (footerRoot && footerRoot.children.length === 0) {

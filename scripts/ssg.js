@@ -133,6 +133,9 @@ async function injectHero(document, pageKey, prefix) {
         if (heroData.imageSrc && !heroData.imageSrc.startsWith('http')) {
             heroData.imageSrc = prefix + heroData.imageSrc;
         }
+        if (heroData.imageSrcMobile && !heroData.imageSrcMobile.startsWith('http')) {
+            heroData.imageSrcMobile = prefix + heroData.imageSrcMobile;
+        }
         const { getHeroHTML } = await import('../js/components/HeroSection.js');
         heroRoot.innerHTML = getHeroHTML(heroData);
         console.log(`   ✨ Hero inyectado (key: ${pageKey})`);

@@ -38,7 +38,7 @@ export class HomeHubController {
         if (servicesGrid && servicesData) {
             // INTELLIGENT HYDRATION: Si ya hay contenido (inyectado por SSG), no re-renderizamos.
             if (servicesGrid.children.length > 0) {
-                // console.log("[HomeHub] Services already present in HTML (SSG), skipping.");
+                console.log("✅ [HomeHub] Servicios del SSG detectados. Manteniendo contenido original.");
                 return;
             }
 

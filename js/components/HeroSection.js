@@ -20,19 +20,19 @@
  * @param {string} props.imageAlt - Texto alternativo para SEO
  * @returns {string} HTML string
  */
-export const getHeroHTML = ({ title, subtitle, imageSrc, imageAlt, variant = 'standard' }) => {
+export const getHeroHTML = ({ title, subtitle, imageSrc, imageSrcMobile, imageAlt, variant = 'standard' }) => {
     return `
     <div class="relative">
-        ${renderHeroImage(imageSrc, imageAlt, variant)}
+        ${renderHeroImage(imageSrc, imageSrcMobile, imageAlt, variant)}
         ${renderHeroContent(title, subtitle)}
     </div>
     `;
 };
 
 /**
- * Renderiza la sección de la imagen de fondo.
+ * Renderiza la sección de la imagen de fondo con soporte para Picture (Móvil/Escritorio).
  */
-function renderHeroImage(src, alt, variant) {
+function renderHeroImage(src, srcMobile, alt, variant) {
     const isLogo = variant === 'logo';
     const sectionClass = isLogo 
         ? 'relative h-[60vh] md:h-[80vh] bg-gray-900 rounded-b-xl mx-auto w-[85%]' 
@@ -42,9 +42,18 @@ function renderHeroImage(src, alt, variant) {
         ? 'w-full h-full object-contain absolute inset-0 z-0 mx-auto p-12 opacity-80' 
         : 'w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl';
 
+    // Si tenemos imagen móvil, usamos <picture> para optimizar LCP
+    const imageHtml = srcMobile ? `
+        <picture class="contents">
+            <source media="(max-width: 768px)" srcset="${srcMobile}">
+            <source media="(min-width: 769px)" srcset="${src}">
+            <img src="${src}" alt="${alt}" class="${imgClass}" loading="eager" fetchpriority="high">
+        </picture>
+    ` : `<img src="${src}" alt="${alt}" class="${imgClass}" loading="eager" fetchpriority="high">`;
+
     return `
         <section id="inicio" class="${sectionClass}">
-            <img src="${src}" alt="${alt}" class="${imgClass}" loading="eager" fetchpriority="high">
+            ${imageHtml}
         </section>
     `;
 }

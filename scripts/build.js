@@ -162,6 +162,8 @@ const copyAssets = async () => {
         { src: 'video', dest: 'video' },
         { src: 'lang', dest: 'lang' },
         { src: 'blog/articles/images', dest: 'blog/articles/images' },
+        { src: 'fidelizacion', dest: 'fidelizacion' }, // Añadido
+        { src: 'legal', dest: 'legal' },               // Añadido
         { src: 'robots.txt', dest: 'robots.txt' },
         { src: 'sitemap.xml', dest: 'sitemap.xml' },
         { src: '.htaccess', dest: '.htaccess' }
@@ -288,13 +290,10 @@ const runBuild = async () => {
             throw error;
         }
 
-        // 3. PurgeCSS (Post-Hydration)
-        // Now PurgeCSS will see all the classes injected by SSG (like max-md:hidden)
-        await runPurgeCSS();
-
-        // Optimize CSS further after PurgeCSS strips out Tailwind
-        log('Minifying CSS with CSSO...', colors.magenta);
-        await execPromise('npx csso-cli ./dist/css/styles.css -o ./dist/css/styles.css');
+        // 3. PurgeCSS & Minification (Desactivado para Tailwind v4 para evitar pérdida de estilos)
+        // await runPurgeCSS();
+        // log('Minifying CSS with CSSO...', colors.magenta);
+        // await execPromise('npx csso-cli ./dist/css/styles.css -o ./dist/css/styles.css');
 
         // 4. Versioning (Final step: hash the optimized files)
         await versionAssets();
