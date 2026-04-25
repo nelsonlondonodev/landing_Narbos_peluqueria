@@ -1,3 +1,4 @@
+# Final Deployment - Clean State
 name: Deploy to Hostinger
 
 on:
