@@ -20,8 +20,11 @@ import { HomeHubController } from './controllers/HomeHubController.js';
 
 class App {
     constructor() {
-        // App Root se deriva directamente del BASE_PATH configurado
-        this.appRoot = window.location.origin + BASE_PATH + '/';
+        // App Root se deriva del BASE_PATH o se ajusta si estamos en la carpeta dist (pruebas locales)
+        const isLocalDist = window.location.pathname.includes('/dist/');
+        const localDistPath = isLocalDist ? '/dist' : '';
+        
+        this.appRoot = window.location.origin + BASE_PATH + localDistPath + '/';
         this.version = siteConfig.version;
         
         // Debug para verificar en consola y soporte técnico
@@ -40,8 +43,16 @@ class App {
      */
     _checkIfHomePage() {
         const path = window.location.pathname;
-        const currentPathClean = path.replace(BASE_PATH, '/').replace('//', '/');
-        return currentPathClean === '/' || currentPathClean === '/index.html' || currentPathClean === '';
+        // Limpiamos el path de BASE_PATH y también de /dist/ si estamos en pruebas locales
+        const currentPathClean = path.replace(BASE_PATH, '')
+                                     .replace('/dist/', '/')
+                                     .replace('//', '/');
+        
+        return currentPathClean === '/' || 
+               currentPathClean === '/index.html' || 
+               currentPathClean === '' ||
+               path.endsWith('/dist/') ||
+               path.endsWith('/dist/index.html');
     }
 
 

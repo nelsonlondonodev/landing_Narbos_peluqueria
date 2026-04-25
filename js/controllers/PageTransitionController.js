@@ -62,9 +62,9 @@ export class PageTransitionController {
             const targetUrl = new URL(url, window.location.origin);
             if (targetUrl.origin !== window.location.origin) return;
 
-            // Resolvemos la ruta (añadirá .html solo si estamos en local)
-            const resolvedPath = resolveRoute(targetUrl.pathname);
-            const finalUrl = resolvedPath + targetUrl.search + targetUrl.hash;
+            // La URL ya es absoluta y correcta gracias al navegador y al SSG.
+            // No necesitamos re-procesarla con resolveRoute para evitar duplicidad de carpetas.
+            const finalUrl = targetUrl.href;
 
             this.isExiting = true;
             e.preventDefault();

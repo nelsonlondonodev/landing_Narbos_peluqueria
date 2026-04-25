@@ -34,19 +34,31 @@ export const BASE_PATH = isGitHubPages ? repoName : '';
 export const resolveRoute = (path, prefix = '') => {
     if (!path || path === '/' || path === '') return prefix || './';
     
-    if (path.startsWith('http')) return path;
+    if (path.startsWith('http') || path.startsWith('mailto:') || path.startsWith('tel:')) return path;
+    if (path.startsWith('#')) return path;
 
-    let cleanPath = path;
-    if (cleanPath.startsWith('/')) cleanPath = cleanPath.slice(1);
+    // 1. Limpiar el path de slashes iniciales y redundancias
+    let cleanPath = path.replace(/^\//, '');
     
-    // Normalizar BASE_PATH
-    const base = BASE_PATH ? (BASE_PATH.endsWith('/') ? BASE_PATH : BASE_PATH + '/') : prefix;
-
-    if (isDevelopment && !cleanPath.endsWith('/') && !cleanPath.includes('.') && cleanPath !== '') {
-        return `${base}${cleanPath}.html`;
+    // 2. Normalizar Prefijo (asegurar que termine en / si existe)
+    let safePrefix = prefix;
+    if (safePrefix && !safePrefix.endsWith('/')) safePrefix += '/';
+    
+    // 3. Lógica de archivos físicos (.html)
+    // Si termina en /, apuntamos a index.html
+    if (cleanPath.endsWith('/')) {
+        cleanPath += 'index.html';
+    } 
+    // Si no tiene extensión, le ponemos .html
+    else if (!cleanPath.includes('.') && !cleanPath.endsWith('.html')) {
+        cleanPath += '.html';
     }
 
-    return `${base}${cleanPath}`;
+    // 4. Construir ruta final y limpiar dobles slashes o puntos
+    let finalUrl = `${safePrefix}${cleanPath}`;
+    
+    // Eliminar redundancias de '././' que a veces ocurren por basePath manual
+    return finalUrl.replace(/\.\/\.\//g, './');
 };
 
 /**
@@ -58,10 +70,10 @@ export const resolveAsset = (path, prefix = '') => {
     if (!path) return '';
     if (path.startsWith('http')) return path; 
     
-    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-    const base = BASE_PATH ? (BASE_PATH.endsWith('/') ? BASE_PATH : BASE_PATH + '/') : prefix;
+    const cleanPath = path.replace(/^\//, '');
+    const safePrefix = prefix && !prefix.endsWith('/') ? `${prefix}/` : prefix;
     
-    return `${base}${cleanPath}`;
+    return `${safePrefix}${cleanPath}`;
 };
 
 /**
