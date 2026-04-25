@@ -146,11 +146,7 @@ class ServicePageManager {
         const config = pagesData[this.pageKey];
         if (!config || !config.gallery) return;
 
-        const galleryItems = config.gallery.map(item => ({
-             ...item,
-             src: this.app.resolvePath(item.src),
-             poster: item.poster ? this.app.resolvePath(item.poster) : undefined
-        }));
+        const galleryItems = config.gallery.map(item => this.app.resolveDeep(item));
 
         const galleryOptions = config.galleryOptions || {};
         galleryContainer.innerHTML = getBentoGridHTML(galleryItems, galleryOptions);
