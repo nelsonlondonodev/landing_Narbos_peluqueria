@@ -137,9 +137,23 @@ body.modal-open-layer-fix #app-wrapper {
 
 .whatsapp-float:hover { @apply scale-110; }
 
-/* Marquee */
+/* Marquee & Brands Slider */
 .marquee-track {
     @apply w-max animate-marquee;
+}
+
+.brands-slider {
+    @apply flex w-full overflow-hidden relative;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.brands-track {
+    @apply flex items-center w-max will-change-transform;
+}
+
+.brands-item {
+    @apply shrink-0 w-auto px-8 md:px-16 flex flex-col items-center justify-center box-border;
 }
 /* purgecss end ignore */
 

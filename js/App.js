@@ -114,45 +114,45 @@ class App {
 
     initInteractiveComponents() {
         // Blog
-        this._initializeModule('#articles-grid', async () => {
+        this.observeAndInit('#articles-grid', async () => {
             const { BlogController } = await import('./controllers/BlogController.js');
             new BlogController(this.appRoot);
         });
 
         // About
-        this._initializeModule('.marquee-track', async () => {
+        this.observeAndInit('.marquee-track', async () => {
             const { default: AboutHubController } = await import('./controllers/AboutHubController.js');
             new AboutHubController();
         });
 
         // FAQ
         ['#faq', '#article-faq'].forEach(sel => {
-            this._initializeModule(sel, async () => {
+            this.observeAndInit(sel, async () => {
                 const { FAQAccordion } = await import('./components/FAQAccordion.js');
                 new FAQAccordion(sel);
             });
         });
 
         // Reviews
-        this._initializeModule('#reviews-slider-wrapper', async () => {
+        this.observeAndInit('#reviews-slider-wrapper', async () => {
             const { ReviewsCarousel } = await import('./components/ReviewsCarousel.js');
             new ReviewsCarousel();
         });
 
         // Formulario
-        this._initializeModule('#contact-root', async () => {
+        this.observeAndInit('#contact-root', async () => {
             const { ContactFormController } = await import('./controllers/ContactFormController.js');
             new ContactFormController();
         });
 
         // Galería
-        this._initializeModule('#gallery-root', async () => {
+        this.observeAndInit('#gallery-root', async () => {
             const { GalleryController } = await import('./controllers/GalleryController.js');
             new GalleryController();
         });
 
         // Calculadora
-        this._initializeModule('#calculadora', async () => {
+        this.observeAndInit('#calculadora', async () => {
             const { default: OxidationCalculator } = await import('./controllers/OxidationCalculator.js');
             new OxidationCalculator();
         });
@@ -171,9 +171,9 @@ class App {
     }
 
     /**
-     * Inicialización perezosa de módulos.
+     * Inicialización perezosa de módulos (Lazy Hydration).
      */
-    _initializeModule(selector, importFn) {
+    observeAndInit(selector, importFn) {
         const element = document.querySelector(selector);
         if (!element) return;
 

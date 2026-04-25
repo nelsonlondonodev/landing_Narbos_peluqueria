@@ -37,8 +37,8 @@ export class BrandsSection {
             </div>
         `;
 
-        // Duplicamos la lista suficientes veces para cubrir pantallas grandes y buffer de scroll (12x es seguro)
-        const itemsHtml = Array(12).fill(this.brands).flat().map(createBrandItem).join('');
+        // Duplicamos la lista para asegurar el efecto infinito (4x es suficiente para cubrir cualquier ancho)
+        const itemsHtml = Array(4).fill(this.brands).flat().map(createBrandItem).join('');
 
         this.container.innerHTML = `
             ${styles}
