@@ -1,6 +1,6 @@
-Narbo's Salón Spa - Sitio Web Oficial
+Narbo's Salón Spa - Web Oficial
 
-Este repositorio contiene el código fuente de la Plataforma Web Oficial de Narbo's Salón Spa, un sitio web robusto, escalable y totalmente responsivo, diseñado para ofrecer una experiencia de usuario premium y gestionar servicios avanzados.
+Este repositorio contiene el código fuente de la Plataforma Web Integral de Narbo's Salón Spa, un ecosistema web robusto, escalable y totalmente responsivo, diseñado para ofrecer una experiencia de usuario premium y gestionar servicios avanzados.
 
 Ver Demo en Vivo (https://narbossalon.com/)
 
@@ -363,7 +363,7 @@ Para llevar a Narbo's Salón Spa al siguiente nivel de conversión y eficiencia,
 ## 🔄 Recent Updates (March 26, 2026) - Loyalty Program Enhancement 🎁
 
 ### 1. Retention Strategy Update (15% Discount)
-*   **Discount Increase:** Professionally updated the loyalty landing page (`/fidelizacion/`) to reflect a **15% welcome discount** (previously 10%).
+*   **Discount Increase:** Professionally updated the loyalty portal (`/fidelizacion/`) to reflect a **15% welcome discount** (previously 10%).
 *   **Policy Clarification:** Integrated a mandatory service exception for **Hair Removal (Depilación)** into all UI touchpoints (Benefit cards, Success messages, and QR modals) to ensure consistency with automated email workflows.
 *   **iOS & Apple Cache Integrity:** Implemented a targeted **Cache Buster (v=3.1)** on the loyalty stylesheet to force immediate updates on iPhones and iPads, which often retain legacy CSS.
 *   **Production Deployment:** Executed a full production build (`npm run build`) and synchronized `develop` with `main` to push the 15% offer live.
@@ -596,7 +596,7 @@ Batch scripts modifying HTML must use surgical `sed` patterns scoped to the exac
 *   **Problem:** Modifying visible HTML FAQ content without updating the underlying structured data can lead to search engine confusion, rich result loss, or "Missing field" errors in Search Console. Some pages were completely lacking this schema.
 *   **Solution:** 
     *   Updated the existing `@type: FAQPage` JSON-LD script in `unas-acrilicas-gel.html` to mirror the exact wording (including commas and periods) of the new *polygel* content.
-    *   Injected completely new, highly detailed `@type: FAQPage` structured data scripts into `index.html` (Landing), `servicios/peluqueria/index.html`, and `servicios/unas-spa/index.html`. This ensures Google's bots perfectly digest our new LSI and local keywords, maximizing our chances for rich snippets in the SERPs without risk of cloaking penalties.
+    *   Injected completely new, highly detailed `@type: FAQPage` structured data scripts into `index.html` (Home), `servicios/peluqueria/index.html`, and `servicios/unas-spa/index.html`. This ensures Google's bots perfectly digest our new LSI and local keywords, maximizing our chances for rich snippets in the SERPs without risk of cloaking penalties.
 
 ## 🔄 Recent Updates (February 23, 2026)
 
@@ -1117,7 +1117,7 @@ Para garantizar la estabilidad visual y el correcto funcionamiento del menú mó
 
 ### 📝 Últimas Actualizaciones (7 de enero, 2026)
 - **Estrategia SEO Local & Arquitectura:**
-    - **Landing Pages Dedicadas:** Se crearon 7 páginas estáticas optimizadas para SEO local (ej: `cortes-de-pelo-en-chia.html`) con H1s únicos y contenido semántico, viviendo en la raíz para URLs limpias.
+    - **Páginas de Servicio Especializadas:** Se crearon 7 páginas estáticas optimizadas para SEO local (ej: `cortes-de-pelo-en-chia.html`) con H1s únicos y contenido semántico, viviendo en la raíz para URLs limpias.
     - **Inyección SSG Global:** Se actualizó `scripts/ssg.js` para pre-renderizar componentes dinámicos (`ServiceCard`) en *todas* las páginas de servicio durante el build, mejorando el Core Web Vitals (LCP).
 - **Estabilidad de Navegación:**
     - **Rutas Absolutas:** Se migraron todos los enlaces internos (`js/data/*.js`) a formato absoluto (`/ruta...`). Esto soluciona definitivamente los errores 404 al navegar entre niveles de carpetas (`root` vs `peluqueria/` vs `servicios/`).
@@ -1150,7 +1150,7 @@ Para garantizar la estabilidad visual y el correcto funcionamiento del menú mó
     - **Configuración de Servidor Avanzada:** Optimización de `.htaccess` con compresión Gzip y políticas de caché de 1 año para activos estáticos.
 
 ### 🔮 Roadmap & Transición 2026 (Enero)
-- **Arquitectura Multi-Página:** El proyecto ha evolucionado de una Landing Page única a una arquitectura web robusta con URLs dedicadas para cada servicio (ej: `/servicios/peluqueria.html`), Blog y Fidelización.
+- **Arquitectura Multi-Página:** El proyecto ha completado su transición de una Landing Page inicial a una arquitectura web robusta con URLs dedicadas para cada servicio (ej: `/servicios/peluqueria/`), Blog y un ecosistema de Fidelización automatizado.
 - **Actualización de Stack:** Se ha programado la actualización de **Tailwind CSS a la versión v4.x** para enero de 2026.
     - *Nota:* Se ha **congelado** la refactorización profunda de CSS (safelist/config) hasta esa fecha para garantizar la estabilidad del sitio durante la temporada de fin de año.
 

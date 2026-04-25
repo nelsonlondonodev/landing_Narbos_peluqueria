@@ -18,6 +18,7 @@
  * Configuración de entorno y Rutas Base.
  */
 const isGitHubPages = typeof window !== 'undefined' && window.location.hostname.includes('github.io');
+// Nota: El nombre 'landing_Narbos_peluqueria' se mantiene por compatibilidad con el repositorio original y despliegue.
 const repoName = '/landing_Narbos_peluqueria'; 
 
 export const BASE_PATH = isGitHubPages ? repoName : '';
