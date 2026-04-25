@@ -44,7 +44,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'featured-video',
-                src: '../../images/pages/maquillaje/maquillaje-social-chia-trabajo-1.webp',
+                src: 'images/pages/maquillaje/maquillaje-social-chia-trabajo-1.webp',
                 title: "Maquillaje de ojos",
                 subtitle: "Tonos tierra",
                 alt: "Maquillaje social profesional con sombras cálidas"
@@ -52,14 +52,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-ojos-ahumados-narbos-2.webp',
+                src: 'images/pages/maquillaje/maquillaje-ojos-ahumados-narbos-2.webp',
                 title: "Smokey Eyes",
                 alt: "Maquillaje de noche ahumado intenso en Chía"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-y-pestanas-chia-3.webp',
+                src: 'images/pages/maquillaje/maquillaje-y-pestanas-chia-3.webp',
                 title: "Mirada impactante",
                 subtitle: "Pestañas & makeup",
                 alt: "Extensiones de pestañas y maquillaje profesional"
@@ -67,7 +67,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/maquillaje/maquillaje-novias-y-eventos-4.webp',
+                src: 'images/pages/maquillaje/maquillaje-novias-y-eventos-4.webp',
                 title: "Novias y eventos",
                 subtitle: "Tonos neutros",
                 alt: "Sombras neutras y elegantes para eventos especiales"
@@ -75,28 +75,28 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/maquillaje/maquillaje-social-tendencia-chia.webp',
+                src: 'images/pages/maquillaje/maquillaje-social-tendencia-chia.webp',
                 title: "Tendencias sociales",
                 alt: "Chica arreglándose para evento social"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-artistico-eventos-chia.webp',
+                src: 'images/pages/maquillaje/maquillaje-artistico-eventos-chia.webp',
                 title: "Look artístico",
                 alt: "Maquillaje para fiestas y eventos de noche"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-profesional-chia-narbos-spa.webp',
+                src: 'images/pages/maquillaje/maquillaje-profesional-chia-narbos-spa.webp',
                 title: "Profesionalismo",
                 alt: "Estudio de maquillaje profesional Narbo's"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-social-peinado-grados-chia-narbos-salon-spa.webp',
+                src: 'images/pages/maquillaje/maquillaje-social-peinado-grados-chia-narbos-salon-spa.webp',
                 title: "Para tus grados",
                 subtitle: "Combo peinado",
                 alt: "Maquillaje especial y peinado para ceremonia de grados"
@@ -104,7 +104,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/maquillaje/maquillaje-profesional-peluquerias-en-chia-narbos-salon.webp',
+                src: 'images/pages/maquillaje/maquillaje-profesional-peluquerias-en-chia-narbos-salon.webp',
                 title: "Centros de belleza",
                 subtitle: "Acabados de lujo",
                 alt: "Técnicas de preparación de piel previas al maquillaje"
@@ -112,14 +112,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/maquillaje/maquillaje-social-peinado-narbos-salon-spa-chia.webp',
+                src: 'images/pages/maquillaje/maquillaje-social-peinado-narbos-salon-spa-chia.webp',
                 title: "Armonía facial",
                 alt: "Maquillaje de contorno e iluminación profesional"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/maquillaje/retoque-maquillaje-mejores-peluquerias-chia-salon-de-belleza.webp',
+                src: 'images/pages/maquillaje/retoque-maquillaje-mejores-peluquerias-chia-salon-de-belleza.webp',
                 title: "El toque final",
                 subtitle: "Detalles impecables",
                 alt: "Retoque de maquillaje en sala de belleza premium"
@@ -140,7 +140,7 @@ export const pagesData = Object.freeze({
                 type: 'video',
                 layout: 'featured-video', // 9:16 vertical on mobile, 2x2 on desktop
                 src: 'video/video_instagram_1.mp4',
-                poster: '../../images/pages/peluqueria/hair-hero.webp',
+                poster: 'images/pages/peluqueria/hair-hero.webp',
                 title: "Experiencia Narbo's",
                 subtitle: "Vive el cambio",
                 alt: "Video de experiencia en Narbo's Salon"
@@ -148,56 +148,56 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/color-tratamiento.webp',
+                src: 'images/pages/peluqueria/color-tratamiento.webp',
                 title: "Color profundo",
                 alt: "Balayage y tintes de color profundo"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/mechas-balayage-detalle.webp',
+                src: 'images/pages/peluqueria/mechas-balayage-detalle.webp',
                 title: "Iluminaciones",
                 alt: "Detalle de mechas balayage"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp',
+                src: 'images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp',
                 title: "Rubios",
                 alt: "Balayage rubio iluminado"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/estilismo-barba.webp',
+                src: 'images/pages/peluqueria/estilismo-barba.webp',
                 title: "Cortes",
                 alt: "Cortes de diseño y estilismo"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '/images/pages/peluqueria/narbos-salon-spa-chia-peinado-tendencia-trenzas-laterales-ondas-sueltas-large.webp',
+                src: 'images/pages/peluqueria/narbos-salon-spa-chia-peinado-tendencia-trenzas-laterales-ondas-sueltas-large.webp',
                 title: "Peinados",
                 alt: "Peinados de tendencia y ondas sueltas"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/lavado-spa-capilar.webp',
+                src: 'images/pages/peluqueria/lavado-spa-capilar.webp',
                 title: "Spa Capilar",
                 alt: "Lavado y spa capilar relajante"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/imagen-balayage_chia.webp',
+                src: 'images/pages/peluqueria/imagen-balayage_chia.webp',
                 title: "Babylights",
                 alt: "Técnica de babylights en cabello"
             },
             {
                 type: 'image',
                 layout: 'square', // Originalmente era un bloque de cierre, lo dejaremos square o vertical según ajuste. En el HTML era col-span-2 md:col-span-1. Haremos square para mobile y desktop consistente.
-                src: '../../images/pages/peluqueria/lavado-spa-capilar.webp', // Nota: imagen repetida en origin, verificar si usar otra.
+                src: 'images/pages/peluqueria/lavado-spa-capilar.webp', // Nota: imagen repetida en origin, verificar si usar otra.
                 title: "Tratamientos",
                 alt: "Tratamientos capilares profundos"
             }
@@ -214,7 +214,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '/images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp',
+                src: 'images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp',
                 title: "Ambiente Premium",
                 subtitle: "Comodidad y Estilo",
                 alt: "Ambiente exclusivo en Narbo's Barbería Chía: el espacio que mereces"
@@ -222,7 +222,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '/images/pages/barberia/corte-cabello-caballero-profesional-chia.webp',
+                src: 'images/pages/barberia/corte-cabello-caballero-profesional-chia.webp',
                 title: "Cortes de Tendencia",
                 subtitle: "Estilo Masculino",
                 alt: "Corte de cabello caballero profesional con técnica moderna en Chía"
@@ -230,7 +230,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/barberia/corte-hombre-fade-moderno.webp',
+                src: 'images/pages/barberia/corte-hombre-fade-moderno.webp',
                 title: "Corte Fade Moderno",
                 subtitle: "Degradados de Precisión",
                 alt: "Corte fade moderno realizado por barbero profesional en Chía"
@@ -238,7 +238,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/barberia/ritual-barba-vaporizador-relajante.webp',
+                src: 'images/pages/barberia/ritual-barba-vaporizador-relajante.webp',
                 title: "Spa de Barba",
                 subtitle: "Relajación Total",
                 alt: "Ritual de barba con vapor ozono en Narbo's Barbería"
@@ -246,14 +246,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/barberia/corte-barba-tendencia-barberia.webp',
+                src: 'images/pages/barberia/corte-barba-tendencia-barberia.webp',
                 title: "Diseño de Barba",
                 alt: "Perfilado y diseño de barba con técnica profesional"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '/images/pages/barberia/barbero-profesional-trabajando-narbos-chia.webp',
+                src: 'images/pages/barberia/barbero-profesional-trabajando-narbos-chia.webp',
                 title: "Pasión por el detalle",
                 subtitle: "Servicio Experto",
                 alt: "Barbero profesional en plena acción realizando un corte clásico en Narbo's Barbería Chía"
@@ -288,7 +288,7 @@ export const pagesData = Object.freeze({
                 type: 'video',
                 layout: 'featured-video',
                 src: 'video/video_instagram_1.mp4',
-                poster: '../../images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
+                poster: 'images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
                 title: "Experiencia Narbo's",
                 subtitle: "Vive el cambio",
                 alt: "Video de experiencia en Narbo's Salon"
@@ -296,28 +296,28 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/corte_pixie_mujer_chia.webp',
+                src: 'images/pages/peluqueria/corte_pixie_mujer_chia.webp',
                 title: "Corte Pixie",
                 alt: "Corte Pixie y Pelo Corto"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp',
+                src: 'images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp',
                 title: "Cortes Modernos",
                 alt: "Resultado de corte profesional en Narbo's"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/corte_bob_chia.webp',
+                src: 'images/pages/peluqueria/corte_bob_chia.webp',
                 title: "Corte Bob",
                 alt: "Corte Bob en Chía"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/peluqueria/corte_capas_chia.webp',
+                src: 'images/pages/peluqueria/corte_capas_chia.webp',
                 title: "Corte en Capas",
                 alt: "Corte en Capas y Movimiento"
             }
@@ -337,13 +337,13 @@ export const pagesData = Object.freeze({
              {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/casos_exito/tratamiento-hidratacion-chia-despues.webp',
+                src: 'images/pages/peluqueria/casos_exito/tratamiento-hidratacion-chia-despues.webp',
                 title: "Hidratación Profunda",
                 subtitle: "Tratamiento Reparador",
                 alt: "Resultado final: Cabello hidratado y saludable.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/tratamiento-hidratacion-chia-antes.webp',
+                        src: 'images/pages/peluqueria/casos_exito/tratamiento-hidratacion-chia-antes.webp',
                         alt: 'Antes: Cabello deshidratado y sin vida.'
                     }
                 ]
@@ -351,13 +351,13 @@ export const pagesData = Object.freeze({
              {
                 type: 'image',
                 layout: 'vertical', 
-                src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-despues.webp',
+                src: 'images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-despues.webp',
                 title: "Corrección Total",
                 subtitle: "De maltratado a rubio perfecto",
                 alt: "Resultado final: Corrección de color exitosa y diseño de balayage rubio luminoso.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-antes.webp',
+                        src: 'images/pages/peluqueria/casos_exito/correccion-rubio-extremo-cabello-danado-antes.webp',
                         alt: 'Antes: Cabello con manchas y daño severo recuperado.'
                     }
                 ]
@@ -366,13 +366,13 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-despues.webp',
+                src: 'images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-despues.webp',
                 title: "Rubio Soñado",
                 subtitle: "Iluminación balayage",
                 alt: "Diseño de color rubio con técnica balayage.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-antes.webp',
+                        src: 'images/pages/peluqueria/casos_exito/balayage-rubio-iluminacion-chia-antes.webp',
                         alt: 'Estado inicial antes del diseño de color.'
                     }
                 ]
@@ -381,13 +381,13 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/casos_exito/correccion-color-balayage-miel-chia-despues.webp',
+                src: 'images/pages/peluqueria/casos_exito/correccion-color-balayage-miel-chia-despues.webp',
                 title: "Cambio de Look",
                 subtitle: "Renovación total",
                 alt: "Renovación de imagen con color y corte.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/correccion-color-balayage-miel-chia-antes.webp',
+                        src: 'images/pages/peluqueria/casos_exito/correccion-color-balayage-miel-chia-antes.webp',
                         alt: 'Antes del cambio de look.'
                     }
                 ]
@@ -396,13 +396,13 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-despues.webp',
+                src: 'images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-despues.webp',
                 title: "Rubio Perla",
                 subtitle: "Corrección y diseño",
                 alt: "Balayage rubio perla con corrección de color.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-antes.webp',
+                        src: 'images/pages/peluqueria/casos_exito/balayage-correccion-rubio-claro-chia-antes.webp',
                         alt: 'Estado inicial antes del balayage rubio perla.'
                     }
                 ]
@@ -411,13 +411,13 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-despues.webp',
+                src: 'images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-despues.webp',
                 title: "Rubio Dorado",
                 subtitle: "Luz natural",
                 alt: "Balayage en tonos dorados cálidos.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-antes.webp',
+                        src: 'images/pages/peluqueria/casos_exito/balayage-rubio-dorado-chia-antes.webp',
                         alt: 'Estado antes de la iluminación dorada.'
                     }
                 ]
@@ -426,13 +426,13 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-despues.webp',
+                src: 'images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-despues.webp',
                 title: "Rubio Tendencia",
                 subtitle: "Diseño de autor",
                 alt: "Balayage rubio tendencia 2026 realizado por expertos.",
                 subImages: [
                     {
-                        src: '../../images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-antes.webp',
+                        src: 'images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-antes.webp',
                         alt: 'Antes del cambio de look de tendencia.'
                     }
                 ]
@@ -453,7 +453,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/tinte-completo-rubio-dorado.webp',
+                src: 'images/pages/peluqueria/tinte-completo-rubio-dorado.webp',
                 title: "Tinte Completo",
                 subtitle: "Cobertura total",
                 alt: "Resultado de tinte completo rubio dorado"
@@ -461,7 +461,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp', 
+                src: 'images/pages/peluqueria/cubrimiento-de-canas-natural.webp', 
                 title: "Cubrimiento Canas",
                 subtitle: "Acabado Natural",
                 alt: "Cobertura 100% de canas con acabado natural"
@@ -469,7 +469,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'logo-card',
                 layout: 'horizontal',
-                src: '../../images/brand/logo_narbos.webp',
+                src: 'images/brand/logo_narbos.webp',
                 title: "Expertos en Color",
                 subtitle: "Técnica Profesional",
                 alt: "Logo Narbos Salon Colorimetría"
@@ -477,14 +477,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/peluqueria/retoque-de-raiz-tinte.webp',
+                src: 'images/pages/peluqueria/retoque-de-raiz-tinte.webp',
                 title: "Retoque de Raíz",
                 alt: "Mantenimiento impecable de color en raíz"
             },
             {
                 type: 'logo-card',
                 layout: 'square',
-                src: '../../images/brand/logo_narbos.webp',
+                src: 'images/brand/logo_narbos.webp',
                 title: "Salud Capilar",
                 alt: "Cuidado del cabello post-color"
             }
@@ -497,7 +497,7 @@ export const pagesData = Object.freeze({
              {
                 type: 'logo-card',
                 layout: 'vertical',
-                src: '../../images/brand/logo_narbos.webp',
+                src: 'images/brand/logo_narbos.webp',
                 title: "Spa Capilar",
                 subtitle: "Relajación y Salud",
                 alt: "Lavado y masaje capilar profundo"
@@ -505,21 +505,21 @@ export const pagesData = Object.freeze({
             {
                 type: 'logo-card',
                 layout: 'vertical',
-                src: '../../images/brand/logo_narbos.webp',
+                src: 'images/brand/logo_narbos.webp',
                 title: "Nutrición",
                 alt: "Aplicación de tratamiento nutritivo"
             },
             {
                 type: 'logo-card',
                 layout: 'horizontal',
-                src: '../../images/brand/logo_narbos.webp',
+                src: 'images/brand/logo_narbos.webp',
                 title: "Brillo Extremo",
                 alt: "Cabello sano y brillante"
             },
             {
                 type: 'logo-card', 
                 layout: 'horizontal',
-                src: '../../images/brand/logo_narbos.webp', 
+                src: 'images/brand/logo_narbos.webp', 
                 title: "Resultados Visibles",
                 subtitle: "Salud Capilar",
                 alt: "Cabello recuperado tras tratamiento"
@@ -537,7 +537,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '/images/pages/estetica/limpieza-facial-profunda-proceso.webp',
+                src: 'images/pages/estetica/limpieza-facial-profunda-proceso.webp',
                 title: "Limpieza Facial",
                 subtitle: "Procedimiento Profesional",
                 alt: "Limpieza facial profunda realizada por experta"
@@ -545,7 +545,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '/images/pages/estetica/masaje-relajante-profesional-chia.webp',
+                src: 'images/pages/estetica/masaje-relajante-profesional-chia.webp',
                 title: "Masaje Relajante",
                 subtitle: "Relax Total",
                 alt: "Masaje relajante profesional en cabina"
@@ -596,7 +596,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '/images/pages/estetica/alta-frecuencia-facial-narbos.webp',
+                src: 'images/pages/estetica/alta-frecuencia-facial-narbos.webp',
                 title: "Alta Frecuencia",
                 subtitle: "Tecnología Facial",
                 alt: "Tratamiento facial con alta frecuencia"
@@ -604,7 +604,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '/images/pages/estetica/terapia-led-facial-chia.webp',
+                src: 'images/pages/estetica/terapia-led-facial-chia.webp',
                 title: "Terapia LED",
                 subtitle: "Rejuvenecimiento",
                 alt: "Mascarilla LED para tratamiento facial avanzado"
@@ -612,14 +612,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '/images/pages/estetica/limpieza-facial-profunda-proceso.webp',
+                src: 'images/pages/estetica/limpieza-facial-profunda-proceso.webp',
                 title: "Limpieza Profunda",
                 alt: "Proceso de extracción y limpieza facial"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
+                src: 'images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
                 title: "Tecnología Avanzada",
                 subtitle: "Resultados visibles",
                 alt: "Equipos de hidrofacial y microdermoabrasión"
@@ -638,21 +638,21 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '/images/pages/estetica/limpieza-facial-profunda-proceso.webp',
+                src: 'images/pages/estetica/limpieza-facial-profunda-proceso.webp',
                 title: "Higiene Total",
                 alt: "Protocolos de bioseguridad en depilación"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '/images/pages/estetica/spa-hero.webp',
+                src: 'images/pages/estetica/spa-hero.webp',
                 title: "Piel Suave",
                 alt: "Resultado de piel suave post-depilación"
             },
             {
                 type: 'logo-card',
                 layout: 'horizontal',
-                src: '/images/brand/logo_narbos.webp',
+                src: 'images/brand/logo_narbos.webp',
                 title: "Narbo's Estética",
                 alt: "Logo Narbo's Salon"
             }
@@ -670,13 +670,13 @@ export const pagesData = Object.freeze({
              {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/estetica/microblading-cejas-despues.webp',
+                src: 'images/pages/estetica/microblading-cejas-despues.webp',
                 title: "Diseño Microblading",
                 subtitle: "Resultado Final",
                 alt: "Cejas pelo a pelo resultado final",
                 subImages: [
                     {
-                        src: '../../images/pages/estetica/microblading-cejas-antes.webp',
+                        src: 'images/pages/estetica/microblading-cejas-antes.webp',
                         alt: 'Cejas antes del procedimiento'
                     }
                 ]
@@ -684,28 +684,28 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '/images/pages/estetica/masaje-facial-relajante-narbos.webp', // Fallback/Existing image
+                src: 'images/pages/estetica/masaje-facial-relajante-narbos.webp', // Fallback/Existing image
                 title: "Lifting de Pestañas",
                 alt: "Pestañas naturales curvadas"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '/images/pages/estetica/depilacion-hilo-facial-estetica-chia.webp', 
+                src: 'images/pages/estetica/depilacion-hilo-facial-estetica-chia.webp', 
                 title: "Depilación con Hilo",
                 alt: "Técnica milenaria de depilación con hilo para una definición perfecta de cejas"
             },
             {
                 type: 'logo-card',
                 layout: 'logo-filler',
-                src: '/images/brand/logo_narbos.webp',
+                src: 'images/brand/logo_narbos.webp',
                 title: "Narbo's Excellence",
                 alt: "Sello de calidad Narbo's Salon"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/spa-hero.webp',
+                src: 'images/pages/estetica/spa-hero.webp',
                 title: "Mirada Impactante",
                 subtitle: "Belleza Natural",
                 alt: "Cliente satisfecha con diseño de cejas"
@@ -713,7 +713,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'logo-card',
                 layout: 'logo-filler',
-                src: '/images/brand/logo_narbos.webp',
+                src: 'images/brand/logo_narbos.webp',
                 title: "Cuidado Experto",
                 alt: "Branding Narbo's Salon Spa"
             }
@@ -732,7 +732,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '/images/pages/estetica/masaje-facial-relajante-narbos.webp',
+                src: 'images/pages/estetica/masaje-facial-relajante-narbos.webp',
                 title: "Masaje Facial",
                 subtitle: "Relajación Profunda",
                 alt: "Masaje facial relajante en Narbo's"
@@ -740,7 +740,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
+                src: 'images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
                 title: "Alta Frecuencia",
                 subtitle: "Limpieza Profunda",
                 alt: "Limpieza facial con alta frecuencia"
@@ -748,14 +748,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
+                src: 'images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
                 title: "Hidrofacial",
                 alt: "Sesión de hidrofacial profesional"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
+                src: 'images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
                 title: "Mascarilla",
                 subtitle: "Nutrición Intensiva",
                 alt: "Mascarilla facial nutritiva"
@@ -763,14 +763,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/spa-hero.webp',
+                src: 'images/pages/estetica/spa-hero.webp',
                 title: "Ambiente Spa",
                 alt: "Cabina de estética y spa"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
+                src: 'images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
                 title: "Equipos de Vanguardia",
                 subtitle: "Tecnología Estética",
                 alt: "Equipamiento de hidrofacial y estética"
@@ -791,7 +791,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '/images/pages/estetica/masaje-relajante-profesional-chia.webp',
+                src: 'images/pages/estetica/masaje-relajante-profesional-chia.webp',
                 title: "Masaje Profesional",
                 subtitle: "Alivio de Tensión",
                 alt: "Masaje descontracturante y relajante profesional"
@@ -799,7 +799,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '/images/pages/estetica/cabinas-spa-estetica-narbos.webp',
+                src: 'images/pages/estetica/cabinas-spa-estetica-narbos.webp',
                 title: "Nuestras Cabinas",
                 subtitle: "Ambiente Controlado",
                 alt: "Cabinas de spa privadas y relajantes"
@@ -807,7 +807,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
+                src: 'images/pages/estetica/masaje-relajante-piedras-calientes-espalda-chia.webp',
                 title: "Alivio de Tensión",
                 subtitle: "Masaje de Espalda",
                 alt: "Masaje enfocado en espalda con piedras calientes"
@@ -815,14 +815,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/masaje-descontracturante-cuerpo-chia.webp',
+                src: 'images/pages/estetica/masaje-descontracturante-cuerpo-chia.webp',
                 title: "Descontracturante",
                 alt: "Masaje profundo de cuerpo completo"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
+                src: 'images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
                 title: "Moldeamiento",
                 subtitle: "Cuidado Corporal",
                 alt: "Tratamiento corporal estético"
@@ -830,7 +830,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/estetica/masaje_reductor.webp',
+                src: 'images/pages/estetica/masaje_reductor.webp',
                 title: "Técnicas Especializadas",
                 subtitle: "Bienestar Corporal",
                 alt: "Masaje reductor y técnicas de spa"
@@ -844,7 +844,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/unas/manicure-spa.webp',
+                src: 'images/pages/unas/manicure-spa.webp',
                 title: "Manicure Spa",
                 subtitle: "Relajación total",
                 alt: "Servicio de Manicure Spa completo"
@@ -852,7 +852,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'featured-video', // Movidó aquí para encajar con el vertical en móvil (1+1 cols) y escritorio (1+2+1 cols de squares)
-                src: '../../images/pages/unas/unas-acrilicas-tendencia-2026-chia.webp', // Actualizado a la imagen tendencia 2026
+                src: 'images/pages/unas/unas-acrilicas-tendencia-2026-chia.webp', // Actualizado a la imagen tendencia 2026
                 title: "Extensiones & Nail Art",
                 subtitle: "Diseños exclusivos",
                 alt: "Uñas acrílicas y diseños artísticos personalizados"
@@ -860,7 +860,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/pedicure-spa.webp',
+                src: 'images/pages/unas/pedicure-spa.webp',
                 title: "Pedicure Spa",
                 subtitle: "Bienestar para tus pies",
                 alt: "Pedicure Spa con masaje relajante"
@@ -868,14 +868,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/esmaltado-semi.webp',
+                src: 'images/pages/unas/esmaltado-semi.webp',
                 title: "Esmaltado Semipermanente",
                 alt: "Uñas con esmaltado de larga duración"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/unas/disenos-nailart.webp',
+                src: 'images/pages/unas/disenos-nailart.webp',
                 title: "Tendencias Nail Art",
                 subtitle: "Creatividad sin límites",
                 alt: "Variedad de diseños de uñas modernos"
@@ -883,14 +883,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/retiro-semi.webp',
+                src: 'images/pages/unas/retiro-semi.webp',
                 title: "Cuidado de Uñas",
                 alt: "Retiro profesional de esmalte y cuidado"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/diseno-unas-arte-mano-alzada-chia.webp',
+                src: 'images/pages/unas/diseno-unas-arte-mano-alzada-chia.webp',
                 title: "Arte a Mano Alzada",
                 subtitle: "Diseño exclusivo",
                 alt: "Diseño de uñas a mano alzada en Chía"
@@ -902,7 +902,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/unas/manicure-spa.webp',
+                src: 'images/pages/unas/manicure-spa.webp',
                 title: "Manicure Spa",
                 subtitle: "Limpieza profunda",
                 alt: "Servicio de Manicure Spa completo"
@@ -910,7 +910,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'featured-video',
-                src: '../../images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp',
+                src: 'images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp',
                 title: "Nail Art & Diseño",
                 subtitle: "Arte a mano alzada",
                 alt: "Uñas acrílicas y diseños artísticos personalizados"
@@ -918,21 +918,21 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/manicure-ruso-detalle-perfecto-narbos.webp',
+                src: 'images/pages/unas/manicure-ruso-detalle-perfecto-narbos.webp',
                 title: "Manicure Ruso",
                 alt: "Detalle de manicure ruso con acabado impecable"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/manicure-diseno-unas-glitter-elegantes-narbos-salon-spa-chia.webp',
+                src: 'images/pages/unas/manicure-diseno-unas-glitter-elegantes-narbos-salon-spa-chia.webp',
                 title: "Diseño con Glitter",
                 alt: "Uñas decoradas con glitter y destellos"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/unas/disenos-nailart.webp',
+                src: 'images/pages/unas/disenos-nailart.webp',
                 title: "Tendencias 2026",
                 subtitle: "Creatividad extrema",
                 alt: "Variedad de diseños de uñas modernos"
@@ -940,14 +940,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/diseno-unas-arte-mano-alzada-chia.webp',
+                src: 'images/pages/unas/diseno-unas-arte-mano-alzada-chia.webp',
                 title: "Nail Art",
                 alt: "Diseños personalizados hechos a mano"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/esmaltado-semi.webp',
+                src: 'images/pages/unas/esmaltado-semi.webp',
                 title: "Esmaltado Semipermanente",
                 alt: "Uñas con brillo de larga duración"
             }
@@ -958,7 +958,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
-                src: '../../images/pages/unas/manicure-spa.webp',
+                src: 'images/pages/unas/manicure-spa.webp',
                 title: "Manicure Spa",
                 subtitle: "Relajación total",
                 alt: "Sesión de manicure spa relajante"
@@ -966,7 +966,7 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'featured-video',
-                src: '../../images/pages/unas/pedicure-spa-relax-experiencia-chia.webp',
+                src: 'images/pages/unas/pedicure-spa-relax-experiencia-chia.webp',
                 title: "Pedicure Spa",
                 subtitle: "Bienestar para tus pies",
                 alt: "Experiencia completa de pedicure spa"
@@ -974,21 +974,21 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/pedicure-spa.webp',
+                src: 'images/pages/unas/pedicure-spa.webp',
                 title: "Salud y Estética",
                 alt: "Cuidado profesional de pies"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/esmaltado-semi.webp',
+                src: 'images/pages/unas/esmaltado-semi.webp',
                 title: "Brillo Duradero",
                 alt: "Uñas perfectas por 21 días"
             },
             {
                 type: 'image',
                 layout: 'horizontal',
-                src: '../../images/pages/unas/manicura-perfecta-tono-vino-elegante-narbos-salon-spa-chia.webp',
+                src: 'images/pages/unas/manicura-perfecta-tono-vino-elegante-narbos-salon-spa-chia.webp',
                 title: "Clásicos Elegantes",
                 subtitle: "Tono vino profundo",
                 alt: "Manicura elegante en color vino"
@@ -996,14 +996,14 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/retiro-semi.webp',
+                src: 'images/pages/unas/retiro-semi.webp',
                 title: "Cuidado Técnico",
                 alt: "Retiro seguro de semipermanente"
             },
             {
                 type: 'image',
                 layout: 'square',
-                src: '../../images/pages/unas/manicure-diseno-premium-narbos-salon-spa-chia-cundinamarca-belleza-integral.webp',
+                src: 'images/pages/unas/manicure-diseno-premium-narbos-salon-spa-chia-cundinamarca-belleza-integral.webp',
                 title: "Belleza Integral",
                 alt: "Detalle de manicura de alta calidad"
             }
