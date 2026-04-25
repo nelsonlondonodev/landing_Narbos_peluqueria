@@ -114,7 +114,8 @@ const buildJS = async () => {
         path.join(SRC_DIR, 'js/main.js'),
         path.join(SRC_DIR, 'js/service-page.js'),
         path.join(SRC_DIR, 'js/hair-page.js'),
-        path.join(SRC_DIR, 'js/nails-page.js')
+        path.join(SRC_DIR, 'js/nails-page.js'),
+        path.join(SRC_DIR, 'js/makeup-page.js')
     ];
 
     try {

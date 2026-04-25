@@ -10,7 +10,7 @@ import { hairSalonServices } from '../js/data/hairSalonServices.js';
 import { getNavbarHTML } from '../js/components/Navbar.js';
 import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
-import { resolveRoute } from '../js/config.js';
+import { resolveRoute, resolveAsset } from '../js/config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

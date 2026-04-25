@@ -56,6 +56,12 @@ function initMakeupServicesGrid() {
     const gridContainer = document.getElementById('makeup-services-grid');
     if (!gridContainer) return;
     
+    // INTELLIGENT HYDRATION: Si el SSG ya inyectó contenido, no lo sobreescribimos.
+    if (gridContainer.children.length > 0) {
+        console.log("✅ [MakeupPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
+        return;
+    }
+
     gridContainer.innerHTML = '';
 
     const serviceModal = new ServiceModal(makeupServices);
@@ -99,9 +105,9 @@ function createServiceCard(service, modalInstance) {
     const cardElement = new ServiceCard({
         title: service.title,
         description: service.description,
-        image: service.image,
+        image: window.narbosApp.resolvePath(service.image),
         price: service.price,
-        link: service.link || '#',
+        link: window.narbosApp.resolvePath(service.link || '#'),
         variant: service.variant || 'standard',
         modalId: isModal ? 'service-modal' : null
     }).render();
@@ -136,9 +142,16 @@ function initGallery() {
 
     const galleryData = pagesData['maquillaje']?.gallery;
     if (galleryData) {
-        galleryRoot.innerHTML = getBentoGridHTML(galleryData);
-        // La librería GLightbox suele auto-inicializarse o requiere ser llamada si se carga defer,
-        // pero verificamos si existe.
+        // Hydration check for gallery
+        if (galleryRoot.children.length > 0) return;
+
+        const processedGallery = galleryData.map(item => ({
+            ...item,
+            src: window.narbosApp.resolvePath(item.src)
+        }));
+
+        galleryRoot.innerHTML = getBentoGridHTML(processedGallery);
+        
         if (typeof GLightbox !== 'undefined') {
             GLightbox({ selector: '.glightbox', touchNavigation: true, loop: true });
         }
