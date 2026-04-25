@@ -69,6 +69,14 @@ function injectBaseLayout(document, prefix, isHome = false) {
 }
 
 /**
+ * Elimina etiquetas HTML de un string.
+ */
+function stripHtml(html) {
+    if (!html) return '';
+    return html.replace(/<[^>]*>?/gm, '');
+}
+
+/**
  * Inyecta Metadatos SEO (Title, Meta Description, Canonical)
  */
 async function injectSEO(document, pageKey, pagePath) {
@@ -81,9 +89,9 @@ async function injectSEO(document, pageKey, pagePath) {
     // 1. Title
     const titleTag = document.querySelector('title') || document.createElement('title');
     if (config.metaTitle) {
-        titleTag.textContent = config.metaTitle;
+        titleTag.textContent = stripHtml(config.metaTitle);
     } else if (config.hero?.title) {
-        titleTag.textContent = `${config.hero.title} | Narbo's Salón`;
+        titleTag.textContent = `${stripHtml(config.hero.title)} | Narbo's Salón`;
     }
     if (!titleTag.parentNode) document.head.appendChild(titleTag);
 
@@ -95,9 +103,9 @@ async function injectSEO(document, pageKey, pagePath) {
         document.head.appendChild(metaDesc);
     }
     if (config.metaDescription) {
-        metaDesc.content = config.metaDescription;
+        metaDesc.content = stripHtml(config.metaDescription);
     } else if (config.hero?.subtitle) {
-        metaDesc.content = config.hero.subtitle;
+        metaDesc.content = stripHtml(config.hero.subtitle);
     }
 
     // 3. Canonical Tag (Clean URLs)
