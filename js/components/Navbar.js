@@ -17,7 +17,7 @@ import { resolveAsset, resolveRoute } from '../config.js'; // Import helper
 export function getNavbarHTML(basePath = './', isHome = true) {
     // Si no estamos en home, los anclas (#) deben redirigir a /
     const linkPrefix = isHome ? '' : `${basePath}`;
-    const menuCategories = getMenuCategories(basePath);
+    const menuCategories = getMenuCategories();
     const navLink = createNavLinkHelper(linkPrefix, basePath);
 
     return `

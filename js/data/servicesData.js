@@ -21,7 +21,7 @@ export const servicesData = Object.freeze([
         description: "Expertos en color, balayage, cortes, keratinas y tratamientos capilares con las mejores marcas profesionales.",
         i18nDesc: "service.hair.desc",
         icon: '<path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>',
-        link: "/servicios/peluqueria/",
+        link: "servicios/peluqueria/",
         image: "images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
         animationDelay: "0s"
     },
@@ -31,7 +31,7 @@ export const servicesData = Object.freeze([
         description: "Manicure y pedicure spa, esmaltado semipermanente, uñas en gel y acrílicas con diseños exclusivos.",
         i18nDesc: "service.nails.desc",
         icon: '<path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/>',
-        link: "/servicios/unas-spa/",
+        link: "servicios/unas-spa/",
         image: "images/pages/unas/manicure-spa.webp",
         animationDelay: "0.2s"
     },
@@ -41,8 +41,8 @@ export const servicesData = Object.freeze([
         description: "Faciales profundos, masajes relajantes, drenaje linfático y tratamientos corporales de bienestar.",
         i18nDesc: "service.spa.desc",
         icon: '<path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m3 4.5a4.5 4.5 0 1 0 4.5-4.5M12 16.5V15m4.5-3H15"/>',
-        link: "/servicios/estetica/",
-        image: "/images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
+        link: "servicios/estetica/",
+        image: "images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
         animationDelay: "0.4s"
     },
     {
@@ -51,7 +51,7 @@ export const servicesData = Object.freeze([
         description: "Maquillaje profesional para toda ocasión: novias, social, editorial y quinceañeras en Chía.",
         i18nDesc: "service.makeup.desc",
         icon: '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>',
-        link: "/servicios/maquillaje/",
+        link: "servicios/maquillaje/",
         image: "images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
         animationDelay: "0.5s"
     },
@@ -61,7 +61,7 @@ export const servicesData = Object.freeze([
         description: "Cortes clásicos y modernos, arreglo de barba, ritual de toalla caliente y cuidado masculino.",
         i18nDesc: "service.barber.desc",
         icon: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M7 8l10 5M7 13l10 5M7 18l6 3M11 3l6 3"/>',
-        link: "/servicios/barberia/",
+        link: "servicios/barberia/",
         image: "images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp",
         animationDelay: "0.6s"
     }

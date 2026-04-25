@@ -16,47 +16,47 @@
  * @param {string} basePath - Ruta base para los assets y enlaces.
  * @returns {MenuCategory[]} Array de categorías y sus items.
  */
-export const getMenuCategories = (basePath = './') => [
+export const getMenuCategories = () => [
     {
         title: "Peluquería",
-        link: `${basePath}servicios/peluqueria/`,
+        link: "servicios/peluqueria/",
         items: [
-            { label: "Corte Dama", link: `${basePath}servicios/peluqueria/cortes-de-pelo` },
-            { label: "Balayage y Mechas", link: `${basePath}servicios/peluqueria/balayage-mechas` },
-            { label: "Color y Tinturas", link: `${basePath}servicios/peluqueria/color-tinturas-cabello` },
-            { label: "Tratamientos", link: `${basePath}servicios/peluqueria/tratamientos-capilares` }
+            { label: "Corte Dama", link: "servicios/peluqueria/cortes-de-pelo" },
+            { label: "Balayage y Mechas", link: "servicios/peluqueria/balayage-mechas" },
+            { label: "Color y Tinturas", link: "servicios/peluqueria/color-tinturas-cabello" },
+            { label: "Tratamientos", link: "servicios/peluqueria/tratamientos-capilares" }
         ]
     },
     {
         title: "Uñas",
-        link: `${basePath}servicios/unas-spa/`,
+        link: "servicios/unas-spa/",
         items: [
-            { label: "Acrílicas y Gel", link: `${basePath}servicios/unas-spa/unas-acrilicas-gel` },
-            { label: "Manicure y Pedicure", link: `${basePath}servicios/unas-spa/manicure-pedicure` }
+            { label: "Acrílicas y Gel", link: "servicios/unas-spa/unas-acrilicas-gel" },
+            { label: "Manicure y Pedicure", link: "servicios/unas-spa/manicure-pedicure" }
         ]
     },
     {
         title: "Estética",
-        link: `${basePath}servicios/estetica/`,
+        link: "servicios/estetica/",
         items: [
-            { label: "Spa Facial", link: `${basePath}servicios/estetica/spa-facial-integral` },
-            { label: "Masajes Relajantes", link: `${basePath}servicios/estetica/masajes-relajantes` },
-            { label: "Cejas y Pestañas", link: `${basePath}servicios/estetica/cejas-y-pestanas` },
-            { label: "Depilación Corporal", link: `${basePath}servicios/estetica/depilacion-corporal` }
+            { label: "Spa Facial", link: "servicios/estetica/spa-facial-integral" },
+            { label: "Masajes Relajantes", link: "servicios/estetica/masajes-relajantes" },
+            { label: "Cejas y Pestañas", link: "servicios/estetica/cejas-y-pestanas" },
+            { label: "Depilación Corporal", link: "servicios/estetica/depilacion-corporal" }
         ]
     },
     {
         title: "Maquillaje",
-        link: `${basePath}servicios/maquillaje/`,
+        link: "servicios/maquillaje/",
         items: [
-            { label: "Todo en Maquillaje", link: `${basePath}servicios/maquillaje/` }
+            { label: "Todo en Maquillaje", link: "servicios/maquillaje/" }
         ]
     },
     {
         title: "Barbería",
-        link: `${basePath}servicios/barberia/`,
+        link: "servicios/barberia/",
         items: [
-            { label: "Corte y Barba", link: `${basePath}servicios/barberia/barberia-cortes-hombre` }
+            { label: "Corte y Barba", link: "servicios/barberia/barberia-cortes-hombre" }
         ]
     }
 ];

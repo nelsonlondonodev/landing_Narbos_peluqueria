@@ -37,7 +37,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Maquillaje profesional <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Realza tu belleza natural para tu evento perfecto.",
-            imageSrc: "../../images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
+            imageSrc: "images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
             imageAlt: "Maquillaje profesional en Narbo's Salon Spa"
         },
         gallery: [
@@ -132,7 +132,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Peluquería en Chía: expertos en estilo, color <span class=\"text-brand-green\">y bienestar</span>",
             subtitle: "Expertos en realzar tu belleza con técnicas de vanguardia y productos de clase mundial.",
-            imageSrc: "../../images/pages/peluqueria/hair-hero.webp",
+            imageSrc: "images/pages/peluqueria/hair-hero.webp",
             imageAlt: "Servicio de peluquería profesional en Narbo's"
         },
         gallery: [
@@ -280,7 +280,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Cortes de pelo en Chía: Estilo y <span class=\"text-brand-green\">Tendencia</span>",
             subtitle: "Diseños personalizados realizados por expertos para realzar tu estilo único.",
-            imageSrc: "../../images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp",
+            imageSrc: "images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp",
             imageAlt: "Corte de pelo profesional realizado en Narbo's Salon Spa"
         },
         gallery: [
@@ -327,7 +327,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Balayage y Mechas en Chía: Expertos en <span class=\"text-brand-green\">Iluminación</span>",
             subtitle: "Técnicas avanzadas de aclaración, babylights y contornos para un rubio espectacular.",
-            imageSrc: "../../images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
+            imageSrc: "images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
             imageAlt: "Diseño de balayage profesional en Narbo's Salon"
         },
         metaTitle: "Balayage y Mechas en Chía | Especialistas en Rubios | Narbo's",
@@ -444,7 +444,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Color y Tinturas en Chía: Cobertura y <span class=\"text-brand-green\">Brillo</span>",
             subtitle: "Expertos en color global, retoque de raíz y cubrimiento total de canas con marcas premium.",
-            imageSrc: "../../images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp",
+            imageSrc: "images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp",
             imageAlt: "Servicio de coloración profesional en Narbo's"
         },
         metaTitle: "Coloración y Tinturas en Chía | Cubrimiento de Canas | Narbo's",
@@ -530,7 +530,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Estética y Spa <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.",
-            imageSrc: "/images/pages/estetica/cabinas-spa-estetica-narbos.webp",
+            imageSrc: "images/pages/estetica/cabinas-spa-estetica-narbos.webp",
             imageAlt: "Cabinas profesionales de spa y estética en Narbo's"
         },
         gallery: [
@@ -587,7 +587,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Limpieza Facial Profunda <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Elimina impurezas, puntos negros y toxinas con tecnología de alta frecuencia.",
-            imageSrc: "../../images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
+            imageSrc: "images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
             imageAlt: "Limpieza de cutis profunda en Chía"
         },
         metaTitle: "Limpieza Facial Profunda en Chía | Extracción e Impurezas | Narbo's",
@@ -723,7 +723,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Spa Facial Integral: Rejuvenecimiento y <span class=\"text-brand-green\">Relax</span>",
             subtitle: "Rituales de bienestar para tu rostro que combinan nutrición profunda y máxima relajación.",
-            imageSrc: "/images/pages/estetica/masaje-facial-relajante-narbos.webp",
+            imageSrc: "images/pages/estetica/masaje-facial-relajante-narbos.webp",
             imageAlt: "Spa facial integral y masajes relajantes en Chía"
         },
         metaTitle: "Spa Facial Integral en Chía | Rejuvenecimiento y Bienestar | Narbo's",
@@ -782,7 +782,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Masajes Relajantes <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Desconecta del mundo y reconecta contigo mismo. Una experiencia sensorial única para cuerpo y mente.",
-            imageSrc: "../../images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp",
+            imageSrc: "images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp",
             imageAlt: "Masajes Relajantes con piedras calientes en Chía"
         },
         metaTitle: "Masajes Relajantes en Chía | Piedras Calientes y Relax | Narbo's",
@@ -1013,7 +1013,7 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Barbería y Estilismo <span class=\"text-brand-green\">Masculino</span>",
             subtitle: "Cortes modernos, barbas impecables y un ambiente diseñado para ti.",
-            imageSrc: "../../images/pages/barberia/corte-hombre-fade-moderno.webp",
+            imageSrc: "images/pages/barberia/corte-hombre-fade-moderno.webp",
             imageAlt: "Corte de cabello masculino profesional en Narbo's"
         },
         gallery: [

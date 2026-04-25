@@ -10,6 +10,7 @@ import { hairSalonServices } from '../js/data/hairSalonServices.js';
 import { getNavbarHTML } from '../js/components/Navbar.js';
 import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
+import { resolveRoute } from '../js/config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -180,7 +181,7 @@ async function injectServices(document, pageKey, prefix) {
         servicesSource.forEach(data => {
             const processedData = {
                 ...data,
-                link: data.link.startsWith('http') ? data.link : prefix + data.link.replace(/^\//, ''),
+                link: resolveRoute(data.link, prefix),
                 image: data.image.startsWith('http') ? data.image : prefix + data.image.replace(/^\//, '')
             };
             const card = new ServiceCard(processedData);
@@ -209,7 +210,7 @@ async function injectArticles(document, pageKey, prefix) {
         sortedArticles.forEach(data => {
             const processedData = {
                 ...data,
-                link: data.link.startsWith('http') ? data.link : prefix + data.link.replace(/^\//, ''),
+                link: resolveRoute(data.link, prefix),
                 image: data.image.startsWith('http') ? data.image : prefix + data.image.replace(/^\//, '')
             };
             const card = new ArticleCard(processedData);
