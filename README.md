@@ -36,6 +36,24 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Stabilization of Dist Folder & SEO Hydration Fixes (April 25, 2026) - v2.6.4 🚀
+
+### 1. Smart Hydration & Image Resolution Fix (Makeup Hub) ⚡
+*   **The Problem:** Service pages (especially Makeup) suffered from broken image paths (404) because client-side scripts were "sabotaging" the perfect SSG content. The JS was wiping the static HTML and re-injecting cards with incorrect relative paths.
+*   **Smart Hydration Logic:** Implemented a detection mechanism in `makeup-page.js`, `hair-page.js`, and `nails-page.js`. Scripts now identify if the SSG already rendered the services and skip the destructive re-injection, preventing flickering and broken images.
+*   **Path Standardization:** Forced all dynamic rendering to use `window.narbosApp.resolvePath()`. Cleaned up `pagesData.js` and service data files by removing hardcoded `../../` prefixes, centralizing path logic in the core configuration.
+
+### 2. SEO Meta-Data Cleanup & SSG Integrity 🔍
+*   **HTML Title Stripping:** Fixed a visual artifact where `<span>` tags (used for green highlights in Hero titles) were appearing literally in browser tabs. Implemented a `stripHtml` helper in `ssg.js` to ensure `<title>` and `meta description` tags contain only pure text.
+*   **SSG Pathing:** Standardized the use of `resolveAsset` and `resolveRoute` within the SSG engine, ensuring all internal links and assets are correctly mapped regardless of the directory depth.
+
+### 3. Build Pipeline & Cache Busting (v2.6.4) 🛠️
+*   **EntryPoints Sync:** Included `makeup-page.js` in the official `build.js` entry points to ensure it receives a unique hash and timestamp versioning.
+*   **Global Version Bump:** Synchronized the project to **v2.6.4** and executed a full production build (`npm run build`) to stabilize the `dist` folder with 100% parity to root files.
+*   **Result:** 0 Console errors, 100% path resolution, and pixel-perfect SEO titles.
+
+---
+
 ## 🔄 Performance & SEO Optimization (April 20, 2026) - LCP & TBT Surgical Fixes for Spa Hubs 🚀
 
 ### 1. Static HTML Injection for LCP Recovery (Uñas & Estética) ⚡
