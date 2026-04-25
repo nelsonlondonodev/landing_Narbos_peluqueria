@@ -1,6 +1,6 @@
-Narbo's Salón Spa - Sitio Web Oficial
+Narbo's Salón Spa - Web Oficial
 
-Este repositorio contiene el código fuente de la Plataforma Web Oficial de Narbo's Salón Spa, un sitio web robusto, escalable y totalmente responsivo, diseñado para ofrecer una experiencia de usuario premium y gestionar servicios avanzados.
+Este repositorio contiene el código fuente de la Plataforma Web Integral de Narbo's Salón Spa, un ecosistema web robusto, escalable y totalmente responsivo, diseñado para ofrecer una experiencia de usuario premium y gestionar servicios avanzados.
 
 Ver Demo en Vivo (https://narbossalon.com/)
 
@@ -35,6 +35,45 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 3. Etiquetas Canonicals: Todas las páginas deben incluir una etiqueta <link rel="canonical" href="https://narbossalon.com/..."> que coincida exactamente con la URL final sin www.
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
+
+## 🔄 Refactorización Profunda de Rutas y Preparación para Optimización CSS (April 25, 2026) - v2.6.5 🚀
+
+### 1. Resolución de Rutas Universal (resolveDeep) 🛠️
+*   **El Problema:** Los posters de video y sub-imágenes en las galerías Bento (especialmente en el Hub de Peluquería) fallaban con error 404 debido a que solo se resolvía la ruta principal `src`.
+*   **Solución Quirúrgica:** Se implementó el método `window.narbosApp.resolveDeep(item)` en `App.js`. Este método escanea recursivamente el objeto del ítem y corrige las rutas de `src`, `poster` y `subImages` de forma automática.
+*   **Refactorización Unificada:** Se actualizaron todos los controladores de Hubs (`Hair`, `Esthetics`, `Barber`, `Nails`) y las páginas individuales (`hair-page.js`, `makeup-page.js`, `nails-page.js` y `service-page.js`) para usar este nuevo estándar, eliminando código redundante y parches locales.
+
+### 2. Estabilización de la Sección de Marcas (Brands) 🎨
+*   **Corrección de Duplicidad:** Se identificó un bug donde el carrusel de marcas se duplicaba masivamente en el DOM. Se restauraron los estilos críticos en `input.css` y se optimizó `BrandsSection.js` para limitar las repeticiones a lo estrictamente necesario para el efecto infinito.
+*   **Sincronización de Estilos:** Se recuperaron las clases de Tailwind v4 para el `brands-slider` que se habían perdido en refactorizaciones previas, devolviendo la fluidez visual a la sección.
+
+### 3. Próximos Pasos: Plan "Zero-Warning CSS" (Pendiente de Ejecución) 🛡️
+*   **Análisis de Advertencias:** Se detectaron 31 warnings en `input.css` relacionados con prefijos redundantes, selectores complejos con `@apply` y colisiones en el `@theme`.
+*   **Plan de Acción Robusto:**
+    *   **Fase 1:** Normalización del Bloque `@theme` para evitar colisiones de variables con el sistema de Tailwind v4.
+    *   **Fase 2:** Eliminación de prefijos de proveedor manuales (dejando que Lightning CSS gestione la compatibilidad).
+    *   **Fase 3:** Desacoplamiento de `@apply` en selectores de alta profundidad para mejorar la velocidad de compilación.
+    *   **Fase 4:** Saneamiento de animaciones y keyframes para una perfecta integración con el motor de utilidades.
+
+---
+
+## 🔄 Stabilization of Dist Folder & SEO Hydration Fixes (April 25, 2026) - v2.6.4 🚀
+
+### 1. Smart Hydration & Image Resolution Fix (Makeup Hub) ⚡
+*   **The Problem:** Service pages (especially Makeup) suffered from broken image paths (404) because client-side scripts were "sabotaging" the perfect SSG content. The JS was wiping the static HTML and re-injecting cards with incorrect relative paths.
+*   **Smart Hydration Logic:** Implemented a detection mechanism in `makeup-page.js`, `hair-page.js`, and `nails-page.js`. Scripts now identify if the SSG already rendered the services and skip the destructive re-injection, preventing flickering and broken images.
+*   **Path Standardization:** Forced all dynamic rendering to use `window.narbosApp.resolvePath()`. Cleaned up `pagesData.js` and service data files by removing hardcoded `../../` prefixes, centralizing path logic in the core configuration.
+
+### 2. SEO Meta-Data Cleanup & SSG Integrity 🔍
+*   **HTML Title Stripping:** Fixed a visual artifact where `<span>` tags (used for green highlights in Hero titles) were appearing literally in browser tabs. Implemented a `stripHtml` helper in `ssg.js` to ensure `<title>` and `meta description` tags contain only pure text.
+*   **SSG Pathing:** Standardized the use of `resolveAsset` and `resolveRoute` within the SSG engine, ensuring all internal links and assets are correctly mapped regardless of the directory depth.
+
+### 3. Build Pipeline & Cache Busting (v2.6.4) 🛠️
+*   **EntryPoints Sync:** Included `makeup-page.js` in the official `build.js` entry points to ensure it receives a unique hash and timestamp versioning.
+*   **Global Version Bump:** Synchronized the project to **v2.6.4** and executed a full production build (`npm run build`) to stabilize the `dist` folder with 100% parity to root files.
+*   **Result:** 0 Console errors, 100% path resolution, and pixel-perfect SEO titles.
+
+---
 
 ## 🔄 Performance & SEO Optimization (April 20, 2026) - LCP & TBT Surgical Fixes for Spa Hubs 🚀
 
@@ -324,7 +363,7 @@ Para llevar a Narbo's Salón Spa al siguiente nivel de conversión y eficiencia,
 ## 🔄 Recent Updates (March 26, 2026) - Loyalty Program Enhancement 🎁
 
 ### 1. Retention Strategy Update (15% Discount)
-*   **Discount Increase:** Professionally updated the loyalty landing page (`/fidelizacion/`) to reflect a **15% welcome discount** (previously 10%).
+*   **Discount Increase:** Professionally updated the loyalty portal (`/fidelizacion/`) to reflect a **15% welcome discount** (previously 10%).
 *   **Policy Clarification:** Integrated a mandatory service exception for **Hair Removal (Depilación)** into all UI touchpoints (Benefit cards, Success messages, and QR modals) to ensure consistency with automated email workflows.
 *   **iOS & Apple Cache Integrity:** Implemented a targeted **Cache Buster (v=3.1)** on the loyalty stylesheet to force immediate updates on iPhones and iPads, which often retain legacy CSS.
 *   **Production Deployment:** Executed a full production build (`npm run build`) and synchronized `develop` with `main` to push the 15% offer live.
@@ -557,7 +596,7 @@ Batch scripts modifying HTML must use surgical `sed` patterns scoped to the exac
 *   **Problem:** Modifying visible HTML FAQ content without updating the underlying structured data can lead to search engine confusion, rich result loss, or "Missing field" errors in Search Console. Some pages were completely lacking this schema.
 *   **Solution:** 
     *   Updated the existing `@type: FAQPage` JSON-LD script in `unas-acrilicas-gel.html` to mirror the exact wording (including commas and periods) of the new *polygel* content.
-    *   Injected completely new, highly detailed `@type: FAQPage` structured data scripts into `index.html` (Landing), `servicios/peluqueria/index.html`, and `servicios/unas-spa/index.html`. This ensures Google's bots perfectly digest our new LSI and local keywords, maximizing our chances for rich snippets in the SERPs without risk of cloaking penalties.
+    *   Injected completely new, highly detailed `@type: FAQPage` structured data scripts into `index.html` (Home), `servicios/peluqueria/index.html`, and `servicios/unas-spa/index.html`. This ensures Google's bots perfectly digest our new LSI and local keywords, maximizing our chances for rich snippets in the SERPs without risk of cloaking penalties.
 
 ## 🔄 Recent Updates (February 23, 2026)
 
@@ -1078,7 +1117,7 @@ Para garantizar la estabilidad visual y el correcto funcionamiento del menú mó
 
 ### 📝 Últimas Actualizaciones (7 de enero, 2026)
 - **Estrategia SEO Local & Arquitectura:**
-    - **Landing Pages Dedicadas:** Se crearon 7 páginas estáticas optimizadas para SEO local (ej: `cortes-de-pelo-en-chia.html`) con H1s únicos y contenido semántico, viviendo en la raíz para URLs limpias.
+    - **Páginas de Servicio Especializadas:** Se crearon 7 páginas estáticas optimizadas para SEO local (ej: `cortes-de-pelo-en-chia.html`) con H1s únicos y contenido semántico, viviendo en la raíz para URLs limpias.
     - **Inyección SSG Global:** Se actualizó `scripts/ssg.js` para pre-renderizar componentes dinámicos (`ServiceCard`) en *todas* las páginas de servicio durante el build, mejorando el Core Web Vitals (LCP).
 - **Estabilidad de Navegación:**
     - **Rutas Absolutas:** Se migraron todos los enlaces internos (`js/data/*.js`) a formato absoluto (`/ruta...`). Esto soluciona definitivamente los errores 404 al navegar entre niveles de carpetas (`root` vs `peluqueria/` vs `servicios/`).
@@ -1111,7 +1150,7 @@ Para garantizar la estabilidad visual y el correcto funcionamiento del menú mó
     - **Configuración de Servidor Avanzada:** Optimización de `.htaccess` con compresión Gzip y políticas de caché de 1 año para activos estáticos.
 
 ### 🔮 Roadmap & Transición 2026 (Enero)
-- **Arquitectura Multi-Página:** El proyecto ha evolucionado de una Landing Page única a una arquitectura web robusta con URLs dedicadas para cada servicio (ej: `/servicios/peluqueria.html`), Blog y Fidelización.
+- **Arquitectura Multi-Página:** El proyecto ha completado su transición de una Landing Page inicial a una arquitectura web robusta con URLs dedicadas para cada servicio (ej: `/servicios/peluqueria/`), Blog y un ecosistema de Fidelización automatizado.
 - **Actualización de Stack:** Se ha programado la actualización de **Tailwind CSS a la versión v4.x** para enero de 2026.
     - *Nota:* Se ha **congelado** la refactorización profunda de CSS (safelist/config) hasta esa fecha para garantizar la estabilidad del sitio durante la temporada de fin de año.
 

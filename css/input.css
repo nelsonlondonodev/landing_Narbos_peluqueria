@@ -1,775 +1,148 @@
 @import "tailwindcss";
-/* Force Recompile: 2026-02-11 T10:50 */
+@source "../index.html";
+@source "../js/**/*.js";
+@source "../servicios/**/*.html";
+@source "../blog/**/*.html";
+@source "../_templates/**/*.html";
 
-/* purgecss start ignore */
 @theme {
+  /* Brand Colors */
   --color-brand-green: #6B755A;
   --color-brand-light: #DED2C4;
   --color-brand-medium: #C5AB94;
   --color-brand-gray-light: #BEC2B4;
   --color-brand-gray-lighter: #D3D3CB;
   --color-brand-gray-dark: #364041;
+  --color-brand-red: #8B0000;
+
+  /* Typography */
   --font-serif: "Playfair Display", serif;
   --font-sans: "Montserrat", sans-serif;
-}
 
-/* Establece el comportamiento de scroll suave para toda la página */
-.smooth-scroll {
-  scroll-behavior: smooth;
-}
+  /* Radius Overrides */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
 
-/* Establece las fuentes base para el cuerpo del documento */
-@layer base {
-  :root {
-    --color-text-base: #1f2937; /* gray-800 */
+  /* Custom Animations */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
-}
-
-body {
-  font-family: "Montserrat", sans-serif;
-  background-color: #ffffff;
-  color: #1f2937;
-  /* LCP Optimization: Content visible by default. No global fade-in. */
-}
-
-/* page-is-loaded removed to avoid LCP delay. Body is visible by default. */
-
-/* Estado salida: Se añade al hacer clic en un link */
-body.page-is-exiting {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-/* purgecss end ignore */
-
-/* La transición de salida se maneja vía JS en PageTransitionController.js */
-
-/* Estilos para los títulos para aplicar la fuente serif */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Playfair Display", serif;
-}
-
-/* --- INICIO: NUEVOS ESTILOS PARA NAVEGACIÓN ACTIVA --- */
-
-/*
-  Añadimos una transición para la propiedad 'transform' a los enlaces del menú.
-  Esto asegura que el efecto de escala que vamos a añadir sea suave y no brusco.
-  Complementa las clases de transición que ya estaban en el HTML.
-*/
-.site-header nav .desktop-menu a {
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-/*
-  Esta es la clase que nuestro JavaScript añade dinámicamente.
-  Define el estilo del enlace de navegación cuando su sección correspondiente está activa.
-  Le damos el color de la marca, lo ponemos en negrita y lo hacemos un poco más grande.
-*/
-.nav-link-active {
-  color: #FFFFFF; /* Blanco para máximo contraste */
-  font-weight: 700; /* Corresponde a 'font-bold' */
-  transform: scale(1.1);
-}
-
-/* --- FIN: NUEVOS ESTILOS PARA NAVEGACIÓN ACTIVA --- */
-
-/* --- INICIO: ESTILOS PARA SLIDER DE RESEÑAS --- */
-
-/*
-  Añade una transición suave a las reseñas para que
-  aparezcan y desaparezcan con un efecto de fundido.
-*/
-.review-slide {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* --- FIN: ESTILOS PARA SLIDER DE RESEÑAS --- */
-
-/* --- INICIO: ESTILOS PARA MENÚ MÓVIL OVERLAY --- */
-/*
-  Cuando el menú móvil está abierto, añadimos esta clase al <body>
-  con JavaScript para prevenir el scroll del contenido de fondo.
-  Esto proporciona un bloqueo de scroll más robusto.
-*/
-body.mobile-menu-open {
-  overflow: auto;
-}
-/* --- FIN: ESTILOS PARA MENÚ MÓVIL OVERLAY --- */
-
-/* purgecss start ignore */
-/* --- INICIO: ESTILOS PARA HEADER DINÁMICO Y NAVEGACIÓN --- */
-
-/* 
-  Estilos base estandarizados para el Site Header.
-  Forzamos la barra a una altura constante para evitar problemas con las migas de pan.
-  Alto fijo: 90px en móvil, 110px en escritorio.
-*/
-.site-header {
-  @apply bg-brand-green backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md transition-transform duration-300;
   
-  /* Mantener transiciones de color, pero el tamaño ya no cambia */
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-  height: 90px;
-  display: flex;
-  align-items: center;
+  @keyframes heroFadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 1.5rem)); }
+  }
+
+  --animate-fade-in: fade-in 0.5s ease-in-out;
+  --animate-hero-up: heroFadeInUp 0.8s ease-out forwards;
+  --animate-marquee: marquee-scroll 40s linear infinite;
 }
 
-@media (min-width: 768px) {
-  .site-header {
-    height: 110px;
+@layer base {
+  body {
+    @apply font-sans bg-white text-gray-800 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
   }
 }
 
-/*
-  Estilos para el header cuando el usuario hace scroll.
-  Solo cambia el color de fondo a uno más sólido.
-*/
-.site-header.header-scrolled {
-  background-color: rgba(107, 117, 90, 0.98); /* brand-green más sólido */
+/* --- Global Utilities --- */
+.smooth-scroll { scroll-behavior: smooth; }
+
+.page-is-exiting {
+    @apply opacity-0 transition-opacity duration-300 ease-in-out;
 }
 
-/* 
-  (Eliminado: Ya no se reduce la altura ni el padding del nav al hacer scroll)
-*/
-/* purgecss end ignore */
-
-/* 
-  Fix crítico para el contenedor del Navbar.
-  Garantiza el centrado vertical inclusive antes de que JS inyecte el contenido.
-*/
-#navbar-root {
-  @apply flex items-center justify-center w-full min-h-[80px];
+/* --- Navigation --- */
+.nav-link-active {
+  @apply text-white font-bold scale-110;
 }
 
-/* 
-  Reserva espacio para el breadcrumb antes de que JS lo hidrate.
-  Evita CLS (salto de layout) cuando las migas de pan aparecen.
-  Equivalente al min-height de #navbar-root.
-*/
-#breadcrumbs-root {
-  min-height: 40px;
-}
-
-/* 
-  Compensa el header fixed para todo el contenido de la página.
-  Esta es la ÚNICA fuente de verdad para el offset del header.
-  Elimina la necesidad de mt- manual en Breadcrumbs o secciones Hero.
-*/
-#app-wrapper {
-  padding-top: 90px;
-}
-
-@media (min-width: 768px) {
-  #app-wrapper {
-    padding-top: 110px;
-  }
-}
-
-/* 
-  Estilos para el logo dentro del header eliminados para hacerlo estático.
-*/
-
-/*
-  Preparamos los enlaces de navegación para el efecto de la línea animada.
-  El pseudo-elemento ::after será nuestra línea.
-*/
 .site-header nav .desktop-menu a {
-  position: relative;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  @apply relative no-underline transition-all duration-300;
 }
 
 .site-header nav .desktop-menu a::after {
   content: '';
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: #FFFFFF; /* Blanco para máximo contraste */
-  transform: scaleX(0);
-  transform-origin: bottom right;
-  transition: transform 0.3s ease-out;
+  @apply absolute w-full h-[2px] -bottom-1 left-0 bg-white scale-x-0 origin-bottom-right transition-transform duration-300 ease-out;
 }
 
-/*
-  Al pasar el cursor sobre el enlace, la línea aparece animándose desde la derecha.
-*/
-.site-header nav .desktop-menu a:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-}
-
-/* 
-  Para el enlace activo, la línea siempre será visible.
-*/
+.site-header nav .desktop-menu a:hover::after,
 .site-header nav .desktop-menu a.nav-link-active::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
+  @apply scale-x-100 origin-bottom-left;
 }
 
+/* --- Mobile Menu --- */
+.mobile-menu-open {
+  @apply overflow-hidden;
+}
 
-/* --- FIN: ESTILOS PARA HEADER DINÁMICO Y NAVEGACIÓN --- */
+/* --- Layout Components --- */
+.site-header {
+  @apply bg-brand-green backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md h-[90px] md:h-[110px] flex items-center transition-all duration-300;
+}
 
-/* --- INICIO: NUEVOS ESTILOS PARA FILTRO DE GALERÍA --- */
+.site-header.header-scrolled {
+  @apply bg-brand-green/95;
+}
 
-/*
-  Estilo para el botón de filtro que está ACTIVO.
-  Usamos los colores de la marca para destacarlo.
-  Esta clase se añadirá/quitará con JavaScript.
-*/
+#navbar-root {
+  @apply flex items-center justify-center w-full min-h-[80px];
+}
+
+#app-wrapper {
+  @apply pt-[90px] md:pt-[110px];
+}
+
+/* --- UI Elements --- */
+.review-slide { @apply animate-fade-in; }
+
 .filter-btn-active {
-  background-color: #6b755a; /* brand-green */
-  color: #ffffff;
+  @apply bg-brand-green text-white;
 }
 
-/*
-  Estilos para los botones de filtro INACTIVOS.
-  Los hacemos semitransparentes para que el activo destaque más.
-*/
-.filter-btn {
-  background-color: rgba(209, 213, 219, 0.5); /* gray-300 con 50% de opacidad */
-  color: #374151; /* gray-700 */
-}
-
-/*
-  Añade una transición suave a los ítems de la galería
-  para que el filtrado se vea más fluido.
-*/
 .gallery-item {
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  @apply transition-all duration-400;
 }
 
-/*
-  NUEVO: Estilo para el efecto HOVER en los botones de filtro inactivos.
-  Se aplica un color de fondo intermedio para dar retroalimentación visual.
-*/
-.filter-btn:not(.filter-btn-active):hover {
-  background-color: #a6b199; /* Un tono más claro de brand-green */
-  color: #ffffff;
+/* Modals */
+.modal-open-layer-fix .site-header,
+.modal-open-layer-fix #app-wrapper {
+    @apply z-0 pointer-events-none brightness-50 transition-all duration-300;
 }
 
-/* --- FIN: NUEVOS ESTILOS PARA FILTRO DE GALERÍA --- */
-
-/* Utilidad para evitar colapso del scroll en secciones FAQ cortas */
-.min-h-faq {
-  min-height: 60vh;
-  position: relative;
-  overflow: hidden;
-}
-
-/* --- INICIO: NUEVOS ESTILOS PARA MODAL DE SERVICIOS --- */
-
-@keyframes fadeInModal {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scaleUpModal {
-  from {
-    transform: scale(0.95);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-/* Estas animaciones se aplicarán al modal y a su contenido
-  cada vez que aparezcan (cuando JavaScript quite la clase 'hidden').
-*/
-.modal-animation {
-  animation: fadeInModal 0.3s ease-out forwards;
-}
-
-.modal-content-animation {
-  animation: scaleUpModal 0.3s ease-out forwards;
-}
-
-/* Fix crítico de Stacking Context para Modales */
-body.modal-open-layer-fix .site-header,
-body.modal-open-layer-fix #app-wrapper {
-    z-index: 0 !important; 
-    pointer-events: none; /* Desactiva clics fuera del modal */
-    filter: brightness(0.5); /* Oscurece visualmente el fondo */
-    transition: filter 0.3s ease;
-}
-
-/* --- FIN: NUEVOS ESTILOS PARA MODAL DE SERVICIOS --- */
-
-/* --- INICIO: ESTILOS PARA ANIMACIÓN DE HERO (OPTIMIZADO LCP) --- */
-
-/* 
-  Optimizamos el LCP (Largest Contentful Paint) moviendo la animación a CSS puro.
-  Esto elimina la dependencia de JavaScript para mostrar el título principal,
-  lo que reduce el tiempo de renderizado percibido drásticamente.
-*/
-@keyframes heroFadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Hero Animations */
 .animate-hero-element {
-  /* Iniciamos la animación inmediatamente al cargar el CSS */
-  opacity: 0;
-  animation: heroFadeInUp 0.8s ease-out forwards;
+  @apply opacity-0 animate-hero-up;
 }
 
-/* Delays escalonados para el efecto visual sin intervenir con JS */
-#hero-title {
-  animation-delay: 0.1s;
+/* WhatsApp */
+.whatsapp-float {
+    @apply fixed bottom-5 right-5 z-[1000] flex items-center justify-center w-[60px] h-[60px] bg-[#25D366] rounded-full shadow-lg transition-transform duration-300 hover:scale-110;
 }
 
-#hero-subtitle {
-  animation-delay: 0.4s;
+/* Marquee & Brands Slider */
+.marquee-track {
+    @apply w-max animate-marquee;
 }
 
-/* El Business Status badge también se anima por CSS */
-#business-status-root {
-  opacity: 0;
-  animation: heroFadeInUp 0.8s ease-out forwards;
-  animation-delay: 0.2s;
-}
-
-/* --- FIN: ESTILOS PARA ANIMACIÓN DE HERO (OPTIMIZADO LCP) --- */
-
-/* --- INICIO: ESTILOS PARA ÍCONOS EN MODALES DE SERVICIOS --- */
-
-/*
-  Usamos Flexbox para alinear el ícono y el texto en cada item de la lista.
-*/
-.modal-service-item {
-  display: flex;
-  align-items: flex-start; /* Alinea el ícono con el inicio del texto, ideal para textos de varias líneas */
-}
-
-/*
-  Estilos para el contenedor del ícono.
-*/
-.modal-service-icon {
-  flex-shrink: 0; /* Previene que el ícono se encoja si el texto es largo */
-  color: #6b755a; /* Color brand-green por defecto */
-  margin-right: 0.75rem; /* Espacio entre el ícono y el texto (12px) */
-  margin-top: 3px; /* Pequeño ajuste para alinear visualmente mejor con la altura del texto */
-}
-
-/* --- FIN: ESTILOS PARA ÍCONOS EN MODALES DE SERVICIOS --- */
-
-/* --- INICIO: ESTILOS PARA ANIMACIÓN EN SECCIÓN "SOBRE NOSOTROS" --- */
-
-/*
-  Esta es la clase que JavaScript añadirá cuando el elemento sea visible.
-  Hace que el elemento sea totalmente opaco y lo mueve a su posición original (0,0),
-  activando la animación definida en la clase base .scroll-animate.
-*/
-.is-visible {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
-/* --- INICIO: ESTILOS PARA ANIMACIONES CON ANIMATE.CSS --- */
-.animation-hidden {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  will-change: opacity, transform;
-}
-
-.animate__animated.is-visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Custom Soft Animations to prevent layout jumps */
-@keyframes fadeInUpSmall {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 50px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.animate__fadeInUpSmall {
-  animation-name: fadeInUpSmall;
-}
-/* --- FIN: ESTILOS PARA ANIMACIONES CON ANIMATE.CSS --- */
-
-/* --- FIN: ESTILOS PARA ANIMACIÓN EN SECCIÓN "SOBRE NOSOTROS" --- */
-
-/* --- INICIO: NUEVOS ESTILOS PARA TARJETAS DE RESEÑAS INTERACTIVAS --- */
-
-/*
-  Clase para el contenedor del slider, que ahora será un enlace.
-  Añadimos un cursor de tipo puntero para indicar que es clicable.
-  Añadimos una transición para que los cambios de sombra y transformación sean suaves.
-*/
-#reviews-slider-wrapper {
-  display: block; /* Hacemos que el 'a' se comporte como un bloque */
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/*
-  Efecto al pasar el cursor sobre la tarjeta.
-  La levantamos ligeramente y aumentamos la sombra para dar una sensación de profundidad.
-*/
-#reviews-slider-wrapper:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-/* --- FIN: NUEVOS ESTILOS PARA TARJETAS DE RESEÑAS INTERACTIVAS --- */
-
-/* --- INICIO: OPTIMIZACIÓN CLS (Estilos críticos movidos desde JS) --- */
-
-/* 1. Reviews Carousel: Grid Stack pre-JS */
-#reviews-slider {
-    display: grid;
-    grid-template-areas: "stack";
-    min-height: 300px; /* Reserva espacio aproximado */
-}
-
-.review-slide {
-    grid-area: stack;
-    width: 100%;
-    transition: opacity 0.5s ease-in-out;
-}
-
-/* 2. Brands Section: Slider infinito */
 .brands-slider {
-    display: flex;
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    /* Máscara de degradado para suavizar bordes */
+    @apply flex w-full overflow-hidden relative;
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .brands-track {
-    display: flex;
-    align-items: center;
-    width: max-content;
-    will-change: transform;
+    @apply flex items-center w-max will-change-transform;
 }
 
 .brands-item {
-    flex-shrink: 0;
-    width: auto; /* Ancho variable según contenido */
-    padding: 0 2rem; /* Espaciado mobile (Gap simulado) */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+    @apply shrink-0 w-auto px-8 md:px-16 flex flex-col items-center justify-center box-border;
 }
-
-@media (min-width: 768px) {
-    .brands-item {
-        padding: 0 4rem; /* Espaciado desktop más amplio */
-    }
-}
-/* --- FIN: OPTIMIZACIÓN CLS --- */
-
-
-
-/* --- INICIO: ESTILOS PARA SECCIÓN DE VIDEO --- */
-
-.video-aspect-ratio {
-  aspect-ratio: 9 / 16;
-}
-
-#video-promo .video-aspect-ratio {
-  width: 100%;
-}
-
-/* Estilos para el botón de Play superpuesto */
-#video-play-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: transform 0.2s ease-out, opacity 0.3s ease-out;
-}
-
-#video-play-button:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-}
-
-/* --- FIN: ESTILOS PARA SECCIÓN DE VIDEO --- */
-
-/* --- FIN: ESTILOS PARA SECCIÓN DE VIDEO --- */
-
-/* --- INICIO: ESTILOS PARA BOTÓN FLOTANTE WHATSAPP --- */
-/* Estilos para el botón flotante de WhatsApp */
-.whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    display: flex; /* Usar flexbox para centrar el contenido */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    width: 60px; /* Ancho fijo para el botón circular */
-    height: 60px; /* Alto fijo para el botón circular */
-    background-color: #25D366; /* Color verde de WhatsApp */
-    border-radius: 50%; /* Hacerlo circular */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto flotante */
-    transition: transform 0.3s ease-in-out;
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.1);
-}
-
-.whatsapp-float img {
-    /* La imagen se escalará dentro del contenedor flex */
-    max-width: 80%; /* Ajustar según sea necesario para dar un poco de padding */
-    max-height: 80%; /* Ajustar según sea necesario para dar un poco de padding */
-}
-
-/* --- INICIO: ESTILOS PARA BLOCKQUOTE EN ARTÍCULOS --- */
-
-.prose blockquote {
-  position: relative;
-  padding-left: 2rem;
-  border-left: 0;
-  font-style: normal;
-  font-size: 1.125rem; /* Aumenta el tamaño de la fuente */
-  color: #374151; /* Un gris más oscuro para mejor legibilidad */
-}
-
-.prose blockquote::before {
-  content: "“";
-  position: absolute;
-  left: -0.5rem;
-  top: -1rem;
-  font-size: 4rem;
-  font-family: "Playfair Display", serif;
-  color: #c5ab94; /* brand-medium */
-  opacity: 0.8;
-}
-
-.prose blockquote p {
-  font-style: italic;
-}
-
-/* --- FIN: ESTILOS PARA BLOCKQUOTE EN ARTÍCULOS --- */
-
-/* --- INICIO: ANIMACIONES FLOTANTES --- */
-@keyframes floating {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-.animate-floating {
-    animation: floating 3s ease-in-out infinite;
-}
-
-/* Animations for Leaves Entry */
-@keyframes leafEnterRight {
-    0% {
-        opacity: 0;
-        transform: translate(100px, -50px) scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(0, 0) scale(1);
-    }
-}
-
-@keyframes leafEnterLeft {
-    0% {
-        opacity: 0;
-        transform: translate(-100px, 50px) scale(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(0, 0) scale(1);
-    }
-}
-
-.animate-leaf-enter-right {
-    animation: leafEnterRight 1.5s ease-out forwards;
-}
-
-.animate-leaf-enter-left {
-    animation: leafEnterLeft 1.5s ease-out forwards;
-}
-
-/* Generic Fade In Up for Content */
-@keyframes fadeInUpContent {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-fade-in-up {
-    animation: fadeInUpContent 0.8s ease-out forwards;
-}
-
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-500 { animation-delay: 500ms; }
-
-/* --- FIN: ANIMACIONES FLOTANTES --- */
-/* --- INICIO: OPTIMIZACIÓN GLightbox (General y Móvil) --- */
-
-/* Estilos Base para Botones de Navegación */
-.gbtn {
-    display: flex !important;
-    background-color: rgba(0, 0, 0, 0.4) !important;
-    border-radius: 50%;
-    width: 45px !important;
-    height: 45px !important;
-    top: 50% !important;
-    margin-top: -22px !important;
-    opacity: 1 !important; /* Asegurar visibilidad siempre */
-    transition: background-color 0.3s ease;
-    align-items: center;
-    justify-content: center;
-}
-
-.gbtn:hover {
-    background-color: rgba(0, 0, 0, 0.8) !important;
-}
-
-/* Iconos dentro de los botones */
-.gbtn svg {
-    width: 24px !important;
-    height: 24px !important;
-    color: white !important;
-}
-
-/* Ajustes Específicos para Prev y Next */
-.gbtn.prev {
-    left: 10px !important;
-    margin-left: 0 !important;
-}
-
-.gbtn.next {
-    right: 10px !important;
-    margin-right: 0 !important;
-}
-
-/* Ajustes para Móvil */
-@media (max-width: 768px) {
-    .gbtn {
-        width: 40px !important;
-        height: 40px !important;
-        margin-top: -20px !important; /* Ajuste centro vertical */
-    }
-}
-
-/* Botón de Cerrar (Posición Fija) */
-.gclose, .glightbox-close {
-    position: fixed !important;
-    top: 20px !important;
-    right: 20px !important;
-    margin: 0 !important;
-    width: 40px !important;
-    height: 40px !important;
-    background-color: transparent !important;
-    z-index: 99999 !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-}
-
-.gclose svg, .glightbox-close svg {
-    width: 30px !important;
-    height: 30px !important;
-    color: white !important;
-    filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
-}
-/* --- FIN: OPTIMIZACIÓN GLightbox --- */
-/* --- INICIO: ESTILOS PROGRAMA DE FIDELIZACIÓN --- */
-.fidelizacion-card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(197, 171, 148, 0.3);
-}
-
-.loyalty-input {
-    border-bottom: 2px solid var(--color-brand-medium);
-    transition: border-color 0.3s ease;
-    @apply w-full bg-transparent p-3 outline-none;
-}
-
-.loyalty-input:focus {
-    border-bottom-color: var(--color-brand-green);
-}
-
-.input-focused .loyalty-input {
-    border-bottom-color: var(--color-brand-green);
-    background-color: rgba(107, 117, 90, 0.05); /* brand-green muy suave */
-}
-
-/* Animación spin para el botón de carga */
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.animate-spin {
-    animation: spin 1s linear infinite;
-}
-/* --- FIN: ESTILOS PROGRAMA DE FIDELIZACIÓN --- */
-
-/* --- INICIO: SECCIÓN MARQUEE INFINITO --- */
-/* Infinite Marquee Animation Logic */
-.marquee-track {
-    animation: marquee-scroll 40s linear infinite;
-    width: max-content;
-}
-
-@keyframes marquee-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-50% - 1.5rem)); } /* Moves half the width (original content) plus half gap */
-    /* Calculation assumes "original content width" is roughly 50% of the total track width due to duplication.
-       Actually, for perfect looping, translation should be exactly - (width of one set of items + gaps).
-       With 6 items + 6 clones, we shift by the width of the first 6 items. 
-    */
-}
-
-/* Pause on Hover */
-.hover\:pause-animation:hover {
-    animation-play-state: paused;
-}
-/* --- FIN: SECCIÓN MARQUEE INFINITO --- */

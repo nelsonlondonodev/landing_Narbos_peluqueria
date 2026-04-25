@@ -16,78 +16,67 @@
 
 /**
  * Configuración de entorno y Rutas Base.
- * Detecta si estamos en GitHub Pages para ajustar las rutas de assets.
  */
 const isGitHubPages = typeof window !== 'undefined' && window.location.hostname.includes('github.io');
-const isDevelopment = typeof window !== 'undefined' && 
-    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+// Nota: El nombre 'landing_Narbos_peluqueria' se mantiene por compatibilidad con el repositorio original y despliegue.
 const repoName = '/landing_Narbos_peluqueria'; 
 
 export const BASE_PATH = isGitHubPages ? repoName : '';
 
 /**
+ * Normaliza un path eliminando slashes duplicados e iniciales.
+ * @param {string} path 
+ * @returns {string}
+ */
+const normalizePath = (path) => path.replace(/^\/+/, '').replace(/\/+/g, '/');
+
+/**
  * Resuelve una ruta de navegación (URL).
- * En desarrollo agrega .html para compatibilidad con Live Server.
- * En producción mantiene URLs limpias para SEO.
  * @param {string} path - Ruta base (ej: 'nosotros')
+ * @param {string} prefix - Prefijo relativo opcional (ej: '../')
  * @returns {string} URL terminada.
  */
-export const resolveRoute = (path) => {
-    if (!path || path === '/' || path === '') return BASE_PATH + '/';
-    
-    // Si ya es un link externo real, no lo tocamos
-    if (path.startsWith('http') && !path.includes(window.location.hostname)) return path;
-
-    // Normalizar: Quitar el origin si existe para procesarlo internamente
-    let cleanPath = path;
-    if (path.startsWith('http')) {
-        try {
-            cleanPath = new URL(path).pathname;
-        } catch(e) { /* fallback cleanPath */ }
-    }
-    
-    // Quitar slash inicial y BASE_PATH para normalizar la ruta relativa
-    cleanPath = cleanPath.replace(BASE_PATH, '');
-    if (cleanPath.startsWith('/')) cleanPath = cleanPath.slice(1);
-    
-    // En desarrollo, si no termina en / (carpeta) y no tiene extensión, agregamos .html
-    if (isDevelopment && !cleanPath.endsWith('/') && !cleanPath.includes('.') && cleanPath !== '') {
-        return `${BASE_PATH}/${cleanPath}.html`;
+export const resolveRoute = (path, prefix = '') => {
+    if (!path || path === '/' || path === '') return prefix || './';
+    if (path.startsWith('http') || path.startsWith('mailto:') || path.startsWith('tel:') || path.startsWith('#')) {
+        return path;
     }
 
-    return `${BASE_PATH}/${cleanPath}`;
+    let cleanPath = normalizePath(path);
+    let safePrefix = prefix ? (prefix.endsWith('/') ? prefix : `${prefix}/`) : '';
+
+    // Lógica de archivos físicos (.html)
+    if (cleanPath.endsWith('/')) {
+        cleanPath += 'index.html';
+    } else if (!cleanPath.includes('.') && !cleanPath.endsWith('.html')) {
+        cleanPath += '.html';
+    }
+
+    return `${safePrefix}${cleanPath}`.replace(/\.\/\.\//g, './');
 };
 
 /**
  * Resuelve una ruta de asset (imágenes, fuentes, etc).
  * @param {string} path - Ruta relativa
+ * @param {string} prefix - Prefijo relativo opcional
  */
-export const resolveAsset = (path) => {
+export const resolveAsset = (path, prefix = '') => {
     if (!path) return '';
-    if (path.startsWith('http')) return path; 
+    if (path.startsWith('http') || path.startsWith('data:')) return path; 
     
-    // Normalizar: Quitar slash inicial para evitar duplicados al concatenar con BASE_PATH
-    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    const cleanPath = normalizePath(path);
+    // Si el prefijo ya es una URL absoluta o tiene el formato de retroceso ../.., lo usamos directamente
+    const safePrefix = prefix ? (prefix.endsWith('/') ? prefix : `${prefix}/`) : '';
     
-    // Si BASE_PATH está definido (GitHub Pages), lo usamos.
-    // Si no (Local), devolvemos la ruta absoluta limpia (agregando / al inicio).
-    const prefix = BASE_PATH ? BASE_PATH + '/' : '/';
-    
-    const finalPath = `${prefix}${cleanPath}`;
-    
-    // Debug en producción para verificar rutas
-    // console.log(`[ResolveAsset] Input: ${path} -> Output: ${finalPath}`);
-    
-    return finalPath;
+    return `${safePrefix}${cleanPath}`.replace(/\.\/\.\//g, './');
 };
 
 /**
  * Configuración global del sitio.
- * Centraliza datos estáticos para facilitar el mantenimiento.
  */
 export const siteConfig = Object.freeze({
-    version: "2.6.3", // Versión actual del proyecto (Control Maestro)
-    basePath: BASE_PATH, // Exponer basePath para uso general
+    version: "2.6.4", // Versión actualizada
+    basePath: BASE_PATH,
     socialLinks: [
         {
             name: "WhatsApp",
@@ -119,3 +108,4 @@ export const siteConfig = Object.freeze({
         googleAnalyticsId: "G-7XLWJJBSDL"
     }
 });
+

@@ -47,7 +47,12 @@ function initGallery() {
     const galleryData = pagesData[pageKey]?.gallery;
 
     if (galleryData) {
-        renderGallery(galleryRoot, galleryData);
+        // Hydration check for gallery
+        if (galleryRoot.children.length > 0) return;
+
+        const processedGallery = galleryData.map(item => window.narbosApp.resolveDeep(item));
+
+        renderGallery(galleryRoot, processedGallery);
         initLightbox();
     } else {
         console.warn(`Gallery data not found for page key: ${pageKey}`);
@@ -148,6 +153,12 @@ function initNailServicesGrid() {
     const gridContainer = document.getElementById('nail-services-grid');
     if (!gridContainer) return;
 
+    // INTELLIGENT HYDRATION: Si el SSG ya inyectó contenido, no lo sobreescribimos.
+    if (gridContainer.children.length > 0) {
+        console.log("✅ [NailsPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
+        return;
+    }
+
     gridContainer.innerHTML = '';
     
     // Initialize Modal Logic via Component
@@ -172,9 +183,9 @@ function createServiceCard(service, modalInstance) {
     const cardElement = new ServiceCard({
         title: service.title,
         description: service.summary || service.description,
-        image: service.image,
+        image: window.narbosApp.resolvePath(service.image),
         price: service.price,
-        link: service.link || '#',
+        link: window.narbosApp.resolvePath(service.link || '#'),
         variant: 'standard',
         modalId: service.link ? null : 'service-modal'
     }).render();

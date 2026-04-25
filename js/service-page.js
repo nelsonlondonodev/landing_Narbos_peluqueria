@@ -140,14 +140,13 @@ class ServicePageManager {
         const galleryContainer = document.getElementById('bento-gallery-root');
         if (!galleryContainer || !this.pageKey) return;
 
+        // INTELLIGENT HYDRATION: Si ya tiene contenido del SSG, no tocar.
+        if (galleryContainer.children.length > 0) return;
+
         const config = pagesData[this.pageKey];
         if (!config || !config.gallery) return;
 
-        const galleryItems = config.gallery.map(item => ({
-             ...item,
-             src: this.app.resolvePath(item.src),
-             poster: item.poster ? this.app.resolvePath(item.poster) : undefined
-        }));
+        const galleryItems = config.gallery.map(item => this.app.resolveDeep(item));
 
         const galleryOptions = config.galleryOptions || {};
         galleryContainer.innerHTML = getBentoGridHTML(galleryItems, galleryOptions);
@@ -214,6 +213,10 @@ class ServicePageManager {
     }
 
     _renderStandardCards(grid, services, modalInstance = null) {
+        // INTELLIGENT HYDRATION: Si la grilla ya tiene tarjetas del SSG, no borramos.
+        // Solo adjuntamos eventos si fuera necesario (en este caso no lo es para links estándar).
+        if (grid.children.length > 0 && !modalInstance) return;
+
         grid.innerHTML = '';
         services.forEach(data => {
             const processedData = {
@@ -235,9 +238,13 @@ class ServicePageManager {
 
 
 
-    initLightboxInstance(retries = 0) {
+    initLightboxInstance() {
+        // Limpiamos reintentos infinitos. Si GLightbox no está, se reintenta una vez tras 500ms o se ignora.
         if (!this.pageKey || typeof GLightbox === 'undefined') {
-            if (retries < 50) setTimeout(() => this.initLightboxInstance(retries + 1), 100);
+            if (!this._glightboxRetry) {
+                this._glightboxRetry = true;
+                setTimeout(() => this.initLightboxInstance(), 500);
+            }
             return;
         }
         if (this.lightbox) try { this.lightbox.destroy(); } catch(e) {}

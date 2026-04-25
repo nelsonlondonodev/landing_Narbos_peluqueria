@@ -62,7 +62,9 @@ function initGallery() {
                 <p class="text-lg text-gray-700 max-w-2xl mx-auto">Resultados reales en cabellos reales.</p>
             </div>
         `;
-        galleryRoot.innerHTML = titleHTML + getBentoGridHTML(galleryData);
+        const processedGallery = galleryData.map(item => window.narbosApp.resolveDeep(item));
+
+        galleryRoot.innerHTML = titleHTML + getBentoGridHTML(processedGallery);
         initLightbox();
     } else {
         console.warn(`Gallery data not found for page key: ${pageKey}`);
@@ -204,9 +206,9 @@ function createServiceCard(service, modalInstance) {
     const cardElement = new ServiceCard({
         title: service.title,
         description: service.description, // already simple or markdown
-        image: service.image,
+        image: window.narbosApp.resolvePath(service.image),
         price: service.price,
-        link: service.link || '#',
+        link: window.narbosApp.resolvePath(service.link || '#'),
         variant: service.variant || 'standard',
         modalId: isModal ? 'service-modal' : null
     }).render();

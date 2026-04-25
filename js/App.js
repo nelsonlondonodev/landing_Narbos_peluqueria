@@ -1,49 +1,49 @@
-import { siteConfig, BASE_PATH, resolveAsset, resolveRoute } from './config.js'; // Importar Config y Helper
+import { siteConfig, BASE_PATH, resolveAsset, resolveRoute } from './config.js';
 import { UIService } from './services/UIService.js';
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
 import { getContactFormHTML } from './components/ContactForm.js';
 import { getHeroHTML } from './components/HeroSection.js';
-// Components
 import { MobileMenu } from './components/MobileMenu.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
 import { StoreBadge } from './components/StoreBadge.js';
-// Controllers
 import { HeaderController } from './controllers/HeaderController.js';
-import { PageTransitionController } from './controllers/PageTransitionController.js'; // Nuevo Controller
-// Data
-import { pagesData } from './data/pagesData.js'; // Nuevo Import
+import { PageTransitionController } from './controllers/PageTransitionController.js';
+import { pagesData } from './data/pagesData.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { AnalyticsService } from './services/AnalyticsService.js';
 import { HomeHubController } from './controllers/HomeHubController.js';
 
-
 class App {
     constructor() {
-        // App Root se deriva directamente del BASE_PATH configurado
-        this.appRoot = window.location.origin + BASE_PATH + '/';
+        const isLocalDist = window.location.pathname.includes('/dist/');
+        const localDistPath = isLocalDist ? '/dist' : '';
+        
+        this.appRoot = window.location.origin + BASE_PATH + localDistPath + '/';
         this.version = siteConfig.version;
         
-        // Debug para verificar en consola y soporte técnico
         if (typeof window !== 'undefined') {
             window.__NARBO_VERSION__ = this.version;
-            // console.log(`[App] Initialized v${this.version}. Root: ${this.appRoot}`);
         }
         
         this.isHomePage = this._checkIfHomePage();
+        
+        // Cachear claves ordenadas para detección de páginas
+        this._pagesDataKeys = Object.keys(pagesData).sort((a, b) => b.length - a.length);
     }
 
-    /**
-     * Comprueba de manera robusta si la URL actual corresponde a la página de inicio.
-     * @returns {boolean}
-     * @private
-     */
     _checkIfHomePage() {
         const path = window.location.pathname;
-        const currentPathClean = path.replace(BASE_PATH, '/').replace('//', '/');
-        return currentPathClean === '/' || currentPathClean === '/index.html' || currentPathClean === '';
+        const currentPathClean = path.replace(BASE_PATH, '')
+                                     .replace('/dist/', '/')
+                                     .replace('//', '/');
+        
+        return currentPathClean === '/' || 
+               currentPathClean === '/index.html' || 
+               currentPathClean === '' ||
+               path.endsWith('/dist/') ||
+               path.endsWith('/dist/index.html');
     }
-
 
     init() {
         this.mountLayout();
@@ -58,23 +58,30 @@ class App {
         this.initAnalytics();
     }
 
-    /**
-     * Resuelve una ruta (absoluta o relativa) a la URL base correcta de la aplicación.
-     * @param {string} path - Ruta a resolver (ej: '/servicios/...' o 'images/...')
-     * @returns {string} URL absoluta correcta.
-     */
     resolvePath(path) {
-        if (!path || path === '/') return this.appRoot; 
+        if (!path || path === '/') return this.isHomePage ? './' : this.appRoot; 
+        return resolveRoute(path, this.appRoot);
+    }
+
+    /**
+     * Resuelve profundamente todas las rutas de un objeto (src, poster, subImages).
+     * @param {Object} item 
+     */
+    resolveDeep(item) {
+        if (!item) return item;
+        const resolved = { ...item };
         
-        // Resolvemos el path usando el algoritmo inteligente de config.js (v2.1.8)
-        const smartPath = resolveRoute(path);
+        if (resolved.src) resolved.src = this.resolvePath(resolved.src);
+        if (resolved.poster) resolved.poster = this.resolvePath(resolved.poster);
         
-        // Si no es un link externo, aseguramos que se resuelva contra el origin absoluto
-        if (smartPath.startsWith('http') && !smartPath.includes(window.location.hostname)) return smartPath;
+        if (resolved.subImages && Array.isArray(resolved.subImages)) {
+            resolved.subImages = resolved.subImages.map(sub => ({
+                ...sub,
+                src: this.resolvePath(sub.src)
+            }));
+        }
         
-        // Limpiamos smartPath para el constructor de URL si es necesario
-        const cleanPath = smartPath.startsWith('/') ? smartPath.slice(1) : smartPath;
-        return new URL(cleanPath, this.appRoot).href;
+        return resolved;
     }
 
     mountLayout() {
@@ -82,178 +89,147 @@ class App {
         const footerRoot = document.getElementById('footer-root');
         const contactRoot = document.getElementById('contact-root');
         
-        // FORCE HYDRATION: Clear existing content to avoid layout issues from partial refactors
-        if (navbarRoot) {
+        if (navbarRoot && navbarRoot.children.length === 0) {
             navbarRoot.innerHTML = getNavbarHTML(this.appRoot, this.isHomePage);
         }
-        if (footerRoot) {
+        
+        if (footerRoot && footerRoot.children.length === 0) {
             footerRoot.innerHTML = getFooterHTML(this.appRoot);
         }
+        
         if (contactRoot && contactRoot.children.length === 0) {
             contactRoot.innerHTML = getContactFormHTML();
         }
     }
 
-
-
     mountHero() {
         const heroRoot = document.getElementById('hero-root');
-        if (!heroRoot) return;
+        if (!heroRoot || heroRoot.querySelector('h1')) return;
 
         const path = window.location.pathname;
         let pageKey = null;
 
-        // 1. Mapeo Explícito (Prioridad Alta)
+        // 1. Mapeo Explícito
         if (path.includes('nosotros.html')) pageKey = 'nosotros';
         else if (path.includes('contacto.html')) pageKey = 'contacto';
         
-        // 2. Detección Dinámica Robusta (Basada en pagesData)
-        // Ordenamos las claves por longitud (descendente) para que 'cejas-y-pestanas' 
-        // se detecte antes que un posible 'cejas' o coincidencias parciales.
+        // 2. Detección Dinámica (Usa cache)
         if (!pageKey) {
-            const keys = Object.keys(pagesData).sort((a, b) => b.length - a.length);
-            for (const key of keys) {
-                if (path.includes(key)) {
-                    pageKey = key;
-                    break;
-                }
-            }
+            pageKey = this._pagesDataKeys.find(key => path.includes(key));
         }
 
-        if (pageKey && pagesData[pageKey] && pagesData[pageKey].hero) {
-            // ROBUST FIX V2: Evitar sobrescritura si el Hero ya tiene contenido real (SSG o HTML estático)
-            // Verificamos si existe un H1 renderizado para comprobar que no es un contenedor vacío
-            const hasStaticHero = heroRoot.querySelector('h1');
-            
-            if (!hasStaticHero) {
-                const heroData = pagesData[pageKey].hero;
-                const imageSrc = this.resolvePath(heroData.imageSrc);
-                
-                heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
-            }
+        if (pageKey && pagesData[pageKey]?.hero) {
+            const heroData = pagesData[pageKey].hero;
+            const imageSrc = this.resolvePath(heroData.imageSrc);
+            heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
         }
     }
 
     initCoreComponents() {
-        try { new MobileMenu(); } catch(e) { /* silent */ }
-        try { new WhatsAppButton(); } catch(e) { /* silent */ }
-        try { new HeaderController(); } catch(e) { /* silent */ }
-        try { new PageTransitionController(); } catch(e) { /* silent */ }
-        try { new StoreBadge().init(); } catch(e) { /* silent */ }
+        const components = [MobileMenu, WhatsAppButton, HeaderController, PageTransitionController];
+        components.forEach(Comp => {
+            try { new Comp(); } catch(e) {}
+        });
+        try { new StoreBadge().init(); } catch(e) {}
     }
 
     initInteractiveComponents() {
-        // 1. Componentes Críticos (Header, Nav, Botones Flotantes) -> Inmediatos
-        // (Ya instanciados en initCoreComponents o montados en mountLayout)
-        
-        // 2. Componentes Pesados / Bajo el fold -> Carga Diferida con Observer
-        // Esto libera el Hilo Principal durante la carga inicial (Mejora TBT y LCP)
-        
-        // Blog Catalog
+        // Blog
         this.observeAndInit('#articles-grid', async () => {
             const { BlogController } = await import('./controllers/BlogController.js');
             new BlogController(this.appRoot);
         });
 
-        // Página Nosotros (Marquee de reseñas y timeline)
+        // About
         this.observeAndInit('.marquee-track', async () => {
             const { default: AboutHubController } = await import('./controllers/AboutHubController.js');
             new AboutHubController();
         });
 
-        // FAQ (Footer y Artículos)
-        this.observeAndInit('#faq', async () => {
-            const { FAQAccordion } = await import('./components/FAQAccordion.js');
-            new FAQAccordion('#faq');
+        // FAQ
+        ['#faq', '#article-faq'].forEach(sel => {
+            this.observeAndInit(sel, async () => {
+                const { FAQAccordion } = await import('./components/FAQAccordion.js');
+                new FAQAccordion(sel);
+            });
         });
-        this.observeAndInit('#article-faq', async () => {
-            const { FAQAccordion } = await import('./components/FAQAccordion.js');
-            new FAQAccordion('#article-faq');
-        }); 
 
-        // Reseñas (Carrusel pesado)
+        // Reviews
         this.observeAndInit('#reviews-slider-wrapper', async () => {
             const { ReviewsCarousel } = await import('./components/ReviewsCarousel.js');
             new ReviewsCarousel();
         });
 
-        // Contacto (Formulario)
+        // Formulario
         this.observeAndInit('#contact-root', async () => {
             const { ContactFormController } = await import('./controllers/ContactFormController.js');
             new ContactFormController();
         });
 
-
-
-        // Galería y Videos (Media intensiva)
+        // Galería
         this.observeAndInit('#gallery-root', async () => {
             const { GalleryController } = await import('./controllers/GalleryController.js');
             new GalleryController();
         });
-        this.observeAndInit('#video-promo', async () => {
-            new VideoPlayerController();
-        });
 
-        // Calculadora de Oxidación (Artículos específicos)
+        // Calculadora
         this.observeAndInit('#calculadora', async () => {
             const { default: OxidationCalculator } = await import('./controllers/OxidationCalculator.js');
             new OxidationCalculator();
         });
         
-        // Decoraciones Flotantes (No críticas)
-        const initFloatingDecorations = async () => {
+        // Decoraciones (Idle)
+        const initDecorations = async () => {
              const { FloatingDecorations } = await import('./components/FloatingDecorations.js');
              new FloatingDecorations({ basePath: this.appRoot });
         };
 
         if (window.requestIdleCallback) {
-            requestIdleCallback(initFloatingDecorations, { timeout: 4000 });
+            requestIdleCallback(initDecorations, { timeout: 4000 });
         } else {
-            setTimeout(initFloatingDecorations, 4000);
+            setTimeout(initDecorations, 4000);
         }
-
     }
 
     /**
-     * Helper para Lazy Hydration.
-     * Instancia un componente solo cuando su contenedor entra en el viewport.
-     * @param {string} selector - Selector CSS del contenedor.
-     * @param {Function} initFn - Función que instancia el componente.
+     * Inicialización perezosa de módulos (Lazy Hydration).
      */
-    observeAndInit(selector, initFn) {
+    observeAndInit(selector, importFn) {
         const element = document.querySelector(selector);
-        // Si el elemento no existe en esta página, no hacemos nada (ahorra recursos)
         if (!element) return;
 
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
-                // console.log(`[App] Lazy hydrating: ${selector}`);
-                initFn();
-                observer.disconnect(); // Solo necesitamos instanciar una vez
+                importFn();
+                observer.disconnect();
             }
-        }, { 
-            rootMargin: '200px 0px', // Cargar 200px antes de que aparezca
-            threshold: 0.01 
-        });
+        }, { rootMargin: '200px 0px', threshold: 0.01 });
 
         observer.observe(element);
     }
-
-
 
     initServices() {
         new UIService();
     }
 
+    /**
+     * Truncado inteligente de texto para breadcrumbs.
+     */
+    _truncateText(text, limit = 40) {
+        if (!text) return '';
+        const cleanText = text.replace(/\s+/g, ' ').trim();
+        if (window.innerWidth < 768) {
+            const words = cleanText.split(/\s+/);
+            return words.length > 3 ? words.slice(0, 3).join(' ') + '...' : cleanText;
+        }
+        return cleanText.length > limit ? cleanText.substring(0, limit) + '...' : cleanText;
+    }
+
     initBreadcrumbs() {
         const root = document.getElementById('breadcrumbs-root');
-        if (!root) return;
-
         const path = window.location.pathname;
 
-        // Solo renderizar si es un artículo del blog (por debajo de /blog/articles/)
-        // Nosotros, Contacto y el Hub del Blog no llevan breadcrumbs según feedback del usuario.
-        if (path.includes('/blog/articles/')) {
+        if (root && path.includes('/blog/articles/')) {
             const items = [
                 { label: 'Inicio', link: this.resolvePath('') },
                 { label: 'Blog', link: this.resolvePath('blog/') }
@@ -261,24 +237,8 @@ class App {
 
             const h1 = document.querySelector('h1');
             if (h1) {
-                // Priorizar atributo data-breadcrumb para versiones cortas manuales
-                const customBreadcrumb = h1.getAttribute('data-breadcrumb');
-                let titleText = customBreadcrumb || h1.textContent.replace(/\s+/g, ' ').trim();
-                
-                // Truncar títulos automáticos si no hay uno manual y estamos en móvil
-                if (!customBreadcrumb && window.innerWidth < 768) {
-                    const words = titleText.split(/\s+/);
-                    if (words.length > 3) {
-                        titleText = words.slice(0, 3).join(' ') + '...';
-                    }
-                } else if (!customBreadcrumb && titleText.length > 40) {
-                    // En escritorio truncamos solo si es excesivo y no hay manual
-                    titleText = titleText.substring(0, 40) + '...';
-                }
-                
-                if (titleText) {
-                    items.push({ label: titleText, link: '#' });
-                }
+                const label = h1.getAttribute('data-breadcrumb') || this._truncateText(h1.textContent);
+                if (label) items.push({ label, link: '#' });
             }
             
             root.innerHTML = new Breadcrumbs(items).render();
@@ -287,10 +247,10 @@ class App {
 
     initAnalytics() {
         if (siteConfig.contact.googleAnalyticsId) {
-            const analytics = new AnalyticsService(siteConfig.contact.googleAnalyticsId);
-            analytics.init();
+            new AnalyticsService(siteConfig.contact.googleAnalyticsId).init();
         }
     }
 }
 
 export { App };
+

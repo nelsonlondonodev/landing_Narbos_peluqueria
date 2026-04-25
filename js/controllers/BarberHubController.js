@@ -73,10 +73,6 @@ export class BarberHubController {
      * @private
      */
     processGalleryItems(items) {
-        return items.map(item => ({
-            ...item,
-            src: this.app.resolvePath(item.src),
-            poster: item.poster ? this.app.resolvePath(item.poster) : undefined
-        }));
+        return items.map(item => this.app.resolveDeep(item));
     }
 }

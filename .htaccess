@@ -1,5 +1,6 @@
 # Configuración de Narbo's Salón Spa
-# v2.6.3 - Optimización SEO y URLs Limpias
+# v2.6.5 - Configuración de Plataforma Web Integral
+# Optimización de Rendimiento, Seguridad y SEO Canónico
 
 # Forzar codificación UTF-8
 AddDefaultCharset UTF-8
@@ -15,31 +16,37 @@ AddType 'application/javascript; charset=UTF-8' .js
 # Página de error 404
 ErrorDocument 404 /404.html
 
+# Seguridad: Impedir listado de directorios
+Options -Indexes
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
 
-    # 1. Forzar HTTPS (Protección y SEO)
+    # 1. Redirigir de www a no-www (SEO y Consistencia)
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+    # 2. Forzar HTTPS (Protección y SEO)
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # 2. Redirigir index.html a / (Raíz y Subcarpetas)
+    # 3. Redirigir index.html a / (Raíz y Subcarpetas)
     # Ejemplo: /blog/index.html -> /blog/
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+/)?index\.html\ HTTP/
     RewriteRule ^(.+/)?index\.html$ /%1 [R=301,L]
 
-    # 3. Quitar extensión .html de la URL (Redirección externa 301)
+    # 4. Quitar extensión .html de la URL (Redirección externa 301)
     # Ejemplo: /contacto.html -> /contacto
     RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
     RewriteRule ^ /%1 [R=301,L,NE]
 
-    # 4. Normalizar Trailing Slash (Quitar barra en archivos, mantener en carpetas)
-    # Esto evita contenido duplicado para GSC
+    # 5. Normalizar Trailing Slash (Quitar barra en archivos, mantener en carpetas)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} ^(.+)/$
     RewriteRule ^(.+)/$ /%1 [R=301,L]
 
-    # 5. Mapeo Interno (Servir archivos .html sin mostrar la extensión)
+    # 6. Mapeo Interno (Servir archivos .html sin mostrar la extensión)
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{DOCUMENT_ROOT}/$1.html -f
@@ -47,6 +54,9 @@ ErrorDocument 404 /404.html
 
     # --- Redirecciones Específicas de Legacy/Errores ---
     RewriteRule ^servicios/estetica/depilacion$ /servicios/estetica/depilacion-corporal [R=301,L]
+    
+    # Bloquear acceso a archivos sensibles e infraestructura
+    RewriteRule ^(\.git|package\.json|package-lock\.json|README\.md|tailwind\.config\.js|.*\.log)$ - [F,L]
 </IfModule>
 
 # Manejo de Cache (Optimizado para PageSpeed v2)
@@ -80,9 +90,9 @@ ErrorDocument 404 /404.html
     Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# Compresión GZIP
+# Compresión GZIP (Optimizado para Datos Estructurados y Assets)
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css text/javascript
-    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json application/xml
-    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json application/xml application/ld+json
+    AddOutputFilterByType DEFLATE image/svg+xml image/x-icon
 </IfModule>
