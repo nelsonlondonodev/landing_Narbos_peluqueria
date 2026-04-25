@@ -61,12 +61,13 @@ export const resolveRoute = (path, prefix = '') => {
  */
 export const resolveAsset = (path, prefix = '') => {
     if (!path) return '';
-    if (path.startsWith('http')) return path; 
+    if (path.startsWith('http') || path.startsWith('data:')) return path; 
     
     const cleanPath = normalizePath(path);
+    // Si el prefijo ya es una URL absoluta o tiene el formato de retroceso ../.., lo usamos directamente
     const safePrefix = prefix ? (prefix.endsWith('/') ? prefix : `${prefix}/`) : '';
     
-    return `${safePrefix}${cleanPath}`;
+    return `${safePrefix}${cleanPath}`.replace(/\.\/\.\//g, './');
 };
 
 /**

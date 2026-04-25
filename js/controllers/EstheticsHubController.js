@@ -137,12 +137,7 @@ export class EstheticsHubController {
         const container = document.getElementById('bento-gallery-root');
         if (!container || !this.config || !this.config.gallery) return;
 
-        const processedItems = this.config.gallery.map(item => ({
-            ...item,
-            src: this.app.resolvePath(item.src),
-            poster: item.poster ? this.app.resolvePath(item.poster) : undefined
-        }));
-
+        const processedItems = this.config.gallery.map(item => this.app.resolveDeep(item));
         container.innerHTML = getBentoGridHTML(processedItems, this.config.galleryOptions || {});
     }
 }

@@ -64,8 +64,11 @@ function getAllHtmlFiles(dir, fileList = []) {
  */
 function getRelativePrefix(filePath) {
     const dir = path.dirname(filePath);
+    // path.dirname retorna '.' para archivos en la raíz
     if (dir === '.' || dir === '') return './';
-    const depth = dir.split(/[/\\]/).length;
+    
+    // Filtramos partes vacías para contar la profundidad real
+    const depth = dir.split(/[/\\]/).filter(p => p && p !== '.').length;
     return '../'.repeat(depth);
 }
 
@@ -118,12 +121,12 @@ function injectHero(document, pageKey, prefix) {
     const heroRoot = document.getElementById('hero-root');
     if (!heroRoot || !pageKey || !pagesData[pageKey]?.hero) return;
 
-    const heroData = { ...pagesData[pageKey].hero };
-    ['imageSrc', 'imageSrcMobile'].forEach(prop => {
-        if (heroData[prop] && !heroData[prop].startsWith('http')) {
-            heroData[prop] = prefix + heroData[prop].replace(/^\//, '');
-        }
-    });
+    const originalHero = pagesData[pageKey].hero;
+    const heroData = {
+        ...originalHero,
+        imageSrc: resolveAsset(originalHero.imageSrc, prefix),
+        imageSrcMobile: originalHero.imageSrcMobile ? resolveAsset(originalHero.imageSrcMobile, prefix) : undefined
+    };
 
     heroRoot.innerHTML = getHeroHTML(heroData);
 }
@@ -142,7 +145,7 @@ function injectServices(document, pageKey, prefix) {
         const processedData = {
             ...data,
             link: resolveRoute(data.link, prefix),
-            image: data.image.startsWith('http') ? data.image : prefix + data.image.replace(/^\//, '')
+            image: resolveAsset(data.image, prefix)
         };
         grid.appendChild(new ServiceCard(processedData).render());
     });
@@ -161,7 +164,7 @@ function injectArticles(document, pageKey, prefix) {
         const processedData = {
             ...data,
             link: resolveRoute(data.link, prefix),
-            image: data.image.startsWith('http') ? data.image : prefix + data.image.replace(/^\//, '')
+            image: resolveAsset(data.image, prefix)
         };
         grid.appendChild(new ArticleCard(processedData).render());
     });

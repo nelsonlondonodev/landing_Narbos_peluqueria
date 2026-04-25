@@ -63,6 +63,27 @@ class App {
         return resolveRoute(path, this.appRoot);
     }
 
+    /**
+     * Resuelve profundamente todas las rutas de un objeto (src, poster, subImages).
+     * @param {Object} item 
+     */
+    resolveDeep(item) {
+        if (!item) return item;
+        const resolved = { ...item };
+        
+        if (resolved.src) resolved.src = this.resolvePath(resolved.src);
+        if (resolved.poster) resolved.poster = this.resolvePath(resolved.poster);
+        
+        if (resolved.subImages && Array.isArray(resolved.subImages)) {
+            resolved.subImages = resolved.subImages.map(sub => ({
+                ...sub,
+                src: this.resolvePath(sub.src)
+            }));
+        }
+        
+        return resolved;
+    }
+
     mountLayout() {
         const navbarRoot = document.getElementById('navbar-root');
         const footerRoot = document.getElementById('footer-root');

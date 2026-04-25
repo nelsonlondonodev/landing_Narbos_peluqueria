@@ -110,11 +110,7 @@ export class NailsHubController {
         const galleryRoot = document.getElementById('nails-gallery-root') || document.getElementById('bento-gallery-root');
         if (!galleryRoot || !this.config || !this.config.gallery) return;
 
-        const processedItems = this.config.gallery.map(item => ({
-             ...item,
-             src: this.app.resolvePath(item.src),
-             poster: item.poster ? this.app.resolvePath(item.poster) : undefined
-        }));
+        const processedItems = this.config.gallery.map(item => this.app.resolveDeep(item));
 
         const titleHTML = `
             <div class="text-center mb-12" data-animation="fadeInUp">

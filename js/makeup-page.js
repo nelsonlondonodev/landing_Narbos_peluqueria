@@ -145,10 +145,7 @@ function initGallery() {
         // Hydration check for gallery
         if (galleryRoot.children.length > 0) return;
 
-        const processedGallery = galleryData.map(item => ({
-            ...item,
-            src: window.narbosApp.resolvePath(item.src)
-        }));
+        const processedGallery = galleryData.map(item => window.narbosApp.resolveDeep(item));
 
         galleryRoot.innerHTML = getBentoGridHTML(processedGallery);
         

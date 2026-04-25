@@ -62,10 +62,7 @@ function initGallery() {
                 <p class="text-lg text-gray-700 max-w-2xl mx-auto">Resultados reales en cabellos reales.</p>
             </div>
         `;
-        const processedGallery = galleryData.map(item => ({
-            ...item,
-            src: window.narbosApp.resolvePath(item.src)
-        }));
+        const processedGallery = galleryData.map(item => window.narbosApp.resolveDeep(item));
 
         galleryRoot.innerHTML = titleHTML + getBentoGridHTML(processedGallery);
         initLightbox();
