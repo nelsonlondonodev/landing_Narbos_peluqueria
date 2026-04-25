@@ -4,7 +4,7 @@
  */
 export class HeaderController {
     constructor(headerElement) {
-        // Inicialización diferida para máxima compatibilidad con hidratación JS
+        // Inicialización inmediata: El Header ya viene en el HTML (SSG)
         this.DOM = {
             header: headerElement || document.querySelector(".site-header") || document.querySelector("header"),
             dropdownBtn: null,
@@ -14,11 +14,7 @@ export class HeaderController {
         if (this.DOM.header) {
             this.init();
         } else {
-            // Reintento silencioso único
-            setTimeout(() => {
-                this.DOM.header = this.DOM.header || document.querySelector(".site-header") || document.querySelector("header");
-                if (this.DOM.header) this.init();
-            }, 1000);
+            // console.warn("[HeaderController] Site header not found in DOM.");
         }
     }
 
