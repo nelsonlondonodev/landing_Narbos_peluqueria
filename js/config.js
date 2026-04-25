@@ -16,14 +16,18 @@
 
 /**
  * Configuración de entorno y Rutas Base.
- * Detecta si estamos en GitHub Pages para ajustar las rutas de assets.
  */
 const isGitHubPages = typeof window !== 'undefined' && window.location.hostname.includes('github.io');
-const isDevelopment = typeof window !== 'undefined' && 
-    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
 const repoName = '/landing_Narbos_peluqueria'; 
 
 export const BASE_PATH = isGitHubPages ? repoName : '';
+
+/**
+ * Normaliza un path eliminando slashes duplicados e iniciales.
+ * @param {string} path 
+ * @returns {string}
+ */
+const normalizePath = (path) => path.replace(/^\/+/, '').replace(/\/+/g, '/');
 
 /**
  * Resuelve una ruta de navegación (URL).
@@ -33,32 +37,21 @@ export const BASE_PATH = isGitHubPages ? repoName : '';
  */
 export const resolveRoute = (path, prefix = '') => {
     if (!path || path === '/' || path === '') return prefix || './';
-    
-    if (path.startsWith('http') || path.startsWith('mailto:') || path.startsWith('tel:')) return path;
-    if (path.startsWith('#')) return path;
+    if (path.startsWith('http') || path.startsWith('mailto:') || path.startsWith('tel:') || path.startsWith('#')) {
+        return path;
+    }
 
-    // 1. Limpiar el path de slashes iniciales y redundancias
-    let cleanPath = path.replace(/^\//, '');
-    
-    // 2. Normalizar Prefijo (asegurar que termine en / si existe)
-    let safePrefix = prefix;
-    if (safePrefix && !safePrefix.endsWith('/')) safePrefix += '/';
-    
-    // 3. Lógica de archivos físicos (.html)
-    // Si termina en /, apuntamos a index.html
+    let cleanPath = normalizePath(path);
+    let safePrefix = prefix ? (prefix.endsWith('/') ? prefix : `${prefix}/`) : '';
+
+    // Lógica de archivos físicos (.html)
     if (cleanPath.endsWith('/')) {
         cleanPath += 'index.html';
-    } 
-    // Si no tiene extensión, le ponemos .html
-    else if (!cleanPath.includes('.') && !cleanPath.endsWith('.html')) {
+    } else if (!cleanPath.includes('.') && !cleanPath.endsWith('.html')) {
         cleanPath += '.html';
     }
 
-    // 4. Construir ruta final y limpiar dobles slashes o puntos
-    let finalUrl = `${safePrefix}${cleanPath}`;
-    
-    // Eliminar redundancias de '././' que a veces ocurren por basePath manual
-    return finalUrl.replace(/\.\/\.\//g, './');
+    return `${safePrefix}${cleanPath}`.replace(/\.\/\.\//g, './');
 };
 
 /**
@@ -70,19 +63,18 @@ export const resolveAsset = (path, prefix = '') => {
     if (!path) return '';
     if (path.startsWith('http')) return path; 
     
-    const cleanPath = path.replace(/^\//, '');
-    const safePrefix = prefix && !prefix.endsWith('/') ? `${prefix}/` : prefix;
+    const cleanPath = normalizePath(path);
+    const safePrefix = prefix ? (prefix.endsWith('/') ? prefix : `${prefix}/`) : '';
     
     return `${safePrefix}${cleanPath}`;
 };
 
 /**
  * Configuración global del sitio.
- * Centraliza datos estáticos para facilitar el mantenimiento.
  */
 export const siteConfig = Object.freeze({
-    version: "2.6.3", // Versión actual del proyecto (Control Maestro)
-    basePath: BASE_PATH, // Exponer basePath para uso general
+    version: "2.6.4", // Versión actualizada
+    basePath: BASE_PATH,
     socialLinks: [
         {
             name: "WhatsApp",
@@ -114,3 +106,4 @@ export const siteConfig = Object.freeze({
         googleAnalyticsId: "G-7XLWJJBSDL"
     }
 });
+
