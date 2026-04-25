@@ -102,7 +102,7 @@ function renderMobileMenuHeader() {
 function renderMegaMenuDesktop(menuCategories, basePath) {
     const desktopMenuGrid = menuCategories.map(cat => `
         <div class="flex flex-col space-y-3">
-            <a href="${cat.link}" class="font-serif font-bold text-brand-green uppercase tracking-wider text-base border-b-2 border-brand-gold/30 pb-2 hover:text-brand-gold transition-colors block">
+            <a href="${resolveRoute(cat.link, basePath)}" class="font-serif font-bold text-brand-green uppercase tracking-wider text-base border-b-2 border-brand-gold/30 pb-2 hover:text-brand-gold transition-colors block">
                 ${cat.title}
             </a>
             <ul class="space-y-2">
