@@ -18,6 +18,24 @@
   --font-sans: "Montserrat", sans-serif;
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  --animate-fade-in: fade-in 0.5s ease-in-out;
+
+  @keyframes heroFadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  --animate-hero-up: heroFadeInUp 0.8s ease-out forwards;
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 1.5rem)); }
+  }
+  --animate-marquee: marquee-scroll 40s linear infinite;
 }
 
 @layer base {
@@ -62,7 +80,7 @@ body.page-is-exiting {
 
 /* --- Menú Móvil --- */
 body.mobile-menu-open {
-  @apply overflow-hidden; /* CORRECCIÓN: Bloquear scroll al abrir menú */
+  @apply overflow-hidden;
 }
 
 /* --- Site Header --- */
@@ -93,11 +111,6 @@ body.mobile-menu-open {
 /* --- Componentes Específicos --- */
 .review-slide { @apply animate-fade-in; }
 
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 .filter-btn-active {
   @apply bg-brand-green text-white;
 }
@@ -113,14 +126,8 @@ body.modal-open-layer-fix #app-wrapper {
 }
 
 /* Hero Animations */
-@keyframes heroFadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 .animate-hero-element {
-  @apply opacity-0;
-  animation: heroFadeInUp 0.8s ease-out forwards;
+  @apply opacity-0 animate-hero-up;
 }
 
 /* WhatsApp */
@@ -132,13 +139,8 @@ body.modal-open-layer-fix #app-wrapper {
 
 /* Marquee */
 .marquee-track {
-    @apply w-max;
-    animation: marquee-scroll 40s linear infinite;
-}
-
-@keyframes marquee-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-50% - 1.5rem)); }
+    @apply w-max animate-marquee;
 }
 /* purgecss end ignore */
+
 
