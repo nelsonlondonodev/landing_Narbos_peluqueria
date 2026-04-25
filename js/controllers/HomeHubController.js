@@ -36,6 +36,12 @@ export class HomeHubController {
     mountHomeServices() {
         const servicesGrid = document.getElementById('services-grid');
         if (servicesGrid && servicesData) {
+            // INTELLIGENT HYDRATION: Si ya hay contenido (inyectado por SSG), no re-renderizamos.
+            if (servicesGrid.children.length > 0) {
+                // console.log("[HomeHub] Services already present in HTML (SSG), skipping.");
+                return;
+            }
+
             servicesGrid.innerHTML = '';
             servicesData.forEach(data => {
                 const processedData = {

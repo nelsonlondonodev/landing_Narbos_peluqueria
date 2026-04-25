@@ -82,13 +82,18 @@ class App {
         const footerRoot = document.getElementById('footer-root');
         const contactRoot = document.getElementById('contact-root');
         
-        // FORCE HYDRATION: Clear existing content to avoid layout issues from partial refactors
-        if (navbarRoot) {
+        // INTELLIGENT HYDRATION: Solo inyectamos si el contenedor está vacío.
+        // Si el SSG ya puso el contenido, el JS no debe destruirlo.
+        if (navbarRoot && navbarRoot.children.length === 0) {
+            // console.log("[App] Injecting Navbar (Container was empty)");
             navbarRoot.innerHTML = getNavbarHTML(this.appRoot, this.isHomePage);
         }
-        if (footerRoot) {
+        
+        if (footerRoot && footerRoot.children.length === 0) {
+            // console.log("[App] Injecting Footer (Container was empty)");
             footerRoot.innerHTML = getFooterHTML(this.appRoot);
         }
+        
         if (contactRoot && contactRoot.children.length === 0) {
             contactRoot.innerHTML = getContactFormHTML();
         }
@@ -130,6 +135,9 @@ class App {
                 const imageSrc = this.resolvePath(heroData.imageSrc);
                 
                 heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
+                // console.log(`[App] Hero injected for ${pageKey}`);
+            } else {
+                // console.log(`[App] Hero already present in HTML (SSG), skipping injection.`);
             }
         }
     }
