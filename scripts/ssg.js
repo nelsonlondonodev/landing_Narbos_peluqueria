@@ -16,55 +16,34 @@ const __dirname = path.dirname(__filename);
 const DIST_DIR = path.join(__dirname, '../dist');
 
 /**
- * Configuración dinámica de rutas para SSG
+ * Escanea recursivamente el directorio dist para encontrar todos los archivos HTML.
  */
+function getAllHtmlFiles(dir, fileList = []) {
+    const files = fs.readdirSync(dir);
+    files.forEach(file => {
+        const filePath = path.join(dir, file);
+        if (fs.statSync(filePath).isDirectory()) {
+            if (file !== 'node_modules' && file !== '.git') {
+                getAllHtmlFiles(filePath, fileList);
+            }
+        } else if (file.endsWith('.html') && !file.includes('_templates')) {
+            const relativePath = path.relative(DIST_DIR, filePath);
+            fileList.push({
+                path: relativePath,
+                isHome: relativePath === 'index.html',
+                // La key se deriva del nombre del archivo o la carpeta
+                key: path.basename(file, '.html') === 'index' 
+                     ? (path.basename(path.dirname(filePath)) === 'dist' ? 'home' : path.basename(path.dirname(filePath)))
+                     : path.basename(file, '.html')
+            });
+        }
+    });
+    return fileList;
+}
+
 async function getPagesConfig() {
-    const basePages = [
-        { path: 'index.html', isHome: true, key: 'home' },
-        { path: 'peluqueria/index.html', key: 'peluqueria' },
-        { path: 'servicios/barberia/index.html', key: 'barberia' },
-        { path: 'nosotros.html', key: 'nosotros' },
-        { path: 'contacto.html', key: 'contacto' },
-        { path: 'blog/index.html', key: 'blog' },
-        
-        // Peluquería Específicos
-        { path: 'servicios/peluqueria/index.html', key: 'peluqueria' },
-        { path: 'servicios/peluqueria/balayage-mechas.html', key: 'balayage-mechas' },
-        { path: 'servicios/peluqueria/color-tinturas-cabello.html', key: 'color-tinturas-cabello' },
-        { path: 'servicios/peluqueria/cortes-de-pelo.html', key: 'cortes-de-pelo' },
-        { path: 'servicios/peluqueria/tratamientos-capilares.html', key: 'tratamientos-capilares' },
-
-        // Estética Específicos
-        { path: 'servicios/estetica/index.html', key: 'estetica' },
-        { path: 'servicios/estetica/limpieza-facial.html', key: 'limpieza-facial' },
-        { path: 'servicios/estetica/spa-facial-integral.html', key: 'spa-facial-integral' },
-        { path: 'servicios/estetica/cejas-y-pestanas.html', key: 'cejas-y-pestanas' },
-        { path: 'servicios/estetica/masajes-relajantes.html', key: 'masajes-relajantes' },
-
-        // Uñas Específicos
-        { path: 'servicios/unas-spa/index.html', key: 'unas-spa' },
-        { path: 'servicios/unas-spa/manicure-pedicure.html', key: 'manicure-pedicure' },
-        { path: 'servicios/unas-spa/unas-acrilicas-gel.html', key: 'unas-acrilicas-gel' },
-
-        // Maquillaje Específico
-        { path: 'servicios/maquillaje/index.html', key: 'maquillaje' },
-
-        // Rutas legacy o alias
-        { path: 'cortes-de-pelo-en-chia.html', key: 'cortes-de-pelo' },
-        { path: 'balayage-y-color-en-chia.html', key: 'balayage-mechas' },
-        { path: 'tratamientos-capilares-chia.html', key: 'tratamientos-capilares' }
-    ];
-
-    // Detectar automáticamente artículos del blog
-    const articlesDir = path.join(DIST_DIR, 'blog/articles');
-    if (fs.existsSync(articlesDir)) {
-        const articles = fs.readdirSync(articlesDir)
-            .filter(file => file.endsWith('.html'))
-            .map(file => ({ path: `blog/articles/${file}` }));
-        return [...basePages, ...articles];
-    }
-
-    return basePages;
+    console.log('🔍 Escaneando archivos HTML para procesamiento...');
+    return getAllHtmlFiles(DIST_DIR);
 }
 
 /**

@@ -49,6 +49,7 @@ export class UIService {
 
     /**
      * Configura el IntersectionObserver para animar elementos al hacer scroll.
+     * Optimizado: Eliminamos cálculos manuales (getBoundingClientRect) para evitar Layout Thrashing.
      */
     initScrollAnimations() {
         const animatedElements = document.querySelectorAll("[data-animation]");
@@ -63,26 +64,15 @@ export class UIService {
                 });
             },
             {
-                threshold: 0.05,
+                threshold: 0.1, // Un poco más de margen para asegurar visibilidad
                 rootMargin: '0px 0px -50px 0px'
             }
         );
 
-        // PHASE 1: Batch Read — Collect geometry without triggering writes
-        const viewportHeight = window.innerHeight;
-        const elementsWithVisibility = Array.from(animatedElements).map(el => ({
-            el,
-            isAboveFold: el.getBoundingClientRect().top < viewportHeight
-        }));
-
-        // PHASE 2: Batch Write — Apply classes/observe without interleaving reads
-        elementsWithVisibility.forEach(({ el, isAboveFold }) => {
-            if (isAboveFold) {
-                this.animateElement(el, observer);
-            } else {
-                el.classList.add("animation-hidden");
-                observer.observe(el);
-            }
+        // Observar todos los elementos. Los que ya están en el viewport se dispararán inmediatamente.
+        animatedElements.forEach(el => {
+            el.classList.add("animation-hidden"); // Ocultar por defecto para animar entrada
+            observer.observe(el);
         });
     }
 
