@@ -5,8 +5,8 @@
 @source "../blog/**/*.html";
 @source "../_templates/**/*.html";
 
-/* purgecss start ignore */
 @theme {
+  /* Brand Colors */
   --color-brand-green: #6B755A;
   --color-brand-light: #DED2C4;
   --color-brand-medium: #C5AB94;
@@ -14,35 +14,37 @@
   --color-brand-gray-lighter: #D3D3CB;
   --color-brand-gray-dark: #364041;
   --color-brand-red: #8B0000;
+
+  /* Typography */
   --font-serif: "Playfair Display", serif;
   --font-sans: "Montserrat", sans-serif;
+
+  /* Radius Overrides */
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
 
+  /* Custom Animations */
   @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
   }
-  --animate-fade-in: fade-in 0.5s ease-in-out;
-
+  
   @keyframes heroFadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  --animate-hero-up: heroFadeInUp 0.8s ease-out forwards;
 
   @keyframes marquee-scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(calc(-50% - 1.5rem)); }
   }
+
+  --animate-fade-in: fade-in 0.5s ease-in-out;
+  --animate-hero-up: heroFadeInUp 0.8s ease-out forwards;
   --animate-marquee: marquee-scroll 40s linear infinite;
 }
 
 @layer base {
-  :root {
-    --color-text-base: #1f2937;
-  }
-  
   body {
     @apply font-sans bg-white text-gray-800 antialiased;
   }
@@ -52,14 +54,14 @@
   }
 }
 
-/* Transiciones Globales */
+/* --- Global Utilities --- */
 .smooth-scroll { scroll-behavior: smooth; }
 
-body.page-is-exiting {
+.page-is-exiting {
     @apply opacity-0 transition-opacity duration-300 ease-in-out;
 }
 
-/* --- Navegación Activa --- */
+/* --- Navigation --- */
 .nav-link-active {
   @apply text-white font-bold scale-110;
 }
@@ -78,18 +80,14 @@ body.page-is-exiting {
   @apply scale-x-100 origin-bottom-left;
 }
 
-/* --- Menú Móvil --- */
-body.mobile-menu-open {
+/* --- Mobile Menu --- */
+.mobile-menu-open {
   @apply overflow-hidden;
 }
 
-/* --- Site Header --- */
+/* --- Layout Components --- */
 .site-header {
-  @apply bg-brand-green backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md h-[90px] flex items-center transition-all duration-300;
-}
-
-@media (min-width: 768px) {
-  .site-header { @apply h-[110px]; }
+  @apply bg-brand-green backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md h-[90px] md:h-[110px] flex items-center transition-all duration-300;
 }
 
 .site-header.header-scrolled {
@@ -101,14 +99,10 @@ body.mobile-menu-open {
 }
 
 #app-wrapper {
-  @apply pt-[90px];
+  @apply pt-[90px] md:pt-[110px];
 }
 
-@media (min-width: 768px) {
-  #app-wrapper { @apply pt-[110px]; }
-}
-
-/* --- Componentes Específicos --- */
+/* --- UI Elements --- */
 .review-slide { @apply animate-fade-in; }
 
 .filter-btn-active {
@@ -119,9 +113,9 @@ body.mobile-menu-open {
   @apply transition-all duration-400;
 }
 
-/* Modales */
-body.modal-open-layer-fix .site-header,
-body.modal-open-layer-fix #app-wrapper {
+/* Modals */
+.modal-open-layer-fix .site-header,
+.modal-open-layer-fix #app-wrapper {
     @apply z-0 pointer-events-none brightness-50 transition-all duration-300;
 }
 
@@ -132,10 +126,8 @@ body.modal-open-layer-fix #app-wrapper {
 
 /* WhatsApp */
 .whatsapp-float {
-    @apply fixed bottom-5 right-5 z-[1000] flex items-center justify-center w-[60px] h-[60px] bg-[#25D366] rounded-full shadow-lg transition-transform duration-300;
+    @apply fixed bottom-5 right-5 z-[1000] flex items-center justify-center w-[60px] h-[60px] bg-[#25D366] rounded-full shadow-lg transition-transform duration-300 hover:scale-110;
 }
-
-.whatsapp-float:hover { @apply scale-110; }
 
 /* Marquee & Brands Slider */
 .marquee-track {
@@ -145,7 +137,6 @@ body.modal-open-layer-fix #app-wrapper {
 .brands-slider {
     @apply flex w-full overflow-hidden relative;
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .brands-track {
@@ -155,6 +146,3 @@ body.modal-open-layer-fix #app-wrapper {
 .brands-item {
     @apply shrink-0 w-auto px-8 md:px-16 flex flex-col items-center justify-center box-border;
 }
-/* purgecss end ignore */
-
-
