@@ -36,6 +36,27 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 4. Sitemap: Debe generarse siempre apuntando al dominio raíz (ejecutar npm run build para asegurar la actualización).
 
 
+## 🔄 Refactorización Profunda de Rutas y Preparación para Optimización CSS (April 25, 2026) - v2.6.5 🚀
+
+### 1. Resolución de Rutas Universal (resolveDeep) 🛠️
+*   **El Problema:** Los posters de video y sub-imágenes en las galerías Bento (especialmente en el Hub de Peluquería) fallaban con error 404 debido a que solo se resolvía la ruta principal `src`.
+*   **Solución Quirúrgica:** Se implementó el método `window.narbosApp.resolveDeep(item)` en `App.js`. Este método escanea recursivamente el objeto del ítem y corrige las rutas de `src`, `poster` y `subImages` de forma automática.
+*   **Refactorización Unificada:** Se actualizaron todos los controladores de Hubs (`Hair`, `Esthetics`, `Barber`, `Nails`) y las páginas individuales (`hair-page.js`, `makeup-page.js`, `nails-page.js` y `service-page.js`) para usar este nuevo estándar, eliminando código redundante y parches locales.
+
+### 2. Estabilización de la Sección de Marcas (Brands) 🎨
+*   **Corrección de Duplicidad:** Se identificó un bug donde el carrusel de marcas se duplicaba masivamente en el DOM. Se restauraron los estilos críticos en `input.css` y se optimizó `BrandsSection.js` para limitar las repeticiones a lo estrictamente necesario para el efecto infinito.
+*   **Sincronización de Estilos:** Se recuperaron las clases de Tailwind v4 para el `brands-slider` que se habían perdido en refactorizaciones previas, devolviendo la fluidez visual a la sección.
+
+### 3. Próximos Pasos: Plan "Zero-Warning CSS" (Pendiente de Ejecución) 🛡️
+*   **Análisis de Advertencias:** Se detectaron 31 warnings en `input.css` relacionados con prefijos redundantes, selectores complejos con `@apply` y colisiones en el `@theme`.
+*   **Plan de Acción Robusto:**
+    *   **Fase 1:** Normalización del Bloque `@theme` para evitar colisiones de variables con el sistema de Tailwind v4.
+    *   **Fase 2:** Eliminación de prefijos de proveedor manuales (dejando que Lightning CSS gestione la compatibilidad).
+    *   **Fase 3:** Desacoplamiento de `@apply` en selectores de alta profundidad para mejorar la velocidad de compilación.
+    *   **Fase 4:** Saneamiento de animaciones y keyframes para una perfecta integración con el motor de utilidades.
+
+---
+
 ## 🔄 Stabilization of Dist Folder & SEO Hydration Fixes (April 25, 2026) - v2.6.4 🚀
 
 ### 1. Smart Hydration & Image Resolution Fix (Makeup Hub) ⚡
