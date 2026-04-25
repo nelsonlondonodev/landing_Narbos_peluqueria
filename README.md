@@ -1,4 +1,5 @@
-Narbo's Salón Spa - Web Oficial
+# Narbo's Salón Spa - Web Oficial
+> **Versión 2.6.5** | **Estado: Optimización Profesional Completa**
 
 Este repositorio contiene el código fuente de la Plataforma Web Integral de Narbo's Salón Spa, un ecosistema web robusto, escalable y totalmente responsivo, diseñado para ofrecer una experiencia de usuario premium y gestionar servicios avanzados.
 
@@ -29,6 +30,10 @@ Archivos sitemap.xml y robots.txt incluidos para una mejor indexación en motore
 
 🚨 Arquitectura de URLs y Reglas Críticas de SEO
 Para preservar el historial de indexación en Google Search Console y evitar errores de "propiedad no válida" o contenido duplicado, se DEBEN seguir estas reglas estrictas:
+- [x] Configuración de `.htaccess` profesional (v2.6.5).
+- [x] Despliegue automatizado con GitHub Actions (CI/CD).
+- [x] Saneamiento completo de `input.css` (Zero Warnings).
+- [x] Optimización de carga y caché del servidor.
 
 1. Dominio Principal: El sitio opera bajo https://narbossalon.com (SIN www). El archivo .htaccess está configurado para redirigir cualquier intento de acceso con www al dominio raíz.
 2. URLs Limpias: Se debe evitar el uso de index.html en los enlaces. El servidor redirige automáticamente cualquier petición a /index.html hacia la raíz /.
@@ -81,7 +86,7 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 *   **The Problem:** PageSpeed Insights reported high LCP (2.6s - 7.6s) and significant TBT across Nail and Aesthetic service pages. The root cause was `innerHTML` DOM trashing and dynamic JavaScript rendering of service cards blocking the parser.
 *   **Surgical Fixes:**
     *   **Nails Hub:** Extracted and physically injected the HTML grid for `unas-acrilicas-gel.html` (2 cards) and `manicure-pedicure.html` (8 cards).
-    *   **Esthetics Hub:** Hardcoded the top 3 macro-categories (Facial, Corporal, Depilación) directly into `/servicios/estetica/index.html` to instantly unblock the main thread.
+    *   **Esthetics Hub:** Hardcoded the top 3 macro-categories (Facial, Corporal, Depilación) directamente into `/servicios/estetica/index.html` to instantly unblock the main thread.
     *   **Spa Facial:** Pre-rendered the 4 core facial services directly into `spa-facial-integral.html`.
 *   **Controller Resilience:** Refactored `EstheticsHubController.js` and `NailsHubController.js` to detect pre-existing static DOM nodes. The scripts now purely "hydrate" the HTML (attaching Modal listeners) without destructive `innerHTML = ''` operations.
 *   **Result:** Reduced structural TBT to near 0ms, eliminated CLS layout shifts, and positioned these URLs to achieve the 90+ Green Score milestone on mobile.
@@ -569,7 +574,7 @@ Para llevar a Narbo's Salón Spa al siguiente nivel de conversión y eficiencia,
 *   **CSS:** Bumped `styles.css?v=1.3` → `?v=2.0` on all service pages for cache invalidation.
 *   **`LAYOUT_GUIDE.md`:** Updated to document `#app-wrapper padding-top` as canonical header offset pattern.
 
-*   **Commit:** `929f6ad`
+*   **Commit:** `929f6ad`.
 
 ### 4. Lesson Learned 📋
 
@@ -881,9 +886,9 @@ A fully automated customer retention system integrated with Supabase, n8n, and G
 - **Consistent Visuals:** Adjusted the Homepage Hero background opacity (`bg-white/90`) and styling to ensure a pixel-perfect match with the component-based Hero (`HeroSection.js`) used throughout the application.
 
 ### 4. Previous SEO Fixes 🔍
-- **Canonical & OG Correction:** Conducted a comprehensive audit of all service pages (`/peluqueria`, `/estetica`, `/barberia`, `/unas-spa`) and fixed critical inconsistencies in `<link rel="canonical">` and `<meta property="og:url">` tags.
+- **Canonical & OG Correction:** Conducted a comprehensive audit of all service pages (`/peluquería`, `/estética`, `/barbería`, `/uñas-spa`) and fixed critical inconsistencies in `<link rel="canonical">` and `<meta property="og:url">` tags.
     - Resolved typo: `narbosalon` -> `narbossalon` (missing 's').
-    - Standardized URLs: Ensured all canonical paths correctly point to their physical file locations (e.g., `/servicios/peluqueria/` instead of `/peluqueria/`).
+    - Standardized URLs: Ensured all canonical paths correctly point to their physical file locations (e.g., `/servicios/peluquería/` instead of `/peluquería/`).
 - **Full Schema Markup Coverage:** Implemented JSON-LD structured data on all remaining key pages to ensure 100% SEO coverage:
     - **About Us (`nosotros.html`):** Added `BeautySalon` and `AboutPage` schema.
     - **Contact (`contacto.html`):** Added `ContactPage` schema with `GeoCoordinates` and `OpeningHours`.
@@ -896,12 +901,12 @@ A fully automated customer retention system integrated with Supabase, n8n, and G
 
 ### 1. Functional Enhancements & UX 🛠️
 - **Home Decorations Animation:** Synchronized the floating leaves animation on the Homepage (`index.html`) to match the "Enter Flow" of the inner pages (`animate-leaf-enter`), addressing the "static" or "braked" initial feel (fly-in from external sides).
-- **Dynamic Breadcrumbs Logic:** Updated `service-page.js` to intelligently handle sub-service routes (e.g., distinguishing `/barberia/cortes` from generic paths), ensuring navigation trails are accurate and complete (e.g., `Home > Barbería > Cortes de Hombre`).
+- **Dynamic Breadcrumbs Logic:** Updated `service-page.js` to intelligently handle sub-service routes (e.g., distinguishing `/barbería/cortes` from generic paths), ensuring navigation trails are accurate and complete (e.g., `Home > Barbería > Cortes de Hombre`).
 - **Placeholder Bento Grid (Barbería):** Implemented a temporary yet polished Bento Grid for the "Cortes de Hombre" page using the brand logo in varied layouts (Vertical/Square/Horizontal). This allows visualizing the final structure and layout stability while real photographic assets are produced.
 - **Service Card Branding:** Standardized the "Arreglo de Barba" service card to use the brand logo with a dark theme variant (`variant: 'logo'`) instead of incorrect generic imagery.
 
 ### 2. Stability & Performance 🚀
-- **GLightbox Dependency Fix:** Resolved a critical "infinite retry loop" in the GLightbox loader by ensuring the library's CSS and JS dependencies are correctly injected into all service sub-pages (`estetica`, `barberia`).
+- **GLightbox Dependency Fix:** Resolved a critical "infinite retry loop" in the GLightbox loader by ensuring the library's CSS and JS dependencies are correctly injected into all service sub-pages (`estética`, `barbería`).
 - **Grid ID Correction:** Fixed a DOM ID mismatch in the Barber page that caused the "Women's Hair Services" grid to load instead of the "Barber Services".
 - **Console Cleanup:** Removed verbose initialization logs from production code to reduce browser console noise.
 
@@ -918,7 +923,7 @@ A fully automated customer retention system integrated with Supabase, n8n, and G
     - Restored **Floating Decorations (Parallax Leaves)** logic to work seamlessly with dynamic content injection.
     - Fixed `GLightbox` initialization errors on sub-pages by ensuring dependencies are present.
 
----
+***
 
 ## 🔄 Recent Updates (February 28, 2026)
 
@@ -1048,7 +1053,7 @@ A fully automated customer retention system integrated with Supabase, n8n, and G
     - **Optimización de Rutas:** Se completó la migración a rutas absolutas (`/images/...`) en la configuración de datos, eliminando la dependencia de hacks relativos (`../../`) y blindando la carga de imágenes desde cualquier nivel de profundidad de URL.
 
 - **Correcciones Críticas y Mejoras:** 🛠️
-    - **Rutas Relativas Dinámicas:** Se corrigió el algoritmo `calculateBasePath` en `main.js` para soportar correctamente la navegación en páginas anidadas profundas (ej: `/servicios/peluqueria/index.html`).
+    - **Rutas Relativas Dinámicas:** Se corrigió el algoritmo `calculateBasePath` en `main.js` para soportar correctamente la navegación en páginas anidadas profundas (ej: `/servicios/peluquería/index.html`).
     - **Optimización de Imports:** Eliminación de dependencias circulares y duplicadas en `TranslationService`.
     - **Refinamiento de UX (Barbería):** 💈
         - **Menú Simplificado:** Se actualizó la navegación principal, consolidando la sección de Barbería en un enlace único y directo "Corte y Barba" que dirige a la página especializada.
@@ -1074,7 +1079,7 @@ A fully automated customer retention system integrated with Supabase, n8n, and G
 
 ### 📝 Últimas Actualizaciones (8 de enero, 2026 - Parte 2)
 - **UX Multimedia ("Bento Grid" Premium):**
-    - Se transformó la galería tradicional de imágenes en un **Bento Grid** moderno en las páginas `peluqueria/index.html` y `cortes-de-pelo-en-chia.html`.
+    - Se transformó la galería tradicional de imágenes en un **Bento Grid** moderno en las páginas `peluquería/index.html` y `cortes-de-pelo-en-chia.html`.
     - **Video Híbrido:** Se integró contenido de video (`.mp4`) con **Lazy Loading Inteligente** (IntersectionObserver + Poster) para no afectar la velocidad de carga inicial (Core Web Vitals).
     - **SEO de Video:** Implementación de Schema Markup **VideoObject (JSON-LD)** para garantizar la indexación correcta en Google Search Console.
     - **Pinterest Mobile Layout:** Optimización específica para móviles, pasando de 1 columna a **2 columnas**, mejorando la densidad de contenido y la retención del usuario.
