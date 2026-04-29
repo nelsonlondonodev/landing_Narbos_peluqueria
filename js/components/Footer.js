@@ -1,4 +1,5 @@
 import { siteConfig } from '../config.js';
+import businessHours from '../data/business-hours.js';
 
 /**
  * Genera el HTML del Footer (Pie de página global).
@@ -17,6 +18,10 @@ export function getFooterHTML(basePath = './') {
 
             <div class="mb-6 text-brand-light/90">
                 ${renderAddress()}
+            </div>
+
+            <div class="mb-8 text-brand-light/80 text-sm">
+                ${renderHours()}
             </div>
             
             <p class="text-sm text-brand-light/80">
@@ -65,6 +70,34 @@ function renderAddress() {
             </svg>
             <span class="text-left md:text-center leading-tight border-b border-transparent group-hover:border-white/50 transition-colors duration-300">${siteConfig.contact.address}</span>
         </a>
+    `;
+}
+
+/**
+ * Renderiza los horarios de atención sincronizados.
+ */
+function renderHours() {
+    const { schedule, lastSync } = businessHours;
+    
+    // Agrupamos lunes a sábado si tienen el mismo horario
+    const monToSat = schedule.find(s => s.day === 'Lunes');
+    const sunday = schedule.find(s => s.day === 'Domingo');
+
+    const holiday = schedule.find(s => s.day === 'Festivos');
+
+    return `
+        <div class="flex flex-col items-center gap-1">
+            <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-bold uppercase tracking-wider text-xs opacity-70">Horario de atención</span>
+            </div>
+            <p>Lunes a Sábado: <span class="font-bold text-white">${monToSat.opens} AM – ${monToSat.closes} PM</span></p>
+            <p>Festivos: <span class="font-bold text-white">${holiday.opens} AM – ${holiday.closes} PM</span></p>
+            <p class="opacity-60 text-xs">Domingos: <span class="font-bold text-red-400">Cerrado</span></p>
+            <span class="text-[9px] opacity-30 mt-1 uppercase tracking-tighter">Sincronizado con Google • ${new Date(lastSync).toLocaleDateString()}</span>
+        </div>
     `;
 }
 
