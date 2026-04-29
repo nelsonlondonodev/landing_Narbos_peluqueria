@@ -4,58 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Google Tag Manager / Analytics -->
+    <!-- Google Tag Manager -->
     <meta name="google-site-verification" content="z7iMcq4xUxxKeXpDsVU32HJ_a0jXCwyOFmZi-7vvCKs" />
 
     <!-- SEO MASTER START -->
-    <title>{{TITLE}} | Narbo's Salón Spa</title>
-    <meta id="meta-description" name="description" content="{{DESCRIPTION}}" />
-    <link rel="canonical" href="https://narbossalon.com/blog/articles/{{SLUG}}" />
+    <title>{{titulo_articulo}} | Narbo's Salón Spa</title>
+    <meta id="meta-description" name="description" content="{{descripcion_seo}}" />
+    <link rel="canonical" href="https://narbossalon.com/blog/articles/{{slug_articulo}}" />
+    <link rel="preload" as="image" href="{{ruta_imagen_destacada}}" fetchpriority="high">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://narbossalon.com/blog/articles/{{SLUG}}" />
-    <meta property="og:title" content="{{TITLE}} | Narbo's Salón Spa" />
-    <meta property="og:description" content="{{DESCRIPTION}}" />
-    <meta property="og:image" content="https://narbossalon.com/{{IMAGE_PATH}}" />
+    <meta property="og:url" content="https://narbossalon.com/blog/articles/{{slug_articulo}}" />
+    <meta property="og:title" content="{{titulo_articulo}} | Narbo's Salón Spa" />
+    <meta property="og:description" content="{{descripcion_seo}}" />
+    <meta property="og:image" content="https://narbossalon.com{{ruta_imagen_destacada}}" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://narbossalon.com/blog/articles/{{SLUG}}" />
-    <meta property="twitter:title" content="{{TITLE}} | Narbo's Salón Spa" />
-    <meta property="twitter:description" content="{{DESCRIPTION}}" />
-    <meta property="twitter:image" content="https://narbossalon.com/{{IMAGE_PATH}}" />
+    <meta property="twitter:url" content="https://narbossalon.com/blog/articles/{{slug_articulo}}" />
+    <meta property="twitter:title" content="{{titulo_articulo}} | Narbo's Salón Spa" />
+    <meta property="twitter:description" content="{{descripcion_seo}}" />
+    <meta property="twitter:image" content="https://narbossalon.com{{ruta_imagen_destacada}}" />
     
-    <!-- Robots: This will be replaced by JSON-LD Schema in production articles -->
-    <meta name="robots" content="noindex, nofollow" />
+    <!-- JSON-LD Schema base se inyectará aquí en cada artículo -->
+    
     <!-- SEO MASTER END -->
 
+    <link rel="preload" href="../../css/styles.css?v=2.6.1" as="style" />
     <link rel="stylesheet" href="../../css/styles.css?v=2.6.1" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     
-    <!-- Optimización de Fuentes y CSS Externos -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Optimización de Fuentes (Montserrat y Playfair Display) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
     
     <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     </noscript>
 
     <style>
-        /* Optimización de CLS y Estilos Base */
+        /* Optimización de CLS */
         #navbar-root { min-height: 80px; }
-        #breadcrumbs-root { min-height: 48px; }
-        .prose h2 { margin-top: 3rem; margin-bottom: 1.25rem; font-family: 'Playfair Display', serif; }
-        .prose h3 { margin-top: 2rem; margin-bottom: 1rem; color: #1a202c; }
-        .prose p { margin-bottom: 1.5rem; line-height: 1.8; color: #4a5568; }
-        .highlight-box { background: #fdfaf3; border-left: 4px solid #6b7a5a; padding: 2rem; border-radius: 0.75rem; margin: 2rem 0; }
+        #breadcrumbs-root { min-height: 40px; }
     </style>
-</head>
-  <body class="font-sans bg-white text-slate-800">
+  </head>
+  <body class="font-sans bg-white text-gray-900">
     <header class="site-header">
       <div id="navbar-root"></div>
     </header>
@@ -67,71 +67,92 @@
       <main class="pb-16 md:pb-24 pt-8 md:pt-12">
         <div class="container mx-auto px-6 max-w-screen-md">
           <article>
-            <header class="text-center mb-12 animate__animated animate__fadeIn">
+            <header class="text-center mb-12 animate__animated animate__fadeInUp">
               <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6 leading-tight"
-                   data-breadcrumb="{{BREADCRUMB_TITLE}}">
-                {{TITLE}}
+                   data-breadcrumb="{{titulo_corto_breadcrumb}}">
+                {{titulo_articulo}}
               </h1>
               <p class="text-lg text-gray-600">
                 <span>Por el equipo de Narbo's Salón Spa</span>
-                • <span>{{DATE}}</span>
+                • <span>{{fecha_publicacion}}</span>
               </p>
               
               <!-- Botón de Compartir -->
               <div class="share-button-container mt-6 flex justify-center" 
-                   data-title="{{TITLE}} | Narbo's Salón Spa" 
-                   data-text="{{DESCRIPTION}}"></div>
+                   data-title="{{titulo_articulo}} | Narbo's Salón Spa" 
+                   data-text="{{descripcion_seo}}"></div>
             </header>
 
             <img
-              src="{{IMAGE_PATH}}"
-              alt="{{IMAGE_ALT}}"
+              src="{{ruta_imagen_destacada}}"
+              alt="{{alt_imagen_destacada}}"
               class="w-full max-w-lg mx-auto rounded-2xl shadow-xl mb-12 animate__animated animate__fadeInUp"
               style="animation-delay: 0.2s"
               loading="eager"
+              fetchpriority="high"
+              width="640"
+              height="640"
             />
 
-            <div class="prose prose-lg max-w-none text-gray-700">
+            <div class="max-w-none text-gray-800 leading-relaxed">
               
               <!-- Tabla de Contenidos -->
-              {{TOC}}
+              <div class="bg-white/50 p-6 rounded-lg shadow-md mb-12 border-l-4 border-brand-green animate__animated animate__fadeInUp">
+                <h3 class="text-2xl font-serif font-bold text-gray-900 mb-4">Tabla de contenidos</h3>
+                <ol class="list-decimal list-inside space-y-2 text-lg text-brand-green">
+                   <!-- Items dinámicos -->
+                   <li><a href="#seccion-1" class="hover:underline">Título de sección 1</a></li>
+                </ol>
+              </div>
 
               <!-- CONTENIDO DEL ARTÍCULO -->
               <div class="article-body">
-                {{ARTICLE_CONTENT}}
+                <section id="introduccion" class="mb-12">
+                   <p class="text-lg leading-relaxed mb-6">{{introduccion_texto}}</p>
+                </section>
+                
+                {{bloques_contenido_dinamico}}
               </div>
               
-              <!-- CTA de agendamiento -->
-              <div class="text-center mt-12 animate__animated animate__zoomIn">
-                <a
-                  href="https://wa.me/573123462618?text=Hola%2C%20le%C3%AD%20su%20art%C3%ADculo%20sobre%20{{TITLE}}%20y%20quiero%20agendar%20una%20cita."
-                  class="inline-block bg-brand-green text-white font-bold py-4 px-10 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
-                  >Agenda tu cita y asesoría personalizada 📲</a>
-              </div>
-
               <!-- FAQ SECTION -->
-              <section id="faq-section" class="mt-20 pt-16 border-t border-gray-100">
-                <h2 class="text-3xl font-serif font-bold text-gray-900 mb-10 text-center">Preguntas frecuentes</h2>
-                <div id="article-faq" class="max-w-3xl mx-auto space-y-4">
-                  <!-- FAQ 1 TEMPLATE -->
-                  <details class="group bg-white rounded-lg shadow-sm p-4 [&_summary::-webkit-details-marker]:hidden border border-brand-light/20 open:shadow-md transition-shadow duration-300">
-                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-brand-gray-dark">
-                      <h3 class="font-bold text-lg font-serif">{{PREGUNTA_1}}</h3>
-                      <span class="shrink-0 rounded-full bg-brand-light/20 p-1.5 text-brand-gray-dark sm:p-3 group-hover:bg-brand-light/40 transition-colors ">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 transition duration-300 group-open:-rotate-180 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              <section id="article-faq" class="mt-20 pt-16 border-t border-gray-100">
+                <h2 class="text-3xl font-serif font-bold text-gray-900 mb-10">Preguntas frecuentes</h2>
+                <div class="space-y-4">
+                  <!-- FAQ Item base -->
+                  <details class="group border-b border-gray-200 pb-4">
+                    <summary class="flex justify-between items-center font-bold text-gray-900 cursor-pointer list-none py-4 px-2 hover:bg-gray-50 transition-colors">
+                      <span>{{pregunta_frecuente}}</span>
+                      <span class="transition-transform group-open:rotate-180">
+                        <svg class="w-5 h-5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                       </span>
                     </summary>
-                    <div class="faq-content overflow-hidden">
-                      <p class="mt-4 leading-relaxed text-brand-gray-dark/80 ps-1 pb-4">
-                        {{RESPUESTA_1}}
-                      </p>
+                    <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                      <p class="py-4">{{respuesta_frecuente}}</p>
                     </div>
                   </details>
-                  <!-- Añade más items de FAQ copiando este detalle -->
                 </div>
               </section>
+
+              <!-- Localización SEO -->
+              <section id="ubicacion-seo" class="mt-16 pt-16 border-t border-gray-100">
+                <h2 class="text-3xl font-serif font-bold text-gray-900 mb-8 text-center">Nuestra ubicación en la sabana</h2>
+                <div class="rounded-xl overflow-hidden shadow-lg aspect-video">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.3509389748656!2d-74.039479227166!3d4.880758995095013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4079007a3b0ab7%3A0xb81b9628c4e7ebba!2zUGVsdXF1ZXLDrWEgfCBOYXJib-KAmXMgc2Fsw7NuIHNwYSB8IENoaWE!5e0!3m2!1ses-419!2ses!4v1773042307626!5m2!1ses-419!2ses" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                  </iframe>
+                </div>
+              </section>
+              
+              <!-- CTA final -->
+              <div class="text-center mt-12 animate__animated animate__zoomIn">
+                <a
+                  href="https://wa.me/573123462618?text=Hola%2C%20le%C3%AD%20el%20art%C3%ADculo%20sobre%20{{titulo_articulo}}%20y%20quiero%20más%20información."
+                  class="inline-block bg-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
+                >Agenda tu asesoría personalizada 📲</a>
+              </div>
             </div>
           </article>
 
@@ -142,7 +163,7 @@
       </main>
 
       <div id="footer-root"></div>
-    </div> <!-- End app-wrapper -->
+    </div>
 
     <script src="../../js/main.js?v=2.6.1" type="module"></script>
   </body>
