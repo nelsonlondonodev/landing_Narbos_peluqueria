@@ -39,7 +39,7 @@ const articles = [
         description: "Descubre las diferencias y ventajas del polygel vs uñas acrílicas. Guía experta para elegir tu manicure ideal en Narbo's Salón Spa en Chía.",
         image: '/images/pages/unas/acrilicas-polygel.webp',
         alt: "Manicura y Nail Art en Chía Narbo's Salón y Spa",
-        link: '/blog/articles/unas-acrilicas-vs-polygel-chia',
+        link: '/blog/articles/unas-acrilicas-vs-polygel-chia.html',
         featured: true
     },
     {
