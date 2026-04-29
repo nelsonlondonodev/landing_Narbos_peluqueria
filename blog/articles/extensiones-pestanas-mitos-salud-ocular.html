@@ -125,13 +125,16 @@
     </script>
     <!-- SEO MASTER END -->
 
+    <link rel="preload" href="../../css/styles.css?v=2.6.1" as="style" />
     <link rel="stylesheet" href="../../css/styles.css?v=2.6.1" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     
-    <!-- Optimización de Fuentes -->
+    <!-- Optimización de Fuentes y CSS Externos -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
     
@@ -185,7 +188,7 @@
               height="640"
             />
 
-            <div class="prose lg:prose-xl max-w-none text-gray-800">
+            <div class="max-w-none text-gray-800 leading-relaxed">
               
               <!-- Tabla de Contenidos -->
               <div class="bg-white/50 p-6 rounded-lg shadow-md mb-12 border-l-4 border-brand-green animate__animated animate__fadeInUp">
@@ -258,7 +261,7 @@
                   </p>
                 </section>
 
-                <section id="guia-cuidado" class="mb-12 bg-gray-50 p-8 rounded-2xl border border-gray-100">
+                <section id="guia-cuidado" class="mb-12 bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-inner">
                   <h2 class="text-3xl font-serif font-bold text-gray-900 mb-6">5. Guía Pro de Cuidado (Evergreen)</h2>
                   <p class="mb-6">Para mantener tu mirada impecable y tus ojos sanos, sigue estos mandamientos técnicos:</p>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -281,7 +284,7 @@
                   </div>
                 </section>
 
-                <section id="article-faq" class="mt-16 pt-16 border-t border-gray-100">
+                <section id="article-faq" class="mt-16 pt-16 border-t border-gray-100 animate__animated animate__fadeInUp">
                   <h2 class="text-3xl font-serif font-bold text-gray-900 mb-8">Preguntas frecuentes</h2>
                   <div class="space-y-4">
                     <details class="group border-b border-gray-200 pb-4">
@@ -293,8 +296,8 @@
                           </svg>
                         </span>
                       </summary>
-                      <div class="px-4 text-gray-700 leading-relaxed py-4">
-                        Recomendamos un mantenimiento cada <strong>15 a 21 días</strong>. Esto permite reponer las extensiones que han caído por el ciclo natural y retirar aquellas que han crecido demasiado y podrían desestabilizar la pestaña natural.
+                      <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                        <p class="py-4">Recomendamos un mantenimiento cada <strong>15 a 21 días</strong>. Esto permite reponer las extensiones que han caído por el ciclo natural y retirar aquellas que han crecido demasiado y podrían desestabilizar la pestaña natural.</p>
                       </div>
                     </details>
                     <details class="group border-b border-gray-200 pb-4">
@@ -306,10 +309,21 @@
                           </svg>
                         </span>
                       </summary>
-                      <div class="px-4 text-gray-700 leading-relaxed py-4">
-                        No es recomendable. Las extensiones ya aportan el volumen y largo deseado. El uso de pestañina (especialmente las waterproof) dificulta la limpieza y genera grumos que dañan la retención y la salud del vello.
+                      <div class="faq-content overflow-hidden px-4 text-gray-700 leading-relaxed">
+                        <p class="py-4">No es recomendable. Las extensiones ya aportan el volumen y largo deseado. El uso de pestañina (especialmente las waterproof) dificulta la limpieza y genera grumos que dañan la retención y la salud del vello.</p>
                       </div>
                     </details>
+                  </div>
+                </section>
+
+                <!-- Localización SEO -->
+                <section id="ubicacion-seo" class="mt-16 pt-16 border-t border-gray-100">
+                  <h2 class="text-3xl font-serif font-bold text-gray-900 mb-8">Nuestra ubicación en la sabana</h2>
+                  <div class="rounded-xl overflow-hidden shadow-lg aspect-video">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.3509389748656!2d-74.039479227166!3d4.880758995095013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4079007a3b0ab7%3A0xb81b9628c4e7ebba!2zUGVsdXF1ZXLDrWEgfCBOYXJib-KAmXMgc2Fsw7NuIHNwYSB8IENoaWE!5e0!3m2!1ses-419!2ses!4v1773042307626!5m2!1ses-419!2ses" 
+                      width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                   </div>
                 </section>
 
