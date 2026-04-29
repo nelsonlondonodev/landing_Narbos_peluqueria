@@ -19,6 +19,18 @@
  */
 const articles = [
     {
+        id: 'extensiones-pestanas-mitos-salud-ocular',
+        date: '29 de abril de 2026',
+        isoDate: '2026-04-29',
+        category: 'Cejas y Pestañas',
+        title: 'Extensiones de pestañas: la verdad técnica sobre el mito de la pérdida natural',
+        description: "¿Las extensiones dañan la pestaña natural? Descubre la verdad científica sobre el ciclo capilar y salud ocular en esta guía técnica perenne.",
+        image: '/blog/articles/images/extensiones-pestanas-salud-ocular.webp',
+        alt: "Salud ocular y extensiones de pestañas en Narbo's Salón Spa Chía",
+        link: '/blog/articles/extensiones-pestanas-mitos-salud-ocular.html',
+        featured: true
+    },
+    {
         id: 'unas-acrilicas-vs-polygel-chia',
         date: '20 de abril de 2026',
         isoDate: '2026-04-20',
