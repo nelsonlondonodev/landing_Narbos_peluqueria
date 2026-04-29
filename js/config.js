@@ -105,7 +105,8 @@ export const siteConfig = Object.freeze({
         email: "citas@narbossalon.com",
         address: "Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118, Chía, Cundinamarca, Colombia.",
         mapsLink: "https://maps.app.goo.gl/tuLinkDeMaps",
-        googleAnalyticsId: "G-7XLWJJBSDL"
+        googleAnalyticsId: "G-7XLWJJBSDL",
+        googleMapsApiKey: "AIzaSyDU2lYVfhSyR6KIYdJDizFfneY6DUB1kZk"
     }
 });
 

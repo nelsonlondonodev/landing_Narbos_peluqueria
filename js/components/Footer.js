@@ -10,7 +10,7 @@ export function getFooterHTML(basePath = './') {
     const year = new Date().getFullYear();
 
     return `
-    <footer class="bg-gradient-to-t from-brand-gray-dark to-brand-green text-white py-12">
+    <footer class="bg-gradient-to-t from-brand-gray-dark to-brand-green text-white py-12" data-dynamic-hours>
         <div class="container mx-auto px-6 text-center max-w-screen-xl">
             <div class="flex justify-center space-x-6 mb-6">
                 ${renderSocialLinks()}
@@ -96,7 +96,7 @@ function renderHours() {
             <p>Lunes a Sábado: <span class="font-bold text-white">${monToSat.opens} AM – ${monToSat.closes} PM</span></p>
             <p>Festivos: <span class="font-bold text-white">${holiday.opens} AM – ${holiday.closes} PM</span></p>
             <p class="opacity-60 text-xs">Domingos: <span class="font-bold text-red-400">Cerrado</span></p>
-            <span class="text-[9px] opacity-30 mt-1 uppercase tracking-tighter">Sincronizado con Google • ${new Date(lastSync).toLocaleDateString()}</span>
+            <span class="sync-timestamp text-[9px] opacity-30 mt-1 uppercase tracking-tighter">Sincronizado con Google • ${new Date(lastSync).toLocaleDateString()}</span>
         </div>
     `;
 }

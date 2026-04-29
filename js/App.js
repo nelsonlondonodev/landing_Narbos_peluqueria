@@ -13,6 +13,7 @@ import { pagesData } from './data/pagesData.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { AnalyticsService } from './services/AnalyticsService.js';
 import { HomeHubController } from './controllers/HomeHubController.js';
+import { HoursController } from './controllers/HoursController.js';
 
 class App {
     constructor() {
@@ -126,9 +127,12 @@ class App {
     }
 
     initCoreComponents() {
-        const components = [MobileMenu, WhatsAppButton, HeaderController, PageTransitionController];
+        const components = [MobileMenu, WhatsAppButton, HeaderController, PageTransitionController, HoursController];
         components.forEach(Comp => {
-            try { new Comp(); } catch(e) {}
+            try { 
+                const instance = new Comp();
+                if (instance.init) instance.init();
+            } catch(e) {}
         });
         try { new StoreBadge().init(); } catch(e) {}
     }
