@@ -137,6 +137,36 @@ Para preservar el historial de indexación en Google Search Console y evitar err
 *   **Visual Schedule:** Updated the visual "Horario de atención" card in `contacto.html` and other pages to show Sunday as **Cerrado** (highlighted with `text-red-500` for prominence).
 *   **FAQ Content:** Synchronized all visible FAQ answers across `index.html`, `contacto.html`, and `nosotros.html` to reflect the new rest day.
 
+---
+
+## 🔄 Automated Business Hours Sync (April 29, 2026) - Google Business Integration (v2.6.5) 🚀
+
+### 1. Hybrid Sync Architecture (SSG + Live) 🌐
+*   **Static Generation (SEO):** Implemented `scripts/sync-google-hours.js`. This script runs during `npm run build`, fetches the latest hours from Google Business Profile, and hardcodes them into the HTML. This ensures:
+    *   **Zero-Cost API:** Minimum usage of Google Cloud credits.
+    *   **SEO Excellence:** AI and Search Engines see the correct, updated text without executing JS.
+*   **Dynamic Hydration (Live Experience):** Developed `HoursController.js` and `GoogleMapsService.js`. 
+    *   **Smart Cache:** The browser caches Google data for 12 hours.
+    *   **Real-time Accuracy:** If you change your hours in Google, the website updates automatically for users without a new build.
+    *   **Consistent Formatting:** Standardized everything to the Colombian 12-hour (AM/PM) format (e.g., 7:00 AM – 8:00 PM).
+
+### 2. Holiday Automation 🇨🇴
+*   **Auto-Detection:** The system now correctly identifies and displays holiday hours (**9:00 AM – 6:00 PM**) instead of showing "Closed".
+*   **Schema & Meta Synchronization:** JSON-LD structured data and FAQ sections are automatically updated to reflect these hours, improving Local SEO visibility during peak holiday dates.
+
+### 3. Security & Infrastructure 🛡️
+*   **Google Cloud Protection:** Integrated Google Places API restricted by domain (`*.narbossalon.com/*`) to prevent unauthorized usage.
+*   **Environment Management:** Secure API Key storage using `.env` for the build pipeline.
+
+---
+
+## 🔄 Recent Updates (April 25, 2026) - Part 3: SEO & Local Authority 🚀
+
+### 1. Article Optimization (Pestañas) 👁️
+*   **SEO Refactor:** Corrected grammar (Sentence case) and optimized meta-descriptions for the "Extensiones de Pestañas" article.
+*   **Schema Sync:** Updated FAQ and WebPage JSON-LD schemas to match the new content.
+*   **WPO (Performance):** Converted hero images to WebP (66KB), reducing article weight by 65%.
+
 ### 2. SEO & Technical Synchronization 🔍
 *   **Massive Schema Audit:** Performed a surgical removal of Sunday from `openingHoursSpecification` across the entire project, including the Home, Contact, About, and all Service Hubs (Makeup, Hairdressing).
 *   **Rich Snippet Protection:** Updated JSON-LD `@graph` structures to ensure Google Search Console and local search results accurately reflect that the business is closed on Sundays, preventing potential customer confusion and improving SEO consistency.
