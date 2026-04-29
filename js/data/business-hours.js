@@ -1,58 +1,58 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-04-29T09:32:39.385Z
+ * Última sincronización con Google Business Profile: 2026-04-29T09:36:38.868Z
  */
 const businessHours = {
-    "lastSync": "2026-04-29T09:32:39.385Z",
+    "lastSync": "2026-04-29T09:36:38.868Z",
     "source": "Google Business Profile",
     "status": "OPEN",
     "schedule": [
         {
             "day": "Lunes",
-            "opens": "07:00",
-            "closes": "20:00",
+            "opens": "7:00 AM",
+            "closes": "8:00 PM",
             "closed": false
         },
         {
             "day": "Martes",
-            "opens": "07:00",
-            "closes": "20:00",
+            "opens": "7:00 AM",
+            "closes": "8:00 PM",
             "closed": false
         },
         {
             "day": "Miércoles",
-            "opens": "07:00",
-            "closes": "20:00",
+            "opens": "7:00 AM",
+            "closes": "8:00 PM",
             "closed": false
         },
         {
             "day": "Jueves",
-            "opens": "07:00",
-            "closes": "20:00",
+            "opens": "7:00 AM",
+            "closes": "8:00 PM",
             "closed": false
         },
         {
             "day": "Viernes",
-            "opens": "07:00",
-            "closes": "20:00",
+            "opens": "7:00 AM",
+            "closes": "8:00 PM",
             "closed": false
         },
         {
             "day": "Sábado",
-            "opens": "07:00",
-            "closes": "20:00",
+            "opens": "7:00 AM",
+            "closes": "8:00 PM",
             "closed": false
         },
         {
             "day": "Domingo",
-            "opens": "00:00",
-            "closes": "00:00",
+            "opens": "Cerrado",
+            "closes": "Cerrado",
             "closed": true
         },
         {
             "day": "Festivos",
-            "opens": "09:00",
-            "closes": "18:00",
+            "opens": "9:00 AM",
+            "closes": "6:00 PM",
             "closed": false
         }
     ]

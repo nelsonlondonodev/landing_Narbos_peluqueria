@@ -93,8 +93,8 @@ function renderHours() {
                 </svg>
                 <span class="font-bold uppercase tracking-wider text-xs opacity-70">Horario de atención</span>
             </div>
-            <p>Lunes a Sábado: <span class="font-bold text-white">${monToSat.opens} AM – ${monToSat.closes} PM</span></p>
-            <p>Festivos: <span class="font-bold text-white">${holiday.opens} AM – ${holiday.closes} PM</span></p>
+            <p>Lunes a Sábado: <span class="font-bold text-white">7:00 AM – 8:00 PM</span></p>
+            <p>Festivos: <span class="font-bold text-white">9:00 AM – 6:00 PM</span></p>
             <p class="opacity-60 text-xs">Domingos: <span class="font-bold text-red-400">Cerrado</span></p>
             <span class="sync-timestamp text-[9px] opacity-30 mt-1 uppercase tracking-tighter">Sincronizado con Google • ${new Date(lastSync).toLocaleDateString()}</span>
         </div>

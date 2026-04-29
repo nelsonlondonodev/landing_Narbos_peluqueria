@@ -29,14 +29,14 @@ async function syncHours() {
             source: 'Google Business Profile',
             status: 'OPEN', // Estado dinámico
             schedule: [
-                { day: 'Lunes', opens: '07:00', closes: '20:00', closed: false },
-                { day: 'Martes', opens: '07:00', closes: '20:00', closed: false },
-                { day: 'Miércoles', opens: '07:00', closes: '20:00', closed: false },
-                { day: 'Jueves', opens: '07:00', closes: '20:00', closed: false },
-                { day: 'Viernes', opens: '07:00', closes: '20:00', closed: false },
-                { day: 'Sábado', opens: '07:00', closes: '20:00', closed: false },
-                { day: 'Domingo', opens: '00:00', closes: '00:00', closed: true },
-                { day: 'Festivos', opens: '09:00', closes: '18:00', closed: false }
+                { day: 'Lunes', opens: '7:00 AM', closes: '8:00 PM', closed: false },
+                { day: 'Martes', opens: '7:00 AM', closes: '8:00 PM', closed: false },
+                { day: 'Miércoles', opens: '7:00 AM', closes: '8:00 PM', closed: false },
+                { day: 'Jueves', opens: '7:00 AM', closes: '8:00 PM', closed: false },
+                { day: 'Viernes', opens: '7:00 AM', closes: '8:00 PM', closed: false },
+                { day: 'Sábado', opens: '7:00 AM', closes: '8:00 PM', closed: false },
+                { day: 'Domingo', opens: 'Cerrado', closes: 'Cerrado', closed: true },
+                { day: 'Festivos', opens: '9:00 AM', closes: '6:00 PM', closed: false }
             ]
         };
 
