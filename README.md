@@ -1,5 +1,24 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.6.5** | **Estado: Optimización Profesional Completa**
+> **Versión 2.6.6** | **Estado: Optimización Profesional Completa**
+
+## 🔄 404 Navigation Fix & Production Deployment (April 29, 2026) - v2.6.6 🚀
+
+### 1. Fix: Hardcoded Links & Local 404s 🚑
+*   **The Problem:** Service cards in the Estética and Peluquería hubs were failing with 404 errors in local development (Live Server) because the links lacked the `.html` extension (e.g., `href="depilacion-corporal"`).
+*   **Surgical Fix:** Added the `.html` extension to all hardcoded service card links in the source files (`servicios/estetica/index.html` and `servicios/peluqueria/index.html`).
+*   **Why?** While the production server (Hostinger) handles extension-less URLs via `.htaccess`, local servers require the physical extension to resolve the file correctly. Adding the extension provides compatibility for both environments without impacting SEO (as the `.htaccess` redirects `.html` to the clean version).
+
+### 2. SEO & Sitemap Synchronization 🔍
+*   **Sitemap Update:** Regenerated the `sitemap.xml` using the build pipeline, ensuring the "Depilación Corporal" service and other updated routes are correctly indexed for Google.
+*   **Version Sync:** Synchronized the project version to **v2.6.6** across `package.json`, `js/config.js`, and the `.htaccess` configuration.
+
+### 3. Production Deployment 🏗️
+*   **Branch Parity:** Successfully merged the `develop` branch into `main`.
+*   **CI/CD Trigger:** Pushed to `main`, activating the GitHub Action for automated deployment to Hostinger.
+*   **Result:** All navigation errors are resolved, and the site is 100% synchronized for production.
+
+---
+
 
 Este repositorio contiene el código fuente de la Plataforma Web Integral de Narbo's Salón Spa, un ecosistema web robusto, escalable y totalmente responsivo, diseñado para ofrecer una experiencia de usuario premium y gestionar servicios avanzados.
 
