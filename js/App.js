@@ -131,10 +131,15 @@ class App {
         components.forEach(Comp => {
             try { 
                 const instance = new Comp();
-                if (instance.init) instance.init();
-            } catch(e) {}
+                // Solo llamamos a init si el componente no se auto-inicializó
+                if (typeof instance.init === 'function') {
+                    instance.init();
+                }
+            } catch(e) {
+                console.error(`[App] Error inicializando componente ${Comp.name}:`, e);
+            }
         });
-        try { new StoreBadge().init(); } catch(e) {}
+        try { new StoreBadge().init(); } catch(e) { console.error(`[App] Error inicializando StoreBadge:`, e); }
     }
 
     initInteractiveComponents() {
@@ -257,4 +262,3 @@ class App {
 }
 
 export { App };
-

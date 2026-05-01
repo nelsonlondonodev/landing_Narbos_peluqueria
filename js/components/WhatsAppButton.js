@@ -11,14 +11,15 @@ export class WhatsAppButton {
         this.elements = {};
         // Centralizamos la configuración aquí
         this.waConfig = siteConfig.socialLinks.find(s => s.name === "WhatsApp") || { url: `https://wa.me/${siteConfig.contact.whatsapp}` };
-        this.init();
+        this.isInitialized = false;
     }
 
     init() {
-        if (this.shouldHide()) return;
+        if (this.isInitialized || this.shouldHide()) return;
         this.render();
         this.bindElements();
         this.setupEventListeners();
+        this.isInitialized = true;
     }
 
     /**
