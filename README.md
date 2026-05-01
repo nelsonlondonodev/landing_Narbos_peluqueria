@@ -50,7 +50,7 @@ Archivos sitemap.xml y robots.txt incluidos para una mejor indexación en motore
 🚨 Arquitectura de URLs y Reglas Críticas de SEO
 Para preservar el historial de indexación en Google Search Console y evitar errores de "propiedad no válida" o contenido duplicado, se DEBEN seguir estas reglas estrictas:
 - [x] Configuración de `.htaccess` profesional (v2.6.5).
-- [x] Despliegue automatizado con GitHub Actions (CI/CD).
+- [x] Despliegue automatizado con GitHub Actions (CI/CD) vía FTPS (Puerto 21) a la raíz (./).
 - [x] Saneamiento completo de `input.css` (Zero Warnings).
 - [x] Optimización de carga y caché del servidor.
 
