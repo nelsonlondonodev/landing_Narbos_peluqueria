@@ -1,10 +1,12 @@
 /**
- * VideoModal Component - Professional Version
+ * VideoModal Component - Professional Version (Refactored)
  * Handles YouTube video playback with guaranteed visibility and performance.
  */
 export class VideoModal {
     constructor() {
         this.modalId = 'video-modal-overlay';
+        this.containerId = 'video-modal-container';
+        this.iframeId = 'modal-youtube-iframe';
         this.isOpen = false;
     }
 
@@ -15,45 +17,12 @@ export class VideoModal {
     open(videoId) {
         if (this.isOpen) return;
 
-        // 1. Clean any existing modal first
-        this._destroyExisting();
-
-        // 2. Render structure without the iframe src yet
-        const overlay = this._renderBase(videoId);
-        document.body.appendChild(overlay);
-
-        // 3. Lock scroll safely
-        document.body.style.overflow = 'hidden';
-        this.isOpen = true;
-
-        // 4. Force Reflow to ensure transition works
-        void overlay.offsetWidth;
-
-        // 5. Activate visibility and animation
-        overlay.classList.remove('hidden');
-        overlay.classList.add('flex');
+        this._prepareDOM(videoId);
+        this._lockScroll();
+        this._animateIn();
+        this._initVideo(videoId);
         
-        // Use requestAnimationFrame for smoother entry
-        requestAnimationFrame(() => {
-            overlay.classList.add('opacity-100');
-            const container = overlay.querySelector('#video-modal-container');
-            if (container) {
-                container.classList.remove('scale-95', 'opacity-0');
-                container.classList.add('scale-100', 'opacity-100');
-            }
-        });
-
-        // 6. Load the iframe only AFTER the modal is starting to show
-        // and disable pointer events on it during the 300ms transition
-        const iframe = overlay.querySelector('#modal-youtube-iframe');
-        iframe.style.pointerEvents = 'none';
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`;
-
-        setTimeout(() => {
-            if (iframe) iframe.style.pointerEvents = 'auto';
-        }, 500);
-
-        this._attachEvents(overlay);
+        this.isOpen = true;
     }
 
     /**
@@ -61,73 +30,122 @@ export class VideoModal {
      */
     close() {
         const overlay = document.getElementById(this.modalId);
-        if (!overlay) {
-            this._restoreEnvironment();
-            return;
-        }
+        if (!overlay) return this._unlockScroll();
 
-        // 1. Fade out
-        overlay.classList.remove('opacity-100');
-        overlay.classList.add('opacity-0');
-        
-        const container = overlay.querySelector('#video-modal-container');
-        if (container) {
-            container.classList.remove('scale-100');
-            container.classList.add('scale-95');
-        }
+        this._animateOut(overlay);
+        this._stopVideo(overlay);
 
-        // 2. Stop audio immediately by removing iframe src
-        const iframe = overlay.querySelector('#modal-youtube-iframe');
-        if (iframe) iframe.src = '';
-
-        // 3. Cleanup after animation
         setTimeout(() => {
-            this._destroyExisting();
-            this._restoreEnvironment();
+            this._cleanup(overlay);
         }, 300);
     }
 
+    // --- Private Methods (Atomic Operations) ---
+
     /**
-     * Renders the base structure of the modal.
+     * Prepares the DOM by cleaning existing instances and injecting the new one.
      * @private
      */
-    _renderBase(videoId) {
+    _prepareDOM(videoId) {
+        this._destroyExisting();
+        const overlay = this._createOverlay(videoId);
+        document.body.appendChild(overlay);
+        this._attachEvents(overlay);
+    }
+
+    /**
+     * Creates the overlay element.
+     * @private
+     */
+    _createOverlay(videoId) {
         const overlay = document.createElement('div');
         overlay.id = this.modalId;
-        // Start hidden and with pointer-events-none
         overlay.className = 'fixed inset-0 z-[9999] hidden items-center justify-center bg-black/95 backdrop-blur-md opacity-0 transition-opacity duration-300 px-4 pointer-events-auto';
-        
-        overlay.innerHTML = `
-            <div class="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] transform scale-95 opacity-0 transition-all duration-500 ease-out" id="video-modal-container">
-                <!-- Close Button -->
-                <button id="close-video-modal" class="absolute top-4 right-4 z-[100] p-3 bg-white/10 hover:bg-brand-green text-white rounded-full transition-all duration-300 backdrop-blur-xl border border-white/20 group shadow-lg" aria-label="Cerrar video">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:rotate-90 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-
-                <!-- Iframe Placeholder -->
-                <iframe 
-                    id="modal-youtube-iframe"
-                    class="w-full h-full"
-                    src="" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-        `;
+        overlay.innerHTML = this._getTemplate(videoId);
         return overlay;
     }
 
     /**
-     * Cleans up events and state.
+     * Handles the entrance animations and reflow.
      * @private
      */
-    _restoreEnvironment() {
-        document.body.style.overflow = '';
+    _animateIn() {
+        const overlay = document.getElementById(this.modalId);
+        const container = document.getElementById(this.containerId);
+        
+        if (!overlay || !container) return;
+
+        overlay.classList.replace('hidden', 'flex');
+        void overlay.offsetWidth; // Force Reflow
+
+        requestAnimationFrame(() => {
+            overlay.classList.add('opacity-100');
+            container.classList.remove('scale-95', 'opacity-0');
+            container.classList.add('scale-100', 'opacity-100');
+        });
+    }
+
+    /**
+     * Handles exit animations.
+     * @private
+     */
+    _animateOut(overlay) {
+        overlay.classList.replace('opacity-100', 'opacity-0');
+        const container = overlay.querySelector(`#${this.containerId}`);
+        if (container) {
+            container.classList.replace('scale-100', 'scale-95');
+        }
+    }
+
+    /**
+     * Safely loads the YouTube iframe.
+     * @private
+     */
+    _initVideo(videoId) {
+        const iframe = document.getElementById(this.iframeId);
+        if (!iframe) return;
+
+        iframe.style.pointerEvents = 'none';
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`;
+
+        setTimeout(() => {
+            if (iframe) iframe.style.pointerEvents = 'auto';
+        }, 500);
+    }
+
+    /**
+     * Stops video playback by clearing the src.
+     * @private
+     */
+    _stopVideo(overlay) {
+        const iframe = overlay.querySelector(`#${this.iframeId}`);
+        if (iframe) iframe.src = '';
+    }
+
+    /**
+     * Cleans up the modal from the DOM and state.
+     * @private
+     */
+    _cleanup(overlay) {
+        overlay.remove();
+        this._unlockScroll();
         this.isOpen = false;
+    }
+
+    /**
+     * Locks body scroll.
+     * @private
+     */
+    _lockScroll() {
+        document.body.style.overflow = 'hidden';
+    }
+
+    /**
+     * Unlocks body scroll.
+     * @private
+     */
+    _unlockScroll() {
+        document.body.style.overflow = '';
     }
 
     /**
@@ -136,13 +154,11 @@ export class VideoModal {
      */
     _destroyExisting() {
         const existing = document.getElementById(this.modalId);
-        if (existing) {
-            existing.remove();
-        }
+        if (existing) existing.remove();
     }
 
     /**
-     * Attaches events for closing.
+     * Attaches click and key events.
      * @private
      */
     _attachEvents(overlay) {
@@ -154,17 +170,43 @@ export class VideoModal {
         };
 
         overlay.onclick = (e) => {
-            if (e.target.id === this.modalId) {
-                this.close();
-            }
+            if (e.target.id === this.modalId) this.close();
         };
 
         const keyHandler = (e) => {
-            if (e.key === 'Escape') {
+            if (e.key === 'Escape' && this.isOpen) {
                 this.close();
                 document.removeEventListener('keydown', keyHandler);
             }
         };
         document.addEventListener('keydown', keyHandler);
+    }
+
+    /**
+     * Returns the HTML template for the modal content.
+     * @private
+     */
+    _getTemplate(videoId) {
+        return `
+            <div class="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] transform scale-95 opacity-0 transition-all duration-500 ease-out" id="${this.containerId}">
+                <!-- Close Button -->
+                <button id="close-video-modal" class="absolute top-4 right-4 z-[100] p-3 bg-white/10 hover:bg-brand-green text-white rounded-full transition-all duration-300 backdrop-blur-xl border border-white/20 group shadow-lg" aria-label="Cerrar video">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:rotate-90 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <!-- YouTube Iframe -->
+                <iframe 
+                    id="${this.iframeId}"
+                    class="w-full h-full"
+                    src="" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        `;
     }
 }

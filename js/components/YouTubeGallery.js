@@ -4,6 +4,7 @@ import { VideoModal } from './VideoModal.js';
 /**
  * YouTubeGallery Component
  * Renders a grid of YouTube videos with premium styling and Lightbox support.
+ * Refactored for clean code and modularity.
  */
 export class YouTubeGallery {
     /**
@@ -13,6 +14,7 @@ export class YouTubeGallery {
     constructor(containerId, videoIds = []) {
         this.container = document.getElementById(containerId);
         this.videoIds = videoIds;
+        this.gridId = 'youtube-video-grid';
         this.youtubeUrl = siteConfig.socialLinks.find(l => l.name === 'YouTube')?.url || 'https://youtube.com';
         this.modal = new VideoModal();
     }
@@ -23,15 +25,24 @@ export class YouTubeGallery {
     render() {
         if (!this.container) return;
 
-        this.container.innerHTML = `
+        this.container.innerHTML = this._getLayout();
+        this._attachEvents();
+    }
+
+    // --- Private Methods ---
+
+    /**
+     * Returns the main section layout.
+     * @private
+     */
+    _getLayout() {
+        return `
             <div class="container mx-auto px-6 max-w-screen-xl">
                 ${this._renderHeader()}
                 ${this._renderGrid()}
                 ${this._renderFooterButton()}
             </div>
         `;
-
-        this._attachEvents();
     }
 
     /**
@@ -58,7 +69,7 @@ export class YouTubeGallery {
     _renderGrid() {
         const hasVideos = this.videoIds && this.videoIds.length > 0;
         return `
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="youtube-video-grid">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="${this.gridId}">
                 ${hasVideos 
                     ? this.videoIds.map(id => this._getVideoCard(id)).join('') 
                     : this._getEmptyState()}
@@ -92,13 +103,12 @@ export class YouTubeGallery {
      * @private
      */
     _getVideoCard(videoId) {
-        // Thumbnail de alta calidad de YouTube
         const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
         
         return `
             <div class="video-card relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white group cursor-pointer" 
                  data-video-id="${videoId}">
-                <!-- Thumbnail -->
+                <!-- Thumbnail with hover effect -->
                 <img src="${thumbnailUrl}" alt="Narbo's Salon Video" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
                 
                 <!-- Play Button Overlay -->
@@ -119,22 +129,18 @@ export class YouTubeGallery {
     }
 
     /**
-     * Adjunta los eventos de clic a las tarjetas de video.
+     * Adjunta los eventos de clic usando delegación sobre el grid.
      * @private
      */
     _attachEvents() {
-        const grid = this.container.querySelector('#youtube-video-grid');
+        const grid = this.container.querySelector(`#${this.gridId}`);
         if (!grid) return;
 
-        // Limpiar cualquier listener previo si fuera necesario (aunque innerHTML ya lo hace)
         grid.onclick = (e) => {
             const card = e.target.closest('.video-card');
             if (card) {
                 const videoId = card.getAttribute('data-video-id');
-                if (videoId) {
-                    console.log(`[YouTubeGallery] Abriendo video: ${videoId}`);
-                    this.modal.open(videoId);
-                }
+                if (videoId) this.modal.open(videoId);
             }
         };
     }
