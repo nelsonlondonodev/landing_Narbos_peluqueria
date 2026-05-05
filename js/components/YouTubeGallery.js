@@ -1,9 +1,9 @@
 import { siteConfig } from '../config.js';
+import { VideoModal } from './VideoModal.js';
 
 /**
  * YouTubeGallery Component
- * Renders a grid of YouTube videos with premium styling.
- * Refactored for modularity and clean code.
+ * Renders a grid of YouTube videos with premium styling and Lightbox support.
  */
 export class YouTubeGallery {
     /**
@@ -14,6 +14,7 @@ export class YouTubeGallery {
         this.container = document.getElementById(containerId);
         this.videoIds = videoIds;
         this.youtubeUrl = siteConfig.socialLinks.find(l => l.name === 'YouTube')?.url || 'https://youtube.com';
+        this.modal = new VideoModal();
     }
 
     /**
@@ -29,6 +30,8 @@ export class YouTubeGallery {
                 ${this._renderFooterButton()}
             </div>
         `;
+
+        this._attachEvents();
     }
 
     /**
@@ -55,7 +58,7 @@ export class YouTubeGallery {
     _renderGrid() {
         const hasVideos = this.videoIds && this.videoIds.length > 0;
         return `
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="youtube-video-grid">
                 ${hasVideos 
                     ? this.videoIds.map(id => this._getVideoCard(id)).join('') 
                     : this._getEmptyState()}
@@ -85,25 +88,55 @@ export class YouTubeGallery {
     }
 
     /**
-     * Genera el HTML de una tarjeta de video individual.
+     * Genera el HTML de una tarjeta de video individual (Fachada).
      * @private
      */
     _getVideoCard(videoId) {
+        // Thumbnail de alta calidad de YouTube
+        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+        
         return `
-            <div class="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white">
-                <iframe 
-                    class="w-full h-full absolute inset-0 z-10"
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/${videoId}?rel=0" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
+            <div class="video-card relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white group cursor-pointer" 
+                 data-video-id="${videoId}">
+                <!-- Thumbnail -->
+                <img src="${thumbnailUrl}" alt="Narbo's Salon Video" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                
+                <!-- Play Button Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0 transition-colors duration-300">
+                    <div class="w-16 h-16 bg-brand-green/90 text-white rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-125 group-hover:bg-brand-green ring-4 ring-white/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Glassmorphism Badge -->
+                <div class="absolute bottom-4 left-4 px-3 py-1 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 text-white text-xs font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Ver video
+                </div>
             </div>
         `;
+    }
+
+    /**
+     * Adjunta los eventos de clic a las tarjetas de video.
+     * @private
+     */
+    _attachEvents() {
+        const grid = this.container.querySelector('#youtube-video-grid');
+        if (!grid) return;
+
+        // Limpiar cualquier listener previo si fuera necesario (aunque innerHTML ya lo hace)
+        grid.onclick = (e) => {
+            const card = e.target.closest('.video-card');
+            if (card) {
+                const videoId = card.getAttribute('data-video-id');
+                if (videoId) {
+                    console.log(`[YouTubeGallery] Abriendo video: ${videoId}`);
+                    this.modal.open(videoId);
+                }
+            }
+        };
     }
 
     /**

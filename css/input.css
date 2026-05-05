@@ -146,3 +146,26 @@
 .brands-item {
     @apply shrink-0 w-auto px-8 md:px-16 flex flex-col items-center justify-center box-border;
 }
+
+/* --- Video Gallery & Modal --- */
+.video-card {
+    will-change: transform;
+}
+
+.video-card img {
+    will-change: transform, opacity;
+}
+
+.video-card:hover .w-16 {
+    animation: play-button-pulse 1.5s infinite;
+}
+
+@keyframes play-button-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(107, 117, 90, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(107, 117, 90, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(107, 117, 90, 0); }
+}
+
+#video-modal-container {
+    will-change: transform;
+}
