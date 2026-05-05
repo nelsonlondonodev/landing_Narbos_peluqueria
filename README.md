@@ -1,5 +1,5 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.6.6** | **Estado: Optimización Profesional Completa**
+> **Versión 2.6.8** | **Estado: Optimización Profesional Completa**
 
 ## 🔄 404 Navigation Fix & Production Deployment (April 29, 2026) - v2.6.6 🚀
 
@@ -16,6 +16,29 @@
 *   **Branch Parity:** Successfully merged the `develop` branch into `main`.
 *   **CI/CD Trigger:** Pushed to `main`, activating the GitHub Action for automated deployment to Hostinger.
 *   **Result:** All navigation errors are resolved, and the site is 100% synchronized for production.
+
+---
+
+## 🔄 YouTube Brand Channel & Video Gallery Integration (May 5, 2026) - v2.6.8 🚀
+
+### 1. YouTube Brand Channel Identity 🎨
+*   **Visual Assets:** Generated professional visual assets for the new YouTube channel (Avatar & Banner), optimized for the platform's dimensions.
+*   **Centralized Config:** Integrated the new YouTube channel ID (`UCzcJjM0hpoMy3C2pmk7Jfxg`) into `siteConfig.socialLinks`, ensuring global consistency across the site.
+
+### 2. Dynamic Video Gallery Component (`YouTubeGallery.js`) 🎥
+*   **Modular Architecture:** Developed a high-performance, modular component that renders a responsive grid of videos directly on the homepage.
+*   **Lazy Loading:** Integrated with `IntersectionObserver` via `HomeHubController.js` to ensure zero impact on initial LCP/TBT scores.
+*   **Mobile-First Interaction:** Optimized `iframe` attributes and removed CSS transformation layers to guarantee perfect play button responsiveness on touch devices.
+*   **Data Store:** Implemented `js/data/videoData.js` to decouple video content from application logic.
+
+### 3. SEO & Structured Data Enrichment 🔍
+*   **VideoObject Schema:** Updated the JSON-LD `VideoObject` in `index.html` with real YouTube metadata (titles, descriptions, and high-res thumbnails).
+*   **Chía Local SEO:** Synchronized video metadata with local keywords to strengthen brand authority in the Sabana region.
+
+### 4. Build & Deployment Optimization (v2.6.8) 🛠️
+*   **Version Bump:** Synchronized project manifests to **v2.6.8** across `package.json`, `js/config.js`, and `index.html`.
+*   **Social Icon Flexibility:** Refactored the `Footer` component to support custom SVG `viewBox` values, ensuring perfect visual parity for the YouTube icon.
+*   **Cache Busting:** Triggered a full build cycle to force immediate asset updates in production environments.
 
 ---
 
