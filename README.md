@@ -1,5 +1,5 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.6.8** | **Estado: Optimización Profesional Completa**
+> **Versión 2.6.9** | **Estado: Optimización Profesional Completa**
 
 ## 🔄 404 Navigation Fix & Production Deployment (April 29, 2026) - v2.6.6 🚀
 
@@ -16,6 +16,24 @@
 *   **Branch Parity:** Successfully merged the `develop` branch into `main`.
 *   **CI/CD Trigger:** Pushed to `main`, activating the GitHub Action for automated deployment to Hostinger.
 *   **Result:** All navigation errors are resolved, and the site is 100% synchronized for production.
+
+---
+
+## 🔄 Video Gallery Refactor & UX Stabilization (May 5, 2026) - v2.6.9 🚀
+
+### 1. Premium Video Modal Architecture (`VideoModal.js`) 🎥
+*   **Modular Design:** Created a standalone, atomic component to handle YouTube playback with a high-end Lightbox experience.
+*   **Safe-Show Protocol:** Implemented a mandatory "reflow" trigger (`void element.offsetWidth`) and `hidden/flex` state management to guarantee the modal is always visible and interactive, solving the legacy "frozen screen" bug.
+*   **Deferred Iframe Loading:** The YouTube player now only initializes its `src` AFTER the modal is visible, preventing "ghost audio" and improving initial page performance.
+
+### 2. UX/UI & Performance Excellence ✨
+*   **Interaction Polish:** Added a subtle pulse animation to the custom "Play" button and a premium *glassmorphism* backdrop (blur) for the modal.
+*   **Scroll & Event Guard:** Implemented a robust `try-finally` pattern to ensure body scroll is always restored and used `onclick` delegation to prevent event listener duplication.
+*   **Zero Ghost Clicks:** The modal now starts as `hidden`, ensuring it doesn't intercept user clicks while invisible.
+
+### 3. Clean Code & Maintainability 🛠️
+*   **Surgical Refactor:** Deconstructed monolithic methods into atomic operations (`_prepareDOM`, `_animateIn`, `_initVideo`, etc.).
+*   **Template Abstraction:** Extracted HTML templates from logic to improve readability and facilitate future UI updates.
 
 ---
 
