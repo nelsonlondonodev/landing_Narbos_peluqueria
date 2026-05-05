@@ -40,7 +40,7 @@ function renderSocialLinks() {
     const linksHTML = siteConfig.socialLinks.map(link => `
         <a href="${link.url}" target="_blank" class="text-brand-light/70 hover:text-white transition-colors duration-300">
             <span class="sr-only">${link.name}</span>
-            <svg fill="currentColor" class="w-6 h-6" viewBox="0 0 448 512" aria-hidden="true">
+            <svg fill="currentColor" class="w-6 h-6" viewBox="${link.viewBox || '0 0 448 512'}" aria-hidden="true">
                 <path d="${link.iconPath}"/>
             </svg>
         </a>
