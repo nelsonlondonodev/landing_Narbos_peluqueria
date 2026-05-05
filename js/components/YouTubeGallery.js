@@ -85,15 +85,17 @@ export class YouTubeGallery {
     }
 
     /**
-     * Generates HTML for a single video card.
+     * Genera el HTML de una tarjeta de video individual.
      * @private
      */
     _getVideoCard(videoId) {
         return `
-            <div class="relative group aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl" data-animation="fadeInUp">
+            <div class="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white">
                 <iframe 
-                    class="w-full h-full"
-                    src="https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&autohide=1" 
+                    class="w-full h-full absolute inset-0 z-10"
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/${videoId}?rel=0" 
                     title="YouTube video player" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
