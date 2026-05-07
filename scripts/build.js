@@ -161,6 +161,18 @@ const runBuild = async () => {
         log('Running SSG...');
         await execPromise('node scripts/ssg.js');
 
+        log('Injecting Secrets...', colors.magenta);
+        const apiKey = process.env.GOOGLE_MAPS_API_KEY || 'AIzaSyDU2lYVfhSyR6KIYdJDizFfneY6DUB1kZk'; 
+        const distJsFiles = getFiles(path.join(DIST_DIR, 'js'), '.js');
+        distJsFiles.forEach(file => {
+            let content = fs.readFileSync(file, 'utf8');
+            if (content.includes('___GOOGLE_MAPS_API_KEY___')) {
+                content = content.replace(/___GOOGLE_MAPS_API_KEY___/g, apiKey);
+                fs.writeFileSync(file, content, 'utf8');
+                log(`Clave inyectada en: ${path.basename(file)}`, colors.green);
+            }
+        });
+
         await versionAssets();
         log(`Build successful in ${((Date.now() - start) / 1000).toFixed(2)}s! 🚀`, colors.green);
     } catch (e) {
