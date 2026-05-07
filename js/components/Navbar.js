@@ -61,7 +61,7 @@ function renderLogo(basePath, isHome) {
     const logoSrc = resolveAsset('images/brand/logo_narbos.webp', basePath);
     return `
         <a href="${isHome ? '#' : basePath}" class="block group">
-             <img src="${logoSrc}" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56">
+             <img src="${logoSrc}" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56" decoding="async">
         </a>
     `;
 }
