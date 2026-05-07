@@ -1,5 +1,38 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.6.9** | **Estado: Optimización Profesional Completa**
+> **Versión 2.7.1** | **Estado: Optimización Profesional Completa**
+
+
+## 🔄 Secret Scanning & Build Injection Security (May 7, 2026) - v2.7.1 🛡️
+
+### 1. Public Secret Removal 🔐
+*   **The Problem:** GitHub detected the Google Maps API Key in plain text within `js/config.js`, triggering a security alert and exposing the account to potential misuse.
+*   **Surgical Fix:** Replaced the hardcoded key with a placeholder (`___GOOGLE_MAPS_API_KEY___`).
+
+### 2. Build-Time Secret Injection 🏗️
+*   **Dynamic Injection:** Modified `scripts/build.js` to automatically inject the API Key into the bundled JS files during the build process.
+*   **GitHub Actions Integration:** Updated `deploy.yml` to pass the `GOOGLE_MAPS_API_KEY` from GitHub Secrets to the build environment, ensuring the key remains encrypted and off-repo.
+*   **Local Env Support:** Introduced `.env` support and a `.env.example` template, with strict `.gitignore` rules to prevent credential leaks.
+
+### 3. Cleanup & Repository Hygiene 🧹
+*   **Legacy Asset Removal:** Deleted unused large assets like `barber-hero.webp` to reduce repository bloat.
+
+---
+
+## 🔄 Performance Optimization & Root Asset Cleanup (May 7, 2026) - v2.7.0 🚀
+
+### 1. Critical Asset Optimization (LCP Fix) ⚡
+*   **Logo Refactor:** Resized the "monster" logo (8000px) down to 800px. Reduced weight from 90KB to 8.7KB, eliminating a massive rendering bottleneck.
+*   **High-Res Hero Cleanup:** Detected and optimized multiple assets over 4000px wide in Barbería and Peluquería, achieving a ~90% reduction in memory footprint.
+*   **Async Decoding:** Added `decoding="async"` to the logo to unblock the main thread during initial paint.
+
+### 2. SSG for Home Services Grid 🏗️
+*   **Pre-rendered Grid:** Migrated the 5 main service cards from dynamic JS injection to static HTML in `index.html`. 
+*   **Why?** This ensures the services are visible on First Contentful Paint (FCP) and eliminates the layout shift (CLS) caused by dynamic hydration.
+
+### 3. Cache Management & Versioning 🛰️
+*   **Global Version Bump:** Synchronized the project to **v2.7.0** across all core files and implemented strict cache-busting for production assets.
+
+---
 
 ## 🔄 404 Navigation Fix & Production Deployment (April 29, 2026) - v2.6.6 🚀
 
