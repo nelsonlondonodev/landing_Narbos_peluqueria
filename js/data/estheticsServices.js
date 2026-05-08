@@ -77,6 +77,8 @@ export const estheticsServices = [
         description: 'Tratamientos reductores y reafirmantes para definir tu silueta.',
         image: '/images/pages/estetica/antes-despues-moldeamiento-corporal-chia.webp',
         imageAlt: 'Antes y después de tratamiento de moldeamiento corporal en Chía',
+        width: 720,
+        height: 1280,
         link: 'servicios/estetica/masajes-relajantes',
         price: `Sesión ${masterPrices.esthetics.corporal.moldeamiento}`,
         variant: 'standard'
@@ -112,6 +114,8 @@ export const estheticsServices = [
         description: 'Piel suave y libre de vello en una zona delicada.',
         image: '/images/pages/estetica/experiencia-spa-depilacion-sin-dolor.webp',
         imageAlt: 'Experiencia de depilación suave en axilas en Narbo\'s Salon Spa',
+        width: 784,
+        height: 1168,
         link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.axilas,
         variant: 'standard'
@@ -121,6 +125,8 @@ export const estheticsServices = [
         description: 'Suavidad total desde los muslos hasta los tobillos.',
         image: '/images/pages/estetica/depilacion-cera-piernas-chia.webp',
         imageAlt: 'Depilación con cera en piernas completas para una piel suave',
+        width: 784,
+        height: 1168,
         link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.piernaCompleta,
         variant: 'standard'
@@ -130,6 +136,8 @@ export const estheticsServices = [
         description: 'Depilación efectiva de rodillas hacia abajo.',
         image: '/images/pages/estetica/servicio-depilacion-integral-chia.webp',
         imageAlt: 'Tratamiento de depilación en media pierna con cera profesional',
+        width: 784,
+        height: 1168,
         link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.mediaPierna,
         variant: 'standard'
