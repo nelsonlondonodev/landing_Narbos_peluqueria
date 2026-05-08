@@ -580,6 +580,14 @@ export const pagesData = Object.freeze({
                 title: "Descontracturante",
                 subtitle: "Alivio y Bienestar",
                 alt: "Masaje descontracturante profesional"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/estetica/antes-despues-moldeamiento-corporal-chia.webp',
+                title: "Resultados Reales",
+                subtitle: "Moldeamiento Corporal",
+                alt: "Antes y después de tratamiento reductor y moldeamiento en Narbo's"
             }
         ]
     },
@@ -655,6 +663,30 @@ export const pagesData = Object.freeze({
                 src: 'images/brand/logo_narbos.webp',
                 title: "Narbo's Estética",
                 alt: "Logo Narbo's Salon"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/estetica/depilacion-cera-piernas-chia.webp',
+                title: "Piel de Seda",
+                subtitle: "Depilación con Cera",
+                alt: "Servicio de depilación con cera en piernas"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/estetica/experiencia-spa-depilacion-sin-dolor.webp',
+                title: "Experiencia Spa",
+                subtitle: "Depilación Axilas",
+                alt: "Depilación suave en axilas con técnicas de spa"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/estetica/servicio-depilacion-integral-chia.webp',
+                title: "Depilación Integral",
+                subtitle: "Máxima Suavidad",
+                alt: "Tratamiento de depilación integral con cera profesional"
             }
         ]
     },

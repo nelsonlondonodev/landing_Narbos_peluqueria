@@ -75,7 +75,7 @@ export const estheticsServices = [
     {
         title: 'Moldeamiento Corporal',
         description: 'Tratamientos reductores y reafirmantes para definir tu silueta.',
-        image: '/images/pages/estetica/radiofrecuencia-reduccion-corporal-chia.webp',
+        image: '/images/pages/estetica/antes-despues-moldeamiento-corporal-chia.webp',
         link: 'servicios/estetica/masajes-relajantes',
         price: `Sesión ${masterPrices.esthetics.corporal.moldeamiento}`,
         variant: 'standard'
@@ -109,26 +109,26 @@ export const estheticsServices = [
     {
         title: 'Depilación Axilas (Cera)',
         description: 'Piel suave y libre de vello en una zona delicada.',
-        image: '/images/brand/logo_narbos.webp',
+        image: '/images/pages/estetica/experiencia-spa-depilacion-sin-dolor.webp',
         link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.axilas,
-        variant: 'logo'
+        variant: 'standard'
     },
     {
         title: 'Depilación Pierna Completa (Cera)',
         description: 'Suavidad total desde los muslos hasta los tobillos.',
-        image: '/images/brand/logo_narbos.webp',
+        image: '/images/pages/estetica/depilacion-cera-piernas-chia.webp',
         link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.piernaCompleta,
-        variant: 'logo'
+        variant: 'standard'
     },
     {
         title: 'Depilación Media Pierna (Cera)',
         description: 'Depilación efectiva de rodillas hacia abajo.',
-        image: '/images/brand/logo_narbos.webp',
+        image: '/images/pages/estetica/servicio-depilacion-integral-chia.webp',
         link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.mediaPierna,
-        variant: 'logo'
+        variant: 'standard'
     },
     {
         title: 'Depilación Bikini Parcial (Cera)',
