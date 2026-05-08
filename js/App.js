@@ -187,17 +187,7 @@ class App {
             new OxidationCalculator();
         });
         
-        // Decoraciones (Idle)
-        const initDecorations = async () => {
-             const { FloatingDecorations } = await import('./components/FloatingDecorations.js');
-             new FloatingDecorations({ basePath: this.appRoot });
-        };
 
-        if (window.requestIdleCallback) {
-            requestIdleCallback(initDecorations, { timeout: 4000 });
-        } else {
-            setTimeout(initDecorations, 4000);
-        }
     }
 
     /**

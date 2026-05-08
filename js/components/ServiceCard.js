@@ -147,7 +147,7 @@ export class ServiceCard {
 
     getOverlayIcon() {
         return `
-            <div class="mb-4 relative z-10 animate-floating">
+            <div class="mb-4 relative z-10">
                 <svg class="w-12 h-12 text-white transition-colors duration-300 transition-transform duration-300 group-hover:scale-110 drop-shadow-md" 
                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
                      fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">

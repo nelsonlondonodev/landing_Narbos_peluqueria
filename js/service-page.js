@@ -5,7 +5,7 @@ import { getBentoGridHTML } from './components/BentoGrid.js';
 import { getHeroHTML } from './components/HeroSection.js';
 
 import { pagesData } from './data/pagesData.js';
-import { FloatingDecorations } from './components/FloatingDecorations.js';
+
 
 import { BrandsSection } from './components/BrandsSection.js'; 
 import { hairBrands } from './data/brandsData.js'; 
@@ -37,7 +37,7 @@ class ServicePageManager {
         this.initControllers();
         
         // --- Componentes Globales de Página ---
-        this.initFloatingDecorations(); 
+  
         this.initBrands(); 
         this.initLazyVideos();
         this.initBreadcrumbs();
@@ -180,13 +180,7 @@ class ServicePageManager {
         }
     }
 
-    initFloatingDecorations() {
-        if (this.app) {
-             setTimeout(() => {
-                new FloatingDecorations({ basePath: this.app.appRoot });
-             }, 50);
-        }
-    }
+
 
     initServiceGrid() {
         this.initBarberServices();
