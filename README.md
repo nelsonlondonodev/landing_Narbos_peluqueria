@@ -1,8 +1,24 @@
 # Narbo's Salón Spa - Web Oficial
 > **Versión 2.7.1** | **Estado: Optimización Profesional Completa**
 
+## 🔄 LCP Optimization & Service Catalog Schema Enrichment (May 8, 2026) - v2.7.1 🚀
 
-## 🔄 Pedicure Optimization & Premium Imagery Refactor (May 8, 2026) - v2.7.2 💅
+### 1. Advanced LCP Optimization (Hero Image) ⚡
+*   **Asset Processing:** Optimized `IMG_3645.webp` (1086x1280) for the Manicure-Pedicure hero section.
+*   **Loading Strategy:** Migrated from `loading="lazy"` to `loading="eager"` and set `fetchpriority="high"` to ensure the hero image loads as fast as possible, directly improving the Largest Contentful Paint (LCP) score.
+*   **Dimensions:** Fixed explicit dimensions (1086x1280) to eliminate layout shifts.
+
+### 2. Rich Results & Schema Markup 🔍
+*   **Service Schema:** Enriched the `Service` JSON-LD for Manicure and Pedicure.
+*   **Offer Catalog:** Implemented a detailed `hasOfferCatalog` with specific pricing for 4 core services, enhancing visibility in Google Search results and AI-driven answers.
+*   **Local SEO:** Added `telephone`, `priceRange`, and refined `areaServed` for better local authority.
+
+### 3. Build & Global Synchronization 🛠️
+*   **Cache Busting:** Synchronized all cache busters (`?v=2.7.1`) across the entire HTML ecosystem (44+ files).
+*   **Version Bump:** Official project release **v2.7.1**.
+*   **Production Deployment:** Merged and pushed to `main`, triggering the automated deployment to Hostinger.
+
+## 🔄 Pedicure Optimization & Premium Imagery Refactor (May 8, 2026) - v2.7.0 💅
 
 ### 1. High-Performance Pedicure Imagery 📸
 *   **Asset Creation:** Processed a high-resolution professional pedicure image into optimized WebP formats:
