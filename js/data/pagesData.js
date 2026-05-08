@@ -806,6 +806,14 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/estetica/terapia-piedras-calientes-spa-chia.webp',
+                title: "Terapia de Piedras",
+                subtitle: "Relajación Profunda",
+                alt: "Terapia con piedras calientes volcánicas en Narbo's Chía"
+            },
+            {
+                type: 'image',
                 layout: 'square',
                 src: 'images/pages/estetica/cabinas-spa-estetica-narbos.webp',
                 title: "Nuestras Cabinas",
