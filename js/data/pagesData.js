@@ -530,8 +530,8 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Estética y Spa <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.",
-            imageSrc: "images/pages/estetica/cabinas-spa-estetica-narbos.webp",
-            imageAlt: "Cabinas profesionales de spa y estética en Narbo's"
+            imageSrc: "images/pages/estetica/cabina-doble-spa-estetica-chia.webp",
+            imageAlt: "Cabina profesional doble de spa y estética en Narbo's"
         },
         gallery: [
             {
@@ -788,6 +788,14 @@ export const pagesData = Object.freeze({
         metaTitle: "Masajes Relajantes en Chía | Piedras Calientes y Relax | Narbo's",
         metaDescription: "Libera el estrés y renueva tu energía con nuestros masajes relajantes en Chía. Terapia con piedras calientes, aromaterapia y técnicas descontracturantes.",
         gallery: [
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/estetica/zona-de-masajes-relajantes-spa-chia.webp',
+                title: "Zona de Relax",
+                subtitle: "Ambiente Exclusivo",
+                alt: "Zona de masajes relajantes y spa en Narbo's Chía"
+            },
             {
                 type: 'image',
                 layout: 'vertical',
