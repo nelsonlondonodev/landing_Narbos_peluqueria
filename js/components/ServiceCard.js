@@ -16,7 +16,11 @@ export class ServiceCard {
      * @param {string} [props.price] - Precio del servicio (Opcional)
      */
     constructor({ title, description, icon, image, imageAlt, link, modalId, animationDelay = "0s", variant = 'overlay', price, width, height }) {
-        this.props = { title, description, icon, image, imageAlt, link, modalId, animationDelay, variant, price, width, height };
+        this.props = { 
+            title, description, icon, image, imageAlt, link, modalId, animationDelay, variant, price,
+            width: width || (variant === 'overlay' ? 800 : 400),
+            height: height || (variant === 'overlay' ? 600 : 300)
+        };
     }
 
     /**
@@ -129,7 +133,7 @@ export class ServiceCard {
     getOverlayBackground() {
         if (this.props.image) {
             return `
-                <img src="${this.props.image}" alt="" loading="lazy" width="${this.props.width || 800}" height="${this.props.height || 600}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105">
+                <img src="${this.props.image}" alt="" loading="lazy" width="${this.props.width}" height="${this.props.height}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105">
                 
                 <!-- Gradiente Base (Verde) que desaparece en hover -->
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0 transition-opacity duration-500 group-hover:opacity-0"></div>
@@ -162,7 +166,7 @@ export class ServiceCard {
 
         const imageHtml = this.props.image ? `
             <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                <img src="${this.props.image}" alt="${this.props.imageAlt || this.props.title}" loading="lazy" width="${this.props.width || 400}" height="${this.props.height || 300}" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                <img src="${this.props.image}" alt="${this.props.imageAlt || this.props.title}" loading="lazy" width="${this.props.width}" height="${this.props.height}" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                 
                 <!-- Precio Overlay en Móvil/Desktop si se prefiere, pero aquí lo pondremos en el body para más claridad -->

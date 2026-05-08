@@ -1,5 +1,8 @@
 import { masterPrices } from './masterPrices.js';
 
+// Dimensiones estándar para imágenes de servicios
+const IMG_DIM_DEPILACION = { width: 784, height: 1168 };
+
 export const estheticsServices = [
     /* -------------------------------------------------------------------------- */
     /*                                FACIAL                                      */
@@ -114,8 +117,7 @@ export const estheticsServices = [
         description: 'Piel suave y libre de vello en una zona delicada.',
         image: '/images/pages/estetica/experiencia-spa-depilacion-sin-dolor.webp',
         imageAlt: 'Experiencia de depilación suave en axilas en Narbo\'s Salon Spa',
-        width: 784,
-        height: 1168,
+        ...IMG_DIM_DEPILACION,
         link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.axilas,
         variant: 'standard'
@@ -125,8 +127,7 @@ export const estheticsServices = [
         description: 'Suavidad total desde los muslos hasta los tobillos.',
         image: '/images/pages/estetica/depilacion-cera-piernas-chia.webp',
         imageAlt: 'Depilación con cera en piernas completas para una piel suave',
-        width: 784,
-        height: 1168,
+        ...IMG_DIM_DEPILACION,
         link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.piernaCompleta,
         variant: 'standard'
@@ -136,8 +137,7 @@ export const estheticsServices = [
         description: 'Depilación efectiva de rodillas hacia abajo.',
         image: '/images/pages/estetica/servicio-depilacion-integral-chia.webp',
         imageAlt: 'Tratamiento de depilación en media pierna con cera profesional',
-        width: 784,
-        height: 1168,
+        ...IMG_DIM_DEPILACION,
         link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.mediaPierna,
         variant: 'standard'
