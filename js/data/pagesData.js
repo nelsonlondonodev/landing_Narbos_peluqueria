@@ -637,7 +637,7 @@ export const pagesData = Object.freeze({
     'depilacion-corporal': {
         hero: {
             title: "Depilación Corporal <span class=\"text-brand-green\">con Cera</span>",
-            subtitle: "Suavidad duradera para tu piel con técnicas higiénicas y productos de alta calidad.",
+            subtitle: "Experimenta la máxima suavidad con técnicas profesionales y productos de alta calidad para el cuidado de tu piel.",
             imageSrc: "images/pages/estetica/experiencia-spa-depilacion-sin-dolor.webp",
             imageAlt: "Experiencia de depilación spa en Narbo's Salón Chía"
         },
