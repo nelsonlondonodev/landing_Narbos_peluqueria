@@ -31,12 +31,15 @@
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      "serviceType": "Manicura y Pedicura Profesional en Chía",
+      "name": "Manicura y Pedicura Spa Profesional",
+      "serviceType": "Beauty and Personal Care",
       "provider": {
         "@type": "BeautySalon",
         "name": "Narbo's Salón Spa",
         "url": "https://narbossalon.com/",
         "image": "https://narbossalon.com/images/pages/unas/IMG_3645.webp",
+        "priceRange": "$$",
+        "telephone": "+573123462618",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Bajos del hotel Ibis, Km 2 vía Chía - Cajica Edificio Quantum, local 118",
@@ -46,17 +49,53 @@
           "addressCountry": "CO"
         }
       },
-      "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota", "Fontanar"],
-      "description": "Servicios de manicura y pedicura spa, esmaltado semipermanente, uñas acrílicas y polygel en Chía. Máxima higiene y cuidado para tus manos.",
-      "brand": {
-        "@type": "Brand",
-        "name": ["OPI", "Masglo Professional"]
-      },
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "COP",
-        "availability": "https://schema.org/InStock",
-        "description": "Consultar precios y disponibilidad vía WhatsApp"
+      "areaServed": [
+        { "@type": "City", "name": "Chía" },
+        { "@type": "City", "name": "Cajicá" },
+        { "@type": "City", "name": "Zipaquirá" }
+      ],
+      "description": "Experiencia premium de manicura y pedicura spa en Chía. Incluye rituales de relajación, esmaltado semipermanente de larga duración y protocolos estrictos de esterilización.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de Uñas Spa",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Manicura Tradicional"
+            },
+            "price": "23000",
+            "priceCurrency": "COP"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Manicura Semipermanente"
+            },
+            "price": "56000",
+            "priceCurrency": "COP"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Pedicura Tradicional"
+            },
+            "price": "29000",
+            "priceCurrency": "COP"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Pedicura Semipermanente"
+            },
+            "price": "61000",
+            "priceCurrency": "COP"
+          }
+        ]
       }
     }
     </script>
