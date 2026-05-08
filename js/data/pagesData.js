@@ -586,8 +586,8 @@ export const pagesData = Object.freeze({
                 layout: 'vertical',
                 src: 'images/pages/estetica/antes-despues-moldeamiento-corporal-chia.webp',
                 title: "Resultados Reales",
-                subtitle: "Moldeamiento Corporal",
-                alt: "Antes y después de tratamiento reductor y moldeamiento en Narbo's"
+                subtitle: "Moldeo Corporal",
+                alt: "Testimonio visual antes y después de moldeamiento corporal y reducción en Narbo's Chía"
             }
         ]
     },
@@ -669,24 +669,24 @@ export const pagesData = Object.freeze({
                 layout: 'vertical',
                 src: 'images/pages/estetica/depilacion-cera-piernas-chia.webp',
                 title: "Piel de Seda",
-                subtitle: "Depilación con Cera",
-                alt: "Servicio de depilación con cera en piernas"
+                subtitle: "Piernas Perfectas",
+                alt: "Depilación profesional de piernas con cera en Narbo's Salón Spa"
             },
             {
                 type: 'image',
                 layout: 'vertical',
                 src: 'images/pages/estetica/experiencia-spa-depilacion-sin-dolor.webp',
                 title: "Experiencia Spa",
-                subtitle: "Depilación Axilas",
-                alt: "Depilación suave en axilas con técnicas de spa"
+                subtitle: "Máximo Confort",
+                alt: "Depilación de axilas en ambiente relajante y profesional"
             },
             {
                 type: 'image',
                 layout: 'vertical',
                 src: 'images/pages/estetica/servicio-depilacion-integral-chia.webp',
-                title: "Depilación Integral",
-                subtitle: "Máxima Suavidad",
-                alt: "Tratamiento de depilación integral con cera profesional"
+                title: "Suavidad Integral",
+                subtitle: "Cuidado Profesional",
+                alt: "Servicio de depilación integral con cera de alta calidad"
             }
         ]
     },
