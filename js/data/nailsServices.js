@@ -30,7 +30,8 @@ export const nailsServices = [
         description: 'Relaja tus pies con nuestra pedicura tradicional. Incluye baño relajante, remoción de durezas, cuidado de uñas y cutículas, hidratación básica y esmaltado perfecto.',
         image: '../../images/pages/unas/servicio-pedicura-spa-profesional-chia-card.webp',
         width: 800,
-        height: 600,
+        height: 975,
+        alt: 'Pedicura profesional spa en Narbo\'s Chía',
         link: 'manicure-pedicure'
     },
      {

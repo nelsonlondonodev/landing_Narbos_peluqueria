@@ -1025,8 +1025,8 @@ export const pagesData = Object.freeze({
                 width: 1051,
                 height: 1280,
                 title: "Pedicura Profesional",
-                subtitle: "Salud y Estética",
-                alt: "Cuidado profesional de pies y pedicura spa"
+                subtitle: "Salud y Bienestar",
+                alt: "Pedicura profesional spa en Narbo's Chía"
             },
             {
                 type: 'image',
