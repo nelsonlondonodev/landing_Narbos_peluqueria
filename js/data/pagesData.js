@@ -1021,9 +1021,12 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'square',
-                src: 'images/pages/unas/pedicure-spa.webp',
-                title: "Salud y Estética",
-                alt: "Cuidado profesional de pies"
+                src: 'images/pages/unas/servicio-pedicura-spa-profesional-chia.webp',
+                width: 1051,
+                height: 1280,
+                title: "Pedicura Profesional",
+                subtitle: "Salud y Estética",
+                alt: "Cuidado profesional de pies y pedicura spa"
             },
             {
                 type: 'image',

@@ -72,7 +72,7 @@ function getMediaContentHTML(item) {
         `;
     }
 
-    return `<img src="${item.src}" alt="${item.alt}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">`;
+    return `<img src="${item.src}" alt="${item.alt}" loading="lazy" width="${item.width || ''}" height="${item.height || ''}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">`;
 }
 
 /**
