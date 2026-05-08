@@ -2,6 +2,30 @@
 > **Versión 2.7.1** | **Estado: Optimización Profesional Completa**
 
 
+## 🔄 Pedicure Optimization & Premium Imagery Refactor (May 8, 2026) - v2.7.2 💅
+
+### 1. High-Performance Pedicure Imagery 📸
+*   **Asset Creation:** Processed a high-resolution professional pedicure image into optimized WebP formats:
+    *   `servicio-pedicura-spa-profesional-chia.webp`: Full-res hero asset.
+    *   `servicio-pedicura-spa-profesional-chia-card.webp`: Card-optimized version (800x975) preserving the original vertical aspect ratio to prevent pixel distortion.
+*   **Hero Sections:** Updated the "Uñas y Spa" Hub and the "Manicure & Pedicure" service page with these new professional assets, replacing legacy generic photos.
+*   **Elegant Nail Design:** Updated the Hero section of the Nails Hub with a sophisticated design (`diseno-unas-elegantes-chia-narbos-spa.webp`) to enhance the premium brand feel.
+
+### 2. Surgical Data & HTML Synchronization 🏗️
+*   **Consistency:** Refactored `nailsServices.js`, `pagesData.js`, and the hardcoded HTML cards in `unas-spa/index.html` and `manicure-pedicure.html`. 
+*   **Integrity:** Ensured all dimensions (800x975), descriptive `alt` texts, and subtitles ("Salud y Bienestar") are perfectly synchronized across the entire project.
+
+### 3. SEO & Performance Excellence 🚀
+*   **Schema Markup Enrichment:** Updated the `BeautySalon` and `Service` JSON-LD schemas with the new premium imagery, ensuring Google's Rich Snippets reflect the updated visual identity.
+*   **Intelligent Loading:** Implemented `loading="lazy"` and `fetchpriority="low"` for the new hero sections as requested, giving priority to interactive DOM elements.
+*   **Zero-Distortion Policy:** Eliminated layout shifts and image stretching by declaring exact physical dimensions on all updated `<img>` tags.
+
+### 4. Build & Deployment (v2.7.2) 🛠️
+*   **Production Parity:** Executed a full build cycle (`npm run build`) to consolidate all imagery and data fixes.
+*   **Clean History:** Committed all changes with surgical precision, maintaining a clear audit trail of the visual and technical improvements.
+
+---
+
 ## 🔄 Secret Scanning & Build Injection Security (May 7, 2026) - v2.7.1 🛡️
 
 ### 1. Public Secret Removal 🔐
