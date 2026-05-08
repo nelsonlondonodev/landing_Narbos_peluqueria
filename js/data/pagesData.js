@@ -531,7 +531,7 @@ export const pagesData = Object.freeze({
             title: "Estética y Spa <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.",
             imageSrc: "images/pages/estetica/cabina-doble-spa-estetica-chia.webp",
-            imageAlt: "Cabina profesional doble de spa y estética en Narbo's"
+            imageAlt: "Cabina profesional doble para masajes y spa en Narbo's Chía"
         },
         gallery: [
             {
@@ -793,8 +793,8 @@ export const pagesData = Object.freeze({
                 layout: 'vertical',
                 src: 'images/pages/estetica/zona-de-masajes-relajantes-spa-chia.webp',
                 title: "Zona de Relax",
-                subtitle: "Ambiente Exclusivo",
-                alt: "Zona de masajes relajantes y spa en Narbo's Chía"
+                subtitle: "Máximo Bienestar",
+                alt: "Ambiente exclusivo de spa y masajes relajantes en Narbo's Chía"
             },
             {
                 type: 'image',
