@@ -1,9 +1,9 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-05-08T08:24:42.984Z
+ * Última sincronización con Google Business Profile: 2026-05-08T08:27:15.059Z
  */
 const businessHours = {
-    "lastSync": "2026-05-08T08:24:42.984Z",
+    "lastSync": "2026-05-08T08:27:15.059Z",
     "source": "Google Business Profile",
     "status": "OPEN",
     "schedule": [
