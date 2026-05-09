@@ -19,6 +19,18 @@
  */
 const articles = [
     {
+        id: 'unas-respiran-mito-realidad-salud-chia',
+        date: '9 de mayo de 2026',
+        isoDate: '2026-05-09',
+        category: 'Uñas y Spa',
+        title: '¿Uñas que respiran? Desmontando el mito más grande de la manicura',
+        description: 'Descubre la verdad científica sobre la respiración de las uñas. Mitos, salud ungueal y consejos de expertos en Narbo\'s Salón Spa Chía.',
+        image: '/blog/articles/images/unas-respiran-narbos.webp',
+        alt: 'Salud ungueal y mitos sobre la respiración de las uñas en Narbo\'s Salón Spa Chía',
+        link: '/blog/articles/unas-respiran-mito-realidad-salud-chia.html',
+        featured: true
+    },
+    {
         id: 'extensiones-pestanas-mitos-salud-ocular',
         date: '29 de abril de 2026',
         isoDate: '2026-04-29',
