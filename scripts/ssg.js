@@ -27,11 +27,11 @@ const DIST_DIR = path.join(__dirname, '../dist');
  * Registry de fuentes de datos para servicios por página.
  */
 const SERVICE_SOURCE_REGISTRY = {
-    'barberia': { source: barberServices, gridId: 'barber-services-grid' },
-    'peluqueria': { source: hairSalonServices, gridId: 'hair-services-grid' },
-    'estetica': { source: estheticsServices, gridId: 'aesthetics-services-static' },
-    'maquillaje': { source: makeupServices, gridId: 'makeup-services-grid' },
-    'default': { source: servicesData, gridId: 'services-grid' }
+    'barberia': { source: barberServices, gridId: 'barber-services-grid', variant: 'standard' },
+    'peluqueria': { source: hairSalonServices, gridId: 'hair-services-grid', variant: 'standard' },
+    'estetica': { source: estheticsServices, gridId: 'aesthetics-services-static', variant: 'standard' },
+    'maquillaje': { source: makeupServices, gridId: 'makeup-services-grid', variant: 'standard' },
+    'default': { source: servicesData, gridId: 'services-grid', variant: 'overlay' }
 };
 
 /**
@@ -144,8 +144,10 @@ function injectServices(document, pageKey, prefix) {
     registry.source.forEach(data => {
         const processedData = {
             ...data,
+            variant: data.variant || registry.variant, // Priorizar variante del dato si existe
             link: resolveRoute(data.link, prefix),
-            image: resolveAsset(data.image, prefix)
+            image: resolveAsset(data.image, prefix),
+            modalId: data.modal ? 'service-modal' : data.modalId
         };
         grid.appendChild(new ServiceCard(processedData).render());
     });
