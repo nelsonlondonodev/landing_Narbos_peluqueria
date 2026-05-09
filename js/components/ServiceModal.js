@@ -1,88 +1,113 @@
 export class ServiceModal {
     constructor(services) {
-        // Registro de servicios centralizado para evitar colisiones y permitir múltiples instancias
-        if (!window._narbosServices) window._narbosServices = [];
-        
-        // Agregar nuevos servicios al registro si no están ya registrados
-        if (services && Array.isArray(services)) {
-            services.forEach(s => {
-                const alreadyExists = window._narbosServices.some(ex => 
-                    ex.id.toString() === s.id.toString() && ex.title === s.title
-                );
-                if (!alreadyExists) {
-                    window._narbosServices.push(s);
-                }
-            });
-        }
+        this._registerServices(services);
+        this._ensureModalElement();
+        this._initializeRefs();
+        this.init();
+    }
 
+    /**
+     * Registra servicios en un repositorio global para soportar hidratación y múltiples instancias.
+     * @private
+     */
+    _registerServices(services) {
+        if (!window._narbosServices) window._narbosServices = [];
+        if (!services || !Array.isArray(services)) return;
+
+        services.forEach(s => {
+            const alreadyExists = window._narbosServices.some(ex => 
+                ex.id.toString() === s.id.toString() && ex.title === s.title
+            );
+            if (!alreadyExists) {
+                window._narbosServices.push(s);
+            }
+        });
+    }
+
+    /**
+     * Asegura la existencia del elemento modal en el DOM.
+     * @private
+     */
+    _ensureModalElement() {
         this.modal = document.getElementById('service-modal');
-        
         if (!this.modal) {
             this.injectHTML();
             this.modal = document.getElementById('service-modal');
         }
+    }
 
+    /**
+     * Inicializa las referencias a los elementos del DOM.
+     * @private
+     */
+    _initializeRefs() {
+        const getById = (id) => document.getElementById(id);
         this.refs = {
-            backdrop: document.getElementById('modal-backdrop'),
-            panel: document.getElementById('modal-panel'),
-            scrollContainer: document.getElementById('modal-scroll-container'),
-            closeBtn: document.getElementById('close-modal-btn'),
-            title: document.getElementById('modal-title'),
-            image: document.getElementById('modal-image'),
-            duration: document.getElementById('modal-duration'),
-            price: document.getElementById('modal-price'),
-            desc: document.getElementById('modal-description'),
-            whatsappBtn: document.getElementById('modal-whatsapp-btn')
+            backdrop: getById('modal-backdrop'),
+            panel: getById('modal-panel'),
+            scrollContainer: getById('modal-scroll-container'),
+            closeBtn: getById('close-modal-btn'),
+            title: getById('modal-title'),
+            image: getById('modal-image'),
+            duration: getById('modal-duration'),
+            price: getById('modal-price'),
+            desc: getById('modal-description'),
+            whatsappBtn: getById('modal-whatsapp-btn')
         };
-
-        this.init();
     }
 
     init() {
         if (window._serviceModalEventsBound) return;
         this.bindEvents();
         
-        // Exponer método de apertura global para compatibilidad
         window.openServiceModal = (id) => this.open(id);
         window._serviceModalEventsBound = true;
     }
 
     bindEvents() {
-        if (this.refs.closeBtn) {
-            this.refs.closeBtn.addEventListener('click', () => this.close());
-        }
+        this.refs.closeBtn?.addEventListener('click', () => this.close());
+        this.refs.scrollContainer?.addEventListener('click', (e) => this.handleOutsideClick(e));
+        
+        this._bindGlobalClickDelegation();
+        this._bindKeyboardEvents();
+    }
 
-        if (this.refs.scrollContainer) {
-            this.refs.scrollContainer.addEventListener('click', (e) => this.handleOutsideClick(e));
-        }
-
-        // Global Delegation for Modal Triggers (Fix for SSG & Dynamic cards)
+    /**
+     * Delegación de clics global para manejar disparadores estáticos y dinámicos.
+     * @private
+     */
+    _bindGlobalClickDelegation() {
         document.addEventListener('click', (e) => {
             const trigger = e.target.closest('[data-modal-target]');
-            if (trigger) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Priorizar data-modal-target sobre el ID del elemento para mayor flexibilidad
-                const targetId = trigger.dataset.modalTarget;
-                const elementId = trigger.id.replace('service-card-', '');
-                
-                // Intentar abrir por el ID descriptivo o buscar por el ID de data
-                const serviceId = this._resolveServiceId(targetId || elementId);
-                if (serviceId !== null) {
-                    this.open(serviceId);
-                }
+            if (!trigger) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const targetId = trigger.dataset.modalTarget;
+            const elementId = trigger.id.replace('service-card-', '');
+            const serviceId = this._resolveServiceId(targetId || elementId);
+            
+            if (serviceId !== null) {
+                this.open(serviceId);
             }
         });
+    }
 
+    /**
+     * Manejo de eventos de teclado (Escape, Enter, Espacio).
+     * @private
+     */
+    _bindKeyboardEvents() {
         document.addEventListener('keydown', (e) => {
-            // Support Enter/Space for non-button triggers
+            const isModalOpen = !this.modal.classList.contains('hidden');
+
             if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('[data-modal-target]')) {
                 e.preventDefault();
                 e.target.closest('[data-modal-target]').click();
             }
 
-            if (e.key === 'Escape' && !this.modal.classList.contains('hidden')) {
+            if (e.key === 'Escape' && isModalOpen) {
                 this.close();
             }
         });
@@ -92,7 +117,6 @@ export class ServiceModal {
         if (!domId) return null;
         const services = window._narbosServices || [];
 
-        // Buscar en el registro global de servicios para soportar hidratación de cualquier página
         const service = services.find(s => 
             s.id.toString() === domId.toString() || 
             this._toKebabCase(s.title) === domId.toString()

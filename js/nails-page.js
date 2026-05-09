@@ -128,27 +128,45 @@ function initBreadcrumbs() {
 /*                                GRID & MODAL                                */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Configura el contenedor principal del Grid de servicios.
+ */
 function initNailServicesGrid() {
     const gridContainer = document.getElementById('nail-services-grid');
     if (!gridContainer) return;
 
-    // Initialize Modal Logic via Component (Registrar servicios incluso en SSG)
+    // Registrar servicios en el modal (incluso en SSG)
     const serviceModal = new ServiceModal(nailsServices);
 
-    // INTELLIGENT HYDRATION: Si el SSG ya inyectó contenido, no lo sobreescribimos.
-    if (gridContainer.children.length > 0) {
+    if (isHydrated(gridContainer)) return;
+
+    renderDynamicGrid(gridContainer, serviceModal);
+}
+
+/**
+ * Verifica si el contenedor ya tiene contenido inyectado por SSG.
+ * @private
+ */
+function isHydrated(container) {
+    if (container.children.length > 0) {
         console.log("✅ [NailsPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
-        return;
+        return true;
     }
+    return false;
+}
 
-    gridContainer.innerHTML = '';
-
-    const excludeString = gridContainer.dataset.excludeIds;
+/**
+ * Realiza el renderizado dinámico del grid cuando no hay SSG.
+ * @private
+ */
+function renderDynamicGrid(container, modal) {
+    container.innerHTML = '';
+    const excludeString = container.dataset.excludeIds;
     const filteredServices = filterServices(nailsServices, excludeString);
     
     filteredServices.forEach(service => {
-        const cardElement = createServiceCard(service, serviceModal);
-        gridContainer.appendChild(cardElement);
+        const cardElement = createServiceCard(service, modal);
+        container.appendChild(cardElement);
     });
 }
 

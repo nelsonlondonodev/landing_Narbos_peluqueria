@@ -59,24 +59,31 @@ function initMakeupServicesGrid() {
     // Registrar servicios en el modal aunque haya SSG para habilitar la interactividad
     const serviceModal = new ServiceModal(makeupServices);
 
-    // INTELLIGENT HYDRATION: Si el SSG ya inyectó contenido, no lo sobreescribimos.
-    if (gridContainer.children.length > 0) {
-        console.log("✅ [MakeupPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
-        return;
-    }
+    if (isHydrated(gridContainer)) return;
 
-    gridContainer.innerHTML = '';
-    const hubServices = getHubServices();
-
-    renderServiceCards(gridContainer, hubServices, serviceModal);
+    renderDynamicGrid(gridContainer, serviceModal);
 }
 
 /**
- * Obtiene los servicios filtrados para la pantalla principal (Hub)
- * @returns {Array} Servicios de categoría 'hub'
+ * Verifica si el contenedor ya tiene contenido inyectado por SSG.
+ * @private
  */
-function getHubServices() {
-    return makeupServices.filter(s => s.category === 'hub');
+function isHydrated(container) {
+    if (container.children.length > 0) {
+        console.log("✅ [MakeupPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Realiza el renderizado dinámico del grid cuando no hay SSG.
+ * @private
+ */
+function renderDynamicGrid(container, modal) {
+    container.innerHTML = '';
+    const hubServices = makeupServices.filter(s => s.category === 'hub');
+    renderServiceCards(container, hubServices, modal);
 }
 
 /**
