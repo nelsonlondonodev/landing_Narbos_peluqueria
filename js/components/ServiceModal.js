@@ -94,10 +94,17 @@ export class ServiceModal {
             
             const targetId = trigger.dataset.modalTarget;
             const elementId = trigger.id.replace('service-card-', '');
-            const serviceId = this._resolveServiceId(targetId || elementId);
+            
+            // Intentar resolver primero por el target semántico, luego por el ID del elemento
+            let serviceId = this._resolveServiceId(targetId);
+            if (serviceId === null && targetId !== elementId) {
+                serviceId = this._resolveServiceId(elementId);
+            }
             
             if (serviceId !== null) {
                 this.open(serviceId);
+            } else {
+                console.warn(`[ServiceModal] No se pudo resolver el servicio para:`, { targetId, elementId });
             }
         });
     }
@@ -122,7 +129,7 @@ export class ServiceModal {
     }
 
     _resolveServiceId(domId) {
-        if (!domId) return null;
+        if (!domId || domId === 'service-modal') return null;
         const services = window._narbosServices || [];
 
         const service = services.find(s => 

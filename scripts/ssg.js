@@ -145,7 +145,7 @@ function injectServices(document, pageKey, prefix) {
         const processedData = {
             ...data,
             variant: data.variant || registry.variant, // Priorizar variante del dato si existe
-            link: resolveRoute(data.link, prefix),
+            link: data.link ? resolveRoute(data.link, prefix) : undefined,
             image: resolveAsset(data.image, prefix),
             modalId: data.modal ? 'service-modal' : data.modalId
         };

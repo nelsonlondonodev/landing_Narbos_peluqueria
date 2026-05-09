@@ -105,7 +105,10 @@ export class ServiceCard {
                 element.setAttribute('tabindex', '0');
             }
             element.setAttribute('aria-label', `Ver detalles de ${this.props.title}`);
-            element.setAttribute('data-modal-target', this.props.modalId);
+            
+            // SEMANTIC FIX: Usar el ID del servicio (slug) como target para facilitar la resolución de datos
+            const semanticTarget = this.toKebabCase(this.props.title);
+            element.setAttribute('data-modal-target', semanticTarget);
         }
     }
 
