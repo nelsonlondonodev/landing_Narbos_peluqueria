@@ -1,22 +1,24 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.7.2** | **Estado: GEO-LLM Authority & Content Optimization**
+> **Versión 2.7.3** | **Estado: Critical Path Optimization & FOUC Stability**
 
-## 🔄 GEO-LLM Authority & Nail Health Optimization (May 9, 2026) - v2.7.2 🚀
+## 🔄 Critical Path Optimization & FOUC Stability (May 9, 2026) - v2.7.3 🚀
 
-### 1. Generative Engine Optimization (GEO) 🤖
-*   **llms.txt Implementation:** Created a machine-readable roadmap in the root to provide LLMs (ChatGPT, Claude, Perplexity) with a clear understanding of the salon's authority, services, and key knowledge bases.
-*   **IA-Specific Infrastructure:** Configured `.htaccess` for zero-cache on `llms.txt` and updated `robots.txt` for faster bot discovery.
-*   **Brand Ontology:** Structured the brand's mission and services into a citable format for AI-driven local search queries.
+### 1. FOUC (Flash of Unstyled Content) Mitigation ⚡
+*   **Synchronous CSS Loading:** Restored synchronous loading for the main `styles.css` in the Estética sub-pages, eliminating the delay where unstyled HTML was visible.
+*   **Resource Preloading:** Implemented `<link rel="preload">` for `styles.css` and Google Fonts to prioritize critical assets discovery.
+*   **Critical CSS Injection:** Injected inline CSS in the `<head>` to style the Header and Hero immediately, ensuring a professional look from the first millisecond.
 
-### 2. High-Authority Content & Semantic SEO ✍️
-*   **New Article:** Published "¿Uñas que respiran? Desmontando el mito más grande de la manicura", addressing scientific nail health and local salon authority in Chía.
-*   **Surgical SEO Injections:** Injected high-intent local keywords (Chía, Cajicá, Fontanar, Barbería, Hair Salon) into FAQ and article sections based on GMB analytics.
-*   **Schema Markup v2:** Implemented a full JSON-LD graph including `BlogPosting`, `FAQPage`, `BreadcrumbList`, and `WebPage` for maximum search visibility.
+### 2. Layout Stability (CLS Reduction) 🏗️
+*   **Hero Reservations:** Added `min-height` constraints via critical CSS to the Hero section to prevent layout jumps when images or dynamic content load.
+*   **Header Stabilization:** Reserved space for the Navbar to prevent structural shifts during JS hydration.
 
-### 3. Template & Infrastructure Standardization 🛠️
-*   **Article Template v2:** Standardized `article.template.html` with fixed H1 styles, technical sources section, and secure external linking attributes.
-*   **Build Pipeline Automation:** Updated `build.js` to automatically manage `llms.txt` and asset synchronization for production deployments.
-*   **Cache Busting:** Official version bump to **v2.7.2** with full project-wide synchronization.
+### 3. Build & Global Synchronization 🛠️
+*   **Cache Busting:** Official version bump to **v2.7.3** across the entire ecosystem.
+*   **Production Build:** Executed a full build cycle (`npm run build`) including cache-busting hashing and asset synchronization for Hostinger.
+*   **Footer Update:** Synchronized the visual version tag with the latest project release.
+
+---
+
 
 ---
 
