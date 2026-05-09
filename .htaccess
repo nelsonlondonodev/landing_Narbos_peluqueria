@@ -1,5 +1,5 @@
 # Configuración de Narbo's Salón Spa
-# v2.6.6 - Configuración de Plataforma Web Integral
+# v2.7.2 - GEO-LLM Authority & Nail Health Optimization
 # Optimización de Rendimiento, Seguridad y SEO Canónico
 
 # Forzar codificación UTF-8
@@ -88,6 +88,12 @@ Options -Indexes
     Header set X-XSS-Protection "1; mode=block"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Asegurar que llms.txt se sirva siempre fresco para las IAs
+    <FilesMatch "llms\.txt$">
+        Header set Content-Type "text/plain; charset=UTF-8"
+        Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+    </FilesMatch>
 </IfModule>
 
 # Compresión GZIP (Optimizado para Datos Estructurados y Assets)

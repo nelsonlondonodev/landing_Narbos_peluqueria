@@ -1,5 +1,24 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.7.1** | **Estado: Optimización Profesional Completa**
+> **Versión 2.7.2** | **Estado: GEO-LLM Authority & Content Optimization**
+
+## 🔄 GEO-LLM Authority & Nail Health Optimization (May 9, 2026) - v2.7.2 🚀
+
+### 1. Generative Engine Optimization (GEO) 🤖
+*   **llms.txt Implementation:** Created a machine-readable roadmap in the root to provide LLMs (ChatGPT, Claude, Perplexity) with a clear understanding of the salon's authority, services, and key knowledge bases.
+*   **IA-Specific Infrastructure:** Configured `.htaccess` for zero-cache on `llms.txt` and updated `robots.txt` for faster bot discovery.
+*   **Brand Ontology:** Structured the brand's mission and services into a citable format for AI-driven local search queries.
+
+### 2. High-Authority Content & Semantic SEO ✍️
+*   **New Article:** Published "¿Uñas que respiran? Desmontando el mito más grande de la manicura", addressing scientific nail health and local salon authority in Chía.
+*   **Surgical SEO Injections:** Injected high-intent local keywords (Chía, Cajicá, Fontanar, Barbería, Hair Salon) into FAQ and article sections based on GMB analytics.
+*   **Schema Markup v2:** Implemented a full JSON-LD graph including `BlogPosting`, `FAQPage`, `BreadcrumbList`, and `WebPage` for maximum search visibility.
+
+### 3. Template & Infrastructure Standardization 🛠️
+*   **Article Template v2:** Standardized `article.template.html` with fixed H1 styles, technical sources section, and secure external linking attributes.
+*   **Build Pipeline Automation:** Updated `build.js` to automatically manage `llms.txt` and asset synchronization for production deployments.
+*   **Cache Busting:** Official version bump to **v2.7.2** with full project-wide synchronization.
+
+---
 
 ## 🔄 LCP Optimization & Service Catalog Schema Enrichment (May 8, 2026) - v2.7.1 🚀
 
