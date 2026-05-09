@@ -103,7 +103,7 @@ const copyAssets = async () => {
     log('Copying assets...');
     const assets = [
         'images', 'video', 'lang', 'blog/articles/images', 'fidelizacion', 'legal', 
-        'robots.txt', 'sitemap.xml', '.htaccess'
+        'robots.txt', 'sitemap.xml', 'llms.txt', '.htaccess'
     ];
     assets.forEach(asset => {
         const src = path.join(SRC_DIR, asset);
