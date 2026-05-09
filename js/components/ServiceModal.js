@@ -15,10 +15,18 @@ export class ServiceModal {
         if (!services || !Array.isArray(services)) return;
 
         services.forEach(s => {
-            const alreadyExists = window._narbosServices.some(ex => 
-                ex.id.toString() === s.id.toString() && ex.title === s.title
-            );
-            if (!alreadyExists) {
+            // Asegurar que el servicio tenga un ID para evitar errores de referencia
+            if (!s.id && s.title) {
+                s.id = this._toKebabCase(s.title);
+            }
+
+            const alreadyExists = window._narbosServices.some(ex => {
+                const exId = ex.id ? ex.id.toString() : null;
+                const sId = s.id ? s.id.toString() : null;
+                return exId === sId && ex.title === s.title;
+            });
+
+            if (!alreadyExists && s.id) {
                 window._narbosServices.push(s);
             }
         });
