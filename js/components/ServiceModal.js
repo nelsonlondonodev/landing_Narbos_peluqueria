@@ -25,10 +25,12 @@ export class ServiceModal {
     }
 
     init() {
+        if (window._serviceModalInitialized) return;
         this.bindEvents();
         // Expose open method globally if needed for legacy inline calls, 
         // essentially orchestrating the view from data-attributes or similar
         window.openServiceModal = (id) => this.open(id);
+        window._serviceModalInitialized = true;
     }
 
     bindEvents() {
@@ -47,12 +49,12 @@ export class ServiceModal {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Extraer el ID del servicio del propio id del elemento (formato: service-card-ID)
-                // O buscar un atributo data-service-id si existe.
-                const triggerId = trigger.id.replace('service-card-', '');
+                // Priorizar data-modal-target sobre el ID del elemento para mayor flexibilidad
+                const targetId = trigger.dataset.modalTarget;
+                const elementId = trigger.id.replace('service-card-', '');
                 
                 // Intentar abrir por el ID descriptivo o buscar por el ID de data
-                const serviceId = this._resolveServiceId(triggerId);
+                const serviceId = this._resolveServiceId(targetId || elementId);
                 if (serviceId !== null) {
                     this.open(serviceId);
                 }
@@ -72,16 +74,14 @@ export class ServiceModal {
         });
     }
 
-    /**
-     * Resuelve el ID numérico del servicio a partir del ID descriptivo del DOM.
-     * @private
-     */
     _resolveServiceId(domId) {
-        // En hair-pageServices, el id es numérico (ej: 10, 12)
-        // Intentamos encontrar el servicio que coincida con el domId convertido o viceversa
+        if (!domId) return null;
+
+        // En los servicios, el id es numérico (ej: 10, 12)
+        // Intentamos encontrar el servicio que coincida con el domId (id numérico o kebab-case del título)
         const service = this.services.find(s => 
-            s.id.toString() === domId || 
-            this._toKebabCase(s.title) === domId
+            s.id.toString() === domId.toString() || 
+            this._toKebabCase(s.title) === domId.toString()
         );
         return service ? service.id : null;
     }
@@ -100,7 +100,15 @@ export class ServiceModal {
 
     updateContent(service) {
         if (this.refs.title) this.refs.title.textContent = service.title;
-        if (this.refs.image) this.refs.image.src = service.image;
+        
+        // Resolución de ruta de imagen usando la infraestructura global de la App
+        if (this.refs.image && service.image) {
+            const resolvedPath = window.narbosApp ? 
+                window.narbosApp.resolvePath(service.image) : 
+                service.image;
+            this.refs.image.src = resolvedPath;
+        }
+
         if (this.refs.duration) this.refs.duration.textContent = service.duration;
         if (this.refs.price) this.refs.price.textContent = service.price;
         
