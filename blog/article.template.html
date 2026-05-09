@@ -66,33 +66,37 @@
 
       <main class="pb-16 md:pb-24 pt-8 md:pt-12">
         <div class="container mx-auto px-6 max-w-screen-md">
-          <article>
+          <article itemscope itemtype="https://schema.org/Article">
             <header class="text-center mb-12 animate__animated animate__fadeInUp">
-              <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6 leading-tight"
+              <h1 itemprop="headline" class="text-4xl md:text-5xl font-serif font-bold text-gray-900 mt-4 mb-6"
                    data-breadcrumb="{{titulo_corto_breadcrumb}}">
-                {{titulo_articulo}}
+                {{titulo_articulo_formateado}}
               </h1>
               <p class="text-lg text-gray-600">
-                <span>Por el equipo de Narbo's Salón Spa</span>
-                • <span>{{fecha_publicacion}}</span>
+                <span itemprop="author" itemscope itemtype="https://schema.org/Organization">
+                  <span itemprop="name">Por el equipo de Narbo's Salón Spa</span>
+                </span>
+                • <time itemprop="datePublished" datetime="{{iso_fecha}}">{{fecha_publicacion}}</time>
               </p>
               
               <!-- Botón de Compartir -->
-              <div class="share-button-container mt-6 flex justify-center" 
+              <div class="share-button-container mt-4 flex justify-center" 
                    data-title="{{titulo_articulo}} | Narbo's Salón Spa" 
                    data-text="{{descripcion_seo}}"></div>
             </header>
 
-            <img
-              src="{{ruta_imagen_destacada}}"
-              alt="{{alt_imagen_destacada}}"
-              class="w-full max-w-lg mx-auto rounded-2xl shadow-xl mb-12 animate__animated animate__fadeInUp"
-              style="animation-delay: 0.2s"
-              loading="eager"
-              fetchpriority="high"
-              width="640"
-              height="640"
-            />
+            <figure class="mb-12 animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+              <img
+                src="{{ruta_imagen_destacada}}"
+                alt="{{alt_imagen_destacada}}"
+                class="w-full max-w-lg mx-auto rounded-2xl shadow-xl"
+                itemprop="image"
+                loading="eager"
+                fetchpriority="high"
+                width="640"
+                height="640"
+              />
+            </figure>
 
             <div class="max-w-none text-gray-800 leading-relaxed">
               
@@ -144,6 +148,12 @@
                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                   </iframe>
                 </div>
+              <!-- Fuentes Técnicas -->
+              <section id="fuentes" class="mt-20 pt-12 border-t border-gray-100 text-sm text-gray-500 italic">
+                <h4 class="font-bold uppercase tracking-wider mb-4 text-gray-400">Fuentes Técnicas:</h4>
+                <ul class="space-y-2">
+                  <li>• <strong>Fuente 1:</strong> <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-brand-green hover:underline">Nombre del estudio o artículo</a>.</li>
+                </ul>
               </section>
               
               <!-- CTA final -->
@@ -151,6 +161,7 @@
                 <a
                   href="https://wa.me/573123462618?text=Hola%2C%20le%C3%AD%20el%20art%C3%ADculo%20sobre%20{{titulo_articulo}}%20y%20quiero%20más%20información."
                   class="inline-block bg-brand-green text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out"
+                  rel="noopener noreferrer"
                 >Agenda tu asesoría personalizada 📲</a>
               </div>
             </div>
