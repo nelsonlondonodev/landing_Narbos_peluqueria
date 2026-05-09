@@ -56,6 +56,9 @@ function initMakeupServicesGrid() {
     const gridContainer = document.getElementById('makeup-services-grid');
     if (!gridContainer) return;
     
+    // Registrar servicios en el modal aunque haya SSG para habilitar la interactividad
+    const serviceModal = new ServiceModal(makeupServices);
+
     // INTELLIGENT HYDRATION: Si el SSG ya inyectó contenido, no lo sobreescribimos.
     if (gridContainer.children.length > 0) {
         console.log("✅ [MakeupPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
@@ -63,8 +66,6 @@ function initMakeupServicesGrid() {
     }
 
     gridContainer.innerHTML = '';
-
-    const serviceModal = new ServiceModal(makeupServices);
     const hubServices = getHubServices();
 
     renderServiceCards(gridContainer, hubServices, serviceModal);

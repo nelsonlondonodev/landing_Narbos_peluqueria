@@ -1,6 +1,20 @@
 export class ServiceModal {
     constructor(services) {
-        this.services = services;
+        // Registro de servicios centralizado para evitar colisiones y permitir múltiples instancias
+        if (!window._narbosServices) window._narbosServices = [];
+        
+        // Agregar nuevos servicios al registro si no están ya registrados
+        if (services && Array.isArray(services)) {
+            services.forEach(s => {
+                const alreadyExists = window._narbosServices.some(ex => 
+                    ex.id.toString() === s.id.toString() && ex.title === s.title
+                );
+                if (!alreadyExists) {
+                    window._narbosServices.push(s);
+                }
+            });
+        }
+
         this.modal = document.getElementById('service-modal');
         
         if (!this.modal) {
@@ -25,12 +39,12 @@ export class ServiceModal {
     }
 
     init() {
-        if (window._serviceModalInitialized) return;
+        if (window._serviceModalEventsBound) return;
         this.bindEvents();
-        // Expose open method globally if needed for legacy inline calls, 
-        // essentially orchestrating the view from data-attributes or similar
+        
+        // Exponer método de apertura global para compatibilidad
         window.openServiceModal = (id) => this.open(id);
-        window._serviceModalInitialized = true;
+        window._serviceModalEventsBound = true;
     }
 
     bindEvents() {
@@ -76,10 +90,10 @@ export class ServiceModal {
 
     _resolveServiceId(domId) {
         if (!domId) return null;
+        const services = window._narbosServices || [];
 
-        // En los servicios, el id es numérico (ej: 10, 12)
-        // Intentamos encontrar el servicio que coincida con el domId (id numérico o kebab-case del título)
-        const service = this.services.find(s => 
+        // Buscar en el registro global de servicios para soportar hidratación de cualquier página
+        const service = services.find(s => 
             s.id.toString() === domId.toString() || 
             this._toKebabCase(s.title) === domId.toString()
         );
@@ -91,8 +105,14 @@ export class ServiceModal {
     }
 
     open(id) {
-        const service = this.services.find(s => s.id === id);
-        if (!service) return;
+        if (id === undefined || id === null) return;
+        const services = window._narbosServices || [];
+        
+        const service = services.find(s => s.id.toString() === id.toString());
+        if (!service) {
+            console.warn(`[ServiceModal] Servicio con ID ${id} no encontrado en el registro global.`);
+            return;
+        }
 
         this.updateContent(service);
         this.show();

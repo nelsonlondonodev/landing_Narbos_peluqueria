@@ -132,6 +132,9 @@ function initNailServicesGrid() {
     const gridContainer = document.getElementById('nail-services-grid');
     if (!gridContainer) return;
 
+    // Initialize Modal Logic via Component (Registrar servicios incluso en SSG)
+    const serviceModal = new ServiceModal(nailsServices);
+
     // INTELLIGENT HYDRATION: Si el SSG ya inyectó contenido, no lo sobreescribimos.
     if (gridContainer.children.length > 0) {
         console.log("✅ [NailsPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
@@ -139,9 +142,6 @@ function initNailServicesGrid() {
     }
 
     gridContainer.innerHTML = '';
-    
-    // Initialize Modal Logic via Component
-    const serviceModal = new ServiceModal(nailsServices);
 
     const excludeString = gridContainer.dataset.excludeIds;
     const filteredServices = filterServices(nailsServices, excludeString);
