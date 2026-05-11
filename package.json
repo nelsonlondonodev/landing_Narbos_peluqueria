@@ -10,6 +10,7 @@
     "new-post": "node scripts/create-article.js",
     "generate:blog": "node scripts/generate-blog.js",
     "generate:sitemap": "node scripts/generate-sitemap.js",
+    "index-now": "node scripts/index-now.js",
     "generate:hours": "node scripts/sync-google-hours.js",
     "build": "npm run generate:hours && npm run generate:blog && npm run generate:sitemap && node scripts/build.js"
   },
