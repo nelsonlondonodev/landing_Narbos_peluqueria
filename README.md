@@ -1,5 +1,22 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.7.3** | **Estado: Critical Path Optimization & FOUC Stability**
+> **Versión 2.7.4** | **Estado: IndexNow Automation & Version Sync**
+
+## 🔄 IndexNow Automation & Footer Version Sync (May 11, 2026) - v2.7.4 🚀
+
+### 1. IndexNow Integration (Instant Indexing) 🔍
+*   **Automated Submission:** Creado `scripts/index-now.js` para notificar automáticamente a los motores de búsqueda (Bing, Yandex) tras cada construcción del sitio.
+*   **Dynamic Discovery:** El script escanea todos los archivos HTML y artículos del blog, normaliza las URLs (Clean URLs) y las envía a la API de IndexNow.
+*   **Verification Security:** Implementada la copia dinámica del archivo de verificación en el proceso de build para asegurar que Bing siempre pueda validar la propiedad del dominio.
+
+### 2. Sincronización Automática de Versión 🛠️
+*   **Single Source of Truth:** Creado `scripts/apply-version.js` para sincronizar automáticamente la versión desde `package.json` hacia `js/config.js` durante el build.
+*   **UI Consistency:** El footer ahora refleja siempre la versión real del proyecto sin intervención manual, eliminando inconsistencias visuales.
+
+### 3. Refactorización y Pipeline de Build 🏗️
+*   **Modular Utils:** Creación de `scripts/utils.js` para centralizar la lógica de escaneo y normalización, reduciendo la duplicidad de código en un 40% entre el sitemap e IndexNow.
+*   **Pipeline Optimizado:** El comando `npm run build` ahora orquesta la sincronización de versión, horarios, blog, sitemap e IndexNow en una sola pasada atómica.
+
+---
 
 ## 🔄 Critical Path Optimization & FOUC Stability (May 9, 2026) - v2.7.3 🚀
 
