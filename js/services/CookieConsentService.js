@@ -1,4 +1,4 @@
-import { siteConfig, resolveRoute } from '../config.js';
+import { siteConfig, resolveRoute, resolveAsset } from '../config.js';
 
 /**
  * Configuración de la librería y recursos externos.
@@ -24,6 +24,7 @@ class CookieConsentService {
     constructor(analyticsService) {
         this.analyticsService = analyticsService;
         this.isInitialized = false;
+        this.logoUrl = resolveAsset('images/brand/logo_narbos.webp');
     }
 
     /**
@@ -121,7 +122,7 @@ class CookieConsentService {
 
         cc.run({
             guiOptions: {
-                consentModal: { layout: 'box', position: 'bottom right', equalWeightButtons: true },
+                consentModal: { layout: 'box', position: 'bottom right', equalWeightButtons: false },
                 preferencesModal: { layout: 'box', equalWeightButtons: true }
             },
             categories: {
@@ -146,8 +147,21 @@ class CookieConsentService {
     _getTranslations() {
         return {
             consentModal: {
-                title: 'Respetamos tu privacidad',
-                description: `Narbos Salón utiliza cookies para mejorar tu experiencia. Al continuar, aceptas nuestra <a href="${resolveRoute('legal/cookies')}" class="cc__link">Política de Cookies</a>.`,
+                title: `<img src="${this.logoUrl}" alt="Logo Narbo's" class="cc__logo-img"> <br> Respetamos tu privacidad`,
+                description: `
+                    <p class="cc__text">Narbos Salón utiliza cookies para mejorar tu experiencia. Elige qué cookies permites:</p>
+                    <div class="cc__custom-categories">
+                        <div class="cc__custom-category">
+                            <input type="checkbox" checked disabled id="cat-necessary">
+                            <label for="cat-necessary">Necesarias</label>
+                        </div>
+                        <div class="cc__custom-category">
+                            <input type="checkbox" checked id="cat-analytics" onchange="window.CookieConsent.setCategory('analytics', this.checked)">
+                            <label for="cat-analytics">Estadísticas</label>
+                        </div>
+                    </div>
+                    <p class="cc__subtext">Consulta nuestra <a href="${resolveRoute('legal/cookies')}" class="cc__link">Política de Cookies</a>.</p>
+                `,
                 acceptAllBtn: 'Aceptar Todo',
                 acceptNecessaryBtn: 'Rechazar',
                 showPreferencesBtn: 'Configurar'
@@ -187,16 +201,70 @@ class CookieConsentService {
                 --cc-modal-border-radius: 2rem;
                 --cc-btn-border-radius: 50px;
             }
+            .cc__logo-img {
+                height: 40px;
+                width: auto;
+                margin-bottom: 1rem;
+                display: block;
+            }
+            .cc__text { margin-bottom: 1.5rem; font-size: 0.9rem; line-height: 1.5; }
+            .cc__subtext { margin-top: 1.5rem; font-size: 0.8rem; }
             .cc__link { color: #6B755A !important; font-weight: bold; text-decoration: underline; transition: opacity 0.2s; }
             .cc__link:hover { opacity: 0.8; }
-            #cc-main .cm {
-                backdrop-filter: blur(20px) saturate(180%);
-                -webkit-backdrop-filter: blur(20px) saturate(180%);
-                border: 1px solid rgba(255, 255, 255, 0.4);
-                box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+
+            /* Estilos de Categorías (Toggles) */
+            .cc__custom-categories {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+                background: rgba(107, 117, 90, 0.05);
+                padding: 1.25rem;
+                border-radius: 1.5rem;
+                border: 1px solid rgba(107, 117, 90, 0.1);
             }
-            #cc-main .cm__title { font-family: 'Playfair Display', serif !important; font-size: 1.5rem !important; color: #364041 !important; }
-            #cc-main .cm__btn { font-weight: 700 !important; letter-spacing: 0.5px !important; text-transform: none !important; }
+            .cc__custom-category {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                font-weight: 600;
+                font-size: 0.85rem;
+                color: #364041;
+            }
+            .cc__custom-category input[type="checkbox"] {
+                appearance: none;
+                width: 34px;
+                height: 20px;
+                background: #ddd;
+                border-radius: 20px;
+                position: relative;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+            .cc__custom-category input[type="checkbox"]:checked { background: #6B755A; }
+            .cc__custom-category input[type="checkbox"]::before {
+                content: "";
+                position: absolute;
+                width: 14px;
+                height: 14px;
+                background: white;
+                border-radius: 50%;
+                top: 3px;
+                left: 3px;
+                transition: transform 0.3s;
+            }
+            .cc__custom-category input[type="checkbox"]:checked::before { transform: translateX(14px); }
+            .cc__custom-category input[type="checkbox"]:disabled { opacity: 0.5; cursor: not-allowed; }
+
+            /* Ajustes del Modal */
+            #cc-main .cm {
+                backdrop-filter: blur(25px) saturate(180%);
+                -webkit-backdrop-filter: blur(25px) saturate(180%);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+                max-width: 320px !important;
+            }
+            #cc-main .cm__title { font-family: 'Playfair Display', serif !important; font-size: 1.4rem !important; color: #364041 !important; line-height: 1.2; }
+            #cc-main .cm__btn { font-weight: 700 !important; letter-spacing: 0.5px !important; }
         `;
         document.head.appendChild(style);
     }
