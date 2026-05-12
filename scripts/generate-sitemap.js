@@ -33,7 +33,7 @@ function generateSitemap() {
 
     // 1. Procesar archivos físicos
     allHtmlFiles.forEach(file => {
-        if (file.includes('blog/articles/')) return;
+        if (file.includes('blog/articles/') || file.includes('legal/')) return;
 
         const urlPath = normalizeUrlPath(file);
         const priority = priorityMap[file] || '0.8';
