@@ -1,5 +1,24 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.7.4** | **Estado: IndexNow Automation & Version Sync**
+> **Versión 2.8.0** | **Estado: GDPR Cookie Consent & SEO Clean URLs**
+
+## 🍪 GDPR Cookie Consent & SEO Clean URLs (May 12, 2026) - v2.8.0 🚀
+
+### 1. Sistema de Consentimiento de Cookies Premium 🛡️
+*   **Diseño SaaS-Grade:** Implementación de un banner de cookies con estética *Glassmorphism*, integración del logo de marca y botones de "Aceptar" y "Rechazar" con igual prominencia legal (EDPB Compliance).
+*   **Control Granular:** Toggles integrados para que el usuario decida qué categorías activar (Analítica, Marketing) directamente desde el banner inicial.
+*   **Persistencia:** Enlace de "Preferencias de Cookies" en el footer global para permitir la revocación o ajuste del consentimiento en cualquier momento.
+*   **Gatillo por Geo-Fencing:** Activación inteligente del banner solo en territorios regulados (EU/EEA/UK/CH) y auto-aceptación en regiones permitidas (Colombia).
+
+### 2. Infraestructura de Clean URLs & Rescate SEO 🔍
+*   **URLs Amigables (Option A):** Configuración avanzada de `.htaccess` mediante `mod_rewrite` para servir archivos `.html` sin mostrar la extensión en la barra de direcciones.
+*   **Solución 404:** Resolución de errores críticos en Google Search Console al mapear correctamente las rutas del sitemap con los archivos físicos del servidor.
+*   **Redirección 301 Automática:** Los accesos a archivos `.html` se redirigen ahora permanentemente a su versión limpia para consolidar la autoridad de dominio y evitar contenido duplicado.
+
+### 3. Optimización de Sitemap & Privacidad 🤖
+*   **Exclusión de Páginas Legales:** Actualizado `scripts/generate-sitemap.js` para excluir automáticamente la carpeta `legal/` del sitemap, evitando que las políticas de cookies canibalicen palabras clave comerciales.
+*   **Robots & Noindex:** Verificación de etiquetas `noindex, nofollow` en documentos legales para proteger el presupuesto de rastreo (Crawl Budget).
+
+---
 
 ## 🔄 IndexNow Automation & Footer Version Sync (May 11, 2026) - v2.7.4 🚀
 
