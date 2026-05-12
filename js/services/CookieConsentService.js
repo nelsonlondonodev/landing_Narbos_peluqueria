@@ -8,6 +8,7 @@ class CookieConsentService {
     constructor(analyticsService) {
         this.analyticsService = analyticsService;
         this.libraryUrl = 'https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.1/dist/cookieconsent.umd.js';
+        this.cssUrl = 'https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.1/dist/cookieconsent.css';
         this.geoApiUrl = 'https://freeipapi.com/api/json';
         this.regulatedCountries = [
             'AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 
@@ -68,6 +69,14 @@ class CookieConsentService {
     _loadLibrary() {
         return new Promise((resolve) => {
             if (window.CookieConsent) return resolve();
+
+            // Cargar CSS
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = this.cssUrl;
+            document.head.appendChild(link);
+
+            // Cargar JS
             const script = document.createElement('script');
             script.src = this.libraryUrl;
             script.onload = resolve;
@@ -168,26 +177,43 @@ class CookieConsentService {
         const style = document.createElement('style');
         style.innerHTML = `
             #cc-main {
-                --cc-bg: rgba(255, 255, 255, 0.95);
+                --cc-bg: rgba(255, 255, 255, 0.65);
                 --cc-primary-color: #364041;
                 --cc-secondary-color: #6B755A;
                 --cc-btn-primary-bg: #6B755A;
                 --cc-btn-primary-hover-bg: #555d48;
-                --cc-btn-secondary-bg: transparent;
-                --cc-btn-secondary-hover-bg: #f0f0f0;
+                --cc-btn-primary-color: #ffffff;
+                --cc-btn-secondary-bg: rgba(255, 255, 255, 0.4);
+                --cc-btn-secondary-hover-bg: rgba(107, 117, 90, 0.1);
                 --cc-btn-secondary-border-color: #6B755A;
                 --cc-font-family: 'Montserrat', sans-serif;
-                --cc-modal-border-radius: 1.5rem;
+                --cc-modal-border-radius: 2rem;
+                --cc-btn-border-radius: 50px;
             }
             .cc__link {
                 color: #6B755A !important;
                 font-weight: bold;
                 text-decoration: underline;
+                transition: opacity 0.2s;
+            }
+            .cc__link:hover {
+                opacity: 0.8;
             }
             #cc-main .cm {
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(107, 117, 90, 0.1);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            }
+            #cc-main .cm__title {
+                font-family: 'Playfair Display', serif !important;
+                font-size: 1.5rem !important;
+                color: #364041 !important;
+            }
+            #cc-main .cm__btn {
+                font-weight: 700 !important;
+                letter-spacing: 0.5px !important;
+                text-transform: none !important;
             }
         `;
         document.head.appendChild(style);
