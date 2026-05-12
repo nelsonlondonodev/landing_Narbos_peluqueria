@@ -122,7 +122,12 @@ class CookieConsentService {
 
         cc.run({
             guiOptions: {
-                consentModal: { layout: 'box', position: 'bottom right', equalWeightButtons: false },
+                consentModal: { 
+                    layout: 'box', 
+                    position: 'bottom right', 
+                    equalWeightButtons: true, // Forzar igual peso visual
+                    flipButtons: false 
+                },
                 preferencesModal: { layout: 'box', equalWeightButtons: true }
             },
             categories: {
@@ -191,12 +196,18 @@ class CookieConsentService {
                 --cc-bg: rgba(255, 255, 255, 0.65);
                 --cc-primary-color: #364041;
                 --cc-secondary-color: #6B755A;
+                
+                /* Botones Principales (Aceptar y Rechazar) */
                 --cc-btn-primary-bg: #6B755A;
                 --cc-btn-primary-hover-bg: #555d48;
                 --cc-btn-primary-color: #ffffff;
-                --cc-btn-secondary-bg: rgba(255, 255, 255, 0.4);
-                --cc-btn-secondary-hover-bg: rgba(107, 117, 90, 0.1);
-                --cc-btn-secondary-border-color: #6B755A;
+                
+                /* El botón secundario se comporta como primario para GDPR (Igual Prominencia) */
+                --cc-btn-secondary-bg: #6B755A;
+                --cc-btn-secondary-hover-bg: #555d48;
+                --cc-btn-secondary-color: #ffffff;
+                --cc-btn-secondary-border-color: transparent;
+
                 --cc-font-family: 'Montserrat', sans-serif;
                 --cc-modal-border-radius: 2rem;
                 --cc-btn-border-radius: 50px;
@@ -265,6 +276,17 @@ class CookieConsentService {
             }
             #cc-main .cm__title { font-family: 'Playfair Display', serif !important; font-size: 1.4rem !important; color: #364041 !important; line-height: 1.2; }
             #cc-main .cm__btn { font-weight: 700 !important; letter-spacing: 0.5px !important; }
+
+            /* Diferenciar el botón de configurar (terciario) */
+            #cc-main .cm__btn[data-role="show_preferences"] {
+                background: transparent !important;
+                color: #6B755A !important;
+                border: 1px solid #6B755A !important;
+                margin-top: 0.5rem !important;
+            }
+            #cc-main .cm__btn[data-role="show_preferences"]:hover {
+                background: rgba(107, 117, 90, 0.1) !important;
+            }
         `;
         document.head.appendChild(style);
     }
