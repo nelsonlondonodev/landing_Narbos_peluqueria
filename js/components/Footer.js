@@ -110,6 +110,8 @@ function renderCopyright(year) {
         <div class="flex flex-col sm:flex-row items-center justify-center gap-2 opacity-80 text-xs sm:text-sm">
             <span>© ${year} Narbo's Salón Spa.</span>
             <span class="hidden sm:inline text-brand-light/30">|</span>
+            <button onclick="window.CookieConsent.showPreferences()" class="hover:text-white transition-colors duration-200">Preferencias de Cookies</button>
+            <span class="hidden sm:inline text-brand-light/30">|</span>
             ${renderVersionTag()}
         </div>
         <span class="block mt-2 opacity-70 text-xs text-brand-light/90">
