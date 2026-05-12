@@ -12,6 +12,7 @@ import { PageTransitionController } from './controllers/PageTransitionController
 import { pagesData } from './data/pagesData.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { AnalyticsService } from './services/AnalyticsService.js';
+import { CookieConsentService } from './services/CookieConsentService.js';
 import { HomeHubController } from './controllers/HomeHubController.js';
 import { HoursController } from './controllers/HoursController.js';
 
@@ -56,7 +57,9 @@ class App {
         this.initInteractiveComponents();
         this.initServices();
         this.initBreadcrumbs();
-        this.initAnalytics();
+        
+        // Inicialización coordinada de Cookies y Analytics
+        this.initConsentAndAnalytics();
     }
 
     resolvePath(path) {
@@ -244,10 +247,15 @@ class App {
         }
     }
 
-    initAnalytics() {
-        if (siteConfig.contact.googleAnalyticsId) {
-            new AnalyticsService(siteConfig.contact.googleAnalyticsId).init();
-        }
+    initConsentAndAnalytics() {
+        const gaId = siteConfig.contact.googleAnalyticsId;
+        if (!gaId) return;
+
+        this.analyticsService = new AnalyticsService(gaId);
+        this.cookieService = new CookieConsentService(this.analyticsService);
+
+        // El servicio de cookies determinará si GA puede cargar de inmediato o si requiere banner
+        this.cookieService.init();
     }
 }
 

@@ -6,9 +6,8 @@ class AnalyticsService {
     constructor(measurementId) {
         this.measurementId = measurementId;
         this.gaLoaded = false;
+        this.consentRequired = false; // Por defecto asumimos que no, hasta que se detecte zona regulada
 
-        // Initialize dataLayer and gtag shim immediately to avoid "reference errors"
-        // if other scripts call gtag() before the GA library is loaded.
         if (typeof window !== 'undefined') {
             window.dataLayer = window.dataLayer || [];
             window.gtag = window.gtag || function() {
@@ -18,50 +17,60 @@ class AnalyticsService {
     }
 
     /**
-     * Initializes the GA loading with deferral strategies.
+     * Define si se requiere consentimiento previo antes de cargar.
+     */
+    setConsentRequired(required) {
+        this.consentRequired = required;
+    }
+
+    /**
+     * Inicializa el servicio. Si se requiere consentimiento, espera a que se llame a enable().
      */
     init() {
         if (this.gaLoaded) return;
 
-        // 1. Idle Load (Low priority)
-        if (window.requestIdleCallback) {
-            requestIdleCallback(() => this.load(), { timeout: 4000 });
-        } else {
-            setTimeout(() => this.load(), 4000);
+        // Si no se requiere consentimiento (fuera de la UE), cargamos normalmente con estrategia idle
+        if (!this.consentRequired) {
+            this._scheduleLoad();
+            this.addInteractionListeners();
         }
-
-        // 2. Interaction Load (Priority on user intent)
-        this.addInteractionListeners();
     }
 
     /**
-     * Injects the GA scripts into the document.
+     * Activa manualmente la carga de GA (llamado desde el banner de cookies).
      */
-    load() {
+    enable() {
+        if (this.gaLoaded) return;
+        this._loadNow();
+    }
+
+    _scheduleLoad() {
+        if (window.requestIdleCallback) {
+            requestIdleCallback(() => this._loadNow(), { timeout: 4000 });
+        } else {
+            setTimeout(() => this._loadNow(), 4000);
+        }
+    }
+
+    _loadNow() {
         if (this.gaLoaded) return;
         this.gaLoaded = true;
 
-        // Inject script tag
         const script = document.createElement('script');
         script.src = `https://www.googletagmanager.com/gtag/js?id=${this.measurementId}`;
         script.async = true;
         document.head.appendChild(script);
 
-        // Initialize GA tracking
-
         gtag('js', new Date());
         gtag('config', this.measurementId);
-        
-        // console.log(`[AnalyticsService] GA Loaded (${this.measurementId})`);
     }
 
-    /**
-     * Attaches event listeners for first interaction.
-     */
     addInteractionListeners() {
         const events = ['scroll', 'touchstart', 'mousemove', 'click'];
         const handler = () => {
-            this.load();
+            if (!this.consentRequired) {
+                this._loadNow();
+            }
             events.forEach(evt => document.removeEventListener(evt, handler));
         };
 
