@@ -105,12 +105,9 @@ export class VideoModal {
         const iframe = document.getElementById(this.iframeId);
         if (!iframe) return;
 
-        iframe.style.pointerEvents = 'none';
+        // Optimized for mobile: direct source assignment without pointer-events blocking
+        // to ensure immediate user interaction capability.
         iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`;
-
-        setTimeout(() => {
-            if (iframe) iframe.style.pointerEvents = 'auto';
-        }, 500);
     }
 
     /**
@@ -188,24 +185,25 @@ export class VideoModal {
      */
     _getTemplate(videoId) {
         return `
-            <div class="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] transform scale-95 opacity-0 transition-all duration-500 ease-out" id="${this.containerId}">
-                <!-- Close Button -->
-                <button id="close-video-modal" class="absolute top-4 right-4 z-[100] p-3 bg-white/10 hover:bg-brand-green text-white rounded-full transition-all duration-300 backdrop-blur-xl border border-white/20 group shadow-lg" aria-label="Cerrar video">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:rotate-90 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-
-                <!-- YouTube Iframe -->
+            <div class="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] transform scale-95 opacity-0 transition-all duration-500 ease-out will-change-transform" id="${this.containerId}">
+                <!-- YouTube Iframe - Positioned absolute to fill the aspect-video container robustly -->
                 <iframe 
                     id="${this.iframeId}"
-                    class="w-full h-full"
+                    class="absolute inset-0 w-full h-full z-10"
                     src="" 
                     title="YouTube video player" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
+                    allowfullscreen
+                    loading="eager">
                 </iframe>
+
+                <!-- Close Button - Placed after iframe in DOM with high z-index for guaranteed accessibility -->
+                <button id="close-video-modal" class="absolute top-4 right-4 z-50 p-3 bg-black/40 hover:bg-brand-green text-white rounded-full transition-all duration-300 backdrop-blur-md border border-white/20 group shadow-lg pointer-events-auto" aria-label="Cerrar video">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:rotate-90 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
         `;
     }
