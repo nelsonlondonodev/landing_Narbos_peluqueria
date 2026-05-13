@@ -3,5 +3,6 @@
  * Contains IDs for the YouTube gallery.
  */
 export const homeVideos = [
-    'sz-uA1RgpVs' // Transformación de Color y Balayage en Chía
+    'sz-uA1RgpVs', // Transformación de Color y Balayage en Chía
+    'MC-SPNzjk0E'  // Transformación de Estilo y Color (Shorts)
 ];
