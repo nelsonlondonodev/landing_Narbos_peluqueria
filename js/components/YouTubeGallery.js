@@ -71,7 +71,7 @@ export class YouTubeGallery {
         return `
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="${this.gridId}">
                 ${hasVideos 
-                    ? this.videoIds.map(id => this._getVideoCard(id)).join('') 
+                    ? [...this.videoIds].reverse().map((id, index) => this._getVideoCard(id, index === 0)).join('') 
                     : this._getEmptyState()}
             </div>
         `;
@@ -102,12 +102,19 @@ export class YouTubeGallery {
      * Genera el HTML de una tarjeta de video individual (Fachada).
      * @private
      */
-    _getVideoCard(videoId) {
+    _getVideoCard(videoId, isLatest = false) {
         const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
         
         return `
             <div class="video-card relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white group cursor-pointer" 
                  data-video-id="${videoId}">
+                
+                ${isLatest ? `
+                    <div class="absolute top-4 left-4 z-20 px-3 py-1 bg-brand-green text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg border border-white/20 animate-pulse">
+                        Última publicación
+                    </div>
+                ` : ''}
+
                 <!-- Thumbnail with hover effect -->
                 <img src="${thumbnailUrl}" alt="Narbo's Salon Video" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
                 
