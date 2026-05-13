@@ -1,5 +1,23 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.0** | **Estado: GDPR Cookie Consent & SEO Clean URLs**
+> **Versión 2.8.1** | **Estado: YouTube Shorts Integration & Mobile UX Optimization**
+
+## 🎥 YouTube Shorts Integration & Mobile UX Optimization (May 13, 2026) - v2.8.1 🚀
+
+### 1. Integración de YouTube Shorts & Galería Dinámica 🎥
+*   **Contenido Actualizado:** Inclusión del nuevo video de transformación de estilo y color (`MC-SPNzjk0E`) directamente en la galería del Home.
+*   **Algoritmo de Ordenación:** Refactorización del componente `YouTubeGallery.js` para mostrar siempre el video más reciente en la primera posición de forma automática.
+*   **Badge de Novedad:** Implementación de una etiqueta dinámica de "Última publicación" con animación de pulso (*pulse*) exclusiva para el video más reciente, aumentando el CTR.
+
+### 2. Solución Robusta para Interacción Móvil 📱
+*   **VideoModal Optimization:** Eliminación de los bloqueos de puntero (`pointer-events: none`) que causaban que los controles de YouTube se congelaran en dispositivos táctiles.
+*   **Aceleración por Hardware:** Inyección de `will-change-transform` y optimización de capas CSS para asegurar que los eventos de pausa, volumen y pantalla completa respondan instantáneamente en iOS y Android.
+*   **Alineación de Hitbox:** Refactorización del iframe a posicionamiento absoluto (`inset-0`) para garantizar una coincidencia perfecta entre los controles visuales y el área de clic.
+
+### 3. Sincronización de Versión & Cache Management 🛠️
+*   **Version Bump (v2.8.1):** Actualización global de la versión en `package.json`, `js/config.js` y el footer del sitio.
+*   **Cache Booster:** Generación de nuevos hashes de assets para forzar la actualización de estilos y scripts en los navegadores de los clientes tras las mejoras en el modal.
+
+---
 
 ## 🍪 GDPR Cookie Consent & SEO Clean URLs (May 12, 2026) - v2.8.0 🚀
 
