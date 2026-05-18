@@ -5,5 +5,4 @@ Disallow: /fidelizacion/
 
 Sitemap: https://narbossalon.com/sitemap.xml
 
-# LLM Roadmap
-Link: https://narbossalon.com/llms.txt; rel="help"
+# LLM Roadmap: https://narbossalon.com/llms.txt
