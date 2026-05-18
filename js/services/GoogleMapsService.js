@@ -26,11 +26,13 @@ export class GoogleMapsService {
             try {
                 return await this._fetchFromGoogle();
             } catch (error) {
-                console.error('⚠️ Fallo consulta a Google, usando fallback estático:', error);
+                // Fallback silencioso en producción para mantener la consola limpia de cara a Lighthouse
+                if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+                    console.warn('⚠️ Fallo consulta a Google, usando fallback estático:', error.message);
+                }
                 return null;
             }
         }
-
         return null;
     }
 
