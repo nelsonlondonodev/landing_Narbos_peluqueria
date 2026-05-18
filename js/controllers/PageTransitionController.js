@@ -52,6 +52,28 @@ export class PageTransitionController {
             const targetUrl = new URL(url, window.location.origin);
             if (targetUrl.origin !== window.location.origin) return;
 
+            // --- Enrutamiento Inteligente en Tiempo de Ejecución (Runtime Routing) ---
+            // Si estamos fuera del dominio de producción, adaptamos la URL añadiendo .html en caliente.
+            const isProductionDomain = ['narbossalon.com', 'www.narbossalon.com'].includes(window.location.hostname);
+            const isLocal = ['localhost', '127.0.0.1'].some(h => window.location.hostname.includes(h));
+            const isGitHubPages = window.location.hostname.includes('github.io');
+            const isLocalFile = window.location.protocol.startsWith('file:');
+
+            const needsHtml = !isProductionDomain || isLocal || isGitHubPages || isLocalFile;
+            
+            if (needsHtml) {
+                let pathname = targetUrl.pathname;
+                if (pathname.endsWith('/')) {
+                    pathname += 'index.html';
+                } else {
+                    const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
+                    if (lastSegment && !lastSegment.includes('.')) {
+                        pathname += '.html';
+                    }
+                }
+                targetUrl.pathname = pathname;
+            }
+
             this.isExiting = true;
             e.preventDefault();
             this._performExitAnimation(targetUrl.href);

@@ -18,6 +18,13 @@
  * Configuración de entorno y Rutas Base.
  */
 const isGitHubPages = typeof window !== 'undefined' && window.location.hostname.includes('github.io');
+const isProductionDomain = typeof window !== 'undefined' && ['narbossalon.com', 'www.narbossalon.com'].includes(window.location.hostname);
+const isLocalFile = typeof window !== 'undefined' && window.location.protocol.startsWith('file:');
+const isLocalServer = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].some(h => window.location.hostname.includes(h));
+
+// Necesitamos la extensión .html únicamente si estamos fuera del dominio de producción de Hostinger
+export const needsHtmlExtension = (typeof window !== 'undefined') && (!isProductionDomain || isGitHubPages || isLocalFile || isLocalServer);
+
 // Nota: El nombre 'landing_Narbos_peluqueria' se mantiene por compatibilidad con el repositorio original y despliegue.
 const repoName = '/landing_Narbos_peluqueria'; 
 
@@ -46,14 +53,13 @@ export const resolveRoute = (path, prefix = '') => {
     let safePrefix = prefix ? (prefix.endsWith('/') ? prefix : `${prefix}/`) : '';
 
     // Lógica de archivos físicos (.html)
-    // Solo agregamos .html en GitHub Pages para compatibilidad con su hosting estático.
-    // En producción (Hostinger) y local usamos URLs limpias sin .html.
+    // Solo agregamos .html si nos encontramos fuera del dominio de producción para asegurar la compatibilidad con Live Server/GitHub Pages.
     if (cleanPath.endsWith('/')) {
-        if (isGitHubPages) {
+        if (needsHtmlExtension) {
             cleanPath += 'index.html';
         }
     } else if (!cleanPath.includes('.') && !cleanPath.endsWith('.html')) {
-        if (isGitHubPages) {
+        if (needsHtmlExtension) {
             cleanPath += '.html';
         }
     }
