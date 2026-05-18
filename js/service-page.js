@@ -196,7 +196,7 @@ class ServicePageManager {
         const isCutsPage = this.pageKey === 'barberia-cortes-hombre';
         let displayServices = barberServices;
         if (isCutsPage) {
-            displayServices = barberServices.filter(s => s.link.includes('barberia-cortes-hombre.html'));
+            displayServices = barberServices.filter(s => s.link.includes('barberia-cortes-hombre'));
         }
         this._renderStandardCards(grid, displayServices);
     }
