@@ -1,7 +1,7 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.1** | **Estado: YouTube Shorts Integration & Mobile UX Optimization**
+> **Versión 2.8.2** | **Estado: YouTube Shorts Integration & Mobile UX Optimization**
 
-## 🎥 YouTube Shorts Integration & Mobile UX Optimization (May 13, 2026) - v2.8.1 🚀
+## 🎥 YouTube Shorts Integration & Mobile UX Optimization (May 13, 2026) - v2.8.2 🚀
 
 ### 1. Integración de YouTube Shorts & Galería Dinámica 🎥
 *   **Contenido Actualizado:** Inclusión del nuevo video de transformación de estilo y color (`MC-SPNzjk0E`) directamente en la galería del Home.
@@ -14,7 +14,7 @@
 *   **Alineación de Hitbox:** Refactorización del iframe a posicionamiento absoluto (`inset-0`) para garantizar una coincidencia perfecta entre los controles visuales y el área de clic.
 
 ### 3. Sincronización de Versión & Cache Management 🛠️
-*   **Version Bump (v2.8.1):** Actualización global de la versión en `package.json`, `js/config.js` y el footer del sitio.
+*   **Version Bump (v2.8.2):** Actualización global de la versión en `package.json`, `js/config.js` y el footer del sitio.
 *   **Cache Booster:** Generación de nuevos hashes de assets para forzar la actualización de estilos y scripts en los navegadores de los clientes tras las mejoras en el modal.
 
 ---
