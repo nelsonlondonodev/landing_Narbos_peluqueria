@@ -46,10 +46,16 @@ export const resolveRoute = (path, prefix = '') => {
     let safePrefix = prefix ? (prefix.endsWith('/') ? prefix : `${prefix}/`) : '';
 
     // Lógica de archivos físicos (.html)
+    // Solo agregamos .html en GitHub Pages para compatibilidad con su hosting estático.
+    // En producción (Hostinger) y local usamos URLs limpias sin .html.
     if (cleanPath.endsWith('/')) {
-        cleanPath += 'index.html';
+        if (isGitHubPages) {
+            cleanPath += 'index.html';
+        }
     } else if (!cleanPath.includes('.') && !cleanPath.endsWith('.html')) {
-        cleanPath += '.html';
+        if (isGitHubPages) {
+            cleanPath += '.html';
+        }
     }
 
     return `${safePrefix}${cleanPath}`.replace(/\.\/\.\//g, './');
