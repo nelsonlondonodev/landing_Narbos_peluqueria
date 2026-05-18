@@ -141,7 +141,7 @@ function injectHero(document, pageKey, prefix) {
             // Preload Móvil (max-width: 768px)
             const preloadMobile = document.createElement('link');
             preloadMobile.rel = 'preload';
-            preloadMobile.as = 'image';
+            preloadMobile.setAttribute('as', 'image');
             preloadMobile.href = heroData.imageSrcMobile;
             preloadMobile.media = '(max-width: 768px)';
             preloadMobile.setAttribute('fetchpriority', 'high');
@@ -151,7 +151,7 @@ function injectHero(document, pageKey, prefix) {
             // Preload Escritorio (min-width: 769px)
             const preloadDesktop = document.createElement('link');
             preloadDesktop.rel = 'preload';
-            preloadDesktop.as = 'image';
+            preloadDesktop.setAttribute('as', 'image');
             preloadDesktop.href = heroData.imageSrc;
             preloadDesktop.media = '(min-width: 769px)';
             preloadDesktop.setAttribute('fetchpriority', 'high');
@@ -161,7 +161,7 @@ function injectHero(document, pageKey, prefix) {
             // Preload global (si no hay variante móvil)
             const preloadDesktop = document.createElement('link');
             preloadDesktop.rel = 'preload';
-            preloadDesktop.as = 'image';
+            preloadDesktop.setAttribute('as', 'image');
             preloadDesktop.href = heroData.imageSrc;
             preloadDesktop.setAttribute('fetchpriority', 'high');
             preloadDesktop.type = 'image/webp';
