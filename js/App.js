@@ -111,16 +111,7 @@ class App {
         if (!heroRoot || heroRoot.querySelector('h1')) return;
 
         const path = window.location.pathname;
-        let pageKey = null;
-
-        // 1. Mapeo Explícito
-        if (path.includes('nosotros.html') || path.endsWith('/nosotros')) pageKey = 'nosotros';
-        else if (path.includes('contacto.html') || path.endsWith('/contacto')) pageKey = 'contacto';
-        
-        // 2. Detección Dinámica (Usa cache)
-        if (!pageKey) {
-            pageKey = this._pagesDataKeys.find(key => path.includes(key));
-        }
+        const pageKey = this._pagesDataKeys.find(key => path.includes(key));
 
         if (pageKey && pagesData[pageKey]?.hero) {
             const heroData = pagesData[pageKey].hero;

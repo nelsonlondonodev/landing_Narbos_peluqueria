@@ -1,4 +1,4 @@
-import { resolveRoute } from '../config.js';
+import { resolveRoute, needsHtmlExtension } from '../config.js';
 
 /**
  * Controlador de Transiciones de Página.
@@ -53,31 +53,32 @@ export class PageTransitionController {
             if (targetUrl.origin !== window.location.origin) return;
 
             // --- Enrutamiento Inteligente en Tiempo de Ejecución (Runtime Routing) ---
-            // Si estamos fuera del dominio de producción, adaptamos la URL añadiendo .html en caliente.
-            const isProductionDomain = ['narbossalon.com', 'www.narbossalon.com'].includes(window.location.hostname);
-            const isLocal = ['localhost', '127.0.0.1'].some(h => window.location.hostname.includes(h));
-            const isGitHubPages = window.location.hostname.includes('github.io');
-            const isLocalFile = window.location.protocol.startsWith('file:');
-
-            const needsHtml = !isProductionDomain || isLocal || isGitHubPages || isLocalFile;
-            
-            if (needsHtml) {
-                let pathname = targetUrl.pathname;
-                if (pathname.endsWith('/')) {
-                    pathname += 'index.html';
-                } else {
-                    const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
-                    if (lastSegment && !lastSegment.includes('.')) {
-                        pathname += '.html';
-                    }
-                }
-                targetUrl.pathname = pathname;
+            if (needsHtmlExtension) {
+                this._applyHtmlExtensionFallback(targetUrl);
             }
 
             this.isExiting = true;
             e.preventDefault();
             this._performExitAnimation(targetUrl.href);
         } catch (err) {}
+    }
+
+    /**
+     * Ajusta el pathname de la URL para añadir .html en caliente si el entorno lo requiere.
+     * @private
+     * @param {URL} targetUrl - URL a transformar.
+     */
+    _applyHtmlExtensionFallback(targetUrl) {
+        let pathname = targetUrl.pathname;
+        if (pathname.endsWith('/')) {
+            pathname += 'index.html';
+        } else {
+            const lastSegment = pathname.substring(pathname.lastIndexOf('/') + 1);
+            if (lastSegment && !lastSegment.includes('.')) {
+                pathname += '.html';
+            }
+        }
+        targetUrl.pathname = pathname;
     }
 
     _performExitAnimation(url) {

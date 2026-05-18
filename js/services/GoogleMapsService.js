@@ -19,10 +19,7 @@ export class GoogleMapsService {
     async getBusinessHours() {
         // 1. Intentar obtener del caché de usuario primero
         const cached = this._getCache();
-        if (cached) {
-            // console.log('📦 Usando horarios desde caché local');
-            return cached;
-        }
+        if (cached) return cached;
 
         // 2. Si no hay caché o expiró, y tenemos API Key, consultamos a Google
         if (this.apiKey) {

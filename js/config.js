@@ -17,18 +17,29 @@
 /**
  * Configuración de entorno y Rutas Base.
  */
-const isGitHubPages = typeof window !== 'undefined' && window.location.hostname.includes('github.io');
-const isProductionDomain = typeof window !== 'undefined' && ['narbossalon.com', 'www.narbossalon.com'].includes(window.location.hostname);
-const isLocalFile = typeof window !== 'undefined' && window.location.protocol.startsWith('file:');
-const isLocalServer = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].some(h => window.location.hostname.includes(h));
+const getEnvironmentConfig = () => {
+    const hasWindow = typeof window !== 'undefined';
+    if (!hasWindow) return { isGitHubPages: false, needsHtml: false };
 
-// Necesitamos la extensión .html únicamente si estamos fuera del dominio de producción de Hostinger
-export const needsHtmlExtension = (typeof window !== 'undefined') && (!isProductionDomain || isGitHubPages || isLocalFile || isLocalServer);
+    const { hostname, protocol } = window.location;
+    const isGitHub = hostname.includes('github.io');
+    const isProd = ['narbossalon.com', 'www.narbossalon.com'].includes(hostname);
+    const isLocalF = protocol.startsWith('file:');
+    const isLocalS = ['localhost', '127.0.0.1'].some(h => hostname.includes(h));
+
+    return {
+        isGitHubPages: isGitHub,
+        needsHtml: !isProd || isGitHub || isLocalF || isLocalS
+    };
+};
+
+const env = getEnvironmentConfig();
+export const needsHtmlExtension = env.needsHtml;
 
 // Nota: El nombre 'landing_Narbos_peluqueria' se mantiene por compatibilidad con el repositorio original y despliegue.
 const repoName = '/landing_Narbos_peluqueria'; 
 
-export const BASE_PATH = isGitHubPages ? repoName : '';
+export const BASE_PATH = env.isGitHubPages ? repoName : '';
 
 /**
  * Normaliza un path eliminando slashes duplicados e iniciales.

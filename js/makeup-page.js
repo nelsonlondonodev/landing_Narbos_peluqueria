@@ -68,13 +68,7 @@ function initMakeupServicesGrid() {
  * Verifica si el contenedor ya tiene contenido inyectado por SSG.
  * @private
  */
-function isHydrated(container) {
-    if (container.children.length > 0) {
-        // console.log("✅ [MakeupPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
-        return true;
-    }
-    return false;
-}
+const isHydrated = (container) => container.children.length > 0;
 
 /**
  * Realiza el renderizado dinámico del grid cuando no hay SSG.

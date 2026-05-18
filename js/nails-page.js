@@ -106,7 +106,7 @@ function initBreadcrumbs() {
         { label: 'Inicio', link: '../../' }
     ];
 
-    const isIndex = currentPath.endsWith('/unas-spa') || currentPath.endsWith('/unas-spa/') || currentPath.endsWith('/unas-spa/index.html');
+    const isIndex = /\/unas-spa(\/?|(\/index\.html)?)$/.test(currentPath);
     
     // Level 2: Hub
     items.push({ 
@@ -147,13 +147,7 @@ function initNailServicesGrid() {
  * Verifica si el contenedor ya tiene contenido inyectado por SSG.
  * @private
  */
-function isHydrated(container) {
-    if (container.children.length > 0) {
-        // console.log("✅ [NailsPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
-        return true;
-    }
-    return false;
-}
+const isHydrated = (container) => container.children.length > 0;
 
 /**
  * Realiza el renderizado dinámico del grid cuando no hay SSG.

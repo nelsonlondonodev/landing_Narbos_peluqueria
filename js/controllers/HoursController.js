@@ -26,7 +26,7 @@ export class HoursController {
                 this.updateUI(liveData);
             }
         } catch (error) {
-            // console.log('💡 Manteniendo horario estático por seguridad.');
+            // Fallback silencioso al horario estático (SEO)
         }
     }
 
