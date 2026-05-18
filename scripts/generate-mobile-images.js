@@ -56,6 +56,14 @@ const IMAGES_TO_OPTIMIZE = [
     {
         src: 'images/pages/estetica/masaje-facial-relajante-narbos.webp',
         dest: 'images/pages/estetica/masaje-facial-relajante-narbos-mobile.webp'
+    },
+    {
+        src: 'images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp',
+        dest: 'images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia-mobile.webp'
+    },
+    {
+        src: 'images/pages/barberia/corte-hombre-fade-moderno.webp',
+        dest: 'images/pages/barberia/corte-hombre-fade-moderno-mobile.webp'
     }
 ];
 
