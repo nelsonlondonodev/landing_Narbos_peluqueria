@@ -20,7 +20,7 @@ export class GoogleMapsService {
         // 1. Intentar obtener del caché de usuario primero
         const cached = this._getCache();
         if (cached) {
-            console.log('📦 Usando horarios desde caché local');
+            // console.log('📦 Usando horarios desde caché local');
             return cached;
         }
 

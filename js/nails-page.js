@@ -149,7 +149,7 @@ function initNailServicesGrid() {
  */
 function isHydrated(container) {
     if (container.children.length > 0) {
-        console.log("✅ [NailsPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
+        // console.log("✅ [NailsPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
         return true;
     }
     return false;

@@ -70,7 +70,7 @@ function initMakeupServicesGrid() {
  */
 function isHydrated(container) {
     if (container.children.length > 0) {
-        console.log("✅ [MakeupPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
+        // console.log("✅ [MakeupPage] Contenido del SSG detectado. Manteniendo hidratación estática.");
         return true;
     }
     return false;
