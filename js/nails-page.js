@@ -106,7 +106,7 @@ function initBreadcrumbs() {
         { label: 'Inicio', link: '../../' }
     ];
 
-    const isIndex = currentPath.endsWith('/unas-spa/') || currentPath.endsWith('/unas-spa/index.html');
+    const isIndex = currentPath.endsWith('/unas-spa') || currentPath.endsWith('/unas-spa/') || currentPath.endsWith('/unas-spa/index.html');
     
     // Level 2: Hub
     items.push({ 

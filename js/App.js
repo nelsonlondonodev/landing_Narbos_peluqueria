@@ -114,8 +114,8 @@ class App {
         let pageKey = null;
 
         // 1. Mapeo Explícito
-        if (path.includes('nosotros.html')) pageKey = 'nosotros';
-        else if (path.includes('contacto.html')) pageKey = 'contacto';
+        if (path.includes('nosotros.html') || path.endsWith('/nosotros')) pageKey = 'nosotros';
+        else if (path.includes('contacto.html') || path.endsWith('/contacto')) pageKey = 'contacto';
         
         // 2. Detección Dinámica (Usa cache)
         if (!pageKey) {

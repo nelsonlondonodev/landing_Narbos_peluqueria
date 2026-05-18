@@ -105,7 +105,7 @@ function initBreadcrumbs() {
         { label: 'Inicio', link: '../../' }
     ];
 
-    const isIndex = currentPath.endsWith('/peluqueria/') || currentPath.endsWith('/peluqueria/index.html');
+    const isIndex = currentPath.endsWith('/peluqueria') || currentPath.endsWith('/peluqueria/') || currentPath.endsWith('/peluqueria/index.html');
     
     // Level 2: Hub
     items.push({ 
