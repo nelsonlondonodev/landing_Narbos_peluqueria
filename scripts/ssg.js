@@ -129,6 +129,45 @@ function injectHero(document, pageKey, prefix) {
     };
 
     heroRoot.innerHTML = getHeroHTML(heroData);
+
+    // Inyección automatizada de preloads de LCP en el head para optimización de PageSpeed
+    const head = document.head;
+    if (head) {
+        // Eliminar preloads de imágenes anteriores para evitar duplicados heredados
+        const existingPreloads = head.querySelectorAll('link[rel="preload"][as="image"]');
+        existingPreloads.forEach(el => el.remove());
+
+        if (heroData.imageSrcMobile) {
+            // Preload Móvil (max-width: 768px)
+            const preloadMobile = document.createElement('link');
+            preloadMobile.rel = 'preload';
+            preloadMobile.as = 'image';
+            preloadMobile.href = heroData.imageSrcMobile;
+            preloadMobile.media = '(max-width: 768px)';
+            preloadMobile.setAttribute('fetchpriority', 'high');
+            preloadMobile.type = 'image/webp';
+            head.insertBefore(preloadMobile, head.firstChild);
+
+            // Preload Escritorio (min-width: 769px)
+            const preloadDesktop = document.createElement('link');
+            preloadDesktop.rel = 'preload';
+            preloadDesktop.as = 'image';
+            preloadDesktop.href = heroData.imageSrc;
+            preloadDesktop.media = '(min-width: 769px)';
+            preloadDesktop.setAttribute('fetchpriority', 'high');
+            preloadDesktop.type = 'image/webp';
+            head.insertBefore(preloadDesktop, head.firstChild);
+        } else {
+            // Preload global (si no hay variante móvil)
+            const preloadDesktop = document.createElement('link');
+            preloadDesktop.rel = 'preload';
+            preloadDesktop.as = 'image';
+            preloadDesktop.href = heroData.imageSrc;
+            preloadDesktop.setAttribute('fetchpriority', 'high');
+            preloadDesktop.type = 'image/webp';
+            head.insertBefore(preloadDesktop, head.firstChild);
+        }
+    }
 }
 
 /**
