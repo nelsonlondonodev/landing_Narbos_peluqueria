@@ -8,14 +8,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.join(__dirname, '../');
 
-const BASE_URL = 'https://narbossalon.com';
+const ENDPOINTS = [
+    { name: 'IndexNow Global (Microsoft)', url: 'https://api.indexnow.org/indexnow' },
+    { name: 'Bing Direct', url: 'https://www.bing.com/indexnow' },
+    { name: 'Yandex Direct', url: 'https://yandex.com/indexnow' }
+];
 
 /**
  * Detecta la clave de IndexNow desde los archivos .txt de la raíz
  */
 function detectApiKey() {
     const files = fs.readdirSync(PROJECT_ROOT);
-    // Busca un archivo .txt que tenga exactamente 32 caracteres hexadecimales (el patrón que generamos)
     const keyFile = files.find(f => /^[a-f0-9]{32}\.txt$/.test(f));
     
     if (!keyFile) {
@@ -23,19 +26,19 @@ function detectApiKey() {
     }
     
     const key = keyFile.replace('.txt', '');
-    return { key, location: `${BASE_URL}/${keyFile}` };
+    return { key, keyFile };
 }
 
 /**
- * Recopila todas las URLs del sitio
+ * Recopila todas las URLs del sitio para un base URL dado
  */
-function collectAllUrls() {
+function collectAllUrls(baseUrl) {
     const urls = new Set();
     
     // 1. Archivos físicos HTML
     getHtmlFiles(PROJECT_ROOT).forEach(file => {
         if (!file.includes('blog/articles/')) {
-            urls.add(`${BASE_URL}${normalizeUrlPath(file)}`);
+            urls.add(`${baseUrl}${normalizeUrlPath(file)}`);
         }
     });
 
@@ -43,43 +46,95 @@ function collectAllUrls() {
     articles.forEach(article => {
         let link = article.link.startsWith('/') ? article.link : `/${article.link}`;
         if (link.endsWith('.html')) link = link.slice(0, -5);
-        urls.add(`${BASE_URL}${link}`);
+        urls.add(`${baseUrl}${link}`);
     });
 
     return Array.from(urls);
 }
 
 /**
- * Ejecuta la notificación a IndexNow
+ * Construye el payload para un hostname y clave dados
+ */
+function buildPayload(baseUrl, key, keyFile) {
+    const hostname = new URL(baseUrl).hostname;
+    return {
+        host: hostname,
+        key: key,
+        keyLocation: `${baseUrl}/${keyFile}`,
+        urlList: collectAllUrls(baseUrl)
+    };
+}
+
+/**
+ * Envía la petición a un endpoint específico
+ */
+async function submitToEndpoint(endpoint, payload) {
+    console.log(`📡 Enviando a ${endpoint.name} (${payload.host})...`);
+    try {
+        const response = await fetch(endpoint.url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+            body: JSON.stringify(payload)
+        });
+
+        const status = response.status;
+        const text = await response.text();
+        
+        if (response.ok) {
+            return { success: true, status, text };
+        } else {
+            return { success: false, status, text };
+        }
+    } catch (err) {
+        return { success: false, status: 500, text: err.message };
+    }
+}
+
+/**
+ * Invoca el ciclo completo
  */
 async function runIndexNow() {
     try {
-        const { key, location } = detectApiKey();
-        const urlList = collectAllUrls();
+        const { key, keyFile } = detectApiKey();
+        
+        // Hostnames de inicio y alternativo
+        const primaryBaseUrl = 'https://narbossalon.com';
+        const alternativeBaseUrl = 'https://www.narbossalon.com';
 
-        console.log(`\n🚀 IndexNow: Iniciando envío para ${BASE_URL}`);
+        console.log(`\n🚀 Iniciando motor de indexación robusta IndexNow`);
         console.log(`🔑 Clave detectada: ${key}`);
-        console.log(`📄 URLs a indexar: ${urlList.length}\n`);
+        
+        const results = [];
 
-        const response = await fetch('https://api.indexnow.org/indexnow', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json; charset=utf-8' },
-            body: JSON.stringify({
-                host: new URL(BASE_URL).hostname,
-                key: key,
-                keyLocation: location,
-                urlList: urlList
-            })
-        });
+        for (const endpoint of ENDPOINTS) {
+            console.log(`\n--- Evaluando buscador: ${endpoint.name} ---`);
+            
+            // Intento 1: Hostname Primario (non-www)
+            let payload = buildPayload(primaryBaseUrl, key, keyFile);
+            let res = await submitToEndpoint(endpoint, payload);
 
-        if (response.ok) {
-            console.log('✅ ¡Éxito! Bing y otros buscadores han sido notificados correctamente.\n');
-        } else {
-            const error = await response.text();
-            console.error(`❌ Error (${response.status}): ${error}`);
+            // Si falla por 403 o 401, intentamos con el hostname alternativo (www)
+            if (!res.success && (res.status === 403 || res.status === 401)) {
+                console.log(`⚠️ Advertencia: Intento primario falló con código ${res.status}. Conmutando de host a ${new URL(alternativeBaseUrl).hostname}...`);
+                payload = buildPayload(alternativeBaseUrl, key, keyFile);
+                res = await submitToEndpoint(endpoint, payload);
+            }
+
+            if (res.success) {
+                console.log(`✅ ¡Éxito! ${endpoint.name} aceptó el envío (Código: ${res.status}).`);
+                results.push({ endpoint: endpoint.name, status: `Éxito (${res.status})`, hostUsed: payload.host });
+            } else {
+                console.error(`❌ Falló ${endpoint.name} (Código: ${res.status}): ${res.text}`);
+                results.push({ endpoint: endpoint.name, status: `Error (${res.status})`, hostUsed: payload.host });
+            }
         }
+
+        console.log(`\n📊 REPORT DE INDEXACIÓN INDEXNOW:`);
+        console.table(results);
+        console.log('\n');
+
     } catch (error) {
-        console.error(`❌ Error en IndexNow: ${error.message}`);
+        console.error(`❌ Error general en IndexNow: ${error.message}`);
     }
 }
 
