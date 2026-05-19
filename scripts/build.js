@@ -109,6 +109,23 @@ const copyAssets = async () => {
         const src = path.join(SRC_DIR, asset);
         if (fs.existsSync(src)) fs.cpSync(src, path.join(DIST_DIR, asset), { recursive: true });
     });
+
+    // Copiar de forma dinámica archivos de verificación SEO de la raíz
+    try {
+        const files = fs.readdirSync(SRC_DIR);
+        files.forEach(file => {
+            const isIndexNow = /^[a-f0-9]{32}\.txt$/.test(file);
+            const isGoogle = /^google[a-f0-9]+\.html$/.test(file);
+            const isBing = /^BingSiteAuth\.xml$/.test(file);
+
+            if (isIndexNow || isGoogle || isBing) {
+                fs.copyFileSync(path.join(SRC_DIR, file), path.join(DIST_DIR, file));
+                log(`Archivo de verificación SEO copiado: ${file}`, colors.green);
+            }
+        });
+    } catch (err) {
+        log(`Error al copiar archivos de verificación SEO: ${err.message}`, colors.red);
+    }
 };
 
 const versionAssets = async () => {
