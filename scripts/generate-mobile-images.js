@@ -21,6 +21,10 @@ const IMAGES_TO_OPTIMIZE = [
         dest: 'images/pages/estetica/cabina-doble-spa-estetica-chia-mobile.webp'
     },
     {
+        src: 'images/pages/estetica/alta-frecuencia-facial-narbos.webp',
+        dest: 'images/pages/estetica/alta-frecuencia-facial-narbos-mobile.webp'
+    },
+    {
         src: 'images/nosotros/narbos-team-hero.webp',
         dest: 'images/nosotros/narbos-team-hero-mobile.webp'
     },
