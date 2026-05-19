@@ -1,5 +1,19 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.2** | **Estado: YouTube Shorts Integration & Mobile UX Optimization**
+> **Versión 2.8.6** | **Estado: Robust IndexNow Engine & Official API Key Migration**
+
+## 🚀 Robust IndexNow Engine & Official API Key Migration (May 19, 2026) - v2.8.6 / v2.8.5 🛠️
+
+### 1. Migración a Clave Oficial de Bing (v2.8.6) 🔑
+*   **Token Oficial:** Integración de la clave oficial generada por Bing Webmaster Tools (`e23ca6bb90af414c88c63f305e240a00.txt`) en la raíz del proyecto.
+*   **Detección Dinámica:** Validación del pipeline para asegurar que el archivo de 32 bytes exactos (sin saltos de línea) sea copiado automáticamente a `dist/`.
+*   **Sometimiento Exitoso:** Envío de URLs con código de respuesta **HTTP 202 (Éxito)** en todos los buscadores integrados.
+
+### 2. Motor Resiliente de Indexación Multi-Host (v2.8.5) 📡
+*   **Multi-Endpoint:** Refactorización de `scripts/index-now.js` para notificar en paralelo a IndexNow Global, Bing Direct y Yandex Direct.
+*   **Conmutación de Host:** Implementación de failover automático para alternar el hostname (`narbossalon.com` <=> `www.narbossalon.com`) en caso de recibir respuestas `403` o `401`.
+*   **Copia Dinámica en Build:** Modificación de `scripts/build.js` para escanear y copiar de forma dinámica cualquier llave `.txt` (32 caracteres hexadecimales), archivos `google*.html` y `BingSiteAuth.xml` desde la raíz a la carpeta `dist/`.
+
+---
 
 ## 🎥 YouTube Shorts Integration & Mobile UX Optimization (May 13, 2026) - v2.8.2 🚀
 
