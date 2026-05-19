@@ -21,10 +21,11 @@ const REGULATED_COUNTRIES = [
  * CookieConsentService - Gestiona el banner de cookies y el cumplimiento legal (GDPR).
  */
 class CookieConsentService {
-    constructor(analyticsService) {
+    constructor(analyticsService, appRoot = '') {
         this.analyticsService = analyticsService;
+        this.appRoot = appRoot;
         this.isInitialized = false;
-        this.logoUrl = resolveAsset('images/brand/logo_narbos.webp');
+        this.logoUrl = resolveAsset('images/brand/logo_narbos.webp', appRoot);
     }
 
     /**
@@ -180,7 +181,7 @@ class CookieConsentService {
                     <label for="cat-analytics">Estadísticas</label>
                 </div>
             </div>
-            <p class="cc__subtext">Consulta nuestra <a href="${resolveRoute('legal/cookies')}" class="cc__link">Política de Cookies</a>.</p>
+            <p class="cc__subtext">Consulta nuestra <a href="${resolveRoute('legal/cookies', this.appRoot)}" class="cc__link">Política de Cookies</a>.</p>
         `;
     }
 

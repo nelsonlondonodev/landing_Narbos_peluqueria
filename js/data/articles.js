@@ -19,7 +19,7 @@
  */
 const articles = [
     {
-        id: 'limpieza-facial-profunda-clima-frio-sabana',
+        id: 'limpieza-facial-clima-frio-chia',
         date: '19 de mayo de 2026',
         isoDate: '2026-05-19',
         category: 'Estética',
@@ -27,7 +27,7 @@ const articles = [
         description: '¿Piel seca y opaca por el frío de la sabana? Descubre cómo una limpieza facial profunda profesional protege y restaura tu barrera cutánea en Chía.',
         image: '/images/pages/estetica/alta-frecuencia-facial-narbos.webp',
         alt: 'Tratamiento de alta frecuencia facial en Narbo\'s Salón Spa Chía',
-        link: '/blog/articles/limpieza-facial-profunda-clima-frio-sabana',
+        link: '/blog/articles/limpieza-facial-clima-frio-chia',
         featured: true
     },
     {

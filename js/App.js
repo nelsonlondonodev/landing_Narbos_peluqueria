@@ -243,7 +243,7 @@ class App {
         if (!gaId) return;
 
         this.analyticsService = new AnalyticsService(gaId);
-        this.cookieService = new CookieConsentService(this.analyticsService);
+        this.cookieService = new CookieConsentService(this.analyticsService, this.appRoot);
 
         // El servicio de cookies determinará si GA puede cargar de inmediato o si requiere banner
         this.cookieService.init();
