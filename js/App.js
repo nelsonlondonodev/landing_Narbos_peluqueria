@@ -2,7 +2,7 @@ import { siteConfig, BASE_PATH, resolveAsset, resolveRoute } from './config.js';
 import { UIService } from './services/UIService.js';
 import { getNavbarHTML } from './components/Navbar.js';
 import { getFooterHTML } from './components/Footer.js';
-import { getContactFormHTML } from './components/ContactForm.js';
+
 import { getHeroHTML } from './components/HeroSection.js';
 import { MobileMenu } from './components/MobileMenu.js';
 import { WhatsAppButton } from './components/WhatsAppButton.js';
@@ -13,7 +13,7 @@ import { pagesData } from './data/pagesData.js';
 import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { AnalyticsService } from './services/AnalyticsService.js';
 import { CookieConsentService } from './services/CookieConsentService.js';
-import { HomeHubController } from './controllers/HomeHubController.js';
+
 import { HoursController } from './controllers/HoursController.js';
 
 class App {
@@ -51,7 +51,13 @@ class App {
         this.mountLayout();
         this.mountHero();
         if (this.isHomePage) {
-            new HomeHubController(this).init();
+            import('./controllers/HomeHubController.js')
+                .then(({ HomeHubController }) => {
+                    new HomeHubController(this).init();
+                })
+                .catch(error => {
+                    console.error("Error loading HomeHubController:", error);
+                });
         }
         this.initCoreComponents();
         this.initInteractiveComponents();
@@ -102,7 +108,13 @@ class App {
         }
         
         if (contactRoot && contactRoot.children.length === 0) {
-            contactRoot.innerHTML = getContactFormHTML();
+            import('./components/ContactForm.js')
+                .then(({ getContactFormHTML }) => {
+                    contactRoot.innerHTML = getContactFormHTML();
+                })
+                .catch(error => {
+                    console.error("Error loading ContactForm component:", error);
+                });
         }
     }
 
