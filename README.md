@@ -1,5 +1,17 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.6** | **Estado: Robust IndexNow Engine & Official API Key Migration**
+> **Versión 2.8.7** | **Estado: Cache Busting Version Bump & Production Redeploy**
+
+## 🚀 Cache Busting & Production Deployment (May 22, 2026) - v2.8.7 🛠️
+
+### 1. Incremento de Versión para Cache Busting ⚡
+*   **Invalidación de Caché:** Actualización global a la **v2.8.7** en `package.json` y `js/config.js` para asegurar que los navegadores de los clientes carguen de inmediato los cambios y estilos más recientes sin almacenar versiones antiguas en la memoria caché.
+*   **Sincronización Automatizada:** Sincronización transparente de la versión hacia el componente visual del Footer mediante el script `apply-version.js` durante el pipeline de construcción.
+
+### 2. Despliegue a Producción Automatizado 📡
+*   **Build Exitoso:** Validación de la compilación local (`npm run build`) completando la regeneración de sitemap, horarios y blog en 18s sin errores.
+*   **Integración de Ramas:** Fusión fast-forward de la rama `develop` hacia `main` y push a GitHub, lo cual activó la acción automatizada `Deploy to Hostinger` vía FTPS para la puesta en vivo inmediata de la versión.
+
+---
 
 ## 🚀 Robust IndexNow Engine & Official API Key Migration (May 19, 2026) - v2.8.6 / v2.8.5 🛠️
 
