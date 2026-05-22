@@ -23,7 +23,7 @@ function generateSitemap() {
         'index.html': '1.0',
         'contacto.html': '0.9',
         'nosotros.html': '0.9',
-        'blog/index.html': '0.9'
+        '/blog/': '0.9'
     };
 
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
