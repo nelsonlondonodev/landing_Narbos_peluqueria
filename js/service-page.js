@@ -8,14 +8,14 @@ import { pagesData } from './data/pagesData.js';
 
 
 import { BrandsSection } from './components/BrandsSection.js'; 
-import { hairBrands } from './data/brandsData.js'; 
+ 
 import { barberServices } from './data/barberServices.js';
 import { estheticsServices } from './data/estheticsServices.js'; 
 import { ServiceModal } from './components/ServiceModal.js'; 
-import { BarberHubController } from './controllers/BarberHubController.js';
-import { EstheticsHubController } from './controllers/EstheticsHubController.js';
-import { HairHubController } from './controllers/HairHubController.js';
-import { NailsHubController } from './controllers/NailsHubController.js';
+
+
+
+
 
 /**
  * Gestor de la Página de Servicios.
@@ -53,7 +53,11 @@ class ServicePageManager {
 
         // Controlador de Barbería (Hub)
         if (this.pageKey === 'barberia') {
-            new BarberHubController(this.app).init();
+            import('./controllers/BarberHubController.js')
+                .then(({ BarberHubController }) => {
+                    new BarberHubController(this.app).init();
+                })
+                .catch(error => console.error("Error loading BarberHubController:", error));
             return;
         }
 
@@ -63,7 +67,11 @@ class ServicePageManager {
             'cejas-y-pestanas', 'depilacion-corporal', 'limpieza-facial'
         ];
         if (estheticsPages.includes(this.pageKey)) {
-            new EstheticsHubController(this.app, this.pageKey).init();
+            import('./controllers/EstheticsHubController.js')
+                .then(({ EstheticsHubController }) => {
+                    new EstheticsHubController(this.app, this.pageKey).init();
+                })
+                .catch(error => console.error("Error loading EstheticsHubController:", error));
             return;
         }
 
@@ -73,7 +81,11 @@ class ServicePageManager {
             'color-tinturas-cabello', 'tratamientos-capilares'
         ];
         if (hairPages.includes(this.pageKey)) {
-            new HairHubController(this.app, this.pageKey).init();
+            import('./controllers/HairHubController.js')
+                .then(({ HairHubController }) => {
+                    new HairHubController(this.app, this.pageKey).init();
+                })
+                .catch(error => console.error("Error loading HairHubController:", error));
             return;
         }
 
@@ -82,7 +94,11 @@ class ServicePageManager {
             'unas-spa', 'unas-acrilicas-gel', 'manicure-pedicure'
         ];
         if (nailsPages.includes(this.pageKey)) {
-            new NailsHubController(this.app, this.pageKey).init();
+            import('./controllers/NailsHubController.js')
+                .then(({ NailsHubController }) => {
+                    new NailsHubController(this.app, this.pageKey).init();
+                })
+                .catch(error => console.error("Error loading NailsHubController:", error));
             return;
         }
 
@@ -155,7 +171,11 @@ class ServicePageManager {
     initBrands() {
         if (this.pageKey && (this.pageKey === 'peluqueria' || this.pageKey.includes('cortes') || this.pageKey.includes('balayage'))) {
              if(document.getElementById('hair-brands-root')) {
-                 new BrandsSection('hair-brands-root', hairBrands).render();
+                 import('./data/brandsData.js')
+                    .then(({ hairBrands }) => {
+                        new BrandsSection('hair-brands-root', hairBrands).render();
+                    })
+                    .catch(error => console.error("Error loading hairBrands data:", error));
              }
         }
     }
@@ -184,7 +204,7 @@ class ServicePageManager {
 
     initServiceGrid() {
         this.initBarberServices();
-        this.initEstheticsServices();
+
     }
 
 
@@ -201,10 +221,7 @@ class ServicePageManager {
         this._renderStandardCards(grid, displayServices);
     }
 
-    initEstheticsServices() {
-        // Obsoleto: Toda la lógica de Estética ha sido migrada a EstheticsHubController
-        return;
-    }
+
 
     _renderStandardCards(grid, services, modalInstance = null) {
         // INTELLIGENT HYDRATION: Si la grilla ya tiene tarjetas del SSG, no borramos.
