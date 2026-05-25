@@ -4,6 +4,9 @@ import { exec } from 'child_process';
 import util from 'util';
 import { fileURLToPath } from 'url';
 import crypto from 'crypto';
+import esbuild from 'esbuild';
+import htmlMinifier from 'html-minifier';
+const { minify } = htmlMinifier;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -71,7 +74,7 @@ const clean = async () => {
 const buildCSS = async () => {
     log('Building CSS (Tailwind v4)...');
     ensureDir(path.join(DIST_DIR, 'css'));
-    await execPromise('npx @tailwindcss/cli -i ./css/input.css -o ./dist/css/styles.css --minify');
+    await execPromise('node ./node_modules/@tailwindcss/cli/dist/index.mjs -i ./css/input.css -o ./dist/css/styles.css --minify');
 };
 
 const buildJS = async () => {
@@ -80,20 +83,37 @@ const buildJS = async () => {
         'js/main.js', 'js/service-page.js', 'js/hair-page.js', 'js/nails-page.js', 'js/makeup-page.js'
     ].map(e => path.join(SRC_DIR, e));
 
-    await execPromise(`npx esbuild ${entryPoints.map(e => `"${e}"`).join(' ')} --bundle --splitting --minify --format=esm --outdir="${path.join(DIST_DIR, 'js')}" --target=es2020`);
+    await esbuild.build({
+        entryPoints,
+        bundle: true,
+        splitting: true,
+        minify: true,
+        format: 'esm',
+        outdir: path.join(DIST_DIR, 'js'),
+        target: 'es2020'
+    });
 };
 
 const buildHTML = async () => {
     log('Minifying HTML...');
     const htmlFiles = getFiles(SRC_DIR, '.html').filter(f => !f.includes('template.html'));
-    const options = '--collapse-whitespace --remove-comments --remove-redundant-attributes --minify-css true --minify-js true';
+    const options = {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        minifyCSS: true,
+        minifyJS: true
+    };
     
     for (const file of htmlFiles) {
         const destPath = path.join(DIST_DIR, path.relative(SRC_DIR, file));
         ensureDir(path.dirname(destPath));
         try {
-            await execPromise(`npx html-minifier "${file}" -o "${destPath}" ${options}`);
+            const content = fs.readFileSync(file, 'utf8');
+            const minified = minify(content, options);
+            fs.writeFileSync(destPath, minified, 'utf8');
         } catch (e) {
+            console.error(`Error al minificar ${file}, copiando sin minificar:`, e);
             fs.copyFileSync(file, destPath);
         }
     }
