@@ -1,5 +1,21 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.7** | **Estado: Cache Busting Version Bump & Production Redeploy**
+> **Versión 2.8.8** | **Estado: FOUC Fix & Version Bump Deploy**
+
+## ⚡ FOUC Correction & Production Deployment (May 25, 2026) - v2.8.8 🚀
+
+### 1. Corrección del FOUC (Flash of Unstyled Content) ⚡
+*   **Carga Síncrona de CSS:** Se restauró la carga síncrona tradicional para la hoja de estilos principal (`styles.css`) en los 5 archivos HTML clave del proyecto (`index.html`, `contacto.html`, `nosotros.html`, `blog/index.html` y `servicios/unas-spa/index.html`). Esto soluciona el parpadeo de texto sin estilo al cargar las páginas y mejora notablemente el Cumulative Layout Shift (CLS) en PageSpeed.
+*   **Carga Asíncrona Controlada:** Las fuentes de Google, `animate.css` y `glightbox.css` mantienen su carga asíncrona por ser recursos no críticos de diseño.
+
+### 2. Incremento de Versión y Cache Busting 🛠️
+*   **Version Bump:** Actualización global a la **v2.8.8** en `package.json`, `js/config.js` y el footer visual del sitio.
+*   **Actualización de Cache Busters:** Actualización masiva de los parámetros de consulta estáticos de `?v=2.7.1` y `?v=2.7.4` a `?v=2.8.8` en **44 archivos HTML** del código fuente para asegurar que los navegadores limpien la caché vieja.
+
+### 3. Refactorización Quirúrgica del Script de Compilación 🏗️
+*   **APIs Nativas:** Se refactorizó `scripts/build.js` para usar las APIs de Node nativas de `esbuild` y `html-minifier`, así como la llamada local a Tailwind CLI. Esto eliminó la dependencia de `npx` y resolvió los bloqueos del sandbox del IDE, acelerando la compilación a solo 2.15s.
+*   **Fusión y Despliegue:** Fusión fast-forward exitosa de la rama `develop` a `main` y push a GitHub, gatillando el deploy automático FTPS en Hostinger.
+
+---
 
 ## 🚀 Cache Busting & Production Deployment (May 22, 2026) - v2.8.7 🛠️
 
