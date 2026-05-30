@@ -9,6 +9,7 @@ export class UIService {
             history.scrollRestoration = 'manual';
         }
         this.init();
+        this.setupScrollSave();
     }
 
     init() {
@@ -19,12 +20,27 @@ export class UIService {
     }
 
     /**
-     * Garantiza que la página inicie en el tope al recargar,
-     * evitando que el H1 quede oculto tras el navbar.
+     * Guarda la posición del scroll en sessionStorage antes de que la página se descargue
+     */
+    setupScrollSave() {
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        });
+    }
+
+    /**
+     * Restaura la posición del scroll del usuario ante una recarga, o garantiza
+     * que la página inicie en el tope si es una nueva navegación limpia.
      */
     handleInitialScroll() {
         if (!window.location.hash) {
-            window.scrollTo(0, 0);
+            const savedScroll = sessionStorage.getItem('scrollPosition');
+            if (savedScroll !== null) {
+                window.scrollTo(0, parseInt(savedScroll, 10));
+                sessionStorage.removeItem('scrollPosition');
+            } else {
+                window.scrollTo(0, 0);
+            }
         }
     }
 

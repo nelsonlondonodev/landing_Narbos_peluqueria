@@ -15,5 +15,13 @@
     "**/dist": false 
   },
   "html.validate.scripts": false,
-  "html.validate.styles": false
+  "html.validate.styles": false,
+  "liveServer.settings.ignoreFiles": [
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/js/data/business-hours.js",
+    "**/sitemap.xml",
+    "**/.DS_Store",
+    "**/*.log"
+  ]
 }
