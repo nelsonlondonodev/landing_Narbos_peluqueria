@@ -22,6 +22,19 @@
     "**/js/data/business-hours.js",
     "**/sitemap.xml",
     "**/.DS_Store",
-    "**/*.log"
+    "**/*.log",
+    "**/scratch/**",
+    "**/database/**",
+    "**/dist/**",
+    "**/seo_tracking/**",
+    "**/.vscode/**",
+    "**/_templates/**",
+    "**/scripts/**",
+    "**/*.md",
+    "**/*.json",
+    "**/.gemini/**",
+    "**/.history/**",
+    "**/package-lock.json",
+    "**/.env*"
   ]
 }
