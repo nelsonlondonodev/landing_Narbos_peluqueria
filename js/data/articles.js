@@ -19,6 +19,18 @@
  */
 const articles = [
     {
+        id: 'manchas-blancas-unas-no-es-falta-de-calcio-chia',
+        date: '30 de mayo de 2026',
+        isoDate: '2026-05-30',
+        category: 'Uñas y Spa',
+        title: 'Manchas blancas en las uñas: no es falta de calcio (la verdadera razón científica)',
+        description: '¿Tienes manchas blancas en las uñas? Desvelamos la verdadera causa científica (leuconiquia) y cómo el frío de Chía y la Sabana de Bogotá las favorece.',
+        image: '/blog/articles/images/manchas-blancas-unas-narbos.webp',
+        alt: 'Salud ungueal y manicure profesional en Chía, Narbo\'s Salón Spa',
+        link: '/blog/articles/manchas-blancas-unas-no-es-falta-de-calcio-chia',
+        featured: true
+    },
+    {
         id: 'limpieza-facial-clima-frio-chia',
         date: '19 de mayo de 2026',
         isoDate: '2026-05-19',
