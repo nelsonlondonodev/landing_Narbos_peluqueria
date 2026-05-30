@@ -1,5 +1,21 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.8** | **Estado: FOUC Fix & Version Bump Deploy**
+> **Versión 2.8.9** | **Estado: Blog Release & pnpm Migration**
+
+## 🚀 Blog Release, Scroll Refactor & pnpm Migration (May 30, 2026) - v2.8.9 🛠️
+
+### 1. Nuevo Artículo sobre Leuconiquia y Optimización de Imágenes 💅
+*   **Artículo Publicado:** Se ha redactado y publicado el artículo informativo sobre la leuconiquia (manchas blancas en las uñas) en el blog oficial del salón.
+*   **Optimización de Imágenes:** La imagen del nuevo post (`IMG_5704 Large.jpeg`) se ha convertido y optimizado en formato WebP con versiones específicas para pantallas grandes (Desktop, 1024px) y móviles (Mobile, 768px), reduciendo el tamaño y mejorando los tiempos de carga en PageSpeed.
+*   **Integración SEO y Schema:** Se registró correctamente el nuevo artículo en `js/data/articles.js` y se eliminaron los trailing slashes de las URLs en los esquemas JSON-LD.
+
+### 2. Refactorización del Control de Scroll 📱
+*   **Scroll Restoration Nativo:** Se eliminó el hack basado en `sessionStorage` que causaba inestabilidad en `js/services/UIService.js` y se restauró el mecanismo nativo de restauración de scroll del navegador (`history.scrollRestoration = 'auto'`), garantizando una navegación más fluida y estándar.
+
+### 3. Migración a pnpm & Exclusión en Live Server 📦
+*   **Migración de Dependencias:** Se migró el gestor de paquetes de npm a pnpm, creando `pnpm-lock.yaml` y configurando `onlyBuiltDependencies` en `package.json` para permitir la compilación segura de binarios locales.
+*   **Live Server Fix:** Modificados los ajustes de `.vscode/settings.json` para ignorar los archivos compilados en `dist/` y markdown en el sandbox, solucionando los loops de recarga infinita en desarrollo local.
+
+---
 
 ## ⚡ FOUC Correction & Production Deployment (May 25, 2026) - v2.8.8 🚀
 
