@@ -20,24 +20,26 @@ export class UIService {
     }
 
     /**
-     * Guarda la posición del scroll en sessionStorage antes de que la página se descargue
+     * Guarda la posición del scroll en sessionStorage antes de que la página se descargue,
+     * vinculando la clave a la ruta específica (pathname) actual.
      */
     setupScrollSave() {
         window.addEventListener('beforeunload', () => {
-            sessionStorage.setItem('scrollPosition', window.scrollY);
+            sessionStorage.setItem('scrollPosition_' + window.location.pathname, window.scrollY);
         });
     }
 
     /**
-     * Restaura la posición del scroll del usuario ante una recarga, o garantiza
-     * que la página inicie en el tope si es una nueva navegación limpia.
+     * Restaura la posición del scroll del usuario ante una recarga de la misma página,
+     * o garantiza que inicie en el tope si es una nueva página de destino.
      */
     handleInitialScroll() {
         if (!window.location.hash) {
-            const savedScroll = sessionStorage.getItem('scrollPosition');
+            const key = 'scrollPosition_' + window.location.pathname;
+            const savedScroll = sessionStorage.getItem(key);
             if (savedScroll !== null) {
                 window.scrollTo(0, parseInt(savedScroll, 10));
-                sessionStorage.removeItem('scrollPosition');
+                sessionStorage.removeItem(key);
             } else {
                 window.scrollTo(0, 0);
             }
