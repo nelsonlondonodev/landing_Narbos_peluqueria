@@ -1,5 +1,10 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.9** | **Estado: Blog Release & pnpm Migration**
+> **Versión 2.8.10** | **Estado: GitHub Actions CI Fix**
+
+## 🔧 GitHub Actions CI Fix for pnpm (May 30, 2026) - v2.8.10 🚀
+*   **Corrección de Despliegue:** Se adaptó el pipeline `.github/workflows/deploy.yml` para soportar pnpm. Se añadió la acción `pnpm/action-setup@v4` con la versión 11, se configuró la caché para `pnpm` y se reemplazaron los comandos de instalación y compilación para usar pnpm (`pnpm install --frozen-lockfile` y `pnpm run build`), solucionando la falla de compilación por falta de lockfile de npm.
+
+---
 
 ## 🚀 Blog Release, Scroll Refactor & pnpm Migration (May 30, 2026) - v2.8.9 🛠️
 
