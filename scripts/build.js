@@ -122,7 +122,7 @@ const buildHTML = async () => {
 const copyAssets = async () => {
     log('Copying assets...');
     const assets = [
-        'images', 'video', 'lang', 'blog/articles/images', 'fidelizacion', 'legal', 
+        'images', 'video', 'lang', 'blog/articles/images', 'legal', 
         'robots.txt', 'sitemap.xml', 'llms.txt', '.htaccess'
     ];
     assets.forEach(asset => {

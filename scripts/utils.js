@@ -6,7 +6,7 @@ import path from 'path';
  */
 export function getHtmlFiles(dir, fileList = [], rootDir = dir) {
     const files = fs.readdirSync(dir);
-    const excludedDirs = ['node_modules', 'dist', '.git', '_templates', 'css', 'js', 'images', 'video', 'scripts', 'lang', 'fidelizacion', 'legal'];
+    const excludedDirs = ['node_modules', 'dist', '.git', '_templates', 'css', 'js', 'images', 'video', 'scripts', 'lang', 'legal'];
 
     files.forEach(file => {
         const filePath = path.join(dir, file);
