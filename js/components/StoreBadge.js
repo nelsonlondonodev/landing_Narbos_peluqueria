@@ -93,7 +93,7 @@ export class StoreBadge {
     /**
      * Identifica si la fecha corresponde a un día festivo en Colombia durante 2026.
      * @param {number} year 
-     * @param {number} month (1-12)
+     * @param {number} month 
      * @param {number} day 
      * @returns {boolean}
      */
@@ -133,6 +133,39 @@ export class StoreBadge {
     }
 
     /**
+     * Convierte una hora en formato string (ej: "7:00 AM", "8:30 PM") a un float decimal.
+     * @param {string} timeStr 
+     * @returns {number} Valor flotante que representa las horas decimales (0.0 a 24.0)
+     */
+    _parseTimeToFloat(timeStr) {
+        const [time, modifier] = timeStr.split(' ');
+        let [hours, minutes] = time.split(':').map(Number);
+        
+        if (modifier === 'PM' && hours < 12) hours += 12;
+        if (modifier === 'AM' && hours === 12) hours = 0;
+        
+        return hours + (minutes / 60);
+    }
+
+    /**
+     * Retorna la configuración de horario para el día correspondiente en el schedule.
+     * @param {Array} schedule 
+     * @param {number} dayOfWeek 
+     * @param {boolean} isHoliday 
+     * @returns {Object|null}
+     */
+    _getDayConfig(schedule, dayOfWeek, isHoliday) {
+        if (isHoliday) {
+            this.specialReason = "FESTIVOS (9am a 6pm)";
+            return schedule.find(s => s.day === 'Festivos');
+        }
+        
+        const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+        const currentDayName = dayNames[dayOfWeek];
+        return schedule.find(s => s.day === currentDayName);
+    }
+
+    /**
      * Calcula el estado de apertura usando el fallback de configuración local.
      * @returns {boolean}
      */
@@ -145,38 +178,18 @@ export class StoreBadge {
             return false;
         }
 
-        const isHoliday = this._isColombianHoliday(bYear, bMonth, bDayOfMonth);
-        const { schedule } = businessHours;
-        const timeValue = bHour + (bMinute / 60);
-
         if (dayOfWeek === 0) {
             this.specialReason = "CERRADO DOMINGOS";
             return false;
         }
 
-        // Obtener la configuración del día (si es festivo usamos la config de Festivos)
-        let dayConfig;
-        if (isHoliday) {
-            dayConfig = schedule.find(s => s.day === 'Festivos');
-            this.specialReason = "FESTIVOS (9am a 6pm)";
-        } else {
-            const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-            const currentDayName = dayNames[dayOfWeek];
-            dayConfig = schedule.find(s => s.day === currentDayName);
-        }
+        const isHoliday = this._isColombianHoliday(bYear, bMonth, bDayOfMonth);
+        const dayConfig = this._getDayConfig(businessHours.schedule, dayOfWeek, isHoliday);
+        const timeValue = bHour + (bMinute / 60);
 
         if (dayConfig && !dayConfig.closed) {
-            // Mapear hora "7:00 AM" o "8:00 PM" a valor numérico
-            const parseTime = (timeStr) => {
-                const [time, modifier] = timeStr.split(' ');
-                let [hours, minutes] = time.split(':').map(Number);
-                if (modifier === 'PM' && hours < 12) hours += 12;
-                if (modifier === 'AM' && hours === 12) hours = 0;
-                return hours + (minutes / 60);
-            };
-
-            const opensVal = parseTime(dayConfig.opens);
-            const closesVal = parseTime(dayConfig.closes);
+            const opensVal = this._parseTimeToFloat(dayConfig.opens);
+            const closesVal = this._parseTimeToFloat(dayConfig.closes);
 
             const isOpen = timeValue >= opensVal && timeValue < closesVal;
             if (!isOpen && isHoliday) {
@@ -188,21 +201,106 @@ export class StoreBadge {
         return false;
     }
 
-    render(open, isLive = false) {
-        if (!this.container) return;
-        
+    /**
+     * Obtiene las clases de estilo y colores correspondientes para el Badge.
+     * @param {boolean} open 
+     * @returns {Object}
+     */
+    _getBadgeStyles(open) {
         const badgeClasses = open 
             ? "bg-black/40 backdrop-blur-md text-white border-white/20"
             : "bg-black/60 backdrop-blur-md text-white border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.5)]";
             
-        const textStr = open ? "ABIERTO AHORA" : (this.specialReason || "CERRADO AHORA");
         const dotColor = open ? "bg-green-400" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,1)]";
-        
         const pingEffect = `<span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${dotColor}"></span>`;
+        
+        return { badgeClasses, dotColor, pingEffect };
+    }
+
+    /**
+     * Genera el HTML del popover flotante con el detalle de los horarios.
+     * @param {boolean} isLive 
+     * @returns {string} HTML del Popover
+     */
+    _generatePopoverHTML(isLive) {
+        const syncText = isLive 
+            ? 'Sincronizado en tiempo real con Google Places API (incluye festivos y horarios especiales).' 
+            : 'Mostrando horario local (sin conexión en tiempo real).';
+            
+        return `
+            <div id="store-badge-popover" class="absolute right-0 mt-2 w-64 bg-brand-gray-dark/95 backdrop-blur-md text-white rounded-xl shadow-2xl border border-white/10 p-4 invisible opacity-0 md:group-hover:visible md:group-hover:opacity-100 transition-all duration-300 z-50 text-left translate-y-1 md:group-hover:translate-y-0" role="region" aria-label="Detalle de horarios de atención">
+                <h4 class="font-serif font-bold text-xs text-brand-gold border-b border-white/10 pb-1.5 mb-2 flex justify-between items-center tracking-wider uppercase">
+                    <span>Horario de Atención</span>
+                    <span class="text-[8px] px-1.5 py-0.5 rounded bg-white/10 font-sans tracking-normal lowercase font-semibold">${isLive ? 'en vivo' : 'local'}</span>
+                </h4>
+                <ul class="space-y-1.5 text-[11px]">
+                    <li class="flex justify-between items-center">
+                        <span class="opacity-80">Lunes a Sábado:</span>
+                        <span class="font-bold">7:00 AM – 8:00 PM</span>
+                    </li>
+                    <li class="flex justify-between items-center text-brand-gold">
+                        <span class="opacity-90">Festivos:</span>
+                        <span class="font-bold">9:00 AM – 6:00 PM</span>
+                    </li>
+                    <li class="flex justify-between items-center text-red-400">
+                        <span class="opacity-80">Domingos:</span>
+                        <span class="font-bold">CERRADO</span>
+                    </li>
+                </ul>
+                <div class="mt-3 pt-2.5 border-t border-white/10 text-[9px] text-white/50 leading-relaxed">
+                    ${syncText}
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Registra los escuchadores de eventos click y tap para mobile y cierres externos.
+     * @param {HTMLElement} trigger 
+     * @param {HTMLElement} popover 
+     */
+    _setupPopoverListeners(trigger, popover) {
+        if (!trigger || !popover) return;
+        
+        const togglePopover = (e) => {
+            e.stopPropagation();
+            const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+            trigger.setAttribute('aria-expanded', !isExpanded);
+            
+            popover.classList.toggle('opacity-0');
+            popover.classList.toggle('invisible');
+            popover.classList.toggle('translate-y-1');
+            popover.classList.toggle('opacity-100');
+            popover.classList.toggle('visible');
+            popover.classList.toggle('translate-y-0');
+        };
+        
+        trigger.addEventListener('click', togglePopover);
+        
+        const closePopover = () => {
+            if (trigger.getAttribute('aria-expanded') === 'true') {
+                trigger.setAttribute('aria-expanded', 'false');
+                popover.classList.add('opacity-0', 'invisible', 'translate-y-1');
+                popover.classList.remove('opacity-100', 'visible', 'translate-y-0');
+            }
+        };
+        
+        document.addEventListener('click', closePopover);
+        
+        popover.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    render(open, isLive = false) {
+        if (!this.container) return;
+        
+        const { badgeClasses, dotColor, pingEffect } = this._getBadgeStyles(open);
+        const textStr = open ? "ABIERTO AHORA" : (this.specialReason || "CERRADO AHORA");
+        const popoverHTML = this._generatePopoverHTML(isLive);
 
         this.container.innerHTML = `
             <div class="relative inline-block group">
-                <!-- Trigger Button (Click / Hover) -->
                 <button id="store-badge-trigger" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-wider uppercase border transition-all duration-300 transform hover:scale-105 cursor-pointer ${badgeClasses}" aria-expanded="false" aria-controls="store-badge-popover">
                     <span class="relative flex h-1.5 w-1.5 md:h-2 md:w-2">
                       ${pingEffect}
@@ -210,72 +308,13 @@ export class StoreBadge {
                     </span>
                     ${textStr}
                 </button>
-                
-                <!-- Premium Glassmorphism Popover (Detalle de horarios) -->
-                <div id="store-badge-popover" class="absolute right-0 mt-2 w-64 bg-brand-gray-dark/95 backdrop-blur-md text-white rounded-xl shadow-2xl border border-white/10 p-4 invisible opacity-0 md:group-hover:visible md:group-hover:opacity-100 transition-all duration-300 z-50 text-left translate-y-1 md:group-hover:translate-y-0" role="region" aria-label="Detalle de horarios de atención">
-                    <h4 class="font-serif font-bold text-xs text-brand-gold border-b border-white/10 pb-1.5 mb-2 flex justify-between items-center tracking-wider uppercase">
-                        <span>Horario de Atención</span>
-                        <span class="text-[8px] px-1.5 py-0.5 rounded bg-white/10 font-sans tracking-normal lowercase font-semibold">${isLive ? 'en vivo' : 'local'}</span>
-                    </h4>
-                    <ul class="space-y-1.5 text-[11px]">
-                        <li class="flex justify-between items-center">
-                            <span class="opacity-80">Lunes a Sábado:</span>
-                            <span class="font-bold">7:00 AM – 8:00 PM</span>
-                        </li>
-                        <li class="flex justify-between items-center text-brand-gold">
-                            <span class="opacity-90">Festivos:</span>
-                            <span class="font-bold">9:00 AM – 6:00 PM</span>
-                        </li>
-                        <li class="flex justify-between items-center text-red-400">
-                            <span class="opacity-80">Domingos:</span>
-                            <span class="font-bold">CERRADO</span>
-                        </li>
-                    </ul>
-                    <div class="mt-3 pt-2.5 border-t border-white/10 text-[9px] text-white/50 leading-relaxed">
-                        ${isLive 
-                            ? 'Sincronizado en tiempo real con Google Places API (incluye festivos y horarios especiales).' 
-                            : 'Mostrando horario local (sin conexión en tiempo real).'}
-                    </div>
-                </div>
+                ${popoverHTML}
             </div>
         `;
 
-        // Lógica de interactividad táctil para Mobile (y click en general)
         const trigger = this.container.querySelector('#store-badge-trigger');
         const popover = this.container.querySelector('#store-badge-popover');
         
-        if (trigger && popover) {
-            const togglePopover = (e) => {
-                e.stopPropagation();
-                const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
-                trigger.setAttribute('aria-expanded', !isExpanded);
-                
-                // Conmutar clases de visualización
-                popover.classList.toggle('opacity-0');
-                popover.classList.toggle('invisible');
-                popover.classList.toggle('translate-y-1');
-                popover.classList.toggle('opacity-100');
-                popover.classList.toggle('visible');
-                popover.classList.toggle('translate-y-0');
-            };
-            
-            trigger.addEventListener('click', togglePopover);
-            
-            // Cerrar popover al hacer clic en cualquier otra parte del documento
-            const closePopover = () => {
-                if (trigger.getAttribute('aria-expanded') === 'true') {
-                    trigger.setAttribute('aria-expanded', 'false');
-                    popover.classList.add('opacity-0', 'invisible', 'translate-y-1');
-                    popover.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                }
-            };
-            
-            document.addEventListener('click', closePopover);
-            
-            // Evitar que el clic dentro del contenido del popover lo cierre solo
-            popover.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        }
+        this._setupPopoverListeners(trigger, popover);
     }
 }
