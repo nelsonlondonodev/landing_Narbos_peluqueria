@@ -1,3 +1,7 @@
+import { GoogleMapsService } from '../services/GoogleMapsService.js';
+import { siteConfig } from '../config.js';
+import businessHours from '../data/business-hours.js';
+
 export class StoreBadge {
     /**
      * @param {string} containerId - El ID del elemento donde se inyectará el componente
@@ -5,22 +9,43 @@ export class StoreBadge {
     constructor(containerId = 'business-status-root') {
         this.container = document.getElementById(containerId);
         this.lastState = null;
+        this.specialReason = null;
     }
     
-    init() {
+    async init() {
         if (!this.container) return;
-        this.checkAndUpdate();
+
+        // 1. Mostrar estado inicial basado en fallback local inmediato (LCP veloz)
+        this.checkAndUpdate(false);
+
+        // 2. Intentar sincronizar estado real en vivo desde Google Maps (Places API)
+        try {
+            const googleService = new GoogleMapsService(siteConfig.googleMapsApiKey);
+            const liveData = await googleService.getBusinessHours();
+            
+            if (liveData) {
+                const isOpenLive = liveData.status === 'OPEN';
+                this.specialReason = isOpenLive ? null : "CERRADO POR HOY (Festivo/Especial)";
+                this.updateUI(isOpenLive, true);
+            }
+        } catch (error) {
+            // Fallback silencioso en caso de error de conexión
+        }
     }
 
-    checkAndUpdate() {
+    checkAndUpdate(isLive = false) {
         if (!this.container) return;
-        const open = this.isOpen();
+        const open = this.calculateLocalStatus();
         
-        // Solo actualizamos el DOM si el estado ha cambiado, evitando repaints molestos
         if (this.lastState !== open) {
             this.lastState = open;
-            this.render(open);
+            this.render(open, isLive);
         }
+    }
+
+    updateUI(open, isLive = true) {
+        this.lastState = open;
+        this.render(open, isLive);
     }
 
     /**
@@ -66,6 +91,33 @@ export class StoreBadge {
     }
 
     /**
+     * Identifica si la fecha corresponde a un día festivo en Colombia durante 2026.
+     * @param {number} year 
+     * @param {number} month (1-12)
+     * @param {number} day 
+     * @returns {boolean}
+     */
+    _isColombianHoliday(year, month, day) {
+        if (year !== 2026) return false;
+        
+        // Días festivos oficiales en Colombia para el año 2026
+        const holidays2026 = {
+            1: [1, 12],      // Año Nuevo, Reyes Magos
+            3: [23],         // Día de San José
+            4: [2, 3],       // Jueves Santo, Viernes Santo
+            5: [1, 18],      // Día del Trabajo, Ascensión del Señor
+            6: [8, 15, 29],  // Corpus Christi, Sagrado Corazón, San Pedro y San Pablo
+            7: [20],         // Día de la Independencia
+            8: [7, 17],      // Batalla de Boyacá, Asunción de la Virgen
+            10: [12],        // Día de la Raza
+            11: [2, 16],     // Todos los Santos, Independencia de Cartagena
+            12: [8, 25]      // Inmaculada Concepción, Navidad
+        };
+        
+        return (holidays2026[month] || []).includes(day);
+    }
+
+    /**
      * Verifica si hay alguna regla de cierre excepcional manual (vacaciones/festivos manuales).
      * @param {number} year 
      * @param {number} month 
@@ -73,7 +125,6 @@ export class StoreBadge {
      * @returns {boolean} Si está cerrado por razones especiales
      */
     _isSpecialClosure(year, month, day) {
-        // Ejemplo de cerrado especial: Abril 3, 2026
         const isClosed = (year === 2026 && month === 4 && day === 3);
         if (isClosed) {
             this.specialReason = "CERRADO POR HOY";
@@ -82,34 +133,11 @@ export class StoreBadge {
     }
 
     /**
-     * Verifica si es un día y hora laboral según los horarios fijos de la peluquería.
-     * @param {number} dayOfWeek 
-     * @param {number} hour 
-     * @param {number} minute 
+     * Calcula el estado de apertura usando el fallback de configuración local.
      * @returns {boolean}
      */
-    _isWithinBusinessHours(dayOfWeek, hour, minute) {
-        if (dayOfWeek === 0) {
-            this.specialReason = "CERRADO DOMINGOS";
-            return false;
-        }
-
-        const timeValue = hour + (minute / 60);
-
-        if (dayOfWeek >= 1 && dayOfWeek <= 6) {
-            // Lunes a Sábado (1-6): 07:00 a 20:00
-            return timeValue >= 7 && timeValue < 20;
-        }
-
-        return false;
-    }
-
-    /**
-     * Método principal orquestador que define el estado de apertura.
-     */
-    isOpen() {
+    calculateLocalStatus() {
         this.specialReason = null;
-
         const { bYear, bMonth, bDayOfMonth, bHour, bMinute } = this._getBogotaTimeParts();
         const dayOfWeek = this._getDayOfWeek(bYear, bMonth, bDayOfMonth);
         
@@ -117,10 +145,50 @@ export class StoreBadge {
             return false;
         }
 
-        return this._isWithinBusinessHours(dayOfWeek, bHour, bMinute);
+        const isHoliday = this._isColombianHoliday(bYear, bMonth, bDayOfMonth);
+        const { schedule } = businessHours;
+        const timeValue = bHour + (bMinute / 60);
+
+        if (dayOfWeek === 0) {
+            this.specialReason = "CERRADO DOMINGOS";
+            return false;
+        }
+
+        // Obtener la configuración del día (si es festivo usamos la config de Festivos)
+        let dayConfig;
+        if (isHoliday) {
+            dayConfig = schedule.find(s => s.day === 'Festivos');
+            this.specialReason = "FESTIVOS (9am a 6pm)";
+        } else {
+            const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const currentDayName = dayNames[dayOfWeek];
+            dayConfig = schedule.find(s => s.day === currentDayName);
+        }
+
+        if (dayConfig && !dayConfig.closed) {
+            // Mapear hora "7:00 AM" o "8:00 PM" a valor numérico
+            const parseTime = (timeStr) => {
+                const [time, modifier] = timeStr.split(' ');
+                let [hours, minutes] = time.split(':').map(Number);
+                if (modifier === 'PM' && hours < 12) hours += 12;
+                if (modifier === 'AM' && hours === 12) hours = 0;
+                return hours + (minutes / 60);
+            };
+
+            const opensVal = parseTime(dayConfig.opens);
+            const closesVal = parseTime(dayConfig.closes);
+
+            const isOpen = timeValue >= opensVal && timeValue < closesVal;
+            if (!isOpen && isHoliday) {
+                this.specialReason = "CERRADO POR HOY (Festivo)";
+            }
+            return isOpen;
+        }
+
+        return false;
     }
 
-    render(open) {
+    render(open, isLive = false) {
         if (!this.container) return;
         
         const badgeClasses = open 
@@ -130,17 +198,84 @@ export class StoreBadge {
         const textStr = open ? "ABIERTO AHORA" : (this.specialReason || "CERRADO AHORA");
         const dotColor = open ? "bg-green-400" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,1)]";
         
-        // Ahora ambos estados (Abierto y Cerrado) usan la animación 'animate-ping' para dar sensación de "en vivo"
         const pingEffect = `<span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${dotColor}"></span>`;
 
         this.container.innerHTML = `
-            <div title="Horario: Lun-Sáb 7am a 8pm | Domingos: CERRADO" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-wider uppercase border transition-all duration-300 transform hover:scale-105 ${badgeClasses}">
-                <span class="relative flex h-1.5 w-1.5 md:h-2 md:w-2">
-                  ${pingEffect}
-                  <span class="relative inline-flex rounded-full h-1.5 w-1.5 md:h-2 md:w-2 ${dotColor}"></span>
-                </span>
-                ${textStr}
+            <div class="relative inline-block group">
+                <!-- Trigger Button (Click / Hover) -->
+                <button id="store-badge-trigger" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] md:text-[11px] font-bold tracking-wider uppercase border transition-all duration-300 transform hover:scale-105 cursor-pointer ${badgeClasses}" aria-expanded="false" aria-controls="store-badge-popover">
+                    <span class="relative flex h-1.5 w-1.5 md:h-2 md:w-2">
+                      ${pingEffect}
+                      <span class="relative inline-flex rounded-full h-1.5 w-1.5 md:h-2 md:w-2 ${dotColor}"></span>
+                    </span>
+                    ${textStr}
+                </button>
+                
+                <!-- Premium Glassmorphism Popover (Detalle de horarios) -->
+                <div id="store-badge-popover" class="absolute right-0 mt-2 w-64 bg-brand-gray-dark/95 backdrop-blur-md text-white rounded-xl shadow-2xl border border-white/10 p-4 invisible opacity-0 md:group-hover:visible md:group-hover:opacity-100 transition-all duration-300 z-50 text-left translate-y-1 md:group-hover:translate-y-0" role="region" aria-label="Detalle de horarios de atención">
+                    <h4 class="font-serif font-bold text-xs text-brand-gold border-b border-white/10 pb-1.5 mb-2 flex justify-between items-center tracking-wider uppercase">
+                        <span>Horario de Atención</span>
+                        <span class="text-[8px] px-1.5 py-0.5 rounded bg-white/10 font-sans tracking-normal lowercase font-semibold">${isLive ? 'en vivo' : 'local'}</span>
+                    </h4>
+                    <ul class="space-y-1.5 text-[11px]">
+                        <li class="flex justify-between items-center">
+                            <span class="opacity-80">Lunes a Sábado:</span>
+                            <span class="font-bold">7:00 AM – 8:00 PM</span>
+                        </li>
+                        <li class="flex justify-between items-center text-brand-gold">
+                            <span class="opacity-90">Festivos:</span>
+                            <span class="font-bold">9:00 AM – 6:00 PM</span>
+                        </li>
+                        <li class="flex justify-between items-center text-red-400">
+                            <span class="opacity-80">Domingos:</span>
+                            <span class="font-bold">CERRADO</span>
+                        </li>
+                    </ul>
+                    <div class="mt-3 pt-2.5 border-t border-white/10 text-[9px] text-white/50 leading-relaxed">
+                        ${isLive 
+                            ? 'Sincronizado en tiempo real con Google Places API (incluye festivos y horarios especiales).' 
+                            : 'Mostrando horario local (sin conexión en tiempo real).'}
+                    </div>
+                </div>
             </div>
         `;
+
+        // Lógica de interactividad táctil para Mobile (y click en general)
+        const trigger = this.container.querySelector('#store-badge-trigger');
+        const popover = this.container.querySelector('#store-badge-popover');
+        
+        if (trigger && popover) {
+            const togglePopover = (e) => {
+                e.stopPropagation();
+                const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+                trigger.setAttribute('aria-expanded', !isExpanded);
+                
+                // Conmutar clases de visualización
+                popover.classList.toggle('opacity-0');
+                popover.classList.toggle('invisible');
+                popover.classList.toggle('translate-y-1');
+                popover.classList.toggle('opacity-100');
+                popover.classList.toggle('visible');
+                popover.classList.toggle('translate-y-0');
+            };
+            
+            trigger.addEventListener('click', togglePopover);
+            
+            // Cerrar popover al hacer clic en cualquier otra parte del documento
+            const closePopover = () => {
+                if (trigger.getAttribute('aria-expanded') === 'true') {
+                    trigger.setAttribute('aria-expanded', 'false');
+                    popover.classList.add('opacity-0', 'invisible', 'translate-y-1');
+                    popover.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                }
+            };
+            
+            document.addEventListener('click', closePopover);
+            
+            // Evitar que el clic dentro del contenido del popover lo cierre solo
+            popover.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
     }
 }
