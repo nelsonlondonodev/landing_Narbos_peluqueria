@@ -77,25 +77,67 @@ function renderAddress() {
  * Renderiza los horarios de atención sincronizados.
  */
 function renderHours() {
-    const { schedule, lastSync } = businessHours;
+    const { schedule, weekdayText, lastSync } = businessHours;
     
-    // Agrupamos lunes a sábado si tienen el mismo horario
-    const monToSat = schedule.find(s => s.day === 'Lunes');
-    const sunday = schedule.find(s => s.day === 'Domingo');
+    let listHtml = '';
+    
+    if (weekdayText && weekdayText.length > 0) {
+        listHtml = weekdayText.map(text => {
+            const isSunday = text.toLowerCase().includes('domingo');
+            const isClosed = text.toLowerCase().includes('cerrado');
+            let colorClass = 'text-white';
+            if (isClosed) {
+                colorClass = isSunday ? 'text-brand-light/60' : 'text-red-400';
+            }
+            const parts = text.split(':');
+            const day = parts[0];
+            const time = parts.slice(1).join(':');
+            return `<p>${day}: <span class="font-bold ${colorClass}">${time}</span></p>`;
+        }).join('');
+    } else {
+        const mon = schedule.find(s => s.day === 'Lunes') || { opens: '7:00 AM', closes: '8:00 PM' };
+        const sat = schedule.find(s => s.day === 'Sábado') || { opens: '7:00 AM', closes: '8:00 PM' };
+        const sun = schedule.find(s => s.day === 'Domingo') || { closed: true };
+        const hol = schedule.find(s => s.day === 'Festivos') || { opens: '9:00 AM', closes: '6:00 PM' };
 
-    const holiday = schedule.find(s => s.day === 'Festivos');
+        const monText = `${mon.opens} – ${mon.closes}`;
+        const satText = `${sat.opens} – ${sat.closes}`;
+        const holText = `${hol.opens} – ${hol.closes}`;
+
+        let weekDaysHtml = '';
+        if (mon.opens === sat.opens && mon.closes === sat.closes) {
+            weekDaysHtml = `<p>Lunes a Sábado: <span class="font-bold text-white">${monText}</span></p>`;
+        } else {
+            weekDaysHtml = `
+                <p>Lunes a Viernes: <span class="font-bold text-white">${monText}</span></p>
+                <p>Sábado: <span class="font-bold text-white">${satText}</span></p>
+            `;
+        }
+
+        const sundayHtml = sun.closed 
+            ? `<p class="opacity-60 text-xs">Domingos: <span class="font-bold text-red-400">Cerrado</span></p>`
+            : `<p>Domingos: <span class="font-bold text-white">${sun.opens} – ${sun.closes}</span></p>`;
+
+        const holidayHtml = hol.closed
+            ? `<p class="opacity-60 text-xs">Festivos: <span class="font-bold text-red-400">Cerrado</span></p>`
+            : `<p>Festivos: <span class="font-bold text-white">${holText}</span></p>`;
+
+        listHtml = `
+            ${weekDaysHtml}
+            ${holidayHtml}
+            ${sundayHtml}
+        `;
+    }
 
     return `
-        <div class="flex flex-col items-center gap-1">
-            <div class="flex items-center gap-2">
+        <div class="flex flex-col items-center gap-1" id="hours-display-container">
+            <div class="flex items-center gap-2 mb-1">
                 <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <span class="font-bold uppercase tracking-wider text-xs opacity-70">Horario de atención</span>
             </div>
-            <p>Lunes a Sábado: <span class="font-bold text-white">7:00 AM – 8:00 PM</span></p>
-            <p>Festivos: <span class="font-bold text-white">9:00 AM – 6:00 PM</span></p>
-            <p class="opacity-60 text-xs">Domingos: <span class="font-bold text-red-400">Cerrado</span></p>
+            ${listHtml}
             <span class="sync-timestamp text-[9px] opacity-30 mt-1 uppercase tracking-tighter">Sincronizado con Google • ${new Date(lastSync).toLocaleDateString()}</span>
         </div>
     `;

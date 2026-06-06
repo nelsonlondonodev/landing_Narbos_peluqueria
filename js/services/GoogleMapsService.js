@@ -56,11 +56,11 @@ export class GoogleMapsService {
      * Procesa los datos crudos de Google al formato de Narbo's
      */
     _processGoogleData(data) {
-        const hours = data.regularOpeningHours || {};
+        const hours = data.currentOpeningHours || data.regularOpeningHours || {};
         return {
             lastSync: new Date().toISOString(),
             source: 'Google Live API',
-            schedule: hours.periods || [], // Aquí mapearíamos al formato exacto de tu UI
+            schedule: hours.periods || [],
             weekdayText: hours.weekdayDescriptions || []
         };
     }
