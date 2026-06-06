@@ -1,5 +1,13 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.10** | **Estado: GitHub Actions CI Fix**
+> **Versión 2.8.11** | **Estado: Colombian Holidays & Interactive Popover**
+
+## 🇨🇴 Colombian Holidays & Interactive Popover for StoreBadge (June 6, 2026) - v2.8.11 🚀
+*   **Detección de Festivos Colombianos (Fallback)**: Integrado el calendario de los 18 días festivos nacionales en Colombia para 2026. Si el sitio se visualiza sin conexión (fallback local), se calcula y muestra automáticamente el horario reducido de festivos (`9:00 AM – 6:00 PM`).
+*   **Popover Premium Responsivo (Glassmorphism)**: Reemplazados los tooltips nativos del navegador por una tarjeta flotante con efecto translúcido y difuminado (`backdrop-blur-md bg-brand-gray-dark/95`). En dispositivos táctiles se despliega al dar un **tap** en el badge, y en desktop mediante hover/click.
+*   **Refactorización Limpia (Clean Code)**: Descompuesta la lógica de `StoreBadge.js` en métodos atómicos privados específicos con única responsabilidad (`_parseTimeToFloat`, `_getDayConfig`, `_getBadgeStyles`, `_generatePopoverHTML` y `_setupPopoverListeners`), mejorando drásticamente su legibilidad y mantenimiento.
+*   **Compilación y Puesta a Punto**: Compilación de producción exitosa y sincronización automática de la versión a la **v2.8.11** en todos los archivos HTML y el Footer.
+
+---
 
 ## 🔧 GitHub Actions CI Fix for pnpm (May 30, 2026) - v2.8.10 🚀
 *   **Corrección de Despliegue:** Se adaptó el pipeline `.github/workflows/deploy.yml` para soportar pnpm. Se añadió la acción `pnpm/action-setup@v4` con la versión 11, se configuró la caché para `pnpm` y se reemplazaron los comandos de instalación y compilación para usar pnpm (`pnpm install --frozen-lockfile` y `pnpm run build`), solucionando la falla de compilación por falta de lockfile de npm.
