@@ -264,27 +264,33 @@ export const pagesData = Object.freeze({
         ]
     },
     nosotros: {
+        metaTitle: "Sobre Nosotros | Peluquería, Salón y Spa en Chía - Narbo's",
+        metaDescription: "Conoce la historia de Narbo's, tu peluquería y spa en Chía con más de 11 años de experiencia. ¡Ven y vive una experiencia de belleza única!",
         hero: {
-           title: "Nuestra <span class=\"text-brand-green\">historia</span>",
+           title: "Nuestra Historia | Peluquería y Spa <span class=\"text-brand-green\">en Chía</span>",
            subtitle: "Pasión por la belleza y el bienestar desde 2013.",
            imageSrc: "images/nosotros/narbos-team-hero.webp",
            imageSrcMobile: "images/nosotros/narbos-team-hero-mobile.webp",
            imageAlt: "Equipo de profesionales de Narbo's Salón Spa Chía"
        }
-   },
+    },
    contacto: {
+        metaTitle: "Contacto | Peluquería y Spa en Chía y Cajicá | Narbo's",
+        metaDescription: "Conoce nuestros horarios y visítanos en nuestro salón de belleza y spa en Chía, muy cerca de Cajicá. ¡Agenda tu cita hoy mismo!",
         hero: {
-            title: "Ponte en <span class=\"text-brand-green\">Contacto</span>",
-            subtitle: "Estamos listos para transformar tu día. Visítanos en nuestra nueva sede.",
+            title: "Peluquería y Spa en Chía | <span class=\"text-brand-green\">Contacto</span>",
+            subtitle: "Conoce nuestros horarios de atención y visítanos en nuestro salón de belleza muy cerca de Cajicá. ¡Agenda tu cita hoy!",
             imageSrc: "images/blog/foto_fachada.webp",
             imageSrcMobile: "images/blog/foto_fachada-mobile.webp",
             imageAlt: "Recepción de Narbos Salon en Chia"
         }
    },
     'cortes-de-pelo': {
+        metaTitle: "Cortes de Pelo en Chía y Cajicá | Estilo y Tendencias",
+        metaDescription: "¿Buscas un corte de cabello en Chía o Cajicá? Agenda tu cita en Narbo's para lucir las últimas tendencias con asesoría personalizada.",
         hero: {
-            title: "Cortes de pelo en Chía: Estilo y <span class=\"text-brand-green\">Tendencia</span>",
-            subtitle: "Diseños personalizados realizados por expertos para realzar tu estilo único.",
+            title: "Cortes de Pelo en Chía y Cajicá | <span class=\"text-brand-green\">Estilo y Tendencia</span>",
+            subtitle: "Diseños y cortes personalizados por estilistas expertos cerca de Cajicá para realzar tu estilo único.",
             imageSrc: "images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp",
             imageSrcMobile: "images/pages/peluqueria/cortes-de-pelo-profesionales-chia-mobile.webp",
             imageAlt: "Corte de pelo profesional realizado en Narbo's Salon Spa"
@@ -535,9 +541,11 @@ export const pagesData = Object.freeze({
         ]
     },
     estetica: {
+        metaTitle: "Estética, Masajes y Spa en Chía y Cajicá | Narbo's",
+        metaDescription: "¿Buscas un spa en Chía o Cajicá? Disfruta de masajes relajantes, limpiezas faciales profundas y tratamientos corporales en Narbo's.",
         hero: {
-            title: "Estética y Spa <span class=\"text-brand-green\">en Chía</span>",
-            subtitle: "Relájate y renueva tu energía con nuestros tratamientos faciales y corporales.",
+            title: "Estética, Masajes y Spa <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Relájate y renueva tu piel con nuestros masajes y tratamientos faciales en Chía, muy cerca de Cajicá.",
             imageSrc: "images/pages/estetica/cabina-doble-spa-estetica-chia.webp",
             imageSrcMobile: "images/pages/estetica/cabina-doble-spa-estetica-chia-mobile.webp",
             imageAlt: "Cabina profesional doble para masajes y spa en Narbo's Chía"
@@ -1015,6 +1023,8 @@ export const pagesData = Object.freeze({
         ]
     },
     'manicure-pedicure': {
+        metaTitle: "Spa de Uñas en Chía y Cajicá | Manicure y Pedicure - Narbo's",
+        metaDescription: "¿Buscas spa de uñas en Chía o Cajicá? Disfruta de manicure, pedicure y rituales de relajación con esmaltado semipermanente en Narbo's.",
         gallery: [
             {
                 type: 'image',
