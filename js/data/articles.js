@@ -19,7 +19,7 @@
  */
 const articles = [
     {
-        id: 'camuflaje-canas-tinte-clasico-hombres-chia',
+        id: 'camuflaje-canas-hombre-chia',
         date: '10 de junio de 2026',
         isoDate: '2026-06-10',
         category: 'Barbería y Estilo Masculino',
@@ -27,7 +27,7 @@ const articles = [
         description: '¿Quieres disimular tus canas sin que se note artificial? Comparamos el camuflaje de canas frente al tinte clásico para hombres. Ideal para el clima de Chía.',
         image: '/blog/articles/images/camuflaje-canas-hombres-narbos.webp',
         alt: 'Camuflaje de canas y matización masculina en Narbo\'s Barbería Chía',
-        link: '/blog/articles/camuflaje-canas-tinte-clasico-hombres-chia'
+        link: '/blog/articles/camuflaje-canas-hombre-chia'
     },
     {
         id: 'manchas-blancas-unas-no-es-falta-de-calcio-chia',
