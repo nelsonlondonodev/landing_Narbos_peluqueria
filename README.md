@@ -1,5 +1,13 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.11** | **Estado: Colombian Holidays & Interactive Popover**
+> **Versión 2.8.12** | **Estado: Compilación de Producción e Incremento de Versión**
+
+## 🚀 Bump de Versión, Corrección de HTML y Compilación de Producción (June 10, 2026) - v2.8.12 🚀
+*   **Incremento de Versión Global**: Se actualizó la versión del proyecto de `2.8.11` a `2.8.12` en `package.json`, `js/config.js` y el Footer visual para asegurar la correcta invalidación de caché (Cache Busting).
+*   **Corrección de Sintaxis HTML (Choque Térmico)**: Se corrigió un error en el atributo `data-title` de la sección de compartir en el artículo de choque térmico (tenía comillas escapadas incorrectamente como `\"` en lugar de la entidad HTML `&quot;`), lo que impedía que el empaquetador minificara el archivo.
+*   **Compilación y Generación Exitosa**: Se ejecutó la compilación de producción en `/dist/` con cache-busting dinámico para CSS/JS, regenerando con éxito el índice del blog (19 artículos) y el sitemap (41 URLs).
+*   **Despliegue a Producción**: Se fusionó la rama `develop` en `main` y se empujó a GitHub, activando de forma automatizada la GitHub Action para el despliegue por FTPS a Hostinger.
+
+---
 
 ## 🇨🇴 Colombian Holidays & Interactive Popover for StoreBadge (June 6, 2026) - v2.8.11 🚀
 *   **Detección de Festivos Colombianos (Fallback)**: Integrado el calendario de los 18 días festivos nacionales en Colombia para 2026. Si el sitio se visualiza sin conexión (fallback local), se calcula y muestra automáticamente el horario reducido de festivos (`9:00 AM – 6:00 PM`).
