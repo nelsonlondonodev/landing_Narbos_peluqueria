@@ -25,7 +25,7 @@ const articles = [
         category: 'Barbería y Estilo Masculino',
         title: 'Camuflaje de canas vs. tinte clásico para hombres: la alternativa discreta en Chía',
         description: '¿Quieres disimular tus canas sin que se note artificial? Comparamos el camuflaje de canas frente al tinte clásico para hombres. Ideal para el clima de Chía.',
-        image: '/blog/articles/images/camuflaje-canas-hombres-narbos.webp',
+        image: '/images/pages/barberia/corte-hombre-fade-moderno.webp',
         alt: 'Camuflaje de canas y matización masculina en Narbo\'s Barbería Chía',
         link: '/blog/articles/camuflaje-canas-hombre-chia'
     },
