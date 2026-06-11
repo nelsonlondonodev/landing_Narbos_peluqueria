@@ -42,15 +42,5 @@
     "tailwindcss": "^4.1.18",
     "terser": "^5.43.1",
     "uuid": "^13.0.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "cwebp-bin",
-      "esbuild",
-      "gifsicle",
-      "jpegtran-bin",
-      "optipng-bin"
-    ]
   }
 }
