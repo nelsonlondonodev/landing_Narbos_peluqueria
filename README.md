@@ -1,5 +1,12 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.12** | **Estado: Compilación de Producción e Incremento de Versión**
+> **Versión 2.8.13** | **Estado: Compilación de Producción y Corrección de Sitemap**
+
+## 🚀 Corrección de Sitemap para Bing e Incremento de Versión (June 11, 2026) - v2.8.13 🚀
+*   **Corrección en Generación de Sitemap**: Se modificó `scripts/generate-sitemap.js` para ignorar la página de error `404.html`, eliminando la URL `/404` del `sitemap.xml`. Esto resuelve el error de validación de Bing Webmaster Tools (que marcaba el sitemap con error y descubría 0 URLs).
+*   **Incremento de Versión Global**: Se actualizó la versión del proyecto a la `2.8.13` en `package.json`, `js/config.js` y en el Footer visual para asegurar el correcto cache-busting de los assets.
+*   **Compilación de Producción**: Compilación local exitosa con `pnpm build`, actualizando todos los bundles minificados en `/dist/` y sus firmas MD5 de invalidación de caché.
+
+---
 
 ## 🚀 Bump de Versión, Corrección de HTML y Compilación de Producción (June 10, 2026) - v2.8.12 🚀
 *   **Incremento de Versión Global**: Se actualizó la versión del proyecto de `2.8.11` a `2.8.12` en `package.json`, `js/config.js` y el Footer visual para asegurar la correcta invalidación de caché (Cache Busting).
