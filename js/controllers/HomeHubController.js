@@ -18,6 +18,7 @@ export class HomeHubController {
         this.mountHomeModals();
         this.mountHomeServices();
         this.initInteractiveComponents();
+        this.initMapLazyLoad();
     }
 
     /**
@@ -81,6 +82,40 @@ export class HomeHubController {
         } else {
             setTimeout(initSecondary, 2000);
         }
+    }
+
+    /**
+     * Inicializa el escuchador para la carga diferida del mapa interactivo de la Home.
+     */
+    initMapLazyLoad() {
+        const button = document.getElementById('load-map-home-btn');
+        if (!button) return;
+
+        button.addEventListener('click', () => {
+            this.loadGoogleMap();
+        });
+    }
+
+    /**
+     * Crea e inserta el iframe de Google Maps en la sección del mapa de la Home.
+     */
+    loadGoogleMap() {
+        const container = document.getElementById('map-home-container');
+        const placeholder = document.getElementById('map-home-placeholder');
+        if (!container || !placeholder) return;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.3509389748656!2d-74.039479227166!3d4.880758995095013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e4079007a3b0ab7%3A0xb81b9628c4e7ebba!2zUGVsdXF1ZXLDrWEgfCBOYXJib-KAmXMgc2Fsw7NuIHNwYSB8IENoaWE!5e0!3m2!1ses-419!2ses!4v1773042307626!5m2!1ses-419!2ses";
+        iframe.title = "Ubicación de Narbo's Salón Spa en Google Maps";
+        iframe.className = "absolute inset-0 w-full h-full border-0 animate__animated animate__fadeIn";
+        iframe.allowFullscreen = "";
+        iframe.referrerPolicy = "no-referrer-when-downgrade";
+
+        placeholder.style.opacity = '0';
+        setTimeout(() => {
+            placeholder.remove();
+            container.appendChild(iframe);
+        }, 500);
     }
 }
 
