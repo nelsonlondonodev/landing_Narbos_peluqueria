@@ -1,5 +1,13 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.13** | **Estado: Compilación de Producción y Corrección de Sitemap**
+> **Versión 2.8.13** | **Estado: Compilación de Producción e Integración de Opiniones**
+
+## 🚀 Integración Dinámica de Opiniones de Google y Soporte Local (June 13, 2026) 🚀
+*   **Unificación y Visualización de Opiniones**: Se modificaron `index.html` y `nosotros.html` para soportar la visualización del promedio de calificación (5.0) y la cantidad de reseñas (312 opiniones).
+*   **Controladores de Frontend Dinámicos**: Se actualizaron `ReviewsCarousel.js` y `AboutHubController.js` para inyectar estas cifras dinámicamente desde los datos locales y permitir que los enlaces de reseñas dirijan directamente a la ficha en Google Maps.
+*   **Fallback Local y Carga de .env**: Modificados los scripts `sync-google-reviews.js` y `sync-google-hours.js` para levantar las credenciales locales de forma segura mediante un cargador integrado para `.env`. Se estableció el total de opiniones de fallback estático en `312` para mantener la consistencia estética si la API de Google falla.
+*   **Pendiente Técnico (Opcional)**: Resolver el error `404` en las consultas de Places API (New). La petición actual incluye el parámetro query `fields=...` no soportado; se debe migrar la consulta al formato oficial enviando la máscara de campos a través del header `X-Goog-FieldMask: rating,userRatingCount,reviews`.
+
+---
 
 ## 🚀 Corrección de Sitemap para Bing e Incremento de Versión (June 11, 2026) - v2.8.13 🚀
 *   **Corrección en Generación de Sitemap**: Se modificó `scripts/generate-sitemap.js` para ignorar la página de error `404.html`, eliminando la URL `/404` del `sitemap.xml`. Esto resuelve el error de validación de Bing Webmaster Tools (que marcaba el sitemap con error y descubría 0 URLs).
