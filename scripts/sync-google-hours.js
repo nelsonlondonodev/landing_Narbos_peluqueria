@@ -5,6 +5,22 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Cargar variables de entorno desde .env si existe en la raíz
+const envPath = path.join(__dirname, '../.env');
+if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split('\n').forEach(line => {
+        const parts = line.split('=');
+        if (parts.length >= 2) {
+            const key = parts[0].trim();
+            let val = parts.slice(1).join('=').trim();
+            if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+            if (val.startsWith("'") && val.endsWith("'")) val = val.slice(1, -1);
+            process.env[key] = val;
+        }
+    });
+}
+
 // CONFIGURACIÓN DE NARBO'S SALÓN SPA
 const PLACE_ID = 'ChIJtwq7egB5QI4RuteHxCidG7g';
 const OUTPUT_FILE = path.join(__dirname, '../js/data/business-hours.js');

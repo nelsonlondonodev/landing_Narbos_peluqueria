@@ -13,8 +13,24 @@ export default class AboutHubController {
     }
 
     init() {
+        this._hydrateHeader();
         if (this.marqueeTrack) {
             this._renderReviews();
+        }
+    }
+
+    /**
+     * Hidrata la cabecera de la sección de opiniones con la puntuación y volumen real de Google.
+     * @private
+     */
+    _hydrateHeader() {
+        const averageEl = document.getElementById("about-reviews-average");
+        const countEl = document.getElementById("about-reviews-count");
+        if (averageEl && googleReviews.rating) {
+            averageEl.textContent = googleReviews.rating.toFixed(1);
+        }
+        if (countEl && googleReviews.userRatingCount) {
+            countEl.textContent = `(${googleReviews.userRatingCount} opiniones en Google)`;
         }
     }
 

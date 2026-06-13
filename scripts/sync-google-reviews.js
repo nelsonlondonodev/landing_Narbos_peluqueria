@@ -5,6 +5,22 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Cargar variables de entorno desde .env si existe en la raíz
+const envPath = path.join(__dirname, '../.env');
+if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split('\n').forEach(line => {
+        const parts = line.split('=');
+        if (parts.length >= 2) {
+            const key = parts[0].trim();
+            let val = parts.slice(1).join('=').trim();
+            if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+            if (val.startsWith("'") && val.endsWith("'")) val = val.slice(1, -1);
+            process.env[key] = val;
+        }
+    });
+}
+
 // CONFIGURACIÓN DE NARBO'S SALÓN SPA
 const PLACE_ID = 'ChIJtwq7egB5QI4RuteHxCidG7g';
 const OUTPUT_FILE = path.join(__dirname, '../js/data/google-reviews.js');
@@ -62,7 +78,7 @@ function mapGoogleReview(review) {
  */
 async function fetchGoogleReviews(placeId, apiKey) {
     console.log('📡 Realizando consulta HTTP a Google Places API (Reviews)...');
-    const url = `https://places.googleapis.com/v1/places/${placeId}?fields=reviews&key=${apiKey}`;
+    const url = `https://places.googleapis.com/v1/places/${placeId}?fields=rating,userRatingCount,reviews&key=${apiKey}`;
     const response = await fetch(url);
     
     if (!response.ok) {
@@ -100,6 +116,8 @@ async function syncReviews() {
     let reviewsData = {
         lastSync: new Date().toISOString(),
         source: 'Static Fallback (Local)',
+        rating: 5.0,
+        userRatingCount: 292,
         reviews: getFallbackReviews()
     };
 
@@ -113,9 +131,11 @@ async function syncReviews() {
                 reviewsData = {
                     lastSync: new Date().toISOString(),
                     source: 'Google Places API (Sincronizado)',
+                    rating: data.rating || 5.0,
+                    userRatingCount: data.userRatingCount || 292,
                     reviews: data.reviews.map(mapGoogleReview)
                 };
-                console.log(`✅ ${reviewsData.reviews.length} opiniones obtenidas de Google exitosamente.`);
+                console.log(`✅ ${reviewsData.reviews.length} opiniones obtenidas de Google exitosamente (Calificación: ${reviewsData.rating}, Total: ${reviewsData.userRatingCount}).`);
             } else {
                 console.warn('⚠️ La API de Google no retornó opiniones. Usando fallback.');
             }

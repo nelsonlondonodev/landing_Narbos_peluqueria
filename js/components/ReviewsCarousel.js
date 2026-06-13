@@ -11,6 +11,8 @@ export class ReviewsCarousel {
             prevBtn: document.getElementById("prev-review"),
             nextBtn: document.getElementById("next-review"),
             slider: document.getElementById("reviews-slider"),
+            averageRating: document.getElementById("reviews-average-rating"),
+            totalCount: document.getElementById("reviews-total-count"),
             slides: []
         };
 
@@ -29,6 +31,7 @@ export class ReviewsCarousel {
     init() {
         if (!this.DOM.wrapper || !this.DOM.slider) return;
 
+        this.hydrateHeader();
         this.renderSlides();
         
         if (this.DOM.slides.length === 0) return;
@@ -36,6 +39,18 @@ export class ReviewsCarousel {
         this.bindEvents();
         this.updateView(this.state.currentIndex);
         this.startAutoPlay();
+    }
+
+    /**
+     * Hidrata la cabecera del carrusel con la puntuación y cantidad de opiniones reales.
+     */
+    hydrateHeader() {
+        if (this.DOM.averageRating && googleReviews.rating) {
+            this.DOM.averageRating.textContent = googleReviews.rating.toFixed(1);
+        }
+        if (this.DOM.totalCount && googleReviews.userRatingCount) {
+            this.DOM.totalCount.textContent = `(${googleReviews.userRatingCount} opiniones en Google)`;
+        }
     }
 
     renderSlides() {
