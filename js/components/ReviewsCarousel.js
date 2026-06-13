@@ -1,15 +1,17 @@
+import googleReviews from '../data/google-reviews.js';
+
 /**
  * Componente Carrusel de Reseñas.
- * Maneja la lógica del slider de testimonios: autolay, navegación y alturas responsivas.
+ * Maneja la lógica del slider de testimonios: autoplay, navegación, render dinámico y alturas adaptativas.
  */
 export class ReviewsCarousel {
     constructor() {
         this.DOM = {
             wrapper: document.getElementById("reviews-slider-wrapper"),
-            slides: document.querySelectorAll(".review-slide"),
             prevBtn: document.getElementById("prev-review"),
             nextBtn: document.getElementById("next-review"),
-            slider: document.getElementById("reviews-slider")
+            slider: document.getElementById("reviews-slider"),
+            slides: []
         };
 
         this.state = {
@@ -22,27 +24,55 @@ export class ReviewsCarousel {
     }
 
     /**
-     * Inicializa el componente si los elementos existen.
+     * Inicializa el componente.
      */
     init() {
-        if (!this.DOM.wrapper || this.DOM.slides.length === 0) return;
+        if (!this.DOM.wrapper || !this.DOM.slider) return;
 
-        this.setupStyles();
+        this.renderSlides();
+        
+        if (this.DOM.slides.length === 0) return;
+
         this.bindEvents();
         this.updateView(this.state.currentIndex);
         this.startAutoPlay();
     }
 
     /**
-     * Configura los estilos necesarios para el funcionamiento (CSS Grid Stack).
+     * Renderiza dinámicamente las opiniones de Google Business Profile.
+     * Si no hay opiniones disponibles, utiliza las opiniones estáticas preexistentes en el DOM como fallback.
      */
-    setupStyles() {
-        if (!this.DOM.slider) return;
+    renderSlides() {
+        const reviews = googleReviews.reviews || [];
+        if (reviews.length === 0) {
+            // Usar los que ya existan en el DOM (fallback progresivo para SEO e indexación)
+            this.DOM.slides = this.DOM.slider.querySelectorAll(".review-slide");
+            return;
+        }
 
-        this.DOM.slides.forEach(slide => {
-            slide.style.display = ''; // Limpiar inline styles previos
-            // Styles now handled in CSS for CLS prevention
+        let slidesHTML = '';
+        reviews.forEach((review, i) => {
+            const isFirst = i === 0;
+            const positionClass = isFirst ? 'relative' : 'absolute inset-0';
+            const opacityClass = isFirst ? 'opacity-100' : 'opacity-0';
+            const visibilityStyle = isFirst ? '' : 'style="visibility: hidden;"';
+            
+            // Sanitizar y dar formato a los saltos de línea
+            const formattedText = review.text ? review.text.replace(/\n/g, '<br>') : '';
+
+            slidesHTML += `
+                <div class="review-slide ${positionClass} w-full ${opacityClass} transition-all duration-500 ease-in-out flex flex-col justify-center" ${visibilityStyle}>
+                    <p class="text-xl md:text-2xl font-serif italic text-brand-gray-dark mb-6 leading-relaxed">
+                        "${formattedText}"
+                    </p>
+                    <div class="font-bold text-brand-green text-base">${review.author}</div>
+                    <div class="text-xs text-brand-gray-dark/50 mt-1">Cliente de Google Maps • Reseña verificada (${review.relativeTime})</div>
+                </div>
+            `;
         });
+
+        this.DOM.slider.innerHTML = slidesHTML;
+        this.DOM.slides = this.DOM.slider.querySelectorAll(".review-slide");
     }
 
     /**
@@ -59,8 +89,6 @@ export class ReviewsCarousel {
 
     /**
      * Maneja la navegación manual.
-     * @param {Event} e 
-     * @param {'prev'|'next'} direction 
      */
     handleNavigation(e, direction) {
         e.preventDefault();
@@ -73,8 +101,9 @@ export class ReviewsCarousel {
     }
 
     /**
-     * Actualiza la visibilidad de los slides.
-     * @param {number} index 
+     * Actualiza la visibilidad de los slides alternando también el tipo de posicionamiento.
+     * El slide activo se hace 'relative' para determinar el alto dinámico del carrusel,
+     * previniendo colapsos de altura y adaptándose de forma elástica a testimonios largos.
      */
     updateView(index) {
         this.DOM.slides.forEach((slide, i) => {
@@ -82,6 +111,7 @@ export class ReviewsCarousel {
             slide.style.opacity = isActive ? '1' : '0';
             slide.style.visibility = isActive ? 'visible' : 'hidden';
             slide.style.zIndex = isActive ? '1' : '0';
+            slide.style.position = isActive ? 'relative' : 'absolute';
         });
     }
 
