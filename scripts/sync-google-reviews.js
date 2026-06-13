@@ -117,7 +117,7 @@ async function syncReviews() {
         lastSync: new Date().toISOString(),
         source: 'Static Fallback (Local)',
         rating: 5.0,
-        userRatingCount: 292,
+        userRatingCount: 312,
         reviews: getFallbackReviews()
     };
 
