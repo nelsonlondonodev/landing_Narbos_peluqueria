@@ -10,13 +10,11 @@ const PLACE_ID = 'ChIJtwq7egB5QI4RuteHxCidG7g';
 const OUTPUT_FILE = path.join(__dirname, '../js/data/google-reviews.js');
 
 /**
- * Script de Sincronización de Reseñas de Google Business Profile (Places API v1)
- * Obtiene las reseñas reales de Google. Si falla o no hay API Key, aplica fallback estático.
+ * Retorna las opiniones estáticas de fallback (locales).
+ * @returns {Array<Object>}
  */
-async function syncReviews() {
-    console.log('🚀 Sincronizando opiniones con Google Business Profile...');
-
-    const fallbackReviews = [
+function getFallbackReviews() {
+    return [
         {
             author: "Andrea Morales",
             rating: 5,
@@ -39,42 +37,85 @@ async function syncReviews() {
             verified: true
         }
     ];
+}
+
+/**
+ * Mapea una opinión individual de la API de Google Places al formato del frontend.
+ * @param {Object} review 
+ * @returns {Object}
+ */
+function mapGoogleReview(review) {
+    return {
+        author: review.authorAttribution?.displayName || 'Cliente de Google',
+        rating: review.rating || 5,
+        text: review.text?.text || '',
+        relativeTime: review.relativePublishTimeDescription || 'Reciente',
+        verified: true
+    };
+}
+
+/**
+ * Realiza la llamada HTTP a la API de Google Places.
+ * @param {string} placeId 
+ * @param {string} apiKey 
+ * @returns {Promise<Object>}
+ */
+async function fetchGoogleReviews(placeId, apiKey) {
+    console.log('📡 Realizando consulta HTTP a Google Places API (Reviews)...');
+    const url = `https://places.googleapis.com/v1/places/${placeId}?fields=reviews&key=${apiKey}`;
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+        throw new Error(`Google API respondió con código ${response.status}`);
+    }
+
+    return await response.json();
+}
+
+/**
+ * Escribe los datos de las opiniones estructurados en el archivo JavaScript local.
+ * @param {string} filePath 
+ * @param {Object} data 
+ */
+function saveReviewsToFile(filePath, data) {
+    const fileContent = `/**
+ * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
+ * Última sincronización con Google Business Profile: ${data.lastSync}
+ */
+const googleReviews = ${JSON.stringify(data, null, 4)};
+
+export default googleReviews;
+`;
+
+    fs.writeFileSync(filePath, fileContent, 'utf8');
+    console.log(`💾 Archivo ${path.relative(process.cwd(), filePath)} escrito correctamente.`);
+}
+
+/**
+ * Orquestador principal para la sincronización de reseñas de Google Business Profile.
+ */
+async function syncReviews() {
+    console.log('🚀 Sincronizando opiniones con Google Business Profile...');
 
     let reviewsData = {
         lastSync: new Date().toISOString(),
         source: 'Static Fallback (Local)',
-        reviews: fallbackReviews
+        reviews: getFallbackReviews()
     };
 
     const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
     if (apiKey) {
         try {
-            console.log('📡 Realizando consulta HTTP a Google Places API (Reviews)...');
-            const url = `https://places.googleapis.com/v1/places/${PLACE_ID}?fields=reviews&key=${apiKey}`;
-            const response = await fetch(url);
-            
-            if (!response.ok) {
-                throw new Error(`Google API respondió con código ${response.status}`);
-            }
-
-            const data = await response.json();
+            const data = await fetchGoogleReviews(PLACE_ID, apiKey);
             
             if (data.reviews && data.reviews.length > 0) {
-                const mappedReviews = data.reviews.map(r => ({
-                    author: r.authorAttribution?.displayName || 'Cliente de Google',
-                    rating: r.rating || 5,
-                    text: r.text?.text || '',
-                    relativeTime: r.relativePublishTimeDescription || 'Reciente',
-                    verified: true
-                }));
-
                 reviewsData = {
                     lastSync: new Date().toISOString(),
                     source: 'Google Places API (Sincronizado)',
-                    reviews: mappedReviews
+                    reviews: data.reviews.map(mapGoogleReview)
                 };
-                console.log(`✅ ${mappedReviews.length} opiniones obtenidas de Google exitosamente.`);
+                console.log(`✅ ${reviewsData.reviews.length} opiniones obtenidas de Google exitosamente.`);
             } else {
                 console.warn('⚠️ La API de Google no retornó opiniones. Usando fallback.');
             }
@@ -86,17 +127,7 @@ async function syncReviews() {
     }
 
     try {
-        const fileContent = `/**
- * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: ${reviewsData.lastSync}
- */
-const googleReviews = ${JSON.stringify(reviewsData, null, 4)};
-
-export default googleReviews;
-`;
-
-        fs.writeFileSync(OUTPUT_FILE, fileContent, 'utf8');
-        console.log('💾 Archivo js/data/google-reviews.js escrito correctamente.');
+        saveReviewsToFile(OUTPUT_FILE, reviewsData);
     } catch (writeError) {
         console.error('❌ Error al escribir el archivo de opiniones:', writeError.message);
     }

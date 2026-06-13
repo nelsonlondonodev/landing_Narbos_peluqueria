@@ -38,10 +38,6 @@ export class ReviewsCarousel {
         this.startAutoPlay();
     }
 
-    /**
-     * Renderiza dinámicamente las opiniones de Google Business Profile.
-     * Si no hay opiniones disponibles, utiliza las opiniones estáticas preexistentes en el DOM como fallback.
-     */
     renderSlides() {
         const reviews = googleReviews.reviews || [];
         if (reviews.length === 0) {
@@ -50,29 +46,35 @@ export class ReviewsCarousel {
             return;
         }
 
-        let slidesHTML = '';
-        reviews.forEach((review, i) => {
-            const isFirst = i === 0;
-            const positionClass = isFirst ? 'relative' : 'absolute inset-0';
-            const opacityClass = isFirst ? 'opacity-100' : 'opacity-0';
-            const visibilityStyle = isFirst ? '' : 'style="visibility: hidden;"';
-            
-            // Sanitizar y dar formato a los saltos de línea
-            const formattedText = review.text ? review.text.replace(/\n/g, '<br>') : '';
-
-            slidesHTML += `
-                <div class="review-slide ${positionClass} w-full ${opacityClass} transition-all duration-500 ease-in-out flex flex-col justify-center" ${visibilityStyle}>
-                    <p class="text-xl md:text-2xl font-serif italic text-brand-gray-dark mb-6 leading-relaxed">
-                        "${formattedText}"
-                    </p>
-                    <div class="font-bold text-brand-green text-base">${review.author}</div>
-                    <div class="text-xs text-brand-gray-dark/50 mt-1">Cliente de Google Maps • Reseña verificada (${review.relativeTime})</div>
-                </div>
-            `;
-        });
-
+        const slidesHTML = reviews.map((review, i) => this.createSlideTemplate(review, i)).join('');
         this.DOM.slider.innerHTML = slidesHTML;
         this.DOM.slides = this.DOM.slider.querySelectorAll(".review-slide");
+    }
+
+    /**
+     * Crea la plantilla HTML para un slide individual.
+     * @param {Object} review 
+     * @param {number} index 
+     * @returns {string} HTML string
+     */
+    createSlideTemplate(review, index) {
+        const isFirst = index === 0;
+        const positionClass = isFirst ? 'relative' : 'absolute inset-0';
+        const opacityClass = isFirst ? 'opacity-100' : 'opacity-0';
+        const visibilityStyle = isFirst ? '' : 'style="visibility: hidden;"';
+        
+        // Sanitizar y dar formato a los saltos de línea
+        const formattedText = review.text ? review.text.replace(/\n/g, '<br>') : '';
+
+        return `
+            <div class="review-slide ${positionClass} w-full ${opacityClass} transition-all duration-500 ease-in-out flex flex-col justify-center" ${visibilityStyle}>
+                <p class="text-xl md:text-2xl font-serif italic text-brand-gray-dark mb-6 leading-relaxed">
+                    "${formattedText}"
+                </p>
+                <div class="font-bold text-brand-green text-base">${review.author}</div>
+                <div class="text-xs text-brand-gray-dark/50 mt-1">Cliente de Google Maps • Reseña verificada (${review.relativeTime})</div>
+            </div>
+        `;
     }
 
     /**
