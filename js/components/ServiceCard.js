@@ -75,7 +75,7 @@ export class ServiceCard {
                 
                 <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
                     <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
-                        <span>Ver Detalles</span>
+                        <span>Ver detalles</span>
                         <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </span>
                 </div>
@@ -190,7 +190,7 @@ export class ServiceCard {
         const actionHtml = `
             <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
                 <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
-                    <span>Ver Detalles</span>
+                    <span>Ver detalles</span>
                     <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </span>
             </div>
