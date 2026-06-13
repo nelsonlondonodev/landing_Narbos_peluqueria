@@ -72,7 +72,9 @@ export class ReviewsCarousel {
                     "${formattedText}"
                 </p>
                 <div class="font-bold text-brand-green text-base">${review.author}</div>
-                <div class="text-xs text-brand-gray-dark/50 mt-1">Cliente de Google Maps • Reseña verificada (${review.relativeTime})</div>
+                <a href="https://maps.app.goo.gl/h3sVPXeiKamdy9KH9" target="_blank" class="text-xs text-brand-gray-dark/50 mt-1 hover:text-brand-green transition-colors underline decoration-dotted decoration-1 underline-offset-2 inline-block" title="Ver reseña en Google Maps">
+                    Cliente de Google Maps • Reseña verificada (${review.relativeTime})
+                </a>
             </div>
         `;
     }
