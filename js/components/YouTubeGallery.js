@@ -110,7 +110,7 @@ export class YouTubeGallery {
                  data-video-id="${videoId}">
                 
                 ${isLatest ? `
-                    <div class="absolute top-4 left-4 z-20 px-3 py-1 bg-brand-green text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg border border-white/20 animate-pulse">
+                    <div class="badge-latest">
                         Última publicación
                     </div>
                 ` : ''}
