@@ -43,8 +43,8 @@
           "@type": "AboutPage",
           "@id": "https://narbossalon.com/nosotros#webpage",
           "url": "https://narbossalon.com/nosotros",
-          "name": "Sobre Nosotros | Narbo's Salón Spa Chía",
-          "description": "Expertos en belleza y bienestar en Chía con más de 11 años de trayectoria.",
+          "name": "Sobre Nosotros | Peluquería, Salón y Spa en Chía - Narbo's",
+          "description": "Conoce la historia de Narbo's, tu peluquería y spa en Chía con más de 11 años de experiencia. ¡Ven y vive una experiencia de belleza única!",
           "breadcrumb": { "@id": "https://narbossalon.com/nosotros#breadcrumb" },
           "mainEntity": {
             "@type": "BeautySalon",
@@ -55,7 +55,8 @@
             "image": [
               "https://narbossalon.com/images/nosotros/narbos-team-hero.webp",
               "https://narbossalon.com/images/nosotros/peluqueria-chia-recepcion.webp",
-              "https://narbossalon.com/images/nosotros/salon-de-belleza-chia-zona-espera-narbos.webp"
+              "https://narbossalon.com/images/nosotros/salon-de-belleza-chia-zona-espera-narbos.webp",
+              "https://narbossalon.com/images/pages/estetica/cabinas-spa-estetica-narbos.webp"
             ],
             "priceRange": "$$",
             "address": {
@@ -77,8 +78,77 @@
                 "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
                 "opens": "07:00",
                 "closes": "20:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "PublicHolidays",
+                "opens": "09:00",
+                "closes": "18:00"
               }
-            ]
+            ],
+            "sameAs": [
+              "https://www.instagram.com/narbossalon/",
+              "https://www.facebook.com/narbossalonspa"
+            ],
+            "areaServed": ["Chía", "Cajicá", "Zipaquirá"],
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5.0",
+              "reviewCount": "312",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Servicios de Belleza y Bienestar",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "url": "https://narbossalon.com/servicios/peluqueria/",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Peluquería Profesional",
+                    "description": "Cortes, color y tratamientos capilares avanzados."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "url": "https://narbossalon.com/servicios/barberia/",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Barbería de Autor",
+                    "description": "Cortes clásicos y modernos, arreglo de barba y cuidado masculino."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "url": "https://narbossalon.com/servicios/unas-spa/",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Uñas y Manicura",
+                    "description": "Cuidado integral de manos y pies con técnicas premium."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "url": "https://narbossalon.com/servicios/estetica/",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Spa y Estética",
+                    "description": "Limpieza facial, masajes y bienestar corporal."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "url": "https://narbossalon.com/servicios/maquillaje/",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Maquillaje Profesional",
+                    "description": "Maquillaje para novias y eventos sociales en Chía."
+                  }
+                }
+              ]
+            }
           }
         },
         {
