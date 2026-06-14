@@ -75,7 +75,12 @@
       "@context": "https://schema.org",
       "@type": "BeautySalon",
       "name": "Narbo's Salón Spa",
-      "image": "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
+      "image": [
+        "https://narbossalon.com/images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
+        "https://narbossalon.com/images/nosotros/narbos-team-hero.webp",
+        "https://narbossalon.com/images/nosotros/peluqueria-chia-recepcion.webp",
+        "https://narbossalon.com/images/nosotros/salon-de-belleza-chia-zona-espera-narbos.webp"
+      ],
       "@id": "https://narbossalon.com/#organization",
       "url": "https://narbossalon.com/",
       "telephone": "+573123462618",
@@ -99,6 +104,12 @@
           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
           "opens": "07:00",
           "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "PublicHolidays",
+          "opens": "09:00",
+          "closes": "18:00"
         }
       ],
       "sameAs": [
@@ -106,12 +117,20 @@
         "https://www.facebook.com/narbossalonspa"
       ],
       "areaServed": ["Chía", "Cajicá", "Zipaquirá"],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "312",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Servicios de Belleza y Bienestar",
         "itemListElement": [
           {
             "@type": "Offer",
+            "url": "https://narbossalon.com/servicios/peluqueria/",
             "itemOffered": {
               "@type": "Service",
               "name": "Peluquería Profesional",
@@ -120,6 +139,7 @@
           },
           {
             "@type": "Offer",
+            "url": "https://narbossalon.com/servicios/barberia/",
             "itemOffered": {
               "@type": "Service",
               "name": "Barbería de Autor",
@@ -128,6 +148,7 @@
           },
           {
             "@type": "Offer",
+            "url": "https://narbossalon.com/servicios/unas-spa/",
             "itemOffered": {
               "@type": "Service",
               "name": "Uñas y Manicura",
@@ -136,6 +157,7 @@
           },
           {
             "@type": "Offer",
+            "url": "https://narbossalon.com/servicios/estetica/",
             "itemOffered": {
               "@type": "Service",
               "name": "Spa y Estética",
@@ -144,6 +166,7 @@
           },
           {
             "@type": "Offer",
+            "url": "https://narbossalon.com/servicios/maquillaje/",
             "itemOffered": {
               "@type": "Service",
               "name": "Maquillaje Profesional",
