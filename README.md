@@ -1,5 +1,14 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.13** | **Estado: Compilación de Producción e Integración de Opiniones**
+> **Versión 2.8.14** | **Estado: Compilación de Producción, SEO y Estabilidad de Layout**
+
+## 🚀 Bento Grid Fix, Nosotros Layout & Schema Enrichment (June 14, 2026) - v2.8.14 🚀
+*   **Corrección de Bento Grid (Home)**: Se solucionó el colapso de diseño al cargar la página principal al estructurar y mapear correctamente las clases `.animation-hidden` y `.is-visible` en `input.css` para las transiciones CSS de entrada.
+*   **Badge de Novedad Unificado**: Se agregó la etiqueta *"Última publicación"* en el Bento Grid y se refactorizaron sus estilos a la clase unificada `.badge-latest` en `input.css`, optimizando el peso del CSS.
+*   **Solapamiento en Nosotros**: Se corrigió el solapamiento del `h1` y la tarjeta de cabecera con el contenido superior en `nosotros.html` ampliando el padding superior a `pt-56 md:pt-64`.
+*   **Datos Estructurados Enriquecidos (SEO)**: Se enriquecieron y alinearon los esquemas JSON-LD (`BeautySalon` y `AboutPage`) en `index.html` y `nosotros.html` agregando calificaciones agregadas, URLs de catálogos de ofertas, arreglos de imágenes de la sede y horarios en días festivos.
+*   **IndexNow y Despliegue**: Compilación local exitosa con `pnpm build` (sincronizando versión en el Footer visual y regenerando sitemaps/assets con cache busting), paso a producción en `main`, y posterior ejecución de `pnpm run index-now` logrando notificar exitosamente a Microsoft Bing y Yandex (códigos HTTP 200 y 202).
+
+---
 
 ## 🚀 Integración Dinámica de Opiniones de Google y Soporte Local (June 13, 2026) 🚀
 *   **Unificación y Visualización de Opiniones**: Se modificaron `index.html` y `nosotros.html` para soportar la visualización del promedio de calificación (5.0) y la cantidad de reseñas (312 opiniones).
