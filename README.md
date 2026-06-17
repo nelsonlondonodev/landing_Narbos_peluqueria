@@ -1,5 +1,11 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.14** | **Estado: Compilación de Producción, SEO y Estabilidad de Layout**
+> **Versión 2.8.15** | **Estado: Compilación de Producción, Novedades en Video y Optimización SEO**
+
+## 🚀 Galería de Videos Actualizada y Consolidación de JSON-LD (June 17, 2026) - v2.8.15 🚀
+*   **Nuevo Video Integrado (Home)**: Se añadió el último video de YouTube Shorts (`ImN8W2AXEJI`) en la primera posición de la galería de transformaciones de la página principal, aplicando el badge "Última publicación".
+*   **Refactorización y Consolidación de JSON-LD**: Se consolidaron de forma quirúrgica múltiples scripts `<script type="application/ld+json">` independientes de tipo `VideoObject` en un único bloque estructurado con un array en `index.html`, optimizando la velocidad de carga y parsing HTML.
+*   **Actualización de Cache Busters**: Sincronización masiva de las referencias de assets al nuevo estándar `?v=2.8.15` para la correcta invalidación de caché.
+*   **Compilación de Producción**: Compilación local automatizada con `pnpm build` que empaqueta y minifica los recursos en `/dist`.
 
 ## 🚀 Bento Grid Fix, Nosotros Layout & Schema Enrichment (June 14, 2026) - v2.8.14 🚀
 *   **Corrección de Bento Grid (Home)**: Se solucionó el colapso de diseño al cargar la página principal al estructurar y mapear correctamente las clases `.animation-hidden` y `.is-visible` en `input.css` para las transiciones CSS de entrada.
