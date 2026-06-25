@@ -1,9 +1,9 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-06-25T04:40:50.496Z
+ * Última sincronización con Google Business Profile: 2026-06-25T05:07:19.682Z
  */
 const googleReviews = {
-    "lastSync": "2026-06-25T04:40:50.496Z",
+    "lastSync": "2026-06-25T05:07:19.682Z",
     "source": "Static Fallback (Local)",
     "rating": 5,
     "userRatingCount": 312,
