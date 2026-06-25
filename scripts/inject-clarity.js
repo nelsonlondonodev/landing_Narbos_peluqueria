@@ -22,14 +22,21 @@ const CLARITY_SCRIPT = `    <!-- Clarity tracking code for https://narbossalon.c
 const EXCLUDED_DIRS = ['node_modules', 'dist', '.git', '.gemini', 'scratch', 'images', 'video', 'css', 'js'];
 
 /**
- * Obtiene recursivamente todos los archivos con la extensión indicada
+ * Obtiene recursivamente todos los archivos con la extensión indicada.
+ * 
+ * @param {string} dir Directorio de inicio.
+ * @param {string} ext Extensión deseada (ej. '.html').
+ * @param {string[]} fileList Lista acumuladora de rutas de archivos.
+ * @returns {string[]} Lista de rutas absolutas de archivos encontrados.
  */
 const getFiles = (dir, ext, fileList = []) => {
     if (!fs.existsSync(dir)) return [];
     const files = fs.readdirSync(dir);
+    
     files.forEach(file => {
         const filePath = path.join(dir, file);
         const stat = fs.statSync(filePath);
+        
         if (stat.isDirectory()) {
             if (!EXCLUDED_DIRS.includes(file)) {
                 getFiles(filePath, ext, fileList);
@@ -38,9 +45,64 @@ const getFiles = (dir, ext, fileList = []) => {
             fileList.push(filePath);
         }
     });
+    
     return fileList;
 };
 
+/**
+ * Valida si el string de contenido HTML ya contiene la firma del script de Clarity.
+ * 
+ * @param {string} content Contenido HTML del archivo.
+ * @returns {boolean} True si ya contiene Clarity, false de lo contrario.
+ */
+const hasClarity = (content) => {
+    return content.includes(CLARITY_ID);
+};
+
+/**
+ * Inyecta el script de seguimiento de Clarity inmediatamente después de la etiqueta de apertura <head>.
+ * 
+ * @param {string} content Contenido HTML original.
+ * @returns {string} Contenido HTML modificado.
+ * @throws {Error} Si no se encuentra la etiqueta <head>.
+ */
+const injectClarityIntoContent = (content) => {
+    const headMatch = content.match(/<head\b[^>]*>/i);
+    if (!headMatch) {
+        throw new Error('No se encontró la etiqueta <head> en el documento.');
+    }
+    
+    const headTag = headMatch[0];
+    return content.replace(headTag, `${headTag}\n${CLARITY_SCRIPT}`);
+};
+
+/**
+ * Lee, procesa e inyecta el script de Clarity en un archivo HTML específico.
+ * 
+ * @param {string} filePath Ruta absoluta del archivo a procesar.
+ * @returns {string} Resultado del proceso: 'UPDATED', 'SKIPPED', o 'FAILED'.
+ */
+const processHtmlFile = (filePath) => {
+    try {
+        let content = fs.readFileSync(filePath, 'utf8');
+
+        if (hasClarity(content)) {
+            return 'SKIPPED';
+        }
+
+        const updatedContent = injectClarityIntoContent(content);
+        fs.writeFileSync(filePath, updatedContent, 'utf8');
+        return 'UPDATED';
+    } catch (error) {
+        const relativePath = path.relative(ROOT_DIR, filePath);
+        console.error(`❌ Error al procesar ${relativePath}: ${error.message}`);
+        return 'FAILED';
+    }
+};
+
+/**
+ * Orquestador principal del proceso de inyección de Microsoft Clarity.
+ */
 const run = () => {
     console.log('🔍 Iniciando escaneo de archivos HTML...');
     const htmlFiles = getFiles(ROOT_DIR, '.html');
@@ -48,37 +110,26 @@ const run = () => {
 
     let updatedCount = 0;
     let skippedCount = 0;
+    let failedCount = 0;
 
     htmlFiles.forEach(filePath => {
         const relativePath = path.relative(ROOT_DIR, filePath);
-        let content = fs.readFileSync(filePath, 'utf8');
+        const result = processHtmlFile(filePath);
 
-        // Verificar si ya tiene el script de Clarity
-        if (content.includes(CLARITY_ID)) {
-            // console.log(`⏭️  Ignorado (ya tiene Clarity): ${relativePath}`);
-            skippedCount++;
-            return;
-        }
-
-        // Buscar la etiqueta <head>
-        const headMatch = content.match(/<head\b[^>]*>/i);
-        if (headMatch) {
-            const headTag = headMatch[0];
-            // Insertamos el script justo después de la etiqueta <head>
-            const replacement = `${headTag}\n${CLARITY_SCRIPT}`;
-            content = content.replace(headMatch[0], replacement);
-
-            fs.writeFileSync(filePath, content, 'utf8');
+        if (result === 'UPDATED') {
             console.log(`✅ Clarity inyectado en: ${relativePath}`);
             updatedCount++;
-        } else {
-            console.warn(`⚠️  Advertencia: No se encontró la etiqueta <head> en: ${relativePath}`);
+        } else if (result === 'SKIPPED') {
+            skippedCount++;
+        } else if (result === 'FAILED') {
+            failedCount++;
         }
     });
 
     console.log('\n📊 Resumen del proceso:');
     console.log(`- Archivos actualizados: ${updatedCount}`);
     console.log(`- Archivos omitidos (ya tenían el script): ${skippedCount}`);
+    console.log(`- Archivos con error: ${failedCount}`);
     console.log(`- Total procesados: ${htmlFiles.length}`);
 };
 
