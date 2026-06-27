@@ -1,5 +1,16 @@
 # Narbo's Salón Spa - Web Oficial
-> **Versión 2.8.15** | **Estado: Compilación de Producción, Novedades en Video y Optimización SEO**
+> **Versión 2.8.16** | **Estado: Nuevo Artículo de Alisados, Optimización de Fuentes y Pendientes de Estilos**
+
+## 🚀 Nuevo Artículo de Alisados Capilares y Depuración de Enlaces (June 27, 2026) - v2.8.16 🚀
+*   **Publicación de Alisados Capilares**: Creado el nuevo post en [alisados-cabello-chia.html](file:///Users/nelsonlondono/Trabajo/developer/websHotinger/Landing_Narbos_salon/blog/articles/alisados-cabello-chia.html) con metatags de SEO estrictos (Title y Description limitados en longitud), enlazado interno transaccional y marcado JSON-LD estructurado de tipo `BlogPosting` y `FAQPage`.
+*   **Integración en el Index de Blog**: Registrada la tarjeta visual en [blog/index.html](file:///Users/nelsonlondono/Trabajo/developer/websHotinger/Landing_Narbos_salon/blog/index.html) y añadidos los datos del nuevo artículo al marcado estructurado general en el head.
+*   **Actualización de Indexación**: Agregada la URL limpia del artículo al mapa del sitio en [sitemap.xml](file:///Users/nelsonlondono/Trabajo/developer/websHotinger/Landing_Narbos_salon/sitemap.xml).
+*   **Depuración de Enlaces de Fuentes**: Corregida y saneada la sección de fuentes técnicas en el artículo y el borrador, manteniendo únicamente los 3 enlaces reales y activos verificados en navegador (FDA en español, Ybera Paris y Brasil Cacau). Se removieron los links de Alfaparf y OCU para evitar enlaces rotos o problemas de SSL.
+*   **Observaciones y Pendientes de Diseño**:
+    *   *Revisión de Títulos:* Revisar la mezcla de mayúsculas y minúsculas en el H1 y otros encabezados de [alisados-cabello-chia.html](file:///Users/nelsonlondono/Trabajo/developer/websHotinger/Landing_Narbos_salon/blog/articles/alisados-cabello-chia.html).
+    *   *Estilos en H1:* Evaluar y aplicar estilos visuales específicos al H1 del artículo para un maquetado visual óptimo.
+
+---
 
 ## 🚀 Galería de Videos Actualizada y Consolidación de JSON-LD (June 17, 2026) - v2.8.15 🚀
 *   **Nuevo Video Integrado (Home)**: Se añadió el último video de YouTube Shorts (`ImN8W2AXEJI`) en la primera posición de la galería de transformaciones de la página principal, aplicando el badge "Última publicación".
