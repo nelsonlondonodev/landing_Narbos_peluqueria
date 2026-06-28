@@ -8,6 +8,13 @@ export class UIService {
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'auto';
         }
+        
+        // Configuración centralizada del observador de scroll
+        this.observerConfig = {
+            threshold: 0.01, // 1% de intersección para que elementos gigantes se animen de inmediato
+            rootMargin: '0px 0px -50px 0px'
+        };
+
         this.init();
     }
 
@@ -44,23 +51,39 @@ export class UIService {
         const animatedElements = document.querySelectorAll("[data-animation]");
         if (animatedElements.length === 0) return;
 
-        const observer = new IntersectionObserver(
+        const observer = this._createScrollObserver();
+        this._prepareAndObserveElements(animatedElements, observer);
+    }
+
+    /**
+     * Crea e inicializa la instancia del IntersectionObserver para animaciones.
+     * @private
+     * @returns {IntersectionObserver}
+     */
+    _createScrollObserver() {
+        return new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        this.animateElement(entry.target, observer);
+                        this.animateElement(entry.target, entry.target._observer || entry.target);
                     }
                 });
             },
-            {
-                threshold: 0.01, // 1% de intersección para que elementos gigantes se animen de inmediato
-                rootMargin: '0px 0px -50px 0px'
-            }
+            this.observerConfig
         );
+    }
 
-        // Observar todos los elementos. Los que ya están en el viewport se dispararán inmediatamente.
-        animatedElements.forEach(el => {
-            el.classList.add("animation-hidden"); // Ocultar por defecto para animar entrada
+    /**
+     * Prepara los elementos ocultándolos e iniciando la observación.
+     * @private
+     * @param {NodeList} elements 
+     * @param {IntersectionObserver} observer 
+     */
+    _prepareAndObserveElements(elements, observer) {
+        elements.forEach((el) => {
+            el.classList.add("animation-hidden");
+            // Guardamos referencia al observer en el elemento para unobserve limpio
+            el._observer = observer; 
             observer.observe(el);
         });
     }
@@ -78,7 +101,11 @@ export class UIService {
         const delay = this._getResponsiveDelay(rawDelay);
 
         this._applyAnimation(element, animationName, delay);
-        observer.unobserve(element);
+        
+        if (observer && typeof observer.unobserve === 'function') {
+            observer.unobserve(element);
+        }
+        delete element._observer;
     }
 
     /**
