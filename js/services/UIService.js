@@ -53,7 +53,7 @@ export class UIService {
                 });
             },
             {
-                threshold: 0.1, // Un poco más de margen para asegurar visibilidad
+                threshold: 0.01, // 1% de intersección para que elementos gigantes se animen de inmediato
                 rootMargin: '0px 0px -50px 0px'
             }
         );
