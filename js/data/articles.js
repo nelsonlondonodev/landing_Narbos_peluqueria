@@ -20,12 +20,12 @@
 const articles = [
     {
         id: 'alisados-cabello-chia',
-        date: '27 de junio de 2026',
-        isoDate: '2026-06-27',
+        date: '28 de junio de 2026',
+        isoDate: '2026-06-28',
         category: 'Peluquería y Cuidado Capilar',
         title: 'Keratina, Aminoácidos o Alisado Orgánico en Chía: ¿Cuál elegir?',
         description: '¿Confundida entre keratina, aminoácidos y alisado orgánico? Descubre las diferencias, duración y cuál es el mejor para tu cabello en Chía.',
-        image: '/blog/articles/images/alisados-cabello-chia.webp',
+        image: '/images/pages/peluqueria/correccion_color_antes_despues_chia.webp',
         alt: 'Cabello liso, brillante y sedoso tratado profesionalmente en Narbo\'s Salón Spa Chía',
         link: '/blog/articles/alisados-cabello-chia'
     },
