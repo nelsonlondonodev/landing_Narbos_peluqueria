@@ -20,8 +20,8 @@
 const articles = [
     {
         id: 'alisados-cabello-chia',
-        date: '28 de junio de 2026',
-        isoDate: '2026-06-28',
+        date: '29 de junio de 2026',
+        isoDate: '2026-06-29',
         category: 'Peluquería y Cuidado Capilar',
         title: 'Keratina, Aminoácidos o Alisado Orgánico en Chía: ¿Cuál elegir?',
         description: '¿Confundida entre keratina, aminoácidos y alisado orgánico? Descubre las diferencias, duración y cuál es el mejor para tu cabello en Chía.',
