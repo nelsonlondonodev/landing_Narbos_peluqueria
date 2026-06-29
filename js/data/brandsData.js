@@ -6,7 +6,14 @@ export const hairBrands = [
     { name: 'Wella Professionals', sub: 'Coloración Premium' },
     { name: 'Schwarzkopf', sub: 'Tecnología Capilar' },
     { name: "L'Oréal Professionnel", sub: 'Innovación Global' },
-    { name: 'Moroccanoil', sub: 'Tratamiento de Argán' }
+    { name: 'Moroccanoil', sub: 'Tratamiento de Argán' },
+    { name: 'Ecosmetics', sub: 'BK Progressiva' },
+    { name: 'Amazônica Beleza', sub: 'Amabelle Only One' }
+];
+
+export const smoothingBrands = [
+    { name: 'Ecosmetics', sub: 'BK Progressiva' },
+    { name: 'Amazônica Beleza', sub: 'Amabelle Only One' }
 ];
 
 export const nailBrands = [

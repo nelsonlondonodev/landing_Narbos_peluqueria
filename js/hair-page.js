@@ -5,7 +5,7 @@ import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { ServiceModal } from './components/ServiceModal.js';
-import { hairBrands } from './data/brandsData.js';
+import { hairBrands, smoothingBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
 import { hairPageServices } from './data/hairPageServices.js';
 
@@ -89,8 +89,9 @@ function initLightbox() {
 function initBrandsCarousel() {
     const brandsId = 'hair-brands-root';
     if (document.getElementById(brandsId)) {
-        // Use the imported hairBrands from data/brandsData.js
-        new BrandsSection(brandsId, hairBrands).render();
+        const isSmoothingPage = window.location.pathname.includes('tratamientos-capilares');
+        const brandsToRender = isSmoothingPage ? smoothingBrands : hairBrands;
+        new BrandsSection(brandsId, brandsToRender).render();
     }
 }
 
