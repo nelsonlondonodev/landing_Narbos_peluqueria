@@ -610,6 +610,9 @@
   .aspect-\[4\/3\] {
     aspect-ratio: 4/3;
   }
+  .aspect-\[9\/16\] {
+    aspect-ratio: 9/16;
+  }
   .aspect-video {
     aspect-ratio: var(--aspect-video);
   }

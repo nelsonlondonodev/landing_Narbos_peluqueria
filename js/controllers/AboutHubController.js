@@ -9,6 +9,7 @@ import googleReviews from '../data/google-reviews.js';
 export default class AboutHubController {
     constructor() {
         this.marqueeTrack = document.querySelector('.marquee-track');
+        this.videoCard = document.querySelector('.video-card');
         this.init();
     }
 
@@ -17,6 +18,24 @@ export default class AboutHubController {
         if (this.marqueeTrack) {
             this._renderReviews();
         }
+        if (this.videoCard) {
+            this._setupVideoEvents();
+        }
+    }
+
+    /**
+     * Inicializa el modal de video y maneja los clics en la tarjeta de video.
+     * @private
+     */
+    async _setupVideoEvents() {
+        const { VideoModal } = await import('../components/VideoModal.js');
+        const modal = new VideoModal();
+        this.videoCard.onclick = () => {
+            const videoId = this.videoCard.getAttribute('data-video-id');
+            if (videoId) {
+                modal.open(videoId);
+            }
+        };
     }
 
     /**
