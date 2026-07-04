@@ -139,13 +139,13 @@ export const pagesData = Object.freeze({
         },
         gallery: [
             {
-                type: 'video',
-                layout: 'featured-video', // 9:16 vertical on mobile, 2x2 on desktop
-                src: 'video/video_instagram_1.mp4',
-                poster: 'images/pages/peluqueria/hair-hero.webp',
+                type: 'youtube',
+                layout: 'featured-video',
+                youtubeId: 'T11HZ98B1h4',
+                poster: 'https://img.youtube.com/vi/T11HZ98B1h4/hqdefault.jpg',
                 title: "Experiencia Narbo's",
                 subtitle: "Vive el cambio",
-                alt: "Video de experiencia en Narbo's Salon"
+                alt: "Tendencias de Estilo y Belleza en Chía | Narbo's Salón Spa"
             },
             {
                 type: 'image',
@@ -297,13 +297,13 @@ export const pagesData = Object.freeze({
         },
         gallery: [
             {
-                type: 'video',
+                type: 'youtube',
                 layout: 'featured-video',
-                src: 'video/video_instagram_1.mp4',
-                poster: 'images/pages/peluqueria/corte-de-cabello-color-en-chia.webp',
+                youtubeId: 'ImN8W2AXEJI',
+                poster: 'https://img.youtube.com/vi/ImN8W2AXEJI/hqdefault.jpg',
                 title: "Experiencia Narbo's",
                 subtitle: "Vive el cambio",
-                alt: "Video de experiencia en Narbo's Salon"
+                alt: "Corte de Cabello y Estilo de Vanguardia en Chía | Narbo's Salón Spa"
             },
             {
                 type: 'image',

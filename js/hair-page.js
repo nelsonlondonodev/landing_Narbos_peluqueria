@@ -66,6 +66,7 @@ function initGallery() {
 
         galleryRoot.innerHTML = titleHTML + getBentoGridHTML(processedGallery);
         initLightbox();
+        initYouTubeModals();
     } else {
         console.warn(`Gallery data not found for page key: ${pageKey}`);
     }
@@ -84,6 +85,23 @@ function initLightbox() {
     } else {
         setTimeout(initLightbox, 100);
     }
+}
+
+async function initYouTubeModals() {
+    const triggers = document.querySelectorAll('.youtube-modal-trigger');
+    if (triggers.length === 0) return;
+
+    const { VideoModal } = await import('./components/VideoModal.js');
+    const modal = new VideoModal();
+    triggers.forEach(trigger => {
+        trigger.onclick = (e) => {
+            e.preventDefault();
+            const videoId = trigger.getAttribute('data-video-id');
+            if (videoId) {
+                modal.open(videoId);
+            }
+        };
+    });
 }
 
 function initBrandsCarousel() {

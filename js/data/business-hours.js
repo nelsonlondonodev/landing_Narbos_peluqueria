@@ -1,9 +1,9 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-07-04T07:12:01.571Z
+ * Última sincronización con Google Business Profile: 2026-07-04T07:50:13.228Z
  */
 const businessHours = {
-    "lastSync": "2026-07-04T07:12:01.571Z",
+    "lastSync": "2026-07-04T07:50:13.228Z",
     "source": "Static Fallback (Local)",
     "status": "OPEN",
     "weekdayText": [],

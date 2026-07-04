@@ -50,6 +50,19 @@ function getGalleryId(item, index, options) {
  * Genera el HTML interno dependiendo del tipo de recurso (Video, Logo o Imagen).
  */
 function getMediaContentHTML(item) {
+    if (item.type === 'youtube') {
+        return `
+            <div class="video-container relative w-full h-full cursor-pointer group/video">
+                <img src="${item.poster}" alt="${item.alt}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover/video:bg-black/30 transition-colors">
+                    <div class="w-16 h-16 bg-brand-green/90 text-white rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-125 group-hover:bg-brand-green ring-4 ring-white/20">
+                        <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
     if (item.type === 'video') {
         const videoHTML = `<video autoplay controls playsinline class='w-full h-full object-cover'><source src='${item.src}' type='video/mp4'></video>`;
         return `
@@ -116,6 +129,18 @@ function getGridItemHTML(item, index, options = {}) {
     const overlayHTML = getOverlayHTML(item);
     const hiddenLinksHTML = getHiddenSubImagesHTML(item, galleryId);
     
+    if (item.type === 'youtube') {
+        return `
+            <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg">
+                ${mediaHTML}
+                ${overlayHTML}
+                <!-- YouTube Modal Trigger -->
+                <a href="javascript:void(0);" data-video-id="${item.youtubeId}" class="youtube-modal-trigger absolute inset-0 z-10" aria-label="${item.alt}"></a>
+                ${hiddenLinksHTML}
+            </div>
+        `;
+    }
+
     const triggerDataType = item.type === 'video' ? 'video' : 'image';
 
     return `
