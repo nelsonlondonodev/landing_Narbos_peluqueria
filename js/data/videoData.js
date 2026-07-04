@@ -30,5 +30,12 @@ export const homeVideos = [
         description: "Descubre la aplicación de tratamientos capilares profesionales y estilismo en Narbo's Salón Spa. Resultados espectaculares y cuidado capilar en Chía.",
         uploadDate: "2026-07-04T08:00:00-05:00",
         thumbnailUrl: "https://img.youtube.com/vi/vwvZ05OGZDU/maxresdefault.jpg"
+    },
+    {
+        id: 'T11HZ98B1h4',
+        title: "Tendencias de Estilo y Belleza en Chía",
+        description: "Descubre las últimas tendencias y técnicas de belleza en Narbo's Salón Spa. Estilo y cuidado capilar profesional en Chía.",
+        uploadDate: "2026-07-04T08:30:00-05:00",
+        thumbnailUrl: "https://img.youtube.com/vi/T11HZ98B1h4/hqdefault.jpg"
     }
 ];

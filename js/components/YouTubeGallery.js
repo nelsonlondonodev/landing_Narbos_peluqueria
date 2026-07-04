@@ -71,7 +71,12 @@ export class YouTubeGallery {
         return `
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="${this.gridId}">
                 ${hasVideos 
-                    ? [...this.videoIds].reverse().map((id, index) => this._getVideoCard(id, index === 0)).join('') 
+                    ? [...this.videoIds].reverse().map((id, index) => {
+                        let statusType = '';
+                        if (index === 0) statusType = 'latest';
+                        else if (index === 1) statusType = 'recent';
+                        return this._getVideoCard(id, statusType);
+                    }).join('') 
                     : this._getEmptyState()}
             </div>
         `;
@@ -102,7 +107,7 @@ export class YouTubeGallery {
      * Genera el HTML de una tarjeta de video individual (Fachada).
      * @private
      */
-    _getVideoCard(video, isLatest = false) {
+    _getVideoCard(video, statusType = '') {
         const isObject = typeof video === 'object' && video !== null;
         const videoId = isObject ? video.id : video;
         const title = isObject && video.title ? video.title : "Narbo's Salón Video";
@@ -110,15 +115,26 @@ export class YouTubeGallery {
             ? video.thumbnailUrl 
             : `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
         
+        let badgeHTML = '';
+        if (statusType === 'latest') {
+            badgeHTML = `
+                <div class="badge-latest">
+                    Última publicación
+                </div>
+            `;
+        } else if (statusType === 'recent') {
+            badgeHTML = `
+                <div class="badge-recent">
+                    Nuevo
+                </div>
+            `;
+        }
+        
         return `
             <div class="video-card relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white group cursor-pointer" 
                  data-video-id="${videoId}">
                 
-                ${isLatest ? `
-                    <div class="badge-latest">
-                        Última publicación
-                    </div>
-                ` : ''}
+                ${badgeHTML}
 
                 <!-- Thumbnail with hover effect -->
                 <img src="${thumbnailUrl}" alt="${title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
