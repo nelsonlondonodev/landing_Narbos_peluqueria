@@ -102,8 +102,13 @@ export class YouTubeGallery {
      * Genera el HTML de una tarjeta de video individual (Fachada).
      * @private
      */
-    _getVideoCard(videoId, isLatest = false) {
-        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    _getVideoCard(video, isLatest = false) {
+        const isObject = typeof video === 'object' && video !== null;
+        const videoId = isObject ? video.id : video;
+        const title = isObject && video.title ? video.title : "Narbo's Salón Video";
+        const thumbnailUrl = isObject && video.thumbnailUrl 
+            ? video.thumbnailUrl 
+            : `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
         
         return `
             <div class="video-card relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white group cursor-pointer" 
@@ -116,7 +121,7 @@ export class YouTubeGallery {
                 ` : ''}
 
                 <!-- Thumbnail with hover effect -->
-                <img src="${thumbnailUrl}" alt="Narbo's Salon Video" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                <img src="${thumbnailUrl}" alt="${title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
                 
                 <!-- Play Button Overlay -->
                 <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0 transition-colors duration-300">
