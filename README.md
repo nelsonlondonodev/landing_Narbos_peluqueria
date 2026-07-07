@@ -2,7 +2,7 @@
 
 > Sitio web y plataforma de servicios de Narbo's Salón Spa (Chía, Cundinamarca, Colombia). Multi-página estática, generada estáticamente (SSG) y optimizada para performance, SEO y GEO (Generative Engine Optimization).
 
-**Versión actual:** `2.8.18` · **Producción:** [narbossalon.com](https://narbossalon.com) · **Licencia:** ISC
+**Versión actual:** `2.8.19` · **Producción:** [narbossalon.com](https://narbossalon.com) · **Licencia:** ISC
 
 ---
 
