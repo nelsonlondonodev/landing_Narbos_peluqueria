@@ -92,9 +92,23 @@ async function processImageVersion(src, destPath, width) {
  * Punto de entrada principal
  */
 async function main() {
-    const src = 'images/blog/IMG_5704 Large.jpeg';
-    const destDesktop = 'blog/articles/images/manchas-blancas-unas-narbos.webp';
-    const destMobile = 'blog/articles/images/manchas-blancas-unas-narbos-mobile.webp';
+    const args = process.argv.slice(2);
+    let src = 'images/blog/IMG_5704 Large.jpeg';
+    let destName = 'manchas-blancas-unas-narbos';
+
+    if (args.length >= 2) {
+        src = args[0];
+        destName = args[1];
+    } else if (args.length === 1) {
+        console.log('💡 Uso: node scripts/optimize-blog-image.js <ruta_origen> <nombre_base_destino>');
+        console.log('   Cargando solo ruta de origen, usando nombre de destino por defecto...');
+        src = args[0];
+    } else {
+        console.log('💡 Usando valores por defecto (Ejemplo de uso: node scripts/optimize-blog-image.js <ruta_origen> <nombre_base_destino>)');
+    }
+
+    const destDesktop = `blog/articles/images/${destName}.webp`;
+    const destMobile = `blog/articles/images/${destName}-mobile.webp`;
 
     console.log(`🚀 Iniciando optimización de imagen para artículo de blog (Vía API JS)...`);
     console.log(`   └─ Imagen Origen: ${src} (${getFileSizeInKB(src)})`);

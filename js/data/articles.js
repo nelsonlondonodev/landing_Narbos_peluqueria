@@ -25,7 +25,7 @@ const articles = [
         category: 'Peluquería y Coloración',
         title: 'De negro a rubio o balayage: guía técnica de extracción de color sin destruir el cabello',
         description: '¿Quieres pasar de tinte negro a rubio o balayage? Descubre cómo lograrlo de forma segura en Chía sin dañar tu fibra capilar. ¡Agenda tu valoración hoy!',
-        image: '/images/blog/balayage-iluminacion-premium-peluqueria-narbo-salon-spa-chia-cerca-cajica-centro-chia-fontanar copy Large.jpeg',
+        image: '/blog/articles/images/balayage-iluminacion-premium-narbo-salon-spa-chia.webp',
         alt: 'Antes y después de una extracción de color negro a rubio balayage con protección plex en Narbo\'s Salón Spa Chía',
         link: '/blog/articles/transicion-negro-rubio-chia'
     },
