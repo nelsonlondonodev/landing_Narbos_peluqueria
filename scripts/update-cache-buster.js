@@ -6,8 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.join(__dirname, '../');
 
-const OLD_VERSION = '2.8.8';
-const NEW_VERSION = '2.8.15';
+const PACKAGE_JSON_PATH = path.join(PROJECT_ROOT, 'package.json');
 
 /**
  * Obtiene recursivamente todos los archivos con extensión .html
@@ -33,19 +32,41 @@ function getHtmlFiles(dir, fileList = []) {
 }
 
 function updateCacheBusters() {
-    console.log(`🚀 Iniciando actualización de Cache Buster: ?v=${OLD_VERSION} ➡️ ?v=${NEW_VERSION}`);
     try {
+        // 1. Leer versión de package.json
+        const packageJson = JSON.parse(fs.readFileSync(PACKAGE_JSON_PATH, 'utf8'));
+        const newVersion = packageJson.version;
+        
+        if (!newVersion) {
+            throw new Error('No se encontró el campo "version" en package.json');
+        }
+
+        console.log(`🚀 Iniciando actualización automática de Cache Buster a v${newVersion}...`);
         const htmlFiles = getHtmlFiles(PROJECT_ROOT);
         let updatedCount = 0;
         
-        const oldQuery = `?v=${OLD_VERSION}`;
-        const newQuery = `?v=${NEW_VERSION}`;
+        // Expresión regular para buscar cualquier ?v=d.d.d en los links (CSS, JS)
+        const versionRegex = /\?v=\d+\.\d+\.\d+/g;
+        const newQuery = `?v=${newVersion}`;
 
         htmlFiles.forEach(filePath => {
             let content = fs.readFileSync(filePath, 'utf8');
-            if (content.includes(oldQuery)) {
-                // Reemplazo preciso
-                const updatedContent = content.replaceAll(oldQuery, newQuery);
+            
+            // Verificamos si hay coincidencias diferentes a la versión actual
+            let hasMatchesToUpdate = false;
+            const matches = content.match(versionRegex);
+            if (matches) {
+                for (const match of matches) {
+                    if (match !== newQuery) {
+                        hasMatchesToUpdate = true;
+                        break;
+                    }
+                }
+            }
+
+            if (hasMatchesToUpdate) {
+                // Reemplazamos todos los ?v=X.Y.Z por la nueva versión de package.json
+                const updatedContent = content.replaceAll(versionRegex, newQuery);
                 fs.writeFileSync(filePath, updatedContent, 'utf8');
                 
                 const relativePath = path.relative(PROJECT_ROOT, filePath);
