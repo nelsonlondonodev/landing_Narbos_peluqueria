@@ -19,6 +19,17 @@
  */
 const articles = [
     {
+        id: 'spa-amor-amistad-chia',
+        date: '18 de julio de 2026',
+        isoDate: '2026-07-18',
+        category: 'Bienestar y spa',
+        title: 'El arte de regalar bienestar en amor y amistad',
+        description: '¿Buscas el regalo de amor y amistad en Chía? Regala bienestar con nuestro bono de spa y masajes. ¡Reserva hoy!',
+        image: '/blog/articles/images/cabina-doble-spa-estetica-chia.webp',
+        alt: 'Cabina doble de spa para masajes en pareja, ideal para regalar en amor y amistad en Narbo\'s Salón Spa Chía',
+        link: '/blog/articles/spa-amor-amistad-chia'
+    },
+    {
         id: 'transicion-negro-rubio-chia',
         date: '11 de julio de 2026',
         isoDate: '2026-07-11',
