@@ -41,4 +41,4 @@ jobs:
           port: 65002
           password: ${{ secrets.FTP_PASSWORD }}
           local_path: './dist/*'
-          remote_path: '.'
+          remote_path: 'domains/narbossalon.com/public_html/'
