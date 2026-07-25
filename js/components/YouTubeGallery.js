@@ -72,9 +72,7 @@ export class YouTubeGallery {
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="${this.gridId}">
                 ${hasVideos 
                     ? [...this.videoIds].reverse().map((id, index) => {
-                        let statusType = '';
-                        if (index === 0) statusType = 'latest';
-                        else if (index === 1) statusType = 'recent';
+                        const statusType = index === 0 ? 'latest' : '';
                         return this._getVideoCard(id, statusType);
                     }).join('') 
                     : this._getEmptyState()}
