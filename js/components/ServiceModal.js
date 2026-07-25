@@ -166,6 +166,7 @@ export class ServiceModal {
                 window.narbosApp.resolvePath(service.image) : 
                 service.image;
             this.refs.image.src = resolvedPath;
+            this.refs.image.alt = `${service.title} en Narbo's Salón Spa Chía`;
         }
 
         if (this.refs.duration) this.refs.duration.textContent = service.duration;
@@ -246,7 +247,7 @@ export class ServiceModal {
                         </button>
                         <div class="bg-white">
                             <div class="relative h-64 sm:h-80">
-                                <img id="modal-image" src="" alt="" class="w-full h-full object-cover">
+                                <img id="modal-image" src="" alt="Servicio profesional en Narbo's Salón Spa Chía" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                                 <div class="absolute bottom-6 left-6 right-6">
                                     <h3 id="modal-title" class="text-3xl font-serif font-bold text-white shadow-sm mb-2"></h3>

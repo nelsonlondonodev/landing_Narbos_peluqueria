@@ -137,7 +137,7 @@ export class ServiceCard {
     getOverlayBackground() {
         if (this.props.image) {
             return `
-                <img src="${this.props.image}" alt="" loading="lazy" width="${this.props.width}" height="${this.props.height}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105">
+                <img src="${this.props.image}" alt="${this.props.imageAlt || `${this.props.title} en Narbo's Salón Spa Chía`}" loading="lazy" width="${this.props.width}" height="${this.props.height}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105">
                 
                 <!-- Gradiente Base (Verde) que desaparece en hover -->
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0 transition-opacity duration-500 group-hover:opacity-0"></div>
