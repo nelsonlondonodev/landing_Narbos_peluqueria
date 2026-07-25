@@ -37,5 +37,12 @@ export const homeVideos = [
         description: "Descubre las últimas tendencias y técnicas de belleza en Narbo's Salón Spa. Estilo y cuidado capilar profesional en Chía.",
         uploadDate: "2026-07-04T08:30:00-05:00",
         thumbnailUrl: "https://img.youtube.com/vi/T11HZ98B1h4/hqdefault.jpg"
+    },
+    {
+        id: 'VCnNQODdxy0',
+        title: "Diseño de Balayage e Iluminación Espectacular en Chía",
+        description: "Descubre el proceso de un diseño de balayage e iluminación profesional en Narbo's Salón Spa. Resultados naturales, rubios vibrantes y salud capilar en Chía.",
+        uploadDate: "2026-07-25T08:00:00-05:00",
+        thumbnailUrl: "https://img.youtube.com/vi/VCnNQODdxy0/hqdefault.jpg"
     }
 ];

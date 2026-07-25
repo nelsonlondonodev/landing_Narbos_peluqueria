@@ -346,6 +346,15 @@ export const pagesData = Object.freeze({
         metaTitle: "Balayage y Mechas en Chía | Especialistas en Rubios | Narbo's",
         metaDescription: "Consigue el rubio de tus sueños con nuestras técnicas de Balayage, Mechas y Babylights en Chía. Expertos en iluminación capilar y salud de tu fibra.",
         gallery: [
+            {
+                type: 'youtube',
+                layout: 'featured-video',
+                youtubeId: 'VCnNQODdxy0',
+                poster: 'https://img.youtube.com/vi/VCnNQODdxy0/hqdefault.jpg',
+                title: "Balayage e Iluminación",
+                subtitle: "Ver resultado en video",
+                alt: "Diseño de Balayage e Iluminación Profesional en Chía | Narbo's Salón Spa"
+            },
              // Caso Estrella: Corrección Rubio Extremo
              {
                 type: 'image',
@@ -464,6 +473,15 @@ export const pagesData = Object.freeze({
         metaTitle: "Coloración y Tinturas en Chía | Cubrimiento de Canas | Narbo's",
         metaDescription: "Especialistas en tintura global, retoque de raíz y matización en Chía. Brindamos cobertura 100% de canas y brillo duradero para tu cabello.",
         gallery: [
+            {
+                type: 'youtube',
+                layout: 'horizontal',
+                youtubeId: 'VCnNQODdxy0',
+                poster: 'https://img.youtube.com/vi/VCnNQODdxy0/hqdefault.jpg',
+                title: "Color e Iluminación",
+                subtitle: "Video de trabajo real",
+                alt: "Técnica de coloración y balayage en Chía | Narbo's Salón Spa"
+            },
             {
                 type: 'image',
                 layout: 'vertical',
