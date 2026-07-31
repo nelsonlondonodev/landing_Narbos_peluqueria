@@ -19,6 +19,18 @@
  */
 const articles = [
     {
+        id: 'cuero-cabelludo-sensible-chia',
+        date: '31 de julio de 2026',
+        isoDate: '2026-07-31',
+        category: 'Peluquería y Cuidado Capilar',
+        title: 'Cuero cabelludo sensible en Chía: guía de cuidado experto y soluciones en la Sabana',
+        description: '¿Sientes picazón o tirantez en el cuero cabelludo en Chía? Descubre sus causas, qué ingredientes evitar y cómo aliviarlo. ¡Lee la guía de Narbo\'s!',
+        image: '/images/pages/peluqueria/narbos-salon-spa-chia-peinado-tendencia-trenzas-laterales-ondas-sueltas-large.webp',
+        alt: 'Diagnóstico tricoscópico y tratamiento para cuero cabelludo sensible en Narbo\'s Salón Spa Chía',
+        link: '/blog/articles/cuero-cabelludo-sensible-chia',
+        featured: true
+    },
+    {
         id: 'spa-amor-amistad-chia',
         date: '18 de julio de 2026',
         isoDate: '2026-07-18',
