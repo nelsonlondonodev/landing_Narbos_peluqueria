@@ -112,14 +112,16 @@ function getBadgeHTML(item) {
         const diffInDays = (currentDate - addedDate) / (1000 * 60 * 60 * 24);
         const maxDays = item.badgeDurationDays || 30;
         
-        if (diffInDays < 0 || diffInDays > maxDays) {
+        // Si han pasado más días que el máximo configurado, expira la etiqueta
+        if (diffInDays > maxDays) {
             return '';
         }
     }
 
     return `
         <div class="absolute top-3 left-3 z-20 pointer-events-none">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-green text-white shadow-md backdrop-blur-sm ring-1 ring-white/30">
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-brand-green text-white shadow-xl backdrop-blur-md ring-2 ring-white/50 animate-pulse">
+                <span class="w-2 h-2 rounded-full bg-white"></span>
                 Nuevo
             </span>
         </div>

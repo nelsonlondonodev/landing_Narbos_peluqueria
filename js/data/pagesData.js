@@ -988,7 +988,7 @@ export const pagesData = Object.freeze({
         gallery: [
             {
                 type: 'image',
-                layout: 'vertical',
+                layout: 'featured-video',
                 src: 'images/pages/unas/manicure-peluqueria-en-chia-narbos-salon.webp',
                 title: "Efecto Cat-Eye Borgoña",
                 subtitle: "Uñas Esculpidas & Brillo Magnético",
@@ -1005,7 +1005,7 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'image',
-                layout: 'featured-video',
+                layout: 'vertical',
                 src: 'images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp',
                 title: "Nail Art & Diseño",
                 subtitle: "Arte a mano alzada",
