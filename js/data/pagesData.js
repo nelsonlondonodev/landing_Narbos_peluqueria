@@ -993,6 +993,7 @@ export const pagesData = Object.freeze({
                 title: "Efecto Cat-Eye Borgoña",
                 subtitle: "Uñas Esculpidas & Brillo Magnético",
                 alt: "Manicure profesional con efecto cat eye borgoña brillante en Narbo's Chía",
+                isNew: true,
                 addedAt: '2026-08-01'
             },
             {
@@ -1053,6 +1054,26 @@ export const pagesData = Object.freeze({
         metaTitle: "Spa de Uñas en Chía y Cajicá | Manicure y Pedicure - Narbo's",
         metaDescription: "¿Buscas spa de uñas en Chía o Cajicá? Disfruta de manicure, pedicure y rituales de relajación con esmaltado semipermanente en Narbo's.",
         gallery: [
+            {
+                type: 'image',
+                layout: 'featured-video',
+                src: 'images/pages/unas/estudios-de-manicure-chia-diseno-unas-narbos.webp',
+                title: "Manicure Ruso Blanco Milk",
+                subtitle: "Elegancia & Acabado Impecable",
+                alt: "Manicure blanco lechoso de alta precisión en Narbo's Salón Spa Chía",
+                isNew: true,
+                addedAt: '2026-08-01'
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/unas/manicure-diseno-flores-vino-tinto-chia-narbos.webp',
+                title: "Diseño Vino & Flores",
+                subtitle: "Nail Art Elegante & Delicado",
+                alt: "Manicure con diseño floral en tono vino tinto realizado en Narbo's Chía",
+                isNew: true,
+                addedAt: '2026-08-01'
+            },
             {
                 type: 'image',
                 layout: 'vertical',
