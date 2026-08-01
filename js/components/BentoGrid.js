@@ -99,6 +99,34 @@ function getHiddenSubImagesHTML(item, galleryId) {
 }
 
 /**
+ * Genera el HTML de la etiqueta "Nuevo" si la fecha del item está dentro del período activo (por defecto 30 días).
+ * @param {Object} item 
+ * @returns {string}
+ */
+function getBadgeHTML(item) {
+    if (!item.addedAt && !item.isNew) return '';
+
+    if (item.addedAt) {
+        const addedDate = new Date(item.addedAt);
+        const currentDate = new Date();
+        const diffInDays = (currentDate - addedDate) / (1000 * 60 * 60 * 24);
+        const maxDays = item.badgeDurationDays || 30;
+        
+        if (diffInDays < 0 || diffInDays > maxDays) {
+            return '';
+        }
+    }
+
+    return `
+        <div class="absolute top-3 left-3 z-20 pointer-events-none">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-green text-white shadow-md backdrop-blur-sm ring-1 ring-white/30">
+                Nuevo
+            </span>
+        </div>
+    `;
+}
+
+/**
  * Genera los textos flotantes (título y subtítulo) sobre el componente de la cuadrícula.
  */
 function getOverlayHTML(item) {
@@ -128,11 +156,13 @@ function getGridItemHTML(item, index, options = {}) {
     const mediaHTML = getMediaContentHTML(item);
     const overlayHTML = getOverlayHTML(item);
     const hiddenLinksHTML = getHiddenSubImagesHTML(item, galleryId);
+    const badgeHTML = getBadgeHTML(item);
     
     if (item.type === 'youtube') {
         return `
             <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg">
                 ${mediaHTML}
+                ${badgeHTML}
                 ${overlayHTML}
                 <!-- YouTube Modal Trigger -->
                 <a href="javascript:void(0);" data-video-id="${item.youtubeId}" class="youtube-modal-trigger absolute inset-0 z-10" aria-label="${item.alt}"></a>
@@ -146,6 +176,7 @@ function getGridItemHTML(item, index, options = {}) {
     return `
         <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg">
             ${mediaHTML}
+            ${badgeHTML}
             ${overlayHTML}
             <!-- Lightbox Trigger -->
             <a href="javascript:void(0);" data-href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${triggerDataType}" aria-label="${item.alt}"></a>

@@ -989,6 +989,15 @@ export const pagesData = Object.freeze({
             {
                 type: 'image',
                 layout: 'vertical',
+                src: 'images/pages/unas/manicure-peluqueria-en-chia-narbos-salon.webp',
+                title: "Efecto Cat-Eye Borgoña",
+                subtitle: "Uñas Esculpidas & Brillo Magnético",
+                alt: "Manicure profesional con efecto cat eye borgoña brillante en Narbo's Chía",
+                addedAt: '2026-08-01'
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
                 src: 'images/pages/unas/manicure-spa.webp',
                 title: "Manicure Spa",
                 subtitle: "Limpieza profunda",
