@@ -121,7 +121,7 @@ function isBadgeActive(item) {
 }
 
 /**
- * Genera el HTML de la etiqueta "Nuevo" si la fecha del item está dentro del período activo.
+ * Genera el HTML de la etiqueta "NUEVO" si la fecha del item está dentro del período activo.
  * @param {Object} item 
  * @returns {string}
  */
@@ -129,11 +129,8 @@ function getBadgeHTML(item) {
     if (!isBadgeActive(item)) return '';
 
     return `
-        <div class="absolute top-3 left-3 z-20 pointer-events-none">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-brand-green text-white shadow-xl backdrop-blur-md ring-2 ring-white/50 animate-pulse">
-                <span class="w-2 h-2 rounded-full bg-white"></span>
-                Nuevo
-            </span>
+        <div class="badge-latest pointer-events-none">
+            NUEVO
         </div>
     `;
 }
