@@ -98,29 +98,39 @@ function getHiddenSubImagesHTML(item, galleryId) {
     `).join('');
 }
 
+const DEFAULT_BADGE_DURATION_DAYS = 30;
+const MS_PER_DAY = 86400000;
+
 /**
- * Genera el HTML de la etiqueta "Nuevo" si la fecha del item está dentro del período activo (por defecto 30 días).
+ * Determina si la insignia "Nuevo" debe estar activa para un item específico.
+ * @param {Object} item 
+ * @returns {boolean}
+ */
+function isBadgeActive(item) {
+    if (!item) return false;
+    if (item.isNew) return true;
+    if (!item.addedAt) return false;
+
+    const addedDate = new Date(item.addedAt);
+    if (isNaN(addedDate.getTime())) return false;
+
+    const diffInDays = (new Date() - addedDate) / MS_PER_DAY;
+    const maxDays = item.badgeDurationDays || DEFAULT_BADGE_DURATION_DAYS;
+
+    return diffInDays <= maxDays;
+}
+
+/**
+ * Genera el HTML de la etiqueta "Nuevo" si la fecha del item está dentro del período activo.
  * @param {Object} item 
  * @returns {string}
  */
 function getBadgeHTML(item) {
-    if (!item.addedAt && !item.isNew) return '';
-
-    if (item.addedAt) {
-        const addedDate = new Date(item.addedAt);
-        const currentDate = new Date();
-        const diffInDays = (currentDate - addedDate) / (1000 * 60 * 60 * 24);
-        const maxDays = item.badgeDurationDays || 30;
-        
-        // Si han pasado más días que el máximo configurado, expira la etiqueta
-        if (diffInDays > maxDays) {
-            return '';
-        }
-    }
+    if (!isBadgeActive(item)) return '';
 
     return `
         <div class="absolute top-3 left-3 z-20 pointer-events-none">
-            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-brand-green text-white shadow-xl backdrop-blur-md ring-2 ring-white/50 animate-pulse">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-brand-green text-white shadow-xl backdrop-blur-md ring-2 ring-white/50 animate-pulse">
                 <span class="w-2 h-2 rounded-full bg-white"></span>
                 Nuevo
             </span>
@@ -148,6 +158,17 @@ function getOverlayHTML(item) {
 }
 
 /**
+ * Genera el enlace disparador de modal de YouTube o Lightbox GLightbox.
+ */
+function getTriggerLinkHTML(item, galleryId) {
+    if (item.type === 'youtube') {
+        return `<a href="javascript:void(0);" data-video-id="${item.youtubeId}" class="youtube-modal-trigger absolute inset-0 z-10" aria-label="${item.alt}"></a>`;
+    }
+    const triggerDataType = item.type === 'video' ? 'video' : 'image';
+    return `<a href="javascript:void(0);" data-href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${triggerDataType}" aria-label="${item.alt}"></a>`;
+}
+
+/**
  * Genera el HTML unitario de un card para el Bento. Ensambla todas sus partes.
  */
 function getGridItemHTML(item, index, options = {}) {
@@ -156,32 +177,17 @@ function getGridItemHTML(item, index, options = {}) {
     
     // Armado de componentes internos
     const mediaHTML = getMediaContentHTML(item);
-    const overlayHTML = getOverlayHTML(item);
-    const hiddenLinksHTML = getHiddenSubImagesHTML(item, galleryId);
     const badgeHTML = getBadgeHTML(item);
-    
-    if (item.type === 'youtube') {
-        return `
-            <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg">
-                ${mediaHTML}
-                ${badgeHTML}
-                ${overlayHTML}
-                <!-- YouTube Modal Trigger -->
-                <a href="javascript:void(0);" data-video-id="${item.youtubeId}" class="youtube-modal-trigger absolute inset-0 z-10" aria-label="${item.alt}"></a>
-                ${hiddenLinksHTML}
-            </div>
-        `;
-    }
-
-    const triggerDataType = item.type === 'video' ? 'video' : 'image';
+    const overlayHTML = getOverlayHTML(item);
+    const triggerLinkHTML = getTriggerLinkHTML(item, galleryId);
+    const hiddenLinksHTML = getHiddenSubImagesHTML(item, galleryId);
 
     return `
         <div class="${spanClass} relative group overflow-hidden rounded-2xl shadow-lg">
             ${mediaHTML}
             ${badgeHTML}
             ${overlayHTML}
-            <!-- Lightbox Trigger -->
-            <a href="javascript:void(0);" data-href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${triggerDataType}" aria-label="${item.alt}"></a>
+            ${triggerLinkHTML}
             ${hiddenLinksHTML}
         </div>
     `;
