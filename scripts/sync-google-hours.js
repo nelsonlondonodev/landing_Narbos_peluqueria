@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { PLACE_ID } from '../js/data/place-config.js';
 import { loadEnv } from './load-env.js';
+import { assertSyncedInCI } from './assert-synced.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -81,6 +82,8 @@ async function syncHours() {
     } else {
         console.log('ℹ️ No se detectó GOOGLE_MAPS_API_KEY_BUILD en el entorno. Usando fallback estático.');
     }
+
+    assertSyncedInCI(hoursData, 'Horarios');
 
     try {
         const fileContent = `/**
