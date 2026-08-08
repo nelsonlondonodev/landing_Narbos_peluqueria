@@ -1,28 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { PLACE_ID } from '../js/data/place-config.js';
+import { loadEnv } from './load-env.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Cargar variables de entorno desde .env si existe en la raíz
-const envPath = path.join(__dirname, '../.env');
-if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, 'utf8');
-    envContent.split('\n').forEach(line => {
-        const parts = line.split('=');
-        if (parts.length >= 2) {
-            const key = parts[0].trim();
-            let val = parts.slice(1).join('=').trim();
-            if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
-            if (val.startsWith("'") && val.endsWith("'")) val = val.slice(1, -1);
-            process.env[key] = val;
-        }
-    });
-}
+loadEnv();
 
 // CONFIGURACIÓN DE NARBO'S SALÓN SPA
-const PLACE_ID = 'ChIJtwq7egB5QI4RuteHxCidG7g';
 const OUTPUT_FILE = path.join(__dirname, '../js/data/google-reviews.js');
 
 /**
@@ -78,7 +65,7 @@ function mapGoogleReview(review) {
  */
 async function fetchGoogleReviews(placeId, apiKey) {
     console.log('📡 Realizando consulta HTTP a Google Places API (Reviews)...');
-    const url = `https://places.googleapis.com/v1/places/${placeId}?fields=rating,userRatingCount,reviews&key=${apiKey}`;
+    const url = `https://places.googleapis.com/v1/places/${placeId}?languageCode=es&fields=rating,userRatingCount,reviews&key=${apiKey}`;
     const response = await fetch(url);
     
     if (!response.ok) {
@@ -108,6 +95,39 @@ export default googleReviews;
 }
 
 /**
+ * Páginas cuyo aggregateRating describe al negocio completo. Se excluyen las fichas
+ * de servicio (ej. maquillaje), que llevan su propia calificación independiente.
+ */
+const AGGREGATE_RATING_PAGES = ['../index.html', '../nosotros.html'];
+
+/**
+ * Propaga la calificación y el total de opiniones al JSON-LD y al texto visible.
+ * El carrusel ya actualiza el conteo en runtime, pero los rastreadores leen el
+ * marcado estático: sin esto el rich snippet se queda con el valor del último build manual.
+ * @param {Object} data
+ */
+function syncAggregateRatingMarkup(data) {
+    const rating = Number(data.rating).toFixed(1);
+    const count = String(data.userRatingCount);
+
+    AGGREGATE_RATING_PAGES.forEach(relativePath => {
+        const filePath = path.join(__dirname, relativePath);
+        if (!fs.existsSync(filePath)) return;
+
+        const original = fs.readFileSync(filePath, 'utf8');
+        const updated = original
+            .replace(/("reviewCount":\s*)"\d+"/g, `$1"${count}"`)
+            .replace(/("ratingValue":\s*)"[\d.]+"/g, `$1"${rating}"`)
+            .replace(/\(\d+\s+opiniones en Google\)/g, `(${count} opiniones en Google)`);
+
+        if (updated !== original) {
+            fs.writeFileSync(filePath, updated, 'utf8');
+            console.log(`🔗 aggregateRating actualizado en ${path.basename(filePath)} (${rating} / ${count}).`);
+        }
+    });
+}
+
+/**
  * Orquestador principal para la sincronización de reseñas de Google Business Profile.
  */
 async function syncReviews() {
@@ -121,7 +141,8 @@ async function syncReviews() {
         reviews: getFallbackReviews()
     };
 
-    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+    // Clave BUILD: este script corre en Node (sin referrer), no sirve la clave web.
+    const apiKey = process.env.GOOGLE_MAPS_API_KEY_BUILD;
 
     if (apiKey) {
         try {
@@ -143,11 +164,12 @@ async function syncReviews() {
             console.error('❌ Error al consultar la API de Google (Reviews), aplicando fallback seguro:', error.message);
         }
     } else {
-        console.log('ℹ️ No se detectó GOOGLE_MAPS_API_KEY en el entorno. Usando fallback estático.');
+        console.log('ℹ️ No se detectó GOOGLE_MAPS_API_KEY_BUILD en el entorno. Usando fallback estático.');
     }
 
     try {
         saveReviewsToFile(OUTPUT_FILE, reviewsData);
+        syncAggregateRatingMarkup(reviewsData);
     } catch (writeError) {
         console.error('❌ Error al escribir el archivo de opiniones:', writeError.message);
     }

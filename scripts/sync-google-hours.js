@@ -1,28 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { PLACE_ID } from '../js/data/place-config.js';
+import { loadEnv } from './load-env.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Cargar variables de entorno desde .env si existe en la raíz
-const envPath = path.join(__dirname, '../.env');
-if (fs.existsSync(envPath)) {
-    const envContent = fs.readFileSync(envPath, 'utf8');
-    envContent.split('\n').forEach(line => {
-        const parts = line.split('=');
-        if (parts.length >= 2) {
-            const key = parts[0].trim();
-            let val = parts.slice(1).join('=').trim();
-            if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
-            if (val.startsWith("'") && val.endsWith("'")) val = val.slice(1, -1);
-            process.env[key] = val;
-        }
-    });
-}
+loadEnv();
 
 // CONFIGURACIÓN DE NARBO'S SALÓN SPA
-const PLACE_ID = 'ChIJtwq7egB5QI4RuteHxCidG7g';
 const OUTPUT_FILE = path.join(__dirname, '../js/data/business-hours.js');
 
 /**
@@ -37,8 +24,12 @@ async function syncHours() {
     const fallbackHours = {
         lastSync: new Date().toISOString(),
         source: 'Static Fallback (Local)',
-        status: 'OPEN',
         weekdayText: [], // Vacío para forzar el dibujo de schedule tradicional
+        // Periodos recurrentes (day: 0 = domingo). Espejo del schedule de abajo.
+        periods: [1, 2, 3, 4, 5, 6].map(day => ({
+            open: { day, hour: 7, minute: 0 },
+            close: { day, hour: 20, minute: 0 }
+        })),
         schedule: [
             { day: 'Lunes', opens: '7:00 AM', closes: '8:00 PM', closed: false },
             { day: 'Martes', opens: '7:00 AM', closes: '8:00 PM', closed: false },
@@ -52,29 +43,32 @@ async function syncHours() {
     };
 
     let hoursData = { ...fallbackHours };
-    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+    // Clave BUILD: este script corre en Node (sin referrer), no sirve la clave web.
+    const apiKey = process.env.GOOGLE_MAPS_API_KEY_BUILD;
 
     if (apiKey) {
         try {
             console.log('📡 Realizando consulta HTTP a Google Places API...');
-            const url = `https://places.googleapis.com/v1/places/${PLACE_ID}?fields=regularOpeningHours,currentOpeningHours&key=${apiKey}`;
+            const url = `https://places.googleapis.com/v1/places/${PLACE_ID}?languageCode=es&fields=regularOpeningHours&key=${apiKey}`;
             const response = await fetch(url);
-            
+
             if (!response.ok) {
                 throw new Error(`Google API respondió con código ${response.status}`);
             }
 
             const data = await response.json();
-            
-            // Usamos currentOpeningHours (que incluye festivos de la semana actual) o regularOpeningHours
-            const hours = data.currentOpeningHours || data.regularOpeningHours || {};
-            
+
+            // Solo horario regular: este archivo es estático y currentOpeningHours
+            // caduca al terminar la semana del build. Los festivos y cierres
+            // excepcionales los resuelve GoogleMapsService en vivo desde el cliente.
+            const hours = data.regularOpeningHours || {};
+
             if (hours.weekdayDescriptions && hours.weekdayDescriptions.length > 0) {
                 hoursData = {
                     lastSync: new Date().toISOString(),
                     source: 'Google Places API (Sincronizado)',
-                    status: data.currentOpeningHours?.openNow ? 'OPEN' : 'CLOSED',
                     weekdayText: hours.weekdayDescriptions,
+                    periods: hours.periods || fallbackHours.periods,
                     schedule: fallbackHours.schedule // Mantenemos schedule para compatibilidad de fallback
                 };
                 console.log('✅ Datos de horarios obtenidos de Google exitosamente.');
@@ -85,7 +79,7 @@ async function syncHours() {
             console.error('❌ Error al consultar la API de Google, aplicando fallback seguro:', error.message);
         }
     } else {
-        console.log('ℹ️ No se detectó GOOGLE_MAPS_API_KEY en el entorno. Usando fallback estático.');
+        console.log('ℹ️ No se detectó GOOGLE_MAPS_API_KEY_BUILD en el entorno. Usando fallback estático.');
     }
 
     try {

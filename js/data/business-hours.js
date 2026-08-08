@@ -1,12 +1,93 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-07-25T06:51:47.044Z
+ * Última sincronización con Google Business Profile: 2026-08-08T05:51:05.362Z
  */
 const businessHours = {
-    "lastSync": "2026-07-25T06:51:47.044Z",
-    "source": "Static Fallback (Local)",
-    "status": "OPEN",
-    "weekdayText": [],
+    "lastSync": "2026-08-08T05:51:05.362Z",
+    "source": "Google Places API (Sincronizado)",
+    "weekdayText": [
+        "lunes: 7:00–20:00",
+        "martes: 7:00–20:00",
+        "miércoles: 7:00–20:00",
+        "jueves: 7:00–20:00",
+        "viernes: 7:00–20:00",
+        "sábado: 7:00–20:00",
+        "domingo: Cerrado"
+    ],
+    "periods": [
+        {
+            "open": {
+                "day": 1,
+                "hour": 7,
+                "minute": 0
+            },
+            "close": {
+                "day": 1,
+                "hour": 20,
+                "minute": 0
+            }
+        },
+        {
+            "open": {
+                "day": 2,
+                "hour": 7,
+                "minute": 0
+            },
+            "close": {
+                "day": 2,
+                "hour": 20,
+                "minute": 0
+            }
+        },
+        {
+            "open": {
+                "day": 3,
+                "hour": 7,
+                "minute": 0
+            },
+            "close": {
+                "day": 3,
+                "hour": 20,
+                "minute": 0
+            }
+        },
+        {
+            "open": {
+                "day": 4,
+                "hour": 7,
+                "minute": 0
+            },
+            "close": {
+                "day": 4,
+                "hour": 20,
+                "minute": 0
+            }
+        },
+        {
+            "open": {
+                "day": 5,
+                "hour": 7,
+                "minute": 0
+            },
+            "close": {
+                "day": 5,
+                "hour": 20,
+                "minute": 0
+            }
+        },
+        {
+            "open": {
+                "day": 6,
+                "hour": 7,
+                "minute": 0
+            },
+            "close": {
+                "day": 6,
+                "hour": 20,
+                "minute": 0
+            }
+        }
+    ],
     "schedule": [
         {
             "day": "Lunes",

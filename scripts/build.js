@@ -6,7 +6,10 @@ import { fileURLToPath } from 'url';
 import crypto from 'crypto';
 import esbuild from 'esbuild';
 import htmlMinifier from 'html-minifier';
+import { loadEnv } from './load-env.js';
 const { minify } = htmlMinifier;
+
+loadEnv();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -199,7 +202,13 @@ const runBuild = async () => {
         await execPromise('node scripts/ssg.js');
 
         log('Injecting Secrets...', colors.magenta);
-        const apiKey = process.env.GOOGLE_MAPS_API_KEY || 'AIzaSyDU2lYVfhSyR6KIYdJDizFfneY6DUB1kZk'; 
+        // Clave WEB: viaja en el bundle público, por eso va restringida por referrer.
+        // Sin clave se inyecta cadena vacía y el cliente cae al horario del build.
+        // Nunca incrustar una clave literal aquí.
+        const apiKey = process.env.GOOGLE_MAPS_API_KEY_WEB || '';
+        if (!apiKey) {
+            log('⚠️  GOOGLE_MAPS_API_KEY_WEB ausente: el badge usará solo el horario estático.', colors.yellow);
+        }
         const distJsFiles = getFiles(path.join(DIST_DIR, 'js'), '.js');
         distJsFiles.forEach(file => {
             let content = fs.readFileSync(file, 'utf8');
