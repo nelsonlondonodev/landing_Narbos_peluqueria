@@ -129,6 +129,15 @@
     @apply fixed bottom-5 right-5 z-[1000] flex items-center justify-center w-[60px] h-[60px] bg-[#25D366] rounded-full shadow-lg transition-transform duration-300 hover:scale-110;
 }
 
+/* Textura del panel de chat. Antes era un PNG de 682 KB traído de
+   user-images.githubusercontent.com: se descargaba en cada carga aunque el panel
+   está oculto (visibility:hidden), saturando la red justo en la ventana del LCP.
+   Este SVG embebido hace lo mismo con ~600 bytes y sin salir del dominio. */
+.wa-doodle {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23111b21' stroke-width='1.5' stroke-linecap='round'%3E%3Ccircle cx='16' cy='16' r='6'/%3E%3Cpath d='M44 10v12M38 16h12'/%3E%3Ccircle cx='54' cy='44' r='6'/%3E%3Cpath d='M12 52h14M12 58h9'/%3E%3Cpath d='M64 14l6 6M70 14l-6 6'/%3E%3Cpath d='M28 66a5 5 0 0 1 10 0'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 80px;
+}
+
 /* Marquee & Brands Slider */
 .marquee-track {
     @apply w-max animate-marquee;

@@ -69,9 +69,7 @@ export class WhatsAppButton {
      */
     _getBackgroundPatternHTML() {
         return `
-            <div class="absolute inset-0 opacity-[0.06] pointer-events-none" 
-                 style="background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: 400px;">
-            </div>
+            <div class="wa-doodle absolute inset-0 opacity-[0.06] pointer-events-none"></div>
         `;
     }
 
