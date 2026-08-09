@@ -1,12 +1,12 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-08-08T05:51:06.067Z
+ * Última sincronización con Google Business Profile: 2026-08-09T14:12:25.314Z
  */
 const googleReviews = {
-    "lastSync": "2026-08-08T05:51:06.067Z",
+    "lastSync": "2026-08-09T14:12:25.314Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
-    "userRatingCount": 330,
+    "userRatingCount": 334,
     "reviews": [
         {
             "author": "Janeth Torres",

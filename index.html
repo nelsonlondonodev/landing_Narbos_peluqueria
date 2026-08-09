@@ -3,10 +3,24 @@
 <head>
     <!-- Clarity tracking code for https://narbossalon.com/ -->
     <script>
-        (function(c,l,a,r,i,t,y){
+        (function(c,l,a,r,i){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            var done=false;
+            var load=function(){
+                if(done)return;
+                done=true;
+                var t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+                l.head.appendChild(t);
+            };
+            var idle=function(){
+                if(c.requestIdleCallback){c.requestIdleCallback(load,{timeout:4000});}else{c.setTimeout(load,4000);}
+            };
+            // El idle se espera al evento load: el navegador concede huecos ociosos
+            // entre frames aunque queden recursos críticos en vuelo, y ahí es justo
+            // donde Clarity le robaría ancho de banda a la imagen LCP.
+            if(l.readyState==="complete"){idle();}else{c.addEventListener("load",idle,{once:true});}
+            var events=['pointerdown','keydown','scroll','touchstart'];
+            for(var n=0;n<events.length;n++){c.addEventListener(events[n],load,{once:true,passive:true});}
         })(window, document, "clarity", "script", "xcdx7c8sub");
     </script>
     <meta charset="UTF-8" />
@@ -40,18 +54,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     
     <!-- Fuentes de Google: Carga no bloqueante -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
     <!-- CSS Externos: Carga no bloqueante para mejorar FCP/LCP -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" media="print" onload="this.media='all'">
+    <!-- GLightbox no se usa en la home (solo en servicios/ y uñas): no se carga aquí. -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload="this.media='all'">
-    
+
     <noscript>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     </noscript>
     <script type="application/ld+json">
@@ -118,7 +130,7 @@
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5.0",
-        "reviewCount": "330",
+        "reviewCount": "334",
         "bestRating": "5",
         "worstRating": "1"
       },
@@ -392,7 +404,7 @@
                                     <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                                     <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                                 </div>
-                                <span id="reviews-total-count" class="text-brand-gray-dark/60 text-xs font-medium">(330 opiniones en Google)</span>
+                                <span id="reviews-total-count" class="text-brand-gray-dark/60 text-xs font-medium">(334 opiniones en Google)</span>
                             </div>
                         </a>
 
@@ -656,7 +668,6 @@
     <!-- Contenedor para modales dinámicos del Home -->
     <div id="modals-root"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
     <script src="js/main.js?v=2.8.20" type="module"></script>
 
 </body>

@@ -9,14 +9,35 @@ const ROOT_DIR = path.join(__dirname, '../');
 
 const CLARITY_ID = 'xcdx7c8sub';
 
+// Clarity se carga en idle (o al primer gesto del usuario), nunca durante la carga
+// inicial: el tag abre tres orígenes —clarity.ms, scripts.clarity.ms y z.clarity.ms—
+// y era el recurso más lento de la ruta crítica. Misma estrategia que AnalyticsService.
+// El stub c[a] encola las llamadas, así que nada se pierde mientras el tag no ha llegado.
 const CLARITY_SCRIPT = `    <!-- Clarity tracking code for https://narbossalon.com/ -->
     <script>
-        (function(c,l,a,r,i,t,y){
+        (function(c,l,a,r,i){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            var done=false;
+            var load=function(){
+                if(done)return;
+                done=true;
+                var t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+                l.head.appendChild(t);
+            };
+            var idle=function(){
+                if(c.requestIdleCallback){c.requestIdleCallback(load,{timeout:4000});}else{c.setTimeout(load,4000);}
+            };
+            // El idle se espera al evento load: el navegador concede huecos ociosos
+            // entre frames aunque queden recursos críticos en vuelo, y ahí es justo
+            // donde Clarity le robaría ancho de banda a la imagen LCP.
+            if(l.readyState==="complete"){idle();}else{c.addEventListener("load",idle,{once:true});}
+            var events=['pointerdown','keydown','scroll','touchstart'];
+            for(var n=0;n<events.length;n++){c.addEventListener(events[n],load,{once:true,passive:true});}
         })(window, document, "clarity", "script", "${CLARITY_ID}");
     </script>`;
+
+// Localiza el bloque completo de Clarity (comentario + script) ya presente en el HTML.
+const CLARITY_BLOCK_RE = /[ \t]*<!-- Clarity tracking code[\s\S]*?<\/script>/;
 
 // Carpetas que deben ignorarse en la búsqueda de archivos HTML
 const EXCLUDED_DIRS = ['node_modules', 'dist', '.git', '.gemini', 'scratch', 'images', 'video', 'css', 'js'];
@@ -51,12 +72,25 @@ const getFiles = (dir, ext, fileList = []) => {
 
 /**
  * Valida si el string de contenido HTML ya contiene la firma del script de Clarity.
- * 
+ *
  * @param {string} content Contenido HTML del archivo.
  * @returns {boolean} True si ya contiene Clarity, false de lo contrario.
  */
 const hasClarity = (content) => {
     return content.includes(CLARITY_ID);
+};
+
+/**
+ * Sustituye un bloque de Clarity ya presente por la versión vigente del snippet.
+ * Permite que el script sea idempotente y sirva también para migrar snippets antiguos.
+ *
+ * @param {string} content Contenido HTML original.
+ * @returns {string|null} Contenido actualizado, o null si el bloque ya está al día.
+ */
+const migrateClarityInContent = (content) => {
+    const match = content.match(CLARITY_BLOCK_RE);
+    if (!match || match[0] === CLARITY_SCRIPT) return null;
+    return content.replace(CLARITY_BLOCK_RE, CLARITY_SCRIPT);
 };
 
 /**
@@ -87,7 +121,10 @@ const processHtmlFile = (filePath) => {
         let content = fs.readFileSync(filePath, 'utf8');
 
         if (hasClarity(content)) {
-            return 'SKIPPED';
+            const migrated = migrateClarityInContent(content);
+            if (!migrated) return 'SKIPPED';
+            fs.writeFileSync(filePath, migrated, 'utf8');
+            return 'MIGRATED';
         }
 
         const updatedContent = injectClarityIntoContent(content);
@@ -109,6 +146,7 @@ const run = () => {
     console.log(`📂 Se encontraron ${htmlFiles.length} archivos HTML para analizar.`);
 
     let updatedCount = 0;
+    let migratedCount = 0;
     let skippedCount = 0;
     let failedCount = 0;
 
@@ -119,6 +157,9 @@ const run = () => {
         if (result === 'UPDATED') {
             console.log(`✅ Clarity inyectado en: ${relativePath}`);
             updatedCount++;
+        } else if (result === 'MIGRATED') {
+            console.log(`♻️  Snippet actualizado en: ${relativePath}`);
+            migratedCount++;
         } else if (result === 'SKIPPED') {
             skippedCount++;
         } else if (result === 'FAILED') {
@@ -128,7 +169,8 @@ const run = () => {
 
     console.log('\n📊 Resumen del proceso:');
     console.log(`- Archivos actualizados: ${updatedCount}`);
-    console.log(`- Archivos omitidos (ya tenían el script): ${skippedCount}`);
+    console.log(`- Snippets migrados a la versión vigente: ${migratedCount}`);
+    console.log(`- Archivos omitidos (ya estaban al día): ${skippedCount}`);
     console.log(`- Archivos con error: ${failedCount}`);
     console.log(`- Total procesados: ${htmlFiles.length}`);
 };
