@@ -68,6 +68,10 @@ const IMAGES_TO_OPTIMIZE = [
     {
         src: 'images/pages/barberia/corte-hombre-fade-moderno.webp',
         dest: 'images/pages/barberia/corte-hombre-fade-moderno-mobile.webp'
+    },
+    {
+        src: 'images/pages/unas/manicure-spa.webp',
+        dest: 'images/pages/unas/manicure-spa-mobile.webp'
     }
 ];
 

@@ -43,7 +43,8 @@ export class HomeHubController {
             const processedData = {
                 ...data,
                 link: this.app.resolvePath(data.link),
-                image: this.app.resolvePath(data.image)
+                image: this.app.resolvePath(data.image),
+                imageMobile: data.imageMobile ? this.app.resolvePath(data.imageMobile) : undefined
             };
             grid.appendChild(new ServiceCard(processedData).render());
         });

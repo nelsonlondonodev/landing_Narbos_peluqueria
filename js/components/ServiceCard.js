@@ -9,15 +9,17 @@ export class ServiceCard {
      * @param {string} props.description - Descripción corta
      * @param {string} [props.icon] - SVG string
      * @param {string} [props.image] - URL de imagen
+     * @param {string} [props.imageMobile] - Variante a 768px; si se pasa, la tarjeta
+     *   envuelve la imagen en <picture> y la sirve por debajo de 768px de ancho
      * @param {string} [props.link] - URL de destino
      * @param {string} [props.modalId] - ID de modal (si aplica)
      * @param {string} [props.animationDelay] - Delay de animación ("0.2s")
      * @param {'overlay'|'standard'|'logo'} [props.variant] - Estilo visual
      * @param {string} [props.price] - Precio del servicio (Opcional)
      */
-    constructor({ title, description, icon, image, imageAlt, link, modalId, animationDelay = "0s", variant = 'overlay', price, width, height }) {
-        this.props = { 
-            title, description, icon, image, imageAlt, link, modalId, animationDelay, variant, price,
+    constructor({ title, description, icon, image, imageMobile, imageAlt, link, modalId, animationDelay = "0s", variant = 'overlay', price, width, height }) {
+        this.props = {
+            title, description, icon, image, imageMobile, imageAlt, link, modalId, animationDelay, variant, price,
             width: width || (variant === 'overlay' ? 800 : 400),
             height: height || (variant === 'overlay' ? 600 : 300)
         };
@@ -136,9 +138,19 @@ export class ServiceCard {
 
     getOverlayBackground() {
         if (this.props.image) {
+            const imgClass = "absolute inset-0 w-full h-full object-cover transition-all duration-700 z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105";
+            const alt = this.props.imageAlt || `${this.props.title} en Narbo's Salón Spa Chía`;
+            const img = `<img src="${this.props.image}" alt="${alt}" loading="lazy" width="${this.props.width}" height="${this.props.height}" class="${imgClass}">`;
+
+            // En móvil estas tarjetas se muestran a ~640px, pero se servía el original a
+            // tamaño de escritorio: solo la de maquillaje eran 161 KB para pintar 637x478.
+            const picture = this.props.imageMobile
+                ? `<picture class="contents"><source media="(max-width: 768px)" srcset="${this.props.imageMobile}" type="image/webp">${img}</picture>`
+                : img;
+
             return `
-                <img src="${this.props.image}" alt="${this.props.imageAlt || `${this.props.title} en Narbo's Salón Spa Chía`}" loading="lazy" width="${this.props.width}" height="${this.props.height}" class="absolute inset-0 w-full h-full object-cover transition-all duration-700 z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105">
-                
+                ${picture}
+
                 <!-- Gradiente Base (Verde) que desaparece en hover -->
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0 transition-opacity duration-500 group-hover:opacity-0"></div>
                 

@@ -7,6 +7,9 @@
  * @property {string} icon - SVG string del icono.
  * @property {string} link - URL destino.
  * @property {string} image - Ruta de imagen (placeholder).
+ * @property {string} [imageMobile] - Variante a 768px para móvil. Solo se declara
+ *   cuando pesa menos que la original: la de balayage, por ejemplo, sale más pesada
+ *   que su fuente y por eso no aparece aquí.
  * @property {string} animationDelay - Retardo de animación CSS.
  */
 
@@ -33,6 +36,7 @@ export const servicesData = Object.freeze([
         icon: '<path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/>',
         link: "servicios/unas-spa/",
         image: "images/pages/unas/manicure-spa.webp",
+        imageMobile: "images/pages/unas/manicure-spa-mobile.webp",
         animationDelay: "0.2s"
     },
     {
@@ -43,6 +47,7 @@ export const servicesData = Object.freeze([
         icon: '<path d="M12 7.5a4.5 4.5 0 1 1 4.5 4.5M12 7.5A4.5 4.5 0 1 0 7.5 12M12 7.5V9m-4.5 3a4.5 4.5 0 1 0 4.5 4.5M7.5 12H9m3 4.5a4.5 4.5 0 1 0 4.5-4.5M12 16.5V15m4.5-3H15"/>',
         link: "servicios/estetica/",
         image: "images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
+        imageMobile: "images/pages/estetica/limpieza-facial-profunda-spa-chia-mobile.webp",
         animationDelay: "0.4s"
     },
     {
@@ -53,6 +58,7 @@ export const servicesData = Object.freeze([
         icon: '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>',
         link: "servicios/maquillaje/",
         image: "images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
+        imageMobile: "images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos-mobile.webp",
         animationDelay: "0.5s"
     },
     {
@@ -63,6 +69,7 @@ export const servicesData = Object.freeze([
         icon: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M7 8l10 5M7 13l10 5M7 18l6 3M11 3l6 3"/>',
         link: "servicios/barberia/",
         image: "images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp",
+        imageMobile: "images/pages/barberia/barberia-salon-spa-premium-chia-hero-mobile.webp",
         animationDelay: "0.6s"
     }
 ]);
