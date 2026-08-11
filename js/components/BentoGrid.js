@@ -85,7 +85,14 @@ function getMediaContentHTML(item) {
         `;
     }
 
-    return `<img src="${item.src}" alt="${item.alt}" loading="lazy" width="${item.width || ''}" height="${item.height || ''}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">`;
+    const img = `<img src="${item.src}" alt="${item.alt}" loading="lazy" width="${item.width || ''}" height="${item.height || ''}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">`;
+
+    // La variante móvil es solo para la miniatura. El lightbox se alimenta de
+    // `item.src` desde getTriggerLinkHTML, así que a pantalla completa sigue
+    // llegando el original: aquí se recorta a 213px de ancho, allí no.
+    return item.srcMobile
+        ? `<picture class="contents"><source media="(max-width: 768px)" srcset="${item.srcMobile}" type="image/webp">${img}</picture>`
+        : img;
 }
 
 /**

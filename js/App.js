@@ -82,6 +82,7 @@ class App {
         const resolved = { ...item };
         
         if (resolved.src) resolved.src = this.resolvePath(resolved.src);
+        if (resolved.srcMobile) resolved.srcMobile = this.resolvePath(resolved.srcMobile);
         if (resolved.poster) resolved.poster = this.resolvePath(resolved.poster);
         
         if (resolved.subImages && Array.isArray(resolved.subImages)) {

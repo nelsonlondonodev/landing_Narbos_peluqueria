@@ -2,7 +2,11 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
-// Lista quirúrgica de imágenes principales del Hero para optimizar en móvil (768px)
+// Ancho por defecto: cubre un hero a ancho completo hasta el breakpoint de 768px.
+const DEFAULT_WIDTH = 768;
+
+// Lista quirúrgica de imágenes a optimizar para móvil. Cada entrada puede fijar
+// su propio `width` cuando se pinta mucho más pequeña que un hero.
 const IMAGES_TO_OPTIMIZE = [
     {
         src: 'images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp',
@@ -92,7 +96,24 @@ const IMAGES_TO_OPTIMIZE = [
     {
         src: 'images/pages/peluqueria/retoque-de-raiz-tinte.webp',
         dest: 'images/pages/peluqueria/retoque-de-raiz-tinte-mobile.webp'
-    }
+    },
+    // Miniaturas del bento de casos de éxito. Se pintan a 213x180 y 213x372 CSS,
+    // así que 576px cubre DPR 3 en un móvil típico; 768 sobraba de largo.
+    // Solo las «después»: las «antes» viven en subImages y únicamente se cargan
+    // al abrir el lightbox, donde van a pantalla completa y deben ir en original.
+    ...[
+        'tratamiento-hidratacion-chia-despues',
+        'correccion-rubio-extremo-cabello-danado-despues',
+        'balayage-rubio-iluminacion-chia-despues',
+        'correccion-color-balayage-miel-chia-despues',
+        'balayage-correccion-rubio-claro-chia-despues',
+        'balayage-rubio-dorado-chia-despues',
+        'balayage-rubio-tendencia-chia-despues'
+    ].map(name => ({
+        src: `images/pages/peluqueria/casos_exito/${name}.webp`,
+        dest: `images/pages/peluqueria/casos_exito/${name}-mobile.webp`,
+        width: 576
+    }))
 ];
 
 /**
@@ -110,7 +131,7 @@ function getFileSizeInKB(filePath) {
  * Procesa y optimiza una sola imagen usando el pipeline de sips y imagemin.
  * @param {Object} imageConfig 
  */
-function optimizeImage({ src, dest }) {
+function optimizeImage({ src, dest, width = DEFAULT_WIDTH }) {
     console.log(`\n----------------------------------------`);
     console.log(`Procesando: ${src}`);
 
@@ -123,9 +144,9 @@ function optimizeImage({ src, dest }) {
     const tempDir = 'temp_out_dir';
 
     try {
-        // Paso 1: Redimensionar con sips a JPEG temporal a 768px de ancho
-        console.log(`-> Redimensionando con sips a 768px de ancho...`);
-        execSync(`sips -s format jpeg --resampleWidth 768 "${src}" --out "${tempJpg}"`, { stdio: 'ignore' });
+        // Paso 1: Redimensionar con sips a JPEG temporal al ancho indicado
+        console.log(`-> Redimensionando con sips a ${width}px de ancho...`);
+        execSync(`sips -s format jpeg --resampleWidth ${width} "${src}" --out "${tempJpg}"`, { stdio: 'ignore' });
 
         // Asegurar que el directorio temporal exista y esté vacío
         if (fs.existsSync(tempDir)) {
