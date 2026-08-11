@@ -72,6 +72,26 @@ const IMAGES_TO_OPTIMIZE = [
     {
         src: 'images/pages/unas/manicure-spa.webp',
         dest: 'images/pages/unas/manicure-spa-mobile.webp'
+    },
+    // Hero de balayage-mechas: es el elemento LCP de la página y se sirve a
+    // 960x1280 para pintarse a 412x386 CSS (721x676 reales a DPR 1.75).
+    {
+        src: 'images/pages/peluqueria/color-tratamiento.webp',
+        dest: 'images/pages/peluqueria/color-tratamiento-mobile.webp'
+    },
+    // Tarjetas de servicio de peluquería: 960x1280 para pintarse a 437x328 CSS.
+    // Las comparten balayage-mechas, color-tinturas-cabello y el hub de peluquería.
+    {
+        src: 'images/pages/peluqueria/imagen-balayage_chia.webp',
+        dest: 'images/pages/peluqueria/imagen-balayage_chia-mobile.webp'
+    },
+    {
+        src: 'images/pages/peluqueria/cubrimiento-de-canas-natural.webp',
+        dest: 'images/pages/peluqueria/cubrimiento-de-canas-natural-mobile.webp'
+    },
+    {
+        src: 'images/pages/peluqueria/retoque-de-raiz-tinte.webp',
+        dest: 'images/pages/peluqueria/retoque-de-raiz-tinte-mobile.webp'
     }
 ];
 

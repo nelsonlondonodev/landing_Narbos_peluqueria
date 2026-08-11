@@ -205,7 +205,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" media="print" onload="this.media='all'">
     
     <!-- LCP Optimization -->
-    <link rel="preload" as="image" href="../../images/pages/peluqueria/color-tratamiento.webp" fetchpriority="high" type="image/webp" />
+    <link rel="preload" as="image" href="../../images/pages/peluqueria/color-tratamiento-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp" />
+    <link rel="preload" as="image" href="../../images/pages/peluqueria/color-tratamiento.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp" />
 
     <style>
         /* Optimización de CLS */
@@ -228,7 +229,11 @@
           <div class="relative">
               <!-- Hero de Servicio (Consistente con Home) -->
               <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-                <img src="../../images/pages/peluqueria/color-tratamiento.webp" alt="Balayage y Color en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="1920" height="1080" fetchpriority="high" decoding="async">
+                <picture class="contents">
+                  <source media="(max-width: 768px)" srcset="../../images/pages/peluqueria/color-tratamiento-mobile.webp" type="image/webp">
+                  <source media="(min-width: 769px)" srcset="../../images/pages/peluqueria/color-tratamiento.webp" type="image/webp">
+                  <img src="../../images/pages/peluqueria/color-tratamiento.webp" alt="Balayage y Color en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" width="960" height="1280" fetchpriority="high" decoding="async">
+                </picture>
               </section>
 
               <!-- Floating Content Box -->
@@ -285,7 +290,10 @@
                     <!-- Babylights / Iluminaciones -->
                     <div id="service-card-21" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0 cursor-pointer" data-animation="zoomIn" data-modal-target="21">
                         <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                            <img src="../../images/pages/peluqueria/imagen-balayage_chia.webp" alt="Babylights / Iluminaciones" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            <picture class="contents">
+                              <source media="(max-width: 768px)" srcset="../../images/pages/peluqueria/imagen-balayage_chia-mobile.webp" type="image/webp">
+                              <img src="../../images/pages/peluqueria/imagen-balayage_chia.webp" alt="Babylights / Iluminaciones" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            </picture>
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
@@ -311,7 +319,10 @@
                     <!-- Aplicación de tintes -->
                     <div id="service-card-22" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0 cursor-pointer" data-animation="zoomIn" data-modal-target="22">
                         <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                            <img src="../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp" alt="Aplicación de tintes" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            <picture class="contents">
+                              <source media="(max-width: 768px)" srcset="../../images/pages/peluqueria/cubrimiento-de-canas-natural-mobile.webp" type="image/webp">
+                              <img src="../../images/pages/peluqueria/cubrimiento-de-canas-natural.webp" alt="Aplicación de tintes" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            </picture>
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
@@ -337,7 +348,10 @@
                     <!-- Retoque de Raíz -->
                     <div id="service-card-23" class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0 cursor-pointer" data-animation="zoomIn" data-modal-target="23">
                         <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
-                            <img src="../../images/pages/peluqueria/retoque-de-raiz-tinte.webp" alt="Retoque de Raíz" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            <picture class="contents">
+                              <source media="(max-width: 768px)" srcset="../../images/pages/peluqueria/retoque-de-raiz-tinte-mobile.webp" type="image/webp">
+                              <img src="../../images/pages/peluqueria/retoque-de-raiz-tinte.webp" alt="Retoque de Raíz" loading="lazy" width="400" height="300" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                            </picture>
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
