@@ -72,5 +72,17 @@ export const homeVideos = [
         description: "Descubre el proceso de un diseño de balayage e iluminación profesional en Narbo's Salón Spa. Resultados naturales, rubios vibrantes y salud capilar en Chía.",
         uploadDate: "2026-07-25T08:00:00-05:00",
         thumbnailUrl: getYouTubeThumbnail('VCnNQODdxy0', 'hqdefault')
+    },
+    {
+        id: '_33Xsn18z8s',
+        title: "Transformación Increíble: Balayage y Ondas en Chía",
+        description: "Mira la transformación completa de un balayage con ondas suaves en Narbo's Salón Spa. Rubios luminosos, movimiento natural y acabado profesional en Chía.",
+        uploadDate: "2026-08-11T01:10:00-05:00",
+        // YouTube entrega este short pillarboxed, sin el relleno desenfocado que puso en
+        // otros. En la tarjeta 16:9 conviene hqdefault (4:3): object-cover recorta arriba
+        // y abajo, así el contenido ocupa ~56 % del ancho en vez del ~33 % de maxresdefault,
+        // que al ser 16:9 exacto entra sin recortar y deja las barras negras a la vista.
+        // La variante vertical sin barras (oar2) no sirve: es el «antes», con el pelo oscuro.
+        thumbnailUrl: getYouTubeThumbnail('_33Xsn18z8s', 'hqdefault')
     }
 ];

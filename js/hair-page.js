@@ -94,12 +94,20 @@ async function initYouTubeModals() {
     const { VideoModal } = await import('./components/VideoModal.js');
     const modal = new VideoModal();
     triggers.forEach(trigger => {
-        trigger.onclick = (e) => {
+        const open = (e) => {
             e.preventDefault();
             const videoId = trigger.getAttribute('data-video-id');
             if (videoId) {
                 modal.open(videoId);
             }
+        };
+
+        trigger.onclick = open;
+
+        // Los disparadores que no son <a>/<button> se marcan con role="button" y
+        // tabindex="0": sin esto quedarían enfocables pero inertes con el teclado.
+        trigger.onkeydown = (e) => {
+            if (e.key === 'Enter' || e.key === ' ') open(e);
         };
     });
 }
