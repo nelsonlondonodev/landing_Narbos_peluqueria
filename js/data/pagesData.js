@@ -345,6 +345,16 @@ export const pagesData = Object.freeze({
         },
         metaTitle: "Balayage y Mechas en Chía | Especialistas en Rubios | Narbo's",
         metaDescription: "Consigue el rubio de tus sueños con nuestras técnicas de Balayage, Mechas y Babylights en Chía. Expertos en iluminación capilar y salud de tu fibra.",
+        video: {
+            id: '_33Xsn18z8s',
+            headingId: 'balayage-video-title',
+            heading: 'Mira una <span class="text-brand-green">transformación real</span>',
+            body: 'Balayage con ondas suaves, de principio a fin. Así trabajamos el degradado a mano alzada para conseguir rubios luminosos con movimiento natural, cuidando la salud del cabello en cada paso.',
+            ctaLabel: 'Agendar mi Balayage',
+            ctaHref: 'https://wa.me/573123462618',
+            alt: "Resultado de un balayage con ondas suaves realizado en Narbo's Salón Spa Chía",
+            ariaLabel: 'Reproducir video: Transformación Increíble, Balayage y Ondas en Chía'
+        },
         gallery: [
             {
                 type: 'youtube',
@@ -479,6 +489,16 @@ export const pagesData = Object.freeze({
         },
         metaTitle: "Coloración y Tinturas en Chía | Cubrimiento de Canas | Narbo's",
         metaDescription: "Especialistas en tintura global, retoque de raíz y matización en Chía. Brindamos cobertura 100% de canas y brillo duradero para tu cabello.",
+        video: {
+            id: 'nDH5jTYxaU8',
+            headingId: 'color-video-title',
+            heading: 'El poder del <span class="text-brand-green">diseño de color</span>',
+            body: 'De la raíz oscura al rubio dorado, en un solo servicio. Así construimos el color a medida: elegimos el tono que favorece tu piel, respetamos la fibra en cada paso y sellamos el brillo para que el resultado dure entre visitas.',
+            ctaLabel: 'Agendar mi Color',
+            ctaHref: 'https://wa.me/573123462618',
+            alt: "Antes y después de un diseño de color: rubio dorado con ondas realizado en Narbo's Salón Spa Chía",
+            ariaLabel: 'Reproducir video: Antes y Después, El Poder del Diseño de Color en Chía'
+        },
         // El vídeo de esta página vive en su propia sección, no en el bento: la galería
         // queda solo para los antes/después. Al sacar el item `youtube` (era `horizontal`)
         // la parrilla pasa de 3 filas con 2 huecos a 2 filas exactas de 4 columnas.

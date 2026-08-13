@@ -401,44 +401,9 @@
                 </div>
             </section>
 
-            <!-- Video del proceso (respalda el VideoObject del JSON-LD) -->
-            <section class="py-16 md:py-24 bg-white" aria-labelledby="color-video-title">
-              <div class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center">
-                  <div class="text-left" data-animation="fadeInUp">
-                      <h2 id="color-video-title" class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark mb-4">
-                          El poder del <span class="text-brand-green">diseño de color</span>
-                      </h2>
-                      <p class="text-brand-gray-dark/80 mb-8 text-lg">
-                          De la raíz oscura al rubio dorado, en un solo servicio. Así construimos el color a medida: elegimos el tono que favorece tu piel, respetamos la fibra en cada paso y sellamos el brillo para que el resultado dure entre visitas.
-                      </p>
-                      <a href="https://wa.me/573123462618" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center rounded-lg bg-brand-green px-6 py-3.5 text-base font-semibold text-white shadow-lg hover:bg-[#5a634b] hover:shadow-xl hover:-translate-y-0.5 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
-                          Agendar mi Color
-                      </a>
-                  </div>
-                  <div class="flex justify-center" data-animation="fadeInUp">
-                      <div class="relative overflow-hidden max-w-xs w-full bg-white rounded-xl shadow-2xl p-2">
-                          <div class="video-card youtube-modal-trigger relative aspect-[9/16] bg-black rounded-lg overflow-hidden group cursor-pointer"
-                               data-video-id="nDH5jTYxaU8" role="button" tabindex="0"
-                               aria-label="Reproducir video: Antes y Después, El Poder del Diseño de Color en Chía">
-
-                              <img src="https://img.youtube.com/vi/nDH5jTYxaU8/maxresdefault.jpg"
-                                   alt="Antes y después de un diseño de color: rubio dorado con ondas realizado en Narbo's Salón Spa Chía"
-                                   loading="lazy" decoding="async"
-                                   class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
-
-                              <!-- Botón de reproducción -->
-                              <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors duration-300">
-                                  <div class="w-16 h-16 bg-brand-green/90 text-white rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-125 group-hover:bg-brand-green ring-4 ring-white/20">
-                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                          <path d="M8 5v14l11-7z" />
-                                      </svg>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </section>
+            <!-- Video del proceso (respalda el VideoObject del JSON-LD).
+                 Contenido en pagesData['color-tinturas-cabello'].video -->
+            <div id="video-section-root"></div>
 
             <!-- Marcas Premium -->
             <div id="hair-brands-root"></div>

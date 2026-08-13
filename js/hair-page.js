@@ -3,6 +3,7 @@ import { Breadcrumbs } from './components/Breadcrumbs.js';
 
 import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
+import { getVideoSectionHTML } from './components/VideoSection.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { ServiceModal } from './components/ServiceModal.js';
 import { hairBrands, smoothingBrands } from './data/brandsData.js';
@@ -32,6 +33,7 @@ function initPageComponents() {
     initBreadcrumbs();
 
     initBrandsCarousel();
+    initVideoSection();
     initGallery();
     initHairServicesGrid();
 }
@@ -40,19 +42,44 @@ function initPageComponents() {
 /*                           COMPONENT INITIALIZERS                           */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Resuelve la clave de `pagesData` correspondiente a la página actual.
+ */
+function getPageKey() {
+    const path = window.location.pathname;
+
+    if (path.includes('cortes-de-pelo')) return 'cortes-de-pelo';
+    if (path.includes('balayage-mechas')) return 'balayage-mechas'; // Check pagesData key matches
+    if (path.includes('color-tinturas')) return 'color-tinturas-cabello';
+    if (path.includes('tratamientos')) return 'tratamientos-capilares';
+
+    return 'peluqueria'; // Default Hub
+}
+
+/**
+ * Pinta la sección de video en desarrollo.
+ *
+ * En producción la inyecta el SSG, porque el rastreador tiene que ver el marcado que
+ * respalda el `VideoObject`. Aquí solo se cubre el caso de trabajar contra el código
+ * fuente sin pasar por el build, y por eso se comprueba que el contenedor esté vacío:
+ * sobre `dist` no debe volver a pintar nada.
+ */
+function initVideoSection() {
+    const root = document.getElementById('video-section-root');
+    if (!root || root.children.length > 0) return;
+
+    const videoData = pagesData[getPageKey()]?.video;
+    if (!videoData) return;
+
+    root.innerHTML = getVideoSectionHTML(videoData);
+    initYouTubeModals();
+}
+
 function initGallery() {
     const galleryRoot = document.getElementById('hair-gallery-root'); // Updated ID
     if (!galleryRoot) return;
 
-    // Determine current page key for Gallery Data
-    const path = window.location.pathname;
-    let pageKey = 'peluqueria'; // Default Hub
-    
-    if (path.includes('cortes-de-pelo')) pageKey = 'cortes-de-pelo';
-    if (path.includes('balayage-mechas')) pageKey = 'balayage-mechas'; // Check pagesData key matches
-    if (path.includes('color-tinturas')) pageKey = 'color-tinturas-cabello';
-    if (path.includes('tratamientos')) pageKey = 'tratamientos-capilares';
-
+    const pageKey = getPageKey();
     const galleryData = pagesData[pageKey]?.gallery;
 
     if (galleryData) {

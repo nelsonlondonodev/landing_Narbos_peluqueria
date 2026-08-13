@@ -1,0 +1,78 @@
+/**
+ * @typedef {Object} VideoSectionData
+ * @property {string} id - ID del video de YouTube.
+ * @property {string} headingId - ID del `h2`, referenciado por `aria-labelledby`.
+ * @property {string} heading - Titular de la sección. Admite HTML (se usa para resaltar).
+ * @property {string} body - Párrafo descriptivo que acompaña al video.
+ * @property {string} ctaLabel - Texto del botón de acción.
+ * @property {string} ctaHref - Destino del botón.
+ * @property {string} alt - Texto alternativo de la miniatura.
+ * @property {string} ariaLabel - Etiqueta accesible del disparador del modal.
+ * @property {'hqdefault'|'maxresdefault'|'sddefault'} [thumbnailQuality='maxresdefault']
+ *   Calidad de la miniatura. La tarjeta es 9:16 y recorta con `object-cover`, así que
+ *   la elección depende de cómo haya rellenado YouTube cada short: ver el comentario
+ *   de cada entrada en `videoData.js`.
+ */
+
+/**
+ * Sección de video de una página de servicio.
+ *
+ * Los videos viven aquí y no en el `BentoGrid` a propósito. El bento es un lightbox de
+ * fotos con una rama especial para `type: 'youtube'` en `getMediaContentHTML` y otra
+ * distinta en `getTriggerLinkHTML`; además un `featured-video` ocupa 4 celdas de casos
+ * de éxito y encaja mal un 9:16 en una caja cuadrada. Con sección propia el
+ * `VideoObject` del JSON-LD describe algo prominente, con titular y texto alrededor.
+ *
+ * La miniatura es un `<img>` y el iframe solo se crea al abrir el modal: un `<iframe>`
+ * de YouTube incrustado de entrada arrastra ~700-900 KB del reproductor aunque nadie
+ * le dé al play.
+ *
+ * @param {VideoSectionData} data
+ * @returns {string} HTML de la sección.
+ */
+export function getVideoSectionHTML(data) {
+    const quality = data.thumbnailQuality || 'maxresdefault';
+    const thumbnail = `https://img.youtube.com/vi/${data.id}/${quality}.jpg`;
+
+    return `
+        <section class="py-16 md:py-24 bg-white" aria-labelledby="${data.headingId}">
+            <div class="container mx-auto px-6 max-w-screen-xl grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-left" data-animation="fadeInUp">
+                    <h2 id="${data.headingId}" class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark mb-4">
+                        ${data.heading}
+                    </h2>
+                    <p class="text-brand-gray-dark/80 mb-8 text-lg">
+                        ${data.body}
+                    </p>
+                    <a href="${data.ctaHref}" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center rounded-lg bg-brand-green px-6 py-3.5 text-base font-semibold text-white shadow-lg hover:bg-[#5a634b] hover:shadow-xl hover:-translate-y-0.5 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
+                        ${data.ctaLabel}
+                    </a>
+                </div>
+                <div class="flex justify-center" data-animation="fadeInUp">
+                    <div class="relative overflow-hidden max-w-xs w-full bg-white rounded-xl shadow-2xl p-2">
+                        <!-- No es <a> ni <button>, así que necesita role/tabindex; el teclado lo
+                             maneja initYouTubeModals, que escucha Enter y Espacio. -->
+                        <div class="video-card youtube-modal-trigger relative aspect-[9/16] bg-black rounded-lg overflow-hidden group cursor-pointer"
+                             data-video-id="${data.id}" role="button" tabindex="0"
+                             aria-label="${data.ariaLabel}">
+
+                            <img src="${thumbnail}"
+                                 alt="${data.alt}"
+                                 loading="lazy" decoding="async"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+
+                            <!-- Botón de reproducción -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors duration-300">
+                                <div class="w-16 h-16 bg-brand-green/90 text-white rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-125 group-hover:bg-brand-green ring-4 ring-white/20">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    `;
+}

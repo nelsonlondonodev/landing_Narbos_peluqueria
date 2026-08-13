@@ -9,6 +9,7 @@ import { getNavbarHTML } from '../js/components/Navbar.js';
 import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
 import { getHeroHTML } from '../js/components/HeroSection.js';
+import { getVideoSectionHTML } from '../js/components/VideoSection.js';
 import { resolveRoute, resolveAsset } from '../js/config.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { servicesData } from '../js/data/servicesData.js';
@@ -193,6 +194,33 @@ function injectServices(document, pageKey, prefix) {
 }
 
 /**
+ * Inyecta la sección de video de una página de servicio.
+ *
+ * El marcado tiene que salir estático: es el contenido que respalda el `VideoObject`
+ * del JSON-LD, y si solo se pintara en cliente el rastreador vería una sección vacía
+ * describiendo un video que no encuentra. Por eso devuelve el desajuste en vez de
+ * ignorarlo: `runSSG` aborta el build antes que publicar esa situación.
+ *
+ * @returns {string|null} Descripción del problema, o null si todo encaja.
+ */
+function injectVideoSection(document, pageKey, pagePath) {
+    const root = document.getElementById('video-section-root');
+    const data = pagesData[pageKey]?.video;
+
+    if (!root && !data) return null;
+
+    if (root && !data) {
+        return `${pagePath}: tiene #video-section-root pero '${pageKey}' no declara \`video\` en pagesData.`;
+    }
+    if (data && !root) {
+        return `${pagePath}: '${pageKey}' declara \`video\` en pagesData pero falta el <div id="video-section-root">.`;
+    }
+
+    root.innerHTML = getVideoSectionHTML(data);
+    return null;
+}
+
+/**
  * Inyecta la grilla de artículos (Blog).
  */
 function injectArticles(document, pageKey, prefix) {
@@ -242,10 +270,13 @@ async function processPage(pageConfig) {
 
     injectHero(document, pageConfig.key, prefix);
     injectServices(document, pageConfig.key, prefix);
+    const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path);
     injectArticles(document, pageConfig.key, prefix);
     injectSEO(document, pageConfig.key, pageConfig.path);
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
+
+    return videoIssue;
 }
 
 /**
@@ -254,15 +285,26 @@ async function processPage(pageConfig) {
 async function runSSG() {
     console.log('\n🚀 Iniciando SSG (Static Site Generation)...');
     const pages = getAllHtmlFiles(DIST_DIR);
-    
+    const videoIssues = [];
+
     for (const page of pages) {
         try {
-            await processPage(page);
+            const issue = await processPage(page);
+            if (issue) videoIssues.push(issue);
             console.log(`✅ Procesado: ${page.path}`);
         } catch (err) {
             console.error(`❌ Error en ${page.path}:`, err.message);
         }
     }
+
+    if (videoIssues.length > 0) {
+        console.error('\n❌ Secciones de video mal cableadas:');
+        videoIssues.forEach(issue => console.error(`   • ${issue}`));
+        console.error('\n   El deploy se aborta: publicar un VideoObject sin su sección visible');
+        console.error('   deja el marcado describiendo un video que no está en la página.');
+        process.exit(1);
+    }
+
     console.log('\n✨ SSG finalizado con éxito.\n');
 }
 
