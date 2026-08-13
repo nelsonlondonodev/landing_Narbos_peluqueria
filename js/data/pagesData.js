@@ -479,16 +479,10 @@ export const pagesData = Object.freeze({
         },
         metaTitle: "Coloración y Tinturas en Chía | Cubrimiento de Canas | Narbo's",
         metaDescription: "Especialistas en tintura global, retoque de raíz y matización en Chía. Brindamos cobertura 100% de canas y brillo duradero para tu cabello.",
+        // El vídeo de esta página vive en su propia sección, no en el bento: la galería
+        // queda solo para los antes/después. Al sacar el item `youtube` (era `horizontal`)
+        // la parrilla pasa de 3 filas con 2 huecos a 2 filas exactas de 4 columnas.
         gallery: [
-            {
-                type: 'youtube',
-                layout: 'horizontal',
-                youtubeId: 'VCnNQODdxy0',
-                poster: 'https://img.youtube.com/vi/VCnNQODdxy0/hqdefault.jpg',
-                title: "Color e Iluminación",
-                subtitle: "Video de trabajo real",
-                alt: "Técnica de coloración y balayage en Chía | Narbo's Salón Spa"
-            },
             {
                 type: 'image',
                 layout: 'vertical',

@@ -1,13 +1,20 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-08-09T14:12:25.314Z
+ * Última sincronización con Google Business Profile: 2026-08-13T06:03:03.607Z
  */
 const googleReviews = {
-    "lastSync": "2026-08-09T14:12:25.314Z",
+    "lastSync": "2026-08-13T06:03:03.607Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
-    "userRatingCount": 334,
+    "userRatingCount": 335,
     "reviews": [
+        {
+            "author": "Paula Andrea Márquez",
+            "rating": 5,
+            "text": "Espectacular todo. La atención maravillosa, el color quedó divino, su trabajo como profesionales en color 10/10, superó mis expectativas justo como se los pedí.",
+            "relativeTime": "Hace 2 semanas",
+            "verified": true
+        },
         {
             "author": "Janeth Torres",
             "rating": 5,
@@ -26,21 +33,14 @@ const googleReviews = {
             "author": "Alejandra Millan",
             "rating": 5,
             "text": "Quiero felicitarlos por el excelente servicios y el trabajo que realizan. Los elegí por las calificaciones en Google y no me arrepiento. Me asesoraron de la mejor forma. Mi primer Balayage y solo recibí cumplidos de mis familiares y amigos, por lo bonito que me dejaron el pelo.\nPasado un mes les escribí nuevamente para un tema de asesoría sobre el balayage y me atendieron presencialmente de una forma muy cordial.. me voy muy feliz. Recomendadisimos y volveré!",
-            "relativeTime": "Hace 1 mes",
+            "relativeTime": "Hace 2 meses",
             "verified": true
         },
         {
             "author": "LINNA MARITZA FIGUEREDO",
             "rating": 5,
             "text": "Excelente servicio, muy buena atencion y profesionalismo , me realice cambio de color con Cristian y me encantó, además la asesoria y atencion que me brindo Ximena  desde el inicio  10/10. Todos muy atentos y amables,  recomiendo el lugar al 100%.",
-            "relativeTime": "Hace 6 meses",
-            "verified": true
-        },
-        {
-            "author": "vazxqle",
-            "rating": 5,
-            "text": "fui a hacerme la keratina y la verdad quedé feliz con el resultado. el servicio fue increíble, desde el primer momento fueron súper atentos y la comunicación fue excelente. me explicaron todo con paciencia y me hicieron sentir muy cómoda. además, el trabajo que hicieron fue impecable, mi pelo quedó espectacular: suave, brillante y súper liso. definitivamente se nota que saben lo que hacen. los recomiendo 100%, volveré sin dudarlo.",
-            "relativeTime": "Hace un año",
+            "relativeTime": "Hace 7 meses",
             "verified": true
         }
     ]

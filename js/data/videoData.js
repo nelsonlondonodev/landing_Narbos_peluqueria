@@ -84,5 +84,18 @@ export const homeVideos = [
         // que al ser 16:9 exacto entra sin recortar y deja las barras negras a la vista.
         // La variante vertical sin barras (oar2) no sirve: es el «antes», con el pelo oscuro.
         thumbnailUrl: getYouTubeThumbnail('_33Xsn18z8s', 'hqdefault')
+    },
+    {
+        id: 'nDH5jTYxaU8',
+        title: "Antes y Después: El Poder del Diseño de Color en Chía",
+        description: "Mira el antes y el después de un diseño de color en Narbo's Salón Spa. De la raíz oscura a un rubio dorado con movimiento, cuidando la salud del cabello en Chía.",
+        uploadDate: "2026-08-13T00:44:46-05:00",
+        // Al revés que `_33Xsn18z8s`: aquí YouTube sí aplicó relleno desenfocado en vez de
+        // barras negras duras, así que `maxresdefault` sirve para las dos tarjetas. En la
+        // parrilla 16:9 de la home entra sin recortar; en la tarjeta vertical 9:16 el
+        // recorte lateral de object-cover cae sobre el frame real (x 438-843 de 1280) y
+        // deja el «después» limpio, sin desenfoque a los lados.
+        // La variante vertical `oar2` no sirve, igual que la vez anterior: es el «antes».
+        thumbnailUrl: getYouTubeThumbnail('nDH5jTYxaU8', 'maxresdefault')
     }
 ];
