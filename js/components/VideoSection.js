@@ -1,3 +1,5 @@
+import { getVideoById, getYouTubeThumbnail } from '../data/videoData.js';
+
 /**
  * @typedef {Object} VideoSectionData
  * @property {string} id - ID del video de YouTube.
@@ -9,10 +11,25 @@
  * @property {string} alt - Texto alternativo de la miniatura.
  * @property {string} ariaLabel - Etiqueta accesible del disparador del modal.
  * @property {'hqdefault'|'maxresdefault'|'sddefault'} [thumbnailQuality='maxresdefault']
- *   Calidad de la miniatura. La tarjeta es 9:16 y recorta con `object-cover`, así que
- *   la elección depende de cómo haya rellenado YouTube cada short: ver el comentario
- *   de cada entrada en `videoData.js`.
+ *   Calidad de la miniatura. La tarjeta recorta con `object-cover`, así que en los
+ *   verticales la elección depende de cómo haya rellenado YouTube cada short: ver el
+ *   comentario de cada entrada en `videoData.js`.
  */
+
+/**
+ * Proporción y ancho de la tarjeta según la orientación del video.
+ *
+ * No todo lo que se publica es un short: `ImN8W2AXEJI` y `vwvZ05OGZDU` son apaisados
+ * nativos, y en una tarjeta 9:16 `object-cover` se comería los lados de la composición.
+ * La orientación se lee del catálogo, no de la página, porque es un hecho del video.
+ *
+ * El vertical se limita a `max-w-xs` para que no domine la columna; el apaisado ocupa el
+ * ancho disponible, que a 16:9 es lo que necesita para no quedar diminuto.
+ */
+const ORIENTATION_STYLES = {
+    vertical: { aspect: 'aspect-[9/16]', width: 'max-w-xs' },
+    horizontal: { aspect: 'aspect-video', width: 'max-w-2xl' }
+};
 
 /**
  * Sección de video de una página de servicio.
@@ -32,7 +49,9 @@
  */
 export function getVideoSectionHTML(data) {
     const quality = data.thumbnailQuality || 'maxresdefault';
-    const thumbnail = `https://img.youtube.com/vi/${data.id}/${quality}.jpg`;
+    const thumbnail = getYouTubeThumbnail(data.id, quality);
+    const orientation = getVideoById(data.id)?.orientation;
+    const { aspect, width } = ORIENTATION_STYLES[orientation] || ORIENTATION_STYLES.vertical;
 
     return `
         <section class="py-16 md:py-24 bg-white" aria-labelledby="${data.headingId}">
@@ -49,10 +68,10 @@ export function getVideoSectionHTML(data) {
                     </a>
                 </div>
                 <div class="flex justify-center" data-animation="fadeInUp">
-                    <div class="relative overflow-hidden max-w-xs w-full bg-white rounded-xl shadow-2xl p-2">
+                    <div class="relative overflow-hidden ${width} w-full bg-white rounded-xl shadow-2xl p-2">
                         <!-- No es <a> ni <button>, así que necesita role/tabindex; el teclado lo
                              maneja initYouTubeModals, que escucha Enter y Espacio. -->
-                        <div class="video-card youtube-modal-trigger relative aspect-[9/16] bg-black rounded-lg overflow-hidden group cursor-pointer"
+                        <div class="video-card youtube-modal-trigger relative ${aspect} bg-black rounded-lg overflow-hidden group cursor-pointer"
                              data-video-id="${data.id}" role="button" tabindex="0"
                              aria-label="${data.ariaLabel}">
 

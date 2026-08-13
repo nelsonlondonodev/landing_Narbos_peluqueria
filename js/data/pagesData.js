@@ -137,16 +137,18 @@ export const pagesData = Object.freeze({
             imageSrcMobile: "images/pages/peluqueria/hair-hero-mobile.webp",
             imageAlt: "Servicio de peluquería profesional en Narbo's"
         },
+        video: {
+            id: 'T11HZ98B1h4',
+            headingId: 'peluqueria-video-title',
+            heading: 'Así se vive una visita a <span class="text-brand-green">Narbo\'s</span>',
+            body: 'Más que un cambio de look. Nuestras clientas llegan con una idea y salen con un estilo pensado para su rostro, su rutina y su tipo de cabello. Asesoría antes de tocar una tijera, marcas premium y un equipo que lleva más de once años en Chía.',
+            ctaLabel: 'Reservar mi cita',
+            ctaHref: 'https://wa.me/573123462618',
+            alt: "Clienta mostrando su resultado junto a su estilista en Narbo's Salón Spa Chía",
+            ariaLabel: 'Reproducir video: Tendencias de Estilo y Belleza en Chía'
+        },
+        // El vídeo tiene sección propia; el bento queda solo para los casos de éxito.
         gallery: [
-            {
-                type: 'youtube',
-                layout: 'featured-video',
-                youtubeId: 'T11HZ98B1h4',
-                poster: 'https://img.youtube.com/vi/T11HZ98B1h4/hqdefault.jpg',
-                title: "Experiencia Narbo's",
-                subtitle: "Vive el cambio",
-                alt: "Tendencias de Estilo y Belleza en Chía | Narbo's Salón Spa"
-            },
             {
                 type: 'image',
                 layout: 'vertical',
@@ -295,16 +297,18 @@ export const pagesData = Object.freeze({
             imageSrcMobile: "images/pages/peluqueria/cortes-de-pelo-profesionales-chia-mobile.webp",
             imageAlt: "Corte de pelo profesional realizado en Narbo's Salon Spa"
         },
+        video: {
+            id: 'ImN8W2AXEJI',
+            headingId: 'cortes-video-title',
+            heading: 'El corte, <span class="text-brand-green">capa a capa</span>',
+            body: 'Un buen corte no se nota: se lleva solo. Trabajamos las capas y el desfilado según la densidad y la caída natural de tu cabello, para que conserve la forma entre visitas y te lo puedas peinar en casa sin pelear con él.',
+            ctaLabel: 'Agendar mi Corte',
+            ctaHref: 'https://wa.me/573123462618',
+            alt: "Resultado de un corte en capas con iluminaciones realizado en Narbo's Salón Spa Chía",
+            ariaLabel: 'Reproducir video: Corte de Cabello y Estilo de Vanguardia en Chía'
+        },
+        // El vídeo tiene sección propia; el bento queda solo para los casos de éxito.
         gallery: [
-            {
-                type: 'youtube',
-                layout: 'featured-video',
-                youtubeId: 'ImN8W2AXEJI',
-                poster: 'https://img.youtube.com/vi/ImN8W2AXEJI/hqdefault.jpg',
-                title: "Experiencia Narbo's",
-                subtitle: "Vive el cambio",
-                alt: "Corte de Cabello y Estilo de Vanguardia en Chía | Narbo's Salón Spa"
-            },
             {
                 type: 'image',
                 layout: 'vertical',

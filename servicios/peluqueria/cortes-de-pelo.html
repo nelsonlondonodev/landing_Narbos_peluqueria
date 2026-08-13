@@ -162,6 +162,23 @@
         @media (min-width: 768px) { #inicio { min-height: 80vh; } }
         #hair-services-grid { min-height: 600px; }
     </style>
+    <!-- VIDEO-OBJECT:cortes-de-pelo -->
+    <script type="application/ld+json">
+    {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "name": "Corte de Cabello y Estilo de Vanguardia en Chía",
+          "description": "Descubre el proceso de un corte y peinado de vanguardia en Narbo's Salón Spa. Estilo sofisticado y profesional en Chía.",
+          "thumbnailUrl": [
+                "https://img.youtube.com/vi/ImN8W2AXEJI/hqdefault.jpg",
+                "https://img.youtube.com/vi/ImN8W2AXEJI/maxresdefault.jpg"
+          ],
+          "uploadDate": "2026-06-15T00:59:11-05:00",
+          "contentUrl": "https://www.youtube.com/watch?v=ImN8W2AXEJI",
+          "embedUrl": "https://www.youtube.com/embed/ImN8W2AXEJI"
+    }
+    </script>
+    <!-- /VIDEO-OBJECT -->
 </head>
   <body class="font-sans">
     
@@ -261,6 +278,10 @@
             </div>
         </div>
       </section>
+
+      <!-- Video del proceso (respalda el VideoObject del JSON-LD).
+           Contenido en pagesData['cortes-de-pelo'].video -->
+      <div id="video-section-root"></div>
 
       <!-- Sección 2: Galería Específica (Fondo Marca) -->
       <section class="py-16 md:py-24 bg-brand-light/10">

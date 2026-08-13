@@ -218,6 +218,23 @@
         #hero-root { min-height: 60vh; background: #f9f9f9; }
         @media (min-width: 768px) { #hero-root { min-height: 80vh; } }
     </style>
+    <!-- VIDEO-OBJECT:peluqueria -->
+    <script type="application/ld+json">
+    {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "name": "Tendencias de Estilo y Belleza en Chía",
+          "description": "Descubre las últimas tendencias y técnicas de belleza en Narbo's Salón Spa. Estilo y cuidado capilar profesional en Chía.",
+          "thumbnailUrl": [
+                "https://img.youtube.com/vi/T11HZ98B1h4/hqdefault.jpg",
+                "https://img.youtube.com/vi/T11HZ98B1h4/maxresdefault.jpg"
+          ],
+          "uploadDate": "2026-07-04T01:37:24-05:00",
+          "contentUrl": "https://youtube.com/shorts/T11HZ98B1h4",
+          "embedUrl": "https://www.youtube.com/embed/T11HZ98B1h4"
+    }
+    </script>
+    <!-- /VIDEO-OBJECT -->
 </head>
   <body class="font-sans">
     
@@ -347,6 +364,10 @@
             </div>
         </div>
       </section>
+
+      <!-- Video del proceso (respalda el VideoObject del JSON-LD).
+           Contenido en pagesData['peluqueria'].video -->
+      <div id="video-section-root"></div>
 
       <!-- Sección de Marcas (Cuidado Capilar) -->
       <div id="hair-brands-root"></div>
