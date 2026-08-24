@@ -52,3 +52,21 @@ Al añadir un artículo de blog que sea autoridad en un tema nuevo, considera si
 ## Verificación de dominio
 
 `scripts/build.js` copia automáticamente a `dist/` cualquier archivo de la raíz que matchee los patrones de verificación de Google (`google*.html`), Bing (`BingSiteAuth.xml`) o IndexNow (`<32-hex>.txt`), sin necesidad de listarlos a mano.
+
+## Estrategia y Roadmap de Optimización de CTR
+
+Para incrementar el CTR orgánico (objetivo: pasar del 1.9 % al rango 3.5 % - 4.5 %):
+
+1. **Optimización de Títulos (`<title>`):**
+   * Migrar de títulos puramente descriptivos a fórmulas de alto impacto con **Beneficio + Localidad + Diferenciador / Confianza**.
+   * *Ejemplo:* En lugar de `Balayage en Chía | Peluquería Narbo's`, usar `Balayage en Chía: Rubios Luminosos Sin Dañar tu Cabello | Narbo's`.
+2. **Meta Descripciones de Alta Conversión (Vender el Clic):**
+   * Incorporar pruebas sociales reales (*"Calificación 5.0 con +330 reseñas en Google"*), ubicación estratégica (*"Edificio Quantum - Hotel Ibis, parqueadero vigilado"*) y marcas premium (*Wella, Olaplex*).
+   * Añadir llamados a la acción directos (*"¡Agenda tu valoración sin costo por WhatsApp!"*).
+3. **Maximización de Resultados Enriquecidos (Rich Snippets):**
+   * Aprovechar `AggregateRating` (estrellas visibles en SERP que incrementan el CTR hasta un +30%).
+   * Reforzar `FAQPage` para ocupar mayor espacio vertical en pantallas móviles.
+   * Mantener sincronizados los nodos `VideoObject` para activar miniaturas de video en búsquedas locales.
+4. **Enfoque en Búsquedas Transaccionales Long-Tail:**
+   * Posicionar términos de intención inmediata (*"alisado keratina chia precio"*, *"arreglo barba hombre chia"*, *"limpieza facial profunda chia"*), que presentan CTRs orgánicos superiores al 8-15 %.
+
