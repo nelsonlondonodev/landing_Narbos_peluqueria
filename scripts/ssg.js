@@ -276,7 +276,60 @@ async function processPage(pageConfig) {
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
 
-    return videoIssue;
+    return { videoIssue, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
+}
+
+const SITE_ORIGIN = 'https://narbossalon.com';
+
+/**
+ * Resuelve una URL del sitio al fichero que la serviría en dist, replicando el
+ * .htaccess: una ruta con barra final busca su index.html y una sin barra final
+ * busca el .html homónimo.
+ */
+function resolveUrlToFile(url) {
+    const route = url.slice(SITE_ORIGIN.length).split(/[?#]/)[0];
+    const clean = route.replace(/^\//, '');
+    if (clean === '') return path.join(DIST_DIR, 'index.html');
+    return clean.endsWith('/')
+        ? path.join(DIST_DIR, clean, 'index.html')
+        : path.join(DIST_DIR, `${clean}.html`);
+}
+
+/**
+ * El 403 de /servicios/ nació así: la página se retiró al crear los hubs de
+ * categoría, pero cuatro BreadcrumbList siguieron declarándola como nivel
+ * intermedio. Google los siguió durante meses hacia un directorio sin
+ * index.html, y un 403 lo reintenta en vez de descartarlo.
+ *
+ * Un breadcrumb es una promesa de que cada nivel es una página real. Aquí se
+ * comprueba contra dist, que es lo que se publica.
+ *
+ * @returns {string[]} Un mensaje por cada nivel que no resuelve a un fichero.
+ */
+function checkBreadcrumbs(document, pagePath) {
+    const issues = [];
+
+    for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        let parsed;
+        try {
+            parsed = JSON.parse(script.textContent);
+        } catch {
+            issues.push(`${pagePath}: un bloque JSON-LD no parsea`);
+            continue;
+        }
+
+        const nodes = parsed['@graph'] ?? (Array.isArray(parsed) ? parsed : [parsed]);
+        for (const node of nodes) {
+            if (node?.['@type'] !== 'BreadcrumbList') continue;
+            for (const { item, name } of node.itemListElement ?? []) {
+                if (typeof item !== 'string' || !item.startsWith(SITE_ORIGIN)) continue;
+                if (fs.existsSync(resolveUrlToFile(item))) continue;
+                issues.push(`${pagePath}: el nivel «${name}» apunta a ${item}, que no existe en dist`);
+            }
+        }
+    }
+
+    return issues;
 }
 
 /**
@@ -286,11 +339,13 @@ async function runSSG() {
     console.log('\n🚀 Iniciando SSG (Static Site Generation)...');
     const pages = getAllHtmlFiles(DIST_DIR);
     const videoIssues = [];
+    const breadcrumbIssues = [];
 
     for (const page of pages) {
         try {
-            const issue = await processPage(page);
-            if (issue) videoIssues.push(issue);
+            const { videoIssue, breadcrumbIssues: crumbs } = await processPage(page);
+            if (videoIssue) videoIssues.push(videoIssue);
+            breadcrumbIssues.push(...crumbs);
             console.log(`✅ Procesado: ${page.path}`);
         } catch (err) {
             console.error(`❌ Error en ${page.path}:`, err.message);
@@ -302,6 +357,14 @@ async function runSSG() {
         videoIssues.forEach(issue => console.error(`   • ${issue}`));
         console.error('\n   El deploy se aborta: publicar un VideoObject sin su sección visible');
         console.error('   deja el marcado describiendo un video que no está en la página.');
+        process.exit(1);
+    }
+
+    if (breadcrumbIssues.length > 0) {
+        console.error('\n❌ Breadcrumbs que apuntan a páginas inexistentes:');
+        breadcrumbIssues.forEach(issue => console.error(`   • ${issue}`));
+        console.error('\n   El deploy se aborta: Google sigue esos niveles y encuentra un 403,');
+        console.error('   que reintenta indefinidamente en vez de descartarlo.');
         process.exit(1);
     }
 

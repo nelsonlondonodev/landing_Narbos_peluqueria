@@ -2,6 +2,12 @@
     RewriteEngine On
     RewriteBase /
 
+    # 0. /servicios/ no es una pagina: se retiro al crear los hubs de cada
+    #    categoria, que ya cubren ese contenido. El directorio sigue existiendo
+    #    (contiene las 5 categorias) pero sin index.html el servidor responde
+    #    403, y Google reintenta un 403 indefinidamente en vez de descartarlo.
+    RewriteRule ^servicios/?$ / [R=301,L]
+
     # 1. Redirigir de /index.html a / (Eliminar index.html)
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.html\s [NC]
     RewriteRule ^ %1/ [R=301,L]
