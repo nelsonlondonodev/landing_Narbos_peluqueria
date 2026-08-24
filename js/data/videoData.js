@@ -127,5 +127,13 @@ export const homeVideos = [
         // deja el «después» limpio, sin desenfoque a los lados.
         // La variante vertical `oar2` no sirve, igual que la vez anterior: es el «antes».
         thumbnailUrl: getYouTubeThumbnail('nDH5jTYxaU8', 'maxresdefault')
+    },
+    {
+        id: 'tuJcoHSWLDM',
+        title: "Transformación Radical con Extensiones en Chía",
+        description: "Mira la transformación completa con extensiones de cabello en Narbo's Salón Spa. Resultados naturales, volumen y largo espectacular en Chía.",
+        uploadDate: "2026-08-24T00:00:00-05:00",
+        thumbnailUrl: getYouTubeThumbnail('tuJcoHSWLDM', 'hqdefault')
     }
 ];
+
