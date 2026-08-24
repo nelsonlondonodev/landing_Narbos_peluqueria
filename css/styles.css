@@ -2222,6 +2222,9 @@
   .text-yellow-800 {
     color: var(--color-yellow-800);
   }
+  .capitalize {
+    text-transform: capitalize;
+  }
   .lowercase {
     text-transform: lowercase;
   }
@@ -2288,9 +2291,6 @@
   }
   .opacity-80 {
     opacity: 80%;
-  }
-  .opacity-90 {
-    opacity: 90%;
   }
   .opacity-95 {
     opacity: 95%;
@@ -3671,6 +3671,20 @@
     }
   }
 }
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/montserrat-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/playfair-display-latin.woff2") format("woff2");
+}
 @layer base {
   body {
     background-color: var(--color-white);
@@ -3840,6 +3854,10 @@
       scale: var(--tw-scale-x) var(--tw-scale-y);
     }
   }
+}
+.wa-doodle {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23111b21' stroke-width='1.5' stroke-linecap='round'%3E%3Ccircle cx='16' cy='16' r='6'/%3E%3Cpath d='M44 10v12M38 16h12'/%3E%3Ccircle cx='54' cy='44' r='6'/%3E%3Cpath d='M12 52h14M12 58h9'/%3E%3Cpath d='M64 14l6 6M70 14l-6 6'/%3E%3Cpath d='M28 66a5 5 0 0 1 10 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px;
 }
 .marquee-track {
   width: max-content;

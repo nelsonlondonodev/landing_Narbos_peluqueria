@@ -1,4 +1,25 @@
 @import "tailwindcss";
+
+/* Fuentes autohospedadas. Servidas desde Google costaban 1,4 s de FCP en 4G
+   lento: dos orígenes con su DNS + TLS, y las woff2 entrando a prioridad
+   VeryHigh justo en la ventana del LCP. Son los subconjuntos `latin`, que
+   cubren acentos y ñ; latin-ext, cyrillic y vietnamese no se usan.
+   Montserrat es variable, así que un solo fichero cubre los pesos 300-700. */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../fonts/montserrat-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/playfair-display-latin.woff2") format("woff2");
+}
+
 @source "../index.html";
 @source "../js/**/*.js";
 @source "../servicios/**/*.html";
