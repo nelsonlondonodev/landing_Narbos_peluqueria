@@ -130,10 +130,13 @@ export const homeVideos = [
     },
     {
         id: 'tuJcoHSWLDM',
+        orientation: 'horizontal',   // nativo apaisado, no es un short (oar2 -> 404)
         title: "Transformación Radical con Extensiones en Chía",
         description: "Mira la transformación completa con extensiones de cabello en Narbo's Salón Spa. Resultados naturales, volumen y largo espectacular en Chía.",
-        uploadDate: "2026-08-24T00:00:00-05:00",
-        thumbnailUrl: getYouTubeThumbnail('tuJcoHSWLDM', 'hqdefault')
+        // YouTube solo publica el día, no la hora: se declara la fecha sola en vez de
+        // inventar una hora, que es lo que hacía el redondeo a las 00:00.
+        uploadDate: "2026-08-22",
+        thumbnailUrl: getYouTubeThumbnail('tuJcoHSWLDM', 'maxresdefault')
     }
 ];
 
