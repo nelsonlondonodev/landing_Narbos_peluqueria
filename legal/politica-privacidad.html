@@ -29,6 +29,9 @@
     <!-- Mantenemos noindex inicialmente, según consideremos si queremos que sea pública en Google o solo para los registros -->
     <meta name="robots" content="noindex, nofollow">
     
+    <!-- Fuentes autohospedadas: sin preload no se descubren hasta parsear el CSS. -->
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/montserrat-latin.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/playfair-display-latin.woff2" crossorigin>
     <link rel="stylesheet" href="../css/styles.css?v=2.8.20">
     <link rel="icon" type="image/webp" href="../images/brand/favicon_narbos.webp" />
 

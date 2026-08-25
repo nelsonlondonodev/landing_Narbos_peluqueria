@@ -36,10 +36,12 @@
     ExpiresByType image/webp "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType video/mp4 "access plus 1 year"
+    # Fuentes autohospedadas: sin esto caian en el default de 1 mes.
+    ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
 
 <IfModule mod_headers.c>
-    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|js|css|swf|mp4|svg)$">
+    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|js|css|swf|mp4|svg|woff2)$">
         Header set Cache-Control "max-age=31536000, public"
     </FilesMatch>
     <FilesMatch "\.(html|htm)$">
