@@ -335,6 +335,31 @@ function checkBreadcrumbs(document, pagePath) {
 /**
  * Orquestador principal de SSG.
  */
+/**
+ * Aborta si un HTML vuelve a pedir animate.css a cdnjs. Las cinco animaciones que
+ * el sitio usa viven ahora en `css/input.css` y viajan dentro de styles.css: una
+ * etiqueta nueva reintroduciría un origen externo entero —DNS, TCP y TLS— para
+ * servir un CSS que ya está descargado. Se comprueba sobre dist, y no sobre las
+ * páginas de pagesData, porque el CDN estaba en las 47 y no solo en las plantilladas.
+ */
+function checkExternalCdn() {
+    const issues = [];
+
+    const walk = dir => {
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+            const full = path.join(dir, entry.name);
+            if (entry.isDirectory()) { walk(full); continue; }
+            if (!entry.name.endsWith('.html')) continue;
+            if (fs.readFileSync(full, 'utf8').includes('cdnjs.cloudflare.com')) {
+                issues.push(path.relative(DIST_DIR, full));
+            }
+        }
+    };
+    walk(DIST_DIR);
+
+    return issues;
+}
+
 async function runSSG() {
     console.log('\n🚀 Iniciando SSG (Static Site Generation)...');
     const pages = getAllHtmlFiles(DIST_DIR);
@@ -365,6 +390,15 @@ async function runSSG() {
         breadcrumbIssues.forEach(issue => console.error(`   • ${issue}`));
         console.error('\n   El deploy se aborta: Google sigue esos niveles y encuentra un 403,');
         console.error('   que reintenta indefinidamente en vez de descartarlo.');
+        process.exit(1);
+    }
+
+    const cdnIssues = checkExternalCdn();
+    if (cdnIssues.length > 0) {
+        console.error('\n❌ Páginas que vuelven a cargar animate.css desde cdnjs:');
+        cdnIssues.forEach(issue => console.error(`   • ${issue}`));
+        console.error('\n   El deploy se aborta: las animaciones ya viajan dentro de styles.css,');
+        console.error('   y la etiqueta reintroduce un origen externo para servir lo ya descargado.');
         process.exit(1);
     }
 
