@@ -326,6 +326,9 @@
   .top-6 {
     top: calc(var(--spacing) * 6);
   }
+  .top-16 {
+    top: calc(var(--spacing) * 16);
+  }
   .top-\[40vh\] {
     top: 40vh;
   }
@@ -382,6 +385,9 @@
   }
   .left-10 {
     left: calc(var(--spacing) * 10);
+  }
+  .left-\[10\%\] {
+    left: 10%;
   }
   .isolation-auto {
     isolation: auto;
@@ -2883,6 +2889,13 @@
       }
     }
   }
+  .hover\:bg-white {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-white);
+      }
+    }
+  }
   .hover\:text-brand-gray-dark {
     &:hover {
       @media (hover: hover) {
@@ -3185,6 +3198,16 @@
       left: calc(1 / 2 * 100%);
     }
   }
+  .md\:left-\[8\%\] {
+    @media (width >= 48rem) {
+      left: 8%;
+    }
+  }
+  .md\:left-auto {
+    @media (width >= 48rem) {
+      left: auto;
+    }
+  }
   .md\:order-1 {
     @media (width >= 48rem) {
       order: 1;
@@ -3438,6 +3461,11 @@
       padding: calc(var(--spacing) * 12);
     }
   }
+  .md\:px-4 {
+    @media (width >= 48rem) {
+      padding-inline: calc(var(--spacing) * 4);
+    }
+  }
   .md\:py-16 {
     @media (width >= 48rem) {
       padding-block: calc(var(--spacing) * 16);
@@ -3602,6 +3630,11 @@
   .lg\:right-\[12\%\] {
     @media (width >= 64rem) {
       right: 12%;
+    }
+  }
+  .lg\:left-\[12\%\] {
+    @media (width >= 64rem) {
+      left: 12%;
     }
   }
   .lg\:grid-cols-2 {

@@ -119,7 +119,8 @@ function syncAggregateRatingMarkup(data) {
         const updated = original
             .replace(/("reviewCount":\s*)"\d+"/g, `$1"${count}"`)
             .replace(/("ratingValue":\s*)"[\d.]+"/g, `$1"${rating}"`)
-            .replace(/\(\d+\s+opiniones en Google\)/g, `(${count} opiniones en Google)`);
+            .replace(/\(\d+\s+opiniones en Google\)/g, `(${count} opiniones en Google)`)
+            .replace(/(data-google-rating[^>]*>)[\d.]+/g, `$1${rating}`);
 
         if (updated !== original) {
             fs.writeFileSync(filePath, updated, 'utf8');
