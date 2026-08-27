@@ -98,7 +98,7 @@ export const resolveAsset = (path, prefix = '') => {
  * Configuración global del sitio.
  */
 export const siteConfig = Object.freeze({
-    version: "2.8.30", // Versión actualizada
+    version: "2.8.31", // Versión actualizada
     basePath: BASE_PATH,
     socialLinks: [
         {
