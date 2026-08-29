@@ -96,10 +96,16 @@ export default googleReviews;
 }
 
 /**
- * Páginas cuyo aggregateRating describe al negocio completo. Se excluyen las fichas
- * de servicio (ej. maquillaje), que llevan su propia calificación independiente.
+ * Páginas cuyo aggregateRating describe al negocio completo.
+ *
+ * La ficha de maquillaje estaba fuera de esta lista porque se dio por hecho que llevaba
+ * una calificación propia del servicio. No la lleva: su `BeautySalon` declara el mismo
+ * `@id` .../#organization que el resto del sitio, o sea el negocio entero, pero con 4.9
+ * y 124 opiniones frente a las 5.0 y 339 reales. Un `@id` con dos calificaciones
+ * distintas es una contradicción sobre la misma entidad, y ahora además la desmentiría
+ * el badge visible del hero. Entra en la lista para que el sync la cuadre.
  */
-const AGGREGATE_RATING_PAGES = ['../index.html', '../nosotros.html'];
+const AGGREGATE_RATING_PAGES = ['../index.html', '../nosotros.html', '../servicios/maquillaje/index.html'];
 
 /**
  * Propaga la calificación y el total de opiniones al JSON-LD y al texto visible.

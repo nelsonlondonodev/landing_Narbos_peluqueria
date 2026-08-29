@@ -12,6 +12,8 @@ import { getHeroHTML } from '../js/components/HeroSection.js';
 import { getVideoSectionHTML } from '../js/components/VideoSection.js';
 import { resolveRoute, resolveAsset } from '../js/config.js';
 import { pagesData } from '../js/data/pagesData.js';
+import { getHeroBadgesHTML, getStarSpriteHTML } from '../js/components/HeroBadges.js';
+import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { barberServices } from '../js/data/barberServices.js';
 import { hairSalonServices } from '../js/data/hairSalonServices.js';
@@ -113,6 +115,42 @@ function injectSEO(document, pageKey, pagePath) {
     if (cleanPath && !cleanPath.endsWith('/')) cleanPath += '/';
     
     canonical.href = `https://narbossalon.com${cleanPath}`;
+}
+
+/**
+ * Cuelga los badges de confianza del hero de cada página.
+ *
+ * Se anclan a `section#inicio` y no al componente `HeroSection`, porque solo ocho de
+ * los dieciséis heroes salen de él: la home y siete fichas de servicio llevan el suyo
+ * escrito a mano. `#inicio` sí lo tienen las dieciséis, y es el mismo `<section>`
+ * posicionado del que ya colgaban en la home, así que las posiciones calibradas para
+ * la foto al 85 % valen tal cual.
+ *
+ * El dato sale de `google-reviews.js` en cada build. Copiar el badge a mano en cada
+ * página lo habría congelado: `sync-google-reviews.js` solo reescribe la calificación
+ * visible en `index.html`, `nosotros.html` y la ficha de maquillaje.
+ */
+function injectHeroBadges(document, pageKey) {
+    // La condición es `section#inicio` y no `pagesData[...].hero`: cuatro fichas
+    // —tratamientos capilares y las tres de uñas y spa— tienen clave en `pagesData`
+    // pero sin bloque `hero`, porque su hero nunca se migró al componente. Tienen la
+    // sección igual que las demás, y con la condición anterior se quedaron sin badge.
+    const seccion = document.querySelector('section#inicio');
+    if (!seccion) return;
+
+    const opciones = pagesData[pageKey]?.heroBadges;
+
+    // La home ya trae el suyo escrito a mano en el HTML; se retira para que no queden
+    // dos, y el generado ocupe su sitio.
+    seccion.querySelectorAll('#hero-google-rating, #business-status-root').forEach(el => el.remove());
+
+    seccion.insertAdjacentHTML('beforeend', getHeroBadgesHTML(opciones));
+
+    // El `<use>` necesita su `<symbol>`: la home ya lo declara para el carrusel, el
+    // resto de páginas no tenían ninguna estrella hasta ahora.
+    if (opciones?.reviews !== false && !document.getElementById('star-icon')) {
+        document.body.insertAdjacentHTML('afterbegin', getStarSpriteHTML());
+    }
 }
 
 /**
@@ -269,6 +307,7 @@ async function processPage(pageConfig) {
     }
 
     injectHero(document, pageConfig.key, prefix);
+    injectHeroBadges(document, pageConfig.key);
     injectServices(document, pageConfig.key, prefix);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path);
     injectArticles(document, pageConfig.key, prefix);
@@ -335,6 +374,29 @@ function checkBreadcrumbs(document, pagePath) {
 /**
  * Orquestador principal de SSG.
  */
+const JSON_LD_RE = /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g;
+
+/**
+ * Recorre los HTML publicados y entrega cada uno ya leído.
+ *
+ * Las guardas comprueban cosas distintas pero todas sobre lo mismo: lo que acaba en
+ * dist, y no las páginas de `pagesData`, porque un fallo puede vivir en cualquiera de
+ * las 47. Cada una traía su propio `walk` recursivo idéntico.
+ *
+ * @param {(relPath: string, html: string) => void} visitar
+ */
+function forEachDistPage(visitar) {
+    const walk = dir => {
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+            const full = path.join(dir, entry.name);
+            if (entry.isDirectory()) { walk(full); continue; }
+            if (!entry.name.endsWith('.html')) continue;
+            visitar(path.relative(DIST_DIR, full), fs.readFileSync(full, 'utf8'));
+        }
+    };
+    walk(DIST_DIR);
+}
+
 /**
  * Aborta si un HTML vuelve a pedir animate.css a cdnjs. Las cinco animaciones que
  * el sitio usa viven ahora en `css/input.css` y viajan dentro de styles.css: una
@@ -345,17 +407,9 @@ function checkBreadcrumbs(document, pagePath) {
 function checkExternalCdn() {
     const issues = [];
 
-    const walk = dir => {
-        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-            const full = path.join(dir, entry.name);
-            if (entry.isDirectory()) { walk(full); continue; }
-            if (!entry.name.endsWith('.html')) continue;
-            if (fs.readFileSync(full, 'utf8').includes('cdnjs.cloudflare.com')) {
-                issues.push(path.relative(DIST_DIR, full));
-            }
-        }
-    };
-    walk(DIST_DIR);
+    forEachDistPage((relPath, html) => {
+        if (html.includes('cdnjs.cloudflare.com')) issues.push(relPath);
+    });
 
     return issues;
 }
@@ -387,37 +441,111 @@ function checkUploadDates() {
         }
     };
 
-    const walk = dir => {
-        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-            const full = path.join(dir, entry.name);
-            if (entry.isDirectory()) { walk(full); continue; }
-            if (!entry.name.endsWith('.html')) continue;
-
-            const relPath = path.relative(DIST_DIR, full);
-            const html = fs.readFileSync(full, 'utf8');
-
-            for (const [, json] of html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
-                let parsed;
-                try {
-                    parsed = JSON.parse(json);
-                } catch {
-                    // `checkBreadcrumbs` ya reporta el JSON-LD que no parsea, y solo
-                    // recorre las páginas de pagesData: aquí se avisa de las demás.
-                    issues.push(`${relPath}: un bloque JSON-LD no parsea`);
-                    continue;
-                }
-
-                recorrer(parsed, fecha => {
-                    if (typeof fecha !== 'string' || !ISO_CON_OFFSET.test(fecha)) {
-                        issues.push(`${relPath}: uploadDate «${fecha}» no es ISO 8601 con zona horaria`);
-                    }
-                });
+    forEachDistPage((relPath, html) => {
+        for (const [, json] of html.matchAll(JSON_LD_RE)) {
+            let parsed;
+            try {
+                parsed = JSON.parse(json);
+            } catch {
+                // `checkBreadcrumbs` ya reporta el JSON-LD que no parsea, y solo
+                // recorre las páginas de pagesData: aquí se avisa de las demás.
+                issues.push(`${relPath}: un bloque JSON-LD no parsea`);
+                continue;
             }
+
+            recorrer(parsed, fecha => {
+                if (typeof fecha !== 'string' || !ISO_CON_OFFSET.test(fecha)) {
+                    issues.push(`${relPath}: uploadDate «${fecha}» no es ISO 8601 con zona horaria`);
+                }
+            });
         }
-    };
-    walk(DIST_DIR);
+    });
 
     return issues;
+}
+
+/**
+ * Aborta si una calificación visible o marcada no coincide con la que trajo el sync.
+ *
+ * El badge del hero pasa de una página a dieciséis, y la calificación es el dato que
+ * más caro sale equivocado: contradecir con el JSON-LD lo que el usuario ve escrito es
+ * justo lo que Google penaliza. Aquí se comprueba que las tres fuentes —el badge, el
+ * `ratingValue` y el `reviewCount`— digan lo mismo que `google-reviews.js`.
+ *
+ * Así se descubrió que la ficha de maquillaje declaraba 4.9 con 124 opiniones para el
+ * mismo `@id` del negocio que el resto del sitio da como 5.0 con 339.
+ */
+function checkRatingConsistency() {
+    const rating = Number(googleReviews.rating).toFixed(1);
+    const count = String(googleReviews.userRatingCount);
+    const issues = [];
+
+    // Solo el del negocio: `@id` .../#organization. Una ficha puede declarar la
+    // calificación de un servicio suelto, que es otra cosa y no se compara.
+    const DEL_NEGOCIO = '"@id":\\s*"https:\\/\\/narbossalon\\.com\\/#organization"[\\s\\S]{0,1200}?';
+
+    forEachDistPage((relPath, html) => {
+        const comprobar = (re, esperado, que) => {
+            for (const [, encontrado] of html.matchAll(re)) {
+                if (encontrado !== esperado) {
+                    issues.push(`${relPath}: ${que} dice ${encontrado} y el sync trae ${esperado}`);
+                }
+            }
+        };
+
+        comprobar(/data-google-rating[^>]*>([\d.]+)/g, rating, 'el badge');
+        comprobar(new RegExp(`${DEL_NEGOCIO}"ratingValue":\\s*"([\\d.]+)"`, 'g'), rating, 'el aggregateRating del negocio');
+        comprobar(new RegExp(`${DEL_NEGOCIO}"reviewCount":\\s*"(\\d+)"`, 'g'), count, 'el reviewCount del negocio');
+    });
+
+    return issues;
+}
+
+/**
+ * Aborta si una página con hero se queda sin el badge de reseñas.
+ *
+ * Es el fallo que se coló en la primera pasada: la inyección se condicionó a que la
+ * página tuviera bloque `hero` en `pagesData`, y cuatro fichas que no lo tienen
+ * —tratamientos capilares y las tres de uñas y spa— salieron sin badge. Se descubrió
+ * a ojo, mirando páginas de una en una, que es justo lo que una guarda evita.
+ *
+ * `section#inicio` es la definición de «página con hero»: la tienen las veinte y ningún
+ * artículo del blog. Si alguna vez hace falta una sin badge, que salte esta guarda y se
+ * decida a propósito.
+ */
+function checkHeroBadges() {
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
+        if (!html.includes('id="inicio"')) return;
+        if (html.includes('hero-google-rating')) return;
+        issues.push(relPath);
+    });
+
+    return issues;
+}
+
+/**
+ * Imprime todas las guardas que fallaron y corta el deploy una sola vez.
+ *
+ * Antes cada una traía su propio bloque idéntico de seis líneas y su propio
+ * `process.exit(1)`, así que un build con dos problemas solo enseñaba el primero: se
+ * arreglaba, se reconstruía, y aparecía el siguiente. Ahora salen juntos.
+ *
+ * @param {{titulo: string, issues: string[], motivo: string}[]} guardas
+ */
+function reportarGuardas(guardas) {
+    const fallidas = guardas.filter(guarda => guarda.issues.length > 0);
+    if (fallidas.length === 0) return;
+
+    for (const { titulo, issues, motivo } of fallidas) {
+        console.error(`\n❌ ${titulo}:`);
+        issues.forEach(issue => console.error(`   • ${issue}`));
+        console.error(`   ↳ ${motivo}`);
+    }
+
+    console.error('\n   El deploy se aborta.\n');
+    process.exit(1);
 }
 
 async function runSSG() {
@@ -437,39 +565,38 @@ async function runSSG() {
         }
     }
 
-    if (videoIssues.length > 0) {
-        console.error('\n❌ Secciones de video mal cableadas:');
-        videoIssues.forEach(issue => console.error(`   • ${issue}`));
-        console.error('\n   El deploy se aborta: publicar un VideoObject sin su sección visible');
-        console.error('   deja el marcado describiendo un video que no está en la página.');
-        process.exit(1);
-    }
-
-    if (breadcrumbIssues.length > 0) {
-        console.error('\n❌ Breadcrumbs que apuntan a páginas inexistentes:');
-        breadcrumbIssues.forEach(issue => console.error(`   • ${issue}`));
-        console.error('\n   El deploy se aborta: Google sigue esos niveles y encuentra un 403,');
-        console.error('   que reintenta indefinidamente en vez de descartarlo.');
-        process.exit(1);
-    }
-
-    const fechaIssues = checkUploadDates();
-    if (fechaIssues.length > 0) {
-        console.error('\n❌ VideoObject con uploadDate mal formada:');
-        fechaIssues.forEach(issue => console.error(`   • ${issue}`));
-        console.error('\n   El deploy se aborta: Search Console marca como inválida toda fecha');
-        console.error('   sin hora ni zona horaria, y el vídeo pierde su rich result.');
-        process.exit(1);
-    }
-
-    const cdnIssues = checkExternalCdn();
-    if (cdnIssues.length > 0) {
-        console.error('\n❌ Páginas que vuelven a cargar animate.css desde cdnjs:');
-        cdnIssues.forEach(issue => console.error(`   • ${issue}`));
-        console.error('\n   El deploy se aborta: las animaciones ya viajan dentro de styles.css,');
-        console.error('   y la etiqueta reintroduce un origen externo para servir lo ya descargado.');
-        process.exit(1);
-    }
+    reportarGuardas([
+        {
+            titulo: 'Secciones de video mal cableadas',
+            issues: videoIssues,
+            motivo: 'publicar un VideoObject sin su sección visible deja el marcado describiendo un video que no está en la página.'
+        },
+        {
+            titulo: 'Breadcrumbs que apuntan a páginas inexistentes',
+            issues: breadcrumbIssues,
+            motivo: 'Google sigue esos niveles y encuentra un 403, que reintenta indefinidamente en vez de descartarlo.'
+        },
+        {
+            titulo: 'VideoObject con uploadDate mal formada',
+            issues: checkUploadDates(),
+            motivo: 'Search Console marca como inválida toda fecha sin hora ni zona horaria, y el vídeo pierde su rich result.'
+        },
+        {
+            titulo: 'Páginas con hero pero sin el badge de reseñas',
+            issues: checkHeroBadges(),
+            motivo: 'la prueba social se publica en unas páginas y en otras no, y la que falta solo se descubre mirándolas a ojo.'
+        },
+        {
+            titulo: 'Calificaciones que no cuadran con el sync de Google',
+            issues: checkRatingConsistency(),
+            motivo: 'un número visible que contradice al JSON-LD es lo que Google trata como marcado engañoso.'
+        },
+        {
+            titulo: 'Páginas que vuelven a cargar animate.css desde cdnjs',
+            issues: checkExternalCdn(),
+            motivo: 'las animaciones ya viajan dentro de styles.css, y la etiqueta reintroduce un origen externo para servir lo ya descargado.'
+        }
+    ]);
 
     console.log('\n✨ SSG finalizado con éxito.\n');
 }

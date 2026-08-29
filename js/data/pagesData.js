@@ -274,7 +274,12 @@ export const pagesData = Object.freeze({
            imageSrc: "images/nosotros/narbos-team-hero.webp",
            imageSrcMobile: "images/nosotros/narbos-team-hero-mobile.webp",
            imageAlt: "Equipo de profesionales de Narbo's Salón Spa Chía"
-       }
+       },
+        // Página de marca: se lee, no se reserva. El ABIERTO/CERRADO es un dato
+        // transaccional y aquí solo sería ruido; la calificación sí se queda.
+        // Va fuera de `hero` porque los badges se cuelgan de `section#inicio`, que
+        // también tienen las fichas sin bloque `hero`.
+        heroBadges: { status: false }
     },
    contacto: {
         metaTitle: "Contacto | Peluquería y Spa en Chía y Cajicá | Narbo's",

@@ -12,6 +12,7 @@
     "generate:sitemap": "node scripts/generate-sitemap.js",
     "generate:video-dates": "node scripts/sync-video-dates.js",
     "generate:video-schema": "node scripts/generate-video-schema.js",
+    "preview": "node scripts/preview.js",
     "index-now": "node scripts/index-now.js",
     "generate:hours": "node scripts/sync-google-hours.js",
     "generate:reviews": "node scripts/sync-google-reviews.js",
