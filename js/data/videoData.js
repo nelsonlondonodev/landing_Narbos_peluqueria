@@ -3,7 +3,10 @@
  * @property {string} id - ID del video de YouTube.
  * @property {string} title - Título del video.
  * @property {string} description - Descripción del video para SEO y accesibilidad.
- * @property {string} uploadDate - Fecha de publicación en formato ISO string.
+ * @property {string} uploadDate - Instante de publicación en ISO 8601 con offset
+ *   (`-05:00`). Lo escribe `sync-video-dates.js` desde el feed del canal, que es la
+ *   única fuente pública de la hora: a mano se ha torcido tres veces y Search Console
+ *   avisa de la fecha sin zona horaria. No editar a mano.
  * @property {string} thumbnailUrl - URL completa de la imagen miniatura.
  * @property {'vertical'|'horizontal'} [orientation='vertical'] - Forma del video original.
  *   No todo lo que se publica es un short. Señal fiable para clasificarlos: los shorts
@@ -133,9 +136,7 @@ export const homeVideos = [
         orientation: 'horizontal',   // nativo apaisado, no es un short (oar2 -> 404)
         title: "Transformación Radical con Extensiones en Chía",
         description: "Mira la transformación completa con extensiones de cabello en Narbo's Salón Spa. Resultados naturales, volumen y largo espectacular en Chía.",
-        // YouTube solo publica el día, no la hora: se declara la fecha sola en vez de
-        // inventar una hora, que es lo que hacía el redondeo a las 00:00.
-        uploadDate: "2026-08-22",
+        uploadDate: "2026-08-22T08:34:17-05:00",
         thumbnailUrl: getYouTubeThumbnail('tuJcoHSWLDM', 'maxresdefault')
     }
 ];

@@ -360,6 +360,66 @@ function checkExternalCdn() {
     return issues;
 }
 
+/**
+ * Aborta si algún `uploadDate` publicado no es un ISO 8601 completo con zona horaria.
+ *
+ * Search Console avisó de las dos caras del mismo dato —«falta la zona horaria» y
+ * «el valor de fecha y hora no es válido»— por un `uploadDate` que era solo el día.
+ * Es el tercer desfase de estas fechas: antes fueron redondeos a las 08:00 y dos días
+ * de más en `ImN8W2AXEJI`. `sync-video-dates.js` mantiene al día el catálogo, pero no
+ * alcanza a los `VideoObject` escritos a mano, que es donde siempre se ha torcido.
+ *
+ * Se recorre dist entero, y no las páginas de `pagesData`, por lo mismo que el CDN:
+ * un JSON-LD puede vivir en cualquiera de las 47.
+ */
+function checkUploadDates() {
+    const ISO_CON_OFFSET = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
+    const issues = [];
+
+    // `uploadDate` aparece anidado a distinta profundidad: suelto en las fichas de
+    // servicio y dentro de cada `ListItem` del `ItemList` de la home.
+    const recorrer = (nodo, onFecha) => {
+        if (Array.isArray(nodo)) { nodo.forEach(hijo => recorrer(hijo, onFecha)); return; }
+        if (!nodo || typeof nodo !== 'object') return;
+        for (const [clave, valor] of Object.entries(nodo)) {
+            if (clave === 'uploadDate') onFecha(valor);
+            else recorrer(valor, onFecha);
+        }
+    };
+
+    const walk = dir => {
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+            const full = path.join(dir, entry.name);
+            if (entry.isDirectory()) { walk(full); continue; }
+            if (!entry.name.endsWith('.html')) continue;
+
+            const relPath = path.relative(DIST_DIR, full);
+            const html = fs.readFileSync(full, 'utf8');
+
+            for (const [, json] of html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
+                let parsed;
+                try {
+                    parsed = JSON.parse(json);
+                } catch {
+                    // `checkBreadcrumbs` ya reporta el JSON-LD que no parsea, y solo
+                    // recorre las páginas de pagesData: aquí se avisa de las demás.
+                    issues.push(`${relPath}: un bloque JSON-LD no parsea`);
+                    continue;
+                }
+
+                recorrer(parsed, fecha => {
+                    if (typeof fecha !== 'string' || !ISO_CON_OFFSET.test(fecha)) {
+                        issues.push(`${relPath}: uploadDate «${fecha}» no es ISO 8601 con zona horaria`);
+                    }
+                });
+            }
+        }
+    };
+    walk(DIST_DIR);
+
+    return issues;
+}
+
 async function runSSG() {
     console.log('\n🚀 Iniciando SSG (Static Site Generation)...');
     const pages = getAllHtmlFiles(DIST_DIR);
@@ -390,6 +450,15 @@ async function runSSG() {
         breadcrumbIssues.forEach(issue => console.error(`   • ${issue}`));
         console.error('\n   El deploy se aborta: Google sigue esos niveles y encuentra un 403,');
         console.error('   que reintenta indefinidamente en vez de descartarlo.');
+        process.exit(1);
+    }
+
+    const fechaIssues = checkUploadDates();
+    if (fechaIssues.length > 0) {
+        console.error('\n❌ VideoObject con uploadDate mal formada:');
+        fechaIssues.forEach(issue => console.error(`   • ${issue}`));
+        console.error('\n   El deploy se aborta: Search Console marca como inválida toda fecha');
+        console.error('   sin hora ni zona horaria, y el vídeo pierde su rich result.');
         process.exit(1);
     }
 
