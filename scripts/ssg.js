@@ -385,16 +385,59 @@ const JSON_LD_RE = /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/s
  *
  * @param {(relPath: string, html: string) => void} visitar
  */
-function forEachDistPage(visitar) {
+function forEachDistFile(ext, visitar) {
     const walk = dir => {
         for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
             const full = path.join(dir, entry.name);
             if (entry.isDirectory()) { walk(full); continue; }
-            if (!entry.name.endsWith('.html')) continue;
+            if (!entry.name.endsWith(ext)) continue;
             visitar(path.relative(DIST_DIR, full), fs.readFileSync(full, 'utf8'));
         }
     };
     walk(DIST_DIR);
+}
+
+function forEachDistPage(visitar) {
+    forEachDistFile('.html', visitar);
+}
+
+/**
+ * Aborta si el banner de cookies vuelve a depender de un CDN, o si el fichero que
+ * el bundle pide no está publicado.
+ *
+ * La librería se servía desde `cdn.jsdelivr.net/gh/...`, que resuelve un tag de git:
+ * a diferencia de un tarball de npm, un tag se puede mover, así que el script que
+ * pedía consentimiento en las 47 páginas podía cambiar de contenido sin que nadie
+ * tocara el repo. Ahora vive en `vendor/` (ver su README) y no sale del dominio.
+ *
+ * La segunda comprobación es la que de verdad importa: si el fichero falta —una
+ * versión que sube en el código y no en `vendor/`—, el banner no aparece y el sitio
+ * deja de cumplir en la UE sin un solo error visible. Se recorren los bundles de
+ * dist y no el fuente, porque es el JS ya empaquetado el que el navegador ejecuta.
+ */
+function checkVendoredConsent() {
+    const issues = [];
+    const RUTA_VENDOR = /vendor\/cookieconsent\/cookieconsent-[\d.]+\.(?:umd\.js|css)/g;
+    const pedidas = new Set();
+
+    forEachDistFile('.js', (relPath, js) => {
+        if (js.includes('cookieconsent') && /cdn\.jsdelivr\.net|unpkg\.com|cdnjs\.cloudflare\.com/.test(js)) {
+            issues.push(`${relPath} — vuelve a pedir la librería a un CDN`);
+        }
+        for (const ruta of js.match(RUTA_VENDOR) || []) pedidas.add(ruta);
+    });
+
+    if (pedidas.size === 0) {
+        issues.push('ningún bundle referencia vendor/cookieconsent — el banner no se cargaría');
+    }
+
+    for (const ruta of pedidas) {
+        if (!fs.existsSync(path.join(DIST_DIR, ruta))) {
+            issues.push(`${ruta} — referenciada por el bundle pero ausente de dist`);
+        }
+    }
+
+    return issues;
 }
 
 /**
@@ -590,6 +633,11 @@ async function runSSG() {
             titulo: 'Calificaciones que no cuadran con el sync de Google',
             issues: checkRatingConsistency(),
             motivo: 'un número visible que contradice al JSON-LD es lo que Google trata como marcado engañoso.'
+        },
+        {
+            titulo: 'Banner de cookies sin autohospedar',
+            issues: checkVendoredConsent(),
+            motivo: 'si la librería del consentimiento no se publica con el sitio, el banner desaparece en la UE sin dar un error.'
         },
         {
             titulo: 'Páginas que vuelven a cargar animate.css desde cdnjs',

@@ -1,11 +1,18 @@
-import { siteConfig, resolveRoute, resolveAsset } from '../config.js';
+import { resolveRoute, resolveAsset } from '../config.js';
 
 /**
- * Configuración de la librería y recursos externos.
+ * Recursos de la librería, autohospedados en `vendor/` (ver su README).
+ * La versión viaja en el nombre del fichero: `versionAssets` no entra en
+ * subdirectorios, así que el nombre es su propio cache busting.
+ *
+ * Las rutas se escriben enteras a propósito, sin interpolar la versión: esbuild
+ * minifica la constante a una letra y deja el template sin resolver, y entonces
+ * `checkVendoredConsent` ya no puede comprobar que el fichero que el bundle pide
+ * existe en dist —que es justo lo que impide que el banner desaparezca sin avisar—.
  */
 const CC_RESOURCES = {
-    JS_URL: 'https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.1/dist/cookieconsent.umd.js',
-    CSS_URL: 'https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v3.0.1/dist/cookieconsent.css',
+    JS_PATH: 'vendor/cookieconsent/cookieconsent-3.0.1.umd.js',
+    CSS_PATH: 'vendor/cookieconsent/cookieconsent-3.0.1.css',
     GEO_API_URL: 'https://freeipapi.com/api/json'
 };
 
@@ -35,9 +42,18 @@ class CookieConsentService {
         if (this.isInitialized) return;
 
         const consentDecision = localStorage.getItem('cc_cookie');
-        
+        this.isInitialized = true;
+
+        // Con decisión guardada no hace falta geolocalizar: basta con levantar la
+        // librería para que respete lo que el visitante ya eligió. Se captura
+        // aparte porque aquí un fallo de carga no debe caer en la política por
+        // defecto —que activa analíticas— sobre una decisión que ya existe.
         if (consentDecision) {
-            await this._boot();
+            try {
+                await this._boot();
+            } catch (error) {
+                console.error('[CookieService] No se pudo cargar el banner:', error.message);
+            }
             return;
         }
 
@@ -54,8 +70,6 @@ class CookieConsentService {
             console.warn('[CookieService] Fallo en Geo-Targeting, aplicando política por defecto.');
             this.analyticsService.init();
         }
-
-        this.isInitialized = true;
     }
 
     /**
@@ -88,20 +102,23 @@ class CookieConsentService {
     }
 
     /**
-     * Inyecta dependencias externas (JS y CSS).
+     * Inyecta la librería del banner desde `vendor/`, sin salir del dominio.
      */
     _loadResources() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             if (window.CookieConsent) return resolve();
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = CC_RESOURCES.CSS_URL;
+            link.href = resolveAsset(CC_RESOURCES.CSS_PATH, this.appRoot);
             document.head.appendChild(link);
 
             const script = document.createElement('script');
-            script.src = CC_RESOURCES.JS_URL;
+            script.src = resolveAsset(CC_RESOURCES.JS_PATH, this.appRoot);
             script.onload = resolve;
+            // Sin esto, un 404 deja la promesa pendiente para siempre y el banner
+            // no aparece nunca, en silencio. Es el fallo que peor se detecta.
+            script.onerror = () => reject(new Error(`No se pudo cargar ${script.src}`));
             document.head.appendChild(script);
         });
     }
