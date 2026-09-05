@@ -56,7 +56,7 @@ function renderForm() {
                         <input type="checkbox" id="accept-policies" name="accept_policies" required class="peer appearance-none w-5 h-5 border-2 border-brand-green/30 rounded-md checked:bg-brand-green checked:border-brand-green focus:outline-none focus:ring-2 focus:ring-brand-green/20 transition-all cursor-pointer">
                         <svg class="absolute inset-0 m-auto w-3 h-3 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                     </div>
-                    <span class="text-[10px] md:text-xs text-brand-gray-dark/60 leading-tight select-none">
+                    <span class="text-[10px] md:text-xs text-brand-gray-dark/80 leading-tight select-none">
                         He leído y acepto la <a href="/legal/politica-privacidad" target="_blank" class="text-brand-green font-bold underline hover:text-brand-gray-dark transition-colors">Política de Tratamiento de Datos (Ley 1581)</a> y acepto ser contactado.
                     </span>
                 </label>

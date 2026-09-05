@@ -58,7 +58,7 @@ export function getHeroBadgesHTML({ reviews = true, status = true } = {}) {
                             <svg class="hidden md:block w-4 h-4 fill-current" viewBox="0 0 20 20"><use href="#star-icon"/></svg>
                             <svg class="hidden md:block w-4 h-4 fill-current" viewBox="0 0 20 20"><use href="#star-icon"/></svg>
                         </span>
-                        <span class="text-brand-gray-dark/60 text-xs font-medium whitespace-nowrap">(${count} opiniones en Google)</span>
+                        <span class="text-brand-gray-dark/80 text-xs font-medium whitespace-nowrap">(${count} opiniones en Google)</span>
                     </a>` : '';
 
     // `StoreBadge` lo hidrata en runtime; `App.js` ya lo instancia en las 47 páginas y

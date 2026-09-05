@@ -402,6 +402,44 @@ function forEachDistPage(visitar) {
 }
 
 /**
+ * Aborta si vuelven las dos combinaciones de color que Lighthouse marcó por
+ * contraste insuficiente.
+ *
+ * `text-brand-gray-dark/60` sobre blanco da 3.40 y `text-red-500` sobre `bg-gray-50`
+ * da 3.60; AA pide 4.5 para texto normal. Se cambiaron por `/80` (5.86) y
+ * `text-brand-red` (9.58). Las dos venían copiadas en varios ficheros —el conteo de
+ * opiniones estaba en la home, en nosotros, en el badge del hero de las veinte
+ * páginas y en el legal del formulario—, así que reaparecen con facilidad al copiar
+ * un bloque existente.
+ *
+ * No es un auditor de contraste: solo impide que vuelvan estas dos. El `<svg>` de
+ * `cabello-sabana-*` se queda en `text-red-500` a propósito, porque como icono le
+ * basta con 3:1 y da 3.76.
+ */
+function checkContrasteConocido() {
+    const COMBINACIONES = [
+        { clase: 'text-brand-gray-dark/60', ratio: '3.40', alternativa: 'text-brand-gray-dark/80' },
+        { clase: 'text-red-500', ratio: '3.60', alternativa: 'text-brand-red' }
+    ];
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
+        for (const { clase, ratio, alternativa } of COMBINACIONES) {
+            // El icono del blog es el único uso legítimo que queda de text-red-500.
+            const usos = html.split(clase).length - 1;
+            const enIconos = clase === 'text-red-500'
+                ? (html.match(/<svg[^>]*text-red-500/g) || []).length
+                : 0;
+            if (usos > enIconos) {
+                issues.push(`${relPath} — ${clase} (${ratio}:1, AA pide 4.5) → usar ${alternativa}`);
+            }
+        }
+    });
+
+    return issues;
+}
+
+/**
  * Aborta si algún bundle vuelve a consultar un servicio de geo-IP.
  *
  * `_isRegulatedZone` decidía con `freeipapi.com` cuando la zona horaria no era
@@ -658,6 +696,11 @@ async function runSSG() {
             titulo: 'Banner de cookies sin autohospedar',
             issues: checkVendoredConsent(),
             motivo: 'si la librería del consentimiento no se publica con el sitio, el banner desaparece en la UE sin dar un error.'
+        },
+        {
+            titulo: 'Texto con contraste por debajo de AA',
+            issues: checkContrasteConocido(),
+            motivo: 'Lighthouse ya marcó estas combinaciones: con menos de 4.5:1 el texto pequeño resulta ilegible para mucha gente.'
         },
         {
             titulo: 'Consulta a un servicio de geo-IP antes del consentimiento',
