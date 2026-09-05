@@ -3,3 +3,8 @@ node_modules
 dist
 .env
 seo_tracking/
+
+# Inbox temporal de medios para posts de GMB
+gmb_inbox/*
+!gmb_inbox/.gitkeep
+!gmb_inbox/README.md
