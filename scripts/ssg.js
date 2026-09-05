@@ -402,6 +402,26 @@ function forEachDistPage(visitar) {
 }
 
 /**
+ * Aborta si algún bundle vuelve a consultar un servicio de geo-IP.
+ *
+ * `_isRegulatedZone` decidía con `freeipapi.com` cuando la zona horaria no era
+ * `Europe/*`: mandaba la IP del visitante —dato personal— a un tercero que no
+ * figura en la política de cookies, y encima antes de que hubiera consentido nada,
+ * que es justo lo que el banner existe para pedir. La zona horaria da la misma
+ * respuesta sin salir del dispositivo.
+ */
+function checkGeoIpLookup() {
+    const SERVICIOS = /freeipapi|ipapi\.co|ip-api\.com|ipinfo\.io|geolocation-db|geoplugin/;
+    const issues = [];
+
+    forEachDistFile('.js', (relPath, js) => {
+        if (SERVICIOS.test(js)) issues.push(relPath);
+    });
+
+    return issues;
+}
+
+/**
  * Aborta si el banner de cookies vuelve a depender de un CDN, o si el fichero que
  * el bundle pide no está publicado.
  *
@@ -638,6 +658,11 @@ async function runSSG() {
             titulo: 'Banner de cookies sin autohospedar',
             issues: checkVendoredConsent(),
             motivo: 'si la librería del consentimiento no se publica con el sitio, el banner desaparece en la UE sin dar un error.'
+        },
+        {
+            titulo: 'Consulta a un servicio de geo-IP antes del consentimiento',
+            issues: checkGeoIpLookup(),
+            motivo: 'manda la IP del visitante a un tercero que no está en la política de cookies, y antes de que haya aceptado nada.'
         },
         {
             titulo: 'Páginas que vuelven a cargar animate.css desde cdnjs',

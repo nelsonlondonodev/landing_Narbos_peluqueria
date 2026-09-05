@@ -12,17 +12,21 @@ import { resolveRoute, resolveAsset } from '../config.js';
  */
 const CC_RESOURCES = {
     JS_PATH: 'vendor/cookieconsent/cookieconsent-3.0.1.umd.js',
-    CSS_PATH: 'vendor/cookieconsent/cookieconsent-3.0.1.css',
-    GEO_API_URL: 'https://freeipapi.com/api/json'
+    CSS_PATH: 'vendor/cookieconsent/cookieconsent-3.0.1.css'
 };
 
 /**
- * Países bajo regulación estricta (UE/EEA/CH/GB).
+ * Zonas horarias bajo regulación estricta (UE/EEA/CH/GB) que no empiezan por
+ * `Europe/`. Son territorios a los que el RGPD sí alcanza: las Canarias son España,
+ * Madeira y Azores son Portugal, los departamentos de ultramar son Francia, y
+ * Chipre e Islandia declaran su zona fuera de `Europe/`.
  */
-const REGULATED_COUNTRIES = [
-    'AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'HU', 
-    'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK', 'GB', 'CH', 'LI', 'NO'
-];
+const REGULATED_TIMEZONES = new Set([
+    'Atlantic/Canary', 'Atlantic/Madeira', 'Atlantic/Azores', 'Atlantic/Reykjavik',
+    'Asia/Nicosia', 'Asia/Famagusta',
+    'America/Guadeloupe', 'America/Martinique', 'America/Cayenne',
+    'Indian/Reunion', 'Indian/Mayotte'
+]);
 
 /**
  * CookieConsentService - Gestiona el banner de cookies y el cumplimiento legal (GDPR).
@@ -41,34 +45,35 @@ class CookieConsentService {
     async init() {
         if (this.isInitialized) return;
 
-        const consentDecision = localStorage.getItem('cc_cookie');
         this.isInitialized = true;
 
-        // Con decisión guardada no hace falta geolocalizar: basta con levantar la
-        // librería para que respete lo que el visitante ya eligió. Se captura
-        // aparte porque aquí un fallo de carga no debe caer en la política por
-        // defecto —que activa analíticas— sobre una decisión que ya existe.
-        if (consentDecision) {
-            try {
-                await this._boot();
-            } catch (error) {
-                console.error('[CookieService] No se pudo cargar el banner:', error.message);
-            }
+        // Con decisión guardada no hace falta mirar la zona: basta con levantar la
+        // librería para que respete lo que el visitante ya eligió.
+        if (localStorage.getItem('cc_cookie')) {
+            await this._bootSeguro();
             return;
         }
 
+        if (!this._isRegulatedZone()) {
+            this._activateAnalyticsWithoutBanner();
+            return;
+        }
+
+        this.analyticsService.setConsentRequired(true);
+        await this._bootSeguro();
+    }
+
+    /**
+     * Levanta el banner sin que un fallo de carga tumbe la inicialización.
+     *
+     * Ante el error no se activa nada: antes caía en una «política por defecto» que
+     * encendía las analíticas precisamente para quien no había podido decir que sí.
+     */
+    async _bootSeguro() {
         try {
-            const isRegulated = await this._isRegulatedZone();
-            
-            if (isRegulated) {
-                this.analyticsService.setConsentRequired(true);
-                await this._boot();
-            } else {
-                this._activateAnalyticsWithoutBanner();
-            }
+            await this._boot();
         } catch (error) {
-            console.warn('[CookieService] Fallo en Geo-Targeting, aplicando política por defecto.');
-            this.analyticsService.init();
+            console.error('[CookieService] No se pudo cargar el banner:', error.message);
         }
     }
 
@@ -90,15 +95,22 @@ class CookieConsentService {
     }
 
     /**
-     * Detección geográfica híbrida (Zona Horaria + IP).
+     * Detección por zona horaria, resuelta en el navegador.
+     *
+     * Antes se consultaba `freeipapi.com` cuando la zona no era `Europe/*`, lo que
+     * mandaba la IP del visitante —dato personal— a un tercero que no figura en la
+     * política de cookies, y además antes de que hubiera consentido nada: justo lo
+     * que el banner existe para pedir. La zona horaria da la misma respuesta sin
+     * salir del dispositivo.
+     *
+     * El coste es que una zona mal configurada o una VPN despistan a la detección.
+     * Se acepta porque falla hacia el lado seguro en el caso que importa: `Europe/*`
+     * cubre a los visitantes europeos reales, y un falso positivo solo enseña un
+     * banner de más.
      */
-    async _isRegulatedZone() {
-        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        if (tz.startsWith('Europe/')) return true;
-
-        const response = await fetch(CC_RESOURCES.GEO_API_URL);
-        const { countryCode } = await response.json();
-        return REGULATED_COUNTRIES.includes(countryCode);
+    _isRegulatedZone() {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        return tz.startsWith('Europe/') || REGULATED_TIMEZONES.has(tz);
     }
 
     /**
