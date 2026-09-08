@@ -1,9 +1,9 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-09-05T09:16:37.150Z
+ * Última sincronización con Google Business Profile: 2026-09-08T05:42:04.108Z
  */
 const googleReviews = {
-    "lastSync": "2026-09-05T09:16:37.150Z",
+    "lastSync": "2026-09-08T05:42:04.108Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
     "userRatingCount": 341,
@@ -19,7 +19,7 @@ const googleReviews = {
             "author": "Valentina Paez",
             "rating": 5,
             "text": "Nabo's salón es increíble desde el inicio hasta la salida, yo me realice un servicio de manicure y pedicure y me encantó relsultado, cumplieron mis expectativas en todo lo que quería, el servicio y la atención es espectacular muy atentas,  amables y cuidadosas con cada parte del proceso. Definitivamente volveré ✨️",
-            "relativeTime": "Hace 3 semanas",
+            "relativeTime": "Hace 1 mes",
             "verified": true
         },
         {
