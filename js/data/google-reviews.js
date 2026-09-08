@@ -1,9 +1,9 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-09-08T05:54:08.304Z
+ * Última sincronización con Google Business Profile: 2026-09-08T07:18:12.108Z
  */
 const googleReviews = {
-    "lastSync": "2026-09-08T05:54:08.304Z",
+    "lastSync": "2026-09-08T07:18:12.108Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
     "userRatingCount": 341,

@@ -1,4 +1,4 @@
-
+import { siteConfig } from '../config.js';
 /**
  * Genera el HTML del formulario de contacto.
  * @returns {string} HTML del componente ContactForm.
@@ -34,9 +34,10 @@ function renderHeader() {
 }
 
 function renderWhatsAppButton() {
+    const { url: whatsappUrl } = siteConfig.socialLinks.find(s => s.name === "WhatsApp");
     return `
         <p class="text-center mb-8" data-animation="zoomIn" data-animation-delay="0.4s">
-            <a href="https://wa.me/573123462618?text=hola, ¡Te hablo desde la web de Narbos Salón!" target="_blank" class="text-brand-green hover:text-brand-gray-dark font-medium underline decoration-brand-green/30 hover:decoration-brand-gray-dark transition-all duration-300">
+            <a href="${whatsappUrl}" target="_blank" class="text-brand-green hover:text-brand-gray-dark font-medium underline decoration-brand-green/30 hover:decoration-brand-gray-dark transition-all duration-300">
                 ¿Prefieres chat? Escríbenos al WhatsApp
             </a>
         </p>
