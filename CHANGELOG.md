@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🚀 Sincronización de Reseñas Reales y Bump v2.8.38 (19 de septiembre de 2026)
+
+*   **Sincronización de Reseñas de Google**: Consulta exitosa a Google Places API sincronizando el total a 350 opiniones reales con calificación 5.0 y actualizando el marcado estructurado `aggregateRating` en `index.html`, `nosotros.html` y servicios (`20e01c8`).
+*   **Versión**: `v2.8.38`.
+
+---
+
 ## 🚀 GEO en Home, Migración de Videos a YouTube y Bump v2.8.18 (4 de julio de 2026)
 
 *   **Consolidación de VideoObject Schema en Home**: Unificado el marcado `VideoObject` de la página de inicio y optimizadas las propiedades GEO (Generative Engine Optimization) para mejorar la citabilidad del sitio en motores de respuesta basados en IA (`4dddcf1`).
