@@ -39,7 +39,14 @@ export const masterPrices = Object.freeze({
         }
     },
     barber: {
+        corte: '$35.000',
+        arregloBarba: '$45.000',
         corteBarba: '$75.000'
+    },
+    makeup: {
+        social: '$120.000',
+        diario: '$95.000'
+        // Novias no tiene precio público: se cotiza por plan.
     },
     esthetics: {
         facial: {

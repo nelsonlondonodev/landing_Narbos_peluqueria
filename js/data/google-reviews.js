@@ -1,9 +1,9 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-09-19T09:26:14.923Z
+ * Última sincronización con Google Business Profile: 2026-09-21T14:53:52.445Z
  */
 const googleReviews = {
-    "lastSync": "2026-09-19T09:26:14.923Z",
+    "lastSync": "2026-09-21T14:53:52.445Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
     "userRatingCount": 350,
@@ -37,10 +37,10 @@ const googleReviews = {
             "verified": true
         },
         {
-            "author": "Ana Maria",
+            "author": "Valentina Paez",
             "rating": 5,
-            "text": "Me dieron de regalo un bono para un masaje relajante. La experiencia fue maravillosa desde el inicio. El local es muy lindo, y el personal muy atento y amable. El masaje, mejor imposible. Muy completo y con una excelente presión. Sin duda volveré.",
-            "relativeTime": "Hace 6 meses",
+            "text": "Nabo's salón es increíble desde el inicio hasta la salida, yo me realice un servicio de manicure y pedicure y me encantó relsultado, cumplieron mis expectativas en todo lo que quería, el servicio y la atención es espectacular muy atentas,  amables y cuidadosas con cada parte del proceso. Definitivamente volveré ✨️",
+            "relativeTime": "Hace 1 mes",
             "verified": true
         }
     ]
