@@ -128,11 +128,11 @@ export const pagesData = Object.freeze({
         ]
     },
     'peluqueria': {
-        metaTitle: "Peluquería en Chía y Cajicá | Barbería, uñas y spa cerca de ti",
-        metaDescription: "Peluquería en Chía y Cajicá cerca de Fontanar. Expertos en cortes, balayage, barbería, maquillaje y uñas. ¡Reserva tu cita en Narbo's Salón!",
+        metaTitle: "Peluquería en Chía: cortes, color y balayage | Narbo's",
+        metaDescription: "Peluquería en Chía y Cajicá, cerca de Fontanar: cortes de dama, color y tinturas, balayage e iluminaciones, alisados y tratamientos capilares.",
         hero: {
-            title: "Peluquería en Chía: expertos en estilo, color <span class=\"text-brand-green\">y bienestar</span>",
-            subtitle: "Expertos en realzar tu belleza con técnicas de vanguardia y productos de clase mundial.",
+            title: "Peluquería en Chía: cortes, color <span class=\"text-brand-green\">y balayage</span>",
+            subtitle: "Corte de dama, tintes y retoque de raíz, balayage e iluminaciones, alisados progresivos y recuperación capilar. Más de once años en Chía.",
             imageSrc: "images/pages/peluqueria/hair-hero.webp",
             imageSrcMobile: "images/pages/peluqueria/hair-hero-mobile.webp",
             imageAlt: "Servicio de peluquería profesional en Narbo's"
