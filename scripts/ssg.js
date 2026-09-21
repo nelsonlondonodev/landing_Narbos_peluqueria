@@ -281,6 +281,36 @@ function injectArticles(document, pageKey, prefix) {
 /**
  * Procesa una sola página para SSG.
  */
+/**
+ * Propaga el title y la description finales a las etiquetas de Open Graph y Twitter.
+ *
+ * El SSG reescribe `<title>` y `meta[name=description]` desde `pagesData`, pero og y
+ * twitter se escribían a mano en cada HTML, así que cada vez que se afinaba un title
+ * quedaban atrás sin que nadie lo viera: no se ven en la página, solo al compartir el
+ * enlace. Eran 17 de 44 páginas, la home incluida, que anunciaba en WhatsApp un
+ * título retirado hacía meses —con «Salon» sin tilde—, y WhatsApp es el canal por el
+ * que se reserva.
+ *
+ * Va fuera de `injectSEO` a propósito: esa sale temprano cuando la página no está en
+ * `pagesData`, que es el caso de los 23 artículos del blog, y son parte del problema.
+ * Aquí se lee lo que el documento ya tiene, venga de donde venga.
+ */
+function sincronizarMetadatosSociales(document) {
+    const title = document.querySelector('title')?.textContent?.trim();
+    const description = document.querySelector('meta[name="description"]')?.content?.trim();
+
+    const propagar = (selector, atributo, valor) => {
+        if (!valor) return;
+        const etiqueta = document.querySelector(selector);
+        if (etiqueta) etiqueta.content = valor;
+    };
+
+    propagar('meta[property="og:title"]', 'content', title);
+    propagar('meta[property="twitter:title"]', 'content', title);
+    propagar('meta[property="og:description"]', 'content', description);
+    propagar('meta[property="twitter:description"]', 'content', description);
+}
+
 async function processPage(pageConfig) {
     const fullPath = path.join(DIST_DIR, pageConfig.path);
     if (!fs.existsSync(fullPath)) return;
@@ -313,6 +343,7 @@ async function processPage(pageConfig) {
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path);
     injectArticles(document, pageConfig.key, prefix);
     injectSEO(document, pageConfig.key, pageConfig.path);
+    sincronizarMetadatosSociales(document);
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
 
@@ -716,6 +747,48 @@ function checkPreciosMarcado() {
 }
 
 /**
+ * Aborta si una página se publica sin `<title>`, o si dos comparten el mismo.
+ *
+ * `injectSEO` compone el title como `metaTitle || hero.title`, así que una entrada de
+ * `pagesData` escrita con otras claves deja las dos ramas en `undefined` y el title se
+ * escribe vacío. Pasó en dos páginas y nadie lo vio en meses: en el navegador se ven
+ * perfectas, el fallo solo está en el `<head>`. `tratamientos-capilares` usaba `title`
+ * y `description` sueltos y acabó en la posición 45 con 90 impresiones;
+ * `unas-acrilicas-gel` no tenía ninguna de las dos.
+ *
+ * El duplicado se vigila por lo contrario: la home y el hub de peluquería abrían los
+ * dos por «Peluquería … Chía», Google se quedaba con la home y mandaba al hub a la
+ * página 2 de resultados. Dos páginas con el mismo title compiten entre ellas.
+ *
+ * Las páginas legales y el 404 quedan fuera: no se indexan y su title da igual.
+ */
+function checkTitles() {
+    const EXENTAS = /^(404\.html|legal\/)/;
+    const issues = [];
+    const vistos = new Map();
+
+    forEachDistPage((relPath, html) => {
+        if (EXENTAS.test(relPath)) return;
+
+        const title = (html.match(/<title>([\s\S]*?)<\/title>/) || [, ''])[1].trim();
+
+        if (!title) {
+            issues.push(`${relPath} — se publica sin <title>; revisa que su entrada de pagesData use metaTitle`);
+            return;
+        }
+
+        if (vistos.has(title)) {
+            issues.push(`${relPath} — mismo title que ${vistos.get(title)}: "${title}"`);
+            return;
+        }
+
+        vistos.set(title, relPath);
+    });
+
+    return issues;
+}
+
+/**
  * Imprime todas las guardas que fallaron y corta el deploy una sola vez.
  *
  * Antes cada una traía su propio bloque idéntico de seis líneas y su propio
@@ -795,6 +868,11 @@ async function runSSG() {
             titulo: 'Consulta a un servicio de geo-IP antes del consentimiento',
             issues: checkGeoIpLookup(),
             motivo: 'manda la IP del visitante a un tercero que no está en la política de cookies, y antes de que haya aceptado nada.'
+        },
+        {
+            titulo: 'Páginas sin title o con el title repetido',
+            issues: checkTitles(),
+            motivo: 'sin title Google se inventa el fragmento, y dos páginas con el mismo compiten entre ellas en vez de sumar.'
         },
         {
             titulo: 'Precios visibles que no cuadran con masterPrices',

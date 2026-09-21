@@ -553,8 +553,8 @@ export const pagesData = Object.freeze({
         ]
     },
     'tratamientos-capilares': {
-        title: "Recuperación <span class=\"text-brand-green\">Capilar</span>",
-        description: "Terapias profundas para devolver la fuerza, el brillo y la suavidad a tu cabello.",
+        metaTitle: "Tratamientos capilares en Chía: keratina y botox | Narbo's",
+        metaDescription: "Recuperación capilar en Chía y Cajicá: keratina, botox capilar, repolarización y alisados progresivos. Diagnóstico del cabello antes de tratar.",
         gallery: [
              {
                 type: 'logo-card',
@@ -1015,6 +1015,8 @@ export const pagesData = Object.freeze({
         ]
     },
     'unas-acrilicas-gel': {
+        metaTitle: "Uñas acrílicas y en gel en Chía | Narbo's Salón Spa",
+        metaDescription: "Uñas acrílicas, polygel y uñas en gel en Chía y Cajicá: esculpidas a medida, diseños personalizados y mantenimiento. Reserva por WhatsApp.",
         gallery: [
             {
                 type: 'image',
