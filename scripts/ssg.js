@@ -628,53 +628,49 @@ function checkHeroBadges() {
 }
 
 /**
- * Aborta si un precio publicado no coincide con `masterPrices`.
- *
- * Vigila los dos sitios donde el precio se escribe a mano, con el alcance que cada
- * uno permite:
- *
- * 1. El texto visible. Los artículos del blog no pasan por `pagesData` ni por el
- *    SSG: su HTML es estático, así que un precio escrito ahí es una copia que nadie
- *    vuelve a mirar. `guia-relajacion` es la página con más tráfico del blog —4.389
- *    impresiones en el trimestre—, o sea que la copia que se queda vieja es la que
- *    más gente lee. Cada `data-precio` nombra su ruta en la lista maestra y aquí se
- *    compara con lo que se ve.
- *
- * 2. Los `Offer` del JSON-LD de las páginas de servicio. Ahí no hay ruta que seguir,
- *    así que solo se comprueba pertenencia: que el precio publicado siga existiendo
- *    en `masterPrices`. No verifica que cada servicio tenga el suyo —dos servicios
- *    pueden costar lo mismo—, pero sí caza el caso que importa: se sube una tarifa
- *    en la lista maestra y el JSON-LD sigue anunciando la vieja, que ya no existe en
- *    ningún sitio. Así se encontraron los tres precios huérfanos que había: el
- *    `price: "0"` de maquillaje de novias y los dos de barbería que nunca llegaron a
- *    la lista.
- *
- * Un precio equivocado en el JSON-LD no es un fallo de estilo: es lo que Google
- * publica en el fragmento, y quien lo lee llega al salón esperando ese número.
+ * Resuelve una ruta con puntos dentro de `masterPrices`: 'esthetics.corporal.X'.
  */
-function checkPrecios() {
-    const ETIQUETA_RE = /<span[^>]*data-precio="([^"]+)"[^>]*>([^<]*)<\/span>/g;
-    const OFFER_PRICE_RE = /"price"\s*:\s*"(\d+)"/g;
-    const issues = [];
-
-    const resolver = ruta => ruta.split('.').reduce(
+function precioMaestro(ruta) {
+    return ruta.split('.').reduce(
         (nodo, clave) => (nodo == null ? undefined : nodo[clave]),
         masterPrices
     );
+}
 
-    // '$120.000' y el "120000" del JSON-LD son el mismo precio escrito de dos formas.
-    const soloDigitos = valor => valor.replace(/\D/g, '');
-
-    const catalogo = new Set();
+/**
+ * Todos los precios de la lista maestra, en dígitos.
+ *
+ * '$120.000' en `masterPrices` y "120000" en el JSON-LD son el mismo precio escrito
+ * de dos formas, así que la comparación se hace sobre la única parte que comparten.
+ */
+function catalogoDePrecios() {
+    const precios = new Set();
     const recorrer = nodo => {
-        if (typeof nodo === 'string') { catalogo.add(soloDigitos(nodo)); return; }
+        if (typeof nodo === 'string') { precios.add(nodo.replace(/\D/g, '')); return; }
         if (nodo && typeof nodo === 'object') Object.values(nodo).forEach(recorrer);
     };
     recorrer(masterPrices);
+    return precios;
+}
+
+/**
+ * Aborta si un precio visible no coincide con el de `masterPrices` en su ruta.
+ *
+ * Los artículos del blog no pasan por `pagesData` ni por el SSG: su HTML es estático,
+ * así que un precio escrito ahí es una copia que nadie vuelve a mirar.
+ * `guia-relajacion` es la página con más tráfico del blog —4.389 impresiones en el
+ * trimestre—, o sea que la copia que se queda vieja es justo la que más gente lee.
+ *
+ * Cada `data-precio` nombra su ruta en la lista maestra, así que aquí la comparación
+ * es exacta: o dice lo mismo, o el build nombra los dos valores.
+ */
+function checkPreciosVisibles() {
+    const ETIQUETA_RE = /<span[^>]*data-precio="([^"]+)"[^>]*>([^<]*)<\/span>/g;
+    const issues = [];
 
     forEachDistPage((relPath, html) => {
         for (const [, ruta, visible] of html.matchAll(ETIQUETA_RE)) {
-            const esperado = resolver(ruta);
+            const esperado = precioMaestro(ruta);
 
             if (typeof esperado !== 'string') {
                 issues.push(`${relPath} — data-precio="${ruta}" no existe en masterPrices`);
@@ -685,7 +681,30 @@ function checkPrecios() {
                 issues.push(`${relPath} — ${ruta}: dice "${visible.trim()}" y masterPrices tiene "${esperado}"`);
             }
         }
+    });
 
+    return issues;
+}
+
+/**
+ * Aborta si un `Offer` del JSON-LD publica un precio que ya no existe en la lista.
+ *
+ * En el marcado no hay ruta que seguir —el `Offer` solo trae el número—, así que
+ * esto es una comprobación de pertenencia, no de correspondencia: no verifica que
+ * cada servicio tenga el suyo, porque dos servicios pueden costar lo mismo. Lo que
+ * caza es el caso real: se sube una tarifa en `masterPrices` y el JSON-LD sigue
+ * anunciando la vieja, que ya no existe en ningún sitio.
+ *
+ * Con eso aparecieron los tres precios huérfanos que llevaban publicados desde antes:
+ * el `price: "0"` de maquillaje de novias —que declaraba el servicio como gratuito— y
+ * el corte y el arreglo de barba, que nunca llegaron a la lista maestra.
+ */
+function checkPreciosMarcado() {
+    const OFFER_PRICE_RE = /"price"\s*:\s*"(\d+)"/g;
+    const catalogo = catalogoDePrecios();
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
         for (const [, precio] of html.matchAll(OFFER_PRICE_RE)) {
             if (!catalogo.has(precio)) {
                 issues.push(`${relPath} — Offer con price "${precio}", que no está en masterPrices`);
@@ -778,9 +797,14 @@ async function runSSG() {
             motivo: 'manda la IP del visitante a un tercero que no está en la política de cookies, y antes de que haya aceptado nada.'
         },
         {
-            titulo: 'Precios publicados que no cuadran con masterPrices',
-            issues: checkPrecios(),
-            motivo: 'la página anuncia una tarifa que ya se cambió en masterPrices, y Google la publica en el fragmento: quien la lee llega al salón esperando ese precio.'
+            titulo: 'Precios visibles que no cuadran con masterPrices',
+            issues: checkPreciosVisibles(),
+            motivo: 'el artículo anuncia una tarifa que ya se cambió en la lista maestra, y quien la lee llega al salón esperando ese precio.'
+        },
+        {
+            titulo: 'Offers del JSON-LD con un precio que ya no existe',
+            issues: checkPreciosMarcado(),
+            motivo: 'ese número es el que Google publica en el fragmento de producto, donde se lee antes de entrar en la página.'
         },
         {
             titulo: 'Páginas que vuelven a cargar animate.css desde cdnjs',
