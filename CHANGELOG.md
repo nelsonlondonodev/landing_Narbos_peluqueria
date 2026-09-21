@@ -6,6 +6,17 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🚀 Cosecha SEO de Spa y Peluquería, y Saneamiento del `<head>` v2.8.39 (21 de septiembre de 2026)
+
+*   **Cosecha de la guía de spa**: Segundo CTA de WhatsApp a mitad del artículo con más tráfico del blog (4.389 impresiones), enlazado reorientado hacia `masajes-relajantes` —el mejor CTR del sitio, 4,11%— y tabla con las cuatro tarifas vigentes (`f1dba2f`).
+*   **Precios atados a `masterPrices`**: Los `Offer` del catálogo de masajes pasan a declarar `price`, y dos guardas nuevas vigilan que ningún precio publicado —visible o en JSON-LD— se aleje de la lista maestra. Al encenderlas aparecieron tres precios huérfanos, incluido un `price: "0"` que declaraba gratuito el maquillaje de novias (`f1dba2f`, `18ca6f9`).
+*   **Reposicionamiento del hub de peluquería**: Title, meta y H1 sueltan barbería, uñas y spa, que lo hacían indistinguible de la home y lo dejaban en posición 14,11 con 0,78% de CTR. Recuperan cortes, color y balayage (`ee1b7ec`).
+*   **Open Graph y Twitter sincronizados**: 17 de 44 páginas publicaban un `og:title` distinto del `title`, la home incluida, que anunciaba en WhatsApp un título retirado meses atrás. El SSG los propaga ahora desde el title final (`c3bf513`).
+*   **Dos páginas sin `<title>`**: `tratamientos-capilares` y `unas-acrilicas-gel` se publicaban mudas por usar claves equivocadas en `pagesData`. `checkTitles` corta el deploy ante un title vacío o repetido (`c3bf513`).
+*   **Versión**: `v2.8.39`.
+
+---
+
 ## 🚀 Sincronización de Reseñas Reales y Bump v2.8.38 (19 de septiembre de 2026)
 
 *   **Sincronización de Reseñas de Google**: Consulta exitosa a Google Places API sincronizando el total a 350 opiniones reales con calificación 5.0 y actualizando el marcado estructurado `aggregateRating` en `index.html`, `nosotros.html` y servicios (`20e01c8`).
