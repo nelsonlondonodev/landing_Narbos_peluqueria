@@ -84,6 +84,18 @@ const stripHtml = (html) => (html ? html.replace(/<[^>]*>?/gm, '') : '');
 /**
  * Inyecta Metadatos SEO.
  */
+/**
+ * Sustituye los tokens que una meta puede tomar de un dato que se sincroniza.
+ *
+ * `{{reviewCount}}` sale de `google-reviews.js`, que el build actualiza contra Google
+ * en cada corrida. Escribir «350 opiniones» a mano en `pagesData` habría creado otra
+ * copia que se queda vieja en silencio en cuanto entre la opinión 351, que es la misma
+ * deriva de la URL de WhatsApp en `ContactForm` y de los precios de las tarjetas.
+ */
+function resolverTokens(texto) {
+    return texto.replace(/\{\{reviewCount\}\}/g, String(googleReviews.userRatingCount));
+}
+
 function injectSEO(document, pageKey, pagePath) {
     const config = pagesData[pageKey];
     if (!config) return;
@@ -100,7 +112,7 @@ function injectSEO(document, pageKey, pagePath) {
         metaDesc.name = "description";
         document.head.appendChild(metaDesc);
     }
-    metaDesc.content = stripHtml(config.metaDescription || config.hero?.subtitle || '');
+    metaDesc.content = resolverTokens(stripHtml(config.metaDescription || config.hero?.subtitle || ''));
 
     // 3. Canonical Tag
     let canonical = document.querySelector('link[rel="canonical"]');
