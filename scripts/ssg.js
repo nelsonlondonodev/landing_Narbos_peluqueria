@@ -835,6 +835,33 @@ function checkMetadatosSociales() {
 }
 
 /**
+ * Aborta si una entrada de `pagesData` no declara `metaTitle` y `metaDescription`.
+ *
+ * `injectSEO` compone el title como `metaTitle || hero.title` y la description como
+ * `metaDescription || hero.subtitle`, así que una entrada sin esas claves publica su
+ * hero como metadatos de SEO sin que nadie lo vea: en la página se lee como el
+ * titular que es, y el fallo solo está en el fragmento de Google. Eran cuatro de
+ * veinte, y entre ellas el hub de barbería, que con 1.518 impresiones anunciaba «El
+ * espacio que mereces para cuidar tu imagen» —ni Chía, ni Cajicá, ni el servicio—.
+ *
+ * Es el mismo fallo que dejó a `tratamientos-capilares` sin `<title>`: entradas
+ * escritas con otra forma que el resto. `checkTitles` caza el title vacío una vez
+ * publicado; esta caza la causa antes, y cubre también la description, que nunca
+ * queda vacía porque el hero siempre tiene subtítulo.
+ */
+function checkMetadatosPagesData() {
+    return Object.entries(pagesData)
+        .filter(([, config]) => !config.metaTitle || !config.metaDescription)
+        .map(([clave, config]) => {
+            const faltan = [
+                !config.metaTitle && 'metaTitle',
+                !config.metaDescription && 'metaDescription'
+            ].filter(Boolean);
+            return `pagesData['${clave}'] — sin ${faltan.join(' ni ')}`;
+        });
+}
+
+/**
  * Imprime todas las guardas que fallaron y corta el deploy una sola vez.
  *
  * Antes cada una traía su propio bloque idéntico de seis líneas y su propio
@@ -914,6 +941,11 @@ async function runSSG() {
             titulo: 'Consulta a un servicio de geo-IP antes del consentimiento',
             issues: checkGeoIpLookup(),
             motivo: 'manda la IP del visitante a un tercero que no está en la política de cookies, y antes de que haya aceptado nada.'
+        },
+        {
+            titulo: 'Entradas de pagesData que publican su hero como metadatos',
+            issues: checkMetadatosPagesData(),
+            motivo: 'sin metaTitle y metaDescription el fragmento de Google lo escribe el hero, que está redactado para quien ya entró en la página.'
         },
         {
             titulo: 'Páginas sin las etiquetas de Open Graph o Twitter completas',

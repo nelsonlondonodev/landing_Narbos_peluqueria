@@ -208,6 +208,8 @@ export const pagesData = Object.freeze({
         ]
     },
     barberia: {
+         metaTitle: "Barbería en Chía y Cajicá | Cortes de Hombre y Barba - Narbo's",
+         metaDescription: "Barbería en Chía y Cajicá con zona exclusiva para hombres: cortes, degradados y fade, perfilado y ritual de barba con toalla caliente. Reserva por WhatsApp.",
          hero: {
             title: "Barbería exclusiva <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "El espacio que mereces para cuidar tu imagen.",
@@ -701,6 +703,8 @@ export const pagesData = Object.freeze({
         ]
     },
     'depilacion-corporal': {
+        metaTitle: "Depilación con cera en Chía y Cajicá | Narbo's Salón Spa",
+        metaDescription: "Depilación corporal con cera en Chía y Cajicá: piernas, axilas y bikini, con protocolo higiénico y cera de alta calidad. Reserva por WhatsApp.",
         hero: {
             title: "Depilación Corporal <span class=\"text-brand-green\">con Cera</span>",
             subtitle: "Experimenta la máxima suavidad con técnicas profesionales y productos de alta calidad para el cuidado de tu piel.",
@@ -758,6 +762,8 @@ export const pagesData = Object.freeze({
     },
     'cejas-y-pestanas': {
         galleryOptions: { isolateItems: true }, // Aísla cada item de la galería (comportamiento solicitado)
+        metaTitle: "Cejas y pestañas en Chía | Laminado, lifting y henna - Narbo's",
+        metaDescription: "Diseño de cejas y pestañas en Chía y Cajicá: laminado de cejas, henna, lifting y extensiones de pestañas. Reserva por WhatsApp.",
         hero: {
             title: "Cejas y <span class=\"text-brand-green\">Pestañas</span>",
             subtitle: "Tu mirada es tu carta de presentación. Diseños personalizados para realzar tu belleza natural con elegancia.",
@@ -1164,6 +1170,8 @@ export const pagesData = Object.freeze({
         ]
     },
     'barberia-cortes-hombre': {
+        metaTitle: "Cortes de hombre y arreglo de barba en Chía | Narbo's",
+        metaDescription: "Cortes de hombre en Chía y Cajicá: degradados y fade, corte a tijera, perfilado y ritual de barba con toalla caliente. Reserva por WhatsApp.",
         hero: {
             title: "Barbería y Estilismo <span class=\"text-brand-green\">Masculino</span>",
             subtitle: "Cortes modernos, barbas impecables y un ambiente diseñado para ti.",
