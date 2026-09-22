@@ -343,6 +343,25 @@ function sincronizarMetadatosSociales(document) {
     propagar('twitter:description', description);
 }
 
+/**
+ * Lleva el `<meta charset>` al principio del `<head>`.
+ *
+ * La especificación pide la declaración dentro de los primeros 1024 bytes: hasta ahí
+ * lee el navegador antes de decidir con qué codificación interpreta el documento, y
+ * si no la encuentra, adivina y reinicia el parseo. En diez páginas llegaba tarde
+ * —las dos legales en el byte 1268, maquillaje en 1075— porque el script de Clarity
+ * va arriba del `<head>` y lo empujaba hacia abajo. Lighthouse lo marcaba en el hub
+ * de peluquería, que estaba en el 1009, justo en el filo.
+ *
+ * Se mueve aquí y no en los 44 HTML a mano porque es una propiedad del documento
+ * publicado, no de cada fichero fuente.
+ */
+function adelantarCharset(document) {
+    const charset = document.querySelector('meta[charset]');
+    if (!charset || document.head.firstElementChild === charset) return;
+    document.head.insertBefore(charset, document.head.firstChild);
+}
+
 async function processPage(pageConfig) {
     const fullPath = path.join(DIST_DIR, pageConfig.path);
     if (!fs.existsSync(fullPath)) return;
@@ -376,6 +395,7 @@ async function processPage(pageConfig) {
     injectArticles(document, pageConfig.key, prefix);
     injectSEO(document, pageConfig.key, pageConfig.path);
     sincronizarMetadatosSociales(document);
+    adelantarCharset(document);
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
 
@@ -953,6 +973,30 @@ function checkCanonicalResuelve() {
 }
 
 /**
+ * Aborta si alguna página declara su codificación fuera de los primeros 1024 bytes.
+ *
+ * Es el límite que lee el navegador antes de decidir la codificación: más allá,
+ * adivina y reinicia el parseo del documento. `adelantarCharset` lo coloca el primero,
+ * así que esta guarda vigila que nada vuelva a colarse por delante —un script nuevo
+ * arriba del `<head>`, por ejemplo, que es justo como pasó con Clarity—.
+ */
+function checkCharsetTemprano() {
+    const LIMITE = 1024;
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
+        const pos = html.toLowerCase().indexOf('charset');
+        if (pos < 0) {
+            issues.push(`${relPath} — no declara charset`);
+        } else if (pos >= LIMITE) {
+            issues.push(`${relPath} — declara charset en el byte ${pos}, pasado el límite de ${LIMITE}`);
+        }
+    });
+
+    return issues;
+}
+
+/**
  * Imprime todas las guardas que fallaron y corta el deploy una sola vez.
  *
  * Antes cada una traía su propio bloque idéntico de seis líneas y su propio
@@ -1032,6 +1076,11 @@ async function runSSG() {
             titulo: 'Consulta a un servicio de geo-IP antes del consentimiento',
             issues: checkGeoIpLookup(),
             motivo: 'manda la IP del visitante a un tercero que no está en la política de cookies, y antes de que haya aceptado nada.'
+        },
+        {
+            titulo: 'Páginas que declaran su codificación demasiado tarde',
+            issues: checkCharsetTemprano(),
+            motivo: 'pasado el byte 1024 el navegador adivina la codificación y reinicia el parseo del documento.'
         },
         {
             titulo: 'Canónicas que apuntan a una URL inexistente',
