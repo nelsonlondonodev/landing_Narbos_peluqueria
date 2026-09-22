@@ -35,6 +35,14 @@ function generateSitemap() {
     allHtmlFiles.forEach(file => {
         if (file.includes('blog/articles/') || file.includes('legal/') || file === '404.html') return;
 
+        // Una página con `noindex` no va al sitemap: incluirla es pedirle a Google que
+        // indexe lo que la propia página le prohíbe indexar. `limpieza-facial` es un
+        // sello de redirección hacia `spa-facial-integral` —noindex, canónica y meta
+        // refresh— y llevaba meses anunciándose en el sitemap, que es la «Excluida por
+        // una etiqueta noindex» que reporta Search Console.
+        const html = fs.readFileSync(path.join(PROJECT_ROOT, file), 'utf8');
+        if (/<meta[^>]+name=["']robots["'][^>]+noindex/i.test(html)) return;
+
         const urlPath = normalizeUrlPath(file);
         const priority = priorityMap[file] || '0.8';
         const loc = `${BASE_URL}${urlPath}`;

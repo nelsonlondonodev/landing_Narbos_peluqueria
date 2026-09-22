@@ -874,6 +874,42 @@ function checkMetadatosPagesData() {
 }
 
 /**
+ * Aborta si el sitemap anuncia una URL que no se puede indexar.
+ *
+ * Son dos promesas contradictorias en la misma corrida: el sitemap dice «indexa esto»
+ * y la página responde `noindex`, o directamente no existe. `limpieza-facial` llevaba
+ * meses así —es un sello de redirección hacia `spa-facial-integral`, con noindex,
+ * canónica y meta refresh— y Search Console lo reportaba como «Excluida por una
+ * etiqueta noindex» sin que nadie atara el cabo.
+ *
+ * Se mira contra dist y con el mismo `resolveUrlToFile` que usan los breadcrumbs,
+ * porque lo que cuenta es lo que se publica, no lo que dice el generador.
+ */
+function checkSitemapIndexable() {
+    const sitemapPath = path.join(DIST_DIR, 'sitemap.xml');
+    if (!fs.existsSync(sitemapPath)) return ['no se generó dist/sitemap.xml'];
+
+    const xml = fs.readFileSync(sitemapPath, 'utf8');
+    const issues = [];
+
+    for (const [, loc] of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+        const fichero = resolveUrlToFile(loc);
+
+        if (!fs.existsSync(fichero)) {
+            issues.push(`${loc} — está en el sitemap y no existe en dist`);
+            continue;
+        }
+
+        const html = fs.readFileSync(fichero, 'utf8');
+        if (/<meta[^>]+name=["']robots["'][^>]+noindex/i.test(html)) {
+            issues.push(`${loc} — está en el sitemap y la página lleva noindex`);
+        }
+    }
+
+    return issues;
+}
+
+/**
  * Imprime todas las guardas que fallaron y corta el deploy una sola vez.
  *
  * Antes cada una traía su propio bloque idéntico de seis líneas y su propio
@@ -953,6 +989,11 @@ async function runSSG() {
             titulo: 'Consulta a un servicio de geo-IP antes del consentimiento',
             issues: checkGeoIpLookup(),
             motivo: 'manda la IP del visitante a un tercero que no está en la política de cookies, y antes de que haya aceptado nada.'
+        },
+        {
+            titulo: 'URLs del sitemap que no se pueden indexar',
+            issues: checkSitemapIndexable(),
+            motivo: 'pedirle a Google que indexe lo que la propia página le prohíbe gasta rastreo y ensucia el informe de cobertura.'
         },
         {
             titulo: 'Entradas de pagesData que publican su hero como metadatos',
