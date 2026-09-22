@@ -299,16 +299,27 @@ function sincronizarMetadatosSociales(document) {
     const title = document.querySelector('title')?.textContent?.trim();
     const description = document.querySelector('meta[name="description"]')?.content?.trim();
 
-    const propagar = (selector, atributo, valor) => {
+    // Si la etiqueta no existe se crea. Saltársela en silencio era el mismo fallo en
+    // pequeño: `nosotros` y `contacto` se publicaban sin bloque de Twitter y la
+    // sincronización pasaba por encima sin decir nada. Estas cuatro las compone el SSG
+    // desde el title y la description finales, así que puede escribirlas de cero; las
+    // que no puede inventarse —url, image y el tipo de tarjeta— las vigila
+    // `checkMetadatosSociales`.
+    const propagar = (propiedad, valor) => {
         if (!valor) return;
-        const etiqueta = document.querySelector(selector);
-        if (etiqueta) etiqueta.content = valor;
+        let etiqueta = document.querySelector(`meta[property="${propiedad}"]`);
+        if (!etiqueta) {
+            etiqueta = document.createElement('meta');
+            etiqueta.setAttribute('property', propiedad);
+            document.head.appendChild(etiqueta);
+        }
+        etiqueta.content = valor;
     };
 
-    propagar('meta[property="og:title"]', 'content', title);
-    propagar('meta[property="twitter:title"]', 'content', title);
-    propagar('meta[property="og:description"]', 'content', description);
-    propagar('meta[property="twitter:description"]', 'content', description);
+    propagar('og:title', title);
+    propagar('twitter:title', title);
+    propagar('og:description', description);
+    propagar('twitter:description', description);
 }
 
 async function processPage(pageConfig) {
@@ -789,6 +800,41 @@ function checkTitles() {
 }
 
 /**
+ * Aborta si una página indexable se publica sin sus etiquetas de Open Graph o Twitter.
+ *
+ * `sincronizarMetadatosSociales` compone og:title, og:description y sus dos gemelas de
+ * Twitter desde el title y la description finales, pero el resto —la url canónica, la
+ * imagen y el tipo de tarjeta— vive en el HTML de cada página y el SSG no puede
+ * inventárselo. Nadie lo vigilaba: `nosotros` y `contacto` llevaban publicándose sin
+ * bloque de Twitter entero, y al no tener `twitter:card` se comparten con miniatura
+ * pequeña en vez de imagen grande. En la página no se nota; solo al pegar el enlace.
+ *
+ * Las mismas exentas que `checkTitles`: las legales y el 404 no se comparten.
+ */
+function checkMetadatosSociales() {
+    const EXENTAS = /^(404\.html|legal\/)/;
+    const REQUERIDAS = [
+        'og:title', 'og:description', 'og:image', 'og:url',
+        'twitter:card', 'twitter:title', 'twitter:description', 'twitter:image'
+    ];
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
+        if (EXENTAS.test(relPath)) return;
+
+        const faltan = REQUERIDAS.filter(
+            propiedad => !new RegExp(`property=["']${propiedad}["']`).test(html)
+        );
+
+        if (faltan.length) {
+            issues.push(`${relPath} — sin ${faltan.join(', ')}`);
+        }
+    });
+
+    return issues;
+}
+
+/**
  * Imprime todas las guardas que fallaron y corta el deploy una sola vez.
  *
  * Antes cada una traía su propio bloque idéntico de seis líneas y su propio
@@ -868,6 +914,11 @@ async function runSSG() {
             titulo: 'Consulta a un servicio de geo-IP antes del consentimiento',
             issues: checkGeoIpLookup(),
             motivo: 'manda la IP del visitante a un tercero que no está en la política de cookies, y antes de que haya aceptado nada.'
+        },
+        {
+            titulo: 'Páginas sin las etiquetas de Open Graph o Twitter completas',
+            issues: checkMetadatosSociales(),
+            motivo: 'el enlace se comparte sin imagen grande ni tarjeta, y WhatsApp es el canal por el que se reserva.'
         },
         {
             titulo: 'Páginas sin title o con el title repetido',
