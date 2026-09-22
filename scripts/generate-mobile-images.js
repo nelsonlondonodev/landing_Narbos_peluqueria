@@ -42,14 +42,6 @@ const IMAGES_TO_OPTIMIZE = [
         dest: 'images/pages/peluqueria/cortes-de-pelo-profesionales-chia-mobile.webp'
     },
     {
-        src: 'images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp',
-        dest: 'images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos-mobile.webp'
-    },
-    {
-        src: 'images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp',
-        dest: 'images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia-mobile.webp'
-    },
-    {
         src: 'images/pages/estetica/limpieza-facial-profunda-spa-chia.webp',
         dest: 'images/pages/estetica/limpieza-facial-profunda-spa-chia-mobile.webp'
     },
@@ -137,6 +129,19 @@ function optimizeImage({ src, dest, width = DEFAULT_WIDTH }) {
 
     if (!fs.existsSync(src)) {
         console.error(`⚠️ Error: El archivo de origen no existe: ${src}`);
+        return;
+    }
+
+    // `sips --resampleWidth` no comprueba el tamaño de origen: si la imagen ya es más
+    // estrecha que el objetivo, la agranda. Así nacieron dos variantes «móviles» que
+    // pesaban más que su original —una de 676x1200 convertida en 768x1363, 73 KB -> 74 KB—
+    // y que, de haberse cableado, habrían empeorado justo lo que venían a mejorar.
+    const anchoOriginal = Number(
+        (execSync(`sips -g pixelWidth "${src}"`, { encoding: 'utf8' }).match(/pixelWidth:\s*(\d+)/) || [])[1]
+    );
+
+    if (anchoOriginal && anchoOriginal <= width) {
+        console.warn(`⏭️  Se omite: el original mide ${anchoOriginal}px de ancho, ya por debajo de los ${width}px objetivo.`);
         return;
     }
 
