@@ -388,6 +388,42 @@ function ordenarHead(document) {
     }
 }
 
+/**
+ * Precarga el logo de la cabecera.
+ *
+ * En `cortar-cabello-crecimiento-rapido-mitos-chia` el elemento LCP resultó ser el
+ * logo, no el hero: 280x56 y 8 KB, porque en móvil no hay nada más grande en la
+ * primera pantalla. Por eso cablear la variante móvil de su hero no movió la
+ * puntuación —se estaba optimizando una imagen que el navegador ni siquiera
+ * esperaba—. El logo no tenía preload, así que lo descubría el parser al llegar a la
+ * etiqueta, ya después del CSS: 380 ms de retraso antes de empezar a pedirlo.
+ *
+ * Es la única imagen presente y visible en las 47 páginas, así que precargarla sale
+ * barato y sirve en todas. Va sin `fetchpriority` a propósito: donde el LCP sí es el
+ * hero, el suyo lleva prioridad alta y no conviene ponerle un competidor.
+ *
+ * El `src` se copia tal cual del `<img>` para que la ruta relativa siga siendo válida
+ * a cualquier profundidad.
+ */
+function precargarLogo(document) {
+    const logo = document.querySelector('header img[src*="logo_narbos"]')
+        || document.querySelector('img[src*="logo_narbos"]');
+
+    const href = logo?.getAttribute('src');
+    if (!href) return;
+
+    const yaEsta = [...document.querySelectorAll('link[rel="preload"]')]
+        .some(l => l.getAttribute('href') === href);
+    if (yaEsta) return;
+
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'preload');
+    link.setAttribute('as', 'image');
+    link.setAttribute('href', href);
+    link.setAttribute('type', 'image/webp');
+    document.head.appendChild(link);
+}
+
 async function processPage(pageConfig) {
     const fullPath = path.join(DIST_DIR, pageConfig.path);
     if (!fs.existsSync(fullPath)) return;
@@ -421,6 +457,7 @@ async function processPage(pageConfig) {
     injectArticles(document, pageConfig.key, prefix);
     injectSEO(document, pageConfig.key, pageConfig.path);
     sincronizarMetadatosSociales(document);
+    precargarLogo(document);
     ordenarHead(document);
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
