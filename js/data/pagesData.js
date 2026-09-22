@@ -351,7 +351,6 @@ export const pagesData = Object.freeze({
             title: "Balayage y Mechas en Chía: Expertos en <span class=\"text-brand-green\">Iluminación</span>",
             subtitle: "Técnicas avanzadas de aclaración, babylights y contornos para un rubio espectacular.",
             imageSrc: "images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
-            imageSrcMobile: "images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos-mobile.webp",
             imageAlt: "Diseño de balayage profesional en Narbo's Salon"
         },
         metaTitle: "Balayage y Mechas en Chía | Especialistas en Rubios | Narbo's",
@@ -495,7 +494,6 @@ export const pagesData = Object.freeze({
             title: "Color y Tinturas en Chía: Cobertura y <span class=\"text-brand-green\">Brillo</span>",
             subtitle: "Expertos en color global, retoque de raíz y cubrimiento total de canas con marcas premium.",
             imageSrc: "images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp",
-            imageSrcMobile: "images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia-mobile.webp",
             imageAlt: "Servicio de coloración profesional en Narbo's"
         },
         metaTitle: "Coloración y Tinturas en Chía | Cubrimiento de Canas | Narbo's",
