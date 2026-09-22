@@ -1,12 +1,9 @@
-# Sonda de diagnóstico, no despliega nada.
+# Sonda de diagnóstico, no despliega nada. Se dispara solo en `ci-ssh-debug`.
 #
-# El deploy del 22-sep-2026 falló con exit 255 tras 134 s en el paso de rsync,
-# mientras la misma llave autentica en segundos desde el Mac. Colgarse dos minutos
-# es descarte de paquetes, no rechazo de credencial, pero hacía falta medirlo desde
-# el propio runner en vez de deducirlo.
-#
-# No usa la llave ni toca el servidor: solo abre sockets y mira quién responde.
-# Se dispara únicamente en la rama `ci-ssh-debug`, así que `main` no se entera.
+# La primera versión midió mal: pedía 120 bytes del banner cuando un banner SSH son
+# unos 40, así que se quedaba esperando y parecía que el servidor callaba. Lo que sí
+# dejó claro es que el TCP entra en 0 s, o sea que los 134 s del deploy no son de red.
+# Esta versión va al handshake y a la autenticación, que es donde queda el problema.
 name: Diagnóstico SSH
 
 on:
@@ -17,41 +14,38 @@ jobs:
   sonda:
     runs-on: ubuntu-latest
     steps:
-      - name: IP pública del runner
+      - name: Entorno del runner
         continue-on-error: true
         run: |
-          echo "IP del runner: $(curl -s --max-time 10 https://api.ipify.org || echo desconocida)"
-
-      - name: Cliente SSH y sistema de la imagen
-        continue-on-error: true
-        run: |
+          echo "IP: $(curl -s --max-time 10 https://api.ipify.org || echo desconocida)"
           ssh -V 2>&1
           grep PRETTY_NAME /etc/os-release
 
-      # Si el 65002 se cuelga y el 443 responde, el filtrado es del puerto SSH
-      # (fail2ban o firewall). Si no responde ninguno, nos bloquean el host entero.
-      - name: Puerto 65002 (SSH)
+      - name: Banner del servidor (lectura de una línea)
         continue-on-error: true
         run: |
           ini=$(date +%s)
-          if timeout 25 bash -c 'cat < /dev/null > /dev/tcp/178.16.128.189/65002' 2>/dev/null; then
-            echo "65002: ACEPTA en $(( $(date +%s) - ini ))s"
+          linea=$(timeout 15 bash -c '
+            exec 3<>/dev/tcp/178.16.128.189/65002
+            IFS= read -r -t 10 l <&3 && echo "$l"
+          ' 2>/dev/null)
+          if [ -n "$linea" ]; then
+            echo "BANNER: $linea   (en $(( $(date +%s) - ini ))s)"
           else
-            echo "65002: NO CONECTA tras $(( $(date +%s) - ini ))s"
+            echo "SIN BANNER tras $(( $(date +%s) - ini ))s: el servidor acepta TCP y no saluda"
           fi
 
-      - name: Puerto 443 (control)
+      - name: Handshake y autenticación con la llave real
         continue-on-error: true
         run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY_B64 }}" | base64 -d > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "--- huella de la llave (no expone la privada) ---"
+          ssh-keygen -lf ~/.ssh/deploy_key || echo "la llave no se pudo leer"
+          echo "--- ssh -vvv, acotado a 60 s ---"
           ini=$(date +%s)
-          if timeout 25 bash -c 'cat < /dev/null > /dev/tcp/178.16.128.189/443' 2>/dev/null; then
-            echo "443: ACEPTA en $(( $(date +%s) - ini ))s"
-          else
-            echo "443: NO CONECTA tras $(( $(date +%s) - ini ))s"
-          fi
-
-      - name: Banner SSH, sin autenticar
-        continue-on-error: true
-        run: |
-          timeout 25 bash -c 'exec 3<>/dev/tcp/178.16.128.189/65002; head -c 120 <&3' 2>/dev/null \
-            || echo "sin banner: la sesión no llegó a establecerse"
+          timeout 60 ssh -vvv -i ~/.ssh/deploy_key -p 65002 \
+            -o StrictHostKeyChecking=no -o BatchMode=yes -o ConnectTimeout=20 \
+            u749405456@178.16.128.189 'echo REMOTO-OK' 2>&1 | tail -60
+          echo "--- terminó en $(( $(date +%s) - ini ))s ---"
