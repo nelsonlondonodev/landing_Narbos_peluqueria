@@ -38,6 +38,13 @@
     ExpiresByType video/mp4 "access plus 1 year"
     # Fuentes autohospedadas: sin esto caian en el default de 1 mes.
     ExpiresByType font/woff2 "access plus 1 year"
+    # Lo que leen los rastreadores se reescribe en cada deploy, asi que tambien caia
+    # en el default de 1 mes: tras publicar la version 2.8.40, la CDN de Hostinger
+    # siguio sirviendo el sitemap del dia anterior, con una URL que ya habiamos
+    # retirado. Un sitemap cacheado 30 dias es un sitemap que Google lee viejo.
+    ExpiresByType application/xml "access plus 0 seconds"
+    ExpiresByType text/xml "access plus 0 seconds"
+    ExpiresByType text/plain "access plus 0 seconds"
 </IfModule>
 
 <IfModule mod_headers.c>
