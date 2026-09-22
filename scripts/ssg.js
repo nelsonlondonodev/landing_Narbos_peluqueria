@@ -122,12 +122,21 @@ function injectSEO(document, pageKey, pagePath) {
         document.head.appendChild(canonical);
     }
     
-    let cleanPath = pagePath.replace('index.html', '').replace('.html', '');
-    if (cleanPath === '' || cleanPath === '/') cleanPath = '';
-    else if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
-    if (cleanPath && !cleanPath.endsWith('/')) cleanPath += '/';
-    
-    canonical.href = `https://narbossalon.com${cleanPath}`;
+    // La barra final solo la llevan las páginas que son un directorio de verdad: los
+    // hubs y el blog, que se sirven desde su `index.html`. Una hoja se sirve sin ella
+    // —`/contacto` existe y `/contacto/` no—, y ponérsela a todas apuntaba la canónica,
+    // que es la señal más fuerte que tiene Google para elegir qué indexar, a una URL
+    // que el servidor no sabe resolver. Son los 14 errores 5xx que Search Console
+    // reporta sin moverse desde julio, y encima la propia página se contradecía: su
+    // `og:url` y el sitemap ya decían la forma buena.
+    const esDirectorio = /(^|\/)index\.html$/.test(pagePath);
+
+    let cleanPath = pagePath.replace(/(^|\/)index\.html$/, '$1').replace(/\.html$/, '');
+    if (cleanPath === '/' ) cleanPath = '';
+    else if (cleanPath && !cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+    if (esDirectorio && cleanPath && !cleanPath.endsWith('/')) cleanPath += '/';
+
+    canonical.href = `${SITE_ORIGIN}${cleanPath}`;
 }
 
 /**
@@ -910,6 +919,40 @@ function checkSitemapIndexable() {
 }
 
 /**
+ * Aborta si una canónica apunta a una URL que no existe en dist.
+ *
+ * La canónica es la señal con la que Google decide qué URL indexar, así que apuntarla
+ * a algo que el servidor no sirve es el peor sitio donde tener este fallo. Pasó:
+ * `injectSEO` le ponía barra final a todas las rutas y las 14 páginas hoja acabaron
+ * declarando `/contacto/` en vez de `/contacto`. Search Console lo reportó durante
+ * tres meses como «Error de servidor (5xx)» y nadie ató el cabo, porque el síntoma
+ * sale en el informe de cobertura y la causa estaba en el generador.
+ */
+function checkCanonicalResuelve() {
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
+        const m = html.match(/rel=["\']canonical["\'][^>]*href=["\']([^"\']+)["\']/i);
+        if (!m) return;
+
+        const url = m[1];
+        if (!url.startsWith(SITE_ORIGIN)) {
+            issues.push(`${relPath} — canónica fuera del sitio: ${url}`);
+            return;
+        }
+
+        // La raíz sin barra es válida: la sirve el index.html de dist.
+        if (url === SITE_ORIGIN || url === `${SITE_ORIGIN}/`) return;
+
+        if (!fs.existsSync(resolveUrlToFile(url))) {
+            issues.push(`${relPath} — canónica a ${url}, que no existe en dist`);
+        }
+    });
+
+    return issues;
+}
+
+/**
  * Imprime todas las guardas que fallaron y corta el deploy una sola vez.
  *
  * Antes cada una traía su propio bloque idéntico de seis líneas y su propio
@@ -989,6 +1032,11 @@ async function runSSG() {
             titulo: 'Consulta a un servicio de geo-IP antes del consentimiento',
             issues: checkGeoIpLookup(),
             motivo: 'manda la IP del visitante a un tercero que no está en la política de cookies, y antes de que haya aceptado nada.'
+        },
+        {
+            titulo: 'Canónicas que apuntan a una URL inexistente',
+            issues: checkCanonicalResuelve(),
+            motivo: 'la canónica decide qué URL indexa Google; si esa URL no se sirve, la página compite consigo misma o desaparece.'
         },
         {
             titulo: 'URLs del sitemap que no se pueden indexar',
