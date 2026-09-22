@@ -1,0 +1,57 @@
+# Sonda de diagnóstico, no despliega nada.
+#
+# El deploy del 22-sep-2026 falló con exit 255 tras 134 s en el paso de rsync,
+# mientras la misma llave autentica en segundos desde el Mac. Colgarse dos minutos
+# es descarte de paquetes, no rechazo de credencial, pero hacía falta medirlo desde
+# el propio runner en vez de deducirlo.
+#
+# No usa la llave ni toca el servidor: solo abre sockets y mira quién responde.
+# Se dispara únicamente en la rama `ci-ssh-debug`, así que `main` no se entera.
+name: Diagnóstico SSH
+
+on:
+  push:
+    branches: [ci-ssh-debug]
+
+jobs:
+  sonda:
+    runs-on: ubuntu-latest
+    steps:
+      - name: IP pública del runner
+        continue-on-error: true
+        run: |
+          echo "IP del runner: $(curl -s --max-time 10 https://api.ipify.org || echo desconocida)"
+
+      - name: Cliente SSH y sistema de la imagen
+        continue-on-error: true
+        run: |
+          ssh -V 2>&1
+          grep PRETTY_NAME /etc/os-release
+
+      # Si el 65002 se cuelga y el 443 responde, el filtrado es del puerto SSH
+      # (fail2ban o firewall). Si no responde ninguno, nos bloquean el host entero.
+      - name: Puerto 65002 (SSH)
+        continue-on-error: true
+        run: |
+          ini=$(date +%s)
+          if timeout 25 bash -c 'cat < /dev/null > /dev/tcp/178.16.128.189/65002' 2>/dev/null; then
+            echo "65002: ACEPTA en $(( $(date +%s) - ini ))s"
+          else
+            echo "65002: NO CONECTA tras $(( $(date +%s) - ini ))s"
+          fi
+
+      - name: Puerto 443 (control)
+        continue-on-error: true
+        run: |
+          ini=$(date +%s)
+          if timeout 25 bash -c 'cat < /dev/null > /dev/tcp/178.16.128.189/443' 2>/dev/null; then
+            echo "443: ACEPTA en $(( $(date +%s) - ini ))s"
+          else
+            echo "443: NO CONECTA tras $(( $(date +%s) - ini ))s"
+          fi
+
+      - name: Banner SSH, sin autenticar
+        continue-on-error: true
+        run: |
+          timeout 25 bash -c 'exec 3<>/dev/tcp/178.16.128.189/65002; head -c 120 <&3' 2>/dev/null \
+            || echo "sin banner: la sesión no llegó a establecerse"
