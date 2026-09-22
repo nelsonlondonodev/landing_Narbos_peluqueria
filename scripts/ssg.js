@@ -344,22 +344,48 @@ function sincronizarMetadatosSociales(document) {
 }
 
 /**
- * Lleva el `<meta charset>` al principio del `<head>`.
+ * Ordena el `<head>` por lo que el navegador necesita antes.
  *
- * La especificación pide la declaración dentro de los primeros 1024 bytes: hasta ahí
- * lee el navegador antes de decidir con qué codificación interpreta el documento, y
- * si no la encuentra, adivina y reinicia el parseo. En diez páginas llegaba tarde
- * —las dos legales en el byte 1268, maquillaje en 1075— porque el script de Clarity
- * va arriba del `<head>` y lo empujaba hacia abajo. Lighthouse lo marcaba en el hub
- * de peluquería, que estaba en el 1009, justo en el filo.
+ * Tres movimientos, de más a menos urgente:
  *
- * Se mueve aquí y no en los 44 HTML a mano porque es una propiedad del documento
- * publicado, no de cada fichero fuente.
+ * 1. **El `<meta charset>` primero.** La especificación pide la declaración dentro de
+ *    los primeros 1024 bytes: hasta ahí lee el navegador antes de decidir con qué
+ *    codificación interpreta el documento, y si no la encuentra, adivina y reinicia el
+ *    parseo. En diez páginas llegaba tarde —las dos legales en el byte 1268— porque el
+ *    script de Clarity va arriba del `<head>` y lo empujaba hacia abajo.
+ *
+ * 2. **Los `preload` justo detrás.** En `balayage-mechas` la pista de la imagen LCP se
+ *    declaraba en el byte 7.898, después de la hoja de estilos que bloquea el
+ *    renderizado y con casi 5 KB de JSON-LD por delante. En el grafo de dependencias
+ *    que simula Lighthouse eso encola la imagen por detrás del CSS, y ahí están los
+ *    380 ms de «retraso de carga del recurso» que marcaba su desglose de LCP. Una
+ *    pista crítica declarada después de lo que bloquea deja de ser una pista.
+ *
+ * 3. **El JSON-LD al final.** Son 4.975 bytes que ningún navegador necesita para
+ *    pintar y que separaban el charset de los preloads. Google lo lee igual esté donde
+ *    esté dentro del documento.
+ *
+ * Va en el SSG y no en los 44 HTML a mano porque es una propiedad del documento
+ * publicado, no de cada fichero fuente, y así cubre los que se escriban mañana.
  */
-function adelantarCharset(document) {
-    const charset = document.querySelector('meta[charset]');
-    if (!charset || document.head.firstElementChild === charset) return;
-    document.head.insertBefore(charset, document.head.firstChild);
+function ordenarHead(document) {
+    const head = document.head;
+
+    const charset = head.querySelector('meta[charset]');
+    if (charset && head.firstElementChild !== charset) {
+        head.insertBefore(charset, head.firstChild);
+    }
+
+    // Se recolocan en su orden original, encadenando cada uno tras el anterior.
+    let ancla = charset;
+    for (const pista of head.querySelectorAll('link[rel="preload"]')) {
+        head.insertBefore(pista, ancla ? ancla.nextSibling : head.firstChild);
+        ancla = pista;
+    }
+
+    for (const bloque of head.querySelectorAll('script[type="application/ld+json"]')) {
+        head.appendChild(bloque);
+    }
 }
 
 async function processPage(pageConfig) {
@@ -395,7 +421,7 @@ async function processPage(pageConfig) {
     injectArticles(document, pageConfig.key, prefix);
     injectSEO(document, pageConfig.key, pageConfig.path);
     sincronizarMetadatosSociales(document);
-    adelantarCharset(document);
+    ordenarHead(document);
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
 
@@ -997,6 +1023,38 @@ function checkCharsetTemprano() {
 }
 
 /**
+ * Aborta si una pista de `preload` se declara después de lo que bloquea el renderizado.
+ *
+ * Es la condición que hace útil un `preload`: llegar antes que la hoja de estilos, para
+ * que la petición no quede encolada tras ella en el grafo de dependencias. Cuando se
+ * invierte, el preload sigue ahí y parece correcto, pero ya no adelanta nada: es como
+ * estaba `balayage-mechas`, con la pista de su imagen LCP en el byte 7.898 y el CSS en
+ * el 7.538.
+ *
+ * `ordenarHead` lo garantiza; esta guarda vigila que nada vuelva a colarse en medio.
+ */
+function checkPreloadsAntesDelCss() {
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
+        const head = (html.match(/<head[\s\S]*?<\/head>/i) || [''])[0];
+        if (!head) return;
+
+        const css = head.search(/<link[^>]*rel=["']stylesheet["'][^>]*>/i);
+        if (css < 0) return;
+
+        for (const m of head.matchAll(/<link[^>]*rel=["']preload["'][^>]*>/gi)) {
+            if (m.index > css) {
+                const href = (m[0].match(/href=["']([^"']+)["']/i) || [, '?'])[1];
+                issues.push(`${relPath} — preload de ${href.split('/').pop()} declarado después de la hoja de estilos`);
+            }
+        }
+    });
+
+    return issues;
+}
+
+/**
  * Imprime todas las guardas que fallaron y corta el deploy una sola vez.
  *
  * Antes cada una traía su propio bloque idéntico de seis líneas y su propio
@@ -1076,6 +1134,11 @@ async function runSSG() {
             titulo: 'Consulta a un servicio de geo-IP antes del consentimiento',
             issues: checkGeoIpLookup(),
             motivo: 'manda la IP del visitante a un tercero que no está en la política de cookies, y antes de que haya aceptado nada.'
+        },
+        {
+            titulo: 'Preloads declarados después de lo que bloquea el renderizado',
+            issues: checkPreloadsAntesDelCss(),
+            motivo: 'un preload que llega después del CSS no adelanta nada: la petición queda encolada igual.'
         },
         {
             titulo: 'Páginas que declaran su codificación demasiado tarde',
