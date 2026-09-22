@@ -268,10 +268,10 @@ export const pagesData = Object.freeze({
         ]
     },
     'nosotros': {
-        metaTitle: "Sobre Nosotros | Peluquería, Salón y Spa en Chía - Narbo's",
-        metaDescription: "Conoce la historia de Narbo's, tu peluquería y spa en Chía con más de 11 años de experiencia. ¡Ven y vive una experiencia de belleza única!",
+        metaTitle: "Sobre Narbo's Salón Spa | Nuestro equipo y nuestra historia",
+        metaDescription: "Narbo's abrió en Chía en 2013. Conoce al equipo, nuestra forma de trabajar y las {{reviewCount}} opiniones de Google que nos respaldan.",
         hero: {
-           title: "Nuestra Historia | Peluquería y Spa <span class=\"text-brand-green\">en Chía</span>",
+           title: "Nuestra Historia <span class=\"text-brand-green\">desde 2013</span>",
            subtitle: "Pasión por la belleza y el bienestar desde 2013.",
            imageSrc: "images/nosotros/narbos-team-hero.webp",
            imageSrcMobile: "images/nosotros/narbos-team-hero-mobile.webp",
@@ -284,10 +284,10 @@ export const pagesData = Object.freeze({
         heroBadges: { status: false }
     },
     'contacto': {
-        metaTitle: "Contacto | Peluquería y Spa en Chía y Cajicá | Narbo's",
-        metaDescription: "Conoce nuestros horarios y visítanos en nuestro salón de belleza y spa en Chía, muy cerca de Cajicá. ¡Agenda tu cita hoy mismo!",
+        metaTitle: "Contacto y horarios | Narbo's Salón Spa en Chía",
+        metaDescription: "Horarios, dirección y WhatsApp de Narbo's: Bajos del hotel Ibis, Edificio Quantum, Km 2 vía Chía - Cajicá. Parqueadero privado y atención con cita previa.",
         hero: {
-            title: "Peluquería y Spa en Chía | <span class=\"text-brand-green\">Contacto</span>",
+            title: "Contacto y <span class=\"text-brand-green\">horarios</span>",
             subtitle: "Conoce nuestros horarios de atención y visítanos en nuestro salón de belleza muy cerca de Cajicá. ¡Agenda tu cita hoy!",
             imageSrc: "images/blog/foto_fachada.webp",
             imageSrcMobile: "images/blog/foto_fachada-mobile.webp",
