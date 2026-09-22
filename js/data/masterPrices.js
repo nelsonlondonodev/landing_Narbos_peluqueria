@@ -21,6 +21,9 @@ export const masterPrices = Object.freeze({
             poligel: '$160.000',
             acrilicas: '$160.000',
             pressOn: '$130.000' // Con aplicación semipermanente
+        },
+        disenos: {
+            nailArt: '$5.000' // Desde, por uña
         }
     },
     hair: {

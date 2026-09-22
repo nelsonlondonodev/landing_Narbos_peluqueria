@@ -84,6 +84,18 @@ const stripHtml = (html) => (html ? html.replace(/<[^>]*>?/gm, '') : '');
 /**
  * Inyecta Metadatos SEO.
  */
+/**
+ * Sustituye los tokens que una meta puede tomar de un dato que se sincroniza.
+ *
+ * `{{reviewCount}}` sale de `google-reviews.js`, que el build actualiza contra Google
+ * en cada corrida. Escribir «350 opiniones» a mano en `pagesData` habría creado otra
+ * copia que se queda vieja en silencio en cuanto entre la opinión 351, que es la misma
+ * deriva de la URL de WhatsApp en `ContactForm` y de los precios de las tarjetas.
+ */
+function resolverTokens(texto) {
+    return texto.replace(/\{\{reviewCount\}\}/g, String(googleReviews.userRatingCount));
+}
+
 function injectSEO(document, pageKey, pagePath) {
     const config = pagesData[pageKey];
     if (!config) return;
@@ -100,7 +112,7 @@ function injectSEO(document, pageKey, pagePath) {
         metaDesc.name = "description";
         document.head.appendChild(metaDesc);
     }
-    metaDesc.content = stripHtml(config.metaDescription || config.hero?.subtitle || '');
+    metaDesc.content = resolverTokens(stripHtml(config.metaDescription || config.hero?.subtitle || ''));
 
     // 3. Canonical Tag
     let canonical = document.querySelector('link[rel="canonical"]');
@@ -110,12 +122,21 @@ function injectSEO(document, pageKey, pagePath) {
         document.head.appendChild(canonical);
     }
     
-    let cleanPath = pagePath.replace('index.html', '').replace('.html', '');
-    if (cleanPath === '' || cleanPath === '/') cleanPath = '';
-    else if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
-    if (cleanPath && !cleanPath.endsWith('/')) cleanPath += '/';
-    
-    canonical.href = `https://narbossalon.com${cleanPath}`;
+    // La barra final solo la llevan las páginas que son un directorio de verdad: los
+    // hubs y el blog, que se sirven desde su `index.html`. Una hoja se sirve sin ella
+    // —`/contacto` existe y `/contacto/` no—, y ponérsela a todas apuntaba la canónica,
+    // que es la señal más fuerte que tiene Google para elegir qué indexar, a una URL
+    // que el servidor no sabe resolver. Son los 14 errores 5xx que Search Console
+    // reporta sin moverse desde julio, y encima la propia página se contradecía: su
+    // `og:url` y el sitemap ya decían la forma buena.
+    const esDirectorio = /(^|\/)index\.html$/.test(pagePath);
+
+    let cleanPath = pagePath.replace(/(^|\/)index\.html$/, '$1').replace(/\.html$/, '');
+    if (cleanPath === '/' ) cleanPath = '';
+    else if (cleanPath && !cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
+    if (esDirectorio && cleanPath && !cleanPath.endsWith('/')) cleanPath += '/';
+
+    canonical.href = `${SITE_ORIGIN}${cleanPath}`;
 }
 
 /**
@@ -299,16 +320,27 @@ function sincronizarMetadatosSociales(document) {
     const title = document.querySelector('title')?.textContent?.trim();
     const description = document.querySelector('meta[name="description"]')?.content?.trim();
 
-    const propagar = (selector, atributo, valor) => {
+    // Si la etiqueta no existe se crea. Saltársela en silencio era el mismo fallo en
+    // pequeño: `nosotros` y `contacto` se publicaban sin bloque de Twitter y la
+    // sincronización pasaba por encima sin decir nada. Estas cuatro las compone el SSG
+    // desde el title y la description finales, así que puede escribirlas de cero; las
+    // que no puede inventarse —url, image y el tipo de tarjeta— las vigila
+    // `checkMetadatosSociales`.
+    const propagar = (propiedad, valor) => {
         if (!valor) return;
-        const etiqueta = document.querySelector(selector);
-        if (etiqueta) etiqueta.content = valor;
+        let etiqueta = document.querySelector(`meta[property="${propiedad}"]`);
+        if (!etiqueta) {
+            etiqueta = document.createElement('meta');
+            etiqueta.setAttribute('property', propiedad);
+            document.head.appendChild(etiqueta);
+        }
+        etiqueta.content = valor;
     };
 
-    propagar('meta[property="og:title"]', 'content', title);
-    propagar('meta[property="twitter:title"]', 'content', title);
-    propagar('meta[property="og:description"]', 'content', description);
-    propagar('meta[property="twitter:description"]', 'content', description);
+    propagar('og:title', title);
+    propagar('twitter:title', title);
+    propagar('og:description', description);
+    propagar('twitter:description', description);
 }
 
 async function processPage(pageConfig) {
@@ -789,6 +821,138 @@ function checkTitles() {
 }
 
 /**
+ * Aborta si una página indexable se publica sin sus etiquetas de Open Graph o Twitter.
+ *
+ * `sincronizarMetadatosSociales` compone og:title, og:description y sus dos gemelas de
+ * Twitter desde el title y la description finales, pero el resto —la url canónica, la
+ * imagen y el tipo de tarjeta— vive en el HTML de cada página y el SSG no puede
+ * inventárselo. Nadie lo vigilaba: `nosotros` y `contacto` llevaban publicándose sin
+ * bloque de Twitter entero, y al no tener `twitter:card` se comparten con miniatura
+ * pequeña en vez de imagen grande. En la página no se nota; solo al pegar el enlace.
+ *
+ * Las mismas exentas que `checkTitles`: las legales y el 404 no se comparten.
+ */
+function checkMetadatosSociales() {
+    const EXENTAS = /^(404\.html|legal\/)/;
+    const REQUERIDAS = [
+        'og:title', 'og:description', 'og:image', 'og:url',
+        'twitter:card', 'twitter:title', 'twitter:description', 'twitter:image'
+    ];
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
+        if (EXENTAS.test(relPath)) return;
+
+        const faltan = REQUERIDAS.filter(
+            propiedad => !new RegExp(`property=["']${propiedad}["']`).test(html)
+        );
+
+        if (faltan.length) {
+            issues.push(`${relPath} — sin ${faltan.join(', ')}`);
+        }
+    });
+
+    return issues;
+}
+
+/**
+ * Aborta si una entrada de `pagesData` no declara `metaTitle` y `metaDescription`.
+ *
+ * `injectSEO` compone el title como `metaTitle || hero.title` y la description como
+ * `metaDescription || hero.subtitle`, así que una entrada sin esas claves publica su
+ * hero como metadatos de SEO sin que nadie lo vea: en la página se lee como el
+ * titular que es, y el fallo solo está en el fragmento de Google. Eran cuatro de
+ * veinte, y entre ellas el hub de barbería, que con 1.518 impresiones anunciaba «El
+ * espacio que mereces para cuidar tu imagen» —ni Chía, ni Cajicá, ni el servicio—.
+ *
+ * Es el mismo fallo que dejó a `tratamientos-capilares` sin `<title>`: entradas
+ * escritas con otra forma que el resto. `checkTitles` caza el title vacío una vez
+ * publicado; esta caza la causa antes, y cubre también la description, que nunca
+ * queda vacía porque el hero siempre tiene subtítulo.
+ */
+function checkMetadatosPagesData() {
+    return Object.entries(pagesData)
+        .filter(([, config]) => !config.metaTitle || !config.metaDescription)
+        .map(([clave, config]) => {
+            const faltan = [
+                !config.metaTitle && 'metaTitle',
+                !config.metaDescription && 'metaDescription'
+            ].filter(Boolean);
+            return `pagesData['${clave}'] — sin ${faltan.join(' ni ')}`;
+        });
+}
+
+/**
+ * Aborta si el sitemap anuncia una URL que no se puede indexar.
+ *
+ * Son dos promesas contradictorias en la misma corrida: el sitemap dice «indexa esto»
+ * y la página responde `noindex`, o directamente no existe. `limpieza-facial` llevaba
+ * meses así —es un sello de redirección hacia `spa-facial-integral`, con noindex,
+ * canónica y meta refresh— y Search Console lo reportaba como «Excluida por una
+ * etiqueta noindex» sin que nadie atara el cabo.
+ *
+ * Se mira contra dist y con el mismo `resolveUrlToFile` que usan los breadcrumbs,
+ * porque lo que cuenta es lo que se publica, no lo que dice el generador.
+ */
+function checkSitemapIndexable() {
+    const sitemapPath = path.join(DIST_DIR, 'sitemap.xml');
+    if (!fs.existsSync(sitemapPath)) return ['no se generó dist/sitemap.xml'];
+
+    const xml = fs.readFileSync(sitemapPath, 'utf8');
+    const issues = [];
+
+    for (const [, loc] of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+        const fichero = resolveUrlToFile(loc);
+
+        if (!fs.existsSync(fichero)) {
+            issues.push(`${loc} — está en el sitemap y no existe en dist`);
+            continue;
+        }
+
+        const html = fs.readFileSync(fichero, 'utf8');
+        if (/<meta[^>]+name=["']robots["'][^>]+noindex/i.test(html)) {
+            issues.push(`${loc} — está en el sitemap y la página lleva noindex`);
+        }
+    }
+
+    return issues;
+}
+
+/**
+ * Aborta si una canónica apunta a una URL que no existe en dist.
+ *
+ * La canónica es la señal con la que Google decide qué URL indexar, así que apuntarla
+ * a algo que el servidor no sirve es el peor sitio donde tener este fallo. Pasó:
+ * `injectSEO` le ponía barra final a todas las rutas y las 14 páginas hoja acabaron
+ * declarando `/contacto/` en vez de `/contacto`. Search Console lo reportó durante
+ * tres meses como «Error de servidor (5xx)» y nadie ató el cabo, porque el síntoma
+ * sale en el informe de cobertura y la causa estaba en el generador.
+ */
+function checkCanonicalResuelve() {
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
+        const m = html.match(/rel=["\']canonical["\'][^>]*href=["\']([^"\']+)["\']/i);
+        if (!m) return;
+
+        const url = m[1];
+        if (!url.startsWith(SITE_ORIGIN)) {
+            issues.push(`${relPath} — canónica fuera del sitio: ${url}`);
+            return;
+        }
+
+        // La raíz sin barra es válida: la sirve el index.html de dist.
+        if (url === SITE_ORIGIN || url === `${SITE_ORIGIN}/`) return;
+
+        if (!fs.existsSync(resolveUrlToFile(url))) {
+            issues.push(`${relPath} — canónica a ${url}, que no existe en dist`);
+        }
+    });
+
+    return issues;
+}
+
+/**
  * Imprime todas las guardas que fallaron y corta el deploy una sola vez.
  *
  * Antes cada una traía su propio bloque idéntico de seis líneas y su propio
@@ -868,6 +1032,26 @@ async function runSSG() {
             titulo: 'Consulta a un servicio de geo-IP antes del consentimiento',
             issues: checkGeoIpLookup(),
             motivo: 'manda la IP del visitante a un tercero que no está en la política de cookies, y antes de que haya aceptado nada.'
+        },
+        {
+            titulo: 'Canónicas que apuntan a una URL inexistente',
+            issues: checkCanonicalResuelve(),
+            motivo: 'la canónica decide qué URL indexa Google; si esa URL no se sirve, la página compite consigo misma o desaparece.'
+        },
+        {
+            titulo: 'URLs del sitemap que no se pueden indexar',
+            issues: checkSitemapIndexable(),
+            motivo: 'pedirle a Google que indexe lo que la propia página le prohíbe gasta rastreo y ensucia el informe de cobertura.'
+        },
+        {
+            titulo: 'Entradas de pagesData que publican su hero como metadatos',
+            issues: checkMetadatosPagesData(),
+            motivo: 'sin metaTitle y metaDescription el fragmento de Google lo escribe el hero, que está redactado para quien ya entró en la página.'
+        },
+        {
+            titulo: 'Páginas sin las etiquetas de Open Graph o Twitter completas',
+            issues: checkMetadatosSociales(),
+            motivo: 'el enlace se comparte sin imagen grande ni tarjeta, y WhatsApp es el canal por el que se reserva.'
         },
         {
             titulo: 'Páginas sin title o con el title repetido',

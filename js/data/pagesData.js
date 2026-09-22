@@ -207,7 +207,9 @@ export const pagesData = Object.freeze({
             }
         ]
     },
-    barberia: {
+    'barberia': {
+         metaTitle: "Barbería en Chía y Cajicá | Cortes de Hombre y Barba - Narbo's",
+         metaDescription: "Barbería en Chía y Cajicá con zona exclusiva para hombres: cortes, degradados y fade, perfilado y ritual de barba con toalla caliente. Reserva por WhatsApp.",
          hero: {
             title: "Barbería exclusiva <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "El espacio que mereces para cuidar tu imagen.",
@@ -265,11 +267,11 @@ export const pagesData = Object.freeze({
             }
         ]
     },
-    nosotros: {
-        metaTitle: "Sobre Nosotros | Peluquería, Salón y Spa en Chía - Narbo's",
-        metaDescription: "Conoce la historia de Narbo's, tu peluquería y spa en Chía con más de 11 años de experiencia. ¡Ven y vive una experiencia de belleza única!",
+    'nosotros': {
+        metaTitle: "Sobre Narbo's Salón Spa | Nuestro equipo y nuestra historia",
+        metaDescription: "Narbo's abrió en Chía en 2013. Conoce al equipo, nuestra forma de trabajar y las {{reviewCount}} opiniones de Google que nos respaldan.",
         hero: {
-           title: "Nuestra Historia | Peluquería y Spa <span class=\"text-brand-green\">en Chía</span>",
+           title: "Nuestra Historia <span class=\"text-brand-green\">desde 2013</span>",
            subtitle: "Pasión por la belleza y el bienestar desde 2013.",
            imageSrc: "images/nosotros/narbos-team-hero.webp",
            imageSrcMobile: "images/nosotros/narbos-team-hero-mobile.webp",
@@ -281,11 +283,11 @@ export const pagesData = Object.freeze({
         // también tienen las fichas sin bloque `hero`.
         heroBadges: { status: false }
     },
-   contacto: {
-        metaTitle: "Contacto | Peluquería y Spa en Chía y Cajicá | Narbo's",
-        metaDescription: "Conoce nuestros horarios y visítanos en nuestro salón de belleza y spa en Chía, muy cerca de Cajicá. ¡Agenda tu cita hoy mismo!",
+    'contacto': {
+        metaTitle: "Contacto y horarios | Narbo's Salón Spa en Chía",
+        metaDescription: "Horarios, dirección y WhatsApp de Narbo's: Bajos del hotel Ibis, Edificio Quantum, Km 2 vía Chía - Cajicá. Parqueadero privado y atención con cita previa.",
         hero: {
-            title: "Peluquería y Spa en Chía | <span class=\"text-brand-green\">Contacto</span>",
+            title: "Contacto y <span class=\"text-brand-green\">horarios</span>",
             subtitle: "Conoce nuestros horarios de atención y visítanos en nuestro salón de belleza muy cerca de Cajicá. ¡Agenda tu cita hoy!",
             imageSrc: "images/blog/foto_fachada.webp",
             imageSrcMobile: "images/blog/foto_fachada-mobile.webp",
@@ -588,7 +590,7 @@ export const pagesData = Object.freeze({
             }
         ]
     },
-    estetica: {
+    'estetica': {
         metaTitle: "Estética, Masajes y Spa en Chía y Cajicá | Narbo's",
         metaDescription: "¿Buscas un spa en Chía o Cajicá? Disfruta de masajes relajantes, limpiezas faciales profundas y tratamientos corporales en Narbo's.",
         hero: {
@@ -701,6 +703,8 @@ export const pagesData = Object.freeze({
         ]
     },
     'depilacion-corporal': {
+        metaTitle: "Depilación con cera en Chía y Cajicá | Narbo's Salón Spa",
+        metaDescription: "Depilación corporal con cera en Chía y Cajicá: piernas, axilas y bikini, con protocolo higiénico y cera de alta calidad. Reserva por WhatsApp.",
         hero: {
             title: "Depilación Corporal <span class=\"text-brand-green\">con Cera</span>",
             subtitle: "Experimenta la máxima suavidad con técnicas profesionales y productos de alta calidad para el cuidado de tu piel.",
@@ -758,6 +762,8 @@ export const pagesData = Object.freeze({
     },
     'cejas-y-pestanas': {
         galleryOptions: { isolateItems: true }, // Aísla cada item de la galería (comportamiento solicitado)
+        metaTitle: "Cejas y pestañas en Chía | Laminado, lifting y henna - Narbo's",
+        metaDescription: "Diseño de cejas y pestañas en Chía y Cajicá: laminado de cejas, henna, lifting y extensiones de pestañas. Reserva por WhatsApp.",
         hero: {
             title: "Cejas y <span class=\"text-brand-green\">Pestañas</span>",
             subtitle: "Tu mirada es tu carta de presentación. Diseños personalizados para realzar tu belleza natural con elegancia.",
@@ -955,8 +961,8 @@ export const pagesData = Object.freeze({
         ]
     },
     'unas-spa': {
-        metaTitle: "Uñas y Spa en Chía | Manicure, Pedicure y Nail Art - Narbo's",
-        metaDescription: "Spa de uñas en Chía y Cajicá. Expertos en manicure, pedicure, uñas acrílicas, gel, polygel y diseños de uñas exclusivos. ¡Agenda tu cita de bienestar!",
+        metaTitle: "Uñas en Chía y Cajicá | Salón de Uñas - Narbo's Salón Spa",
+        metaDescription: "Salón de uñas en Chía y Cajicá, cerca de Fontanar: manicure, pedicure, uñas acrílicas, gel, polygel y nail art. Mira cada servicio y reserva por WhatsApp.",
         gallery: [
             {
                 type: 'image',
@@ -1164,6 +1170,8 @@ export const pagesData = Object.freeze({
         ]
     },
     'barberia-cortes-hombre': {
+        metaTitle: "Cortes de hombre y arreglo de barba en Chía | Narbo's",
+        metaDescription: "Cortes de hombre en Chía y Cajicá: degradados y fade, corte a tijera, perfilado y ritual de barba con toalla caliente. Reserva por WhatsApp.",
         hero: {
             title: "Barbería y Estilismo <span class=\"text-brand-green\">Masculino</span>",
             subtitle: "Cortes modernos, barbas impecables y un ambiente diseñado para ti.",

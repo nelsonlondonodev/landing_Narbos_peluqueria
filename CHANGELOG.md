@@ -6,6 +6,21 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🚀 Reparto por Niveles y Saneamiento de la Indexación v2.8.40 (22 de septiembre de 2026)
+
+*   **Canónicas que apuntaban a URLs rotas**: `injectSEO` añadía barra final a toda ruta, así que las 14 páginas hoja declaraban `/contacto/` en vez de `/contacto` —una URL que el `.htaccess` no resuelve—. Son los 14 «Error de servidor (5xx)» que Search Console reportaba sin moverse desde julio, señalados por la propia señal con la que Google decide qué indexar (`e53dc46`).
+*   **Colisiones entre hub e hija**: El hub de uñas reclamaba en su title el servicio de su hija y abría su meta con la frase exacta de esta; de 507 impresiones de «spa de uñas», 231 se las llevaba el hub con cero clics. Se aplica la misma regla que en peluquería —cada página ocupa el nivel que no ocupa nadie— en uñas y barbería (`b7b14fa`, `b3a617f`).
+*   **La frase principal, de cuatro páginas a dos**: `nosotros` y `contacto` publicaban «Peluquería… en Chía», compitiendo con la home y con el hub. Ahora la reclaman solo la home a nivel marca y el hub de peluquería a nivel servicio (`6aad863`).
+*   **Cuatro páginas publicaban su hero como metadatos**: Sin `metaTitle` ni `metaDescription`, `injectSEO` caía al hero. El hub de barbería anunciaba «El espacio que mereces para cuidar tu imagen» en 1.518 impresiones: ni Chía, ni Cajicá, ni el servicio (`b3a617f`).
+*   **Open Graph y Twitter incompletos**: `nosotros` y `contacto` se publicaban sin bloque de Twitter entero, y la sincronización pasaba por encima en silencio porque solo escribía sobre etiquetas existentes (`40d2c0b`).
+*   **Precios de uñas atados a `masterPrices`**: Los ocho de `manicure-pedicure` eran copias manuales sin vigilar. Al atarlos apareció el precio del nail art, que nunca llegó a la lista maestra (`b7b14fa`).
+*   **Sitemap y enlaces**: Fuera del sitemap lo que lleva `noindex`, y corregido un enlace de «lectura recomendada» hacia un artículo inexistente (`6d077d8`).
+*   **Dirección legal**: La política de privacidad declaraba «Centro Comercial Fontanar» como domicilio del responsable del tratamiento. Narbo's está cerca, no dentro (`1bf6221`).
+*   **Guardas**: De tres a dieciséis. Las nuevas cubren canónicas que no resuelven, URLs del sitemap no indexables, etiquetas sociales incompletas, entradas de `pagesData` sin metadatos y precios desincronizados.
+*   **Versión**: `v2.8.40`.
+
+---
+
 ## 🚀 Cosecha SEO de Spa y Peluquería, y Saneamiento del `<head>` v2.8.39 (21 de septiembre de 2026)
 
 *   **Cosecha de la guía de spa**: Segundo CTA de WhatsApp a mitad del artículo con más tráfico del blog (4.389 impresiones), enlazado reorientado hacia `masajes-relajantes` —el mejor CTR del sitio, 4,11%— y tabla con las cuatro tarifas vigentes (`f1dba2f`).
