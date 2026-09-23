@@ -74,7 +74,7 @@ export class ReviewsMarquee {
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full ${colorClass} flex items-center justify-center font-bold text-lg">${initial}</div>
                         <div>
-                            <h4 class="font-bold text-brand-gray-dark text-sm">${review.author}</h4>
+                            <p class="font-bold text-brand-gray-dark text-sm">${review.author}</p>
                             <p class="text-xs text-gray-500">${review.relativeTime}</p>
                         </div>
                     </div>
