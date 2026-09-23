@@ -622,8 +622,8 @@
                              <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                              <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                          </div>
-                         <span id="about-reviews-average" class="text-xl font-bold text-brand-gray-dark">5.0</span>
-                         <span id="about-reviews-count" class="text-brand-gray-dark/80 text-sm">(350 opiniones en Google)</span>
+                         <span id="about-reviews-average" data-google-rating class="text-xl font-bold text-brand-gray-dark">5.0</span>
+                         <span id="about-reviews-count" data-google-count class="text-brand-gray-dark/80 text-sm">(350 opiniones en Google)</span>
                     </div>
 
                     <p class="text-brand-gray-dark/80 text-lg max-w-2xl mx-auto">
@@ -632,11 +632,7 @@
                 </div>
 
                 <!-- Marquee Wrapper -->
-                <div class="relative w-full">
-                    <!-- Gradient Masks for Fade Effect -->
-                    <div class="absolute left-0 top-0 bottom-0 w-16 md:w-32 z-10 bg-gradient-to-r from-gray-50 to-transparent pointer-events-none"></div>
-                    <div class="absolute right-0 top-0 bottom-0 w-16 md:w-32 z-10 bg-gradient-to-l from-gray-50 to-transparent pointer-events-none"></div>
-
+                <div class="marquee-mask relative w-full">
                     <!-- Scrolling Track -->
                     <div class="marquee-track flex gap-6 py-4 hover:pause-animation">
                          

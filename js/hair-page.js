@@ -72,7 +72,6 @@ function initVideoSection() {
     if (!videoData) return;
 
     root.innerHTML = getVideoSectionHTML(videoData);
-    initYouTubeModals();
 }
 
 function initGallery() {
@@ -93,7 +92,6 @@ function initGallery() {
 
         galleryRoot.innerHTML = titleHTML + getBentoGridHTML(processedGallery);
         initLightbox();
-        initYouTubeModals();
     } else {
         console.warn(`Gallery data not found for page key: ${pageKey}`);
     }
@@ -114,22 +112,6 @@ function initLightbox() {
     }
 }
 
-async function initYouTubeModals() {
-    const triggers = document.querySelectorAll('.youtube-modal-trigger');
-    if (triggers.length === 0) return;
-
-    const { VideoModal } = await import('./components/VideoModal.js');
-    const modal = new VideoModal();
-    triggers.forEach(trigger => {
-        trigger.onclick = (e) => {
-            e.preventDefault();
-            const videoId = trigger.getAttribute('data-video-id');
-            if (videoId) {
-                modal.open(videoId);
-            }
-        };
-    });
-}
 
 function initBrandsCarousel() {
     const brandsId = 'hair-brands-root';

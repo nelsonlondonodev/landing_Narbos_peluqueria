@@ -156,10 +156,10 @@ class App {
             new BlogController(this.appRoot);
         });
 
-        // About
+        // Opiniones: mismo componente en la home y en nosotros.
         this.observeAndInit('.marquee-track', async () => {
-            const { default: AboutHubController } = await import('./controllers/AboutHubController.js');
-            new AboutHubController();
+            const { ReviewsMarquee } = await import('./components/ReviewsMarquee.js');
+            new ReviewsMarquee().render();
         });
 
         // FAQ
@@ -170,11 +170,7 @@ class App {
             });
         });
 
-        // Reviews
-        this.observeAndInit('#reviews-slider-wrapper', async () => {
-            const { ReviewsCarousel } = await import('./components/ReviewsCarousel.js');
-            new ReviewsCarousel();
-        });
+        this.initVideoTriggers();
 
         // Formulario
         this.observeAndInit('#contact-root', async () => {
@@ -200,6 +196,31 @@ class App {
     /**
      * Inicialización perezosa de módulos (Lazy Hydration).
      */
+    /**
+     * Abre el modal de vídeo desde cualquier disparador del sitio.
+     *
+     * Por delegación y no cableando cada elemento porque `BentoGrid` inyecta los suyos
+     * en cliente, después de que esto corra: engancharlos uno a uno obligaba a volver a
+     * llamar al cableado tras cada inyección, y quien añadía una galería nueva tenía
+     * que acordarse. El módulo del modal se carga al primer clic, no antes.
+     */
+    initVideoTriggers() {
+        document.addEventListener('click', async (e) => {
+            const trigger = e.target.closest('.youtube-modal-trigger');
+            if (!trigger) return;
+
+            e.preventDefault();
+            const videoId = trigger.getAttribute('data-video-id');
+            if (!videoId) return;
+
+            if (!this.videoModal) {
+                const { VideoModal } = await import('./components/VideoModal.js');
+                this.videoModal = new VideoModal();
+            }
+            this.videoModal.open(videoId);
+        });
+    }
+
     observeAndInit(selector, importFn) {
         const element = document.querySelector(selector);
         if (!element) return;
