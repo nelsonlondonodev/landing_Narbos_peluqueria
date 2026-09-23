@@ -139,3 +139,20 @@ export const siteConfig = Object.freeze({
     }
 });
 
+/**
+ * Compone un enlace de WhatsApp con el mensaje ya precargado.
+ *
+ * El mensaje es el único rastro del origen de un lead: llega literal al WhatsApp del
+ * salón, así que una frase que nombre la página de la que sale convierte una
+ * conversación anónima en atribuible. Escribir la URL entera a mano es lo que dejó 92
+ * enlaces sin codificar hasta septiembre de 2026; aquí `encodeURIComponent` es parte
+ * del camino, no algo que haya que acordarse de aplicar.
+ *
+ * @param {string} [message] - Texto precargado. Sin él devuelve el enlace desnudo.
+ * @returns {string} URL de wa.me lista para un `href`.
+ */
+export function getWhatsAppUrl(message) {
+    const base = `https://wa.me/${siteConfig.contact.whatsapp}`;
+    return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+}
+

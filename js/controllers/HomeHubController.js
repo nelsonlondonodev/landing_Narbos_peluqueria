@@ -64,8 +64,8 @@ export class HomeHubController {
         // Galería de Videos de YouTube
         this.app.observeAndInit('#video-gallery-root', async () => {
             const { YouTubeGallery } = await import('../components/YouTubeGallery.js');
-            const { homeVideos } = await import('../data/videoData.js');
-            new YouTubeGallery('video-gallery-root', homeVideos).render();
+            const { galleryVideos } = await import('../data/videoData.js');
+            new YouTubeGallery('video-gallery-root', galleryVideos).render();
         });
 
         // Inicialización en tiempo de inactividad para componentes de UI secundarios

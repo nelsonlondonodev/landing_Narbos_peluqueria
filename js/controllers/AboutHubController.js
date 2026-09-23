@@ -25,16 +25,26 @@ export default class AboutHubController {
 
     /**
      * Inicializa el modal de video y maneja los clics en la tarjeta de video.
+     *
+     * La tarjeta la pinta `VideoSection` como un `div` con `role="button"` y
+     * `tabindex="0"`, así que el teclado no llega solo: sin `onkeydown` quedaría
+     * enfocable pero inerte con Enter y Espacio.
      * @private
      */
     async _setupVideoEvents() {
         const { VideoModal } = await import('../components/VideoModal.js');
         const modal = new VideoModal();
-        this.videoCard.onclick = () => {
+        const open = (e) => {
+            e.preventDefault();
             const videoId = this.videoCard.getAttribute('data-video-id');
             if (videoId) {
                 modal.open(videoId);
             }
+        };
+
+        this.videoCard.onclick = open;
+        this.videoCard.onkeydown = (e) => {
+            if (e.key === 'Enter' || e.key === ' ') open(e);
         };
     }
 

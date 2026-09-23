@@ -1,4 +1,5 @@
 import { getVideoById, getYouTubeThumbnail } from '../data/videoData.js';
+import { getWhatsAppUrl } from '../config.js';
 
 /**
  * @typedef {Object} VideoSectionData
@@ -7,7 +8,9 @@ import { getVideoById, getYouTubeThumbnail } from '../data/videoData.js';
  * @property {string} heading - Titular de la sección. Admite HTML (se usa para resaltar).
  * @property {string} body - Párrafo descriptivo que acompaña al video.
  * @property {string} ctaLabel - Texto del botón de acción.
- * @property {string} ctaHref - Destino del botón.
+ * @property {string} ctaMessage - Mensaje que lleva precargado el WhatsApp. Nombra la
+ *   página de la que sale el lead: es el único rastro de su origen, porque llega literal
+ *   a la conversación. El enlace lo compone `getWhatsAppUrl`.
  * @property {string} alt - Texto alternativo de la miniatura.
  * @property {string} ariaLabel - Etiqueta accesible del disparador del modal.
  * @property {'hqdefault'|'maxresdefault'|'sddefault'} [thumbnailQuality='maxresdefault']
@@ -63,7 +66,7 @@ export function getVideoSectionHTML(data) {
                     <p class="text-brand-gray-dark/80 mb-8 text-lg">
                         ${data.body}
                     </p>
-                    <a href="${data.ctaHref}" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center rounded-lg bg-brand-green px-6 py-3.5 text-base font-semibold text-white shadow-lg hover:bg-[#5a634b] hover:shadow-xl hover:-translate-y-0.5 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
+                    <a href="${getWhatsAppUrl(data.ctaMessage)}" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center rounded-lg bg-brand-green px-6 py-3.5 text-base font-semibold text-white shadow-lg hover:bg-[#5a634b] hover:shadow-xl hover:-translate-y-0.5 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
                         ${data.ctaLabel}
                     </a>
                 </div>
