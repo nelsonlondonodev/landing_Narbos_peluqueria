@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { homeVideos, galleryVideos, getVideoUrl, getYouTubeThumbnail } from '../js/data/videoData.js';
+import { galleryVideos, getVideoById, getVideoUrl, getYouTubeThumbnail } from '../js/data/videoData.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { getHtmlFiles } from './utils.js';
 
@@ -79,7 +79,7 @@ function generatePageVideoObjects() {
             continue;
         }
 
-        const video = homeVideos.find(v => v.id === videoId);
+        const video = getVideoById(videoId);
         if (!video) {
             problemas.push(`${relPath}: '${pageKey}' apunta al video ${videoId}, que no está en videoData.js.`);
             continue;

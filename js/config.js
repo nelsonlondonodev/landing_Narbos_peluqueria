@@ -148,11 +148,11 @@ export const siteConfig = Object.freeze({
  * enlaces sin codificar hasta septiembre de 2026; aquí `encodeURIComponent` es parte
  * del camino, no algo que haya que acordarse de aplicar.
  *
- * @param {string} [message] - Texto precargado. Sin él devuelve el enlace desnudo.
+ * @param {string} message - Texto precargado. Es obligatorio a propósito: un enlace sin
+ *   mensaje es justo el que no se puede atribuir.
  * @returns {string} URL de wa.me lista para un `href`.
  */
 export function getWhatsAppUrl(message) {
-    const base = `https://wa.me/${siteConfig.contact.whatsapp}`;
-    return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+    return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`;
 }
 

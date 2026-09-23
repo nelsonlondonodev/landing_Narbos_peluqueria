@@ -72,10 +72,9 @@ export function getVideoSectionHTML(data) {
                 </div>
                 <div class="flex justify-center" data-animation="fadeInUp">
                     <div class="relative overflow-hidden ${width} w-full bg-white rounded-xl shadow-2xl p-2">
-                        <!-- No es <a> ni <button>, así que necesita role/tabindex; el teclado lo
-                             maneja initYouTubeModals, que escucha Enter y Espacio. -->
-                        <div class="video-card youtube-modal-trigger relative ${aspect} bg-black rounded-lg overflow-hidden group cursor-pointer"
-                             data-video-id="${data.id}" role="button" tabindex="0"
+                        <button type="button"
+                             class="video-card youtube-modal-trigger block w-full relative ${aspect} bg-black rounded-lg overflow-hidden group cursor-pointer"
+                             data-video-id="${data.id}"
                              aria-label="${data.ariaLabel}">
 
                             <img src="${thumbnail}"
@@ -83,7 +82,7 @@ export function getVideoSectionHTML(data) {
                                  loading="lazy" decoding="async"
                                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
 
-                            <!-- Botón de reproducción -->
+                            <!-- Icono de reproducción; el disparador es el <button> que lo envuelve. -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors duration-300">
                                 <div class="w-16 h-16 bg-brand-green/90 text-white rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-125 group-hover:bg-brand-green ring-4 ring-white/20">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
@@ -91,7 +90,7 @@ export function getVideoSectionHTML(data) {
                                     </svg>
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -13,9 +13,7 @@
  *   tienen miniatura `oar2`, los apaisados devuelven 404. Determina la proporción de la
  *   tarjeta en `VideoSection` y la URL canónica del video.
  * @property {boolean} [excludeFromGallery=false] - Lo deja fuera de la parrilla de la
- *   home y de su `ItemList`, sin sacarlo del catálogo: sigue recibiendo la fecha de
- *   `sync-video-dates.js` y el `VideoObject` que genera el build para la página que lo
- *   muestre. Ver `galleryVideos`.
+ *   home sin sacarlo del catálogo. Ver `galleryVideos`.
  */
 
 /**
@@ -39,7 +37,7 @@ export function getVideoUrl(video) {
  * @returns {VideoItem|undefined}
  */
 export function getVideoById(videoId) {
-    return homeVideos.find(v => v.id === videoId);
+    return videoCatalog.find(v => v.id === videoId);
 }
 
 /**
@@ -62,10 +60,15 @@ export function getYouTubeShortUrl(videoId) {
 }
 
 /**
- * Almacén unificado de datos de video para la galería principal.
+ * Todos los vídeos publicados, en orden de publicación.
+ *
+ * Fuente única para las tres cosas que dependen del catálogo: la parrilla de la home
+ * (a través de `galleryVideos`), los `VideoObject` que el build escribe en cada página
+ * y las fechas que sincroniza `sync-video-dates.js`. No todo lo que está aquí sale en
+ * la home.
  * @type {Array<VideoItem>}
  */
-export const homeVideos = [
+export const videoCatalog = [
     {
         id: 'sz-uA1RgpVs',
         title: "Transformación de Color y Balayage en Chía",
@@ -157,11 +160,11 @@ export const homeVideos = [
 /**
  * Los vídeos que se pintan en la parrilla de la home y en su `ItemList`.
  *
- * El catálogo y la galería dejaron de ser lo mismo al publicar formación del equipo: es
+ * Catálogo y galería dejaron de ser lo mismo al publicar formación del equipo: es
  * contenido de marca, no una transformación, y como `YouTubeGallery` invierte el array
  * habría encabezado la sección con el badge «Última publicación». Filtrar aquí y no en
  * cada consumidor evita que la parrilla y el marcado que la describe se separen.
  * @type {Array<VideoItem>}
  */
-export const galleryVideos = homeVideos.filter(video => !video.excludeFromGallery);
+export const galleryVideos = videoCatalog.filter(video => !video.excludeFromGallery);
 
