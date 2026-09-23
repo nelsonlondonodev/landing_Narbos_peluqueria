@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { homeVideos, getVideoUrl, getYouTubeThumbnail } from '../js/data/videoData.js';
+import { galleryVideos, getVideoById, getVideoUrl, getYouTubeThumbnail } from '../js/data/videoData.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { getHtmlFiles } from './utils.js';
 
@@ -79,7 +79,7 @@ function generatePageVideoObjects() {
             continue;
         }
 
-        const video = homeVideos.find(v => v.id === videoId);
+        const video = getVideoById(videoId);
         if (!video) {
             problemas.push(`${relPath}: '${pageKey}' apunta al video ${videoId}, que no está en videoData.js.`);
             continue;
@@ -127,8 +127,9 @@ function generatePageVideoObjects() {
  */
 function buildItemList() {
     // `YouTubeGallery` invierte el array al pintar, así que el más reciente encabeza la
-    // parrilla. El ItemList replica ese orden para que `position` case con lo que se ve.
-    const ordered = [...homeVideos].reverse();
+    // parrilla. El ItemList replica ese orden para que `position` case con lo que se ve,
+    // y parte de `galleryVideos` por lo mismo: describe la galería, no el catálogo.
+    const ordered = [...galleryVideos].reverse();
 
     return {
         '@context': 'https://schema.org',

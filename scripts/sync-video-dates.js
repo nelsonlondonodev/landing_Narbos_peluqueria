@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { siteConfig } from '../js/config.js';
-import { homeVideos } from '../js/data/videoData.js';
+import { videoCatalog } from '../js/data/videoData.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -118,7 +118,7 @@ async function syncVideoDates() {
     const cambios = [];
     const ausentes = [];
 
-    for (const video of homeVideos) {
+    for (const video of videoCatalog) {
         const publicado = fechas.get(video.id);
 
         if (!publicado) {
@@ -146,7 +146,7 @@ async function syncVideoDates() {
     }
 
     if (cambios.length === 0) {
-        console.log(`✅ Fechas ya al día (${homeVideos.length} vídeos). Sin cambios.`);
+        console.log(`✅ Fechas ya al día (${videoCatalog.length} vídeos). Sin cambios.`);
         return;
     }
 

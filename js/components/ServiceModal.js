@@ -1,3 +1,5 @@
+import { getWhatsAppUrl } from '../config.js';
+
 export class ServiceModal {
     constructor(services) {
         this._registerServices(services);
@@ -177,9 +179,7 @@ export class ServiceModal {
         }
 
         if (this.refs.whatsappBtn) {
-            const message = encodeURIComponent(`Hola, quisiera agendar una cita para ${service.title}`);
-            const phoneNumber = '573123462618';
-            this.refs.whatsappBtn.href = `https://wa.me/${phoneNumber}?text=${message}`;
+            this.refs.whatsappBtn.href = getWhatsAppUrl(`Hola, quisiera agendar una cita para ${service.title}`);
         }
     }
 

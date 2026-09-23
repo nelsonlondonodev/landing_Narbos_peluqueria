@@ -1,4 +1,5 @@
 import { getVideoById, getYouTubeThumbnail } from '../data/videoData.js';
+import { getWhatsAppUrl } from '../config.js';
 
 /**
  * @typedef {Object} VideoSectionData
@@ -7,7 +8,9 @@ import { getVideoById, getYouTubeThumbnail } from '../data/videoData.js';
  * @property {string} heading - Titular de la sección. Admite HTML (se usa para resaltar).
  * @property {string} body - Párrafo descriptivo que acompaña al video.
  * @property {string} ctaLabel - Texto del botón de acción.
- * @property {string} ctaHref - Destino del botón.
+ * @property {string} ctaMessage - Mensaje que lleva precargado el WhatsApp. Nombra la
+ *   página de la que sale el lead: es el único rastro de su origen, porque llega literal
+ *   a la conversación. El enlace lo compone `getWhatsAppUrl`.
  * @property {string} alt - Texto alternativo de la miniatura.
  * @property {string} ariaLabel - Etiqueta accesible del disparador del modal.
  * @property {'hqdefault'|'maxresdefault'|'sddefault'} [thumbnailQuality='maxresdefault']
@@ -63,16 +66,15 @@ export function getVideoSectionHTML(data) {
                     <p class="text-brand-gray-dark/80 mb-8 text-lg">
                         ${data.body}
                     </p>
-                    <a href="${data.ctaHref}" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center rounded-lg bg-brand-green px-6 py-3.5 text-base font-semibold text-white shadow-lg hover:bg-[#5a634b] hover:shadow-xl hover:-translate-y-0.5 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
+                    <a href="${getWhatsAppUrl(data.ctaMessage)}" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center rounded-lg bg-brand-green px-6 py-3.5 text-base font-semibold text-white shadow-lg hover:bg-[#5a634b] hover:shadow-xl hover:-translate-y-0.5 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
                         ${data.ctaLabel}
                     </a>
                 </div>
                 <div class="flex justify-center" data-animation="fadeInUp">
                     <div class="relative overflow-hidden ${width} w-full bg-white rounded-xl shadow-2xl p-2">
-                        <!-- No es <a> ni <button>, así que necesita role/tabindex; el teclado lo
-                             maneja initYouTubeModals, que escucha Enter y Espacio. -->
-                        <div class="video-card youtube-modal-trigger relative ${aspect} bg-black rounded-lg overflow-hidden group cursor-pointer"
-                             data-video-id="${data.id}" role="button" tabindex="0"
+                        <button type="button"
+                             class="video-card youtube-modal-trigger block w-full relative ${aspect} bg-black rounded-lg overflow-hidden group cursor-pointer"
+                             data-video-id="${data.id}"
                              aria-label="${data.ariaLabel}">
 
                             <img src="${thumbnail}"
@@ -80,7 +82,7 @@ export function getVideoSectionHTML(data) {
                                  loading="lazy" decoding="async"
                                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
 
-                            <!-- Botón de reproducción -->
+                            <!-- Icono de reproducción; el disparador es el <button> que lo envuelve. -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors duration-300">
                                 <div class="w-16 h-16 bg-brand-green/90 text-white rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-125 group-hover:bg-brand-green ring-4 ring-white/20">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
@@ -88,7 +90,7 @@ export function getVideoSectionHTML(data) {
                                     </svg>
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>

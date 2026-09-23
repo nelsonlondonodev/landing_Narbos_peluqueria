@@ -12,6 +12,8 @@
  *   No todo lo que se publica es un short. Señal fiable para clasificarlos: los shorts
  *   tienen miniatura `oar2`, los apaisados devuelven 404. Determina la proporción de la
  *   tarjeta en `VideoSection` y la URL canónica del video.
+ * @property {boolean} [excludeFromGallery=false] - Lo deja fuera de la parrilla de la
+ *   home sin sacarlo del catálogo. Ver `galleryVideos`.
  */
 
 /**
@@ -35,7 +37,7 @@ export function getVideoUrl(video) {
  * @returns {VideoItem|undefined}
  */
 export function getVideoById(videoId) {
-    return homeVideos.find(v => v.id === videoId);
+    return videoCatalog.find(v => v.id === videoId);
 }
 
 /**
@@ -58,10 +60,15 @@ export function getYouTubeShortUrl(videoId) {
 }
 
 /**
- * Almacén unificado de datos de video para la galería principal.
+ * Todos los vídeos publicados, en orden de publicación.
+ *
+ * Fuente única para las tres cosas que dependen del catálogo: la parrilla de la home
+ * (a través de `galleryVideos`), los `VideoObject` que el build escribe en cada página
+ * y las fechas que sincroniza `sync-video-dates.js`. No todo lo que está aquí sale en
+ * la home.
  * @type {Array<VideoItem>}
  */
-export const homeVideos = [
+export const videoCatalog = [
     {
         id: 'sz-uA1RgpVs',
         title: "Transformación de Color y Balayage en Chía",
@@ -138,6 +145,26 @@ export const homeVideos = [
         description: "Mira la transformación completa con extensiones de cabello en Narbo's Salón Spa. Resultados naturales, volumen y largo espectacular en Chía.",
         uploadDate: "2026-08-22T08:34:17-05:00",
         thumbnailUrl: getYouTubeThumbnail('tuJcoHSWLDM', 'maxresdefault')
+    },
+    {
+        id: 'swn-iS5gujQ',
+        orientation: 'horizontal',   // se publicó apaisado: el 9:16 original va con relleno difuminado
+        excludeFromGallery: true,    // vive en `nosotros`, no en la parrilla de transformaciones
+        title: "Capacitación Wella: Diseño de Color y Corte en Chía",
+        description: "Nuestro equipo en una capacitación de Wella Professionals sobre Diseño del Color y Diseño del Corte. Formación continua para llevar cada técnica al salón en Chía.",
+        uploadDate: "2026-09-23T05:08:44-05:00",
+        thumbnailUrl: getYouTubeThumbnail('swn-iS5gujQ', 'maxresdefault')
     }
 ];
+
+/**
+ * Los vídeos que se pintan en la parrilla de la home y en su `ItemList`.
+ *
+ * Catálogo y galería dejaron de ser lo mismo al publicar formación del equipo: es
+ * contenido de marca, no una transformación, y como `YouTubeGallery` invierte el array
+ * habría encabezado la sección con el badge «Última publicación». Filtrar aquí y no en
+ * cada consumidor evita que la parrilla y el marcado que la describe se separen.
+ * @type {Array<VideoItem>}
+ */
+export const galleryVideos = videoCatalog.filter(video => !video.excludeFromGallery);
 

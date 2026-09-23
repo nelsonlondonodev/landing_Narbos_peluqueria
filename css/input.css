@@ -164,9 +164,18 @@
     @apply w-max animate-marquee;
 }
 
+/* Desvanecido de los extremos de cualquier marquesina.
+   Por `mask-image` y no con divs de degradado por encima: un overlay tiene que conocer
+   el color de fondo de su sección, y cuando no coincide —como pasaba en las reseñas—
+   vela el contenido con un color ajeno en vez de desvanecerlo. */
+.marquee-mask,
+.brands-slider {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
 .brands-slider {
     @apply flex w-full overflow-hidden relative;
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .brands-track {

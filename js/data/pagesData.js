@@ -143,7 +143,7 @@ export const pagesData = Object.freeze({
             heading: 'Así se vive una visita a <span class="text-brand-green">Narbo\'s</span>',
             body: 'Más que un cambio de look. Nuestras clientas llegan con una idea y salen con un estilo pensado para su rostro, su rutina y su tipo de cabello. Asesoría antes de tocar una tijera, marcas premium y un equipo que lleva más de once años en Chía.',
             ctaLabel: 'Reservar mi cita',
-            ctaHref: 'https://wa.me/573123462618',
+            ctaMessage: 'Hola, vi el video de peluquería en su web y quiero reservar una cita.',
             alt: "Clienta mostrando su resultado junto a su estilista en Narbo's Salón Spa Chía",
             ariaLabel: 'Reproducir video: Tendencias de Estilo y Belleza en Chía'
         },
@@ -277,6 +277,16 @@ export const pagesData = Object.freeze({
            imageSrcMobile: "images/nosotros/narbos-team-hero-mobile.webp",
            imageAlt: "Equipo de profesionales de Narbo's Salón Spa Chía"
        },
+        video: {
+            id: 'swn-iS5gujQ',
+            headingId: 'video-title',
+            heading: 'Nos formamos con <span class="text-brand-green">Wella Professionals</span>',
+            body: 'La técnica no se aprende una vez. Nuestro equipo asiste a las capacitaciones de Wella Professionals en Diseño del Color y Diseño del Corte, y lo que se practica allí es lo que después aplicamos en tu cita.',
+            ctaLabel: 'Agendar mi cita',
+            ctaMessage: 'Hola, vi el video de la capacitación con Wella en su web y quiero agendar una cita.',
+            alt: "Colorista de Narbo's Salón Spa aplicando mechas durante una capacitación de Wella Professionals",
+            ariaLabel: 'Reproducir video: Capacitación Wella, Diseño de Color y Corte en Chía'
+        },
         // Página de marca: se lee, no se reserva. El ABIERTO/CERRADO es un dato
         // transaccional y aquí solo sería ruido; la calificación sí se queda.
         // Va fuera de `hero` porque los badges se cuelgan de `section#inicio`, que
@@ -310,7 +320,7 @@ export const pagesData = Object.freeze({
             heading: 'El corte, <span class="text-brand-green">capa a capa</span>',
             body: 'Un buen corte no se nota: se lleva solo. Trabajamos las capas y el desfilado según la densidad y la caída natural de tu cabello, para que conserve la forma entre visitas y te lo puedas peinar en casa sin pelear con él.',
             ctaLabel: 'Agendar mi Corte',
-            ctaHref: 'https://wa.me/573123462618',
+            ctaMessage: 'Hola, vi el video de cortes en su web y quiero agendar mi corte.',
             alt: "Resultado de un corte en capas con iluminaciones realizado en Narbo's Salón Spa Chía",
             ariaLabel: 'Reproducir video: Corte de Cabello y Estilo de Vanguardia en Chía'
         },
@@ -361,7 +371,7 @@ export const pagesData = Object.freeze({
             heading: 'Mira una <span class="text-brand-green">transformación real</span>',
             body: 'Balayage con ondas suaves, de principio a fin. Así trabajamos el degradado a mano alzada para conseguir rubios luminosos con movimiento natural, cuidando la salud del cabello en cada paso.',
             ctaLabel: 'Agendar mi Balayage',
-            ctaHref: 'https://wa.me/573123462618',
+            ctaMessage: 'Hola, vi el video de balayage en su web y quiero agendar mi cita.',
             alt: "Resultado de un balayage con ondas suaves realizado en Narbo's Salón Spa Chía",
             ariaLabel: 'Reproducir video: Transformación Increíble, Balayage y Ondas en Chía'
         },
@@ -504,7 +514,7 @@ export const pagesData = Object.freeze({
             heading: 'El poder del <span class="text-brand-green">diseño de color</span>',
             body: 'De la raíz oscura al rubio dorado, en un solo servicio. Así construimos el color a medida: elegimos el tono que favorece tu piel, respetamos la fibra en cada paso y sellamos el brillo para que el resultado dure entre visitas.',
             ctaLabel: 'Agendar mi Color',
-            ctaHref: 'https://wa.me/573123462618',
+            ctaMessage: 'Hola, vi el video de diseño de color en su web y quiero agendar mi diagnóstico.',
             alt: "Antes y después de un diseño de color: rubio dorado con ondas realizado en Narbo's Salón Spa Chía",
             ariaLabel: 'Reproducir video: Antes y Después, El Poder del Diseño de Color en Chía'
         },

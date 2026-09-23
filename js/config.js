@@ -98,7 +98,7 @@ export const resolveAsset = (path, prefix = '') => {
  * Configuración global del sitio.
  */
 export const siteConfig = Object.freeze({
-    version: "2.8.40", // Versión actualizada
+    version: "2.8.41", // Versión actualizada
     basePath: BASE_PATH,
     socialLinks: [
         {
@@ -138,4 +138,21 @@ export const siteConfig = Object.freeze({
         googleMapsApiKey: "___GOOGLE_MAPS_API_KEY___"
     }
 });
+
+/**
+ * Compone un enlace de WhatsApp con el mensaje ya precargado.
+ *
+ * El mensaje es el único rastro del origen de un lead: llega literal al WhatsApp del
+ * salón, así que una frase que nombre la página de la que sale convierte una
+ * conversación anónima en atribuible. Escribir la URL entera a mano es lo que dejó 92
+ * enlaces sin codificar hasta septiembre de 2026; aquí `encodeURIComponent` es parte
+ * del camino, no algo que haya que acordarse de aplicar.
+ *
+ * @param {string} message - Texto precargado. Es obligatorio a propósito: un enlace sin
+ *   mensaje es justo el que no se puede atribuir.
+ * @returns {string} URL de wa.me lista para un `href`.
+ */
+export function getWhatsAppUrl(message) {
+    return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`;
+}
 

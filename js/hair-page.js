@@ -72,7 +72,6 @@ function initVideoSection() {
     if (!videoData) return;
 
     root.innerHTML = getVideoSectionHTML(videoData);
-    initYouTubeModals();
 }
 
 function initGallery() {
@@ -93,7 +92,6 @@ function initGallery() {
 
         galleryRoot.innerHTML = titleHTML + getBentoGridHTML(processedGallery);
         initLightbox();
-        initYouTubeModals();
     } else {
         console.warn(`Gallery data not found for page key: ${pageKey}`);
     }
@@ -114,30 +112,6 @@ function initLightbox() {
     }
 }
 
-async function initYouTubeModals() {
-    const triggers = document.querySelectorAll('.youtube-modal-trigger');
-    if (triggers.length === 0) return;
-
-    const { VideoModal } = await import('./components/VideoModal.js');
-    const modal = new VideoModal();
-    triggers.forEach(trigger => {
-        const open = (e) => {
-            e.preventDefault();
-            const videoId = trigger.getAttribute('data-video-id');
-            if (videoId) {
-                modal.open(videoId);
-            }
-        };
-
-        trigger.onclick = open;
-
-        // Los disparadores que no son <a>/<button> se marcan con role="button" y
-        // tabindex="0": sin esto quedarían enfocables pero inertes con el teclado.
-        trigger.onkeydown = (e) => {
-            if (e.key === 'Enter' || e.key === ' ') open(e);
-        };
-    });
-}
 
 function initBrandsCarousel() {
     const brandsId = 'hair-brands-root';
