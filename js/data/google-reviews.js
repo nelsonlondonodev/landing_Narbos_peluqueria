@@ -1,9 +1,9 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-09-22T09:41:55.700Z
+ * Última sincronización con Google Business Profile: 2026-09-23T11:00:10.832Z
  */
 const googleReviews = {
-    "lastSync": "2026-09-22T09:41:55.700Z",
+    "lastSync": "2026-09-23T11:00:10.832Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
     "userRatingCount": 350,
@@ -19,7 +19,7 @@ const googleReviews = {
             "author": "Paula Andrea Márquez",
             "rating": 5,
             "text": "Espectacular todo. La atención maravillosa, el color quedó divino, su trabajo como profesionales en color 10/10, superó mis expectativas justo como se los pedí.",
-            "relativeTime": "Hace 1 mes",
+            "relativeTime": "Hace 2 meses",
             "verified": true
         },
         {
