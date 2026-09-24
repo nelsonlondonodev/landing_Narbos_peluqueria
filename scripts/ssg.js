@@ -22,6 +22,7 @@ import { makeupServices } from '../js/data/makeupServices.js';
 import articles from '../js/data/articles.js';
 import { masterPrices } from '../js/data/masterPrices.js';
 import { ArticleCard } from '../js/components/ArticleCard.js';
+import { reviewCardHTML } from '../js/components/ReviewsMarquee.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -424,6 +425,19 @@ function precargarLogo(document) {
     document.head.appendChild(link);
 }
 
+/**
+ * Pinta la marquesina de opiniones con las reseñas reales del build. Antes cada página
+ * traía una tarjeta escrita a mano como respaldo para el rastreador, y era una reseña
+ * que no existe en la ficha de Google.
+ */
+function injectReviewsMarquee(document) {
+    const track = document.querySelector('.marquee-track');
+    const reviews = googleReviews.reviews || [];
+    if (!track || reviews.length === 0) return;
+
+    track.innerHTML = reviews.map(reviewCardHTML).join('');
+}
+
 async function processPage(pageConfig) {
     const fullPath = path.join(DIST_DIR, pageConfig.path);
     if (!fs.existsSync(fullPath)) return;
@@ -455,6 +469,7 @@ async function processPage(pageConfig) {
     injectServices(document, pageConfig.key, prefix);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path);
     injectArticles(document, pageConfig.key, prefix);
+    injectReviewsMarquee(document);
     injectSEO(document, pageConfig.key, pageConfig.path);
     sincronizarMetadatosSociales(document);
     precargarLogo(document);
