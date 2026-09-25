@@ -64,7 +64,7 @@ export const hairPageServices = Object.freeze([
         description: "Liso natural, reducción de volumen y brillo extremo sin frizz.",
         link: "servicios/peluqueria/tratamientos-capilares",
         image: "images/pages/peluqueria/lavado-spa-capilar.webp",
-        price: 'Desde $350.000',
+        price: 'Desde $420.000',
         duration: '3 - 4 horas',
         variant: "standard"
     },
@@ -158,7 +158,7 @@ export const hairPageServices = Object.freeze([
         title: "Alisado Progresivo",
         description: "<strong>Liso natural y sin frizz.</strong> Tratamiento que alisa la onda, reduce el volumen y aporta brillo extremo. Duración de 3 a 5 meses.",
         image: "images/pages/peluqueria/lavado-spa-capilar.webp",
-        price: 'Desde $350.000',
+        price: 'Desde $420.000',
         duration: '3 - 4 horas',
         modal: true
     },

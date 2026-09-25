@@ -37,14 +37,16 @@ export const masterPrices = Object.freeze({
             iluminaciones: '$320.000' // Desde
         },
         tratamientos: {
-            alisadoProgresivo: '$350.000', // Desde
+            alisadoProgresivo: '$420.000', // Desde, con aminoácidos
             shampoo: '$10.000' // Desde
         }
     },
     barber: {
         corte: '$35.000',
         arregloBarba: '$45.000',
-        corteBarba: '$75.000'
+        camuflajeCanas: '$120.000',
+        infantil: '$35.000'
+        // No hay combo de corte + barba: cada servicio se cobra aparte.
     },
     makeup: {
         social: '$120.000',
