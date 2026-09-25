@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { PLACE_ID } from '../js/data/place-config.js';
 import { loadEnv } from './load-env.js';
 import { assertSyncedInCI } from './assert-synced.js';
@@ -14,33 +14,19 @@ loadEnv();
 const OUTPUT_FILE = path.join(__dirname, '../js/data/google-reviews.js');
 
 /**
- * Retorna las opiniones estáticas de fallback (locales).
- * @returns {Array<Object>}
+ * Lo que se publica si Google no responde: la última sincronización buena, no reseñas
+ * de muestra. Las que había aquí no existían en la ficha y el SSG las acabaría pintando
+ * en el HTML como si fueran de clientes reales. Sin try: el archivo está en git, y si
+ * faltara, un conteo inventado en el JSON-LD sería peor que un build roto.
+ * @returns {Promise<{rating: number, userRatingCount: number, reviews: Array<Object>}>}
  */
-function getFallbackReviews() {
-    return [
-        {
-            author: "Andrea Morales",
-            rating: 5,
-            text: "Excelente servicio y atención. Me hice un balayage y el resultado fue espectacular, mi cabello quedó súper brillante y con un color hermoso. Sin duda la mejor peluquería en Chía.",
-            relativeTime: "Hace un mes",
-            verified: true
-        },
-        {
-            author: "Carlos Restrepo",
-            rating: 5,
-            text: "Llevo meses viniendo a la barbería y el servicio es impecable. El ritual de toalla caliente y el arreglo de barba son de otro nivel. Súper recomendado.",
-            relativeTime: "Hace 2 meses",
-            verified: true
-        },
-        {
-            author: "Liliana Gómez",
-            rating: 5,
-            text: "Mi lugar favorito para consentirme. El manicure spa y los masajes relajantes son maravillosos. El equipo es súper profesional y las instalaciones en el Edificio Quantum son muy cómodas y seguras.",
-            relativeTime: "Hace 3 semanas",
-            verified: true
-        }
-    ];
+async function getLastSyncedData() {
+    const { default: previous } = await import(pathToFileURL(OUTPUT_FILE).href);
+    return {
+        rating: previous.rating,
+        userRatingCount: previous.userRatingCount,
+        reviews: previous.reviews
+    };
 }
 
 /**
@@ -144,9 +130,7 @@ async function syncReviews() {
     let reviewsData = {
         lastSync: new Date().toISOString(),
         source: 'Static Fallback (Local)',
-        rating: 5.0,
-        userRatingCount: 312,
-        reviews: getFallbackReviews()
+        ...(await getLastSyncedData())
     };
 
     // Clave BUILD: este script corre en Node (sin referrer), no sirve la clave web.
