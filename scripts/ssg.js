@@ -487,6 +487,96 @@ function injectOfferCatalog(document, pageKey, pagePath) {
 }
 
 /**
+ * Contenedores de las FAQ visibles. Son cuatro ids por historia, no por diseño: las
+ * páginas de servicio usan `faq`, los artículos `article-faq`, y hay un artículo y el
+ * índice del blog con el suyo propio.
+ */
+const FAQ_CONTENEDORES = '#faq, #article-faq, #preguntas-frecuentes, #blog-faq';
+
+const limpiarTexto = texto => texto.replace(/\s+/g, ' ').trim();
+
+/**
+ * Lee las preguntas y respuestas tal como las ve el visitante.
+ * @returns {{pregunta: string, respuesta: string}[]}
+ */
+function leerFaqVisible(document) {
+    const vistas = new Set();
+    const faq = [];
+
+    for (const contenedor of document.querySelectorAll(FAQ_CONTENEDORES)) {
+        for (const details of contenedor.querySelectorAll('details')) {
+            if (vistas.has(details)) continue; // hay contenedores anidados
+            vistas.add(details);
+
+            const summary = details.querySelector('summary');
+            const respuesta = [...details.children]
+                .filter(hijo => hijo !== summary)
+                .map(hijo => hijo.textContent)
+                .join(' ');
+            faq.push({ pregunta: limpiarTexto(summary.textContent), respuesta: limpiarTexto(respuesta) });
+        }
+    }
+    return faq;
+}
+
+/**
+ * Busca los nodos `FAQPage` del JSON-LD, estén en la raíz, en un array o en `@graph`.
+ * @returns {{script: Element, datos: Object, nodo: Object}[]}
+ */
+function buscarFaqPage(document) {
+    const encontrados = [];
+    for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        let datos;
+        try {
+            datos = JSON.parse(script.textContent);
+        } catch {
+            continue; // Lo reporta checkBreadcrumbs.
+        }
+        const recorrer = nodo => {
+            if (Array.isArray(nodo)) return nodo.forEach(recorrer);
+            if (!nodo || typeof nodo !== 'object') return;
+            const tipos = [].concat(nodo['@type']);
+            if (tipos.includes('FAQPage')) encontrados.push({ script, datos, nodo });
+            Object.values(nodo).forEach(recorrer);
+        };
+        recorrer(datos);
+    }
+    return encontrados;
+}
+
+/**
+ * Genera las preguntas del `FAQPage` a partir de la FAQ visible.
+ *
+ * El marcado estaba escrito a mano en cada página y se había separado de lo que se ve:
+ * preguntas redactadas de otra forma, respuestas antiguas, en manicure siete desajustes.
+ * Google pide que el marcado de una FAQ repita lo que ve el visitante, así que se
+ * reconstruye en el build desde el propio HTML y ya no puede desviarse. Solo se
+ * sustituye `mainEntity`; el resto del nodo (`@id`, `name`, su sitio en el `@graph`) se
+ * respeta. Las respuestas van en texto plano: los enlaces de la versión visible se
+ * quedan en la página.
+ *
+ * @returns {string|null} Descripción del problema, o null si todo encaja.
+ */
+function sincronizarFaqPage(document, pagePath) {
+    const visible = leerFaqVisible(document);
+    const marcados = buscarFaqPage(document);
+    if (visible.length === 0 && marcados.length === 0) return null;
+
+    if (marcados.length === 0) return `${pagePath}: ${visible.length} preguntas visibles y ningún FAQPage`;
+    if (marcados.length > 1) return `${pagePath}: ${marcados.length} nodos FAQPage`;
+    if (visible.length === 0) return `${pagePath}: FAQPage sin FAQ visible`;
+
+    const { script, datos, nodo } = marcados[0];
+    nodo.mainEntity = visible.map(({ pregunta, respuesta }) => ({
+        '@type': 'Question',
+        name: pregunta,
+        acceptedAnswer: { '@type': 'Answer', text: respuesta }
+    }));
+    script.textContent = JSON.stringify(datos, null, 2);
+    return null;
+}
+
+/**
  * Pinta la marquesina de opiniones con las reseñas reales del build. Antes cada página
  * traía una tarjeta escrita a mano como respaldo para el rastreador, y era una reseña
  * que no existe en la ficha de Google.
@@ -530,6 +620,7 @@ async function processPage(pageConfig) {
     injectServices(document, pageConfig.key, prefix);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
+    const faqInforme = sincronizarFaqPage(document, pageConfig.path);
     injectArticles(document, pageConfig.key, prefix);
     injectReviewsMarquee(document);
     injectSEO(document, pageConfig.key, pageConfig.path);
@@ -539,7 +630,7 @@ async function processPage(pageConfig) {
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
 
-    return { videoIssue, catalogIssue, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
+    return { videoIssue, catalogIssue, faqInforme, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
 }
 
 const SITE_ORIGIN = 'https://narbossalon.com';
@@ -1200,7 +1291,8 @@ async function runSSG() {
 
     for (const page of pages) {
         try {
-            const { videoIssue, catalogIssue, breadcrumbIssues: crumbs } = await processPage(page);
+            const { videoIssue, catalogIssue, faqInforme, breadcrumbIssues: crumbs } = await processPage(page);
+            if (faqInforme && process.env.FAQ_INFORME) fs.appendFileSync(process.env.FAQ_INFORME, `${faqInforme}\n`);
             if (videoIssue) videoIssues.push(videoIssue);
             if (catalogIssue) catalogIssues.push(catalogIssue);
             breadcrumbIssues.push(...crumbs);
