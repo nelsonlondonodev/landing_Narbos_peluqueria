@@ -562,16 +562,30 @@ function sincronizarFaqPage(document, pagePath) {
     const marcados = buscarFaqPage(document);
     if (visible.length === 0 && marcados.length === 0) return null;
 
-    if (marcados.length === 0) return `${pagePath}: ${visible.length} preguntas visibles y ningún FAQPage`;
     if (marcados.length > 1) return `${pagePath}: ${marcados.length} nodos FAQPage`;
     if (visible.length === 0) return `${pagePath}: FAQPage sin FAQ visible`;
 
-    const { script, datos, nodo } = marcados[0];
-    nodo.mainEntity = visible.map(({ pregunta, respuesta }) => ({
+    const preguntas = visible.map(({ pregunta, respuesta }) => ({
         '@type': 'Question',
         name: pregunta,
         acceptedAnswer: { '@type': 'Answer', text: respuesta }
     }));
+
+    // Seis páginas de servicio mostraban su FAQ sin marcado: se les crea el bloque.
+    if (marcados.length === 0) {
+        const script = document.createElement('script');
+        script.setAttribute('type', 'application/ld+json');
+        script.textContent = JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: preguntas
+        }, null, 2);
+        document.head.appendChild(script);
+        return null;
+    }
+
+    const { script, datos, nodo } = marcados[0];
+    nodo.mainEntity = preguntas;
     script.textContent = JSON.stringify(datos, null, 2);
     return null;
 }
