@@ -6,6 +6,42 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🚀 Marcado que Repite lo Visible y FAQ Unificadas v2.8.44 (27 de septiembre de 2026)
+
+*   **Subpáginas de peluquería generadas en el build**: Cortes, balayage, color y tratamientos llevaban sus tarjetas copiadas a mano en el HTML, y el cliente no las repintaba: era lo que se servía y no leía de ningún dato. En tratamientos ya enseñaba los `**asteriscos**` del markdown. Ahora las genera el SSG desde `hairServicesFor()`, la misma regla que usa el cliente, y el alisado lee su precio de `masterPrices` (`4957f5b`, `75ee2ef`).
+*   **Catálogo del schema desde las tarjetas**: El `OfferCatalog` de esas cuatro páginas también estaba escrito a mano: a balayage le faltaba el retoque de raíz, color llamaba «Tinte Global» a «Aplicación de tintes» y tratamientos no tenía catálogo, solo «Consultar precios». Sale del mismo dato que las tarjetas. El botox capilar y la repolarización van sin precio en el marcado hasta que la propietaria los confirme (`0955fec`).
+*   **FAQ que no se abrían**: Las seis preguntas de color-tinturas no tenían el contenedor que anima `FAQAccordion`, que cancelaba el clic antes de comprobarlo. Se corrige la página y el componente, que ya no deja muerta una pregunta sin contenedor (`7c579a6`).
+*   **Un solo diseño de acordeón**: Color-tinturas y once artículos del blog usaban marcados propios; pasan al de la plantilla, con la pregunta en `<h3>` bajo su `<h2>`. Sin tocar ningún texto visible ni el JSON-LD, comprobado artículo por artículo (`dc0ba94`, `bc5fa86`, `2c90477`).
+*   **`FAQPage` generado desde lo visible**: En 18 páginas el marcado de la FAQ ya no coincidía con lo que se ve —preguntas redactadas de otra forma, respuestas antiguas, siete desajustes en manicure—, y ocho mostraban su FAQ sin marcado. El SSG lo reconstruye ahora desde el HTML y una guarda aborta el deploy si una FAQ no se puede seguir. Verificado contra el `dist` anterior: ni el HTML visible ni el resto del JSON-LD cambian (`7b12ec5`, `37c64e3`, `d59f081`, `bcafd76`, `5d60542`).
+*   **Horario**: Nosotros decía que los festivos se cerraba y un artículo prometía abrir los domingos. El horario real, confirmado y alineado con la ficha de Google, es de lunes a sábado de 7:00 a 20:00, festivos de 9:00 a 18:00 y domingos cerrado (`a62eb24`).
+*   **Versión**: `v2.8.44`.
+
+---
+
+## 🚀 Reseñas y Precios Reales v2.8.43 (25 de septiembre de 2026)
+
+*   **Una reseña inventada seguía en el HTML**: La tarjeta de respaldo de la marquesina —la que ve el rastreador si el JS no llega— era de «Andrea Morales», que no existe en la ficha, en la home y en nosotros. El SSG pinta ahora las cinco reseñas reales en el build, el texto que llega de Google se escapa antes de entrar en `innerHTML`, y el sync conserva la última sincronización buena en vez de publicar reseñas de muestra cuando Google falla (`5e680b4`).
+*   **Precios de la propietaria**: Camuflaje de canas a $120.000 y corte niño a $35.000 (estaban como estimados en $50.000 y $30.000), alisado con aminoácidos desde $420.000, y fuera el combo «Corte + Barba», que no existe (`127a803`).
+*   **Sin domicilio**: La guía de novias respondía que sí hacemos maquillaje a domicilio; no lo hay de ningún tipo (`b345cba`).
+*   **Versión**: `v2.8.43`.
+
+---
+
+## ♿ Orden de Encabezados en las Reseñas v2.8.42 (23 de septiembre de 2026)
+
+*   **El autor de una reseña deja de ser un encabezado**: La marquesina ponía el nombre en un `h4` bajo el `h2` de la sección, y Lighthouse bajó la accesibilidad de la home de 100 a 98. Pasa a `p`; nosotros arrastraba el mismo fallo (`16f0b4d`).
+*   **Versión**: `v2.8.42`.
+
+---
+
+## 🚀 Marquesina de Reseñas en la Home v2.8.41 (23 de septiembre de 2026)
+
+*   **Reseñas reales en movimiento**: La home cambia el carrusel de una reseña por la marquesina de nosotros, que enseña cuatro a la vez. De paso salen tres reseñas escritas a mano —Andrea Morales, Carlos Restrepo y Liliana Gómez— que no existían en la ficha de Google (`3163917`).
+*   **Menos código**: La marquesina pasa a ser un componente, `ReviewsMarquee`; `ReviewsCarousel` y `AboutHubController` sobran, y el modal de vídeo queda con un solo mecanismo por delegación en `App.js`.
+*   **Versión**: `v2.8.41`.
+
+---
+
 ## 🚀 Reparto por Niveles y Saneamiento de la Indexación v2.8.40 (22 de septiembre de 2026)
 
 *   **Canónicas que apuntaban a URLs rotas**: `injectSEO` añadía barra final a toda ruta, así que las 14 páginas hoja declaraban `/contacto/` en vez de `/contacto` —una URL que el `.htaccess` no resuelve—. Son los 14 «Error de servidor (5xx)» que Search Console reportaba sin moverse desde julio, señalados por la propia señal con la que Google decide qué indexar (`e53dc46`).
