@@ -497,7 +497,7 @@ const limpiarTexto = texto => texto.replace(/\s+/g, ' ').trim();
 
 /**
  * Lee las preguntas y respuestas tal como las ve el visitante.
- * @returns {{pregunta: string, respuesta: string}[]}
+ * @returns {{pregunta: string, respuesta: string, animable: boolean}[]}
  */
 function leerFaqVisible(document) {
     const vistas = new Set();
@@ -513,7 +513,11 @@ function leerFaqVisible(document) {
                 .filter(hijo => hijo !== summary)
                 .map(hijo => hijo.textContent)
                 .join(' ');
-            faq.push({ pregunta: limpiarTexto(summary.textContent), respuesta: limpiarTexto(respuesta) });
+            faq.push({
+                pregunta: limpiarTexto(summary.textContent),
+                respuesta: limpiarTexto(respuesta),
+                animable: Boolean(details.querySelector('.faq-content'))
+            });
         }
     }
     return faq;
@@ -555,15 +559,22 @@ function buscarFaqPage(document) {
  * respeta. Las respuestas van en texto plano: los enlaces de la versión visible se
  * quedan en la página.
  *
- * @returns {string|null} Descripción del problema, o null si todo encaja.
+ * También vigila que cada pregunta lleve su `.faq-content`: sin él, `FAQAccordion` no
+ * tiene qué animar. Así estuvieron muertas las seis de color-tinturas.
+ *
+ * @returns {string[]} Un mensaje por problema; vacío si todo encaja.
  */
 function sincronizarFaqPage(document, pagePath) {
     const visible = leerFaqVisible(document);
     const marcados = buscarFaqPage(document);
-    if (visible.length === 0 && marcados.length === 0) return null;
+    if (visible.length === 0 && marcados.length === 0) return [];
 
-    if (marcados.length > 1) return `${pagePath}: ${marcados.length} nodos FAQPage`;
-    if (visible.length === 0) return `${pagePath}: FAQPage sin FAQ visible`;
+    if (marcados.length > 1) return [`${pagePath}: ${marcados.length} nodos FAQPage`];
+    if (visible.length === 0) return [`${pagePath}: FAQPage sin FAQ visible`];
+
+    const issues = visible
+        .filter(item => !item.animable)
+        .map(item => `${pagePath}: «${item.pregunta}» no tiene .faq-content`);
 
     const preguntas = visible.map(({ pregunta, respuesta }) => ({
         '@type': 'Question',
@@ -581,13 +592,13 @@ function sincronizarFaqPage(document, pagePath) {
             mainEntity: preguntas
         }, null, 2);
         document.head.appendChild(script);
-        return null;
+        return issues;
     }
 
     const { script, datos, nodo } = marcados[0];
     nodo.mainEntity = preguntas;
     script.textContent = JSON.stringify(datos, null, 2);
-    return null;
+    return issues;
 }
 
 /**
@@ -634,7 +645,7 @@ async function processPage(pageConfig) {
     injectServices(document, pageConfig.key, prefix);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
-    const faqInforme = sincronizarFaqPage(document, pageConfig.path);
+    const faqIssues = sincronizarFaqPage(document, pageConfig.path);
     injectArticles(document, pageConfig.key, prefix);
     injectReviewsMarquee(document);
     injectSEO(document, pageConfig.key, pageConfig.path);
@@ -644,7 +655,7 @@ async function processPage(pageConfig) {
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
 
-    return { videoIssue, catalogIssue, faqInforme, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
+    return { videoIssue, catalogIssue, faqIssues, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
 }
 
 const SITE_ORIGIN = 'https://narbossalon.com';
@@ -1301,12 +1312,13 @@ async function runSSG() {
     const pages = getAllHtmlFiles(DIST_DIR);
     const videoIssues = [];
     const catalogIssues = [];
+    const faqIssues = [];
     const breadcrumbIssues = [];
 
     for (const page of pages) {
         try {
-            const { videoIssue, catalogIssue, faqInforme, breadcrumbIssues: crumbs } = await processPage(page);
-            if (faqInforme && process.env.FAQ_INFORME) fs.appendFileSync(process.env.FAQ_INFORME, `${faqInforme}\n`);
+            const { videoIssue, catalogIssue, faqIssues: faqs, breadcrumbIssues: crumbs } = await processPage(page);
+            faqIssues.push(...faqs);
             if (videoIssue) videoIssues.push(videoIssue);
             if (catalogIssue) catalogIssues.push(catalogIssue);
             breadcrumbIssues.push(...crumbs);
@@ -1326,6 +1338,11 @@ async function runSSG() {
             titulo: 'Subpáginas de peluquería sin Service para su catálogo',
             issues: catalogIssues,
             motivo: 'las tarjetas se publicarían con precio y el marcado sin ninguno: Google leería una página distinta de la que ve el cliente.'
+        },
+        {
+            titulo: 'FAQ visibles que el marcado o el acordeón no pueden seguir',
+            issues: faqIssues,
+            motivo: 'el FAQPage se genera desde la FAQ visible; si no la encuentra entera, el marcado vuelve a contar otra cosa que la página, o la pregunta no se abre.'
         },
         {
             titulo: 'Breadcrumbs que apuntan a páginas inexistentes',
