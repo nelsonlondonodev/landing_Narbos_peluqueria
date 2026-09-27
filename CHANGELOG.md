@@ -6,6 +6,17 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🗓️ Fechas Completas en los Artículos v2.8.45 (27 de septiembre de 2026)
+
+*   **Fechas con hora y zona horaria**: La Prueba de resultados enriquecidos avisaba de que `datePublished` no tenía hora ni zona horaria en 16 de los 23 artículos. Se completan esas 24 fechas con la convención de los que ya estaban bien (8:00 de Bogotá), sin cambiar ningún día (`3d843aa`).
+*   **`dateModified` en los ocho que no lo tenían**: Sin inventar fechas: la de publicación en los que solo tuvieron cambios técnicos, y la real en los dos que cambiaron de contenido, la guía de masajes (21 de septiembre) y la del salón en Chía (hoy, por el horario de los domingos) (`e466854`).
+*   **Una URL del índice del blog daba error 500**: El listado del índice enlazaba `limpieza-facial-clima-frio-chia/` con barra final, que en producción responde 500, y dos artículos con `.html`, que responden 301. Las 23 URLs responden ya 200, y la fecha de alisados se alinea con la del artículo (`0a01cf9`).
+*   **El generador de artículos**: Los nuevos salen con fecha completa y `dateModified`, con la fecha local y no en UTC —que fechaba el día anterior lo creado en España de madrugada— y sin el `${slug}` literal que publicaba en `mainEntityOfPage` (`de05cb6`).
+*   **Guarda**: `checkFechasSchema` sustituye a `checkUploadDates` y vigila también las fechas de los artículos (`f5b38fc`).
+*   **Versión**: `v2.8.45`.
+
+---
+
 ## 🚀 Marcado que Repite lo Visible y FAQ Unificadas v2.8.44 (27 de septiembre de 2026)
 
 *   **Subpáginas de peluquería generadas en el build**: Cortes, balayage, color y tratamientos llevaban sus tarjetas copiadas a mano en el HTML, y el cliente no las repintaba: era lo que se servía y no leía de ningún dato. En tratamientos ya enseñaba los `**asteriscos**` del markdown. Ahora las genera el SSG desde `hairServicesFor()`, la misma regla que usa el cliente, y el alisado lee su precio de `masterPrices` (`4957f5b`, `75ee2ef`).
