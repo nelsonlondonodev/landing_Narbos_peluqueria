@@ -98,7 +98,7 @@ export const resolveAsset = (path, prefix = '') => {
  * Configuración global del sitio.
  */
 export const siteConfig = Object.freeze({
-    version: "2.8.45", // Versión actualizada
+    version: "2.8.46", // Versión actualizada
     basePath: BASE_PATH,
     socialLinks: [
         {
@@ -118,7 +118,7 @@ export const siteConfig = Object.freeze({
         },
         {
             name: "TikTok",
-            url: "https://www.tiktok.com/@narbosspa2508",
+            url: "https://www.tiktok.com/@narbossalonyspa",
             iconPath: "M448 209.9a210.1 210.1 0 0 1 -122.8-39.25V349.38A162.6 162.6 0 1 1 185.3 189.31V292.8a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 122.4 121.18c0 34.13-13.43 65.29-35.12 88.72z"
         },
         {
@@ -131,7 +131,7 @@ export const siteConfig = Object.freeze({
     contact: {
         phone: "+573123462618",
         whatsapp: "573123462618",
-        email: "citas@narbossalon.com",
+        email: "contacto@narbossalon.com",
         address: "Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118, Chía, Cundinamarca, Colombia.",
         mapsLink: "https://maps.app.goo.gl/tuLinkDeMaps",
         googleAnalyticsId: "G-7XLWJJBSDL",

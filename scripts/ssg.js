@@ -10,7 +10,8 @@ import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
 import { getHeroHTML } from '../js/components/HeroSection.js';
 import { getVideoSectionHTML } from '../js/components/VideoSection.js';
-import { resolveRoute, resolveAsset } from '../js/config.js';
+import { resolveRoute, resolveAsset, siteConfig } from '../js/config.js';
+import businessHours from '../js/data/business-hours.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { getHeroBadgesHTML, getStarSpriteHTML } from '../js/components/HeroBadges.js';
 import googleReviews from '../js/data/google-reviews.js';
@@ -487,6 +488,120 @@ function injectOfferCatalog(document, pageKey, pagePath) {
 }
 
 /**
+ * El negocio en el schema: una sola entidad, con los datos de una sola fuente.
+ *
+ * El `BeautySalon` estaba escrito a mano en 24 nodos y cada copia decía una cosa: tres
+ * `@id` distintos (para Google, tres negocios aparte del principal), horarios falsos en
+ * uñas, un `sameAs` que apuntaba a cuentas de Instagram, Facebook y TikTok que no son de
+ * Narbo's, y seis nodos sin teléfono ni rango de precios. Nelson confirmó los datos el
+ * 2026-09-27: salen de `siteConfig` y del horario sincronizado con la ficha de Google.
+ * Lo propio de cada página (imagen, catálogo, valoración, zona) se respeta.
+ */
+const ORG_ID = 'https://narbossalon.com/#organization';
+const DIRECCION = Object.freeze({
+    '@type': 'PostalAddress',
+    streetAddress: 'Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118',
+    addressLocality: 'Chía',
+    addressRegion: 'Cundinamarca',
+    postalCode: '250001',
+    addressCountry: 'CO'
+});
+const DIAS_SCHEMA = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const horaSchema = (hora, minuto) => `${String(hora).padStart(2, '0')}:${String(minuto).padStart(2, '0')}`;
+
+/** «9:00 AM» → «09:00». */
+function hora12a24(texto) {
+    const [, h, m, sufijo] = texto.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+    const hora = (Number(h) % 12) + (sufijo.toUpperCase() === 'PM' ? 12 : 0);
+    return horaSchema(hora, m);
+}
+
+/**
+ * Agrupa los días que comparten horario, como lo escribe Google en su ficha.
+ * Los festivos van aparte, como `PublicHolidays`.
+ */
+function horarioSchema() {
+    const grupos = new Map();
+    for (const { open, close } of businessHours.periods) {
+        const clave = `${horaSchema(open.hour, open.minute)}-${horaSchema(close.hour, close.minute)}`;
+        if (!grupos.has(clave)) grupos.set(clave, []);
+        grupos.get(clave).push(DIAS_SCHEMA[open.day]);
+    }
+    const horario = [...grupos].map(([clave, dias]) => {
+        const [opens, closes] = clave.split('-');
+        return { '@type': 'OpeningHoursSpecification', dayOfWeek: dias, opens, closes };
+    });
+
+    const festivos = businessHours.schedule?.find(dia => dia.day === 'Festivos');
+    if (festivos && !festivos.closed) {
+        horario.push({
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: 'PublicHolidays',
+            opens: hora12a24(festivos.opens),
+            closes: hora12a24(festivos.closes)
+        });
+    }
+    return horario;
+}
+
+function datosDelNegocio() {
+    return {
+        '@id': ORG_ID,
+        name: "Narbo's Salón Spa",
+        url: 'https://narbossalon.com/',
+        telephone: siteConfig.contact.phone,
+        email: siteConfig.contact.email,
+        address: { ...DIRECCION },
+        geo: { '@type': 'GeoCoordinates', latitude: 4.8617, longitude: -74.0539 },
+        priceRange: '$$',
+        openingHoursSpecification: horarioSchema(),
+        logo: { '@type': 'ImageObject', url: 'https://narbossalon.com/images/brand/logo_narbos.webp' },
+        sameAs: siteConfig.socialLinks.filter(red => red.name !== 'WhatsApp').map(red => red.url)
+    };
+}
+
+/**
+ * Completa cada `BeautySalon` del JSON-LD con los datos del negocio, y alinea la dirección
+ * de los `Organization` que la repiten.
+ * @returns {number} Cuántos nodos ha tocado.
+ */
+function unificarNegocio(document) {
+    const negocio = datosDelNegocio();
+    let tocados = 0;
+
+    for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        let datos;
+        try {
+            datos = JSON.parse(script.textContent);
+        } catch {
+            continue; // Lo reporta checkBreadcrumbs.
+        }
+        let cambiado = false;
+        const recorrer = nodo => {
+            if (Array.isArray(nodo)) return nodo.forEach(recorrer);
+            if (!nodo || typeof nodo !== 'object') return;
+            const tipos = [].concat(nodo['@type']);
+            if (tipos.includes('BeautySalon') || tipos.includes('HealthAndBeautyBusiness')) {
+                Object.assign(nodo, structuredClone(negocio));
+                cambiado = true;
+                tocados++;
+            } else if (tipos.includes('Organization') && nodo.address && /Narbo/.test(nodo.name)) {
+                // El publisher de algunos artículos repite la dirección, con «Cajica»:
+                // solo se le corrige esa, el resto del nodo es el de un publisher.
+                nodo.address = { ...DIRECCION };
+                cambiado = true;
+                tocados++;
+            }
+            Object.values(nodo).forEach(recorrer);
+        };
+        recorrer(datos);
+        if (cambiado) script.textContent = JSON.stringify(datos, null, 2);
+    }
+    return tocados;
+}
+
+/**
  * Contenedores de las FAQ visibles. Son cuatro ids por historia, no por diseño: las
  * páginas de servicio usan `faq`, los artículos `article-faq`, y hay un artículo y el
  * índice del blog con el suyo propio.
@@ -646,6 +761,7 @@ async function processPage(pageConfig) {
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
     const faqIssues = sincronizarFaqPage(document, pageConfig.path);
+    unificarNegocio(document);
     injectArticles(document, pageConfig.key, prefix);
     injectReviewsMarquee(document);
     injectSEO(document, pageConfig.key, pageConfig.path);
@@ -853,6 +969,54 @@ function checkExternalCdn() {
     });
 
     return issues;
+}
+
+/**
+ * Aborta si el NAP vuelve a separarse: la dirección del pie (`siteConfig`) distinta de
+ * la del schema, la dirección escrita de otra forma en cualquier página, o un nodo del
+ * negocio con otro `@id` u otro teléfono.
+ *
+ * El 2026-09-27 había 31 «Chía - Cajica» sin tilde en 25 páginas y tres `@id` para el
+ * mismo salón. La ficha de Google es la referencia, y una dirección escrita de dos formas
+ * es justo lo que resta coherencia a la señal de negocio local.
+ */
+function checkNap() {
+    const issues = [];
+    const calle = DIRECCION.streetAddress;
+
+    if (!siteConfig.contact.address.startsWith(calle)) {
+        issues.push(`siteConfig.contact.address no empieza por «${calle}»`);
+    }
+
+    const VARIANTE_RE = /Km 2 vía Chía - Cajic[^\s<",.;:)]*/g;
+    forEachDistPage((relPath, html) => {
+        for (const [variante] of html.matchAll(VARIANTE_RE)) {
+            if (variante !== 'Km 2 vía Chía - Cajicá') {
+                issues.push(`${relPath}: la dirección dice «${variante}»`);
+            }
+        }
+        for (const [, json] of html.matchAll(JSON_LD_RE)) {
+            let parsed;
+            try {
+                parsed = JSON.parse(json);
+            } catch {
+                continue; // Lo reporta checkFechasSchema.
+            }
+            const recorrer = nodo => {
+                if (Array.isArray(nodo)) return nodo.forEach(recorrer);
+                if (!nodo || typeof nodo !== 'object') return;
+                const tipos = [].concat(nodo['@type']);
+                if (tipos.includes('BeautySalon') || tipos.includes('HealthAndBeautyBusiness')) {
+                    if (nodo['@id'] !== ORG_ID) issues.push(`${relPath}: negocio con @id «${nodo['@id']}»`);
+                    if (nodo.telephone !== siteConfig.contact.phone) issues.push(`${relPath}: negocio con teléfono «${nodo.telephone}»`);
+                }
+                Object.values(nodo).forEach(recorrer);
+            };
+            recorrer(parsed);
+        }
+    });
+
+    return [...new Set(issues)];
 }
 
 /**
@@ -1362,6 +1526,11 @@ async function runSSG() {
             titulo: 'Breadcrumbs que apuntan a páginas inexistentes',
             issues: breadcrumbIssues,
             motivo: 'Google sigue esos niveles y encuentra un 403, que reintenta indefinidamente en vez de descartarlo.'
+        },
+        {
+            titulo: 'NAP distinto entre páginas o respecto a la ficha',
+            issues: checkNap(),
+            motivo: 'el nombre, la dirección y el teléfono tienen que decir lo mismo en todas partes: es la señal con la que Google ata la web al negocio local.'
         },
         {
             titulo: 'Fechas del schema mal formadas o ausentes',
