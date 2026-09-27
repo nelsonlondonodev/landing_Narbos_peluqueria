@@ -28,8 +28,11 @@ const ask = (question) => new Promise((resolve) => rl.question(question, resolve
  */
 function getFormattedDates(dateInput) {
     const dateObj = dateInput ? new Date(dateInput) : new Date();
+    // Fecha local, no UTC: `toISOString()` fechaba el día anterior un artículo creado
+    // en España entre las 00:00 y las 02:00.
+    const pad = n => String(n).padStart(2, '0');
     return {
-        iso: dateObj.toISOString().split('T')[0],
+        iso: `${dateObj.getFullYear()}-${pad(dateObj.getMonth() + 1)}-${pad(dateObj.getDate())}`,
         display: dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
     };
 }
@@ -58,10 +61,14 @@ function generateSchemaMarkup(data) {
           "url": "https://narbossalon.com/images/brand/logo-narbos-negro.webp"
         }
       },
-      "datePublished": isoDate,
+      // Google avisa si la fecha va sin hora ni zona horaria. Las 8:00 de Bogotá es la
+      // convención del resto de artículos; `isoDate` sigue siendo AAAA-MM-DD para el
+      // orden del blog y el `lastmod` del sitemap.
+      "datePublished": `${isoDate}T08:00:00-05:00`,
+      "dateModified": `${isoDate}T08:00:00-05:00`,
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://narbossalon.com/blog/articles/${slug}"
+        "@id": `https://narbossalon.com/blog/articles/${slug}`
       }
     };
 
