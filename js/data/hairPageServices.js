@@ -195,3 +195,22 @@ export const hairPageServices = Object.freeze([
         modal: true
     }
 ]);
+
+/**
+ * Categorías que muestra cada página de peluquería, por su clave (el nombre del
+ * archivo sin `.html`). La usan el SSG, que pinta las tarjetas en el build, y
+ * `hair-page.js`, que las pinta en cliente cuando el HTML llega sin ellas.
+ */
+const CATEGORIAS_POR_PAGINA = {
+    'cortes-de-pelo': ['cortes'],
+    'balayage-mechas': ['color', 'balayage'],
+    'color-tinturas-cabello': ['color', 'balayage'],
+    'tratamientos-capilares': ['tratamientos']
+};
+
+export const HAIR_SUBPAGES = Object.keys(CATEGORIAS_POR_PAGINA);
+
+export function hairServicesFor(pagina) {
+    const categorias = CATEGORIAS_POR_PAGINA[pagina] || ['hub'];
+    return hairPageServices.filter(s => categorias.includes(s.category));
+}

@@ -17,6 +17,7 @@ import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { barberServices } from '../js/data/barberServices.js';
 import { hairSalonServices } from '../js/data/hairSalonServices.js';
+import { HAIR_SUBPAGES, hairServicesFor } from '../js/data/hairPageServices.js';
 import { estheticsServices } from '../js/data/estheticsServices.js';
 import { makeupServices } from '../js/data/makeupServices.js';
 import articles from '../js/data/articles.js';
@@ -36,7 +37,13 @@ const SERVICE_SOURCE_REGISTRY = {
     'peluqueria': { source: hairSalonServices, gridId: 'hair-services-grid', variant: 'standard' },
     'estetica': { source: estheticsServices, gridId: 'aesthetics-services-static', variant: 'standard' },
     'maquillaje': { source: makeupServices, gridId: 'makeup-services-grid', variant: 'standard' },
-    'default': { source: servicesData, gridId: 'services-grid', variant: 'overlay' }
+    'default': { source: servicesData, gridId: 'services-grid', variant: 'overlay' },
+    // Las subpáginas de peluquería llevaban el grid copiado a mano en el HTML: una
+    // foto fija que no leía de ningún dato y se quedaba vieja con cada cambio.
+    ...Object.fromEntries(HAIR_SUBPAGES.map(pagina => [
+        pagina,
+        { source: hairServicesFor(pagina), gridId: 'hair-services-grid', variant: 'standard' }
+    ]))
 };
 
 /**
