@@ -8,7 +8,7 @@ import { ServiceCard } from './components/ServiceCard.js';
 import { ServiceModal } from './components/ServiceModal.js';
 import { hairBrands, smoothingBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
-import { hairPageServices } from './data/hairPageServices.js';
+import { hairPageServices, hairServicesFor } from './data/hairPageServices.js';
 
 /**
  * Hair Page Logic
@@ -178,23 +178,8 @@ function initHairServicesGrid() {
 }
 
 function getFilteredServices() {
-    const path = window.location.pathname;
-    
-    if (path.includes('cortes-de-pelo')) {
-        return hairPageServices.filter(s => s.category === 'cortes');
-    }
-    
-    // Unificación de categorías Color y Balayage para ambas páginas relacionadas
-    if (path.includes('balayage-mechas') || path.includes('color-tinturas')) {
-        return hairPageServices.filter(s => s.category === 'color' || s.category === 'balayage');
-    }
-    
-    if (path.includes('tratamientos')) {
-        return hairPageServices.filter(s => s.category === 'tratamientos');
-    }
-
-    // Default: Hub
-    return hairPageServices.filter(s => s.category === 'hub');
+    const pagina = window.location.pathname.split('/').pop().replace(/\.html$/, '');
+    return hairServicesFor(pagina);
 }
 
 function renderServiceCards(container, services, modalInstance) {

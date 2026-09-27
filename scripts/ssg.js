@@ -17,6 +17,7 @@ import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { barberServices } from '../js/data/barberServices.js';
 import { hairSalonServices } from '../js/data/hairSalonServices.js';
+import { HAIR_SUBPAGES, hairServicesFor } from '../js/data/hairPageServices.js';
 import { estheticsServices } from '../js/data/estheticsServices.js';
 import { makeupServices } from '../js/data/makeupServices.js';
 import articles from '../js/data/articles.js';
@@ -36,7 +37,13 @@ const SERVICE_SOURCE_REGISTRY = {
     'peluqueria': { source: hairSalonServices, gridId: 'hair-services-grid', variant: 'standard' },
     'estetica': { source: estheticsServices, gridId: 'aesthetics-services-static', variant: 'standard' },
     'maquillaje': { source: makeupServices, gridId: 'makeup-services-grid', variant: 'standard' },
-    'default': { source: servicesData, gridId: 'services-grid', variant: 'overlay' }
+    'default': { source: servicesData, gridId: 'services-grid', variant: 'overlay' },
+    // Las subpáginas de peluquería llevaban el grid copiado a mano en el HTML: una
+    // foto fija que no leía de ningún dato y se quedaba vieja con cada cambio.
+    ...Object.fromEntries(HAIR_SUBPAGES.map(pagina => [
+        pagina,
+        { source: hairServicesFor(pagina), gridId: 'hair-services-grid', variant: 'standard' }
+    ]))
 };
 
 /**
@@ -426,6 +433,175 @@ function precargarLogo(document) {
 }
 
 /**
+ * Construye el `OfferCatalog` de una subpágina de peluquería con sus propias tarjetas.
+ *
+ * El catálogo estaba escrito a mano en el JSON-LD de cada página y se había ido
+ * separando de lo que se veía: a balayage le faltaba el retoque de raíz, color llamaba
+ * «Tinte Global» a la tarjeta de «Aplicación de tintes» y tratamientos no tenía catálogo,
+ * solo una `Offer` con «Consultar precios» encima de cuatro tarjetas con precio. Ahora
+ * sale del mismo dato que las tarjetas; el resto del `Service` (proveedor, zona) se
+ * respeta tal cual.
+ *
+ * @returns {string|null} Descripción del problema, o null si todo encaja.
+ */
+function injectOfferCatalog(document, pageKey, pagePath) {
+    if (!HAIR_SUBPAGES.includes(pageKey)) return null;
+
+    for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        let datos;
+        try {
+            datos = JSON.parse(script.textContent);
+        } catch {
+            continue; // Lo reporta checkBreadcrumbs, que ya vigila los bloques que no parsean.
+        }
+        const servicio = [datos, ...(datos['@graph'] || [])]
+            .map(nodo => (nodo['@type'] === 'Service' ? nodo : nodo.mainEntity))
+            .find(nodo => nodo?.['@type'] === 'Service');
+        if (!servicio) continue;
+
+        servicio.hasOfferCatalog = {
+            '@type': 'OfferCatalog',
+            name: servicio.hasOfferCatalog?.name || `Catálogo de ${servicio.serviceType || servicio.name}`,
+            itemListElement: hairServicesFor(pageKey).map(item => ({
+                '@type': 'Offer',
+                itemOffered: {
+                    '@type': 'Service',
+                    name: item.title,
+                    description: item.description.replace(/<[^>]+>/g, '')
+                },
+                // Un precio que la propietaria no ha confirmado no se le anuncia a Google.
+                ...(item.precioSinConfirmar ? {} : {
+                    price: item.price.replace(/\D/g, ''),
+                    priceCurrency: 'COP'
+                })
+            }))
+        };
+        // La `Offer` suelta sin precio decía «Consultar precios»: el catálogo la sustituye.
+        if (servicio.offers && !servicio.offers.price) delete servicio.offers;
+
+        script.textContent = JSON.stringify(datos, null, 2);
+        return null;
+    }
+
+    return `${pagePath}: no tiene un Service en su JSON-LD donde colgar el catálogo`;
+}
+
+/**
+ * Contenedores de las FAQ visibles. Son cuatro ids por historia, no por diseño: las
+ * páginas de servicio usan `faq`, los artículos `article-faq`, y hay un artículo y el
+ * índice del blog con el suyo propio.
+ */
+const FAQ_CONTENEDORES = '#faq, #article-faq, #preguntas-frecuentes, #blog-faq';
+
+const limpiarTexto = texto => texto.replace(/\s+/g, ' ').trim();
+
+/**
+ * Lee las preguntas y respuestas tal como las ve el visitante.
+ * @returns {{pregunta: string, respuesta: string, animable: boolean}[]}
+ */
+function leerFaqVisible(document) {
+    const vistas = new Set();
+    const faq = [];
+
+    for (const contenedor of document.querySelectorAll(FAQ_CONTENEDORES)) {
+        for (const details of contenedor.querySelectorAll('details')) {
+            if (vistas.has(details)) continue; // hay contenedores anidados
+            vistas.add(details);
+
+            const summary = details.querySelector('summary');
+            const respuesta = [...details.children]
+                .filter(hijo => hijo !== summary)
+                .map(hijo => hijo.textContent)
+                .join(' ');
+            faq.push({
+                pregunta: limpiarTexto(summary.textContent),
+                respuesta: limpiarTexto(respuesta),
+                animable: Boolean(details.querySelector('.faq-content'))
+            });
+        }
+    }
+    return faq;
+}
+
+/**
+ * Busca los nodos `FAQPage` del JSON-LD, estén en la raíz, en un array o en `@graph`.
+ * @returns {{script: Element, datos: Object, nodo: Object}[]}
+ */
+function buscarFaqPage(document) {
+    const encontrados = [];
+    for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        let datos;
+        try {
+            datos = JSON.parse(script.textContent);
+        } catch {
+            continue; // Lo reporta checkBreadcrumbs.
+        }
+        const recorrer = nodo => {
+            if (Array.isArray(nodo)) return nodo.forEach(recorrer);
+            if (!nodo || typeof nodo !== 'object') return;
+            const tipos = [].concat(nodo['@type']);
+            if (tipos.includes('FAQPage')) encontrados.push({ script, datos, nodo });
+            Object.values(nodo).forEach(recorrer);
+        };
+        recorrer(datos);
+    }
+    return encontrados;
+}
+
+/**
+ * Genera las preguntas del `FAQPage` a partir de la FAQ visible.
+ *
+ * El marcado estaba escrito a mano en cada página y se había separado de lo que se ve:
+ * preguntas redactadas de otra forma, respuestas antiguas, en manicure siete desajustes.
+ * Google pide que el marcado de una FAQ repita lo que ve el visitante, así que se
+ * reconstruye en el build desde el propio HTML y ya no puede desviarse. Solo se
+ * sustituye `mainEntity`; el resto del nodo (`@id`, `name`, su sitio en el `@graph`) se
+ * respeta. Las respuestas van en texto plano: los enlaces de la versión visible se
+ * quedan en la página.
+ *
+ * También vigila que cada pregunta lleve su `.faq-content`: sin él, `FAQAccordion` no
+ * tiene qué animar. Así estuvieron muertas las seis de color-tinturas.
+ *
+ * @returns {string[]} Un mensaje por problema; vacío si todo encaja.
+ */
+function sincronizarFaqPage(document, pagePath) {
+    const visible = leerFaqVisible(document);
+    const marcados = buscarFaqPage(document);
+    if (visible.length === 0 && marcados.length === 0) return [];
+
+    if (marcados.length > 1) return [`${pagePath}: ${marcados.length} nodos FAQPage`];
+    if (visible.length === 0) return [`${pagePath}: FAQPage sin FAQ visible`];
+
+    const issues = visible
+        .filter(item => !item.animable)
+        .map(item => `${pagePath}: «${item.pregunta}» no tiene .faq-content`);
+
+    const preguntas = visible.map(({ pregunta, respuesta }) => ({
+        '@type': 'Question',
+        name: pregunta,
+        acceptedAnswer: { '@type': 'Answer', text: respuesta }
+    }));
+
+    // Seis páginas de servicio mostraban su FAQ sin marcado: se les crea el bloque.
+    if (marcados.length === 0) {
+        const script = document.createElement('script');
+        script.setAttribute('type', 'application/ld+json');
+        script.textContent = JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: preguntas
+        }, null, 2);
+        document.head.appendChild(script);
+        return issues;
+    }
+
+    const { script, datos, nodo } = marcados[0];
+    nodo.mainEntity = preguntas;
+    script.textContent = JSON.stringify(datos, null, 2);
+    return issues;
+}
+
+/**
  * Pinta la marquesina de opiniones con las reseñas reales del build. Antes cada página
  * traía una tarjeta escrita a mano como respaldo para el rastreador, y era una reseña
  * que no existe en la ficha de Google.
@@ -468,6 +644,8 @@ async function processPage(pageConfig) {
     injectHeroBadges(document, pageConfig.key);
     injectServices(document, pageConfig.key, prefix);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path);
+    const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
+    const faqIssues = sincronizarFaqPage(document, pageConfig.path);
     injectArticles(document, pageConfig.key, prefix);
     injectReviewsMarquee(document);
     injectSEO(document, pageConfig.key, pageConfig.path);
@@ -477,7 +655,7 @@ async function processPage(pageConfig) {
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
 
-    return { videoIssue, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
+    return { videoIssue, catalogIssue, faqIssues, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
 }
 
 const SITE_ORIGIN = 'https://narbossalon.com';
@@ -1133,12 +1311,16 @@ async function runSSG() {
     console.log('\n🚀 Iniciando SSG (Static Site Generation)...');
     const pages = getAllHtmlFiles(DIST_DIR);
     const videoIssues = [];
+    const catalogIssues = [];
+    const faqIssues = [];
     const breadcrumbIssues = [];
 
     for (const page of pages) {
         try {
-            const { videoIssue, breadcrumbIssues: crumbs } = await processPage(page);
+            const { videoIssue, catalogIssue, faqIssues: faqs, breadcrumbIssues: crumbs } = await processPage(page);
+            faqIssues.push(...faqs);
             if (videoIssue) videoIssues.push(videoIssue);
+            if (catalogIssue) catalogIssues.push(catalogIssue);
             breadcrumbIssues.push(...crumbs);
             console.log(`✅ Procesado: ${page.path}`);
         } catch (err) {
@@ -1151,6 +1333,16 @@ async function runSSG() {
             titulo: 'Secciones de video mal cableadas',
             issues: videoIssues,
             motivo: 'publicar un VideoObject sin su sección visible deja el marcado describiendo un video que no está en la página.'
+        },
+        {
+            titulo: 'Subpáginas de peluquería sin Service para su catálogo',
+            issues: catalogIssues,
+            motivo: 'las tarjetas se publicarían con precio y el marcado sin ninguno: Google leería una página distinta de la que ve el cliente.'
+        },
+        {
+            titulo: 'FAQ visibles que el marcado o el acordeón no pueden seguir',
+            issues: faqIssues,
+            motivo: 'el FAQPage se genera desde la FAQ visible; si no la encuentra entera, el marcado vuelve a contar otra cosa que la página, o la pregunta no se abre.'
         },
         {
             titulo: 'Breadcrumbs que apuntan a páginas inexistentes',

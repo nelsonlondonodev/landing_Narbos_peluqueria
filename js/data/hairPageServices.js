@@ -1,3 +1,5 @@
+import { masterPrices } from './masterPrices.js';
+
 export const hairPageServices = Object.freeze([
     /* -------------------------------------------------------------------------- */
     /*                                HUB PRINCIPAL                               */
@@ -64,7 +66,7 @@ export const hairPageServices = Object.freeze([
         description: "Liso natural, reducción de volumen y brillo extremo sin frizz.",
         link: "servicios/peluqueria/tratamientos-capilares",
         image: "images/pages/peluqueria/lavado-spa-capilar.webp",
-        price: 'Desde $420.000',
+        price: `Desde ${masterPrices.hair.tratamientos.alisadoProgresivo}`,
         duration: '3 - 4 horas',
         variant: "standard"
     },
@@ -158,7 +160,7 @@ export const hairPageServices = Object.freeze([
         title: "Alisado Progresivo",
         description: "<strong>Liso natural y sin frizz.</strong> Tratamiento que alisa la onda, reduce el volumen y aporta brillo extremo. Duración de 3 a 5 meses.",
         image: "images/pages/peluqueria/lavado-spa-capilar.webp",
-        price: 'Desde $420.000',
+        price: `Desde ${masterPrices.hair.tratamientos.alisadoProgresivo}`,
         duration: '3 - 4 horas',
         modal: true
     },
@@ -169,6 +171,9 @@ export const hairPageServices = Object.freeze([
         description: "<strong>Coctel de nutrientes.</strong> Tratamiento profundo con aparatología (gorro térmico/enfriador) para sellar vitaminas y keratina en la fibra capilar.",
         image: "images/pages/peluqueria/lavado-spa-capilar.webp", // Placeholder reused
         price: '$120.000',
+        // Sin confirmar por la propietaria (pregunta enviada el 2026-09-27): se ve en la
+        // tarjeta como hasta ahora, pero el SSG no lo publica en el JSON-LD.
+        precioSinConfirmar: true,
         duration: '90 min',
         modal: true
     },
@@ -179,6 +184,9 @@ export const hairPageServices = Object.freeze([
         description: "<strong>Rejuvenecimiento instantáneo.</strong> Rellena la fibra capilar dañada, eliminando el frizz y aportando cuerpo y suavidad sin alisar completamente.",
         image: "images/pages/peluqueria/lavado-spa-capilar.webp", // Placeholder reused
         price: 'Desde $180.000',
+        // Sin confirmar por la propietaria (pregunta enviada el 2026-09-27): se ve en la
+        // tarjeta como hasta ahora, pero el SSG no lo publica en el JSON-LD.
+        precioSinConfirmar: true,
         duration: '2 horas',
         modal: true
     },
@@ -193,3 +201,22 @@ export const hairPageServices = Object.freeze([
         modal: true
     }
 ]);
+
+/**
+ * Categorías que muestra cada página de peluquería, por su clave (el nombre del
+ * archivo sin `.html`). La usan el SSG, que pinta las tarjetas en el build, y
+ * `hair-page.js`, que las pinta en cliente cuando el HTML llega sin ellas.
+ */
+const CATEGORIAS_POR_PAGINA = {
+    'cortes-de-pelo': ['cortes'],
+    'balayage-mechas': ['color', 'balayage'],
+    'color-tinturas-cabello': ['color', 'balayage'],
+    'tratamientos-capilares': ['tratamientos']
+};
+
+export const HAIR_SUBPAGES = Object.keys(CATEGORIAS_POR_PAGINA);
+
+export function hairServicesFor(pagina) {
+    const categorias = CATEGORIAS_POR_PAGINA[pagina] || ['hub'];
+    return hairPageServices.filter(s => categorias.includes(s.category));
+}
