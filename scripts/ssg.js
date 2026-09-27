@@ -856,7 +856,7 @@ function checkExternalCdn() {
 }
 
 /**
- * Aborta si algún `uploadDate` publicado no es un ISO 8601 completo con zona horaria.
+ * Aborta si alguna fecha publicada en el schema no es un ISO 8601 completo con zona horaria.
  *
  * Search Console avisó de las dos caras del mismo dato —«falta la zona horaria» y
  * «el valor de fecha y hora no es válido»— por un `uploadDate` que era solo el día.
@@ -866,19 +866,26 @@ function checkExternalCdn() {
  *
  * Se recorre dist entero, y no las páginas de `pagesData`, por lo mismo que el CDN:
  * un JSON-LD puede vivir en cualquiera de las 47.
+ *
+ * Vigila también las fechas de los artículos: la Prueba de resultados enriquecidos daba
+ * el mismo aviso en `datePublished`, que 16 de 23 artículos publicaban como solo el
+ * día, y ocho no declaraban `dateModified`.
  */
-function checkUploadDates() {
+function checkFechasSchema() {
     const ISO_CON_OFFSET = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
+    const CLAVES_DE_FECHA = new Set(['uploadDate', 'datePublished', 'dateModified']);
     const issues = [];
 
-    // `uploadDate` aparece anidado a distinta profundidad: suelto en las fichas de
-    // servicio y dentro de cada `ListItem` del `ItemList` de la home.
-    const recorrer = (nodo, onFecha) => {
-        if (Array.isArray(nodo)) { nodo.forEach(hijo => recorrer(hijo, onFecha)); return; }
+    // Las fechas aparecen anidadas a distinta profundidad: `uploadDate` suelto en las
+    // fichas de servicio y dentro de cada `ListItem` del `ItemList` de la home, las de
+    // los artículos en el `BlogPosting` de su `@graph`.
+    const recorrer = (nodo, onFecha, onNodo) => {
+        if (Array.isArray(nodo)) { nodo.forEach(hijo => recorrer(hijo, onFecha, onNodo)); return; }
         if (!nodo || typeof nodo !== 'object') return;
+        onNodo(nodo);
         for (const [clave, valor] of Object.entries(nodo)) {
-            if (clave === 'uploadDate') onFecha(valor);
-            else recorrer(valor, onFecha);
+            if (CLAVES_DE_FECHA.has(clave)) onFecha(clave, valor);
+            else recorrer(valor, onFecha, onNodo);
         }
     };
 
@@ -894,9 +901,16 @@ function checkUploadDates() {
                 continue;
             }
 
-            recorrer(parsed, fecha => {
+            recorrer(parsed, (clave, fecha) => {
                 if (typeof fecha !== 'string' || !ISO_CON_OFFSET.test(fecha)) {
-                    issues.push(`${relPath}: uploadDate «${fecha}» no es ISO 8601 con zona horaria`);
+                    issues.push(`${relPath}: ${clave} «${fecha}» no es ISO 8601 con zona horaria`);
+                }
+            }, nodo => {
+                // Solo en la página del artículo: el índice del blog lista resúmenes
+                // que remiten a ella, sin fecha de modificación propia.
+                if (relPath.startsWith('blog/articles/') && nodo['@type'] === 'BlogPosting'
+                    && !('dateModified' in nodo)) {
+                    issues.push(`${relPath}: BlogPosting sin dateModified`);
                 }
             });
         }
@@ -1350,9 +1364,9 @@ async function runSSG() {
             motivo: 'Google sigue esos niveles y encuentra un 403, que reintenta indefinidamente en vez de descartarlo.'
         },
         {
-            titulo: 'VideoObject con uploadDate mal formada',
-            issues: checkUploadDates(),
-            motivo: 'Search Console marca como inválida toda fecha sin hora ni zona horaria, y el vídeo pierde su rich result.'
+            titulo: 'Fechas del schema mal formadas o ausentes',
+            issues: checkFechasSchema(),
+            motivo: 'Search Console marca como inválida toda fecha sin hora ni zona horaria: el vídeo pierde su rich result y el artículo, la señal de frescura.'
         },
         {
             titulo: 'Páginas con hero pero sin el badge de reseñas',
