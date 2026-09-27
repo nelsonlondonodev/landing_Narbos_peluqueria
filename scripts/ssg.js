@@ -433,6 +433,60 @@ function precargarLogo(document) {
 }
 
 /**
+ * Construye el `OfferCatalog` de una subpágina de peluquería con sus propias tarjetas.
+ *
+ * El catálogo estaba escrito a mano en el JSON-LD de cada página y se había ido
+ * separando de lo que se veía: a balayage le faltaba el retoque de raíz, color llamaba
+ * «Tinte Global» a la tarjeta de «Aplicación de tintes» y tratamientos no tenía catálogo,
+ * solo una `Offer` con «Consultar precios» encima de cuatro tarjetas con precio. Ahora
+ * sale del mismo dato que las tarjetas; el resto del `Service` (proveedor, zona) se
+ * respeta tal cual.
+ *
+ * @returns {string|null} Descripción del problema, o null si todo encaja.
+ */
+function injectOfferCatalog(document, pageKey, pagePath) {
+    if (!HAIR_SUBPAGES.includes(pageKey)) return null;
+
+    for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        let datos;
+        try {
+            datos = JSON.parse(script.textContent);
+        } catch {
+            continue; // Lo reporta checkBreadcrumbs, que ya vigila los bloques que no parsean.
+        }
+        const servicio = [datos, ...(datos['@graph'] || [])]
+            .map(nodo => (nodo['@type'] === 'Service' ? nodo : nodo.mainEntity))
+            .find(nodo => nodo?.['@type'] === 'Service');
+        if (!servicio) continue;
+
+        servicio.hasOfferCatalog = {
+            '@type': 'OfferCatalog',
+            name: servicio.hasOfferCatalog?.name || `Catálogo de ${servicio.serviceType || servicio.name}`,
+            itemListElement: hairServicesFor(pageKey).map(item => ({
+                '@type': 'Offer',
+                itemOffered: {
+                    '@type': 'Service',
+                    name: item.title,
+                    description: item.description.replace(/<[^>]+>/g, '')
+                },
+                // Un precio que la propietaria no ha confirmado no se le anuncia a Google.
+                ...(item.precioSinConfirmar ? {} : {
+                    price: item.price.replace(/\D/g, ''),
+                    priceCurrency: 'COP'
+                })
+            }))
+        };
+        // La `Offer` suelta sin precio decía «Consultar precios»: el catálogo la sustituye.
+        if (servicio.offers && !servicio.offers.price) delete servicio.offers;
+
+        script.textContent = JSON.stringify(datos, null, 2);
+        return null;
+    }
+
+    return `${pagePath}: no tiene un Service en su JSON-LD donde colgar el catálogo`;
+}
+
+/**
  * Pinta la marquesina de opiniones con las reseñas reales del build. Antes cada página
  * traía una tarjeta escrita a mano como respaldo para el rastreador, y era una reseña
  * que no existe en la ficha de Google.
@@ -475,6 +529,7 @@ async function processPage(pageConfig) {
     injectHeroBadges(document, pageConfig.key);
     injectServices(document, pageConfig.key, prefix);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path);
+    const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
     injectArticles(document, pageConfig.key, prefix);
     injectReviewsMarquee(document);
     injectSEO(document, pageConfig.key, pageConfig.path);
@@ -484,7 +539,7 @@ async function processPage(pageConfig) {
 
     fs.writeFileSync(fullPath, dom.serialize(), 'utf8');
 
-    return { videoIssue, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
+    return { videoIssue, catalogIssue, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
 }
 
 const SITE_ORIGIN = 'https://narbossalon.com';
@@ -1140,12 +1195,14 @@ async function runSSG() {
     console.log('\n🚀 Iniciando SSG (Static Site Generation)...');
     const pages = getAllHtmlFiles(DIST_DIR);
     const videoIssues = [];
+    const catalogIssues = [];
     const breadcrumbIssues = [];
 
     for (const page of pages) {
         try {
-            const { videoIssue, breadcrumbIssues: crumbs } = await processPage(page);
+            const { videoIssue, catalogIssue, breadcrumbIssues: crumbs } = await processPage(page);
             if (videoIssue) videoIssues.push(videoIssue);
+            if (catalogIssue) catalogIssues.push(catalogIssue);
             breadcrumbIssues.push(...crumbs);
             console.log(`✅ Procesado: ${page.path}`);
         } catch (err) {
@@ -1158,6 +1215,11 @@ async function runSSG() {
             titulo: 'Secciones de video mal cableadas',
             issues: videoIssues,
             motivo: 'publicar un VideoObject sin su sección visible deja el marcado describiendo un video que no está en la página.'
+        },
+        {
+            titulo: 'Subpáginas de peluquería sin Service para su catálogo',
+            issues: catalogIssues,
+            motivo: 'las tarjetas se publicarían con precio y el marcado sin ninguno: Google leería una página distinta de la que ve el cliente.'
         },
         {
             titulo: 'Breadcrumbs que apuntan a páginas inexistentes',

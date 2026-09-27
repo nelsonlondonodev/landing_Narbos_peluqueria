@@ -171,6 +171,9 @@ export const hairPageServices = Object.freeze([
         description: "<strong>Coctel de nutrientes.</strong> Tratamiento profundo con aparatología (gorro térmico/enfriador) para sellar vitaminas y keratina en la fibra capilar.",
         image: "images/pages/peluqueria/lavado-spa-capilar.webp", // Placeholder reused
         price: '$120.000',
+        // Sin confirmar por la propietaria (pregunta enviada el 2026-09-27): se ve en la
+        // tarjeta como hasta ahora, pero el SSG no lo publica en el JSON-LD.
+        precioSinConfirmar: true,
         duration: '90 min',
         modal: true
     },
@@ -181,6 +184,9 @@ export const hairPageServices = Object.freeze([
         description: "<strong>Rejuvenecimiento instantáneo.</strong> Rellena la fibra capilar dañada, eliminando el frizz y aportando cuerpo y suavidad sin alisar completamente.",
         image: "images/pages/peluqueria/lavado-spa-capilar.webp", // Placeholder reused
         price: 'Desde $180.000',
+        // Sin confirmar por la propietaria (pregunta enviada el 2026-09-27): se ve en la
+        // tarjeta como hasta ahora, pero el SSG no lo publica en el JSON-LD.
+        precioSinConfirmar: true,
         duration: '2 horas',
         modal: true
     },
