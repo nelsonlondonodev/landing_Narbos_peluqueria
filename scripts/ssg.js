@@ -972,6 +972,54 @@ function checkExternalCdn() {
 }
 
 /**
+ * Aborta si el NAP vuelve a separarse: la dirección del pie (`siteConfig`) distinta de
+ * la del schema, la dirección escrita de otra forma en cualquier página, o un nodo del
+ * negocio con otro `@id` u otro teléfono.
+ *
+ * El 2026-09-27 había 31 «Chía - Cajica» sin tilde en 25 páginas y tres `@id` para el
+ * mismo salón. La ficha de Google es la referencia, y una dirección escrita de dos formas
+ * es justo lo que resta coherencia a la señal de negocio local.
+ */
+function checkNap() {
+    const issues = [];
+    const calle = DIRECCION.streetAddress;
+
+    if (!siteConfig.contact.address.startsWith(calle)) {
+        issues.push(`siteConfig.contact.address no empieza por «${calle}»`);
+    }
+
+    const VARIANTE_RE = /Km 2 vía Chía - Cajic[^\s<",.;:)]*/g;
+    forEachDistPage((relPath, html) => {
+        for (const [variante] of html.matchAll(VARIANTE_RE)) {
+            if (variante !== 'Km 2 vía Chía - Cajicá') {
+                issues.push(`${relPath}: la dirección dice «${variante}»`);
+            }
+        }
+        for (const [, json] of html.matchAll(JSON_LD_RE)) {
+            let parsed;
+            try {
+                parsed = JSON.parse(json);
+            } catch {
+                continue; // Lo reporta checkFechasSchema.
+            }
+            const recorrer = nodo => {
+                if (Array.isArray(nodo)) return nodo.forEach(recorrer);
+                if (!nodo || typeof nodo !== 'object') return;
+                const tipos = [].concat(nodo['@type']);
+                if (tipos.includes('BeautySalon') || tipos.includes('HealthAndBeautyBusiness')) {
+                    if (nodo['@id'] !== ORG_ID) issues.push(`${relPath}: negocio con @id «${nodo['@id']}»`);
+                    if (nodo.telephone !== siteConfig.contact.phone) issues.push(`${relPath}: negocio con teléfono «${nodo.telephone}»`);
+                }
+                Object.values(nodo).forEach(recorrer);
+            };
+            recorrer(parsed);
+        }
+    });
+
+    return [...new Set(issues)];
+}
+
+/**
  * Aborta si alguna fecha publicada en el schema no es un ISO 8601 completo con zona horaria.
  *
  * Search Console avisó de las dos caras del mismo dato —«falta la zona horaria» y
@@ -1478,6 +1526,11 @@ async function runSSG() {
             titulo: 'Breadcrumbs que apuntan a páginas inexistentes',
             issues: breadcrumbIssues,
             motivo: 'Google sigue esos niveles y encuentra un 403, que reintenta indefinidamente en vez de descartarlo.'
+        },
+        {
+            titulo: 'NAP distinto entre páginas o respecto a la ficha',
+            issues: checkNap(),
+            motivo: 'el nombre, la dirección y el teléfono tienen que decir lo mismo en todas partes: es la señal con la que Google ata la web al negocio local.'
         },
         {
             titulo: 'Fechas del schema mal formadas o ausentes',
