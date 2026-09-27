@@ -1,12 +1,12 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-09-25T10:22:37.271Z
+ * Última sincronización con Google Business Profile: 2026-09-27T05:25:21.412Z
  */
 const googleReviews = {
-    "lastSync": "2026-09-25T10:22:37.271Z",
+    "lastSync": "2026-09-27T05:25:21.412Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
-    "userRatingCount": 352,
+    "userRatingCount": 359,
     "reviews": [
         {
             "author": "Ingrid Marcela Aguilera",
