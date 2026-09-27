@@ -20,8 +20,13 @@ export class FAQAccordion {
             const summary = e.target.closest('summary');
             if (!summary) return;
 
-            e.preventDefault();
+            // Sin `.faq-content` no hay nada que animar: se deja el comportamiento nativo del
+            // <details>. Cancelarlo antes de comprobarlo dejó muertas las seis preguntas de
+            // color-tinturas, que nunca tuvieron el contenedor.
             const details = summary.parentElement;
+            if (!details.querySelector('.faq-content')) return;
+
+            e.preventDefault();
             this.toggle(details);
         });
     }
@@ -29,8 +34,6 @@ export class FAQAccordion {
     toggle(details) {
         const isOpen = details.hasAttribute('open');
         const content = details.querySelector('.faq-content');
-        
-        if (!content) return;
 
         // Si está cerrado, cerramos los demás antes de abrir este
         if (!isOpen) {
