@@ -6,6 +6,18 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 📍 Una Sola Entidad y NAP Unificado v2.8.46 (27 de septiembre de 2026)
+
+*   **Un solo negocio para Google**: El `BeautySalon` estaba escrito a mano en 24 nodos, con tres `@id` distintos —barbería, uñas y acrílicas—, que para Google son tres negocios aparte del principal. Ahora todos son `#organization` y el SSG los completa desde una sola fuente: `siteConfig` y el horario sincronizado con la ficha. Lo propio de cada página —imagen, catálogo, valoración— se respeta (`3e9571f`).
+*   **Redes que no eran de Narbo's**: El `sameAs` declaraba como propias cuentas de Instagram, Facebook y TikTok que no son del salón. Pasa a las reales, confirmadas por Nelson, y el pie deja de enlazar un TikTok equivocado (`a7476ee`, `3e9571f`).
+*   **Horario falso en uñas**: Dos páginas declaraban abrir a las 8:00, una de ellas solo de lunes a viernes hasta las 19:00. Toman el horario real de la ficha: lunes a sábado de 7:00 a 20:00 y festivos de 9:00 a 18:00 (`3e9571f`).
+*   **Teléfono y rango de precios**: Seis páginas —tratamientos y estética— declaraban el negocio sin ellos, el aviso de «Empresas locales» de la Prueba de resultados enriquecidos (`3e9571f`).
+*   **«Cajicá» con tilde en toda la web**: 31 apariciones sin tilde en 25 páginas, visibles y en el marcado. Con permiso para unificar el NAP de la web con la ficha, sin cambiar ningún dato (`8c4a9d4`).
+*   **Guarda**: `checkNap` aborta el deploy si la dirección se escribe de otra forma en cualquier página o si un nodo del negocio sale con otro `@id` u otro teléfono (`e45e6a9`).
+*   **Versión**: `v2.8.46`.
+
+---
+
 ## 🗓️ Fechas Completas en los Artículos v2.8.45 (27 de septiembre de 2026)
 
 *   **Fechas con hora y zona horaria**: La Prueba de resultados enriquecidos avisaba de que `datePublished` no tenía hora ni zona horaria en 16 de los 23 artículos. Se completan esas 24 fechas con la convención de los que ya estaban bien (8:00 de Bogotá), sin cambiar ningún día (`3d843aa`).
