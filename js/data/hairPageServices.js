@@ -203,20 +203,36 @@ export const hairPageServices = Object.freeze([
 ]);
 
 /**
- * Categorías que muestra cada página de peluquería, por su clave (el nombre del
- * archivo sin `.html`). La usan el SSG, que pinta las tarjetas en el build, y
- * `hair-page.js`, que las pinta en cliente cuando el HTML llega sin ellas.
+ * Registro único de las subpáginas de peluquería, por su clave (el nombre del
+ * archivo sin `.html`, que es también su clave en `pagesData`). Una página nueva
+ * es una fila aquí.
+ * - `categorias`: tarjetas que muestra. Las pinta el SSG en el build, y
+ *   `hair-page.js` en cliente cuando el HTML llega sin ellas.
+ * - `migaja`: último nivel de la ruta de exploración visible.
  */
-const CATEGORIAS_POR_PAGINA = {
-    'cortes-de-pelo': ['cortes'],
-    'balayage-mechas': ['color', 'balayage'],
-    'color-tinturas-cabello': ['color', 'balayage'],
-    'tratamientos-capilares': ['tratamientos']
+const SUBPAGINAS = {
+    'cortes-de-pelo': { categorias: ['cortes'], migaja: 'Cortes' },
+    'balayage-mechas': { categorias: ['color', 'balayage'], migaja: 'Balayage' },
+    'color-tinturas-cabello': { categorias: ['color', 'balayage'], migaja: 'Color' },
+    'tratamientos-capilares': { categorias: ['tratamientos'], migaja: 'Tratamientos' }
 };
 
-export const HAIR_SUBPAGES = Object.keys(CATEGORIAS_POR_PAGINA);
+export const HAIR_SUBPAGES = Object.keys(SUBPAGINAS);
+
+/**
+ * Clave de la subpágina a la que pertenece una ruta, o `null` si es el hub.
+ * @param {string} ruta
+ */
+export function hairSubpageFor(ruta) {
+    return HAIR_SUBPAGES.find(pagina => ruta.includes(pagina)) ?? null;
+}
+
+/** @param {string} pagina */
+export function hairBreadcrumbFor(pagina) {
+    return SUBPAGINAS[pagina]?.migaja ?? null;
+}
 
 export function hairServicesFor(pagina) {
-    const categorias = CATEGORIAS_POR_PAGINA[pagina] || ['hub'];
+    const categorias = SUBPAGINAS[pagina]?.categorias || ['hub'];
     return hairPageServices.filter(s => categorias.includes(s.category));
 }

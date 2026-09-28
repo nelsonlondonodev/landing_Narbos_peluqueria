@@ -8,7 +8,7 @@ import { ServiceCard } from './components/ServiceCard.js';
 import { ServiceModal } from './components/ServiceModal.js';
 import { hairBrands, smoothingBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
-import { hairPageServices, hairServicesFor } from './data/hairPageServices.js';
+import { hairPageServices, hairServicesFor, hairSubpageFor, hairBreadcrumbFor } from './data/hairPageServices.js';
 
 /**
  * Hair Page Logic
@@ -46,14 +46,7 @@ function initPageComponents() {
  * Resuelve la clave de `pagesData` correspondiente a la página actual.
  */
 function getPageKey() {
-    const path = window.location.pathname;
-
-    if (path.includes('cortes-de-pelo')) return 'cortes-de-pelo';
-    if (path.includes('balayage-mechas')) return 'balayage-mechas'; // Check pagesData key matches
-    if (path.includes('color-tinturas')) return 'color-tinturas-cabello';
-    if (path.includes('tratamientos')) return 'tratamientos-capilares';
-
-    return 'peluqueria'; // Default Hub
+    return hairSubpageFor(window.location.pathname) ?? 'peluqueria';
 }
 
 /**
@@ -116,7 +109,7 @@ function initLightbox() {
 function initBrandsCarousel() {
     const brandsId = 'hair-brands-root';
     if (document.getElementById(brandsId)) {
-        const isSmoothingPage = window.location.pathname.includes('tratamientos-capilares');
+        const isSmoothingPage = getPageKey() === 'tratamientos-capilares';
         const brandsToRender = isSmoothingPage ? smoothingBrands : hairBrands;
         new BrandsSection(brandsId, brandsToRender).render();
     }
@@ -142,10 +135,8 @@ function initBreadcrumbs() {
     });
 
     // Level 3: Subpages
-    if (currentPath.includes('cortes-de-pelo')) items.push({ label: 'Cortes', link: '#' });
-    if (currentPath.includes('balayage-mechas')) items.push({ label: 'Balayage', link: '#' });
-    if (currentPath.includes('color-tinturas')) items.push({ label: 'Color', link: '#' });
-    if (currentPath.includes('tratamientos')) items.push({ label: 'Tratamientos', link: '#' });
+    const migaja = hairBreadcrumbFor(getPageKey());
+    if (migaja) items.push({ label: migaja, link: '#' });
 
     breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
 }
@@ -178,8 +169,7 @@ function initHairServicesGrid() {
 }
 
 function getFilteredServices() {
-    const pagina = window.location.pathname.split('/').pop().replace(/\.html$/, '');
-    return hairServicesFor(pagina);
+    return hairServicesFor(getPageKey());
 }
 
 function renderServiceCards(container, services, modalInstance) {
