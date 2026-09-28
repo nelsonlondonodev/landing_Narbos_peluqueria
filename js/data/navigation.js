@@ -24,7 +24,8 @@ export const getMenuCategories = () => [
             { label: "Corte Dama", link: "servicios/peluqueria/cortes-de-pelo" },
             { label: "Balayage y Mechas", link: "servicios/peluqueria/balayage-mechas" },
             { label: "Color y Tinturas", link: "servicios/peluqueria/color-tinturas-cabello" },
-            { label: "Tratamientos", link: "servicios/peluqueria/tratamientos-capilares" }
+            { label: "Tratamientos", link: "servicios/peluqueria/tratamientos-capilares" },
+            { label: "Extensiones", link: "servicios/peluqueria/extensiones-cabello" }
         ]
     },
     {

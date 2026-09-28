@@ -562,6 +562,20 @@ export const pagesData = Object.freeze({
             }
         ]
     },
+    'extensiones-cabello': {
+        metaTitle: "Extensiones de Cabello Natural en Chía | Narbo's Salón Spa",
+        metaDescription: "Extensiones de cabello natural en Chía: punto a punto desde $18.000 por punto, adhesivo desde $160.000 el par y cortina invisible. Mantenimiento y retiro.",
+        video: {
+            id: 'tuJcoHSWLDM',
+            headingId: 'extensiones-video-title',
+            heading: 'Mira una <span class="text-brand-green">transformación real</span>',
+            body: 'De media melena a cabello largo y con volumen. Así se ve un cambio con extensiones de cabello natural en Narbo\'s Salón Spa.',
+            ctaLabel: 'Agendar mi valoración',
+            ctaMessage: 'Hola, vi el video de extensiones en su web y quiero agendar una valoración.',
+            alt: "Antes y después de unas extensiones de cabello natural en Narbo's Salón Spa Chía",
+            ariaLabel: 'Reproducir video: Transformación Radical con Extensiones en Chía'
+        }
+    },
     'tratamientos-capilares': {
         metaTitle: "Tratamientos capilares en Chía: keratina y botox | Narbo's",
         metaDescription: "Recuperación capilar en Chía y Cajicá: keratina, botox capilar, repolarización y alisados progresivos. Diagnóstico del cabello antes de tratar.",

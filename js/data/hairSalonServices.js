@@ -39,5 +39,12 @@ export const hairSalonServices = Object.freeze([
         link: "servicios/peluqueria/tratamientos-capilares",
         image: "images/pages/peluqueria/lavado-cabello-spa-capilar-narbos-salon-chia.webp",
         variant: "standard"
+    },
+    {
+        title: "Extensiones",
+        description: "Cabello natural punto a punto, adhesivo o cortina invisible.",
+        link: "servicios/peluqueria/extensiones-cabello",
+        image: "images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-mobile.webp",
+        variant: "standard"
     }
 ]);

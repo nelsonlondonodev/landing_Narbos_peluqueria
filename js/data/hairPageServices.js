@@ -199,6 +199,53 @@ export const hairPageServices = Object.freeze([
         price: 'Desde $10.000',
         duration: '20 min',
         modal: true
+    },
+
+    /* -------------------------------------------------------------------------- */
+    /*                                 EXTENSIONES                                */
+    /* -------------------------------------------------------------------------- */
+    {
+        id: 34,
+        category: 'extensiones',
+        title: "Extensiones Punto a Punto",
+        description: "<strong>Cabello natural, mechón a mechón.</strong> Se colocan por puntos para sumar largo y volumen donde lo necesitas.",
+        image: "images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-mobile.webp",
+        price: `Desde ${masterPrices.hair.extensiones.porPunto} por punto`,
+        duration: '2 a 4 horas',
+        modal: true
+    },
+    {
+        id: 35,
+        category: 'extensiones',
+        title: "Extensiones de Adhesivo",
+        description: "<strong>Cabello natural en cinta.</strong> Bandas adhesivas que se colocan por pares para ganar largo y volumen.",
+        image: "images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-mobile.webp",
+        price: `Desde ${masterPrices.hair.extensiones.adhesivoPar} el par`,
+        duration: '2 a 4 horas',
+        modal: true
+    },
+    {
+        id: 36,
+        category: 'extensiones',
+        title: "Cortina Invisible",
+        description: "<strong>Cabello natural en cortina.</strong> El precio depende de tu cabello y del resultado que buscas, así que se define en la valoración.",
+        image: "images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-mobile.webp",
+        price: 'Según valoración',
+        // No es un precio sin confirmar sino que no tiene precio público; la marca
+        // sirve igual: el SSG no publica una `price` que no existe.
+        precioSinConfirmar: true,
+        duration: '2 a 4 horas',
+        modal: true
+    },
+    {
+        id: 37,
+        category: 'extensiones',
+        title: "Mantenimiento de Extensiones",
+        description: "<strong>Reacomodo cada 2 o 3 meses.</strong> De él depende cuánto te duran las extensiones. Si te las pusimos aquí, el retiro no tiene costo.",
+        image: "images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-mobile.webp",
+        price: `Desde ${masterPrices.hair.extensiones.mantenimientoPunto} por punto`,
+        duration: 'Según la cantidad de puntos',
+        modal: true
     }
 ]);
 
@@ -214,7 +261,8 @@ const SUBPAGINAS = {
     'cortes-de-pelo': { categorias: ['cortes'], migaja: 'Cortes' },
     'balayage-mechas': { categorias: ['color', 'balayage'], migaja: 'Balayage' },
     'color-tinturas-cabello': { categorias: ['color', 'balayage'], migaja: 'Color' },
-    'tratamientos-capilares': { categorias: ['tratamientos'], migaja: 'Tratamientos' }
+    'tratamientos-capilares': { categorias: ['tratamientos'], migaja: 'Tratamientos' },
+    'extensiones-cabello': { categorias: ['extensiones'], migaja: 'Extensiones' }
 };
 
 export const HAIR_SUBPAGES = Object.keys(SUBPAGINAS);
