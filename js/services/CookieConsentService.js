@@ -71,10 +71,26 @@ class CookieConsentService {
      */
     async _bootSeguro() {
         try {
+            await this._cuandoCargue();
             await this._boot();
         } catch (error) {
             console.error('[CookieService] No se pudo cargar el banner:', error.message);
         }
+    }
+
+    /**
+     * Espera a que la página termine de cargar antes de pedir la librería.
+     *
+     * Una hoja de estilos insertada por script antes del primer pintado lo bloquea:
+     * en producción retrasaba en torno a un segundo el pintado del hero (Lighthouse,
+     * 2026-10-05). El banner no tiene prisa: hasta que el visitante decide no se
+     * activa ninguna analítica.
+     */
+    _cuandoCargue() {
+        if (document.readyState === 'complete') return Promise.resolve();
+        return new Promise((resolve) => {
+            window.addEventListener('load', () => resolve(), { once: true });
+        });
     }
 
     /**
