@@ -209,7 +209,7 @@ export const pagesData = Object.freeze({
     },
     'barberia': {
          metaTitle: "Barbería en Chía y Cajicá | Cortes de Hombre y Barba - Narbo's",
-         metaDescription: "Barbería en Chía y Cajicá con zona exclusiva para hombres: cortes, degradados y fade, perfilado y ritual de barba con toalla caliente. Reserva por WhatsApp.",
+         metaDescription: "Barbería clásica en Chía y Cajicá: corte de hombre a tijera y máquina, arreglo de barba con toalla caliente y camuflaje de canas. Reserva por WhatsApp.",
          hero: {
             title: "Barbería exclusiva <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "El espacio que mereces para cuidar tu imagen.",
@@ -230,17 +230,17 @@ export const pagesData = Object.freeze({
                 type: 'image',
                 layout: 'vertical',
                 src: 'images/pages/barberia/corte-cabello-caballero-profesional-chia.webp',
-                title: "Cortes de Tendencia",
+                title: "Corte de Caballero",
                 subtitle: "Estilo Masculino",
-                alt: "Corte de cabello caballero profesional con técnica moderna en Chía"
+                alt: "Corte de cabello de caballero a tijera y máquina en Chía"
             },
             {
                 type: 'image',
                 layout: 'vertical',
                 src: 'images/pages/barberia/corte-hombre-fade-moderno.webp',
-                title: "Corte Fade Moderno",
-                subtitle: "Degradados de Precisión",
-                alt: "Corte fade moderno realizado por barbero profesional en Chía"
+                title: "Corte Clásico",
+                subtitle: "A Tijera, con Canas",
+                alt: "Corte clásico de caballero con canas, hecho a tijera en Narbo's Chía"
             },
             {
                 type: 'image',
@@ -1193,19 +1193,19 @@ export const pagesData = Object.freeze({
     },
     'barberia-cortes-hombre': {
         metaTitle: "Cortes de hombre y arreglo de barba en Chía | Narbo's",
-        metaDescription: "Cortes de hombre en Chía y Cajicá: degradados y fade, corte a tijera, perfilado y ritual de barba con toalla caliente. Reserva por WhatsApp.",
+        metaDescription: "Cortes de hombre clásicos en Chía y Cajicá: a tijera y máquina, arreglo de barba con toalla caliente y camuflaje de canas. Reserva por WhatsApp.",
         hero: {
             title: "Barbería y Estilismo <span class=\"text-brand-green\">Masculino</span>",
-            subtitle: "Cortes modernos, barbas impecables y un ambiente diseñado para ti.",
+            subtitle: "Cortes clásicos, barbas impecables y camuflaje de canas.",
             imageSrc: "images/pages/barberia/corte-hombre-fade-moderno.webp",
             imageSrcMobile: "images/pages/barberia/corte-hombre-fade-moderno-mobile.webp",
-            imageAlt: "Corte de cabello masculino profesional en Narbo's"
+            imageAlt: "Corte clásico de caballero con canas, hecho a tijera en Narbo's Chía"
         },
         gallery: [
             { type: 'logo-card', layout: 'vertical', src: 'images/brand/logo_narbos.webp', alt: 'Corte Clásico', title: 'Corte Clásico' },
-            { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Degradado', title: 'Degradado' },
+            { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Camuflaje de Canas', title: 'Camuflaje de Canas' },
             { type: 'logo-card', layout: 'horizontal', src: 'images/brand/logo_narbos.webp', alt: 'Perfilado', title: 'Perfilado de Barba' },
-            { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Estilo Moderno', title: 'Estilo Moderno' },
+            { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Asesoría de Imagen', title: 'Asesoría de Imagen' },
             { type: 'logo-card', layout: 'vertical', src: 'images/brand/logo_narbos.webp', alt: 'Ritual de Barba', title: 'Ritual de Barba' },
             { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Corte Tijera', title: 'Corte a Tijera' },
             { type: 'logo-card', layout: 'horizontal', src: 'images/brand/logo_narbos.webp', alt: 'Acabados', title: 'Acabados Premium' }
