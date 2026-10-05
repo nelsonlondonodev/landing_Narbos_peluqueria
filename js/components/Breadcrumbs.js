@@ -46,6 +46,13 @@ export class Breadcrumbs {
         // Evitar duplicados si ya se inyectó
         if (document.getElementById('breadcrumbs-schema')) return;
 
+        // Ni si la página ya trae su ruta en el JSON-LD estático: 21 páginas acababan
+        // con dos BreadcrumbList distintos («Cortes De Pelo» y «Cortes»). La estática
+        // es la que valida `checkBreadcrumbs` en el build.
+        const yaDeclarada = [...document.querySelectorAll('script[type="application/ld+json"]')]
+            .some(script => script.textContent.includes('"BreadcrumbList"'));
+        if (yaDeclarada) return;
+
         const schema = {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",

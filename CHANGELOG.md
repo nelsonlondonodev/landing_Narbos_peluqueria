@@ -6,6 +6,15 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💇‍♀️ Página de Extensiones y una Sola Ruta de Exploración v2.8.47 (5 de octubre de 2026)
+
+*   **Extensiones de cabello natural**: Servicio real del salón con precio público que no tenía página, y por eso Search Console no veía su demanda. La página solo dice lo que confirmó la propietaria —técnicas, precios desde, duración de la cita, mantenimiento, retiro—; la cortina invisible no tiene precio público y no se declara en el `Offer`. Lleva BreadcrumbList, FAQPage con las 7 preguntas visibles y el `VideoObject` de `tuJcoHSWLDM`. Entra en el menú, el hub de peluquería y el sitemap. La portada usa de forma provisional la miniatura del vídeo hasta tener fotos propias (`1b2805d`).
+*   **Una sola ruta de exploración**: En 21 páginas Google veía dos BreadcrumbList distintas, la estática y la que inyectaba el componente `Breadcrumbs`. Ahora el componente no inyecta si la página ya declara la suya (`3563b6d`).
+*   **Un solo registro de subpáginas de peluquería**: La lista estaba copiada en cinco sitios; ahora vive en `SUBPAGINAS` y sale el código muerto de `service-page.js`, `HairHubController` y cuatro `*Styles.js`. El HTML generado no cambia (`9e0f8ef`).
+*   **Versión**: `v2.8.47`.
+
+---
+
 ## 📍 Una Sola Entidad y NAP Unificado v2.8.46 (27 de septiembre de 2026)
 
 *   **Un solo negocio para Google**: El `BeautySalon` estaba escrito a mano en 24 nodos, con tres `@id` distintos —barbería, uñas y acrílicas—, que para Google son tres negocios aparte del principal. Ahora todos son `#organization` y el SSG los completa desde una sola fuente: `siteConfig` y el horario sincronizado con la ficha. Lo propio de cada página —imagen, catálogo, valoración— se respeta (`3e9571f`).

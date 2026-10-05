@@ -39,6 +39,13 @@ export const masterPrices = Object.freeze({
         tratamientos: {
             alisadoProgresivo: '$420.000', // Desde, con aminoácidos
             shampoo: '$10.000' // Desde
+        },
+        // Confirmados por la propietaria el 2026-09-28. La cortina invisible no tiene
+        // precio público: se cotiza en la valoración.
+        extensiones: {
+            porPunto: '$18.000', // Desde
+            adhesivoPar: '$160.000', // Desde
+            mantenimientoPunto: '$4.000' // Desde; entre 4.000 y 5.000 por punto
         }
     },
     barber: {

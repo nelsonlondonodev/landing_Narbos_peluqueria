@@ -75,12 +75,9 @@ class ServicePageManager {
             return;
         }
 
-        // Controlador de Peluquería (Hub y Subpáginas)
-        const hairPages = [
-            'peluqueria', 'cortes-de-pelo', 'balayage-mechas', 
-            'color-tinturas-cabello', 'tratamientos-capilares'
-        ];
-        if (hairPages.includes(this.pageKey)) {
+        // Controlador de Peluquería (Hub)
+        // Solo el hub: las subpáginas cargan `hair-page.js` y no este archivo.
+        if (this.pageKey === 'peluqueria') {
             import('./controllers/HairHubController.js')
                 .then(({ HairHubController }) => {
                     new HairHubController(this.app, this.pageKey).init();
@@ -120,12 +117,6 @@ class ServicePageManager {
 
     getPageKey() {
         const path = window.location.pathname;
-
-        // Peluquería
-        if (path.includes('cortes-de-pelo')) return 'cortes-de-pelo';
-        if (path.includes('balayage-mechas')) return 'balayage-mechas';
-        if (path.includes('color-tinturas-cabello')) return 'color-tinturas-cabello';
-        if (path.includes('tratamientos-capilares')) return 'tratamientos-capilares';
 
         // Estética
         if (path.includes('limpieza-facial')) return 'limpieza-facial';
