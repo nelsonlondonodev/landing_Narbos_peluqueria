@@ -18,7 +18,7 @@ export const barberServices = Object.freeze([
     {
         id: 'corte-cabello',
         title: "Corte de Cabello",
-        description: "Asesoría de imagen y corte (clásico o fade) con lavado y peinado.",
+        description: "Corte clásico a tijera y máquina, con asesoría de imagen, lavado y peinado.",
         price: masterPrices.barber.corte,
         link: "servicios/barberia/barberia-cortes-hombre",
         image: "images/pages/barberia/barbero-profesional-trabajando-narbos-chia.webp",
@@ -45,7 +45,7 @@ export const barberServices = Object.freeze([
     {
         id: 'barberia-infantil',
         title: "Barbería Infantil",
-        description: "Cortes modernos y clásicos para niños con paciencia y estilo.",
+        description: "Cortes clásicos para niños, con paciencia y estilo.",
         price: masterPrices.barber.infantil,
         link: "servicios/barberia/barberia-cortes-hombre",
         image: "images/brand/logo_narbos.webp",
