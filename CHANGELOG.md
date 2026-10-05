@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## ⚡ El Banner de Cookies Deja de Frenar el Pintado v2.8.48 (5 de octubre de 2026)
+
+*   **Cookieconsent después del `load`**: Su hoja de estilos se insertaba por script antes del primer pintado y lo bloqueaba. En `cortes-de-pelo` el hero esperaba unos 2 s para pintarse y PSI móvil daba 72. Medido con Lighthouse contra producción, bloquear solo cookieconsent subía la página de 77 a 88; Clarity, Places y GLightbox no movían el retraso. El banner aparece igual en zona regulada, unos cientos de milisegundos más tarde, y ninguna analítica se activa antes de que el visitante decida (`e88bb7e`).
+*   **Versión**: `v2.8.48`.
+
+---
+
 ## 💇‍♀️ Página de Extensiones y una Sola Ruta de Exploración v2.8.47 (5 de octubre de 2026)
 
 *   **Extensiones de cabello natural**: Servicio real del salón con precio público que no tenía página, y por eso Search Console no veía su demanda. La página solo dice lo que confirmó la propietaria —técnicas, precios desde, duración de la cita, mantenimiento, retiro—; la cortina invisible no tiene precio público y no se declara en el `Offer`. Lleva BreadcrumbList, FAQPage con las 7 preguntas visibles y el `VideoObject` de `tuJcoHSWLDM`. Entra en el menú, el hub de peluquería y el sitemap. La portada usa de forma provisional la miniatura del vídeo hasta tener fotos propias (`1b2805d`).
