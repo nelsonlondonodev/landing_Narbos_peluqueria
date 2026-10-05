@@ -6,6 +6,15 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💈 Barbería Clásica: Corte, Barba y Canas v2.8.49 (5 de octubre de 2026)
+
+*   **Fuera los fades**: Por decisión de la propietaria, la barbería deja de anunciar cortes fade y degradados, que le quitan horas de servicios de más valor. Meta, OG, JSON-LD, hero, intro, tarjetas y galería hablan ahora de corte clásico a tijera y máquina, arreglo de barba y camuflaje de canas (`e6f4f0f`).
+*   **Filtrar antes del WhatsApp**: La FAQ del fade pasa a «¿Hacen cortes fade o degradados?» con un «no» claro, y la intro lo dice: «no hacemos fades ni diseños» (`e6f4f0f`).
+*   **Se conserva el posicionamiento**: La sección no se borra ni sale del menú y los `<title>` no cambian; «barberia chia» es la consulta con más impresiones de la web (`e6f4f0f`).
+*   **Versión**: `v2.8.49`.
+
+---
+
 ## ⚡ El Banner de Cookies Deja de Frenar el Pintado v2.8.48 (5 de octubre de 2026)
 
 *   **Cookieconsent después del `load`**: Su hoja de estilos se insertaba por script antes del primer pintado y lo bloqueaba. En `cortes-de-pelo` el hero esperaba unos 2 s para pintarse y PSI móvil daba 72. Medido con Lighthouse contra producción, bloquear solo cookieconsent subía la página de 77 a 88; Clarity, Places y GLightbox no movían el retraso. El banner aparece igual en zona regulada, unos cientos de milisegundos más tarde, y ninguna analítica se activa antes de que el visitante decida (`e88bb7e`).
