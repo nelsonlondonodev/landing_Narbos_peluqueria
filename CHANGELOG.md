@@ -6,6 +6,17 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 📸 Extensiones con Foto Real y Corte de Hombre a $38.000 v2.8.50 (6 de octubre de 2026)
+
+*   **Foto real en extensiones**: El hero deja la miniatura provisional del vídeo y usa una foto de una clienta del salón con extensiones de cabello natural y balayage, confirmado por la propietaria. Escritorio a 1600×1200 (106 KB) y móvil recortado en vertical a 768×1024 (49 KB); el original pesaba 2,9 MB. Las tarjetas siguen con la miniatura hasta que haya más fotos (`755fcf4`).
+*   **La misma foto al compartir**: `og:image` y `twitter:image` pasan a la foto real, para que el enlace en WhatsApp y redes se vea como la portada (`2290613`).
+*   **Fuera GLightbox en extensiones**: La página cargaba su CSS y su script desde jsDelivr sin tener galería. Dos descargas externas menos, y sale el `dns-prefetch` que solo servía a esa librería (`065450c`).
+*   **El móvil carga la imagen ligera en tres artículos**: `media="(max-w: 768px)"` no es una media query válida y el móvil bajaba la imagen de escritorio en camuflaje de canas, limpieza facial y manchas en las uñas. La precarga del `<head>` se parte en el par móvil/escritorio, o el móvil habría descargado las dos (`f5e1a97`).
+*   **Corte de hombre a $38.000**: Por petición de la propietaria, en la tarjeta, el modal y el `Offer` del JSON-LD de barbería. La barbería infantil sigue en $35.000 (`04568f2`).
+*   **Versión**: `v2.8.50`.
+
+---
+
 ## 💈 Barbería Clásica: Corte, Barba y Canas v2.8.49 (5 de octubre de 2026)
 
 *   **Fuera los fades**: Por decisión de la propietaria, la barbería deja de anunciar cortes fade y degradados, que le quitan horas de servicios de más valor. Meta, OG, JSON-LD, hero, intro, tarjetas y galería hablan ahora de corte clásico a tijera y máquina, arreglo de barba y camuflaje de canas (`e6f4f0f`).
