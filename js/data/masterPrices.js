@@ -49,7 +49,7 @@ export const masterPrices = Object.freeze({
         }
     },
     barber: {
-        corte: '$35.000',
+        corte: '$38.000',
         arregloBarba: '$45.000',
         camuflajeCanas: '$120.000',
         infantil: '$35.000'
