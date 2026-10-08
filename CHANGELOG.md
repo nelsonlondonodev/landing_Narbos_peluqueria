@@ -6,6 +6,16 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🖼️ Galería Real en Extensiones v2.8.51 (8 de octubre de 2026)
+
+*   **Galería con fotos del salón**: La página de extensiones estrena galería bento con cuatro fotos reales: la colocación de extensiones adhesivas sobre un balayage (las mismas del post de la ficha de Google) y la del hero. Cuatro columnas en escritorio y dos en móvil, sin huecos (`6c5a55d`).
+*   **Cada pantalla con su tamaño**: 432 px para las miniaturas en móvil (25-38 KB) y unos 840 px para escritorio y el visor, todas con carga diferida (`6c5a55d`).
+*   **Foto real en la tarjeta de adhesivo**: Recorte 4:3 propio centrado en la cinta (36 KB); la foto vertical se quedaba en una franja y pesaba 147 KB. Punto a punto, cortina invisible y mantenimiento siguen con la imagen provisional (`6c5a55d`).
+*   **Vuelve GLightbox**: Se quitó en la v2.8.50 porque la página no tenía galería; ahora la tiene y el visor lo necesita (`6c5a55d`).
+*   **Versión**: `v2.8.51`.
+
+---
+
 ## 📸 Extensiones con Foto Real y Corte de Hombre a $38.000 v2.8.50 (6 de octubre de 2026)
 
 *   **Foto real en extensiones**: El hero deja la miniatura provisional del vídeo y usa una foto de una clienta del salón con extensiones de cabello natural y balayage, confirmado por la propietaria. Escritorio a 1600×1200 (106 KB) y móvil recortado en vertical a 768×1024 (49 KB); el original pesaba 2,9 MB. Las tarjetas siguen con la miniatura hasta que haya más fotos (`755fcf4`).

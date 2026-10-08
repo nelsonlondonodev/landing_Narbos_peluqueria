@@ -193,7 +193,9 @@
     <link rel="preload" as="font" type="font/woff2" href="../../fonts/playfair-display-latin.woff2" crossorigin>
     <link rel="stylesheet" href="../../css/styles.css?v=2.8.20" />
     <link rel="icon" type="image/webp" href="../../images/brand/favicon_narbos.webp" />
-    
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" media="print" onload="this.media='all'">
+
     <!-- LCP Optimization -->
     <link rel="preload" as="image" href="../../images/pages/peluqueria/extensiones-cabello-natural-largo-chia-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp" />
     <link rel="preload" as="image" href="../../images/pages/peluqueria/extensiones-cabello-natural-largo-chia.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp" />
@@ -255,11 +257,18 @@
             </div>
           </section>
 
-          <!-- Sección 2: Video del proceso (respalda el VideoObject del JSON-LD).
+          <!-- Sección 2: Galería, contenido en pagesData['extensiones-cabello'].gallery -->
+          <section class="py-16 md:py-24 bg-brand-light/10">
+            <div class="container mx-auto px-6 max-w-screen-xl text-center">
+                <div id="hair-gallery-root"></div>
+            </div>
+          </section>
+
+          <!-- Sección 3: Video del proceso (respalda el VideoObject del JSON-LD).
                Contenido en pagesData['extensiones-cabello'].video -->
           <div id="video-section-root"></div>
 
-          <!-- Sección 3: Preguntas Frecuentes (FAQ). El FAQPage del head copia estas respuestas. -->
+          <!-- Sección 4: Preguntas Frecuentes (FAQ). El FAQPage del head copia estas respuestas. -->
           <section id="faq" class="py-16 md:py-24 bg-brand-light/10 relative">
             <div class="container mx-auto px-6 max-w-4xl">
                 <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark mb-12 text-center" data-animation="fadeInUp">Preguntas Frecuentes</h2>
@@ -387,6 +396,7 @@
     <div id="footer-root"></div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
     <script type="module" src="../../js/main.js?v=2.8.20"></script>
     <script type="module" src="../../js/hair-page.js?v=2.8.20"></script>
 
