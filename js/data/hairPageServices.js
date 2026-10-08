@@ -219,7 +219,10 @@ export const hairPageServices = Object.freeze([
         category: 'extensiones',
         title: "Extensiones de Adhesivo",
         description: "<strong>Cabello natural en cinta.</strong> Bandas adhesivas que se colocan por pares para ganar largo y volumen.",
-        image: "images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-mobile.webp",
+        // Foto real de la técnica, recortada en 4:3 sobre la cinta: la tarjeta es
+        // apaisada y la foto de la galería, vertical, se quedaría en una franja.
+        image: "images/pages/peluqueria/extensiones-adhesivas-cabello-natural-colocacion-chia-tarjeta.webp",
+        imageAlt: "Colocación de extensiones adhesivas de cabello natural en Narbo's Salón Spa Chía",
         price: `Desde ${masterPrices.hair.extensiones.adhesivoPar} el par`,
         duration: '2 a 4 horas',
         modal: true

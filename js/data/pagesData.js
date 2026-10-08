@@ -574,7 +574,47 @@ export const pagesData = Object.freeze({
             ctaMessage: 'Hola, vi el video de extensiones en su web y quiero agendar una valoración.',
             alt: "Antes y después de unas extensiones de cabello natural en Narbo's Salón Spa Chía",
             ariaLabel: 'Reproducir video: Transformación Radical con Extensiones en Chía'
-        }
+        },
+        // Cuatro verticales: 4 columnas × 2 filas en escritorio y 2 × 4 en móvil, sin
+        // huecos. La del hero entra con su recorte vertical de móvil.
+        gallery: [
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/peluqueria/extensiones-cabello-natural-largo-balayage-chia.webp',
+                srcMobile: 'images/pages/peluqueria/extensiones-cabello-natural-largo-balayage-chia-mobile.webp',
+                title: "Largo y volumen",
+                subtitle: "Extensiones sobre balayage",
+                alt: "Cabello largo con extensiones de cabello natural y balayage rubio en Narbo's Salón Spa Chía"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/peluqueria/extensiones-adhesivas-cabello-natural-colocacion-chia.webp',
+                srcMobile: 'images/pages/peluqueria/extensiones-adhesivas-cabello-natural-colocacion-chia-mobile.webp',
+                title: "Extensiones adhesivas",
+                subtitle: "Cinta cerca de la raíz",
+                alt: "Estilista colocando una cinta de extensiones adhesivas de cabello natural"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-salon.webp',
+                srcMobile: 'images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-salon-mobile.webp',
+                title: "Colocación a cuatro manos",
+                subtitle: "Por secciones",
+                alt: "Dos estilistas de Narbo's Salón Spa colocando extensiones de cabello natural a una clienta"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/peluqueria/extensiones-cabello-natural-largo-chia.webp',
+                srcMobile: 'images/pages/peluqueria/extensiones-cabello-natural-largo-chia-mobile.webp',
+                title: "Cabello natural",
+                subtitle: "Resultado final",
+                alt: "Clienta de espaldas con extensiones de cabello natural largo en Narbo's Salón Spa Chía"
+            }
+        ]
     },
     'tratamientos-capilares': {
         metaTitle: "Tratamientos capilares en Chía: keratina y botox | Narbo's",
