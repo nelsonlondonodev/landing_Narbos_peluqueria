@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🔁 URLs con Barra Final sin Error 500 v2.8.52 (9 de octubre de 2026)
+
+*   **Las URLs con barra final ya no dan 500**: `/contacto/` o `/servicios/peluqueria/cortes-de-pelo/` entraban en bucle en el `.htaccess` y respondían 500; Search Console tenía 14 páginas en «Error de servidor (5xx)». Ahora redirigen con 301 a la versión sin barra, la del sitemap. Los hubs de categoría, que son directorios reales, siguen igual (`2400ed3`).
+*   **Versión**: `v2.8.52`.
+
+---
+
 ## 🖼️ Galería Real en Extensiones v2.8.51 (8 de octubre de 2026)
 
 *   **Galería con fotos del salón**: La página de extensiones estrena galería bento con cuatro fotos reales: la colocación de extensiones adhesivas sobre un balayage (las mismas del post de la ficha de Google) y la del hero. Cuatro columnas en escritorio y dos en móvil, sin huecos (`6c5a55d`).
