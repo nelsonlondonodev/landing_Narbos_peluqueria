@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## ↪️ URLs Antiguas Redirigidas v2.8.53 (9 de octubre de 2026)
+
+*   **Cuatro 404 de Search Console pasan a 301**: `/servicios/estetica/depilacion` → depilación corporal, `/peluqueria/` → el hub de peluquería, `/unas-acrilicas-gel` → su página dentro de uñas y spa, y `guia-cuidado-capilar-sabana-viento-casco-frio` → el artículo con su slug actual. Las variantes `.html` saltan directas al destino, sin cadena (`dbeace1`).
+*   **Versión**: `v2.8.53`.
+
+---
+
 ## 🔁 URLs con Barra Final sin Error 500 v2.8.52 (9 de octubre de 2026)
 
 *   **Las URLs con barra final ya no dan 500**: `/contacto/` o `/servicios/peluqueria/cortes-de-pelo/` entraban en bucle en el `.htaccess` y respondían 500; Search Console tenía 14 páginas en «Error de servidor (5xx)». Ahora redirigen con 301 a la versión sin barra, la del sitemap. Los hubs de categoría, que son directorios reales, siguen igual (`2400ed3`).

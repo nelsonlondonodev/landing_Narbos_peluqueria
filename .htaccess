@@ -8,6 +8,13 @@
     #    403, y Google reintenta un 403 indefinidamente en vez de descartarlo.
     RewriteRule ^servicios/?$ / [R=301,L]
 
+    # 0b. URLs antiguas que GSC tenía en 404. Van antes de la regla 2 para que
+    #     la variante .html salte directa al destino, sin pasar por la limpia.
+    RewriteRule ^servicios/estetica/depilacion(\.html)?/?$ /servicios/estetica/depilacion-corporal [R=301,L]
+    RewriteRule ^peluqueria(\.html)?/?$ /servicios/peluqueria/ [R=301,L]
+    RewriteRule ^unas-acrilicas-gel(\.html)?/?$ /servicios/unas-spa/unas-acrilicas-gel [R=301,L]
+    RewriteRule ^blog/articles/guia-cuidado-capilar-sabana-viento-casco-frio(\.html)?/?$ /blog/articles/cuidado-capilar-sabana-viento-casco-frio [R=301,L]
+
     # 1. Redirigir de /index.html a / (Eliminar index.html)
     RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.html\s [NC]
     RewriteRule ^ %1/ [R=301,L]
