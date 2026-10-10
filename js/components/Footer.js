@@ -1,5 +1,6 @@
 import { siteConfig } from '../config.js';
 import businessHours from '../data/business-hours.js';
+import { buildHoursRows, hoursListHTML } from '../utils/hoursRows.js';
 
 /**
  * Genera el HTML del Footer (Pie de página global).
@@ -82,18 +83,7 @@ function renderHours() {
     let listHtml = '';
     
     if (weekdayText && weekdayText.length > 0) {
-        listHtml = weekdayText.map(text => {
-            const isSunday = text.toLowerCase().includes('domingo');
-            const isClosed = text.toLowerCase().includes('cerrado');
-            let colorClass = 'text-white';
-            if (isClosed) {
-                colorClass = isSunday ? 'text-brand-light/60' : 'text-red-400';
-            }
-            const parts = text.split(':');
-            const day = parts[0];
-            const time = parts.slice(1).join(':');
-            return `<p>${day}: <span class="font-bold ${colorClass}">${time}</span></p>`;
-        }).join('');
+        listHtml = hoursListHTML(buildHoursRows(weekdayText));
     } else {
         const mon = schedule.find(s => s.day === 'Lunes') || { opens: '7:00 AM', closes: '8:00 PM' };
         const sat = schedule.find(s => s.day === 'Sábado') || { opens: '7:00 AM', closes: '8:00 PM' };

@@ -7,6 +7,14 @@
 import { PLACE_ID, TIME_ZONE } from '../data/place-config.js';
 
 export class GoogleMapsService {
+    /**
+     * Consulta a Google en curso, compartida entre instancias: `StoreBadge` y
+     * `HoursController` piden los horarios a la vez al cargar la página, y sin
+     * esto una visita sin caché hacía dos llamadas a la API.
+     * @type {Promise<Object|null>|null}
+     */
+    static inflight = null;
+
     constructor(apiKey = null) {
         this.apiKey = apiKey;
         this.cacheDuration = 12 * 60 * 60 * 1000; // 12 horas en milisegundos
@@ -15,12 +23,13 @@ export class GoogleMapsService {
     /**
      * La clave del caché lleva la fecha local de Bogotá: así los periodos de
      * `currentOpeningHours` (que vienen fechados) nunca sobreviven al cambio de día
-     * y un festivo no se arrastra a la jornada siguiente.
+     * y un festivo no se arrastra a la jornada siguiente. El `v2` invalida los
+     * cachés guardados antes de que existiera `specialDates`.
      * @returns {string}
      */
     get cacheKey() {
         const today = new Intl.DateTimeFormat('en-CA', { timeZone: TIME_ZONE }).format(new Date());
-        return `narbos_hours_cache_${today}`;
+        return `narbos_hours_cache_v2_${today}`;
     }
 
     /**
@@ -33,15 +42,16 @@ export class GoogleMapsService {
 
         // 2. Si no hay caché o expiró, y tenemos API Key, consultamos a Google
         if (this.apiKey) {
-            try {
-                return await this._fetchFromGoogle();
-            } catch (error) {
-                // Fallback silencioso en producción para mantener la consola limpia de cara a Lighthouse
-                if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-                    console.warn('⚠️ Fallo consulta a Google, usando fallback estático:', error.message);
-                }
-                return null;
-            }
+            GoogleMapsService.inflight ??= this._fetchFromGoogle()
+                .catch(error => {
+                    // Fallback silencioso en producción para mantener la consola limpia de cara a Lighthouse
+                    if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+                        console.warn('⚠️ Fallo consulta a Google, usando fallback estático:', error.message);
+                    }
+                    return null;
+                })
+                .finally(() => { GoogleMapsService.inflight = null; });
+            return GoogleMapsService.inflight;
         }
         return null;
     }
@@ -69,6 +79,8 @@ export class GoogleMapsService {
      * `currentOpeningHours` describe la semana en curso y trae cada periodo fechado,
      * por lo que ya refleja los horarios especiales de festivos configurados en la
      * ficha de Google. `regularOpeningHours` queda como red de seguridad.
+     * `specialDates` lista, en `YYYY-MM-DD`, los días que la ficha tiene con horario
+     * especial, para poder señalarlos en la lista semanal.
      */
     _processGoogleData(data) {
         const current = data.currentOpeningHours || {};
@@ -80,7 +92,10 @@ export class GoogleMapsService {
             openNow: current.openNow ?? null,
             periods: current.periods || regular.periods || [],
             regularPeriods: regular.periods || [],
-            weekdayText: current.weekdayDescriptions || regular.weekdayDescriptions || []
+            weekdayText: current.weekdayDescriptions || regular.weekdayDescriptions || [],
+            specialDates: (current.specialDays || [])
+                .filter(s => s.date)
+                .map(({ date }) => `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`)
         };
     }
 

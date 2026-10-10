@@ -6,6 +6,15 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🗓️ Días con Horario Especial Señalados v2.8.55 (10 de octubre de 2026)
+
+*   **Los días con horario especial se distinguen en la lista semanal**: cuando la ficha de Google tiene un horario especial (como el festivo del lunes 12 de octubre), ese día muestra su fecha y la etiqueta «Horario especial», en el footer y en el popover del estado. Se dice «horario especial» y no «festivo» porque Google no los distingue (`764e5ea`).
+*   **El footer consulta a Google por su cuenta**: `HoursController` buscaba la clave de la API en una ruta que no existe y solo se actualizaba si el badge había llenado ya la caché. Ahora comparte con el badge una única consulta (`764e5ea`).
+*   **El popover del badge se actualiza con los datos en vivo** aunque no cambie el estado «abierto/cerrado» (`764e5ea`).
+*   **Versión**: `v2.8.55`.
+
+---
+
 ## 📌 GLightbox con Versión Fija v2.8.54 (10 de octubre de 2026)
 
 *   **GLightbox fijado a la 3.3.1**: las 18 páginas con galería lo cargaban de jsDelivr sin versión y recibían siempre la última publicada; con la 4.0 ya en beta, un cambio de API podía romper las galerías sin tocar el repo. Se fija la que se servía hasta ahora, así que nada cambia (`af0b3db`).
