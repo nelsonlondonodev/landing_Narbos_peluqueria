@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 📌 GLightbox con Versión Fija v2.8.54 (10 de octubre de 2026)
+
+*   **GLightbox fijado a la 3.3.1**: las 18 páginas con galería lo cargaban de jsDelivr sin versión y recibían siempre la última publicada; con la 4.0 ya en beta, un cambio de API podía romper las galerías sin tocar el repo. Se fija la que se servía hasta ahora, así que nada cambia (`af0b3db`).
+*   **Versión**: `v2.8.54`.
+
+---
+
 ## ↪️ URLs Antiguas Redirigidas v2.8.53 (9 de octubre de 2026)
 
 *   **Cuatro 404 de Search Console pasan a 301**: `/servicios/estetica/depilacion` → depilación corporal, `/peluqueria/` → el hub de peluquería, `/unas-acrilicas-gel` → su página dentro de uñas y spa, y `guia-cuidado-capilar-sabana-viento-casco-frio` → el artículo con su slug actual. Las variantes `.html` saltan directas al destino, sin cadena (`dbeace1`).
