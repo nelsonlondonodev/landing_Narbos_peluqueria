@@ -2,6 +2,7 @@ import { GoogleMapsService } from '../services/GoogleMapsService.js';
 import { siteConfig } from '../config.js';
 import { TIME_ZONE } from '../data/place-config.js';
 import businessHours from '../data/business-hours.js';
+import { buildHoursRows, SPECIAL_BADGE_HTML } from '../utils/hoursRows.js';
 
 const DAY_NAMES = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
@@ -35,6 +36,9 @@ export class StoreBadge {
                 this.liveData = liveData;
                 this.isLive = true;
                 if (liveData.weekdayText?.length) this.weekdayText = liveData.weekdayText;
+                // Forzar el repintado: si la etiqueta no cambia (p. ej. sigue
+                // «CERRADO AHORA»), el popover se quedaba con el horario del build.
+                this.lastLabel = null;
                 this.checkAndUpdate();
             }
         } catch (error) {
@@ -262,17 +266,16 @@ export class StoreBadge {
             `;
         }
 
-        return this.weekdayText.map(text => {
-            const separator = text.indexOf(':');
-            const day = text.slice(0, separator);
-            const time = text.slice(separator + 1).trim();
-            const isClosed = /cerrado/i.test(time);
-            const colorClass = isClosed ? 'text-red-400' : 'text-white';
+        const specialDates = this.isLive ? (this.liveData?.specialDates || []) : [];
+
+        return buildHoursRows(this.weekdayText, specialDates).map(row => {
+            const colorClass = row.special ? 'text-brand-medium' : (row.closed ? 'text-red-400' : 'text-white');
+            const day = row.dateLabel ? `${row.day} ${row.dateLabel}` : row.day;
 
             return `
                 <li class="flex justify-between items-center gap-3">
-                    <span class="opacity-80 capitalize">${day}:</span>
-                    <span class="font-bold text-right ${colorClass}">${time}</span>
+                    <span class="opacity-80 capitalize">${day}:${row.special ? SPECIAL_BADGE_HTML : ''}</span>
+                    <span class="font-bold text-right ${colorClass}">${row.time}</span>
                 </li>
             `;
         }).join('');

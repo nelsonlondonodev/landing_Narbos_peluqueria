@@ -1,5 +1,6 @@
 import { GoogleMapsService } from '../services/GoogleMapsService.js';
 import { siteConfig } from '../config.js';
+import { buildHoursRows, hoursListHTML } from '../utils/hoursRows.js';
 
 /**
  * HoursController.js
@@ -8,7 +9,7 @@ import { siteConfig } from '../config.js';
  */
 export class HoursController {
     constructor() {
-        this.googleService = new GoogleMapsService(siteConfig.googleMapsApiKey);
+        this.googleService = new GoogleMapsService(siteConfig.contact.googleMapsApiKey);
         this.containerId = 'hours-display-container'; // ID del contenedor en el footer/contacto
     }
 
@@ -53,7 +54,7 @@ export class HoursController {
             container.classList.add('transition-opacity', 'duration-500', 'opacity-0');
 
             setTimeout(() => {
-                target.innerHTML = this._buildHoursHTML(data.weekdayText);
+                target.innerHTML = this._buildHoursHTML(data.weekdayText, data.specialDates);
                 container.classList.remove('opacity-0');
                 container.classList.add('opacity-100');
             }, 500);
@@ -71,20 +72,11 @@ export class HoursController {
     }
 
     /**
-     * Construye la lista de horarios día a día.
-     * Los colores se heredan del contenedor en lugar de fijarse, para que el bloque
-     * siga siendo legible si se reutiliza fuera del footer.
+     * Construye la lista de horarios día a día, con los días especiales señalados.
      * @private
      */
-    _buildHoursHTML(weekdayText) {
-        const listHtml = weekdayText.map(text => {
-            const isSunday = text.toLowerCase().includes('domingo');
-            const isClosed = text.toLowerCase().includes('cerrado');
-            const colorClass = isClosed ? (isSunday ? 'opacity-60' : 'text-red-400') : '';
-            const [day, ...rest] = text.split(':');
-            const time = rest.join(':');
-            return `<p>${day}: <span class="font-bold ${colorClass}">${time}</span></p>`;
-        }).join('');
+    _buildHoursHTML(weekdayText, specialDates = []) {
+        const listHtml = hoursListHTML(buildHoursRows(weekdayText, specialDates));
 
         return `
             <div class="flex items-center gap-2 mb-1">
