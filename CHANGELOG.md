@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🧹 Caché de Horarios sin Acumular v2.8.56 (10 de octubre de 2026)
+
+*   **Las cachés de horarios de días anteriores se borran**: la clave lleva la fecha y cada día se creaba una nueva sin borrar las viejas (un navegador de prueba tenía 35 desde agosto). Ahora, al guardar la del día, se eliminan las demás (`d62e09f`).
+*   **Versión**: `v2.8.56`.
+
+---
+
 ## 🗓️ Días con Horario Especial Señalados v2.8.55 (10 de octubre de 2026)
 
 *   **Los días con horario especial se distinguen en la lista semanal**: cuando la ficha de Google tiene un horario especial (como el festivo del lunes 12 de octubre), ese día muestra su fecha y la etiqueta «Horario especial», en el footer y en el popover del estado. Se dice «horario especial» y no «festivo» porque Google no los distingue (`764e5ea`).
