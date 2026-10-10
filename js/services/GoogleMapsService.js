@@ -117,6 +117,12 @@ export class GoogleMapsService {
 
     _setCache(data) {
         try {
+            // La clave cambia cada día: sin esto, las de días anteriores se
+            // quedaban para siempre en el localStorage del visitante.
+            Object.keys(localStorage)
+                .filter(key => key.startsWith('narbos_hours_cache_') && key !== this.cacheKey)
+                .forEach(key => localStorage.removeItem(key));
+
             localStorage.setItem(this.cacheKey, JSON.stringify({
                 data,
                 timestamp: Date.now()
