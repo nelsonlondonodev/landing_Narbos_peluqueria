@@ -1,12 +1,12 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-10-05T07:43:52.981Z
+ * Última sincronización con Google Business Profile: 2026-10-12T06:13:32.862Z
  */
 const googleReviews = {
-    "lastSync": "2026-10-05T07:43:52.981Z",
+    "lastSync": "2026-10-12T06:13:32.862Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
-    "userRatingCount": 360,
+    "userRatingCount": 361,
     "reviews": [
         {
             "author": "Ingrid Marcela Aguilera",
@@ -26,7 +26,7 @@ const googleReviews = {
             "author": "L A",
             "rating": 5,
             "text": "Excelente trabajo en Narbo’s !! Vine para que me hicieran “alguito” para un evento que tengo hoy y quedé impresionada !  La calidad, el profesionalismo, la asesoría de Martica y Mónica y sobretodo el buen ambiente (y la música)  hacen de este salón toda una experiencia…súper recomendado !!",
-            "relativeTime": "Hace 1 mes",
+            "relativeTime": "Hace 2 meses",
             "verified": true
         },
         {
@@ -40,7 +40,7 @@ const googleReviews = {
             "author": "Valentina Paez",
             "rating": 5,
             "text": "Nabo's salón es increíble desde el inicio hasta la salida, yo me realice un servicio de manicure y pedicure y me encantó relsultado, cumplieron mis expectativas en todo lo que quería, el servicio y la atención es espectacular muy atentas,  amables y cuidadosas con cada parte del proceso. Definitivamente volveré ✨️",
-            "relativeTime": "Hace 1 mes",
+            "relativeTime": "Hace 2 meses",
             "verified": true
         }
     ]
