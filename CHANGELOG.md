@@ -6,6 +6,14 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 📐 Horarios del Footer Alineados v2.8.57 (12 de octubre de 2026)
+
+*   **Los horarios del footer ya no hacen zigzag**: cada día se centraba por separado y las líneas de distinto ancho (sobre todo la del día con «Horario especial») quedaban desalineadas. Ahora van en dos columnas con los «:» alineados, tanto en el horario estático como en el de Google en vivo (`3f8ab7e`).
+*   **Reseñas sincronizadas**: 361 opiniones en Google (`4948a16`).
+*   **Versión**: `v2.8.57`.
+
+---
+
 ## 🧹 Caché de Horarios sin Acumular v2.8.56 (10 de octubre de 2026)
 
 *   **Las cachés de horarios de días anteriores se borran**: la clave lleva la fecha y cada día se creaba una nueva sin borrar las viejas (un navegador de prueba tenía 35 desde agosto). Ahora, al guardar la del día, se eliminan las demás (`d62e09f`).
