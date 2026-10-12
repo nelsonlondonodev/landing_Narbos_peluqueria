@@ -56,16 +56,21 @@ export const SPECIAL_BADGE_HTML =
  * Lista día a día para el bloque de horarios del footer. Los colores se heredan
  * del contenedor en lugar de fijarse, para que siga siendo legible si se
  * reutiliza fuera del footer.
+ *
+ * Va en rejilla de dos columnas (día a la derecha, hora a la izquierda) para que
+ * los «:» queden alineados: centrar cada línea por separado dejaba un zigzag,
+ * porque «lunes 12 oct» con su etiqueta mide el doble que «domingo».
  * @param {ReturnType<typeof buildHoursRows>} rows
  * @returns {string}
  */
 export function hoursListHTML(rows) {
-    return rows.map(row => {
+    const cells = rows.map(row => {
         const colorClass = row.special
             ? 'text-brand-medium'
             : (row.closed ? (row.isSunday ? 'opacity-60' : 'text-red-400') : '');
         const day = row.dateLabel ? `${row.day} ${row.dateLabel}` : row.day;
         const badge = row.special ? SPECIAL_BADGE_HTML : '';
-        return `<p>${day}${badge}: <span class="font-bold ${colorClass}">${row.time}</span></p>`;
+        return `<span class="text-right">${day}${badge}:</span><span class="font-bold text-left ${colorClass}">${row.time}</span>`;
     }).join('');
+    return `<div class="grid grid-cols-[auto_auto] gap-x-1.5 gap-y-1">${cells}</div>`;
 }
