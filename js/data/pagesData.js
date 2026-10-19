@@ -366,24 +366,40 @@ export const pagesData = Object.freeze({
         metaTitle: "Balayage y Mechas en Chía | Especialistas en Rubios | Narbo's",
         metaDescription: "Consigue el rubio de tus sueños con nuestras técnicas de Balayage, Mechas y Babylights en Chía. Expertos en iluminación capilar y salud de tu fibra.",
         video: {
-            id: '_33Xsn18z8s',
+            id: 'GD3bWZQSC8A',
+            // La portada de la edición, no la miniatura de YouTube: es 9:16 nativa, sin
+            // relleno que recortar, y lleva los rótulos «antes» y «después».
+            poster: 'images/pages/peluqueria/video-balayage-castano-ondas-antes-despues.webp',
+            // Etiqueta «Nuevo» hasta el 15 de noviembre: 28 días desde que salió en YouTube.
+            addedAt: '2026-10-18T08:25:09-05:00',
+            badgeDurationDays: 28,
             headingId: 'balayage-video-title',
             heading: 'Mira una <span class="text-brand-green">transformación real</span>',
-            body: 'Balayage con ondas suaves, de principio a fin. Así trabajamos el degradado a mano alzada para conseguir rubios luminosos con movimiento natural, cuidando la salud del cabello en cada paso.',
+            body: 'Así llegó y así salió. Un balayage que ilumina y se funde con su color natural, terminado en ondas para que se vea el movimiento del color. Cada proceso empieza por una valoración: tu referencia, el color que traes y lo que tu cabello puede recibir.',
             ctaLabel: 'Agendar mi Balayage',
             ctaMessage: 'Hola, vi el video de balayage en su web y quiero agendar mi cita.',
-            alt: "Resultado de un balayage con ondas suaves realizado en Narbo's Salón Spa Chía",
-            ariaLabel: 'Reproducir video: Transformación Increíble, Balayage y Ondas en Chía'
+            alt: "Antes y después de un balayage castaño con ondas realizado en Narbo's Salón Spa Chía",
+            ariaLabel: 'Reproducir video: Balayage con Ondas, Antes y Después en Chía'
         },
+        // El vídeo vive en su sección, no en el bento: la galería queda solo para fotos
+        // de antes y después, como en color-tinturas-cabello.
         gallery: [
             {
-                type: 'youtube',
+                type: 'image',
                 layout: 'featured-video',
-                youtubeId: 'VCnNQODdxy0',
-                poster: 'https://img.youtube.com/vi/VCnNQODdxy0/hqdefault.jpg',
-                title: "Balayage e Iluminación",
-                subtitle: "Ver resultado en video",
-                alt: "Diseño de Balayage e Iluminación Profesional en Chía | Narbo's Salón Spa"
+                src: 'images/pages/peluqueria/casos_exito/balayage-castano-ondas-chia-despues.webp',
+                srcMobile: 'images/pages/peluqueria/casos_exito/balayage-castano-ondas-chia-despues-mobile.webp',
+                title: "Balayage Castaño",
+                subtitle: "Del ombré desgastado a las ondas",
+                addedAt: '2026-10-18T08:25:09-05:00',
+                badgeDurationDays: 28,
+                alt: "Resultado final: balayage castaño con ondas que se funde con el color natural.",
+                subImages: [
+                    {
+                        src: 'images/pages/peluqueria/casos_exito/balayage-castano-ondas-chia-antes.webp',
+                        alt: 'Antes: ombré desgastado con la raíz oscura y las puntas sin forma.'
+                    }
+                ]
             },
              // Caso Estrella: Corrección Rubio Extremo
              {

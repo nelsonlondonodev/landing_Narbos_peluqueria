@@ -272,7 +272,7 @@ function injectServices(document, pageKey, prefix) {
  *
  * @returns {string|null} Descripción del problema, o null si todo encaja.
  */
-function injectVideoSection(document, pageKey, pagePath) {
+function injectVideoSection(document, pageKey, pagePath, prefix) {
     const root = document.getElementById('video-section-root');
     const data = pagesData[pageKey]?.video;
 
@@ -285,7 +285,9 @@ function injectVideoSection(document, pageKey, pagePath) {
         return `${pagePath}: '${pageKey}' declara \`video\` en pagesData pero falta el <div id="video-section-root">.`;
     }
 
-    root.innerHTML = getVideoSectionHTML(data);
+    root.innerHTML = getVideoSectionHTML(
+        data.poster ? { ...data, poster: resolveAsset(data.poster, prefix) } : data
+    );
     return null;
 }
 
@@ -758,7 +760,7 @@ async function processPage(pageConfig) {
     injectHero(document, pageConfig.key, prefix);
     injectHeroBadges(document, pageConfig.key);
     injectServices(document, pageConfig.key, prefix);
-    const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path);
+    const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path, prefix);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
     const faqIssues = sincronizarFaqPage(document, pageConfig.path);
     unificarNegocio(document);

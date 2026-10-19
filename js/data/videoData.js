@@ -154,6 +154,16 @@ export const videoCatalog = [
         description: "Nuestro equipo en una capacitación de Wella Professionals sobre Diseño del Color y Diseño del Corte. Formación continua para llevar cada técnica al salón en Chía.",
         uploadDate: "2026-09-23T05:08:44-05:00",
         thumbnailUrl: getYouTubeThumbnail('swn-iS5gujQ', 'maxresdefault')
+    },
+    {
+        id: 'GD3bWZQSC8A',
+        title: "Balayage con Ondas: Antes y Después en Chía",
+        description: "Así llegó y así salió: un balayage que ilumina y se funde con su color natural, terminado en ondas para que se vea el movimiento del color. Narbo's Salón Spa, Chía.",
+        uploadDate: "2026-10-18T08:25:09-05:00",
+        // Como `nDH5jTYxaU8`: relleno desenfocado a los lados, así que `maxresdefault`
+        // entra limpio en la parrilla 16:9 y en la tarjeta 9:16 el recorte cae sobre el
+        // frame real, con el «antes» y el «después» a la vista.
+        thumbnailUrl: getYouTubeThumbnail('GD3bWZQSC8A', 'maxresdefault')
     }
 ];
 
