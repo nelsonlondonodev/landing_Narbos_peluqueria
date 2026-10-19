@@ -1,18 +1,18 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-10-12T06:13:32.862Z
+ * Última sincronización con Google Business Profile: 2026-10-19T05:39:14.412Z
  */
 const googleReviews = {
-    "lastSync": "2026-10-12T06:13:32.862Z",
+    "lastSync": "2026-10-19T05:39:14.412Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
-    "userRatingCount": 361,
+    "userRatingCount": 362,
     "reviews": [
         {
             "author": "Ingrid Marcela Aguilera",
             "rating": 5,
             "text": "⭐⭐⭐⭐⭐\n¡Excelente experiencia! Cristian Barrera hizo un trabajo impecable. Me encantó cómo quedó mi cabello: entendió exactamente lo que quería y el resultado superó mis expectativas. Además de su profesionalismo, brinda una atención amable y dedicada. Sin duda lo recomiendo y volveré para mi próximo cambio de look. ¡Muchas gracias, Cristian!",
-            "relativeTime": "Hace 2 meses",
+            "relativeTime": "Hace 3 meses",
             "verified": true
         },
         {
@@ -33,7 +33,7 @@ const googleReviews = {
             "author": "Janeth Torres",
             "rating": 5,
             "text": "El día de hoy conocí este maravilloso lugar, me guíe por todas las recomendaciones de este medio y quise comprobarlo!  todos son muy atentos especialmente Alex quien fue mi peluquero, Salimos felices con los resultados. Volveré!!!",
-            "relativeTime": "Hace 4 meses",
+            "relativeTime": "Hace 5 meses",
             "verified": true
         },
         {
