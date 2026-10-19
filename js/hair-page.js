@@ -4,6 +4,7 @@ import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
 import { getVideoSectionHTML } from './components/VideoSection.js';
+import { removeExpiredBadges } from './utils/newBadge.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { ServiceModal } from './components/ServiceModal.js';
 import { hairBrands, smoothingBrands } from './data/brandsData.js';
@@ -34,6 +35,7 @@ function initPageComponents() {
 
     initBrandsCarousel();
     initVideoSection();
+    removeExpiredBadges();
     initGallery();
     initHairServicesGrid();
 }
@@ -64,7 +66,7 @@ function initVideoSection() {
     const videoData = pagesData[getPageKey()]?.video;
     if (!videoData) return;
 
-    root.innerHTML = getVideoSectionHTML(videoData);
+    root.innerHTML = getVideoSectionHTML(window.narbosApp.resolveDeep(videoData));
 }
 
 function initGallery() {

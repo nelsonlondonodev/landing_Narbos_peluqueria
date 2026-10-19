@@ -1,5 +1,6 @@
 import { getVideoById, getYouTubeThumbnail } from '../data/videoData.js';
 import { getWhatsAppUrl } from '../config.js';
+import { getNewBadgeHTML } from '../utils/newBadge.js';
 
 /**
  * @typedef {Object} VideoSectionData
@@ -17,6 +18,11 @@ import { getWhatsAppUrl } from '../config.js';
  *   Calidad de la miniatura. La tarjeta recorta con `object-cover`, así que en los
  *   verticales la elección depende de cómo haya rellenado YouTube cada short: ver el
  *   comentario de cada entrada en `videoData.js`.
+ * @property {string} [poster] - Imagen propia en lugar de la miniatura de YouTube, para
+ *   cuando ningún recorte de las suyas queda limpio. Ruta relativa a la raíz: la
+ *   resuelven el SSG y `resolveDeep` según la profundidad de la página.
+ * @property {string} [addedAt] - Activa la etiqueta «Nuevo» (ver `utils/newBadge.js`).
+ * @property {number} [badgeDurationDays] - Días que dura la etiqueta desde `addedAt`.
  */
 
 /**
@@ -52,7 +58,7 @@ const ORIENTATION_STYLES = {
  */
 export function getVideoSectionHTML(data) {
     const quality = data.thumbnailQuality || 'maxresdefault';
-    const thumbnail = getYouTubeThumbnail(data.id, quality);
+    const thumbnail = data.poster || getYouTubeThumbnail(data.id, quality);
     const orientation = getVideoById(data.id)?.orientation;
     const { aspect, width } = ORIENTATION_STYLES[orientation] || ORIENTATION_STYLES.vertical;
 
@@ -81,6 +87,8 @@ export function getVideoSectionHTML(data) {
                                  alt="${data.alt}"
                                  loading="lazy" decoding="async"
                                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100">
+
+                            ${getNewBadgeHTML(data)}
 
                             <!-- Icono de reproducción; el disparador es el <button> que lo envuelve. -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors duration-300">

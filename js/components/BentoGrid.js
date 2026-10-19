@@ -1,3 +1,4 @@
+import { getNewBadgeHTML } from '../utils/newBadge.js';
 
 /**
  * Genera el HTML para un Bento Grid Item.
@@ -105,43 +106,6 @@ function getHiddenSubImagesHTML(item, galleryId) {
     `).join('');
 }
 
-const DEFAULT_BADGE_DURATION_DAYS = 30;
-const MS_PER_DAY = 86400000;
-
-/**
- * Determina si la insignia "Nuevo" debe estar activa para un item específico.
- * @param {Object} item 
- * @returns {boolean}
- */
-function isBadgeActive(item) {
-    if (!item) return false;
-    if (item.isNew) return true;
-    if (!item.addedAt) return false;
-
-    const addedDate = new Date(item.addedAt);
-    if (isNaN(addedDate.getTime())) return false;
-
-    const diffInDays = (new Date() - addedDate) / MS_PER_DAY;
-    const maxDays = item.badgeDurationDays || DEFAULT_BADGE_DURATION_DAYS;
-
-    return diffInDays <= maxDays;
-}
-
-/**
- * Genera el HTML de la etiqueta "NUEVO" si la fecha del item está dentro del período activo.
- * @param {Object} item 
- * @returns {string}
- */
-function getBadgeHTML(item) {
-    if (!isBadgeActive(item)) return '';
-
-    return `
-        <div class="badge-latest pointer-events-none">
-            NUEVO
-        </div>
-    `;
-}
-
 /**
  * Genera los textos flotantes (título y subtítulo) sobre el componente de la cuadrícula.
  */
@@ -181,7 +145,7 @@ function getGridItemHTML(item, index, options = {}) {
     
     // Armado de componentes internos
     const mediaHTML = getMediaContentHTML(item);
-    const badgeHTML = getBadgeHTML(item);
+    const badgeHTML = getNewBadgeHTML(item);
     const overlayHTML = getOverlayHTML(item);
     const triggerLinkHTML = getTriggerLinkHTML(item, galleryId);
     const hiddenLinksHTML = getHiddenSubImagesHTML(item, galleryId);
