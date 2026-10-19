@@ -6,6 +6,16 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🎬 Balayage: Short del Antes y Después v2.8.58 (19 de octubre de 2026)
+
+*   **Un solo vídeo en la página de balayage**: la sección de vídeo estrena el Short «Balayage con ondas: antes y después» (`GD3bWZQSC8A`) con póster propio en vez de la miniatura de YouTube. El bento deja de llevar vídeo: su casilla grande es la foto del antes y el después del mismo balayage (`17b640b`).
+*   **Etiqueta «Nuevo» con caducidad**: vídeo y foto la llevan hasta el 15 de noviembre. La lógica se comparte en `utils/newBadge.js` y el navegador la retira al caducar sin redesplegar (`17b640b`).
+*   **Schema**: `VideoObject` del Short nuevo, `dateModified` e imágenes en el `WebPage` de balayage, y el `ItemList` de la home con 10 vídeos (`17b640b`).
+*   **Reseñas sincronizadas**: 362 opiniones en Google (`91c9d2f`).
+*   **Versión**: `v2.8.58`.
+
+---
+
 ## 📐 Horarios del Footer Alineados v2.8.57 (12 de octubre de 2026)
 
 *   **Los horarios del footer ya no hacen zigzag**: cada día se centraba por separado y las líneas de distinto ancho (sobre todo la del día con «Horario especial») quedaban desalineadas. Ahora van en dos columnas con los «:» alineados, tanto en el horario estático como en el de Google en vivo (`3f8ab7e`).
