@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💆 Masajes en Chía v2.8.59 (23 de octubre de 2026)
+
+*   **La página de masajes pasa al nivel genérico**: title «Masajes en Chía: relajante, descontracturante y drenaje», H1 «Masajes en Chía», y descripción e intro con los cuatro masajes que se venden. Google repartía «masajes chia» entre cuatro URLs del sitio y la página de servicio había caído a la posición 17,4, mientras el hub de estética subía a 9,1 (`5d90586`).
+*   **Versión**: `v2.8.59`.
+
+---
+
 ## 🎬 Balayage: Short del Antes y Después v2.8.58 (19 de octubre de 2026)
 
 *   **Un solo vídeo en la página de balayage**: la sección de vídeo estrena el Short «Balayage con ondas: antes y después» (`GD3bWZQSC8A`) con póster propio en vez de la miniatura de YouTube. El bento deja de llevar vídeo: su casilla grande es la foto del antes y el después del mismo balayage (`17b640b`).
