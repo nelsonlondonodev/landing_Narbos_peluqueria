@@ -964,14 +964,14 @@ export const pagesData = Object.freeze({
 
     'masajes-relajantes': {
         hero: {
-            title: "Masajes Relajantes <span class=\"text-brand-green\">en Chía</span>",
+            title: "Masajes <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Desconecta del mundo y reconecta contigo mismo. Una experiencia sensorial única para cuerpo y mente.",
             imageSrc: "images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp",
             imageSrcMobile: "images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia-mobile.webp",
             imageAlt: "Masajes Relajantes con piedras calientes en Chía"
         },
-        metaTitle: "Masajes Relajantes en Chía | Piedras Calientes y Relax | Narbo's",
-        metaDescription: "Libera el estrés y renueva tu energía con nuestros masajes relajantes en Chía. Terapia con piedras calientes, aromaterapia y técnicas descontracturantes.",
+        metaTitle: "Masajes en Chía: relajante, descontracturante y drenaje | Narbo's",
+        metaDescription: "Masajes en Chía: relajante de 1 hora con piedras calientes, descontracturante de espalda o de cuerpo completo y drenaje linfático. Agenda tu cita en Narbo's.",
         gallery: [
             {
                 type: 'image',
