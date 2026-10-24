@@ -211,8 +211,6 @@
     <style>
         /* Optimización de CLS: Reserva de espacio para componentes dinámicos */
         #navbar-root { min-height: 80px; }
-        #hero-root { min-height: 60vh; background: #f9f9f9; }
-        @media (min-width: 768px) { #hero-root { min-height: 80vh; } }
     </style>
     <!-- VIDEO-OBJECT:peluqueria -->
     <script type="application/ld+json">
@@ -245,24 +243,10 @@
 
     <main>
       <!-- Hero de Peluquería (Principal) -->
-      <div id="hero-root">
-          <div class="relative">
-              <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-                  <img src="../../images/pages/peluqueria/hair-hero.webp" alt="Servicio de peluquería profesional en Narbo's" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" fetchpriority="high">
-              </section>
-              <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
-                  <div class="container mx-auto">
-                      <div class="bg-white/90 text-brand-gray-dark backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto">
-                          <h1 id="hero-title" class="animate-hero-element text-4xl md:text-6xl font-serif font-bold mb-4">Peluquería en Chía: expertos en estilo, color <span class="text-brand-green">y bienestar</span></h1>
-                          <p id="hero-subtitle" class="animate-hero-element text-lg md:text-xl mb-8 max-w-2xl mx-auto">Expertos en realzar tu belleza con técnicas de vanguardia y productos de clase mundial.</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+      <div id="hero-root" class="relative z-20"><!-- Lo pinta el SSG con HeroSection (App.mountHero en desarrollo) desde pagesData. --></div>
 
       <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
-      <section id="servicios" class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
+      <section id="servicios" class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24 overflow-x-hidden">
         <div class="container mx-auto px-6 max-w-screen-xl">
             <div class="text-center mb-16 animate-fade-in-up delay-300" data-animation="fadeInUp">
               <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">

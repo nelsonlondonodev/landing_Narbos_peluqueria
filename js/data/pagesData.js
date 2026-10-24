@@ -41,7 +41,9 @@ export const pagesData = Object.freeze({
             subtitle: "Realza tu belleza natural para tu evento perfecto.",
             imageSrc: "images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
             imageSrcMobile: "images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos-mobile.webp",
-            imageAlt: "Maquillaje profesional en Narbo's Salon Spa"
+            imageAlt: "Maquillaje profesional en Narbo's Salon Spa",
+            eyebrow: "Maquillaje · Chía",
+            ctaMessage: "Hola, vengo de la página de maquillaje de la web de Narbo's y quiero agendar una cita"
         },
         gallery: [
             {
@@ -137,7 +139,9 @@ export const pagesData = Object.freeze({
             subtitle: "Corte de dama, tintes y retoque de raíz, balayage e iluminaciones, alisados progresivos y recuperación capilar. Más de once años en Chía.",
             imageSrc: "images/pages/peluqueria/hair-hero.webp",
             imageSrcMobile: "images/pages/peluqueria/hair-hero-mobile.webp",
-            imageAlt: "Servicio de peluquería profesional en Narbo's"
+            imageAlt: "Servicio de peluquería profesional en Narbo's",
+            eyebrow: "Peluquería · Chía",
+            ctaMessage: "Hola, vengo de la página de peluquería de la web de Narbo's y quiero agendar una cita"
         },
         video: {
             id: 'T11HZ98B1h4',
@@ -217,7 +221,9 @@ export const pagesData = Object.freeze({
             subtitle: "El espacio que mereces para cuidar tu imagen.",
             imageSrc: "images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp",
             imageSrcMobile: "images/pages/barberia/barberia-salon-spa-premium-chia-hero-mobile.webp",
-            imageAlt: "Interior de Narbo's Barbería - Salon de Belleza y Spa Premium en Chía"
+            imageAlt: "Interior de Narbo's Barbería - Salon de Belleza y Spa Premium en Chía",
+            eyebrow: "Barbería · Chía",
+            ctaMessage: "Hola, vengo de la página de barbería de la web de Narbo's y quiero agendar una cita"
         },
         gallery: [
             {
@@ -277,7 +283,9 @@ export const pagesData = Object.freeze({
            subtitle: "Pasión por la belleza y el bienestar desde 2013.",
            imageSrc: "images/nosotros/narbos-team-hero.webp",
            imageSrcMobile: "images/nosotros/narbos-team-hero-mobile.webp",
-           imageAlt: "Equipo de profesionales de Narbo's Salón Spa Chía"
+           imageAlt: "Equipo de profesionales de Narbo's Salón Spa Chía",
+           eyebrow: "Nuestra historia · Chía",
+           ctaMessage: "Hola, vengo de la página Nosotros de la web de Narbo's y quiero agendar una cita"
        },
         video: {
             id: 'swn-iS5gujQ',
@@ -303,7 +311,9 @@ export const pagesData = Object.freeze({
             subtitle: "Conoce nuestros horarios de atención y visítanos en nuestro salón de belleza muy cerca de Cajicá. ¡Agenda tu cita hoy!",
             imageSrc: "images/blog/foto_fachada.webp",
             imageSrcMobile: "images/blog/foto_fachada-mobile.webp",
-            imageAlt: "Recepción de Narbos Salon en Chia"
+            imageAlt: "Recepción de Narbos Salon en Chia",
+            eyebrow: "Contacto · Chía",
+            ctaMessage: "Hola, vengo de la página de contacto de la web de Narbo's y quiero agendar una cita"
         }
    },
     'cortes-de-pelo': {
@@ -678,7 +688,9 @@ export const pagesData = Object.freeze({
             subtitle: "Relájate y renueva tu piel con nuestros masajes y tratamientos faciales en Chía, muy cerca de Cajicá.",
             imageSrc: "images/pages/estetica/cabina-doble-spa-estetica-chia.webp",
             imageSrcMobile: "images/pages/estetica/cabina-doble-spa-estetica-chia-mobile.webp",
-            imageAlt: "Cabina profesional doble para masajes y spa en Narbo's Chía"
+            imageAlt: "Cabina profesional doble para masajes y spa en Narbo's Chía",
+            eyebrow: "Estética y spa · Chía",
+            ctaMessage: "Hola, vengo de la página de estética y spa de la web de Narbo's y quiero agendar una cita"
         },
         gallery: [
             {
@@ -790,7 +802,9 @@ export const pagesData = Object.freeze({
             subtitle: "Experimenta la máxima suavidad con técnicas profesionales y productos de alta calidad para el cuidado de tu piel.",
             imageSrc: "images/pages/estetica/experiencia-spa-depilacion-sin-dolor.webp",
             imageSrcMobile: "images/pages/estetica/experiencia-spa-depilacion-sin-dolor-mobile.webp",
-            imageAlt: "Experiencia de depilación spa en Narbo's Salón Chía"
+            imageAlt: "Experiencia de depilación spa en Narbo's Salón Chía",
+            eyebrow: "Depilación · Chía",
+            ctaMessage: "Hola, vengo de la página de depilación de la web de Narbo's y quiero agendar una cita"
         },
         gallery: [
             {
