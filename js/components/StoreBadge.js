@@ -3,8 +3,7 @@ import { siteConfig } from '../config.js';
 import { TIME_ZONE } from '../data/place-config.js';
 import businessHours from '../data/business-hours.js';
 import { buildHoursRows, SPECIAL_BADGE_HTML } from '../utils/hoursRows.js';
-
-const DAY_NAMES = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+import { calcularEstadoNegocio, momentoEnZona } from '../utils/estadoNegocio.js';
 
 export class StoreBadge {
     /**
@@ -14,7 +13,6 @@ export class StoreBadge {
         this.container = document.getElementById(containerId);
         this.lastState = null;
         this.lastLabel = null;
-        this.specialReason = null;
         this.todayNote = null;
         this.isLive = false;
         this.liveData = null;
@@ -52,8 +50,13 @@ export class StoreBadge {
 
     checkAndUpdate() {
         if (!this.container) return;
-        const open = this.calculateStatus();
-        const label = open ? 'ABIERTO AHORA' : (this.specialReason || 'CERRADO AHORA');
+        // Datos en vivo de Google si los hay; si no, los sincronizados en el build.
+        const { abierto: open, etiqueta: label, nota } = calcularEstadoNegocio({
+            periodos: this.liveData?.periods?.length ? this.liveData.periods : (businessHours.periods || []),
+            regulares: this.liveData?.regularPeriods?.length ? this.liveData.regularPeriods : (businessHours.periods || []),
+            ahora: momentoEnZona(TIME_ZONE)
+        });
+        this.todayNote = nota;
 
         if (this.lastState !== open || this.lastLabel !== label) {
             this.lastState = open;
@@ -63,186 +66,18 @@ export class StoreBadge {
     }
 
     /**
-     * Extrae de forma robusta las partes de fecha/hora en zona UTC-5 (Bogotá)
-     * compatibles con navegadores móviles y Safari.
-     * @returns {Object} Partes de la fecha y hora
-     */
-    _getBogotaTimeParts() {
-        const now = new Date();
-        const options = {
-            timeZone: TIME_ZONE,
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: false
-        };
-        const formatter = new Intl.DateTimeFormat('en-US', options);
-        const parts = formatter.formatToParts(now);
-
-        const getPart = (type) => parseInt(parts.find(p => p.type === type).value, 10);
-
-        return {
-            bYear: getPart('year'),
-            bMonth: getPart('month'), // 1-12
-            bDayOfMonth: getPart('day'),
-            bHour: getPart('hour') === 24 ? 0 : getPart('hour'),
-            bMinute: getPart('minute')
-        };
-    }
-
-    /**
-     * Calcula dinámicamente el día exacto de la semana (0 a 6) en Bogotá.
-     * @param {number} year
-     * @param {number} month
-     * @param {number} day
-     * @returns {number} 0 = Domingo, 1-6 = Lunes a Sábado
-     */
-    _getDayOfWeek(year, month, day) {
-        const utcBogota = new Date(Date.UTC(year, month - 1, day));
-        return utcBogota.getUTCDay();
-    }
-
-    /**
-     * Selecciona los tramos de atención que aplican al día de hoy.
-     *
-     * Google entrega dos formas de periodo: los de `currentOpeningHours` vienen
-     * fechados (y ya incorporan el horario especial de un festivo tal como está
-     * en la ficha), mientras que los de `regularOpeningHours` solo indican día de
-     * la semana. Si hay periodos fechados, ellos mandan: que hoy no aparezca
-     * significa cerrado durante toda la jornada.
-     *
-     * @param {Array} periods
-     * @param {Object} parts - Fecha de hoy en Bogotá
-     * @param {number} dayOfWeek
-     * @returns {Array} Tramos aplicables a hoy
-     */
-    _getTodayPeriods(periods, parts, dayOfWeek) {
-        const dated = periods.filter(p => p.open?.date);
-
-        if (dated.length > 0) {
-            return dated.filter(p =>
-                p.open.date.year === parts.bYear &&
-                p.open.date.month === parts.bMonth &&
-                p.open.date.day === parts.bDayOfMonth
-            );
-        }
-
-        return periods.filter(p => p.open?.day === dayOfWeek);
-    }
-
-    /**
-     * Serializa una lista de tramos para poder compararlos entre sí.
-     * @param {Array} periods
-     * @returns {string}
-     */
-    _fingerprint(periods) {
-        return periods
-            .map(p => `${p.open?.hour}:${p.open?.minute}-${p.close?.hour}:${p.close?.minute}`)
-            .sort()
-            .join('|');
-    }
-
-    /**
-     * Determina si hoy tiene un horario distinto al habitual de ese día de la semana
-     * (festivo, jornada especial o cierre excepcional configurado en Google).
-     * @param {Array} todayPeriods
-     * @param {number} dayOfWeek
-     * @returns {boolean}
-     */
-    _isSpecialToday(todayPeriods, dayOfWeek) {
-        const regular = this.liveData?.regularPeriods?.length
-            ? this.liveData.regularPeriods
-            : (businessHours.periods || []);
-
-        if (!regular.length) return false;
-
-        const regularToday = regular.filter(p => p.open?.day === dayOfWeek);
-        return this._fingerprint(todayPeriods) !== this._fingerprint(regularToday);
-    }
-
-    /**
-     * Convierte un extremo de periodo de Google a minutos desde medianoche.
-     * @param {Object} point - { hour, minute }
-     * @returns {number}
-     */
-    _toMinutes(point) {
-        return (point?.hour || 0) * 60 + (point?.minute || 0);
-    }
-
-    /**
-     * Calcula el estado de apertura a partir de los horarios de Google.
-     * Usa los datos en vivo si están disponibles y, si no, los sincronizados en el build.
-     * @returns {boolean}
-     */
-    calculateStatus() {
-        this.specialReason = null;
-        this.todayNote = null;
-
-        const parts = this._getBogotaTimeParts();
-        const dayOfWeek = this._getDayOfWeek(parts.bYear, parts.bMonth, parts.bDayOfMonth);
-        const periods = this.liveData?.periods?.length
-            ? this.liveData.periods
-            : (businessHours.periods || []);
-
-        const todayPeriods = this._getTodayPeriods(periods, parts, dayOfWeek);
-        const isSpecial = this._isSpecialToday(todayPeriods, dayOfWeek);
-
-        // Sin tramos hoy: cerrado toda la jornada.
-        if (todayPeriods.length === 0) {
-            if (dayOfWeek === 0) {
-                this.specialReason = 'CERRADO DOMINGOS';
-            } else {
-                this.specialReason = isSpecial ? 'CERRADO HOY (FESTIVO)' : 'CERRADO HOY';
-            }
-            return false;
-        }
-
-        const nowMinutes = parts.bHour * 60 + parts.bMinute;
-        const isOpen = todayPeriods.some(p => {
-            const opens = this._toMinutes(p.open);
-            let closes = this._toMinutes(p.close);
-            if (closes <= opens) closes += 24 * 60; // Cierre pasada la medianoche
-            return nowMinutes >= opens && nowMinutes < closes;
-        });
-
-        // Hay atención hoy pero estamos fuera del horario: es un cierre por hora,
-        // no un cierre por festivo. Etiquetarlo como festivo era el error anterior.
-        if (!isOpen) {
-            this.specialReason = 'CERRADO AHORA';
-        } else if (isSpecial) {
-            const p = todayPeriods[0];
-            this.todayNote = `Hoy: horario especial ${this._formatPoint(p.open)} – ${this._formatPoint(p.close)}`;
-        }
-
-        return isOpen;
-    }
-
-    /**
-     * Formatea un extremo de periodo como hora legible (ej: "9:00 AM").
-     * @param {Object} point
-     * @returns {string}
-     */
-    _formatPoint(point) {
-        const hour = point?.hour ?? 0;
-        const minute = String(point?.minute ?? 0).padStart(2, '0');
-        const suffix = hour >= 12 ? 'PM' : 'AM';
-        const display = hour % 12 === 0 ? 12 : hour % 12;
-        return `${display}:${minute} ${suffix}`;
-    }
-
-    /**
      * Obtiene las clases de estilo y colores correspondientes para el Badge.
      * @param {boolean} open
      * @returns {Object}
      */
     _getBadgeStyles(open) {
+        // Cerrado no es una alarma: casi siempre dice cuándo vuelve a abrir, y el rojo
+        // pegado a «Agenda tu cita» desanimaba a pedir cita por WhatsApp.
         const badgeClasses = open
             ? "bg-black/40 backdrop-blur-md text-white border-white/20"
-            : "bg-black/60 backdrop-blur-md text-white border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.5)]";
+            : "bg-black/60 backdrop-blur-md text-white border-amber-300/40";
 
-        const dotColor = open ? "bg-green-400" : "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,1)]";
+        const dotColor = open ? "bg-green-400" : "bg-amber-400";
         const pingEffect = `<span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${dotColor}"></span>`;
 
         return { badgeClasses, dotColor, pingEffect };
