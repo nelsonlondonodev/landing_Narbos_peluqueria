@@ -25,7 +25,7 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- La precarga de la foto del hero la inyecta el SSG desde `pagesData.home.heroMosaic`. -->
+    <!-- La precarga de la foto del hero la inyecta el SSG desde `pagesData.home.hero`. -->
     <meta name="google-site-verification" content="z7iMcq4xUxxKeXpDsVU32HJ_a0jXCwyOFmZi-7vvCKs" />
 
     <title>Peluquería y Spa en Chía | Narbo's Salón Spa</title>
@@ -418,44 +418,10 @@
     <!-- App Content Wrapper: Handles overflow hiding for decorations without clipping fixed elements -->
     <div id="app-wrapper" class="relative w-full overflow-x-hidden">
         <main>
-            <section id="inicio" class="relative bg-brand-light/30">
-                <!-- Hero editorial: texto a la izquierda y la foto en mosaico a la derecha; en móvil,
-                     el texto y la llamada a la acción caben en la primera pantalla y el mosaico va
-                     debajo. Los badges de confianza los inyecta el SSG en `data-hero-badges` desde
-                     `js/components/HeroBadges.js`: escritos aquí a mano se congelaban en el valor
-                     del último build. -->
-                <!-- Solo las líneas decorativas se recortan: un overflow-hidden en la sección
-                     cortaba también el desplegable de horarios del badge. -->
-                <div class="pointer-events-none absolute inset-0 overflow-hidden max-md:hidden" aria-hidden="true">
-                    <svg class="absolute -right-24 top-6 h-[120%] w-[70%] text-brand-medium/50" viewBox="0 0 600 700" fill="none">
-                        <path d="M560 20C380 60 260 180 300 330s210 190 150 300S180 700 40 660" stroke="currentColor" stroke-width="2"/>
-                        <path d="M600 140C470 170 380 250 410 360s150 160 110 250" stroke="currentColor" stroke-width="1.5"/>
-                    </svg>
-                </div>
-                <div class="container relative mx-auto grid max-w-screen-xl items-center gap-10 px-6 py-10 md:grid-cols-[1.05fr_1fr] md:py-12 lg:gap-16 lg:py-14">
-                    <div class="max-w-xl">
-                        <p class="hero-rise text-xs font-semibold uppercase tracking-[0.3em] text-brand-green md:text-sm">Peluquería · Spa · Uñas — Chía</p>
-                        <h1 id="hero-title" class="hero-rise [--d:0.05s] mt-4 font-serif text-[2.3rem] font-bold leading-[1.08] text-brand-gray-dark sm:text-5xl lg:text-[4.25rem]">Peluquería y spa en&nbsp;Chía<span class="sr-only"> | </span><span class="block text-brand-green">Narbo's Salón Spa</span></h1>
-                        <p id="hero-subtitle" class="hero-rise [--d:0.1s] mt-5 max-w-md text-lg text-brand-gray-dark/75 md:text-xl">Más de 11 años de experiencia transformando tu estilo y bienestar.</p>
-                        <div class="hero-rise [--d:0.15s] mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
-                            <a href="https://wa.me/573123462618" data-whatsapp-message="Hola, vengo de la web de Narbo's y quiero agendar una cita" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 rounded-full bg-brand-green px-7 py-3.5 font-semibold text-white shadow-lg shadow-brand-green/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-gray-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
-                                Agenda tu cita
-                                <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg>
-                            </a>
-                            <a href="#servicios" class="group inline-flex items-center gap-2 font-semibold text-brand-gray-dark transition-colors hover:text-brand-green">
-                                Ver servicios
-                                <svg class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-6-6 6 6 6-6"/></svg>
-                            </a>
-                        </div>
-                        <!-- relative z-20: la animación de entrada deja un transform que crea contexto de
-                             apilamiento, y sin z el desplegable de horarios quedaba bajo #servicios. -->
-                        <div data-hero-badges class="hero-rise [--d:0.2s] relative z-20 mt-8 flex flex-wrap items-center gap-3"></div>
-                    </div>
-                    <!-- Las teselas las pinta `HeroMosaic` (el SSG en dist, HomeHubController en
-                         desarrollo) con la foto de `pagesData.home.heroMosaic`. -->
-                    <div data-hero-mosaic class="hero-mosaic mx-auto aspect-square w-full max-w-[520px] md:mr-0"></div>
-                </div>
-            </section>
+            <!-- El hero lo pinta el SSG con HeroSection (App.mountHero en desarrollo) desde
+                 pagesData.home.hero. relative z-20: el desplegable de horarios de sus badges
+                 tiene que quedar por encima de #servicios. -->
+            <div id="hero-root" class="relative z-20"></div>
 
             <section id="servicios" class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24">
                 <div class="container mx-auto px-6 max-w-screen-xl">

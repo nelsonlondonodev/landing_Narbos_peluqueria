@@ -10,11 +10,10 @@ import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
 import { getHeroHTML } from '../js/components/HeroSection.js';
 import { getVideoSectionHTML } from '../js/components/VideoSection.js';
-import { resolveRoute, resolveAsset, siteConfig, getWhatsAppUrl } from '../js/config.js';
+import { resolveRoute, resolveAsset, siteConfig } from '../js/config.js';
 import businessHours from '../js/data/business-hours.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { getHeroBadgesHTML, getStarSpriteHTML } from '../js/components/HeroBadges.js';
-import { getHeroMosaicHTML } from '../js/components/HeroMosaic.js';
 import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { barberServices } from '../js/data/barberServices.js';
@@ -187,20 +186,6 @@ function injectHeroBadges(document, pageKey) {
 }
 
 /**
- * Completa los enlaces de WhatsApp escritos en el HTML con `data-whatsapp-message`.
- *
- * El mensaje precargado es el rastro del origen del lead, y escribir la URL codificada
- * a mano es lo que dejó enlaces rotos hasta septiembre de 2026. En el HTML fuente basta
- * el `href` al número sin mensaje, que sigue funcionando si esto no corre.
- */
-function resolverEnlacesWhatsApp(document) {
-    document.querySelectorAll('a[data-whatsapp-message]').forEach(enlace => {
-        enlace.href = getWhatsAppUrl(enlace.getAttribute('data-whatsapp-message'));
-        enlace.removeAttribute('data-whatsapp-message');
-    });
-}
-
-/**
  * Inyecta Hero section.
  */
 function injectHero(document, pageKey, prefix) {
@@ -250,20 +235,6 @@ function precargarImagenHero(document, imageSrc, imageSrcMobile) {
     } else {
         precarga(imageSrc);
     }
-}
-
-/**
- * Pinta el mosaico del hero de la home en su hueco `data-hero-mosaic` y precarga la foto.
- */
-function injectHeroMosaic(document, pageKey, prefix) {
-    const hueco = document.querySelector('[data-hero-mosaic]');
-    const mosaico = pagesData[pageKey]?.heroMosaic;
-    if (!hueco || !mosaico) return;
-
-    const image = resolveAsset(mosaico.image, prefix);
-    const imageMobile = mosaico.imageMobile ? resolveAsset(mosaico.imageMobile, prefix) : undefined;
-    hueco.innerHTML = getHeroMosaicHTML({ ...mosaico, image, imageMobile });
-    precargarImagenHero(document, image, imageMobile);
 }
 
 /**
@@ -784,9 +755,7 @@ async function processPage(pageConfig) {
     }
 
     injectHero(document, pageConfig.key, prefix);
-    injectHeroMosaic(document, pageConfig.key, prefix);
     injectHeroBadges(document, pageConfig.key);
-    resolverEnlacesWhatsApp(document);
     injectServices(document, pageConfig.key, prefix);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path, prefix);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);

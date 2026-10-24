@@ -23,8 +23,7 @@ const TILES = Object.freeze([
 
 /**
  * Teselas del hero de la home: la misma foto recortada por CSS en cada una, así que
- * todas comparten una única descarga. Lo usan el SSG, que lo deja en el HTML publicado,
- * y `HomeHubController`, en desarrollo.
+ * todas comparten una única descarga. Lo usa `HeroSection` cuando el hero va en mosaico.
  * @param {HeroMosaicData} data
  * @returns {string} HTML de las teselas, para el contenedor `.hero-mosaic`.
  */

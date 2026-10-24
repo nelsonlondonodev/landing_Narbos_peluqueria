@@ -1,8 +1,6 @@
 import { getHomeModalsHTML } from '../components/HomeModals.js';
 import { ServiceCard } from '../components/ServiceCard.js';
 import { servicesData } from '../data/servicesData.js';
-import { getHeroMosaicHTML } from '../components/HeroMosaic.js';
-import { pagesData } from '../data/pagesData.js';
 
 /**
  * HomeHubController
@@ -18,7 +16,6 @@ export class HomeHubController {
      */
     init() {
         this.mountHomeModals();
-        this.mountHeroMosaic();
         this.mountHomeServices();
         this.initInteractiveComponents();
         this.initMapLazyLoad();
@@ -32,22 +29,6 @@ export class HomeHubController {
         if (modalsRoot && modalsRoot.children.length === 0) {
             modalsRoot.innerHTML = getHomeModalsHTML();
         }
-    }
-
-    /**
-     * Monta el mosaico del hero si el HTML llega sin él (en desarrollo, sin pasar por el
-     * SSG). En producción ya viene pintado.
-     */
-    mountHeroMosaic() {
-        const hueco = document.querySelector('[data-hero-mosaic]');
-        const mosaico = pagesData.home?.heroMosaic;
-        if (!hueco || hueco.children.length > 0 || !mosaico) return;
-
-        hueco.innerHTML = getHeroMosaicHTML({
-            ...mosaico,
-            image: this.app.resolvePath(mosaico.image),
-            imageMobile: mosaico.imageMobile ? this.app.resolvePath(mosaico.imageMobile) : undefined
-        });
     }
 
     /**

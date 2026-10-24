@@ -126,12 +126,15 @@ class App {
         if (!heroRoot || heroRoot.querySelector('h1')) return;
 
         const path = window.location.pathname;
-        const pageKey = this._pagesDataKeys.find(key => path.includes(key));
+        const pageKey = this.isHomePage ? 'home' : this._pagesDataKeys.find(key => path.includes(key));
 
         if (pageKey && pagesData[pageKey]?.hero) {
             const heroData = pagesData[pageKey].hero;
-            const imageSrc = this.resolvePath(heroData.imageSrc);
-            heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
+            heroRoot.innerHTML = getHeroHTML({
+                ...heroData,
+                imageSrc: this.resolvePath(heroData.imageSrc),
+                imageSrcMobile: heroData.imageSrcMobile ? this.resolvePath(heroData.imageSrcMobile) : undefined
+            });
         }
     }
 
