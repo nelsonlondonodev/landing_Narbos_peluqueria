@@ -15,6 +15,7 @@ import { AnalyticsService } from './services/AnalyticsService.js';
 import { CookieConsentService } from './services/CookieConsentService.js';
 
 import { HoursController } from './controllers/HoursController.js';
+import { SearchController } from './controllers/SearchController.js';
 
 class App {
     constructor() {
@@ -147,6 +148,7 @@ class App {
             }
         });
         try { new StoreBadge().init(); } catch(e) { console.error(`[App] Error inicializando StoreBadge:`, e); }
+        try { new SearchController(this.appRoot).init(); } catch(e) { console.error(`[App] Error inicializando SearchController:`, e); }
     }
 
     initInteractiveComponents() {
