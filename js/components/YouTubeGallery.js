@@ -1,6 +1,6 @@
 import { siteConfig } from '../config.js';
-import { VideoModal } from './VideoModal.js';
-import { trackClarityEvent } from '../utils/clarity.js';
+import { getPlayIconHTML } from '../utils/playIcon.js';
+import { escapeHTML } from '../utils/escapeHTML.js';
 
 /** @typedef {import('../data/videoData.js').VideoItem} VideoItem */
 
@@ -24,7 +24,6 @@ export class YouTubeGallery {
         this.videos = videos;
         this.gridId = 'youtube-video-grid';
         this.youtubeUrl = siteConfig.socialLinks.find(l => l.name === 'YouTube')?.url || 'https://youtube.com';
-        this.modal = new VideoModal();
     }
 
     /**
@@ -34,7 +33,6 @@ export class YouTubeGallery {
         if (!this.container) return;
 
         this.container.innerHTML = this._getLayout();
-        this._attachEvents();
     }
 
     // --- Private Methods ---
@@ -112,6 +110,11 @@ export class YouTubeGallery {
 
     /**
      * Tarjeta de un vídeo: solo la miniatura, el reproductor se carga al abrirla.
+     *
+     * La abre el disparador global de `App.initVideoTriggers`, como en `VideoSection`, y
+     * `data-clarity-event` le dice qué evento mandar con el ID del vídeo: el mapa de
+     * clics de Clarity no dice cuál se abrió, y la galería se pinta en diferido y no
+     * sale en su captura.
      * @param {VideoItem} video
      * @param {boolean} isLatest - El más reciente lleva la insignia de última publicación.
      * @private
@@ -120,50 +123,27 @@ export class YouTubeGallery {
         const { id: videoId, title, thumbnailUrl } = video;
 
         return `
-            <div class="video-card relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white group cursor-pointer ${MOBILE_SLIDE}"
-                 data-video-id="${videoId}">
+            <button type="button"
+                 class="video-card youtube-modal-trigger block p-0 text-left relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white group cursor-pointer ${MOBILE_SLIDE}"
+                 data-video-id="${videoId}" data-clarity-event="video_galeria_home"
+                 aria-label="Ver vídeo: ${escapeHTML(title)}">
 
                 ${isLatest ? '<div class="badge-latest">Última publicación</div>' : ''}
 
                 <!-- Thumbnail with hover effect -->
-                <img src="${thumbnailUrl}" alt="${title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                <img src="${thumbnailUrl}" alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
                 
                 <!-- Play Button Overlay -->
                 <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0 transition-colors duration-300">
-                    <div class="w-16 h-16 bg-brand-green/90 text-white rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-125 group-hover:bg-brand-green ring-4 ring-white/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                        </svg>
-                    </div>
+                    ${getPlayIconHTML()}
                 </div>
 
                 <!-- Glassmorphism Badge -->
                 <div class="absolute bottom-4 left-4 px-3 py-1 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 text-white text-xs font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Ver video
                 </div>
-            </div>
+            </button>
         `;
-    }
-
-    /**
-     * Adjunta los eventos de clic usando delegación sobre el grid.
-     * @private
-     */
-    _attachEvents() {
-        const grid = this.container.querySelector(`#${this.gridId}`);
-        if (!grid) return;
-
-        grid.onclick = (e) => {
-            const card = e.target.closest('.video-card');
-            if (card) {
-                const videoId = card.getAttribute('data-video-id');
-                if (!videoId) return;
-                this.modal.open(videoId);
-                // El botón de play comparte clases con el vídeo de «Nuestras instalaciones»
-                // y Clarity no distingue sus clics: este evento es lo que mide la galería.
-                trackClarityEvent('video_galeria_home', { video_galeria_home: videoId });
-            }
-        };
     }
 
     /**

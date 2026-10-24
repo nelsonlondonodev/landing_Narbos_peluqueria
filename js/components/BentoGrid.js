@@ -1,4 +1,5 @@
 import { getNewBadgeHTML } from '../utils/newBadge.js';
+import { getPlayIconHTML } from '../utils/playIcon.js';
 
 /**
  * Genera el HTML para un Bento Grid Item.
@@ -56,9 +57,7 @@ function getMediaContentHTML(item) {
             <div class="video-container relative w-full h-full cursor-pointer group/video">
                 <img src="${item.poster}" alt="${item.alt}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover/video:bg-black/30 transition-colors">
-                    <div class="w-16 h-16 bg-brand-green/90 text-white rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-125 group-hover:bg-brand-green ring-4 ring-white/20">
-                        <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
+                    ${getPlayIconHTML()}
                 </div>
             </div>
         `;

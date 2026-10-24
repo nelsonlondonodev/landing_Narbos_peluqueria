@@ -1,6 +1,7 @@
 import { getVideoById, getYouTubeThumbnail } from '../data/videoData.js';
 import { getWhatsAppUrl } from '../config.js';
 import { getNewBadgeHTML } from '../utils/newBadge.js';
+import { getPlayIconHTML } from '../utils/playIcon.js';
 
 /**
  * @typedef {Object} VideoSectionData
@@ -92,11 +93,7 @@ export function getVideoSectionHTML(data) {
 
                             <!-- Icono de reproducción; el disparador es el <button> que lo envuelve. -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors duration-300">
-                                <div class="w-16 h-16 bg-brand-green/90 text-white rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-125 group-hover:bg-brand-green ring-4 ring-white/20">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M8 5v14l11-7z" />
-                                    </svg>
-                                </div>
+                                ${getPlayIconHTML()}
                             </div>
                         </button>
                     </div>
