@@ -1,5 +1,5 @@
 import { getMenuCategories } from './navigation.js';
-import { hairPageServices } from './hairPageServices.js';
+import { hairPageServices, hairSubpageForCategory } from './hairPageServices.js';
 import { nailsServices } from './nailsServices.js';
 import { estheticsServices } from './estheticsServices.js';
 import { makeupServices } from './makeupServices.js';
@@ -17,9 +17,15 @@ const extraPages = [
 ];
 
 // Cada catálogo con su sección y, si sus enlaces no son rutas completas, cómo
-// completarlos: los de uñas son relativos a su hub y los de maquillaje no traen.
+// completarlos: los de uñas son relativos a su hub, los de maquillaje no traen y en
+// peluquería solo los traen los del hub; los de cada subpágina salen de su categoría.
 const serviceCatalogs = [
-    { items: hairPageServices, section: 'Peluquería' },
+    {
+        items: hairPageServices,
+        section: 'Peluquería',
+        resolveLink: (/** @type {string|undefined} */ link, /** @type {{ category: string }} */ item) =>
+            link ?? `servicios/peluqueria/${hairSubpageForCategory(item.category)}`
+    },
     { items: nailsServices, section: 'Uñas', resolveLink: (/** @type {string} */ link) => `servicios/unas-spa/${link}` },
     { items: estheticsServices, section: 'Estética' },
     { items: makeupServices, section: 'Maquillaje', resolveLink: () => 'servicios/maquillaje/' },
@@ -57,7 +63,7 @@ function buildServiceEntries() {
             title: item.title,
             subtitle: section,
             meta: [item.price, item.duration].filter(Boolean).join(' · '),
-            link: resolveLink ? resolveLink(item.link) : item.link
+            link: resolveLink ? resolveLink(item.link, item) : item.link
         }))
         // Peluquería repite en su hub los servicios de cada subpágina, a veces con otro
         // enlace: dos «Balayage» seguidos en los resultados parecen un error.

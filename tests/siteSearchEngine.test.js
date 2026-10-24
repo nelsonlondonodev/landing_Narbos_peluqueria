@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
 import { searchSite, findHighlightRanges, tokenize, normalize } from '../js/utils/siteSearchEngine.js';
 import { searchIndex } from '../js/data/searchIndex.js';
 
@@ -68,6 +69,18 @@ test('el resaltado respeta las tildes del título', () => {
 
 test('el resaltado marca solo el prefijo tecleado', () => {
     assert.deepEqual(findHighlightRanges('Uñas acrílicas', ['acri']), [[5, 9]]);
+});
+
+test('índice real: cada entrada enlaza a una página que existe', () => {
+    const missing = searchIndex
+        .filter(e => {
+            if (!e.link || e.link.includes('null')) return true;
+            const route = e.link.replace(/^\//, '');
+            const file = route.endsWith('/') ? `${route}index.html` : `${route}.html`;
+            return !existsSync(new URL(`../${file}`, import.meta.url));
+        })
+        .map(e => `${e.title} → ${e.link}`);
+    assert.deepEqual(missing, []);
 });
 
 test('índice real: ningún servicio sale repetido con el mismo título', () => {
