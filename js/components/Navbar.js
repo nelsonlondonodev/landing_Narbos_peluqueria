@@ -23,6 +23,7 @@ export function getNavbarHTML(basePath = './', isHome = true) {
             ${navLink(resolveRoute('nosotros', basePath), 'Nosotros')}
             ${navLink(resolveRoute('contacto', basePath), 'Contacto')}
             ${navLink(resolveRoute('blog/', basePath), 'Blog')}
+            ${renderSearchButton()}
         </div>
 
         <!-- Mobile Toggle -->
@@ -66,9 +67,36 @@ function renderLogo(basePath, isHome) {
     `;
 }
 
+/**
+ * Lupa del buscador. La reutiliza el propio `SiteSearch` en su caja de texto.
+ * @param {string} sizeClasses - Clases de tamaño y color del SVG.
+ */
+export const searchIcon = (sizeClasses) => `<svg class="${sizeClasses}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
+
+/**
+ * Lupa del buscador interno. La abre `SearchController` por delegación, así que basta
+ * con el atributo `data-search-open`.
+ */
+function renderSearchButton(mobile = false) {
+    if (mobile) {
+        return `
+             <button type="button" data-search-open aria-label="Buscar en la web" class="text-white p-1 focus:outline-none">
+                 ${searchIcon('w-6 h-6')}
+             </button>
+        `;
+    }
+    return `
+        <button type="button" data-search-open aria-label="Buscar en la web" class="flex items-center gap-2 text-white hover:text-brand-light font-medium transition-colors rounded-full border border-white/40 hover:border-white/70 px-3 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
+            ${searchIcon('w-5 h-5')}
+            <span class="max-lg:hidden">Buscar</span>
+        </button>
+    `;
+}
+
 function renderMobileToggle() {
     return `
         <div class="md:hidden flex items-center gap-4">
+             ${renderSearchButton(true)}
              <button id="menu-btn" aria-label="Abrir menú" class="text-white focus:outline-none z-50 p-1">
                  <svg id="menu-open-icon" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                  <svg id="menu-close-icon" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>

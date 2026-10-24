@@ -116,54 +116,65 @@ export class ServiceCard {
 
     /**
      * Renderiza el contenido para la variante Overlay (Home).
+     *
+     * Por debajo de `md` es una fila compacta (miniatura, título, una línea y flecha);
+     * desde `md`, la tarjeta grande con la foto bajo el velo verde. Apiladas a tamaño
+     * completo, las cinco sumaban 1.433 px de scroll en un móvil de 390 px, y son lo más
+     * pulsado de la home: en fila caben todas en una pantalla.
      */
     renderOverlayContent(element) {
-        element.className = "group relative p-8 rounded-lg shadow-lg transform hover:-translate-y-2 transition-transform duration-300 hover:shadow-2xl overflow-hidden cursor-pointer block h-full select-none bg-brand-green transition-colors duration-500";
-        
-        const backgroundHtml = this.getOverlayBackground();
-        const iconHtml = this.getOverlayIcon();
-        
+        element.className = [
+            'group relative overflow-hidden cursor-pointer select-none',
+            'max-md:flex max-md:items-center max-md:gap-4 max-md:p-3 max-md:rounded-xl max-md:bg-white max-md:shadow-md max-md:border max-md:border-brand-gray-lighter',
+            'md:block md:h-full md:p-8 md:rounded-lg md:shadow-lg md:bg-brand-green md:hover:-translate-y-2 md:hover:shadow-2xl transition-[translate,box-shadow] duration-300'
+        ].join(' ');
+
         element.innerHTML = `
-            ${backgroundHtml}
-            ${iconHtml}
-            <h3 class="text-2xl font-serif font-bold text-white mb-3 relative z-10 drop-shadow-lg transition-colors duration-300">${this.props.title}</h3>
-            <p class="text-brand-light relative z-10 drop-shadow-md font-medium opacity-95 transition-colors duration-300 group-hover:text-white line-clamp-2 text-sm">${this.props.description}</p>
-            <div class="mt-4 pt-3 border-t border-white/10 w-full flex justify-between items-center text-sm font-medium text-white relative z-10">
-                <span>Ver más detalles</span>
-                <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            ${this.getOverlayBackground()}
+            ${this.getOverlayIcon()}
+            <div class="relative z-10 flex-1 min-w-0">
+                <h3 class="font-serif font-bold max-md:text-lg max-md:text-brand-gray-dark max-md:mb-0.5 md:text-2xl md:text-white md:mb-3 md:drop-shadow-lg">${this.props.title}</h3>
+                <p class="text-sm font-medium max-md:text-brand-gray-dark/70 max-md:line-clamp-2 md:text-brand-light md:drop-shadow-md md:opacity-95 md:transition-colors md:duration-300 md:group-hover:text-white md:line-clamp-2">${this.props.description}</p>
+                <div class="max-md:hidden mt-4 pt-3 border-t border-white/10 w-full flex justify-between items-center text-sm font-medium text-white">
+                    <span>Ver más detalles</span>
+                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </div>
             </div>
-            <div class="absolute inset-0 bg-transparent transition-colors duration-300 z-20 pointer-events-none"></div>
+            <svg class="md:hidden w-5 h-5 shrink-0 text-brand-green" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
         `;
     }
 
     getOverlayBackground() {
         if (this.props.image) {
-            const imgClass = "absolute inset-0 w-full h-full object-cover transition-all duration-700 z-0 opacity-40 group-hover:opacity-100 group-hover:scale-105";
+            // En la fila del móvil es la miniatura; desde `md`, el fondo bajo el velo. El
+            // <picture> solo es `contents` desde `md`: en la fila, su <source> contaría como
+            // un hueco más del `gap` y desplazaría la miniatura.
+            const imgClass = "object-cover max-md:block max-md:w-20 max-md:h-20 max-md:shrink-0 max-md:rounded-lg md:absolute md:inset-0 md:w-full md:h-full md:z-0 md:opacity-40 md:transition-all md:duration-700 md:group-hover:opacity-100 md:group-hover:scale-105";
             const alt = this.props.imageAlt || `${this.props.title} en Narbo's Salón Spa Chía`;
             const img = `<img src="${this.props.image}" alt="${alt}" loading="lazy" width="${this.props.width}" height="${this.props.height}" class="${imgClass}">`;
 
             // En móvil estas tarjetas se muestran a ~640px, pero se servía el original a
             // tamaño de escritorio: solo la de maquillaje eran 161 KB para pintar 637x478.
             const picture = this.props.imageMobile
-                ? `<picture class="contents"><source media="(max-width: 768px)" srcset="${this.props.imageMobile}" type="image/webp">${img}</picture>`
+                ? `<picture class="max-md:shrink-0 md:contents"><source media="(max-width: 768px)" srcset="${this.props.imageMobile}" type="image/webp">${img}</picture>`
                 : img;
 
             return `
                 ${picture}
 
                 <!-- Gradiente Base (Verde) que desaparece en hover -->
-                <div class="absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0 transition-opacity duration-500 group-hover:opacity-0"></div>
+                <div class="max-md:hidden absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0 transition-opacity duration-500 group-hover:opacity-0"></div>
                 
                 <!-- Gradiente Hover (Negro/Oscuro) para contraste de lectura -->
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="max-md:hidden absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             `;
         }
-        return `<div class="absolute inset-0 bg-gradient-to-br from-brand-green to-brand-green-dark z-0"></div>`;
+        return `<div class="max-md:hidden absolute inset-0 bg-gradient-to-br from-brand-green to-brand-green-dark z-0"></div>`;
     }
 
     getOverlayIcon() {
         return `
-            <div class="mb-4 relative z-10">
+            <div class="max-md:hidden mb-4 relative z-10">
                 <svg class="w-12 h-12 text-white transition-colors duration-300 transition-transform duration-300 group-hover:scale-110 drop-shadow-md" 
                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
                      fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">

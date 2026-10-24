@@ -15,6 +15,8 @@ import { AnalyticsService } from './services/AnalyticsService.js';
 import { CookieConsentService } from './services/CookieConsentService.js';
 
 import { HoursController } from './controllers/HoursController.js';
+import { SearchController } from './controllers/SearchController.js';
+import { trackClarityEvent } from './utils/clarity.js';
 
 class App {
     constructor() {
@@ -147,6 +149,7 @@ class App {
             }
         });
         try { new StoreBadge().init(); } catch(e) { console.error(`[App] Error inicializando StoreBadge:`, e); }
+        try { new SearchController(this.appRoot).init(); } catch(e) { console.error(`[App] Error inicializando SearchController:`, e); }
     }
 
     initInteractiveComponents() {
@@ -212,6 +215,11 @@ class App {
             e.preventDefault();
             const videoId = trigger.getAttribute('data-video-id');
             if (!videoId) return;
+
+            // Opcional: el disparador que lo declare manda a Clarity su evento con el ID
+            // del vídeo, que el mapa de clics no da.
+            const clarityEvent = trigger.getAttribute('data-clarity-event');
+            if (clarityEvent) trackClarityEvent(clarityEvent, { [clarityEvent]: videoId });
 
             if (!this.videoModal) {
                 const { VideoModal } = await import('./components/VideoModal.js');

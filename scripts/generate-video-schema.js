@@ -137,22 +137,11 @@ function buildItemList() {
         name: "Transformaciones en video de Narbo's Salón Spa",
         description: 'Galería de transformaciones reales de color, corte y bienestar realizadas en Narbo\'s Salón Spa en Chía.',
         numberOfItems: ordered.length,
-        itemListElement: ordered.map((video, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            item: {
-                '@type': 'VideoObject',
-                name: video.title,
-                description: video.description,
-                thumbnailUrl: [
-                    getYouTubeThumbnail(video.id, 'hqdefault'),
-                    getYouTubeThumbnail(video.id, 'maxresdefault')
-                ],
-                uploadDate: video.uploadDate,
-                contentUrl: getVideoUrl(video),
-                embedUrl: `https://www.youtube.com/embed/${video.id}`
-            }
-        }))
+        itemListElement: ordered.map((video, index) => {
+            // Anidado dentro del ItemList, el `@context` ya lo pone el grafo padre.
+            const { '@context': _context, ...item } = buildVideoObject(video);
+            return { '@type': 'ListItem', position: index + 1, item };
+        })
     };
 }
 

@@ -164,6 +164,15 @@ export const videoCatalog = [
         // entra limpio en la parrilla 16:9 y en la tarjeta 9:16 el recorte cae sobre el
         // frame real, con el «antes» y el «después» a la vista.
         thumbnailUrl: getYouTubeThumbnail('GD3bWZQSC8A', 'maxresdefault')
+    },
+    {
+        id: 'ZIA5AIH7xJI',
+        title: "Balayage Rubio Beige y Maquillaje: Antes y Después en Chía",
+        description: "De un balayage opaco y dorado en las puntas a un rubio beige con la raíz difuminada, terminado en ondas y con maquillaje para estrenarlo. Narbo's Salón Spa, Chía.",
+        uploadDate: "2026-10-24T01:34:05-05:00",
+        // Mismo caso que `GD3bWZQSC8A`: `hqdefault` recorta el frame y asoma el título por
+        // abajo; `maxresdefault` trae el relleno desenfocado y el antes/después limpio.
+        thumbnailUrl: getYouTubeThumbnail('ZIA5AIH7xJI', 'maxresdefault')
     }
 ];
 

@@ -278,6 +278,17 @@ export function hairSubpageFor(ruta) {
     return HAIR_SUBPAGES.find(pagina => ruta.includes(pagina)) ?? null;
 }
 
+/**
+ * Primera subpágina que pinta una categoría. Los servicios de las subpáginas no traen
+ * `link` porque ya están en su página; quien los enlaza desde fuera (el buscador) lo
+ * saca de aquí. `color` lo pintan Balayage y Color, y gana la primera.
+ * @param {string} category
+ * @returns {string|null}
+ */
+export function hairSubpageForCategory(category) {
+    return HAIR_SUBPAGES.find(pagina => SUBPAGINAS[pagina].categorias.includes(category)) ?? null;
+}
+
 /** @param {string} pagina */
 export function hairBreadcrumbFor(pagina) {
     return SUBPAGINAS[pagina]?.migaja ?? null;
