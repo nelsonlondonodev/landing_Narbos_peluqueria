@@ -1,19 +1,22 @@
-import { getWhatsAppUrl } from '../config.js';
+import { getWhatsAppUrl, siteConfig } from '../config.js';
 import { getHeroMosaicHTML } from './HeroMosaic.js';
 
 /**
  * @typedef {Object} HeroProps
  * @property {string} title - H1. Admite HTML para el tramo en verde.
  * @property {string} subtitle - Línea de apoyo bajo el H1.
- * @property {string} imageSrc - Foto, ya resuelta para la página.
+ * @property {string} [imageSrc] - Foto, ya resuelta para la página. Sin ella el hero va a
+ *   una columna, sin foto ni precarga (contacto: lo que urge son las acciones).
  * @property {string} [imageSrcMobile] - Variante ligera para pantallas de hasta 768 px.
  * @property {string} imageAlt
  * @property {string} [eyebrow] - Frase corta sobre el H1 («Peluquería · Chía»).
  * @property {string} [ctaMessage] - Mensaje precargado del botón de WhatsApp. Nombra la
  *   página para que la conversación llegue atribuida.
+ * @property {string} [ctaLabel='Agenda tu cita'] - Texto del botón de WhatsApp.
+ * @property {Array<'llamar'|'comoLlegar'>} [actions] - Acciones directas junto al botón.
  * @property {{ label: string, href: string }} [secondaryCta] - Enlace junto al botón.
  * @property {string} [breadcrumb] - Nombre corto de la página en la miga de pan; va en
- *   `data-breadcrumb` del H1, que es de donde lo lee `service-page.js`.
+ *   `data-breadcrumb` del H1, que es de donde lo lee `js/utils/migas.js`.
  * @property {boolean} [mosaic=false] - La foto en mosaico, pieza propia de la home.
  * @property {number} [imageWidth] - Medidas intrínsecas de la foto, para el mosaico.
  * @property {number} [imageHeight]
@@ -22,6 +25,24 @@ import { getHeroMosaicHTML } from './HeroMosaic.js';
 const DEFAULT_CTA_MESSAGE = "Hola, vengo de la web de Narbo's y quiero agendar una cita";
 
 const ARROW_RIGHT = '<svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg>';
+const PHONE_ICON = '<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 0 1 2-2h3.28a1 1 0 0 1 .95.68l1.5 4.5a1 1 0 0 1-.5 1.21l-2.26 1.13a11 11 0 0 0 5.52 5.52l1.13-2.26a1 1 0 0 1 1.21-.5l4.5 1.5a1 1 0 0 1 .68.95V19a2 2 0 0 1-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>';
+const PIN_ICON = '<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+
+/** Acciones directas que una página puede pedir junto al botón de WhatsApp. */
+const ACTIONS = Object.freeze({
+    llamar: { label: 'Llamar', href: `tel:${siteConfig.contact.phone}`, icon: PHONE_ICON },
+    comoLlegar: { label: 'Cómo llegar', href: siteConfig.contact.mapsLink, icon: PIN_ICON, external: true }
+});
+
+function renderAction(nombre) {
+    const { label, href, icon, external } = ACTIONS[nombre];
+    return `
+                    <a href="${href}"${external ? ' target="_blank" rel="noopener"' : ''} class="inline-flex items-center gap-2 rounded-full border border-brand-green/30 bg-white/70 px-5 py-3 font-semibold text-brand-gray-dark transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
+                        ${icon}
+                        ${label}
+                    </a>`;
+}
+
 const ARROW_DOWN = '<svg class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-6-6 6 6 6-6"/></svg>';
 
 // Líneas curvas de fondo, como en la referencia del mosaico. Solo ellas se recortan: un
@@ -45,22 +66,24 @@ const MOSAIC_DECOR = `
  */
 export const getHeroHTML = ({
     title, subtitle, imageSrc, imageSrcMobile, imageAlt, eyebrow, breadcrumb,
-    ctaMessage = DEFAULT_CTA_MESSAGE, secondaryCta, mosaic = false, imageWidth, imageHeight
+    ctaMessage = DEFAULT_CTA_MESSAGE, ctaLabel = 'Agenda tu cita', actions = [], secondaryCta,
+    mosaic = false, imageWidth, imageHeight
 }) => `
     <section id="inicio" class="relative bg-brand-light/30">
         ${mosaic ? MOSAIC_DECOR : ''}
-        <div class="container relative mx-auto grid max-w-screen-xl items-center gap-10 px-6 py-10 md:grid-cols-[1.05fr_1fr] md:py-12 lg:gap-16 lg:py-14">
-            <div class="max-w-xl">
+        <div class="container relative mx-auto grid max-w-screen-xl items-center gap-10 px-6 py-10 ${imageSrc ? 'md:grid-cols-[1.05fr_1fr]' : ''} md:py-12 lg:gap-16 lg:py-14">
+            <div class="${imageSrc ? 'max-w-xl' : 'max-w-3xl'}">
                 ${eyebrow ? `<p class="hero-rise text-xs font-semibold uppercase tracking-[0.3em] text-brand-green md:text-sm">${eyebrow}</p>` : ''}
                 <h1 id="hero-title"${breadcrumb ? ` data-breadcrumb="${breadcrumb}"` : ''} class="hero-rise [--d:0.05s] ${eyebrow ? 'mt-4' : ''} font-serif font-bold text-brand-gray-dark ${mosaic ? 'text-[2.3rem] leading-[1.08] sm:text-5xl lg:text-[4.25rem]' : 'text-[2.1rem] leading-[1.1] sm:text-5xl lg:text-[3.6rem]'}">${title}</h1>
                 <p id="hero-subtitle" class="hero-rise [--d:0.1s] mt-5 max-w-md text-lg text-brand-gray-dark/75 ${mosaic ? 'md:text-xl' : ''}">${subtitle}</p>
-                <div class="hero-rise [--d:0.15s] mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
+                <div class="hero-rise [--d:0.15s] mt-8 flex flex-wrap items-center gap-x-4 gap-y-4">
                     <a href="${getWhatsAppUrl(ctaMessage)}" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 rounded-full bg-brand-green px-7 py-3.5 font-semibold text-white shadow-lg shadow-brand-green/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-gray-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
-                        Agenda tu cita
+                        ${ctaLabel}
                         ${ARROW_RIGHT}
                     </a>
+                    ${actions.map(renderAction).join('')}
                     ${secondaryCta ? `
-                    <a href="${secondaryCta.href}" class="group inline-flex items-center gap-2 font-semibold text-brand-gray-dark transition-colors hover:text-brand-green">
+                    <a href="${secondaryCta.href}" class="group ml-3 inline-flex items-center gap-2 font-semibold text-brand-gray-dark transition-colors hover:text-brand-green">
                         ${secondaryCta.label}
                         ${ARROW_DOWN}
                     </a>` : ''}
@@ -71,7 +94,7 @@ export const getHeroHTML = ({
                      a una segunda línea al pintarse, empujaba la foto 41 px. -->
                 <div data-hero-badges class="hero-rise [--d:0.2s] relative z-20 mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center"></div>
             </div>
-            ${mosaic
+            ${!imageSrc ? '' : mosaic
                 ? `<div class="hero-mosaic mx-auto aspect-square w-full max-w-[520px] md:mr-0">${getHeroMosaicHTML({ image: imageSrc, imageMobile: imageSrcMobile, alt: imageAlt, width: imageWidth, height: imageHeight })}</div>`
                 : renderHeroImage(imageSrc, imageSrcMobile, imageAlt)}
         </div>

@@ -314,11 +314,12 @@ export const pagesData = Object.freeze({
         hero: {
             title: "Contacto y <span class=\"text-brand-green\">horarios</span>",
             subtitle: "Conoce nuestros horarios de atención y visítanos en nuestro salón de belleza muy cerca de Cajicá. ¡Agenda tu cita hoy!",
-            imageSrc: "images/blog/foto_fachada.webp",
-            imageSrcMobile: "images/blog/foto_fachada-mobile.webp",
-            imageAlt: "Recepción de Narbos Salon en Chia",
+            // Sin foto: quien llega aquí ya quiere actuar, y la dirección y el mapa están en
+            // la sección siguiente. Las tres acciones van en la primera pantalla.
             eyebrow: "Contacto · Chía",
-            ctaMessage: "Hola, vengo de la página de contacto de la web de Narbo's y quiero agendar una cita"
+            ctaLabel: "Escríbenos por WhatsApp",
+            ctaMessage: "Hola, vengo de la página de contacto de la web de Narbo's y quiero agendar una cita",
+            actions: ["llamar", "comoLlegar"]
         }
    },
     'cortes-de-pelo': {

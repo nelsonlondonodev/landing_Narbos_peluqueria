@@ -1,4 +1,5 @@
 import googleReviews from '../data/google-reviews.js';
+import { siteConfig } from '../config.js';
 
 /**
  * Badges de confianza del hero: la calificación de Google y el estado del negocio.
@@ -13,9 +14,7 @@ import googleReviews from '../data/google-reviews.js';
  * los cuelga de `section#inicio`, que es el único anclaje que tienen las dieciséis.
  */
 
-// Repetido en nueve sitios del repo; `siteConfig.contact.mapsLink` sigue con el
-// marcador de plantilla, así que no se puede leer de ahí todavía.
-const MAPS_URL = 'https://maps.app.goo.gl/h3sVPXeiKamdy9KH9';
+const MAPS_URL = siteConfig.contact.mapsLink;
 
 /**
  * El sprite de la estrella, para las páginas que aún no lo declaran. La home ya lo trae

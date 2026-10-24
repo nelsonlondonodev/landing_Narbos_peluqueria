@@ -236,12 +236,13 @@ function injectHero(document, pageKey, prefix) {
     const originalHero = pagesData[pageKey].hero;
     const heroData = {
         ...originalHero,
-        imageSrc: resolveAsset(originalHero.imageSrc, prefix),
+        imageSrc: originalHero.imageSrc ? resolveAsset(originalHero.imageSrc, prefix) : undefined,
         imageSrcMobile: originalHero.imageSrcMobile ? resolveAsset(originalHero.imageSrcMobile, prefix) : undefined
     };
 
     heroRoot.innerHTML = getHeroHTML(heroData);
-    precargarImagenHero(document, heroData.imageSrc, heroData.imageSrcMobile);
+    // Un hero sin foto (contacto) no tiene nada que precargar: su LCP es el H1.
+    if (heroData.imageSrc) precargarImagenHero(document, heroData.imageSrc, heroData.imageSrcMobile);
 }
 
 /**

@@ -1,8 +1,9 @@
 import googleReviews from '../data/google-reviews.js';
 // El texto llega de Google escrito por cualquiera y acaba en `innerHTML`.
 import { escapeHTML } from '../utils/escapeHTML.js';
+import { siteConfig } from '../config.js';
 
-const MAPS_URL = 'https://maps.app.goo.gl/h3sVPXeiKamdy9KH9';
+const MAPS_URL = siteConfig.contact.mapsLink;
 
 const AVATAR_COLORS = [
     'bg-brand-green/10 text-brand-green',

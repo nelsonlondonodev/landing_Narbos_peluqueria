@@ -133,7 +133,7 @@ class App {
             const heroData = pagesData[pageKey].hero;
             heroRoot.innerHTML = getHeroHTML({
                 ...heroData,
-                imageSrc: this.resolvePath(heroData.imageSrc),
+                imageSrc: heroData.imageSrc ? this.resolvePath(heroData.imageSrc) : undefined,
                 imageSrcMobile: heroData.imageSrcMobile ? this.resolvePath(heroData.imageSrcMobile) : undefined
             });
         }
