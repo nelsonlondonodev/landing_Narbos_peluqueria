@@ -6,6 +6,17 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🔎 Buscador interno y home más corta en móvil v2.8.60 (24 de octubre de 2026)
+
+*   **Buscador interno**: lupa en el navbar (y `Ctrl/⌘ K` o `/`) que abre una paleta con resultados al instante: páginas, servicios con precio y duración, y artículos del blog. Ignora tildes, tolera erratas y entiende sinónimos y plurales («tinte», «mechas rubias»). Sin resultados ofrece WhatsApp con la búsqueda en el mensaje y la manda a Clarity como `busqueda_sin_resultado`. El módulo y su índice se cargan al acercarse a la lupa (`e7459b4`, `a7c1992`, `070d084`).
+*   **Galería de vídeos en fila lateral en móvil**: los 11 vídeos apilados ocupaban del 26 % al 53 % de la home en móvil y solo ~22 % de las visitas llegaba a las reseñas. Ahora es una fila con scroll lateral; en escritorio no cambia. Abrir un vídeo manda el evento `video_galeria_home` a Clarity, y las tarjetas son botones accesibles con teclado (`db844f8`, `501f579`).
+*   **Servicios en lista compacta en móvil**: las cinco tarjetas pasan de 1.433 px a 578 px, con miniatura, título y descripción; las reseñas suben del 52,8 % al 33,5 % de la página. En escritorio no cambian (`f650078`).
+*   **Short del balayage rubio beige con maquillaje** encabeza la galería de la home (`1060945`).
+*   **Interno**: el `ItemList` de vídeos reutiliza `buildVideoObject` (`1e835e3`); `pnpm test` con `node --test`; `escapeHTML`, la llamada a Clarity y el icono de play pasan a utils compartidos.
+*   **Versión**: `v2.8.60`.
+
+---
+
 ## 💆 Masajes en Chía v2.8.59 (23 de octubre de 2026)
 
 *   **La página de masajes pasa al nivel genérico**: title «Masajes en Chía: relajante, descontracturante y drenaje», H1 «Masajes en Chía», y descripción e intro con los cuatro masajes que se venden. Google repartía «masajes chia» entre cuatro URLs del sitio y la página de servicio había caído a la posición 17,4, mientras el hub de estética subía a 9,1 (`5d90586`).
