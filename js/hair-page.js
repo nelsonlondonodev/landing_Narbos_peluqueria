@@ -1,5 +1,4 @@
 import { App } from './App.js';
-import { Breadcrumbs } from './components/Breadcrumbs.js';
 
 import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
@@ -9,7 +8,7 @@ import { ServiceCard } from './components/ServiceCard.js';
 import { ServiceModal } from './components/ServiceModal.js';
 import { hairBrands, smoothingBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
-import { hairPageServices, hairServicesFor, hairSubpageFor, hairBreadcrumbFor } from './data/hairPageServices.js';
+import { hairPageServices, hairServicesFor, hairSubpageFor } from './data/hairPageServices.js';
 
 /**
  * Hair Page Logic
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initPageComponents() {
-    initBreadcrumbs();
 
     initBrandsCarousel();
     initVideoSection();
@@ -118,30 +116,6 @@ function initBrandsCarousel() {
 }
 
 
-
-function initBreadcrumbs() {
-    const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
-    if (!breadcrumbsRoot) return;
-
-    const currentPath = window.location.pathname;
-    const items = [
-        { label: 'Inicio', link: '../../' }
-    ];
-
-    const isIndex = /\/peluqueria(\/?|(\/index\.html)?)$/.test(currentPath);
-    
-    // Level 2: Hub
-    items.push({ 
-        label: 'Peluquería', 
-        link: isIndex ? '#' : '../../servicios/peluqueria/' 
-    });
-
-    // Level 3: Subpages
-    const migaja = hairBreadcrumbFor(getPageKey());
-    if (migaja) items.push({ label: migaja, link: '#' });
-
-    breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
-}
 
 /* -------------------------------------------------------------------------- */
 /*                                GRID & MODAL                                */

@@ -28,7 +28,8 @@ const H1_ESPERADOS = Object.freeze({
     'tratamientos-capilares': 'Tratamientos Capilares y Recuperación',
     'unas-spa': 'Salón de Uñas en Chía',
     'manicure-pedicure': 'Manicure y Pedicure Spa en Chía',
-    'unas-acrilicas-gel': 'Uñas Acrílicas y Gel en Chía: Diseños que Enamoran'
+    'unas-acrilicas-gel': 'Uñas Acrílicas y Gel en Chía: Diseños que Enamoran',
+    'cejas-y-pestanas': 'Cejas y Pestañas'
 });
 
 /** Texto visible y legible por buscadores: sin etiquetas, con &nbsp; como espacio. */

@@ -66,8 +66,10 @@ export const getHeroHTML = ({
                     </a>` : ''}
                 </div>
                 <!-- relative z-20: la animación deja un transform (contexto de apilamiento) y,
-                     sin z, el desplegable de horarios quedaba bajo la sección siguiente. -->
-                <div data-hero-badges class="hero-rise [--d:0.2s] relative z-20 mt-8 flex flex-wrap items-center gap-3"></div>
+                     sin z, el desplegable de horarios quedaba bajo la sección siguiente. En
+                     móvil, uno debajo de otro: el ABIERTO/CERRADO llega por JS y, si saltaba
+                     a una segunda línea al pintarse, empujaba la foto 41 px. -->
+                <div data-hero-badges class="hero-rise [--d:0.2s] relative z-20 mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center"></div>
             </div>
             ${mosaic
                 ? `<div class="hero-mosaic mx-auto aspect-square w-full max-w-[520px] md:mr-0">${getHeroMosaicHTML({ image: imageSrc, imageMobile: imageSrcMobile, alt: imageAlt, width: imageWidth, height: imageHeight })}</div>`

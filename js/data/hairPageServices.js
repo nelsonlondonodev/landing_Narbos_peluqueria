@@ -258,14 +258,13 @@ export const hairPageServices = Object.freeze([
  * es una fila aquí.
  * - `categorias`: tarjetas que muestra. Las pinta el SSG en el build, y
  *   `hair-page.js` en cliente cuando el HTML llega sin ellas.
- * - `migaja`: último nivel de la ruta de exploración visible.
  */
 const SUBPAGINAS = {
-    'cortes-de-pelo': { categorias: ['cortes'], migaja: 'Cortes' },
-    'balayage-mechas': { categorias: ['color', 'balayage'], migaja: 'Balayage' },
-    'color-tinturas-cabello': { categorias: ['color', 'balayage'], migaja: 'Color' },
-    'tratamientos-capilares': { categorias: ['tratamientos'], migaja: 'Tratamientos' },
-    'extensiones-cabello': { categorias: ['extensiones'], migaja: 'Extensiones' }
+    'cortes-de-pelo': { categorias: ['cortes'] },
+    'balayage-mechas': { categorias: ['color', 'balayage'] },
+    'color-tinturas-cabello': { categorias: ['color', 'balayage'] },
+    'tratamientos-capilares': { categorias: ['tratamientos'] },
+    'extensiones-cabello': { categorias: ['extensiones'] }
 };
 
 export const HAIR_SUBPAGES = Object.keys(SUBPAGINAS);
@@ -287,11 +286,6 @@ export function hairSubpageFor(ruta) {
  */
 export function hairSubpageForCategory(category) {
     return HAIR_SUBPAGES.find(pagina => SUBPAGINAS[pagina].categorias.includes(category)) ?? null;
-}
-
-/** @param {string} pagina */
-export function hairBreadcrumbFor(pagina) {
-    return SUBPAGINAS[pagina]?.migaja ?? null;
 }
 
 export function hairServicesFor(pagina) {

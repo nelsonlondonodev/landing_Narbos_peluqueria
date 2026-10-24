@@ -43,7 +43,9 @@ export function getHeroBadgesHTML({ reviews = true, status = true, inline = fals
     // dejar un espacio muerto.
     const statusTop = reviews ? 'top-16 md:top-8' : 'top-4 md:top-8';
     const ratingPosition = inline ? 'relative' : 'absolute top-4 md:top-8 left-[10%] md:left-[8%] lg:left-[12%] z-20';
-    const statusPosition = inline ? 'relative' : `absolute ${statusTop} left-[10%] md:left-auto md:right-[8%] lg:right-[12%] z-20`;
+    // En línea reserva la altura del badge, que `StoreBadge` pinta por JS: sin ella, la
+    // línea aparecía de golpe y empujaba lo que va debajo.
+    const statusPosition = inline ? 'relative min-h-[30.5px]' : `absolute ${statusTop} left-[10%] md:left-auto md:right-[8%] lg:right-[12%] z-20`;
 
     const ratingBadge = reviews ? `
                     <a href="${MAPS_URL}" target="_blank" rel="noopener" id="hero-google-rating" class="${ratingPosition} animate-fade-in-up delay-100 inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/90 backdrop-blur-md shadow-lg px-3 py-1.5 md:px-4 hover:bg-white hover:scale-105 active:scale-95 transition-all duration-300" title="Ver opiniones en Google Maps" aria-label="Calificación ${rating} sobre 5 en Google. Ver las opiniones en Google Maps">

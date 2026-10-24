@@ -331,7 +331,7 @@ export const pagesData = Object.freeze({
             imageSrc: "images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp",
             imageSrcMobile: "images/pages/peluqueria/cortes-de-pelo-profesionales-chia-mobile.webp",
             imageAlt: "Corte de pelo profesional en Chía",
-            breadcrumb: "Cortes de Pelo",
+            breadcrumb: "Cortes",
             ctaMessage: "Hola, vengo de la página de cortes de pelo de la web de Narbo's y quiero agendar una cita"
         },
         video: {
@@ -384,7 +384,7 @@ export const pagesData = Object.freeze({
             imageSrc: "images/pages/peluqueria/color-tratamiento.webp",
             imageSrcMobile: "images/pages/peluqueria/color-tratamiento-mobile.webp",
             imageAlt: "Balayage y Color en Chía",
-            breadcrumb: "Balayage y Mechas",
+            breadcrumb: "Balayage",
             ctaMessage: "Hola, vengo de la página de balayage de la web de Narbo's y quiero agendar una cita"
         },
         metaTitle: "Balayage y Mechas en Chía | Especialistas en Rubios | Narbo's",
@@ -546,7 +546,7 @@ export const pagesData = Object.freeze({
             subtitle: "Coloración profesional, cobertura perfecta de canas y tonos vibrantes que cuidan tu cabello.",
             imageSrc: "images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp",
             imageAlt: "Tinturas y Color en Chía | Narbo's Salón",
-            breadcrumb: "Color y Tinturas",
+            breadcrumb: "Color",
             ctaMessage: "Hola, vengo de la página de color y tinturas de la web de Narbo's y quiero agendar una cita"
         },
         metaTitle: "Coloración y Tinturas en Chía | Cubrimiento de Canas | Narbo's",
@@ -676,7 +676,7 @@ export const pagesData = Object.freeze({
             subtitle: "Recupera la salud y el brillo de tu cabello con nuestras terapias profundas.",
             imageSrc: "images/pages/peluqueria/lavado-spa-capilar.webp",
             imageAlt: "Tratamientos Capilares en Chía",
-            breadcrumb: "Tratamientos Capilares",
+            breadcrumb: "Tratamientos",
             ctaMessage: "Hola, vengo de la página de tratamientos capilares de la web de Narbo's y quiero agendar una cita"
         },
         metaTitle: "Tratamientos capilares en Chía: keratina y botox | Narbo's",
@@ -841,6 +841,7 @@ export const pagesData = Object.freeze({
             imageSrcMobile: "images/pages/estetica/experiencia-spa-depilacion-sin-dolor-mobile.webp",
             imageAlt: "Experiencia de depilación spa en Narbo's Salón Chía",
             eyebrow: "Depilación · Chía",
+            breadcrumb: "Depilación Corporal con Cera",
             ctaMessage: "Hola, vengo de la página de depilación de la web de Narbo's y quiero agendar una cita"
         },
         gallery: [
@@ -900,7 +901,10 @@ export const pagesData = Object.freeze({
             subtitle: "Tu mirada es tu carta de presentación. Diseños personalizados para realzar tu belleza natural con elegancia.",
             imageSrc: "images/pages/estetica/microblading-cejas-despues.webp",
             imageSrcMobile: "images/pages/estetica/microblading-cejas-despues-mobile.webp",
-            imageAlt: "Cejas y pestañas perfectas en Narbo's Salon"
+            imageAlt: "Cejas y pestañas perfectas en Narbo's Salon",
+            eyebrow: "Estética · Chía",
+            breadcrumb: "Cejas y Pestañas",
+            ctaMessage: "Hola, vengo de la página de cejas y pestañas de la web de Narbo's y quiero agendar una cita"
         },
         gallery: [
              {
@@ -1170,7 +1174,7 @@ export const pagesData = Object.freeze({
             subtitle: "Luce unas manos impecables con nuestras técnicas avanzadas en Polygel, Acrílico y Nail Art exclusivo. Calidad y belleza en cada detalle.",
             imageSrc: "images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp",
             imageAlt: "Diseños de Uñas Personalizadas en Narbos Salon Spa",
-            breadcrumb: "Uñas Acrílicas y Gel",
+            breadcrumb: "Acrílicas y Gel",
             ctaMessage: "Hola, vengo de la página de uñas acrílicas y gel de la web de Narbo's y quiero agendar una cita"
         },
         metaTitle: "Uñas acrílicas y en gel en Chía | Narbo's Salón Spa",

@@ -14,6 +14,8 @@ import { resolveRoute, resolveAsset, siteConfig } from '../js/config.js';
 import businessHours from '../js/data/business-hours.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { getHeroBadgesHTML, getStarSpriteHTML } from '../js/components/HeroBadges.js';
+import { Breadcrumbs } from '../js/components/Breadcrumbs.js';
+import { migasDePagina, itemsDeBreadcrumbList } from '../js/utils/migas.js';
 import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { barberServices } from '../js/data/barberServices.js';
@@ -182,6 +184,51 @@ function injectHeroBadges(document, pageKey) {
     // resto de páginas no tenían ninguna estrella hasta ahora.
     if (opciones?.reviews !== false && !document.getElementById('star-icon')) {
         document.body.insertAdjacentHTML('afterbegin', getStarSpriteHTML());
+    }
+}
+
+/**
+ * Pinta la miga de pan y escribe su `BreadcrumbList` con los mismos nombres.
+ *
+ * Va en el HTML y no por JS: pintada después de la primera pintura empujaba el hero
+ * (CLS de hasta 0,115 en móvil). El nombre de la página sale del `data-breadcrumb` de su
+ * H1, así que esto corre después de `injectHero`. Si la página ya declara un
+ * `BreadcrumbList` (casi siempre dentro de un `@graph`, con un `@id` al que apunta su
+ * `WebPage`), se reescriben solo sus niveles; si no, se añade uno.
+ */
+function injectBreadcrumbs(document, pagePath, prefix) {
+    const hueco = document.getElementById('breadcrumbs-root');
+    if (!hueco) return;
+
+    const migas = migasDePagina(pagePath, document.querySelector('h1')?.getAttribute('data-breadcrumb'));
+    if (!migas.length) return;
+
+    hueco.innerHTML = new Breadcrumbs(migas.map(({ nombre, ruta }) => ({ label: nombre, link: resolveRoute(ruta, prefix) }))).render();
+
+    const items = itemsDeBreadcrumbList(migas);
+    let declarado = false;
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
+        let datos;
+        try { datos = JSON.parse(script.textContent); } catch { return; } // Lo reporta checkBreadcrumbs.
+        const nodos = Array.isArray(datos) ? datos : (datos['@graph'] || [datos]);
+        const nodo = nodos.find(n => n?.['@type'] === 'BreadcrumbList');
+        if (!nodo) return;
+        nodo.itemListElement = items;
+        script.textContent = JSON.stringify(datos, null, 2);
+        declarado = true;
+    });
+
+    if (!declarado) {
+        const canonica = document.querySelector('link[rel="canonical"]')?.getAttribute('href') || items.at(-1).item;
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            '@id': `${canonica.replace(/\/$/, '')}/#breadcrumb`,
+            itemListElement: items
+        }, null, 2);
+        document.head.appendChild(script);
     }
 }
 
@@ -756,6 +803,7 @@ async function processPage(pageConfig) {
 
     injectHero(document, pageConfig.key, prefix);
     injectHeroBadges(document, pageConfig.key);
+    injectBreadcrumbs(document, pageConfig.path, prefix);
     injectServices(document, pageConfig.key, prefix);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path, prefix);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
