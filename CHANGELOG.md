@@ -6,6 +6,15 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## ✨ Hero editorial de la home v2.8.61 (24 de octubre de 2026)
+
+*   **Hero nuevo**: dos columnas sobre el beige de la marca, con frase de categoría, H1 en Playfair a dos tonos, botón «Agenda tu cita» por WhatsApp y «Ver servicios», y la nota de Google y el ABIERTO/CERRADO en línea. La foto actual pasa a un mosaico de seis teselas (una sola descarga). En móvil, el texto y la llamada a la acción caben en la primera pantalla. Antes no había ninguna llamada a la acción en el hero (`d0c467b`).
+*   **SEO intacto**: el mismo texto de H1 en el HTML estático; title, meta, JSON-LD y precarga sin cambios. CLS 0 y el LCP pasa a ser el H1.
+*   **Interno**: `HeroBadges` con variante en línea y el SSG genera los enlaces `data-whatsapp-message` con `getWhatsAppUrl`.
+*   **Versión**: `v2.8.61`.
+
+---
+
 ## 🔎 Buscador interno y home más corta en móvil v2.8.60 (24 de octubre de 2026)
 
 *   **Buscador interno**: lupa en el navbar (y `Ctrl/⌘ K` o `/`) que abre una paleta con resultados al instante: páginas, servicios con precio y duración, y artículos del blog. Ignora tildes, tolera erratas y entiende sinónimos y plurales («tinte», «mechas rubias»). Sin resultados ofrece WhatsApp con la búsqueda en el mensaje y la manda a Clarity como `busqueda_sin_resultado`. El módulo y su índice se cargan al acercarse a la lupa (`e7459b4`, `a7c1992`, `070d084`).
