@@ -63,7 +63,7 @@
             "@id": "https://narbossalon.com/servicios/unas-spa/#breadcrumb"
           },
           "mainEntity": {
-            "@id": "https://narbossalon.com/servicios/unas-spa/#organization"
+            "@id": "https://narbossalon.com/#organization"
           }
         },
         {
@@ -73,7 +73,7 @@
             "https://narbossalon.com/images/pages/unas/diseno-unas-elegantes-chia-narbos-spa.webp",
             "https://narbossalon.com/images/pages/unas/servicio-pedicura-spa-profesional-chia.webp"
           ],
-          "@id": "https://narbossalon.com/servicios/unas-spa/#organization",
+          "@id": "https://narbossalon.com/#organization",
           "url": "https://narbossalon.com/servicios/unas-spa/",
           "telephone": "+573123462618",
           "priceRange": "$$",
@@ -218,22 +218,10 @@
 
     <main>
       <div class="relative">
-        <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-            <img src="../../images/pages/unas/diseno-unas-elegantes-chia-narbos-spa.webp" alt="Diseño de uñas elegantes y sofisticadas en Narbo's Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" fetchpriority="high" decoding="async" width="960" height="1280">
-        </section>
-
-        <!-- Floating Content Box -->
-        <div class="absolute z-20 top-[40vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
-            <div class="container mx-auto">
-                <div class="bg-white text-brand-gray-dark backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto">
-                    <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4">Salón de Uñas <span class="text-brand-green">en Chía</span></h1>
-                    <p class="text-lg md:text-xl text-brand-gray-dark/80 max-w-2xl mx-auto">Elige tu servicio: manicure y pedicure, uñas acrílicas y en gel, o diseños de nail art.</p>
-                </div>
-            </div>
-        </div>
+        <div id="hero-root" class="relative z-20"><!-- Lo pinta el SSG con HeroSection (App.mountHero en desarrollo) desde pagesData. --></div>
 
         <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
-        <section class="relative z-10 bg-white pt-24 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
+        <section class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24 overflow-x-hidden">
         <div class="container mx-auto px-6 max-w-screen-xl">
             <div class="text-center mb-16" data-animation="fadeInUp">
               <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">

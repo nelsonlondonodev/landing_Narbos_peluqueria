@@ -145,6 +145,60 @@
   @apply opacity-0 animate-hero-up;
 }
 
+/* --- Hero editorial de la home ---
+   Solo se mueve, nunca parte de opacidad 0: el H1 y la tesela grande son candidatos a
+   LCP, y un elemento transparente no cuenta como pintado hasta que se ve. */
+@keyframes heroRise {
+  from { transform: translateY(18px); }
+  to { transform: translateY(0); }
+}
+@keyframes heroTileIn {
+  from { transform: translateY(24px) scale(0.96); }
+  to { transform: translateY(0) scale(1); }
+}
+.hero-rise {
+  animation: heroRise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+/* Mosaico: la misma foto recortada en teselas. Cada tesela declara su caja en % del
+   mosaico (--x, --y, --w, --h) y su imagen se escala y desplaza para mostrar solo ese
+   trozo de la foto completa: todas comparten una descarga y encajan como un puzle. */
+.hero-mosaic {
+  position: relative;
+}
+.hero-tile {
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  width: calc(var(--w) * 1%);
+  height: calc(var(--h) * 1%);
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: var(--color-brand-light);
+  box-shadow: 0 18px 40px -18px rgb(54 64 65 / 0.35);
+  animation: heroTileIn 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0s);
+}
+.hero-tile img {
+  position: absolute;
+  max-width: none;
+  width: calc(100% * 100 / var(--w));
+  height: calc(100% * 100 / var(--h));
+  left: calc(-100% * var(--x) / var(--w));
+  top: calc(-100% * var(--y) / var(--h));
+  object-fit: cover;
+  /* Centra el recorte en el ojo y la brocha, no en el centro de la foto apaisada. */
+  object-position: 68% 45%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise,
+  .hero-tile {
+    animation: none;
+  }
+}
+
 /* WhatsApp */
 .whatsapp-float {
     @apply fixed bottom-5 right-5 z-[1000] flex items-center justify-center w-[60px] h-[60px] bg-[#25D366] rounded-full shadow-lg transition-transform duration-300 hover:scale-110;

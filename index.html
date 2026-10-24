@@ -25,10 +25,7 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- LCP Optimization: Specific Preloads for Mobile & Desktop -->
-    <link rel="preload" as="image" href="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp">
-    <link rel="preload" as="image" href="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp">
-    
+    <!-- La precarga de la foto del hero la inyecta el SSG desde `pagesData.home.hero`. -->
     <meta name="google-site-verification" content="z7iMcq4xUxxKeXpDsVU32HJ_a0jXCwyOFmZi-7vvCKs" />
 
     <title>Peluquería y Spa en Chía | Narbo's Salón Spa</title>
@@ -421,39 +418,12 @@
     <!-- App Content Wrapper: Handles overflow hiding for decorations without clipping fixed elements -->
     <div id="app-wrapper" class="relative w-full overflow-x-hidden">
         <main>
-            <div class="relative">
-                            <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-                    <!-- Los badges de confianza (calificación de Google y ABIERTO/CERRADO) los inyecta
-                         el SSG desde `js/components/HeroBadges.js`, igual que en las otras quince
-                         páginas con hero. Escritos aquí a mano se congelaban en el valor del último
-                         build: el sync de reseñas solo reescribe una lista fija de ficheros. -->
-                    <picture class="contents">
-                        <!-- Mobile Image (Forced for screens < 768px) -->
-                        <source media="(max-width: 768px)" srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp">
-                        <!-- Desktop Image -->
-                        <source media="(min-width: 769px)" srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp">
-                        <!-- Fallback Image -->
-                        <img src="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" 
-                             alt="Mujer recibiendo maquillaje profesional en Narbo's Salón Spa Chía" 
-                             class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" 
-                             loading="eager" 
-                             fetchpriority="high"
-                             decoding="async"
-                             width="1632" height="918">
-                    </picture>
-                </section>
-                
-                <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
-                    <div class="container mx-auto">
-                        <div class="bg-white/90 text-brand-gray-dark backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
-                            <h1 id="hero-title" class="animate-hero-element text-4xl md:text-6xl font-serif font-bold mb-4">Peluquería y spa en Chía | <span class="text-brand-green">Narbo's Salón Spa</span></h1>
-                            <p id="hero-subtitle" class="animate-hero-element text-lg md:text-xl mb-8 max-w-2xl mx-auto">Más de 11 años de experiencia transformando tu estilo y bienestar.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- El hero lo pinta el SSG con HeroSection (App.mountHero en desarrollo) desde
+                 pagesData.home.hero. relative z-20: el desplegable de horarios de sus badges
+                 tiene que quedar por encima de #servicios. -->
+            <div id="hero-root" class="relative z-20"></div>
 
-            <section id="servicios" class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24">
+            <section id="servicios" class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24">
                 <div class="container mx-auto px-6 max-w-screen-xl">
                     <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-brand-gray-dark text-center" data-animation="fadeInUp">Tu centro de belleza y spa en Chía</h2>
                     <p class="text-lg text-brand-gray-dark/80 mb-12 max-w-3xl mx-auto text-center" data-animation="fadeInUp" data-animation-delay="0.2s">Especialistas en <strong>peluquería, manicura y tratamientos de spa</strong>. Descubre por qué somos el salón de referencia en la sabana de Bogotá para el cuidado de tu imagen.</p>

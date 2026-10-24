@@ -54,14 +54,9 @@ function renderSocialLinks() {
  * Renderiza la dirección del negocio.
  */
 function renderAddress() {
-    // Enlace directo a Google Maps con la ubicación exacta
-    const mapsUrl = "https://maps.app.goo.gl/WyqYyvVpWwXyJk6X6"; // Link corto si se tuviera, o query
-
-    // Usamos una query de búsqueda precisa como fallback robusto si no tenemos el CID exacto a mano, 
-    // aunque la búsqueda "Narbo's Salon Spa Chia" es muy específica.
-    // Mejor aún, usaremos una query de búsqueda codificada para asegurar compatibilidad.
-    const query = encodeURIComponent("Narbo's Salon Spa, Bajos Hotel Ibis, Chía");
-    const mapsLink = `https://www.google.com/maps/search/?api=1&query=${query}`;
+    // La ficha de Google, la misma que enlazan el hero, los badges y las reseñas. Antes
+    // era una búsqueda por dirección, que podía caer en otro resultado.
+    const mapsLink = siteConfig.contact.mapsLink;
 
     return `
         <a href="${mapsLink}" target="_blank" rel="noopener noreferrer" class="group flex items-start md:items-center justify-center gap-2 max-w-sm mx-auto hover:text-white transition-colors duration-300" aria-label="Ver ubicación en Google Maps">

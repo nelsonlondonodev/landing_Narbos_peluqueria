@@ -1,5 +1,4 @@
 import { App } from './App.js';
-import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { ServiceCard } from './components/ServiceCard.js';
 import { ServiceModal } from './components/ServiceModal.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
@@ -26,23 +25,8 @@ function initCoreApp() {
  * Inicializa los componentes individuales de la página
  */
 function initPageComponents() {
-    initBreadcrumbs();
     initMakeupServicesGrid();
     initGallery();
-}
-
-/**
- * Configura y renderiza los Breadcrumbs
- */
-function initBreadcrumbs() {
-    const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
-    if (!breadcrumbsRoot) return;
-
-    const items = [
-        { label: 'Inicio', link: '../../' },
-        { label: 'Maquillaje', link: '#' }
-    ];
-    breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
 }
 
 /* -------------------------------------------------------------------------- */

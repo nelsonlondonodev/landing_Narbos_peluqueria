@@ -1,5 +1,4 @@
 import { App } from './App.js';
-import { Breadcrumbs } from './components/Breadcrumbs.js';
 
 import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initPageComponents() {
-    initBreadcrumbs();
 
     initBrandsCarousel();
     initGallery();
@@ -96,33 +94,6 @@ function initBrandsCarousel() {
 }
 
 
-
-function initBreadcrumbs() {
-    const breadcrumbsRoot = document.getElementById('breadcrumbs-root');
-    if (!breadcrumbsRoot) return;
-
-    const currentPath = window.location.pathname;
-    const items = [
-        { label: 'Inicio', link: '../../' }
-    ];
-
-    const isIndex = /\/unas-spa(\/?|(\/index\.html)?)$/.test(currentPath);
-    
-    // Level 2: Hub
-    items.push({ 
-        label: 'Uñas y Spa', 
-        link: isIndex ? '#' : '../../servicios/unas-spa/' 
-    });
-
-    // Level 3: Subpages
-    if (currentPath.includes('unas-acrilicas-gel')) {
-        items.push({ label: 'Acrílicas y Gel', link: '#' });
-    } else if (currentPath.includes('manicure-pedicure')) {
-        items.push({ label: 'Manicure y Pedicure', link: '#' });
-    }
-
-    breadcrumbsRoot.innerHTML = new Breadcrumbs(items).render();
-}
 
 /* -------------------------------------------------------------------------- */
 /*                                GRID & MODAL                                */

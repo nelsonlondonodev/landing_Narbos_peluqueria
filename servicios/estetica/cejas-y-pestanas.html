@@ -129,25 +129,10 @@
 
         <main>
             <!-- Hero de Servicio (Consistente con Hub) -->
-            <div id="hero-root" class="relative">
-                <section class="relative h-[60vh] md:h-[80vh] bg-white overflow-hidden">
-                    <img src="../../images/pages/estetica/microblading-cejas-despues.webp" alt="Diseño de cejas y pestañas perfecto en Chía" class="w-full h-full object-cover md:w-[85%] md:mx-auto md:rounded-b-2xl shadow-2xl" loading="eager" fetchpriority="high" width="1920" height="1080" decoding="async">
-                    <div class="absolute inset-0 bg-black/30 md:w-[85%] md:mx-auto md:rounded-b-2xl"></div>
-                </section>
-
-                <!-- Floating Content Box -->
-                <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
-                    <div class="container mx-auto">
-                        <div class="bg-white/95 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-2xl max-w-4xl mx-auto text-center border border-white/20 pointer-events-auto" data-animation="zoomIn">
-                            <h1 class="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-4 leading-tight">Cejas y <span class="text-brand-green">Pestañas</span></h1>
-                            <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto font-light">Diseños personalizados que realzan tu belleza natural con elegancia y precisión técnica.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="hero-root" class="relative z-20"><!-- Lo pinta el SSG con HeroSection (App.mountHero en desarrollo) desde pagesData. --></div>
 
       <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
-      <section class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24">
+      <section class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24">
         <div class="container mx-auto px-6 max-w-screen-xl">
             <div class="text-center mb-16" data-animation="fadeInUp">
               <h2 class="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-8">Diseño de Mirada</h2>

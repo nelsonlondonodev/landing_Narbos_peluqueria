@@ -1,6 +1,7 @@
 /**
  * Componente Breadcrumbs (Migas de pan).
- * Genera la navegación jerárquica basada en una lista de items.
+ * Solo el marcado visible: los niveles salen de `js/utils/migas.js` y el
+ * `BreadcrumbList` lo escribe el SSG con los mismos nombres.
  */
 export class Breadcrumbs {
     /**
@@ -23,9 +24,6 @@ export class Breadcrumbs {
      * @returns {string} HTML string.
      */
     render() {
-        // Inyectar Schema JSON-LD para SEO automáticamente al renderizar
-        this.injectSchema();
-
         const listItemsHTML = this.items.map((item, index) => this.renderItem(item, index)).join('');
 
         return `
@@ -37,51 +35,6 @@ export class Breadcrumbs {
                 </div>
             </nav>
         `;
-    }
-
-    /**
-     * Inyecta datos estructurados (JSON-LD) para que Google entienda la jerarquía.
-     */
-    injectSchema() {
-        // Evitar duplicados si ya se inyectó
-        if (document.getElementById('breadcrumbs-schema')) return;
-
-        // Ni si la página ya trae su ruta en el JSON-LD estático: 21 páginas acababan
-        // con dos BreadcrumbList distintos («Cortes De Pelo» y «Cortes»). La estática
-        // es la que valida `checkBreadcrumbs` en el build.
-        const yaDeclarada = [...document.querySelectorAll('script[type="application/ld+json"]')]
-            .some(script => script.textContent.includes('"BreadcrumbList"'));
-        if (yaDeclarada) return;
-
-        const schema = {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": this.items.map((item, index) => {
-                // Resolver URL absoluta
-                let itemUrl = item.link;
-                if (!itemUrl || itemUrl === '#') {
-                    itemUrl = window.location.href; // Usar URL actual para el último item
-                } else {
-                    // Resolver rutas relativas (../../) a absolutas
-                    const a = document.createElement('a');
-                    a.href = itemUrl;
-                    itemUrl = a.href;
-                }
-
-                return {
-                    "@type": "ListItem",
-                    "position": index + 1,
-                    "name": item.label,
-                    "item": itemUrl
-                };
-            })
-        };
-
-        const script = document.createElement('script');
-        script.type = 'application/ld+json';
-        script.id = 'breadcrumbs-schema';
-        script.textContent = JSON.stringify(schema);
-        document.head.appendChild(script);
     }
 
     /**

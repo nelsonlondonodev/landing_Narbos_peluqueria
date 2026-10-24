@@ -1,75 +1,118 @@
+import { getWhatsAppUrl, siteConfig } from '../config.js';
+import { getHeroMosaicHTML } from './HeroMosaic.js';
+
 /**
- * Componente Hero Section (SSG)
- * Genera el HTML estático para la sección principal, manteniendo consistencia visual con la Home.
- * 
- * @param {Object} props
- * @param {string} props.title - Título principal (H1)
- * @param {string} props.subtitle - Subtítulo descriptivo
- * @param {string} props.imageSrc - Ruta de la imagen de fondo (relativa al root o absoluta)
- * @param {string} props.imageAlt - Texto alternativo para SEO
- * @returns {string} HTML string
+ * @typedef {Object} HeroProps
+ * @property {string} title - H1. Admite HTML para el tramo en verde.
+ * @property {string} subtitle - Línea de apoyo bajo el H1.
+ * @property {string} [imageSrc] - Foto, ya resuelta para la página. Sin ella el hero va a
+ *   una columna, sin foto ni precarga (contacto: lo que urge son las acciones).
+ * @property {string} [imageSrcMobile] - Variante ligera para pantallas de hasta 768 px.
+ * @property {string} imageAlt
+ * @property {string} [eyebrow] - Frase corta sobre el H1 («Peluquería · Chía»).
+ * @property {string} [ctaMessage] - Mensaje precargado del botón de WhatsApp. Nombra la
+ *   página para que la conversación llegue atribuida.
+ * @property {string} [ctaLabel='Agenda tu cita'] - Texto del botón de WhatsApp.
+ * @property {Array<'llamar'|'comoLlegar'>} [actions] - Acciones directas junto al botón.
+ * @property {{ label: string, href: string }} [secondaryCta] - Enlace junto al botón.
+ * @property {string} [breadcrumb] - Nombre corto de la página en la miga de pan; va en
+ *   `data-breadcrumb` del H1, que es de donde lo lee `js/utils/migas.js`.
+ * @property {boolean} [mosaic=false] - La foto en mosaico, pieza propia de la home.
+ * @property {number} [imageWidth] - Medidas intrínsecas de la foto, para el mosaico.
+ * @property {number} [imageHeight]
  */
-/**
- * Componente Hero Section (SSG)
- * Genera el HTML estático para la sección principal.
- * 
- * @param {Object} props
- * @param {string} props.title - Título principal (H1)
- * @param {string} props.subtitle - Subtítulo descriptivo
- * @param {string} props.imageSrc - Ruta de la imagen de fondo
- * @param {string} props.imageAlt - Texto alternativo para SEO
- * @returns {string} HTML string
- */
-export const getHeroHTML = ({ title, subtitle, imageSrc, imageSrcMobile, imageAlt, variant = 'standard' }) => {
+
+const DEFAULT_CTA_MESSAGE = "Hola, vengo de la web de Narbo's y quiero agendar una cita";
+
+const ARROW_RIGHT = '<svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg>';
+const PHONE_ICON = '<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 0 1 2-2h3.28a1 1 0 0 1 .95.68l1.5 4.5a1 1 0 0 1-.5 1.21l-2.26 1.13a11 11 0 0 0 5.52 5.52l1.13-2.26a1 1 0 0 1 1.21-.5l4.5 1.5a1 1 0 0 1 .68.95V19a2 2 0 0 1-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>';
+const PIN_ICON = '<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+
+/** Acciones directas que una página puede pedir junto al botón de WhatsApp. */
+const ACTIONS = Object.freeze({
+    llamar: { label: 'Llamar', href: `tel:${siteConfig.contact.phone}`, icon: PHONE_ICON },
+    comoLlegar: { label: 'Cómo llegar', href: siteConfig.contact.mapsLink, icon: PIN_ICON, external: true }
+});
+
+function renderAction(nombre) {
+    const { label, href, icon, external } = ACTIONS[nombre];
     return `
-    <div class="relative">
-        ${renderHeroImage(imageSrc, imageSrcMobile, imageAlt, variant)}
-        ${renderHeroContent(title, subtitle)}
-    </div>
-    `;
-};
-
-/**
- * Renderiza la sección de la imagen de fondo con soporte para Picture (Móvil/Escritorio).
- */
-function renderHeroImage(src, srcMobile, alt, variant) {
-    const isLogo = variant === 'logo';
-    const sectionClass = isLogo 
-        ? 'relative h-[60vh] md:h-[80vh] bg-gray-900 rounded-b-xl mx-auto w-[85%]' 
-        : 'relative h-[60vh] md:h-[80vh] bg-white';
-    
-    const imgClass = isLogo 
-        ? 'w-full h-full object-contain absolute inset-0 z-0 mx-auto p-12 opacity-80' 
-        : 'w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl';
-
-    // Si tenemos imagen móvil, usamos <picture> para optimizar LCP
-    const imageHtml = srcMobile ? `
-        <picture class="contents">
-            <source media="(max-width: 768px)" srcset="${srcMobile}">
-            <source media="(min-width: 769px)" srcset="${src}">
-            <img src="${src}" alt="${alt}" class="${imgClass}" loading="eager" fetchpriority="high">
-        </picture>
-    ` : `<img src="${src}" alt="${alt}" class="${imgClass}" loading="eager" fetchpriority="high">`;
-
-    return `
-        <section id="inicio" class="${sectionClass}">
-            ${imageHtml}
-        </section>
-    `;
+                    <a href="${href}"${external ? ' target="_blank" rel="noopener"' : ''} class="inline-flex items-center gap-2 rounded-full border border-brand-green/30 bg-white/70 px-5 py-3 font-semibold text-brand-gray-dark transition-colors hover:border-brand-green hover:text-brand-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
+                        ${icon}
+                        ${label}
+                    </a>`;
 }
 
+const ARROW_DOWN = '<svg class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-6-6 6 6 6-6"/></svg>';
+
+// Líneas curvas de fondo, como en la referencia del mosaico. Solo ellas se recortan: un
+// overflow-hidden en la sección cortaba también el desplegable de horarios del badge.
+const MOSAIC_DECOR = `
+        <div class="pointer-events-none absolute inset-0 overflow-hidden max-md:hidden" aria-hidden="true">
+            <svg class="absolute -right-24 top-6 h-[120%] w-[70%] text-brand-medium/50" viewBox="0 0 600 700" fill="none">
+                <path d="M560 20C380 60 260 180 300 330s210 190 150 300S180 700 40 660" stroke="currentColor" stroke-width="2"/>
+                <path d="M600 140C470 170 380 250 410 360s150 160 110 250" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+        </div>`;
+
 /**
- * Renderiza el cuadro de contenido flotante.
+ * Hero editorial de toda la web: frase de categoría, H1 a dos tonos, subtítulo,
+ * «Agenda tu cita» por WhatsApp y los badges de confianza en línea; a la derecha la foto,
+ * o el mosaico en la home. Lo pinta el SSG en dist (y `App.mountHero` en desarrollo), y
+ * el SSG cuelga después los badges en `data-hero-badges`.
+ *
+ * @param {HeroProps} props
+ * @returns {string} HTML del `<section id="inicio">`.
  */
-function renderHeroContent(title, subtitle) {
-    return `
-        <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6 pointer-events-none">
-            <div class="container mx-auto">
-                <div class="bg-white/90 text-brand-gray-dark backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100 pointer-events-auto">
-                    <h1 id="hero-title" class="animate-hero-element text-4xl md:text-6xl font-serif font-bold mb-4">${title}</h1>
-                    <p id="hero-subtitle" class="animate-hero-element text-lg md:text-xl mb-8 max-w-2xl mx-auto">${subtitle}</p>
+export const getHeroHTML = ({
+    title, subtitle, imageSrc, imageSrcMobile, imageAlt, eyebrow, breadcrumb,
+    ctaMessage = DEFAULT_CTA_MESSAGE, ctaLabel = 'Agenda tu cita', actions = [], secondaryCta,
+    mosaic = false, imageWidth, imageHeight
+}) => `
+    <section id="inicio" class="relative bg-brand-light/30">
+        ${mosaic ? MOSAIC_DECOR : ''}
+        <div class="container relative mx-auto grid max-w-screen-xl items-center gap-10 px-6 py-10 ${imageSrc ? 'md:grid-cols-[1.05fr_1fr]' : ''} md:py-12 lg:gap-16 lg:py-14">
+            <div class="${imageSrc ? 'max-w-xl' : 'max-w-3xl'}">
+                ${eyebrow ? `<p class="hero-rise text-xs font-semibold uppercase tracking-[0.3em] text-brand-green md:text-sm">${eyebrow}</p>` : ''}
+                <h1 id="hero-title"${breadcrumb ? ` data-breadcrumb="${breadcrumb}"` : ''} class="hero-rise [--d:0.05s] ${eyebrow ? 'mt-4' : ''} font-serif font-bold text-brand-gray-dark ${mosaic ? 'text-[2.3rem] leading-[1.08] sm:text-5xl lg:text-[4.25rem]' : 'text-[2.1rem] leading-[1.1] sm:text-5xl lg:text-[3.6rem]'}">${title}</h1>
+                <p id="hero-subtitle" class="hero-rise [--d:0.1s] mt-5 max-w-md text-lg text-brand-gray-dark/75 ${mosaic ? 'md:text-xl' : ''}">${subtitle}</p>
+                <div class="hero-rise [--d:0.15s] mt-8 flex flex-wrap items-center gap-x-4 gap-y-4">
+                    <a href="${getWhatsAppUrl(ctaMessage)}" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 rounded-full bg-brand-green px-7 py-3.5 font-semibold text-white shadow-lg shadow-brand-green/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-gray-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
+                        ${ctaLabel}
+                        ${ARROW_RIGHT}
+                    </a>
+                    ${actions.map(renderAction).join('')}
+                    ${secondaryCta ? `
+                    <a href="${secondaryCta.href}" class="group ml-3 inline-flex items-center gap-2 font-semibold text-brand-gray-dark transition-colors hover:text-brand-green">
+                        ${secondaryCta.label}
+                        ${ARROW_DOWN}
+                    </a>` : ''}
                 </div>
+                <!-- relative z-20: la animación deja un transform (contexto de apilamiento) y,
+                     sin z, el desplegable de horarios quedaba bajo la sección siguiente. En
+                     móvil, uno debajo de otro: el ABIERTO/CERRADO llega por JS y, si saltaba
+                     a una segunda línea al pintarse, empujaba la foto 41 px. -->
+                <div data-hero-badges class="hero-rise [--d:0.2s] relative z-20 mt-8 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center"></div>
             </div>
+            ${!imageSrc ? '' : mosaic
+                ? `<div class="hero-mosaic mx-auto aspect-square w-full max-w-[520px] md:mr-0">${getHeroMosaicHTML({ image: imageSrc, imageMobile: imageSrcMobile, alt: imageAlt, width: imageWidth, height: imageHeight })}</div>`
+                : renderHeroImage(imageSrc, imageSrcMobile, imageAlt)}
         </div>
-    `;
+    </section>
+`;
+
+/**
+ * La foto, candidata a LCP: prioridad alta. El tamaño lo fija la proporción del
+ * contenedor, así que no mueve el layout aunque cada página traiga una foto distinta.
+ */
+function renderHeroImage(src, srcMobile, alt) {
+    const img = `<img src="${src}" alt="${alt}" class="h-full w-full object-cover" loading="eager" fetchpriority="high" decoding="async">`;
+    const picture = srcMobile
+        ? `<picture><source media="(max-width: 768px)" srcset="${srcMobile}">${img}</picture>`
+        : img;
+
+    return `
+            <div class="hero-rise [--d:0.1s] relative aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] shadow-[0_24px_60px_-28px_rgb(54_64_65/0.45)] md:aspect-[5/4]">
+                ${picture}
+            </div>`;
 }

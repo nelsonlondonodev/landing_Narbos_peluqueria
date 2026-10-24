@@ -94,8 +94,6 @@
     <style>
         /* Optimización de CLS: Reserva de espacio para componentes dinámicos */
         #navbar-root { min-height: 80px; }
-        #inicio { min-height: 60vh; background: #f9f9f9; }
-        @media (min-width: 768px) { #inicio { min-height: 80vh; } }
         #hair-services-grid { min-height: 600px; }
     </style>
 </head>
@@ -112,25 +110,10 @@
         <div id="breadcrumbs-root"></div>
 
         <main>
-          <div class="relative">
-              <!-- Hero de Servicio (Consistente con Home) -->
-              <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-                <img src="../../images/pages/peluqueria/lavado-spa-capilar.webp" alt="Tratamientos Capilares en Chía" class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" loading="eager" fetchpriority="high" width="1920" height="1080">
-              </section>
-
-              <!-- Floating Content Box -->
-              <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
-                  <div class="container mx-auto">
-                      <div class="bg-white/90 backdrop-blur-md p-6 md:p-8 rounded-lg shadow-xl max-w-4xl mx-auto text-center border border-gray-100">
-                          <h1 class="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-4" data-breadcrumb="Tratamientos Capilares">Tratamientos Capilares y <span class="text-brand-green">Recuperación</span></h1>
-                          <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">Recupera la salud y el brillo de tu cabello con nuestras terapias profundas.</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
+          <div id="hero-root" class="relative z-20"><!-- Lo pinta el SSG con HeroSection (App.mountHero en desarrollo) desde pagesData. --></div>
 
           <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
-          <section class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
+          <section class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24 overflow-x-hidden">
             <div class="container mx-auto px-6 max-w-screen-xl">
                 <div class="text-center mb-16" data-animation="fadeInUp">
                   <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">

@@ -10,10 +10,12 @@ import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
 import { getHeroHTML } from '../js/components/HeroSection.js';
 import { getVideoSectionHTML } from '../js/components/VideoSection.js';
-import { resolveRoute, resolveAsset, siteConfig } from '../js/config.js';
+import { resolveRoute, resolveAsset, siteConfig, SITE_URL } from '../js/config.js';
 import businessHours from '../js/data/business-hours.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { getHeroBadgesHTML, getStarSpriteHTML } from '../js/components/HeroBadges.js';
+import { Breadcrumbs } from '../js/components/Breadcrumbs.js';
+import { migasDePagina, itemsDeBreadcrumbList } from '../js/utils/migas.js';
 import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { barberServices } from '../js/data/barberServices.js';
@@ -145,7 +147,7 @@ function injectSEO(document, pageKey, pagePath) {
     else if (cleanPath && !cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
     if (esDirectorio && cleanPath && !cleanPath.endsWith('/')) cleanPath += '/';
 
-    canonical.href = `${SITE_ORIGIN}${cleanPath}`;
+    canonical.href = `${SITE_URL}${cleanPath}`;
 }
 
 /**
@@ -153,9 +155,8 @@ function injectSEO(document, pageKey, pagePath) {
  *
  * Se anclan a `section#inicio` y no al componente `HeroSection`, porque solo ocho de
  * los dieciséis heroes salen de él: la home y siete fichas de servicio llevan el suyo
- * escrito a mano. `#inicio` sí lo tienen las dieciséis, y es el mismo `<section>`
- * posicionado del que ya colgaban en la home, así que las posiciones calibradas para
- * la foto al 85 % valen tal cual.
+ * escrito a mano. `#inicio` sí lo tienen las dieciséis. La home tiene además su propio
+ * hueco `data-hero-badges`, donde van en línea con el texto en vez de flotar.
  *
  * El dato sale de `google-reviews.js` en cada build. Copiar el badge a mano en cada
  * página lo habría congelado: `sync-google-reviews.js` solo reescribe la calificación
@@ -171,16 +172,57 @@ function injectHeroBadges(document, pageKey) {
 
     const opciones = pagesData[pageKey]?.heroBadges;
 
-    // La home ya trae el suyo escrito a mano en el HTML; se retira para que no queden
-    // dos, y el generado ocupe su sitio.
+    // Por si el HTML trae alguno escrito a mano: se retira para que no queden dos.
     seccion.querySelectorAll('#hero-google-rating, #business-status-root').forEach(el => el.remove());
 
-    seccion.insertAdjacentHTML('beforeend', getHeroBadgesHTML(opciones));
+    // Un hero con hueco propio (`data-hero-badges`, el de la home) los lleva en línea
+    // dentro de él; el resto, flotando sobre la foto.
+    const hueco = seccion.querySelector('[data-hero-badges]');
+    (hueco ?? seccion).insertAdjacentHTML('beforeend', getHeroBadgesHTML({ ...opciones, inline: !!hueco }));
 
     // El `<use>` necesita su `<symbol>`: la home ya lo declara para el carrusel, el
     // resto de páginas no tenían ninguna estrella hasta ahora.
     if (opciones?.reviews !== false && !document.getElementById('star-icon')) {
         document.body.insertAdjacentHTML('afterbegin', getStarSpriteHTML());
+    }
+}
+
+/**
+ * Pinta la miga de pan y escribe su `BreadcrumbList` con los mismos nombres.
+ *
+ * Va en el HTML y no por JS: pintada después de la primera pintura empujaba el hero
+ * (CLS de hasta 0,115 en móvil). El nombre de la página sale del `data-breadcrumb` de su
+ * H1, así que esto corre después de `injectHero`. Si la página ya declara un
+ * `BreadcrumbList` (casi siempre dentro de un `@graph`, con un `@id` al que apunta su
+ * `WebPage`), se reescriben solo sus niveles; si no, se añade uno.
+ */
+function injectBreadcrumbs(document, pagePath, prefix) {
+    const hueco = document.getElementById('breadcrumbs-root');
+    if (!hueco) return;
+
+    const migas = migasDePagina(pagePath, document.querySelector('h1')?.getAttribute('data-breadcrumb'));
+    if (!migas.length) return;
+
+    hueco.innerHTML = new Breadcrumbs(migas.map(({ nombre, ruta }) => ({ label: nombre, link: resolveRoute(ruta, prefix) }))).render();
+
+    const items = itemsDeBreadcrumbList(migas);
+    const declarados = buscarNodosJsonLd(document, 'BreadcrumbList');
+    declarados.forEach(({ script, datos, nodo }) => {
+        nodo.itemListElement = items;
+        script.textContent = JSON.stringify(datos, null, 2);
+    });
+
+    if (declarados.length === 0) {
+        const canonica = document.querySelector('link[rel="canonical"]')?.getAttribute('href') || items.at(-1).item;
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            '@id': `${canonica.replace(/\/$/, '')}/#breadcrumb`,
+            itemListElement: items
+        }, null, 2);
+        document.head.appendChild(script);
     }
 }
 
@@ -194,49 +236,46 @@ function injectHero(document, pageKey, prefix) {
     const originalHero = pagesData[pageKey].hero;
     const heroData = {
         ...originalHero,
-        imageSrc: resolveAsset(originalHero.imageSrc, prefix),
+        imageSrc: originalHero.imageSrc ? resolveAsset(originalHero.imageSrc, prefix) : undefined,
         imageSrcMobile: originalHero.imageSrcMobile ? resolveAsset(originalHero.imageSrcMobile, prefix) : undefined
     };
 
     heroRoot.innerHTML = getHeroHTML(heroData);
+    // Un hero sin foto (contacto) no tiene nada que precargar: su LCP es el H1.
+    if (heroData.imageSrc) precargarImagenHero(document, heroData.imageSrc, heroData.imageSrcMobile);
+}
 
-    // Inyección automatizada de preloads de LCP en el head para optimización de PageSpeed
+/**
+ * Precarga la foto del hero, candidata a LCP, con su variante móvil si la hay.
+ *
+ * Retira antes cualquier otra precarga de imagen: venían heredadas en el HTML de las
+ * plantillas y competían con la buena por el ancho de banda.
+ * @param {Document} document
+ * @param {string} imageSrc - Foto de escritorio, ya resuelta para la página.
+ * @param {string} [imageSrcMobile] - Variante para pantallas de hasta 768 px.
+ */
+function precargarImagenHero(document, imageSrc, imageSrcMobile) {
     const head = document.head;
-    if (head) {
-        // Eliminar preloads de imágenes anteriores para evitar duplicados heredados
-        const existingPreloads = head.querySelectorAll('link[rel="preload"][as="image"]');
-        existingPreloads.forEach(el => el.remove());
+    if (!head) return;
 
-        if (heroData.imageSrcMobile) {
-            // Preload Móvil (max-width: 768px)
-            const preloadMobile = document.createElement('link');
-            preloadMobile.rel = 'preload';
-            preloadMobile.setAttribute('as', 'image');
-            preloadMobile.href = heroData.imageSrcMobile;
-            preloadMobile.media = '(max-width: 768px)';
-            preloadMobile.setAttribute('fetchpriority', 'high');
-            preloadMobile.type = 'image/webp';
-            head.insertBefore(preloadMobile, head.firstChild);
+    head.querySelectorAll('link[rel="preload"][as="image"]').forEach(el => el.remove());
 
-            // Preload Escritorio (min-width: 769px)
-            const preloadDesktop = document.createElement('link');
-            preloadDesktop.rel = 'preload';
-            preloadDesktop.setAttribute('as', 'image');
-            preloadDesktop.href = heroData.imageSrc;
-            preloadDesktop.media = '(min-width: 769px)';
-            preloadDesktop.setAttribute('fetchpriority', 'high');
-            preloadDesktop.type = 'image/webp';
-            head.insertBefore(preloadDesktop, head.firstChild);
-        } else {
-            // Preload global (si no hay variante móvil)
-            const preloadDesktop = document.createElement('link');
-            preloadDesktop.rel = 'preload';
-            preloadDesktop.setAttribute('as', 'image');
-            preloadDesktop.href = heroData.imageSrc;
-            preloadDesktop.setAttribute('fetchpriority', 'high');
-            preloadDesktop.type = 'image/webp';
-            head.insertBefore(preloadDesktop, head.firstChild);
-        }
+    const precarga = (href, media) => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.setAttribute('as', 'image');
+        link.href = href;
+        if (media) link.media = media;
+        link.setAttribute('fetchpriority', 'high');
+        link.type = 'image/webp';
+        head.insertBefore(link, head.firstChild);
+    };
+
+    if (imageSrcMobile) {
+        precarga(imageSrcMobile, '(max-width: 768px)');
+        precarga(imageSrc, '(min-width: 769px)');
+    } else {
+        precarga(imageSrc);
     }
 }
 
@@ -571,6 +610,10 @@ function datosDelNegocio() {
 function unificarNegocio(document) {
     const negocio = datosDelNegocio();
     let tocados = 0;
+    // `@id` que traía cada nodo del negocio antes de unificarlo: las referencias a ellos
+    // (un `mainEntity` que apuntaba a `.../servicios/barberia/#organization`) se quedaban
+    // colgando al pasar el nodo a ORG_ID.
+    const idsSustituidos = new Set();
 
     for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
         let datos;
@@ -585,13 +628,16 @@ function unificarNegocio(document) {
             if (!nodo || typeof nodo !== 'object') return;
             const tipos = [].concat(nodo['@type']);
             if (tipos.includes('BeautySalon') || tipos.includes('HealthAndBeautyBusiness')) {
+                if (nodo['@id'] && nodo['@id'] !== ORG_ID) idsSustituidos.add(nodo['@id']);
                 Object.assign(nodo, structuredClone(negocio));
                 cambiado = true;
                 tocados++;
-            } else if (tipos.includes('Organization') && nodo.address && /Narbo/.test(nodo.name)) {
-                // El publisher de algunos artículos repite la dirección, con «Cajica»:
-                // solo se le corrige esa, el resto del nodo es el de un publisher.
-                nodo.address = { ...DIRECCION };
+            } else if (tipos.includes('Organization') && /Narbo/.test(nodo.name)) {
+                // El publisher de los artículos: se le corrigen la dirección (algunos la
+                // repetían con «Cajica») y el logo (la plantilla citaba uno que no existe);
+                // el resto del nodo es el de un publisher.
+                if (nodo.address) nodo.address = { ...DIRECCION };
+                nodo.logo = structuredClone(negocio.logo);
                 cambiado = true;
                 tocados++;
             }
@@ -599,6 +645,37 @@ function unificarNegocio(document) {
         };
         recorrer(datos);
         if (cambiado) script.textContent = JSON.stringify(datos, null, 2);
+    }
+
+    // Referencias a los `@id` sustituidos, y el negocio en las páginas que lo citan sin
+    // definirlo: Google no sigue un `@id` a otra página, así que un `provider` que solo
+    // apunta a ORG_ID dejaba el servicio sin proveedor.
+    let definido = false;
+    let citado = false;
+    for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        let datos;
+        try { datos = JSON.parse(script.textContent); } catch { continue; }
+        let cambiado = false;
+        const recorrer = nodo => {
+            if (Array.isArray(nodo)) return nodo.forEach(recorrer);
+            if (!nodo || typeof nodo !== 'object') return;
+            if (nodo['@id'] === ORG_ID && Object.keys(nodo).length > 1) definido = true;
+            if (Object.keys(nodo).length === 1 && idsSustituidos.has(nodo['@id'])) {
+                nodo['@id'] = ORG_ID;
+                cambiado = true;
+            }
+            if (Object.keys(nodo).length === 1 && nodo['@id'] === ORG_ID) citado = true;
+            Object.values(nodo).forEach(recorrer);
+        };
+        recorrer(datos);
+        if (cambiado) script.textContent = JSON.stringify(datos, null, 2);
+    }
+    if (citado && !definido) {
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'BeautySalon', ...negocio }, null, 2);
+        document.head.appendChild(script);
+        tocados++;
     }
     return tocados;
 }
@@ -641,10 +718,14 @@ function leerFaqVisible(document) {
 }
 
 /**
- * Busca los nodos `FAQPage` del JSON-LD, estén en la raíz, en un array o en `@graph`.
+ * Busca los nodos de un tipo en el JSON-LD de la página, estén en la raíz, en un array o
+ * en `@graph`. Devuelve también el script y los datos completos, para poder modificar el
+ * nodo y volver a serializar el bloque sin tocar el resto.
+ * @param {Document} document
+ * @param {string} tipo - `FAQPage`, `BreadcrumbList`…
  * @returns {{script: Element, datos: Object, nodo: Object}[]}
  */
-function buscarFaqPage(document) {
+function buscarNodosJsonLd(document, tipo) {
     const encontrados = [];
     for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
         let datos;
@@ -657,7 +738,7 @@ function buscarFaqPage(document) {
             if (Array.isArray(nodo)) return nodo.forEach(recorrer);
             if (!nodo || typeof nodo !== 'object') return;
             const tipos = [].concat(nodo['@type']);
-            if (tipos.includes('FAQPage')) encontrados.push({ script, datos, nodo });
+            if (tipos.includes(tipo)) encontrados.push({ script, datos, nodo });
             Object.values(nodo).forEach(recorrer);
         };
         recorrer(datos);
@@ -683,7 +764,7 @@ function buscarFaqPage(document) {
  */
 function sincronizarFaqPage(document, pagePath) {
     const visible = leerFaqVisible(document);
-    const marcados = buscarFaqPage(document);
+    const marcados = buscarNodosJsonLd(document, 'FAQPage');
     if (visible.length === 0 && marcados.length === 0) return [];
 
     if (marcados.length > 1) return [`${pagePath}: ${marcados.length} nodos FAQPage`];
@@ -759,6 +840,7 @@ async function processPage(pageConfig) {
 
     injectHero(document, pageConfig.key, prefix);
     injectHeroBadges(document, pageConfig.key);
+    injectBreadcrumbs(document, pageConfig.path, prefix);
     injectServices(document, pageConfig.key, prefix);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path, prefix);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
@@ -776,7 +858,6 @@ async function processPage(pageConfig) {
     return { videoIssue, catalogIssue, faqIssues, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
 }
 
-const SITE_ORIGIN = 'https://narbossalon.com';
 
 /**
  * Resuelve una URL del sitio al fichero que la serviría en dist, replicando el
@@ -784,7 +865,7 @@ const SITE_ORIGIN = 'https://narbossalon.com';
  * busca el .html homónimo.
  */
 function resolveUrlToFile(url) {
-    const route = url.slice(SITE_ORIGIN.length).split(/[?#]/)[0];
+    const route = url.slice(SITE_URL.length).split(/[?#]/)[0];
     const clean = route.replace(/^\//, '');
     if (clean === '') return path.join(DIST_DIR, 'index.html');
     return clean.endsWith('/')
@@ -819,7 +900,7 @@ function checkBreadcrumbs(document, pagePath) {
         for (const node of nodes) {
             if (node?.['@type'] !== 'BreadcrumbList') continue;
             for (const { item, name } of node.itemListElement ?? []) {
-                if (typeof item !== 'string' || !item.startsWith(SITE_ORIGIN)) continue;
+                if (typeof item !== 'string' || !item.startsWith(SITE_URL)) continue;
                 if (fs.existsSync(resolveUrlToFile(item))) continue;
                 issues.push(`${pagePath}: el nivel «${name}» apunta a ${item}, que no existe en dist`);
             }
@@ -1037,6 +1118,49 @@ function checkNap() {
  * el mismo aviso en `datePublished`, que 16 de 23 artículos publicaban como solo el
  * día, y ocho no declaraban `dateModified`.
  */
+/**
+ * Referencias rotas dentro del JSON-LD de cada página publicada: un `{"@id": …}` que no
+ * apunta a ningún nodo de la misma página (Google no lo sigue a otra) y las imágenes del
+ * propio dominio que no existen. Las dos pasaban en silencio: logos de publisher a un
+ * fichero borrado, imágenes de BlogPosting con espacios en el nombre, un `mainEntity` a
+ * un `@id` que la unificación del negocio había retirado.
+ */
+function checkReferenciasSchema() {
+    const CLAVES_DE_IMAGEN = new Set(['image', 'thumbnailUrl', 'logo', 'contentUrl', 'url']);
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
+        const definidos = new Set();
+        const citados = [];
+        const imagenes = [];
+        const recorrer = (nodo, clave) => {
+            if (Array.isArray(nodo)) return nodo.forEach(hijo => recorrer(hijo, clave));
+            if (typeof nodo === 'string') {
+                if (CLAVES_DE_IMAGEN.has(clave) && nodo.startsWith(`${SITE_URL}/`) && /\.(webp|jpe?g|png|svg)$/i.test(nodo)) imagenes.push(nodo);
+                return;
+            }
+            if (!nodo || typeof nodo !== 'object') return;
+            const claves = Object.keys(nodo);
+            if (nodo['@id'] && claves.length > 1) definidos.add(nodo['@id']);
+            if (nodo['@id'] && claves.length === 1) citados.push(nodo['@id']);
+            for (const [k, v] of Object.entries(nodo)) recorrer(v, k);
+        };
+        for (const [, json] of html.matchAll(JSON_LD_RE)) {
+            try { recorrer(JSON.parse(json)); } catch { /* Lo reporta checkFechasSchema. */ }
+        }
+        for (const id of new Set(citados)) {
+            if (!definidos.has(id)) issues.push(`${relPath}: referencia a ${id}, que la página no define`);
+        }
+        for (const url of new Set(imagenes)) {
+            if (!fs.existsSync(path.join(DIST_DIR, decodeURI(url.slice(SITE_URL.length + 1))))) {
+                issues.push(`${relPath}: el JSON-LD cita ${url}, que no existe en dist`);
+            }
+        }
+    });
+
+    return issues;
+}
+
 function checkFechasSchema() {
     const ISO_CON_OFFSET = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
     const CLAVES_DE_FECHA = new Set(['uploadDate', 'datePublished', 'dateModified']);
@@ -1392,13 +1516,13 @@ function checkCanonicalResuelve() {
         if (!m) return;
 
         const url = m[1];
-        if (!url.startsWith(SITE_ORIGIN)) {
+        if (!url.startsWith(SITE_URL)) {
             issues.push(`${relPath} — canónica fuera del sitio: ${url}`);
             return;
         }
 
         // La raíz sin barra es válida: la sirve el index.html de dist.
-        if (url === SITE_ORIGIN || url === `${SITE_ORIGIN}/`) return;
+        if (url === SITE_URL || url === `${SITE_URL}/`) return;
 
         if (!fs.existsSync(resolveUrlToFile(url))) {
             issues.push(`${relPath} — canónica a ${url}, que no existe en dist`);
@@ -1533,6 +1657,11 @@ async function runSSG() {
             titulo: 'NAP distinto entre páginas o respecto a la ficha',
             issues: checkNap(),
             motivo: 'el nombre, la dirección y el teléfono tienen que decir lo mismo en todas partes: es la señal con la que Google ata la web al negocio local.'
+        },
+        {
+            titulo: 'Referencias rotas en el schema',
+            issues: checkReferenciasSchema(),
+            motivo: 'un @id que la página no define o una imagen que no existe dejan el nodo incompleto para Google, sin ningún aviso en Search Console hasta semanas después.'
         },
         {
             titulo: 'Fechas del schema mal formadas o ausentes',

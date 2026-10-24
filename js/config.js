@@ -94,11 +94,14 @@ export const resolveAsset = (path, prefix = '') => {
     return `${safePrefix}${cleanPath}`.replace(/\.\/\.\//g, './');
 };
 
+/** Dominio canónico, sin barra final: canónicas, JSON-LD, sitemap y migas de pan. */
+export const SITE_URL = 'https://narbossalon.com';
+
 /**
  * Configuración global del sitio.
  */
 export const siteConfig = Object.freeze({
-    version: "2.8.60", // Versión actualizada
+    version: "2.8.62", // Versión actualizada
     basePath: BASE_PATH,
     socialLinks: [
         {
@@ -133,7 +136,7 @@ export const siteConfig = Object.freeze({
         whatsapp: "573123462618",
         email: "contacto@narbossalon.com",
         address: "Bajos del hotel Ibis, Km 2 vía Chía - Cajicá Edificio Quantum, local 118, Chía, Cundinamarca, Colombia.",
-        mapsLink: "https://maps.app.goo.gl/tuLinkDeMaps",
+        mapsLink: "https://maps.app.goo.gl/h3sVPXeiKamdy9KH9",
         googleAnalyticsId: "G-7XLWJJBSDL",
         googleMapsApiKey: "___GOOGLE_MAPS_API_KEY___"
     }

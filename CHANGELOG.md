@@ -6,6 +6,29 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🧭 Heroes editoriales en toda la web, migas de pan y schema v2.8.62 (24 de octubre de 2026)
+
+*   **Se publica junto con la v2.8.61** (hero editorial de la home), que no llegó a desplegarse por separado.
+*   **Hero editorial en las 20 páginas**: nosotros, los hubs y las fichas de servicio pasan al mismo lenguaje que la home (frase de categoría, H1 a dos tonos, «Agenda tu cita» por WhatsApp con un mensaje que nombra la página, badges en línea y una sola foto). Todos salen de `HeroSection` y `pagesData`; las 12 fichas que lo tenían escrito a mano conservan su H1, su foto y su alt (`ecf1441`, `785b6c8`, `6ec50fe`).
+*   **Contacto, hero de acción**: sin foto y con «Escríbenos por WhatsApp», «Llamar» y «Cómo llegar» en la primera pantalla (`571dec9`).
+*   **Badge de horarios**: dice cuándo abre («ABRE MAÑANA LUNES A LAS 7:00 A. M.», festivos incluidos) en vez de «CERRADO AHORA» en rojo, y su desplegable se orienta para verse entero (`37fafde`, `bd9d76b`).
+*   **Migas de pan desde el SSG**: se pintan en el HTML (antes por JS, que subía el CLS en móvil hasta 0,115) y su `BreadcrumbList` lleva los mismos nombres que la miga visible en las 41 páginas; las 19 que solo lo tenían por JS lo ganan estático (`3196329`).
+*   **Schema**: logo del publisher de los artículos (citaba uno inexistente), dos imágenes rotas del índice del blog, el negocio en las fichas que lo citaban sin definirlo y el `mainEntity` de los hubs de barbería y uñas. Una guarda nueva del build avisa de referencias e imágenes rotas en el JSON-LD (`ec760d5`).
+*   **Estructura**: la FAQ de nosotros y el resto de la home vuelven a estar dentro de `<main>`; un test lo vigila en las 49 páginas (`d47bac3`).
+*   **Interno**: H1 fijados por test, fechas en Bogotá unificadas, `SITE_URL` y `mapsLink` únicos; el footer enlaza a la ficha de Google.
+*   **Versión**: `v2.8.62`.
+
+---
+
+## ✨ Hero editorial de la home v2.8.61 (24 de octubre de 2026)
+
+*   **Hero nuevo**: dos columnas sobre el beige de la marca, con frase de categoría, H1 en Playfair a dos tonos, botón «Agenda tu cita» por WhatsApp y «Ver servicios», y la nota de Google y el ABIERTO/CERRADO en línea. La foto actual pasa a un mosaico de seis teselas (una sola descarga). En móvil, el texto y la llamada a la acción caben en la primera pantalla. Antes no había ninguna llamada a la acción en el hero (`d0c467b`).
+*   **SEO intacto**: el mismo texto de H1 en el HTML estático; title, meta, JSON-LD y precarga sin cambios. CLS 0 y el LCP pasa a ser el H1.
+*   **Interno**: `HeroBadges` con variante en línea y el SSG genera los enlaces `data-whatsapp-message` con `getWhatsAppUrl`.
+*   **Versión**: `v2.8.61`.
+
+---
+
 ## 🔎 Buscador interno y home más corta en móvil v2.8.60 (24 de octubre de 2026)
 
 *   **Buscador interno**: lupa en el navbar (y `Ctrl/⌘ K` o `/`) que abre una paleta con resultados al instante: páginas, servicios con precio y duración, y artículos del blog. Ignora tildes, tolera erratas y entiende sinónimos y plurales («tinte», «mechas rubias»). Sin resultados ofrece WhatsApp con la búsqueda en el mensaje y la manda a Clarity como `busqueda_sin_resultado`. El módulo y su índice se cargan al acercarse a la lupa (`e7459b4`, `a7c1992`, `070d084`).

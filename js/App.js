@@ -17,6 +17,7 @@ import { CookieConsentService } from './services/CookieConsentService.js';
 import { HoursController } from './controllers/HoursController.js';
 import { SearchController } from './controllers/SearchController.js';
 import { trackClarityEvent } from './utils/clarity.js';
+import { migasDePagina } from './utils/migas.js';
 
 class App {
     constructor() {
@@ -126,12 +127,15 @@ class App {
         if (!heroRoot || heroRoot.querySelector('h1')) return;
 
         const path = window.location.pathname;
-        const pageKey = this._pagesDataKeys.find(key => path.includes(key));
+        const pageKey = this.isHomePage ? 'home' : this._pagesDataKeys.find(key => path.includes(key));
 
         if (pageKey && pagesData[pageKey]?.hero) {
             const heroData = pagesData[pageKey].hero;
-            const imageSrc = this.resolvePath(heroData.imageSrc);
-            heroRoot.innerHTML = getHeroHTML({ ...heroData, imageSrc });
+            heroRoot.innerHTML = getHeroHTML({
+                ...heroData,
+                imageSrc: heroData.imageSrc ? this.resolvePath(heroData.imageSrc) : undefined,
+                imageSrcMobile: heroData.imageSrcMobile ? this.resolvePath(heroData.imageSrcMobile) : undefined
+            });
         }
     }
 
@@ -260,24 +264,19 @@ class App {
         return cleanText.length > limit ? cleanText.substring(0, limit) + '...' : cleanText;
     }
 
+    /**
+     * Respaldo de la miga de pan para desarrollo. En dist la pinta el SSG dentro del
+     * HTML (pintada aquí, después de la primera pintura, empujaba el hero).
+     */
     initBreadcrumbs() {
         const root = document.getElementById('breadcrumbs-root');
-        const path = window.location.pathname;
+        if (!root || root.children.length > 0) return;
 
-        if (root && path.includes('/blog/articles/')) {
-            const items = [
-                { label: 'Inicio', link: this.resolvePath('') },
-                { label: 'Blog', link: this.resolvePath('blog/') }
-            ];
+        const ruta = window.location.pathname.replace(BASE_PATH, '').replace('/dist/', '/');
+        const migas = migasDePagina(ruta, document.querySelector('h1')?.getAttribute('data-breadcrumb'));
+        if (!migas.length) return;
 
-            const h1 = document.querySelector('h1');
-            if (h1) {
-                const label = h1.getAttribute('data-breadcrumb') || this._truncateText(h1.textContent);
-                if (label) items.push({ label, link: '#' });
-            }
-            
-            root.innerHTML = new Breadcrumbs(items).render();
-        }
+        root.innerHTML = new Breadcrumbs(migas.map(({ nombre, ruta: destino }) => ({ label: nombre, link: this.resolvePath(destino) }))).render();
     }
 
     initConsentAndAnalytics() {

@@ -1,6 +1,5 @@
 import { App } from './App.js';
 import { ServiceCard } from './components/ServiceCard.js';
-import { Breadcrumbs } from './components/Breadcrumbs.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
 import { getHeroHTML } from './components/HeroSection.js';
 
@@ -40,7 +39,6 @@ class ServicePageManager {
   
         this.initBrands(); 
         this.initLazyVideos();
-        this.initBreadcrumbs();
         this.initLightboxInstance(); 
     }
 
@@ -282,54 +280,6 @@ class ServicePageManager {
         video.play().catch(() => {});
     }
 
-    initBreadcrumbs() {
-        const root = document.getElementById('breadcrumbs-root');
-        if (!root || !this.pageKey) return;
-
-        const items = [{ label: 'Inicio', link: this.app.resolvePath('/') }];
-        const path = window.location.pathname;
-
-        // Añadir Categoría (Hub)
-        if (path.includes('/peluqueria/')) {
-            items.push({ label: 'Peluquería', link: this.app.resolvePath('/servicios/peluqueria/') });
-        } else if (path.includes('/barberia/')) {
-            items.push({ label: 'Barbería', link: this.app.resolvePath('/servicios/barberia/') });
-        } else if (path.includes('/estetica/')) {
-            items.push({ label: 'Estética', link: this.app.resolvePath('/servicios/estetica/') });
-        } else if (path.includes('/unas-spa/')) {
-            items.push({ label: 'Uñas y Spa', link: this.app.resolvePath('/servicios/unas-spa/') });
-        }
-
-        // Añadir Página Actual si es una subpágina
-        const isHubPage = path.endsWith('/index.html') || path.endsWith('/') || 
-                         path.endsWith('/peluqueria') || path.endsWith('/barberia') || 
-                         path.endsWith('/estetica') || path.endsWith('/unas-spa');
-
-        if (!isHubPage) {
-            const pageConfig = pagesData[this.pageKey];
-            let label = this.pageKey.replace(/-/g, ' '); // Fallback
-            
-            // Intentar obtener label de h1 o data-breadcrumb
-            const h1 = document.querySelector('h1');
-            if (h1 && h1.dataset.breadcrumb) {
-                label = h1.dataset.breadcrumb;
-            } else if (pageConfig && pageConfig.hero && pageConfig.hero.title) {
-                // Limpiar HTML de títulos si es necesario
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = pageConfig.hero.title;
-                label = tempDiv.textContent || tempDiv.innerText || label;
-            }
-            
-            // Capitalizar si es el fallback
-            if (label === this.pageKey.replace(/-/g, ' ')) {
-                label = label.charAt(0).toUpperCase() + label.slice(1);
-            }
-
-            items.push({ label: label, link: '#' });
-        }
-
-        root.innerHTML = new Breadcrumbs(items).render();
-    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
