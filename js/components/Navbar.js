@@ -67,7 +67,11 @@ function renderLogo(basePath, isHome) {
     `;
 }
 
-const searchIcon = (sizeClasses) => `<svg class="${sizeClasses}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
+/**
+ * Lupa del buscador. La reutiliza el propio `SiteSearch` en su caja de texto.
+ * @param {string} sizeClasses - Clases de tamaño y color del SVG.
+ */
+export const searchIcon = (sizeClasses) => `<svg class="${sizeClasses}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`;
 
 /**
  * Lupa del buscador interno. La abre `SearchController` por delegación, así que basta

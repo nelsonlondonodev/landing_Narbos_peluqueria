@@ -1,4 +1,6 @@
 import googleReviews from '../data/google-reviews.js';
+// El texto llega de Google escrito por cualquiera y acaba en `innerHTML`.
+import { escapeHTML } from '../utils/escapeHTML.js';
 
 const MAPS_URL = 'https://maps.app.goo.gl/h3sVPXeiKamdy9KH9';
 
@@ -10,18 +12,6 @@ const AVATAR_COLORS = [
     'bg-rose-600/10 text-rose-600',
     'bg-sky-600/10 text-sky-600'
 ];
-
-/**
- * El texto llega de Google escrito por cualquiera y acaba en `innerHTML`: sin escapar,
- * una reseña con `<` rompería el marcado o colaría HTML en la página.
- */
-function escapeHTML(value) {
-    return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-}
 
 /**
  * Tarjeta de una opinión. La comparten el componente y el SSG, que pinta el carril en

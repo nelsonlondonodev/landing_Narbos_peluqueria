@@ -1,25 +1,17 @@
-import { searchIndex, normalize, synonyms, stopWords } from '../data/searchIndex.js';
+import { searchIndex } from '../data/searchIndex.js';
+import { searchSite, normalize, findHighlightRanges } from '../utils/siteSearchEngine.js';
+import { escapeHTML } from '../utils/escapeHTML.js';
 import { resolveRoute, getWhatsAppUrl } from '../config.js';
+import { searchIcon } from './Navbar.js';
 
-/** @typedef {import('../data/searchIndex.js').SearchEntry} SearchEntry */
-/** @typedef {import('../data/searchIndex.js').SearchEntryType} SearchEntryType */
+/** @typedef {import('../utils/siteSearchEngine.js').SearchResult} SearchResult */
 
-/**
- * @typedef {Object} SearchResult
- * @property {SearchEntry} entry
- * @property {number} score
- * @property {string[]} matchedTerms - Lo que hay que resaltar en el título.
- */
-
-/** Orden de los grupos, su rótulo y cuántos resultados caben en cada uno. */
-const GROUPS = /** @type {const} */ ([
-    { type: 'pagina', label: 'Ir a', limit: 4 },
-    { type: 'servicio', label: 'Servicios y precios', limit: 6 },
-    { type: 'articulo', label: 'Del blog', limit: 3 }
+/** Cada tipo de resultado, en el orden en que se pintan sus grupos. */
+const GROUPS = Object.freeze([
+    { type: 'pagina', label: 'Ir a', limit: 4, icon: '<path d="M9 18l6-6-6-6"/>' },
+    { type: 'servicio', label: 'Servicios y precios', limit: 6, icon: '<path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8L4 8.8h6.1z"/>' },
+    { type: 'articulo', label: 'Del blog', limit: 3, icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/>' }
 ]);
-
-// A igual coincidencia, mejor la página del servicio que una fila suelta de su tabla.
-const TYPE_BONUS = { pagina: 3, servicio: 1, articulo: 0 };
 
 const POPULAR_SEARCHES = ['Balayage', 'Uñas acrílicas', 'Masajes', 'Limpieza facial', 'Corte dama', 'Maquillaje de novia'];
 
@@ -27,153 +19,22 @@ const POPULAR_SEARCHES = ['Balayage', 'Uñas acrílicas', 'Masajes', 'Limpieza f
 // intermedia («bal», «bala»…) acabaría en Clarity como si fuera una búsqueda.
 const NO_RESULT_REPORT_DELAY = 1500;
 
-const ICONS = {
-    pagina: '<path d="M9 18l6-6-6-6"/>',
-    servicio: '<path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8L4 8.8h6.1z"/>',
-    articulo: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/>'
-};
-
 /**
- * Distancia de edición acotada: corta en cuanto se pasa de `max`, que es lo único
- * que importa para tolerar una errata («balayaje», «masage»).
- * @param {string} a
- * @param {string} b
- * @param {number} max
- * @returns {boolean}
- */
-function isWithinDistance(a, b, max) {
-    if (Math.abs(a.length - b.length) > max) return false;
-    let previous = Array.from({ length: b.length + 1 }, (_, i) => i);
-    for (let i = 1; i <= a.length; i++) {
-        const current = [i];
-        let rowMin = i;
-        for (let j = 1; j <= b.length; j++) {
-            const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-            current[j] = Math.min(previous[j] + 1, current[j - 1] + 1, previous[j - 1] + cost);
-            rowMin = Math.min(rowMin, current[j]);
-        }
-        if (rowMin > max) return false;
-        previous = current;
-    }
-    return previous[b.length] <= max;
-}
-
-/**
- * Puntúa un término de la búsqueda contra una entrada, probando también sus
- * sinónimos. Devuelve 0 si no aparece de ninguna forma.
- * @param {SearchEntry} entry
- * @param {string} term
- * @returns {{ score: number, matched: string|null }}
- */
-function scoreTerm(entry, term) {
-    // El singular como variante: «rubias» llega a «rubia» y de ahí a sus sinónimos.
-    const singular = term.length > 4 && term.endsWith('s') ? term.slice(0, -1) : null;
-    const variants = [...new Set([
-        term,
-        ...(synonyms[term] ?? []),
-        ...(singular ? [singular, ...(synonyms[singular] ?? [])] : [])
-    ])];
-    let best = { score: 0, matched: /** @type {string|null} */ (null) };
-
-    variants.forEach((variant, index) => {
-        // El término tal cual pesa más que un sinónimo suyo.
-        const weight = index === 0 ? 1 : 0.8;
-        let score = 0;
-        let matched = null;
-
-        const prefixWord = entry.titleWords.find(word => word.startsWith(variant));
-        if (prefixWord) {
-            score = 10;
-            matched = variant;
-        } else if (entry.haystack.includes(variant)) {
-            score = 5;
-        } else if (index === 0 && variant.length >= 4) {
-            // Erratas solo sobre lo que se tecleó: sobre una variante derivada, «ceja»
-            // (de «cejas») acaba encontrando «cera».
-            const maxDistance = variant.length >= 7 ? 2 : 1;
-            const closeWord = entry.titleWords.find(word => isWithinDistance(word, variant, maxDistance));
-            if (closeWord) {
-                score = 6;
-                matched = closeWord;
-            }
-        }
-
-        if (score * weight > best.score) best = { score: score * weight, matched };
-    });
-
-    return best;
-}
-
-/**
- * Busca en el índice. Cada término tiene que aparecer en la entrada (por sí mismo, por
- * un sinónimo o con una errata): «uñas acrílicas» no debe devolver cualquier uña. La
- * excepción es el término que no aparece en ninguna entrada, que se descarta: así
- * «mechas rubias bonitas» busca mechas en vez de no devolver nada.
- * @param {string} query
- * @returns {SearchResult[]} Ordenados de más a menos relevante.
- */
-export function searchSite(query) {
-    const terms = normalize(query)
-        .split(/[^a-z0-9]+/)
-        .filter(term => term && !stopWords.has(term));
-    if (terms.length === 0) return [];
-
-    const scored = searchIndex.map(entry => ({ entry, scores: terms.map(term => scoreTerm(entry, term)) }));
-    const usefulTerms = terms
-        .map((_, i) => i)
-        .filter(i => scored.some(({ scores }) => scores[i].score > 0));
-    if (usefulTerms.length === 0) return [];
-
-    /** @type {SearchResult[]} */
-    const results = [];
-    for (const { entry, scores } of scored) {
-        const termScores = usefulTerms.map(i => scores[i]);
-        if (termScores.some(({ score }) => score === 0)) continue;
-        results.push({
-            entry,
-            score: termScores.reduce((sum, { score }) => sum + score, 0) + TYPE_BONUS[entry.type],
-            matchedTerms: termScores.flatMap(({ matched }) => (matched ? [matched] : []))
-        });
-    }
-    return results.sort((a, b) => b.score - a.score);
-}
-
-function escapeHTML(text) {
-    return text.replace(/[&<>"']/g, char => `&#${char.charCodeAt(0)};`);
-}
-
-/**
- * Resalta en el título las palabras que empiezan por un término encontrado. Trabaja
- * carácter a carácter porque el término está normalizado y el título no: «depilacion»
- * tiene que marcar «Depilación» entera, con su tilde.
+ * Título con los términos encontrados envueltos en `<mark>`.
  * @param {string} title
  * @param {string[]} terms
  * @returns {string} HTML escapado.
  */
 function highlight(title, terms) {
     const chars = [...title];
-    const normalizedChars = chars.map(char => normalize(char));
-    const marked = new Array(chars.length).fill(false);
-    const isWordChar = (i) => /[a-z0-9]/.test(normalizedChars[i] ?? '');
-
-    for (let start = 0; start < chars.length; start++) {
-        if (!isWordChar(start) || (start > 0 && isWordChar(start - 1))) continue;
-        let end = start;
-        while (end < chars.length && isWordChar(end)) end++;
-        const word = normalizedChars.slice(start, end).join('');
-        const term = terms.find(t => word.startsWith(t) || t === word);
-        if (term) {
-            for (let i = start; i < Math.min(end, start + term.length); i++) marked[i] = true;
-        }
-    }
-
     let html = '';
-    chars.forEach((char, i) => {
-        if (marked[i] && !marked[i - 1]) html += '<mark class="bg-transparent text-brand-green font-semibold">';
-        html += escapeHTML(char);
-        if (marked[i] && !marked[i + 1]) html += '</mark>';
-    });
-    return html;
+    let cursor = 0;
+    for (const [start, end] of findHighlightRanges(title, terms)) {
+        html += escapeHTML(chars.slice(cursor, start).join(''));
+        html += `<mark class="bg-transparent text-brand-green font-semibold">${escapeHTML(chars.slice(start, end).join(''))}</mark>`;
+        cursor = end;
+    }
+    return html + escapeHTML(chars.slice(cursor).join(''));
 }
 
 /**
@@ -217,7 +78,7 @@ export class SiteSearch {
 
         dialog.innerHTML = `
             <div class="flex items-center gap-3 px-4 md:px-5 py-3 border-b border-brand-gray-lighter">
-                <svg class="w-5 h-5 shrink-0 text-brand-green" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                ${searchIcon('w-5 h-5 shrink-0 text-brand-green')}
                 <input id="site-search-input" type="search" role="combobox" aria-expanded="false" aria-controls="site-search-results" aria-autocomplete="list"
                     autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go"
                     placeholder="¿Qué buscas? Balayage, uñas, masajes…"
@@ -300,7 +161,7 @@ export class SiteSearch {
             return;
         }
 
-        const results = searchSite(query);
+        const results = searchSite(searchIndex, query);
         if (results.length === 0) {
             this.renderNoResults(query);
             this.scheduleNoResultReport(query);
@@ -357,7 +218,7 @@ export class SiteSearch {
                         href="${resolveRoute(entry.link, this.appRoot)}"
                         class="flex items-center gap-3 px-3 py-2.5 rounded-xl aria-selected:bg-brand-light/50 transition-colors">
                         <span class="flex items-center justify-center w-9 h-9 shrink-0 rounded-full bg-brand-light/40 text-brand-green">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">${ICONS[entry.type]}</svg>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">${group.icon}</svg>
                         </span>
                         <span class="flex-1 min-w-0">
                             <span class="block font-medium leading-snug line-clamp-2">${highlight(entry.title, matchedTerms)}</span>
