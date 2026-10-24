@@ -25,10 +25,7 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- LCP Optimization: Specific Preloads for Mobile & Desktop -->
-    <link rel="preload" as="image" href="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp">
-    <link rel="preload" as="image" href="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp">
-    
+    <!-- La precarga de la foto del hero la inyecta el SSG desde `pagesData.home.heroMosaic`. -->
     <meta name="google-site-verification" content="z7iMcq4xUxxKeXpDsVU32HJ_a0jXCwyOFmZi-7vvCKs" />
 
     <title>Peluquería y Spa en Chía | Narbo's Salón Spa</title>
@@ -448,45 +445,9 @@
                         </div>
                         <div data-hero-badges class="hero-rise [--d:0.2s] mt-8 flex flex-wrap items-center gap-3"></div>
                     </div>
-                    <!-- La misma foto en todas las teselas: una sola descarga. Solo la primera lleva
-                         alt y prioridad; las demás son decorativas. -->
-                    <div class="hero-mosaic mx-auto aspect-square w-full max-w-[520px] md:mr-0">
-                        <div class="hero-tile [--x:26] [--y:8] [--w:40] [--h:56] [--d:0.05s]">
-                            <picture>
-                                <source media="(max-width: 768px)" srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp">
-                                <img src="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" alt="Mujer recibiendo maquillaje profesional en Narbo's Salón Spa Chía" fetchpriority="high" loading="eager" decoding="async" width="1920" height="1080">
-                            </picture>
-                        </div>
-                        <div class="hero-tile [--x:69] [--y:0] [--w:31] [--h:42] [--d:0.15s]" aria-hidden="true">
-                            <picture>
-                                <source media="(max-width: 768px)" srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp">
-                                <img src="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" alt="" loading="eager" decoding="async" width="1920" height="1080">
-                            </picture>
-                        </div>
-                        <div class="hero-tile [--x:26] [--y:67] [--w:40] [--h:31] [--d:0.25s]" aria-hidden="true">
-                            <picture>
-                                <source media="(max-width: 768px)" srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp">
-                                <img src="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" alt="" loading="eager" decoding="async" width="1920" height="1080">
-                            </picture>
-                        </div>
-                        <div class="hero-tile [--x:69] [--y:45] [--w:31] [--h:36] [--d:0.3s]" aria-hidden="true">
-                            <picture>
-                                <source media="(max-width: 768px)" srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp">
-                                <img src="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" alt="" loading="eager" decoding="async" width="1920" height="1080">
-                            </picture>
-                        </div>
-                        <div class="hero-tile [--x:0] [--y:24] [--w:23] [--h:30] [--d:0.35s]" aria-hidden="true">
-                            <picture>
-                                <source media="(max-width: 768px)" srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp">
-                                <img src="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" alt="" loading="eager" decoding="async" width="1920" height="1080">
-                            </picture>
-                        </div>
-                        <div class="hero-tile [--x:0] [--y:57] [--w:23] [--h:22] [--d:0.45s]" aria-hidden="true">
-                            <picture>
-                                <source media="(max-width: 768px)" srcset="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp">
-                                <img src="images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp" alt="" loading="eager" decoding="async" width="1920" height="1080">
-                            </picture>
-                        </div>
+                    <!-- Las teselas las pinta `HeroMosaic` (el SSG en dist, HomeHubController en
+                         desarrollo) con la foto de `pagesData.home.heroMosaic`. -->
+                    <div data-hero-mosaic class="hero-mosaic mx-auto aspect-square w-full max-w-[520px] md:mr-0"></div>
                     </div>
                 </div>
             </section>

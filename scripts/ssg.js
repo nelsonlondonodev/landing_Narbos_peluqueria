@@ -14,6 +14,7 @@ import { resolveRoute, resolveAsset, siteConfig, getWhatsAppUrl } from '../js/co
 import businessHours from '../js/data/business-hours.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { getHeroBadgesHTML, getStarSpriteHTML } from '../js/components/HeroBadges.js';
+import { getHeroMosaicHTML } from '../js/components/HeroMosaic.js';
 import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { barberServices } from '../js/data/barberServices.js';
@@ -153,9 +154,8 @@ function injectSEO(document, pageKey, pagePath) {
  *
  * Se anclan a `section#inicio` y no al componente `HeroSection`, porque solo ocho de
  * los dieciséis heroes salen de él: la home y siete fichas de servicio llevan el suyo
- * escrito a mano. `#inicio` sí lo tienen las dieciséis, y es el mismo `<section>`
- * posicionado del que ya colgaban en la home, así que las posiciones calibradas para
- * la foto al 85 % valen tal cual.
+ * escrito a mano. `#inicio` sí lo tienen las dieciséis. La home tiene además su propio
+ * hueco `data-hero-badges`, donde van en línea con el texto en vez de flotar.
  *
  * El dato sale de `google-reviews.js` en cada build. Copiar el badge a mano en cada
  * página lo habría congelado: `sync-google-reviews.js` solo reescribe la calificación
@@ -215,45 +215,55 @@ function injectHero(document, pageKey, prefix) {
     };
 
     heroRoot.innerHTML = getHeroHTML(heroData);
+    precargarImagenHero(document, heroData.imageSrc, heroData.imageSrcMobile);
+}
 
-    // Inyección automatizada de preloads de LCP en el head para optimización de PageSpeed
+/**
+ * Precarga la foto del hero, candidata a LCP, con su variante móvil si la hay.
+ *
+ * Retira antes cualquier otra precarga de imagen: venían heredadas en el HTML de las
+ * plantillas y competían con la buena por el ancho de banda.
+ * @param {Document} document
+ * @param {string} imageSrc - Foto de escritorio, ya resuelta para la página.
+ * @param {string} [imageSrcMobile] - Variante para pantallas de hasta 768 px.
+ */
+function precargarImagenHero(document, imageSrc, imageSrcMobile) {
     const head = document.head;
-    if (head) {
-        // Eliminar preloads de imágenes anteriores para evitar duplicados heredados
-        const existingPreloads = head.querySelectorAll('link[rel="preload"][as="image"]');
-        existingPreloads.forEach(el => el.remove());
+    if (!head) return;
 
-        if (heroData.imageSrcMobile) {
-            // Preload Móvil (max-width: 768px)
-            const preloadMobile = document.createElement('link');
-            preloadMobile.rel = 'preload';
-            preloadMobile.setAttribute('as', 'image');
-            preloadMobile.href = heroData.imageSrcMobile;
-            preloadMobile.media = '(max-width: 768px)';
-            preloadMobile.setAttribute('fetchpriority', 'high');
-            preloadMobile.type = 'image/webp';
-            head.insertBefore(preloadMobile, head.firstChild);
+    head.querySelectorAll('link[rel="preload"][as="image"]').forEach(el => el.remove());
 
-            // Preload Escritorio (min-width: 769px)
-            const preloadDesktop = document.createElement('link');
-            preloadDesktop.rel = 'preload';
-            preloadDesktop.setAttribute('as', 'image');
-            preloadDesktop.href = heroData.imageSrc;
-            preloadDesktop.media = '(min-width: 769px)';
-            preloadDesktop.setAttribute('fetchpriority', 'high');
-            preloadDesktop.type = 'image/webp';
-            head.insertBefore(preloadDesktop, head.firstChild);
-        } else {
-            // Preload global (si no hay variante móvil)
-            const preloadDesktop = document.createElement('link');
-            preloadDesktop.rel = 'preload';
-            preloadDesktop.setAttribute('as', 'image');
-            preloadDesktop.href = heroData.imageSrc;
-            preloadDesktop.setAttribute('fetchpriority', 'high');
-            preloadDesktop.type = 'image/webp';
-            head.insertBefore(preloadDesktop, head.firstChild);
-        }
+    const precarga = (href, media) => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.setAttribute('as', 'image');
+        link.href = href;
+        if (media) link.media = media;
+        link.setAttribute('fetchpriority', 'high');
+        link.type = 'image/webp';
+        head.insertBefore(link, head.firstChild);
+    };
+
+    if (imageSrcMobile) {
+        precarga(imageSrcMobile, '(max-width: 768px)');
+        precarga(imageSrc, '(min-width: 769px)');
+    } else {
+        precarga(imageSrc);
     }
+}
+
+/**
+ * Pinta el mosaico del hero de la home en su hueco `data-hero-mosaic` y precarga la foto.
+ */
+function injectHeroMosaic(document, pageKey, prefix) {
+    const hueco = document.querySelector('[data-hero-mosaic]');
+    const mosaico = pagesData[pageKey]?.heroMosaic;
+    if (!hueco || !mosaico) return;
+
+    const image = resolveAsset(mosaico.image, prefix);
+    const imageMobile = mosaico.imageMobile ? resolveAsset(mosaico.imageMobile, prefix) : undefined;
+    hueco.innerHTML = getHeroMosaicHTML({ ...mosaico, image, imageMobile });
+    precargarImagenHero(document, image, imageMobile);
 }
 
 /**
@@ -774,6 +784,7 @@ async function processPage(pageConfig) {
     }
 
     injectHero(document, pageConfig.key, prefix);
+    injectHeroMosaic(document, pageConfig.key, prefix);
     injectHeroBadges(document, pageConfig.key);
     resolverEnlacesWhatsApp(document);
     injectServices(document, pageConfig.key, prefix);

@@ -19,12 +19,14 @@ export const pagesData = Object.freeze({
     'home': {
         metaTitle: "Narbo's Salón Spa | Peluquería, Barbería y Estética en Chía",
         metaDescription: "Bienvenida a Narbo's Salón Spa en Chía. Expertos en Balayage, Barbería Premium, Uñas Spa y Estética Facial. Reserva tu cita hoy y vive una experiencia única.",
-        hero: {
-            title: "Peluquería, spa y uñas: expertos en belleza <span class=\"text-brand-green\">en Chía</span>",
-            subtitle: "Más de 11 años de experiencia transformando tu estilo y bienestar.",
-            imageSrc: "images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
-            imageSrcMobile: "images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp",
-            imageAlt: "Mujer recibiendo maquillaje profesional en Narbo's Salón Spa Chía"
+        // El hero de la home está escrito en `index.html` (H1 incluido); de aquí sale solo
+        // la foto del mosaico, que pintan `HeroMosaic` y el SSG, y su precarga.
+        heroMosaic: {
+            image: "images/pages/home/mujer-maquillaje-spa-salon-belleza-chia.webp",
+            imageMobile: "images/pages/home/mujer-maquillaje-spa-salon-belleza-chia-mobile.webp",
+            alt: "Mujer recibiendo maquillaje profesional en Narbo's Salón Spa Chía",
+            width: 1920,
+            height: 1080
         }
     },
     'blog': {
