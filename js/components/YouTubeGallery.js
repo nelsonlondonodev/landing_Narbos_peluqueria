@@ -1,19 +1,27 @@
 import { siteConfig } from '../config.js';
 import { VideoModal } from './VideoModal.js';
+import { trackClarityEvent } from '../utils/clarity.js';
+
+/** @typedef {import('../data/videoData.js').VideoItem} VideoItem */
+
+// Cada tarjeta en la fila del móvil: no encoge, ocupa el 85 % y encaja al soltar.
+const MOBILE_SLIDE = 'max-md:shrink-0 max-md:w-[85%] snap-start';
 
 /**
- * YouTubeGallery Component
- * Renders a grid of YouTube videos with premium styling and Lightbox support.
- * Refactored for clean code and modularity.
+ * Galería de vídeos de la home.
+ *
+ * En móvil es una fila con scroll lateral y en escritorio una parrilla. Apilados a
+ * ancho completo, los 11 vídeos sumaban unos 2.400 px de scroll en el móvil, y Clarity
+ * mostraba que la mitad de las visitas se iba en esa zona sin llegar a las reseñas.
  */
 export class YouTubeGallery {
     /**
-     * @param {string} containerId - The ID of the container element.
-     * @param {Array<string>} videoIds - Array of YouTube video IDs.
+     * @param {string} containerId - ID del contenedor.
+     * @param {VideoItem[]} videos - Vídeos del catálogo, del más antiguo al más reciente.
      */
-    constructor(containerId, videoIds = []) {
+    constructor(containerId, videos = []) {
         this.container = document.getElementById(containerId);
-        this.videoIds = videoIds;
+        this.videos = videos;
         this.gridId = 'youtube-video-grid';
         this.youtubeUrl = siteConfig.socialLinks.find(l => l.name === 'YouTube')?.url || 'https://youtube.com';
         this.modal = new VideoModal();
@@ -51,7 +59,7 @@ export class YouTubeGallery {
      */
     _renderHeader() {
         return `
-            <div class="text-center mb-12" data-animation="fadeInUp">
+            <div class="text-center mb-8 md:mb-12" data-animation="fadeInUp">
                 <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-brand-gray-dark">
                     Nuestras <span class="text-brand-green">Transformaciones</span> en Video
                 </h2>
@@ -67,14 +75,15 @@ export class YouTubeGallery {
      * @private
      */
     _renderGrid() {
-        const hasVideos = this.videoIds && this.videoIds.length > 0;
+        const hasVideos = this.videos.length > 0;
+        // En móvil la fila sale del margen del contenedor (-mx-6 px-6) para llegar al
+        // borde de la pantalla, y la tarjeta siguiente asoma para que se vea que hay más.
+        // El `pb-8` es para la sombra: un contenedor con scroll recorta lo que sobresale.
         return `
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="${this.gridId}">
-                ${hasVideos 
-                    ? [...this.videoIds].reverse().map((id, index) => {
-                        const statusType = index === 0 ? 'latest' : '';
-                        return this._getVideoCard(id, statusType);
-                    }).join('') 
+            <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-6 -mx-6 px-6 pb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+                        md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:overflow-visible md:mx-0 md:px-0 md:pb-0" id="${this.gridId}">
+                ${hasVideos
+                    ? [...this.videos].reverse().map((video, index) => this._getVideoCard(video, index === 0)).join('')
                     : this._getEmptyState()}
             </div>
         `;
@@ -86,7 +95,7 @@ export class YouTubeGallery {
      */
     _renderFooterButton() {
         return `
-            <div class="mt-16 text-center">
+            <div class="mt-2 md:mt-16 text-center">
                 <a href="${this.youtubeUrl}" target="_blank" 
                    class="inline-flex items-center gap-3 px-8 py-3 bg-brand-green text-white font-bold rounded-full hover:bg-brand-green-dark transition-all duration-300 shadow-lg hover:shadow-xl group">
                     <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
@@ -102,37 +111,19 @@ export class YouTubeGallery {
     }
 
     /**
-     * Genera el HTML de una tarjeta de video individual (Fachada).
+     * Tarjeta de un vídeo: solo la miniatura, el reproductor se carga al abrirla.
+     * @param {VideoItem} video
+     * @param {boolean} isLatest - El más reciente lleva la insignia de última publicación.
      * @private
      */
-    _getVideoCard(video, statusType = '') {
-        const isObject = typeof video === 'object' && video !== null;
-        const videoId = isObject ? video.id : video;
-        const title = isObject && video.title ? video.title : "Narbo's Salón Video";
-        const thumbnailUrl = isObject && video.thumbnailUrl 
-            ? video.thumbnailUrl 
-            : `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-        
-        let badgeHTML = '';
-        if (statusType === 'latest') {
-            badgeHTML = `
-                <div class="badge-latest">
-                    Última publicación
-                </div>
-            `;
-        } else if (statusType === 'recent') {
-            badgeHTML = `
-                <div class="badge-recent">
-                    Nuevo
-                </div>
-            `;
-        }
-        
+    _getVideoCard(video, isLatest) {
+        const { id: videoId, title, thumbnailUrl } = video;
+
         return `
-            <div class="video-card relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white group cursor-pointer" 
+            <div class="video-card relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border-4 border-white group cursor-pointer ${MOBILE_SLIDE}"
                  data-video-id="${videoId}">
-                
-                ${badgeHTML}
+
+                ${isLatest ? '<div class="badge-latest">Última publicación</div>' : ''}
 
                 <!-- Thumbnail with hover effect -->
                 <img src="${thumbnailUrl}" alt="${title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
@@ -166,7 +157,11 @@ export class YouTubeGallery {
             const card = e.target.closest('.video-card');
             if (card) {
                 const videoId = card.getAttribute('data-video-id');
-                if (videoId) this.modal.open(videoId);
+                if (!videoId) return;
+                this.modal.open(videoId);
+                // El botón de play comparte clases con el vídeo de «Nuestras instalaciones»
+                // y Clarity no distingue sus clics: este evento es lo que mide la galería.
+                trackClarityEvent('video_galeria_home', { video_galeria_home: videoId });
             }
         };
     }
@@ -177,7 +172,7 @@ export class YouTubeGallery {
      */
     _getEmptyState() {
         return Array(3).fill(0).map(() => `
-            <div class="aspect-video bg-brand-light/20 rounded-2xl animate-pulse flex flex-col items-center justify-center border-2 border-dashed border-brand-green/30">
+            <div class="${MOBILE_SLIDE} aspect-video bg-brand-light/20 rounded-2xl animate-pulse flex flex-col items-center justify-center border-2 border-dashed border-brand-green/30">
                 <svg class="w-12 h-12 text-brand-green/40 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>

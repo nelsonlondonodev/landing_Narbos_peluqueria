@@ -1,6 +1,7 @@
 import { searchIndex } from '../data/searchIndex.js';
 import { searchSite, normalize, findHighlightRanges } from '../utils/siteSearchEngine.js';
 import { escapeHTML } from '../utils/escapeHTML.js';
+import { trackClarityEvent } from '../utils/clarity.js';
 import { resolveRoute, getWhatsAppUrl } from '../config.js';
 import { searchIcon } from './Navbar.js';
 
@@ -314,9 +315,6 @@ export class SiteSearch {
         if (this.reportedNoResults.has(key)) return;
         this.reportedNoResults.add(key);
 
-        // Si Clarity no ha cargado (sin consentimiento, bloqueador), no se registra nada.
-        const { clarity } = /** @type {Window & { clarity?: (...args: string[]) => void }} */ (window);
-        clarity?.('set', 'busqueda_sin_resultado', query);
-        clarity?.('event', 'busqueda_sin_resultado');
+        trackClarityEvent('busqueda_sin_resultado', { busqueda_sin_resultado: query });
     }
 }
