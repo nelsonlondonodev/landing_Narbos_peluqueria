@@ -94,6 +94,9 @@ export const resolveAsset = (path, prefix = '') => {
     return `${safePrefix}${cleanPath}`.replace(/\.\/\.\//g, './');
 };
 
+/** Dominio canónico, sin barra final: canónicas, JSON-LD, sitemap y migas de pan. */
+export const SITE_URL = 'https://narbossalon.com';
+
 /**
  * Configuración global del sitio.
  */

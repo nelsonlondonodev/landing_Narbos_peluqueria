@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import articles from '../js/data/articles.js';
+import { SITE_URL } from '../js/config.js';
 import { getHtmlFiles, normalizeUrlPath } from './utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -9,7 +10,6 @@ const __dirname = path.dirname(__filename);
 
 const PROJECT_ROOT = path.join(__dirname, '../');
 const SITEMAP_PATH = path.join(__dirname, '../sitemap.xml');
-const BASE_URL = 'https://narbossalon.com';
 const TODAY = new Date().toISOString().split('T')[0];
 
 /**
@@ -45,7 +45,7 @@ function generateSitemap() {
 
         const urlPath = normalizeUrlPath(file);
         const priority = priorityMap[file] || '0.8';
-        const loc = `${BASE_URL}${urlPath}`;
+        const loc = `${SITE_URL}${urlPath}`;
         
         xml += `
   <url>
@@ -64,7 +64,7 @@ function generateSitemap() {
         
         xml += `
   <url>
-    <loc>${BASE_URL}${link}</loc>
+    <loc>${SITE_URL}${link}</loc>
     <lastmod>${article.isoDate || TODAY}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

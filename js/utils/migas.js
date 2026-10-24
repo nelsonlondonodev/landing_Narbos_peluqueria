@@ -5,7 +5,7 @@
  * páginas llevaba otros nombres («Balayage Mechas», «Cortes De Pelo»).
  */
 
-const ORIGEN = 'https://narbossalon.com/';
+import { SITE_URL } from '../config.js';
 
 /** Nombre visible de cada sección, por la carpeta de su URL. */
 export const SECCIONES = Object.freeze({
@@ -60,6 +60,6 @@ export function itemsDeBreadcrumbList(migas) {
         '@type': 'ListItem',
         position: indice + 1,
         name: nombre,
-        item: ORIGEN + ruta
+        item: `${SITE_URL}/${ruta}`
     }));
 }

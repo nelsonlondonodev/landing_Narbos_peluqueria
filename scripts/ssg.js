@@ -10,7 +10,7 @@ import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
 import { getHeroHTML } from '../js/components/HeroSection.js';
 import { getVideoSectionHTML } from '../js/components/VideoSection.js';
-import { resolveRoute, resolveAsset, siteConfig } from '../js/config.js';
+import { resolveRoute, resolveAsset, siteConfig, SITE_URL } from '../js/config.js';
 import businessHours from '../js/data/business-hours.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { getHeroBadgesHTML, getStarSpriteHTML } from '../js/components/HeroBadges.js';
@@ -147,7 +147,7 @@ function injectSEO(document, pageKey, pagePath) {
     else if (cleanPath && !cleanPath.startsWith('/')) cleanPath = '/' + cleanPath;
     if (esDirectorio && cleanPath && !cleanPath.endsWith('/')) cleanPath += '/';
 
-    canonical.href = `${SITE_ORIGIN}${cleanPath}`;
+    canonical.href = `${SITE_URL}${cleanPath}`;
 }
 
 /**
@@ -206,19 +206,13 @@ function injectBreadcrumbs(document, pagePath, prefix) {
     hueco.innerHTML = new Breadcrumbs(migas.map(({ nombre, ruta }) => ({ label: nombre, link: resolveRoute(ruta, prefix) }))).render();
 
     const items = itemsDeBreadcrumbList(migas);
-    let declarado = false;
-    document.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
-        let datos;
-        try { datos = JSON.parse(script.textContent); } catch { return; } // Lo reporta checkBreadcrumbs.
-        const nodos = Array.isArray(datos) ? datos : (datos['@graph'] || [datos]);
-        const nodo = nodos.find(n => n?.['@type'] === 'BreadcrumbList');
-        if (!nodo) return;
+    const declarados = buscarNodosJsonLd(document, 'BreadcrumbList');
+    declarados.forEach(({ script, datos, nodo }) => {
         nodo.itemListElement = items;
         script.textContent = JSON.stringify(datos, null, 2);
-        declarado = true;
     });
 
-    if (!declarado) {
+    if (declarados.length === 0) {
         const canonica = document.querySelector('link[rel="canonical"]')?.getAttribute('href') || items.at(-1).item;
         const script = document.createElement('script');
         script.type = 'application/ld+json';
@@ -685,10 +679,14 @@ function leerFaqVisible(document) {
 }
 
 /**
- * Busca los nodos `FAQPage` del JSON-LD, estén en la raíz, en un array o en `@graph`.
+ * Busca los nodos de un tipo en el JSON-LD de la página, estén en la raíz, en un array o
+ * en `@graph`. Devuelve también el script y los datos completos, para poder modificar el
+ * nodo y volver a serializar el bloque sin tocar el resto.
+ * @param {Document} document
+ * @param {string} tipo - `FAQPage`, `BreadcrumbList`…
  * @returns {{script: Element, datos: Object, nodo: Object}[]}
  */
-function buscarFaqPage(document) {
+function buscarNodosJsonLd(document, tipo) {
     const encontrados = [];
     for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
         let datos;
@@ -701,7 +699,7 @@ function buscarFaqPage(document) {
             if (Array.isArray(nodo)) return nodo.forEach(recorrer);
             if (!nodo || typeof nodo !== 'object') return;
             const tipos = [].concat(nodo['@type']);
-            if (tipos.includes('FAQPage')) encontrados.push({ script, datos, nodo });
+            if (tipos.includes(tipo)) encontrados.push({ script, datos, nodo });
             Object.values(nodo).forEach(recorrer);
         };
         recorrer(datos);
@@ -727,7 +725,7 @@ function buscarFaqPage(document) {
  */
 function sincronizarFaqPage(document, pagePath) {
     const visible = leerFaqVisible(document);
-    const marcados = buscarFaqPage(document);
+    const marcados = buscarNodosJsonLd(document, 'FAQPage');
     if (visible.length === 0 && marcados.length === 0) return [];
 
     if (marcados.length > 1) return [`${pagePath}: ${marcados.length} nodos FAQPage`];
@@ -821,7 +819,6 @@ async function processPage(pageConfig) {
     return { videoIssue, catalogIssue, faqIssues, breadcrumbIssues: checkBreadcrumbs(document, pageConfig.path) };
 }
 
-const SITE_ORIGIN = 'https://narbossalon.com';
 
 /**
  * Resuelve una URL del sitio al fichero que la serviría en dist, replicando el
@@ -829,7 +826,7 @@ const SITE_ORIGIN = 'https://narbossalon.com';
  * busca el .html homónimo.
  */
 function resolveUrlToFile(url) {
-    const route = url.slice(SITE_ORIGIN.length).split(/[?#]/)[0];
+    const route = url.slice(SITE_URL.length).split(/[?#]/)[0];
     const clean = route.replace(/^\//, '');
     if (clean === '') return path.join(DIST_DIR, 'index.html');
     return clean.endsWith('/')
@@ -864,7 +861,7 @@ function checkBreadcrumbs(document, pagePath) {
         for (const node of nodes) {
             if (node?.['@type'] !== 'BreadcrumbList') continue;
             for (const { item, name } of node.itemListElement ?? []) {
-                if (typeof item !== 'string' || !item.startsWith(SITE_ORIGIN)) continue;
+                if (typeof item !== 'string' || !item.startsWith(SITE_URL)) continue;
                 if (fs.existsSync(resolveUrlToFile(item))) continue;
                 issues.push(`${pagePath}: el nivel «${name}» apunta a ${item}, que no existe en dist`);
             }
@@ -1437,13 +1434,13 @@ function checkCanonicalResuelve() {
         if (!m) return;
 
         const url = m[1];
-        if (!url.startsWith(SITE_ORIGIN)) {
+        if (!url.startsWith(SITE_URL)) {
             issues.push(`${relPath} — canónica fuera del sitio: ${url}`);
             return;
         }
 
         // La raíz sin barra es válida: la sirve el index.html de dist.
-        if (url === SITE_ORIGIN || url === `${SITE_ORIGIN}/`) return;
+        if (url === SITE_URL || url === `${SITE_URL}/`) return;
 
         if (!fs.existsSync(resolveUrlToFile(url))) {
             issues.push(`${relPath} — canónica a ${url}, que no existe en dist`);
