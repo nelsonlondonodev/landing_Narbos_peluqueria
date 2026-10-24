@@ -34,8 +34,8 @@ export class StoreBadge {
                 this.liveData = liveData;
                 this.isLive = true;
                 if (liveData.weekdayText?.length) this.weekdayText = liveData.weekdayText;
-                // Forzar el repintado: si la etiqueta no cambia (p. ej. sigue
-                // «CERRADO AHORA»), el popover se quedaba con el horario del build.
+                // Forzar el repintado: si la etiqueta no cambia, el popover se
+                // quedaba con el horario del build.
                 this.lastLabel = null;
                 this.checkAndUpdate();
             }
@@ -51,9 +51,10 @@ export class StoreBadge {
     checkAndUpdate() {
         if (!this.container) return;
         // Datos en vivo de Google si los hay; si no, los sincronizados en el build.
+        const delBuild = businessHours.periods || [];
         const { abierto: open, etiqueta: label, nota } = calcularEstadoNegocio({
-            periodos: this.liveData?.periods?.length ? this.liveData.periods : (businessHours.periods || []),
-            regulares: this.liveData?.regularPeriods?.length ? this.liveData.regularPeriods : (businessHours.periods || []),
+            periodos: this.liveData?.periods?.length ? this.liveData.periods : delBuild,
+            regulares: this.liveData?.regularPeriods?.length ? this.liveData.regularPeriods : delBuild,
             ahora: momentoEnZona(TIME_ZONE)
         });
         this.todayNote = nota;

@@ -77,8 +77,11 @@ export function formatearHora(punto) {
     return `${hora % 12 === 0 ? 12 : hora % 12}:${minutos} ${sufijo}`;
 }
 
-/** @param {Fecha} fecha */
-function diaDeLaSemana({ year, month, day }) {
+/**
+ * @param {Fecha} fecha
+ * @returns {number} 0 = domingo.
+ */
+export function diaDeLaSemana({ year, month, day }) {
     return new Date(Date.UTC(year, month - 1, day)).getUTCDay();
 }
 
@@ -87,7 +90,7 @@ function diaDeLaSemana({ year, month, day }) {
  * @param {number} dias
  * @returns {Fecha}
  */
-function sumarDias({ year, month, day }, dias) {
+export function sumarDias({ year, month, day }, dias) {
     const d = new Date(Date.UTC(year, month - 1, day + dias));
     return { year: d.getUTCFullYear(), month: d.getUTCMonth() + 1, day: d.getUTCDate() };
 }

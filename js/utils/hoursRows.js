@@ -1,10 +1,10 @@
 import { TIME_ZONE } from '../data/place-config.js';
+import { momentoEnZona, diaDeLaSemana, sumarDias } from './estadoNegocio.js';
 
 const DAY_INDEX = {
     domingo: 0, lunes: 1, martes: 2, 'miércoles': 3, jueves: 4, viernes: 5, 'sábado': 6
 };
 const MONTHS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-const DAY_MS = 24 * 60 * 60 * 1000;
 
 /**
  * Convierte el `weekdayText` de Google en filas listas para pintar.
@@ -23,10 +23,8 @@ const DAY_MS = 24 * 60 * 60 * 1000;
  * @returns {{day: string, time: string, closed: boolean, isSunday: boolean, special: boolean, dateLabel: string|null}[]}
  */
 export function buildHoursRows(weekdayText, specialDates = [], now = new Date()) {
-    const [year, month, dayOfMonth] = new Intl.DateTimeFormat('en-CA', { timeZone: TIME_ZONE })
-        .format(now).split('-').map(Number);
-    const todayUtc = Date.UTC(year, month - 1, dayOfMonth);
-    const todayDow = new Date(todayUtc).getUTCDay();
+    const today = momentoEnZona(TIME_ZONE, now);
+    const todayDow = diaDeLaSemana(today);
 
     return weekdayText.map(text => {
         const separator = text.indexOf(':');
@@ -37,10 +35,11 @@ export function buildHoursRows(weekdayText, specialDates = [], now = new Date())
         let special = false;
         let dateLabel = null;
         if (dow !== undefined && specialDates.length) {
-            const date = new Date(todayUtc + ((dow - todayDow + 7) % 7) * DAY_MS);
-            if (specialDates.includes(date.toISOString().slice(0, 10))) {
+            const date = sumarDias(today, (dow - todayDow + 7) % 7);
+            const iso = `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
+            if (specialDates.includes(iso)) {
                 special = true;
-                dateLabel = `${date.getUTCDate()} ${MONTHS[date.getUTCMonth()]}`;
+                dateLabel = `${date.day} ${MONTHS[date.month - 1]}`;
             }
         }
 
