@@ -58,7 +58,7 @@ function generateSchemaMarkup(data) {
         "name": "Narbo's Salón Spa",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://narbossalon.com/images/brand/logo-narbos-negro.webp"
+          "url": "https://narbossalon.com/images/brand/logo_narbos.webp"
         }
       },
       // Google avisa si la fecha va sin hora ni zona horaria. Las 8:00 de Bogotá es la

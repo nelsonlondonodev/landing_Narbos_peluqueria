@@ -610,6 +610,10 @@ function datosDelNegocio() {
 function unificarNegocio(document) {
     const negocio = datosDelNegocio();
     let tocados = 0;
+    // `@id` que traía cada nodo del negocio antes de unificarlo: las referencias a ellos
+    // (un `mainEntity` que apuntaba a `.../servicios/barberia/#organization`) se quedaban
+    // colgando al pasar el nodo a ORG_ID.
+    const idsSustituidos = new Set();
 
     for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
         let datos;
@@ -624,13 +628,16 @@ function unificarNegocio(document) {
             if (!nodo || typeof nodo !== 'object') return;
             const tipos = [].concat(nodo['@type']);
             if (tipos.includes('BeautySalon') || tipos.includes('HealthAndBeautyBusiness')) {
+                if (nodo['@id'] && nodo['@id'] !== ORG_ID) idsSustituidos.add(nodo['@id']);
                 Object.assign(nodo, structuredClone(negocio));
                 cambiado = true;
                 tocados++;
-            } else if (tipos.includes('Organization') && nodo.address && /Narbo/.test(nodo.name)) {
-                // El publisher de algunos artículos repite la dirección, con «Cajica»:
-                // solo se le corrige esa, el resto del nodo es el de un publisher.
-                nodo.address = { ...DIRECCION };
+            } else if (tipos.includes('Organization') && /Narbo/.test(nodo.name)) {
+                // El publisher de los artículos: se le corrigen la dirección (algunos la
+                // repetían con «Cajica») y el logo (la plantilla citaba uno que no existe);
+                // el resto del nodo es el de un publisher.
+                if (nodo.address) nodo.address = { ...DIRECCION };
+                nodo.logo = structuredClone(negocio.logo);
                 cambiado = true;
                 tocados++;
             }
@@ -638,6 +645,37 @@ function unificarNegocio(document) {
         };
         recorrer(datos);
         if (cambiado) script.textContent = JSON.stringify(datos, null, 2);
+    }
+
+    // Referencias a los `@id` sustituidos, y el negocio en las páginas que lo citan sin
+    // definirlo: Google no sigue un `@id` a otra página, así que un `provider` que solo
+    // apunta a ORG_ID dejaba el servicio sin proveedor.
+    let definido = false;
+    let citado = false;
+    for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+        let datos;
+        try { datos = JSON.parse(script.textContent); } catch { continue; }
+        let cambiado = false;
+        const recorrer = nodo => {
+            if (Array.isArray(nodo)) return nodo.forEach(recorrer);
+            if (!nodo || typeof nodo !== 'object') return;
+            if (nodo['@id'] === ORG_ID && Object.keys(nodo).length > 1) definido = true;
+            if (Object.keys(nodo).length === 1 && idsSustituidos.has(nodo['@id'])) {
+                nodo['@id'] = ORG_ID;
+                cambiado = true;
+            }
+            if (Object.keys(nodo).length === 1 && nodo['@id'] === ORG_ID) citado = true;
+            Object.values(nodo).forEach(recorrer);
+        };
+        recorrer(datos);
+        if (cambiado) script.textContent = JSON.stringify(datos, null, 2);
+    }
+    if (citado && !definido) {
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'BeautySalon', ...negocio }, null, 2);
+        document.head.appendChild(script);
+        tocados++;
     }
     return tocados;
 }
@@ -1080,6 +1118,49 @@ function checkNap() {
  * el mismo aviso en `datePublished`, que 16 de 23 artículos publicaban como solo el
  * día, y ocho no declaraban `dateModified`.
  */
+/**
+ * Referencias rotas dentro del JSON-LD de cada página publicada: un `{"@id": …}` que no
+ * apunta a ningún nodo de la misma página (Google no lo sigue a otra) y las imágenes del
+ * propio dominio que no existen. Las dos pasaban en silencio: logos de publisher a un
+ * fichero borrado, imágenes de BlogPosting con espacios en el nombre, un `mainEntity` a
+ * un `@id` que la unificación del negocio había retirado.
+ */
+function checkReferenciasSchema() {
+    const CLAVES_DE_IMAGEN = new Set(['image', 'thumbnailUrl', 'logo', 'contentUrl', 'url']);
+    const issues = [];
+
+    forEachDistPage((relPath, html) => {
+        const definidos = new Set();
+        const citados = [];
+        const imagenes = [];
+        const recorrer = (nodo, clave) => {
+            if (Array.isArray(nodo)) return nodo.forEach(hijo => recorrer(hijo, clave));
+            if (typeof nodo === 'string') {
+                if (CLAVES_DE_IMAGEN.has(clave) && nodo.startsWith(`${SITE_URL}/`) && /\.(webp|jpe?g|png|svg)$/i.test(nodo)) imagenes.push(nodo);
+                return;
+            }
+            if (!nodo || typeof nodo !== 'object') return;
+            const claves = Object.keys(nodo);
+            if (nodo['@id'] && claves.length > 1) definidos.add(nodo['@id']);
+            if (nodo['@id'] && claves.length === 1) citados.push(nodo['@id']);
+            for (const [k, v] of Object.entries(nodo)) recorrer(v, k);
+        };
+        for (const [, json] of html.matchAll(JSON_LD_RE)) {
+            try { recorrer(JSON.parse(json)); } catch { /* Lo reporta checkFechasSchema. */ }
+        }
+        for (const id of new Set(citados)) {
+            if (!definidos.has(id)) issues.push(`${relPath}: referencia a ${id}, que la página no define`);
+        }
+        for (const url of new Set(imagenes)) {
+            if (!fs.existsSync(path.join(DIST_DIR, decodeURI(url.slice(SITE_URL.length + 1))))) {
+                issues.push(`${relPath}: el JSON-LD cita ${url}, que no existe en dist`);
+            }
+        }
+    });
+
+    return issues;
+}
+
 function checkFechasSchema() {
     const ISO_CON_OFFSET = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
     const CLAVES_DE_FECHA = new Set(['uploadDate', 'datePublished', 'dateModified']);
@@ -1576,6 +1657,11 @@ async function runSSG() {
             titulo: 'NAP distinto entre páginas o respecto a la ficha',
             issues: checkNap(),
             motivo: 'el nombre, la dirección y el teléfono tienen que decir lo mismo en todas partes: es la señal con la que Google ata la web al negocio local.'
+        },
+        {
+            titulo: 'Referencias rotas en el schema',
+            issues: checkReferenciasSchema(),
+            motivo: 'un @id que la página no define o una imagen que no existe dejan el nodo incompleto para Google, sin ningún aviso en Search Console hasta semanas después.'
         },
         {
             titulo: 'Fechas del schema mal formadas o ausentes',
