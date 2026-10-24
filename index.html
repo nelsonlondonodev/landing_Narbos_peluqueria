@@ -418,16 +418,20 @@
     <!-- App Content Wrapper: Handles overflow hiding for decorations without clipping fixed elements -->
     <div id="app-wrapper" class="relative w-full overflow-x-hidden">
         <main>
-            <section id="inicio" class="relative overflow-hidden bg-brand-light/30">
+            <section id="inicio" class="relative bg-brand-light/30">
                 <!-- Hero editorial: texto a la izquierda y la foto en mosaico a la derecha; en móvil,
                      el texto y la llamada a la acción caben en la primera pantalla y el mosaico va
                      debajo. Los badges de confianza los inyecta el SSG en `data-hero-badges` desde
                      `js/components/HeroBadges.js`: escritos aquí a mano se congelaban en el valor
                      del último build. -->
-                <svg class="pointer-events-none absolute -right-24 top-6 h-[120%] w-[70%] text-brand-medium/50 max-md:hidden" viewBox="0 0 600 700" fill="none" aria-hidden="true">
-                    <path d="M560 20C380 60 260 180 300 330s210 190 150 300S180 700 40 660" stroke="currentColor" stroke-width="2"/>
-                    <path d="M600 140C470 170 380 250 410 360s150 160 110 250" stroke="currentColor" stroke-width="1.5"/>
-                </svg>
+                <!-- Solo las líneas decorativas se recortan: un overflow-hidden en la sección
+                     cortaba también el desplegable de horarios del badge. -->
+                <div class="pointer-events-none absolute inset-0 overflow-hidden max-md:hidden" aria-hidden="true">
+                    <svg class="absolute -right-24 top-6 h-[120%] w-[70%] text-brand-medium/50" viewBox="0 0 600 700" fill="none">
+                        <path d="M560 20C380 60 260 180 300 330s210 190 150 300S180 700 40 660" stroke="currentColor" stroke-width="2"/>
+                        <path d="M600 140C470 170 380 250 410 360s150 160 110 250" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                </div>
                 <div class="container relative mx-auto grid max-w-screen-xl items-center gap-10 px-6 py-10 md:grid-cols-[1.05fr_1fr] md:py-12 lg:gap-16 lg:py-14">
                     <div class="max-w-xl">
                         <p class="hero-rise text-xs font-semibold uppercase tracking-[0.3em] text-brand-green md:text-sm">Peluquería · Spa · Uñas — Chía</p>
@@ -443,12 +447,13 @@
                                 <svg class="h-4 w-4 transition-transform group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-6-6 6 6 6-6"/></svg>
                             </a>
                         </div>
-                        <div data-hero-badges class="hero-rise [--d:0.2s] mt-8 flex flex-wrap items-center gap-3"></div>
+                        <!-- relative z-20: la animación de entrada deja un transform que crea contexto de
+                             apilamiento, y sin z el desplegable de horarios quedaba bajo #servicios. -->
+                        <div data-hero-badges class="hero-rise [--d:0.2s] relative z-20 mt-8 flex flex-wrap items-center gap-3"></div>
                     </div>
                     <!-- Las teselas las pinta `HeroMosaic` (el SSG en dist, HomeHubController en
                          desarrollo) con la foto de `pagesData.home.heroMosaic`. -->
                     <div data-hero-mosaic class="hero-mosaic mx-auto aspect-square w-full max-w-[520px] md:mr-0"></div>
-                    </div>
                 </div>
             </section>
 

@@ -320,8 +320,30 @@ export class StoreBadge {
     _setupPopoverListeners(trigger, popover) {
         if (!trigger || !popover) return;
 
+        // Antes de abrirse decide hacia dónde: abajo por defecto, arriba si debajo no
+        // cabe y arriba hay más sitio; alineado a la derecha del badge salvo que así se
+        // salga por la izquierda. En la home el badge vive al pie del hero y pegado al
+        // margen izquierdo, y abriendo siempre igual el horario quedaba fuera de pantalla.
+        const orientar = () => {
+            const badge = trigger.getBoundingClientRect();
+            const cabecera = document.querySelector('.site-header')?.getBoundingClientRect().bottom ?? 0;
+            const abajo = window.innerHeight - badge.bottom;
+            const arriba = badge.top - cabecera;
+            const haciaArriba = abajo < popover.offsetHeight + 12 && arriba > abajo;
+            popover.classList.toggle('bottom-full', haciaArriba);
+            popover.classList.toggle('mb-2', haciaArriba);
+            popover.classList.toggle('mt-2', !haciaArriba);
+
+            const desdeIzquierda = badge.right - popover.offsetWidth < 8;
+            popover.classList.toggle('left-0', desdeIzquierda);
+            popover.classList.toggle('right-0', !desdeIzquierda);
+        };
+        trigger.parentElement?.addEventListener('mouseenter', orientar);
+        trigger.addEventListener('focus', orientar);
+
         const togglePopover = (e) => {
             e.stopPropagation();
+            orientar();
             const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
             trigger.setAttribute('aria-expanded', !isExpanded);
 
