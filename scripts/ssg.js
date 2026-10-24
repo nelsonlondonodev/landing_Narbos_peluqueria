@@ -10,7 +10,7 @@ import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
 import { getHeroHTML } from '../js/components/HeroSection.js';
 import { getVideoSectionHTML } from '../js/components/VideoSection.js';
-import { resolveRoute, resolveAsset, siteConfig } from '../js/config.js';
+import { resolveRoute, resolveAsset, siteConfig, getWhatsAppUrl } from '../js/config.js';
 import businessHours from '../js/data/business-hours.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { getHeroBadgesHTML, getStarSpriteHTML } from '../js/components/HeroBadges.js';
@@ -171,17 +171,33 @@ function injectHeroBadges(document, pageKey) {
 
     const opciones = pagesData[pageKey]?.heroBadges;
 
-    // La home ya trae el suyo escrito a mano en el HTML; se retira para que no queden
-    // dos, y el generado ocupe su sitio.
+    // Por si el HTML trae alguno escrito a mano: se retira para que no queden dos.
     seccion.querySelectorAll('#hero-google-rating, #business-status-root').forEach(el => el.remove());
 
-    seccion.insertAdjacentHTML('beforeend', getHeroBadgesHTML(opciones));
+    // Un hero con hueco propio (`data-hero-badges`, el de la home) los lleva en línea
+    // dentro de él; el resto, flotando sobre la foto.
+    const hueco = seccion.querySelector('[data-hero-badges]');
+    (hueco ?? seccion).insertAdjacentHTML('beforeend', getHeroBadgesHTML({ ...opciones, inline: !!hueco }));
 
     // El `<use>` necesita su `<symbol>`: la home ya lo declara para el carrusel, el
     // resto de páginas no tenían ninguna estrella hasta ahora.
     if (opciones?.reviews !== false && !document.getElementById('star-icon')) {
         document.body.insertAdjacentHTML('afterbegin', getStarSpriteHTML());
     }
+}
+
+/**
+ * Completa los enlaces de WhatsApp escritos en el HTML con `data-whatsapp-message`.
+ *
+ * El mensaje precargado es el rastro del origen del lead, y escribir la URL codificada
+ * a mano es lo que dejó enlaces rotos hasta septiembre de 2026. En el HTML fuente basta
+ * el `href` al número sin mensaje, que sigue funcionando si esto no corre.
+ */
+function resolverEnlacesWhatsApp(document) {
+    document.querySelectorAll('a[data-whatsapp-message]').forEach(enlace => {
+        enlace.href = getWhatsAppUrl(enlace.getAttribute('data-whatsapp-message'));
+        enlace.removeAttribute('data-whatsapp-message');
+    });
 }
 
 /**
@@ -759,6 +775,7 @@ async function processPage(pageConfig) {
 
     injectHero(document, pageConfig.key, prefix);
     injectHeroBadges(document, pageConfig.key);
+    resolverEnlacesWhatsApp(document);
     injectServices(document, pageConfig.key, prefix);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path, prefix);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
