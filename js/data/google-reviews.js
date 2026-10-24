@@ -1,15 +1,15 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-10-19T05:39:14.412Z
+ * Última sincronización con Google Business Profile: 2026-10-24T08:11:23.607Z
  */
 const googleReviews = {
-    "lastSync": "2026-10-19T05:39:14.412Z",
+    "lastSync": "2026-10-24T08:11:23.607Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
-    "userRatingCount": 362,
+    "userRatingCount": 366,
     "reviews": [
         {
-            "author": "Ingrid Marcela Aguilera",
+            "author": "Allyhome Manager",
             "rating": 5,
             "text": "⭐⭐⭐⭐⭐\n¡Excelente experiencia! Cristian Barrera hizo un trabajo impecable. Me encantó cómo quedó mi cabello: entendió exactamente lo que quería y el resultado superó mis expectativas. Además de su profesionalismo, brinda una atención amable y dedicada. Sin duda lo recomiendo y volveré para mi próximo cambio de look. ¡Muchas gracias, Cristian!",
             "relativeTime": "Hace 3 meses",
@@ -19,7 +19,7 @@ const googleReviews = {
             "author": "Paula Andrea Márquez",
             "rating": 5,
             "text": "Espectacular todo. La atención maravillosa, el color quedó divino, su trabajo como profesionales en color 10/10, superó mis expectativas justo como se los pedí.",
-            "relativeTime": "Hace 2 meses",
+            "relativeTime": "Hace 3 meses",
             "verified": true
         },
         {
