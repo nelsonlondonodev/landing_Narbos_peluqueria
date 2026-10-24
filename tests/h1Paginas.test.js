@@ -16,7 +16,19 @@ const H1_ESPERADOS = Object.freeze({
     estetica: 'Estética, Masajes y Spa en Chía',
     maquillaje: 'Maquillaje profesional en Chía',
     barberia: 'Barbería exclusiva en Chía',
-    'depilacion-corporal': 'Depilación Corporal con Cera'
+    'depilacion-corporal': 'Depilación Corporal con Cera',
+    'barberia-cortes-hombre': 'Cortes de Hombre y Arreglo de Barba en Chía',
+    'limpieza-facial': 'Limpieza Facial Profunda en Chía',
+    'masajes-relajantes': 'Masajes en Chía',
+    'spa-facial-integral': 'Spa Facial y Estética en Chía',
+    'balayage-mechas': 'Balayage y Color en Chía',
+    'color-tinturas-cabello': 'Tinturas y Color en Chía',
+    'cortes-de-pelo': 'Cortes de Pelo en Chía y Cajicá | Estilo y Tendencia',
+    'extensiones-cabello': 'Extensiones de cabello natural en Chía',
+    'tratamientos-capilares': 'Tratamientos Capilares y Recuperación',
+    'unas-spa': 'Salón de Uñas en Chía',
+    'manicure-pedicure': 'Manicure y Pedicure Spa en Chía',
+    'unas-acrilicas-gel': 'Uñas Acrílicas y Gel en Chía: Diseños que Enamoran'
 });
 
 /** Texto visible y legible por buscadores: sin etiquetas, con &nbsp; como espacio. */

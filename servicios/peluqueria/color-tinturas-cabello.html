@@ -190,8 +190,6 @@
     <style>
         /* Optimización de CLS: Reserva de espacio para componentes dinámicos */
         #navbar-root { min-height: 80px; }
-        #inicio { min-height: 60vh; background: #f9f9f9; }
-        @media (min-width: 768px) { #inicio { min-height: 80vh; } }
     </style>
   </head>
   <body class="font-sans antialiased">
@@ -207,29 +205,10 @@
 
         <main>
             <!-- Hero de Servicio -->
-            <section id="inicio" class="relative h-[60vh] md:h-[80vh] bg-white">
-                 <img src="../../images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp" 
-                      alt="Tinturas y Color en Chía | Narbo's Salón" 
-                      class="w-[85%] h-full object-cover absolute inset-0 z-0 mx-auto rounded-b-xl" 
-                      loading="eager" width="1920" height="1080" fetchpriority="high" decoding="async">
-                
-                <!-- Floating Content Box (Overlap Effect Fixed) -->
-                <div class="absolute z-20 top-[50vh] md:top-[65vh] left-0 right-0 px-6">
-                    <div class="container mx-auto">
-                        <div class="bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-xl shadow-2xl max-w-4xl mx-auto text-center border border-gray-100">
-                            <h1 class="text-4xl md:text-6xl font-serif font-bold text-gray-900 mb-4" data-breadcrumb="Color y Tinturas">
-                                Tinturas y Color <span class="text-brand-green">en Chía</span>
-                            </h1>
-                            <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
-                                Coloración profesional, cobertura perfecta de canas y tonos vibrantes que cuidan tu cabello.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div id="hero-root" class="relative z-20"><!-- Lo pinta el SSG con HeroSection (App.mountHero en desarrollo) desde pagesData. --></div>
 
             <!-- Sección de Servicios (Ajuste de Padding para Overlap) -->
-            <section class="relative z-10 bg-white pt-56 md:pt-64 pb-16 md:pb-24 overflow-x-hidden">
+            <section class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24 overflow-x-hidden">
                 <div class="container mx-auto px-6 max-w-screen-xl">
                     <header class="text-center mb-16">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">Expertos en Colorimetría Profesional</h2>

@@ -12,6 +12,8 @@ import { getHeroMosaicHTML } from './HeroMosaic.js';
  * @property {string} [ctaMessage] - Mensaje precargado del botón de WhatsApp. Nombra la
  *   página para que la conversación llegue atribuida.
  * @property {{ label: string, href: string }} [secondaryCta] - Enlace junto al botón.
+ * @property {string} [breadcrumb] - Nombre corto de la página en la miga de pan; va en
+ *   `data-breadcrumb` del H1, que es de donde lo lee `service-page.js`.
  * @property {boolean} [mosaic=false] - La foto en mosaico, pieza propia de la home.
  * @property {number} [imageWidth] - Medidas intrínsecas de la foto, para el mosaico.
  * @property {number} [imageHeight]
@@ -42,7 +44,7 @@ const MOSAIC_DECOR = `
  * @returns {string} HTML del `<section id="inicio">`.
  */
 export const getHeroHTML = ({
-    title, subtitle, imageSrc, imageSrcMobile, imageAlt, eyebrow,
+    title, subtitle, imageSrc, imageSrcMobile, imageAlt, eyebrow, breadcrumb,
     ctaMessage = DEFAULT_CTA_MESSAGE, secondaryCta, mosaic = false, imageWidth, imageHeight
 }) => `
     <section id="inicio" class="relative bg-brand-light/30">
@@ -50,7 +52,7 @@ export const getHeroHTML = ({
         <div class="container relative mx-auto grid max-w-screen-xl items-center gap-10 px-6 py-10 md:grid-cols-[1.05fr_1fr] md:py-12 lg:gap-16 lg:py-14">
             <div class="max-w-xl">
                 ${eyebrow ? `<p class="hero-rise text-xs font-semibold uppercase tracking-[0.3em] text-brand-green md:text-sm">${eyebrow}</p>` : ''}
-                <h1 id="hero-title" class="hero-rise [--d:0.05s] ${eyebrow ? 'mt-4' : ''} font-serif font-bold text-brand-gray-dark ${mosaic ? 'text-[2.3rem] leading-[1.08] sm:text-5xl lg:text-[4.25rem]' : 'text-[2.1rem] leading-[1.1] sm:text-5xl lg:text-[3.6rem]'}">${title}</h1>
+                <h1 id="hero-title"${breadcrumb ? ` data-breadcrumb="${breadcrumb}"` : ''} class="hero-rise [--d:0.05s] ${eyebrow ? 'mt-4' : ''} font-serif font-bold text-brand-gray-dark ${mosaic ? 'text-[2.3rem] leading-[1.08] sm:text-5xl lg:text-[4.25rem]' : 'text-[2.1rem] leading-[1.1] sm:text-5xl lg:text-[3.6rem]'}">${title}</h1>
                 <p id="hero-subtitle" class="hero-rise [--d:0.1s] mt-5 max-w-md text-lg text-brand-gray-dark/75 ${mosaic ? 'md:text-xl' : ''}">${subtitle}</p>
                 <div class="hero-rise [--d:0.15s] mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
                     <a href="${getWhatsAppUrl(ctaMessage)}" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 rounded-full bg-brand-green px-7 py-3.5 font-semibold text-white shadow-lg shadow-brand-green/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-gray-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">

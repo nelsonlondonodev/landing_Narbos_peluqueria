@@ -325,11 +325,14 @@ export const pagesData = Object.freeze({
         metaTitle: "Cortes de Pelo en Chía y Cajicá | Estilo y Tendencias",
         metaDescription: "¿Buscas un corte de cabello en Chía o Cajicá? Agenda tu cita en Narbo's para lucir las últimas tendencias con asesoría personalizada.",
         hero: {
+            eyebrow: "Peluquería · Chía",
             title: "Cortes de Pelo en Chía y Cajicá | <span class=\"text-brand-green\">Estilo y Tendencia</span>",
             subtitle: "Diseños y cortes personalizados por estilistas expertos cerca de Cajicá para realzar tu estilo único.",
             imageSrc: "images/pages/peluqueria/cortes-de-pelo-profesionales-chia.webp",
             imageSrcMobile: "images/pages/peluqueria/cortes-de-pelo-profesionales-chia-mobile.webp",
-            imageAlt: "Corte de pelo profesional realizado en Narbo's Salon Spa"
+            imageAlt: "Corte de pelo profesional en Chía",
+            breadcrumb: "Cortes de Pelo",
+            ctaMessage: "Hola, vengo de la página de cortes de pelo de la web de Narbo's y quiero agendar una cita"
         },
         video: {
             id: 'ImN8W2AXEJI',
@@ -375,10 +378,14 @@ export const pagesData = Object.freeze({
     },
     'balayage-mechas': {
         hero: {
-            title: "Balayage y Mechas en Chía: Expertos en <span class=\"text-brand-green\">Iluminación</span>",
-            subtitle: "Técnicas avanzadas de aclaración, babylights y contornos para un rubio espectacular.",
-            imageSrc: "images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
-            imageAlt: "Diseño de balayage profesional en Narbo's Salon"
+            eyebrow: "Peluquería · Chía",
+            title: "Balayage y Color <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Técnicas avanzadas de coloración para rubios perfectos y cabello saludable.",
+            imageSrc: "images/pages/peluqueria/color-tratamiento.webp",
+            imageSrcMobile: "images/pages/peluqueria/color-tratamiento-mobile.webp",
+            imageAlt: "Balayage y Color en Chía",
+            breadcrumb: "Balayage y Mechas",
+            ctaMessage: "Hola, vengo de la página de balayage de la web de Narbo's y quiero agendar una cita"
         },
         metaTitle: "Balayage y Mechas en Chía | Especialistas en Rubios | Narbo's",
         metaDescription: "Consigue el rubio de tus sueños con nuestras técnicas de Balayage, Mechas y Babylights en Chía. Expertos en iluminación capilar y salud de tu fibra.",
@@ -534,10 +541,13 @@ export const pagesData = Object.freeze({
     },
     'color-tinturas-cabello': {
         hero: {
-            title: "Color y Tinturas en Chía: Cobertura y <span class=\"text-brand-green\">Brillo</span>",
-            subtitle: "Expertos en color global, retoque de raíz y cubrimiento total de canas con marcas premium.",
+            eyebrow: "Peluquería · Chía",
+            title: "Tinturas y Color <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Coloración profesional, cobertura perfecta de canas y tonos vibrantes que cuidan tu cabello.",
             imageSrc: "images/pages/peluqueria/balayage-rubio-iluminado-corte-capas-narbos-salon-spa-chia.webp",
-            imageAlt: "Servicio de coloración profesional en Narbo's"
+            imageAlt: "Tinturas y Color en Chía | Narbo's Salón",
+            breadcrumb: "Color y Tinturas",
+            ctaMessage: "Hola, vengo de la página de color y tinturas de la web de Narbo's y quiero agendar una cita"
         },
         metaTitle: "Coloración y Tinturas en Chía | Cubrimiento de Canas | Narbo's",
         metaDescription: "Especialistas en tintura global, retoque de raíz y matización en Chía. Brindamos cobertura 100% de canas y brillo duradero para tu cabello.",
@@ -596,6 +606,16 @@ export const pagesData = Object.freeze({
         ]
     },
     'extensiones-cabello': {
+        hero: {
+            eyebrow: "Peluquería · Chía",
+            title: "Extensiones de cabello natural <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Más largo y más volumen con cabello natural: punto a punto, adhesivo o cortina invisible.",
+            imageSrc: "images/pages/peluqueria/extensiones-cabello-natural-largo-chia.webp",
+            imageSrcMobile: "images/pages/peluqueria/extensiones-cabello-natural-largo-chia-mobile.webp",
+            imageAlt: "Clienta de espaldas con extensiones de cabello natural largo y balayage en Narbo's Salón Spa, Chía",
+            breadcrumb: "Extensiones",
+            ctaMessage: "Hola, vengo de la página de extensiones de la web de Narbo's y quiero agendar una cita"
+        },
         metaTitle: "Extensiones de Cabello Natural en Chía | Narbo's Salón Spa",
         metaDescription: "Extensiones de cabello natural en Chía: punto a punto desde $18.000 por punto, adhesivo desde $160.000 el par y cortina invisible. Mantenimiento y retiro.",
         video: {
@@ -650,6 +670,15 @@ export const pagesData = Object.freeze({
         ]
     },
     'tratamientos-capilares': {
+        hero: {
+            eyebrow: "Peluquería · Chía",
+            title: "Tratamientos Capilares y <span class=\"text-brand-green\">Recuperación</span>",
+            subtitle: "Recupera la salud y el brillo de tu cabello con nuestras terapias profundas.",
+            imageSrc: "images/pages/peluqueria/lavado-spa-capilar.webp",
+            imageAlt: "Tratamientos Capilares en Chía",
+            breadcrumb: "Tratamientos Capilares",
+            ctaMessage: "Hola, vengo de la página de tratamientos capilares de la web de Narbo's y quiero agendar una cita"
+        },
         metaTitle: "Tratamientos capilares en Chía: keratina y botox | Narbo's",
         metaDescription: "Recuperación capilar en Chía y Cajicá: keratina, botox capilar, repolarización y alisados progresivos. Diagnóstico del cabello antes de tratar.",
         gallery: [
@@ -757,11 +786,14 @@ export const pagesData = Object.freeze({
     },
     'limpieza-facial': {
         hero: {
+            eyebrow: "Estética · Chía",
             title: "Limpieza Facial Profunda <span class=\"text-brand-green\">en Chía</span>",
-            subtitle: "Elimina impurezas, puntos negros y toxinas con tecnología de alta frecuencia.",
+            subtitle: "Tu piel merece un respiro. Elimina impurezas y recupera tu brillo natural con nuestro protocolo experto.",
             imageSrc: "images/pages/estetica/limpieza-facial-profunda-spa-chia.webp",
             imageSrcMobile: "images/pages/estetica/limpieza-facial-profunda-spa-chia-mobile.webp",
-            imageAlt: "Limpieza de cutis profunda en Chía"
+            imageAlt: "Limpieza Facial Profunda en Chía",
+            breadcrumb: "Limpieza Facial",
+            ctaMessage: "Hola, vengo de la página de limpieza facial de la web de Narbo's y quiero agendar una cita"
         },
         metaTitle: "Limpieza Facial Profunda en Chía | Extracción e Impurezas | Narbo's",
         metaDescription: "Recupera la pureza de tu piel con nuestra limpieza facial profunda en Chía. Alta frecuencia, extracción de puntos negros y nutrición para tu cutis.",
@@ -925,11 +957,13 @@ export const pagesData = Object.freeze({
     },
     'spa-facial-integral': {
         hero: {
-            title: "Spa Facial Integral: Rejuvenecimiento y <span class=\"text-brand-green\">Relax</span>",
-            subtitle: "Rituales de bienestar para tu rostro que combinan nutrición profunda y máxima relajación.",
-            imageSrc: "images/pages/estetica/masaje-facial-relajante-narbos.webp",
-            imageSrcMobile: "images/pages/estetica/masaje-facial-relajante-narbos-mobile.webp",
-            imageAlt: "Spa facial integral y masajes relajantes en Chía"
+            eyebrow: "Estética · Chía",
+            title: "Spa Facial y Estética <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Renueva tu piel y relaja tu cuerpo con nuestros servicios profesionales.",
+            imageSrc: "images/pages/estetica/spa-hero.webp",
+            imageAlt: "Spa y Estética en Chía",
+            breadcrumb: "Spa Facial",
+            ctaMessage: "Hola, vengo de la página de spa facial de la web de Narbo's y quiero agendar una cita"
         },
         metaTitle: "Spa Facial Integral en Chía | Rejuvenecimiento y Bienestar | Narbo's",
         metaDescription: "Vive una experiencia de lujo con nuestro Spa Facial Integral en Chía. Hidratación, masajes faciales y terapias de rejuvenecimiento en un ambiente único.",
@@ -985,11 +1019,13 @@ export const pagesData = Object.freeze({
 
     'masajes-relajantes': {
         hero: {
+            eyebrow: "Spa · Chía",
             title: "Masajes <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Desconecta del mundo y reconecta contigo mismo. Una experiencia sensorial única para cuerpo y mente.",
-            imageSrc: "images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia.webp",
-            imageSrcMobile: "images/pages/estetica/masaje-relajante-piedras-calientes-spa-chia-mobile.webp",
-            imageAlt: "Masajes Relajantes con piedras calientes en Chía"
+            imageSrc: "images/pages/estetica/masaje-relajante-profesional-chia.webp",
+            imageAlt: "Masaje relajante profesional en Chía",
+            breadcrumb: "Masajes Relajantes",
+            ctaMessage: "Hola, vengo de la página de masajes de la web de Narbo's y quiero agendar una cita"
         },
         metaTitle: "Masajes en Chía: relajante, descontracturante y drenaje | Narbo's",
         metaDescription: "Masajes en Chía: relajante de 1 hora con piedras calientes, descontracturante de espalda o de cuerpo completo y drenaje linfático. Agenda tu cita en Narbo's.",
@@ -1060,6 +1096,14 @@ export const pagesData = Object.freeze({
         ]
     },
     'unas-spa': {
+        hero: {
+            eyebrow: "Uñas y spa · Chía",
+            title: "Salón de Uñas <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Elige tu servicio: manicure y pedicure, uñas acrílicas y en gel, o diseños de nail art.",
+            imageSrc: "images/pages/unas/diseno-unas-elegantes-chia-narbos-spa.webp",
+            imageAlt: "Diseño de uñas elegantes y sofisticadas en Narbo's Chía",
+            ctaMessage: "Hola, vengo de la página de uñas de la web de Narbo's y quiero agendar una cita"
+        },
         metaTitle: "Uñas en Chía y Cajicá | Salón de Uñas - Narbo's Salón Spa",
         metaDescription: "Salón de uñas en Chía y Cajicá, cerca de Fontanar: manicure, pedicure, uñas acrílicas, gel, polygel y nail art. Mira cada servicio y reserva por WhatsApp.",
         gallery: [
@@ -1120,6 +1164,15 @@ export const pagesData = Object.freeze({
         ]
     },
     'unas-acrilicas-gel': {
+        hero: {
+            eyebrow: "Uñas y spa · Chía",
+            title: "Uñas Acrílicas y Gel en Chía: <span class=\"text-brand-green\">Diseños que Enamoran</span>",
+            subtitle: "Luce unas manos impecables con nuestras técnicas avanzadas en Polygel, Acrílico y Nail Art exclusivo. Calidad y belleza en cada detalle.",
+            imageSrc: "images/pages/unas/unas-decoradas-personalizadas-narbos-salon-spa-chia-cundinamarca.webp",
+            imageAlt: "Diseños de Uñas Personalizadas en Narbos Salon Spa",
+            breadcrumb: "Uñas Acrílicas y Gel",
+            ctaMessage: "Hola, vengo de la página de uñas acrílicas y gel de la web de Narbo's y quiero agendar una cita"
+        },
         metaTitle: "Uñas acrílicas y en gel en Chía | Narbo's Salón Spa",
         metaDescription: "Uñas acrílicas, polygel y uñas en gel en Chía y Cajicá: esculpidas a medida, diseños personalizados y mantenimiento. Reserva por WhatsApp.",
         gallery: [
@@ -1208,6 +1261,15 @@ export const pagesData = Object.freeze({
         ]
     },
     'manicure-pedicure': {
+        hero: {
+            eyebrow: "Uñas y spa · Chía",
+            title: "Manicure y Pedicure Spa <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Disfruta de una experiencia relajante con nuestros rituales de spa. Cuidado, higiene y esmaltado perfecto en un ambiente exclusivo.",
+            imageSrc: "images/pages/unas/IMG_3645.webp",
+            imageAlt: "Pedicura profesional spa de alta calidad en Narbo's Chía",
+            breadcrumb: "Manicure y Pedicure",
+            ctaMessage: "Hola, vengo de la página de manicure y pedicure de la web de Narbo's y quiero agendar una cita"
+        },
         metaTitle: "Spa de Uñas en Chía y Cajicá | Manicure y Pedicure - Narbo's",
         metaDescription: "¿Buscas spa de uñas en Chía o Cajicá? Disfruta de manicure, pedicure y rituales de relajación con esmaltado semipermanente en Narbo's.",
         gallery: [
@@ -1272,11 +1334,14 @@ export const pagesData = Object.freeze({
         metaTitle: "Cortes de hombre y arreglo de barba en Chía | Narbo's",
         metaDescription: "Cortes de hombre clásicos en Chía y Cajicá: a tijera y máquina, arreglo de barba con toalla caliente y camuflaje de canas. Reserva por WhatsApp.",
         hero: {
-            title: "Barbería y Estilismo <span class=\"text-brand-green\">Masculino</span>",
-            subtitle: "Cortes clásicos, barbas impecables y camuflaje de canas.",
+            eyebrow: "Barbería · Chía",
+            title: "Cortes de Hombre y Arreglo de Barba <span class=\"text-brand-green\">en Chía</span>",
+            subtitle: "Corte clásico, barba impecable y camuflaje de canas para el hombre que cuida su imagen.",
             imageSrc: "images/pages/barberia/corte-hombre-fade-moderno.webp",
             imageSrcMobile: "images/pages/barberia/corte-hombre-fade-moderno-mobile.webp",
-            imageAlt: "Corte clásico de caballero con canas, hecho a tijera en Narbo's Chía"
+            imageAlt: "Corte clásico de caballero con canas, hecho a tijera en Narbo's Chía",
+            breadcrumb: "Cortes de Hombre",
+            ctaMessage: "Hola, vengo de la página de cortes de hombre de la web de Narbo's y quiero agendar una cita"
         },
         gallery: [
             { type: 'logo-card', layout: 'vertical', src: 'images/brand/logo_narbos.webp', alt: 'Corte Clásico', title: 'Corte Clásico' },
