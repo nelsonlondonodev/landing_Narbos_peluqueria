@@ -301,12 +301,7 @@ export const pagesData = Object.freeze({
             ctaMessage: 'Hola, vi el video de la capacitación con Wella en su web y quiero agendar una cita.',
             alt: "Colorista de Narbo's Salón Spa aplicando mechas durante una capacitación de Wella Professionals",
             ariaLabel: 'Reproducir video: Capacitación Wella, Diseño de Color y Corte en Chía'
-        },
-        // Página de marca: se lee, no se reserva. El ABIERTO/CERRADO es un dato
-        // transaccional y aquí solo sería ruido; la calificación sí se queda.
-        // Va fuera de `hero` porque los badges se cuelgan de `section#inicio`, que
-        // también tienen las fichas sin bloque `hero`.
-        heroBadges: { status: false }
+        }
     },
     'contacto': {
         metaTitle: "Contacto y horarios | Narbo's Salón Spa en Chía",
