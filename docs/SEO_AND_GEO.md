@@ -12,16 +12,17 @@ Este proyecto invierte fuertemente en SEO técnico clásico (sitemap, JSON-LD, i
 
 Cada página relevante embebe structured data directamente en el `<head>` (no se genera vía JS en cliente, para que los crawlers lo vean sin ejecutar JS). Tipos en uso, principalmente en `index.html`:
 
-- **`BeautySalon`** (subtipo de `LocalBusiness`) con `PostalAddress`, `GeoCoordinates`, `OpeningHoursSpecification` (sincronizado con `js/data/business-hours.js`), `AggregateRating` (sincronizado con `js/data/google-reviews.js`), y `AdministrativeArea` para las zonas de servicio (Chía, Cajicá, Cota).
+- **`BeautySalon`** (subtipo de `LocalBusiness`) con `PostalAddress`, `GeoCoordinates`, `OpeningHoursSpecification` (sincronizado con `js/data/business-hours.js`), `AggregateRating` (sincronizado con `js/data/google-reviews.js`), y `AdministrativeArea` para las zonas de servicio (Chía, Cajicá, Zipaquirá).
 - **`OfferCatalog`** → `Offer` → `Service` para el catálogo de servicios.
-- **`VideoObject`** para cada video embebido (ver sección Videos abajo) — consolidado para evitar duplicados cuando varios videos comparten contexto (ver commits `4dddcf1`, `1a6090f` en el changelog).
+- **`VideoObject`** para cada video embebido (ver sección Videos abajo). Lo escribe `scripts/generate-video-schema.js` en cada build a partir de `videoData.js` y `pagesData.js`: no se edita a mano.
+- **`BreadcrumbList`** en cada página interna, generado por el SSG con las mismas migas que se ven.
 - **`FAQPage`** → `Question`/`Answer` en Home y en artículos del blog (`BlogPosting` + `FAQPage` combinados, ver artículos individuales).
 
-**Regla de mantenimiento:** cuando `js/data/business-hours.js` o `js/data/google-reviews.js` se regeneran (`pnpm generate:hours` / `generate:reviews`), el JSON-LD embebido en el HTML de Home **no se actualiza solo** — si los horarios/reseñas cambian de forma estructural (no solo de valor), revisar manualmente que el `OpeningHoursSpecification`/`AggregateRating` en `index.html` siga siendo consistente.
+**Sincronización:** el `OpeningHoursSpecification` y el `AggregateRating` (nota y total de reseñas) los rellena el SSG en cada build desde `js/data/business-hours.js` y `js/data/google-reviews.js`, así que siguen solos a Google. Solo hay que revisarlos a mano si cambia la **estructura** de esos datos (campos nuevos o renombrados), no sus valores.
 
 ## Videos: migración de local a YouTube
 
-Desde julio de 2026 el proyecto migró progresivamente los videos servidos localmente (`video/`) a embebidos de YouTube en Home, Nosotros, Peluquería y Cortes de Pelo. Motivos: menor peso de `dist/`, no depender de ancho de banda propio, y aprovechar el `VideoObject` schema con métricas reales de YouTube (vistas, fecha de publicación). Ver `js/data/videoData.js` y `js/components/YouTubeGallery.js` como fuente de verdad de qué videos se muestran dónde.
+Desde julio de 2026 el proyecto migró los videos servidos localmente a embebidos de YouTube en Home, Nosotros, Peluquería y Cortes de Pelo; ya no queda ningún video en el repo. Motivos: menor peso de `dist/`, no depender de ancho de banda propio, y aprovechar el `VideoObject` schema con métricas reales de YouTube (vistas, fecha de publicación). Ver `js/data/videoData.js` y `js/components/YouTubeGallery.js` como fuente de verdad de qué videos se muestran dónde.
 
 ## IndexNow (`scripts/index-now.js`)
 
@@ -47,26 +48,9 @@ Al añadir un artículo de blog que sea autoridad en un tema nuevo, considera si
 
 ## Seguimiento de keywords
 
-`seo_tracking/*.json` contiene snapshots de posicionamiento de keywords por categoría (uñas, peluquería, barbería). Esta carpeta está en `.gitignore` — es tracking local, no se versiona.
+El histórico de keywords, posiciones y métricas vive fuera del repo, en la base local de `datos-marketing`. `seo_tracking/` (en `.gitignore`) es la carpeta de exports de origen que se carga allí.
 
 ## Verificación de dominio
 
 `scripts/build.js` copia automáticamente a `dist/` cualquier archivo de la raíz que matchee los patrones de verificación de Google (`google*.html`), Bing (`BingSiteAuth.xml`) o IndexNow (`<32-hex>.txt`), sin necesidad de listarlos a mano.
-
-## Estrategia y Roadmap de Optimización de CTR
-
-Para incrementar el CTR orgánico (objetivo: pasar del 1.9 % al rango 3.5 % - 4.5 %):
-
-1. **Optimización de Títulos (`<title>`):**
-   * Migrar de títulos puramente descriptivos a fórmulas de alto impacto con **Beneficio + Localidad + Diferenciador / Confianza**.
-   * *Ejemplo:* En lugar de `Balayage en Chía | Peluquería Narbo's`, usar `Balayage en Chía: Rubios Luminosos Sin Dañar tu Cabello | Narbo's`.
-2. **Meta Descripciones de Alta Conversión (Vender el Clic):**
-   * Incorporar pruebas sociales reales (*"Calificación 5.0 con +330 reseñas en Google"*), ubicación estratégica (*"Edificio Quantum - Hotel Ibis, parqueadero vigilado"*) y marcas premium (*Wella, Olaplex*).
-   * Añadir llamados a la acción directos (*"¡Agenda tu valoración sin costo por WhatsApp!"*).
-3. **Maximización de Resultados Enriquecidos (Rich Snippets):**
-   * Aprovechar `AggregateRating` (estrellas visibles en SERP que incrementan el CTR hasta un +30%).
-   * Reforzar `FAQPage` para ocupar mayor espacio vertical en pantallas móviles.
-   * Mantener sincronizados los nodos `VideoObject` para activar miniaturas de video en búsquedas locales.
-4. **Enfoque en Búsquedas Transaccionales Long-Tail:**
-   * Posicionar términos de intención inmediata (*"alisado keratina chia precio"*, *"arreglo barba hombre chia"*, *"limpieza facial profunda chia"*), que presentan CTRs orgánicos superiores al 8-15 %.
 
