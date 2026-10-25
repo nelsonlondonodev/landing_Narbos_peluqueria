@@ -18,7 +18,6 @@ export function getNavbarHTML(basePath = './', isHome = true) {
         
         <!-- Desktop Menu -->
         <div class="desktop-menu flex items-center space-x-8 max-md:hidden pl-8">
-            ${navLink(isHome ? '#' : basePath, 'Inicio')}
             ${renderMegaMenuDesktop(menuCategories, basePath)}
             ${navLink(resolveRoute('nosotros', basePath), 'Nosotros')}
             ${navLink(resolveRoute('contacto', basePath), 'Contacto')}
@@ -62,7 +61,7 @@ function renderLogo(basePath, isHome) {
     const logoSrc = resolveAsset('images/brand/logo_narbos.webp', basePath);
     return `
         <a href="${isHome ? '#' : basePath}" class="block group">
-             <img src="${logoSrc}" alt="Narbo's Salón Spa Logo" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56" decoding="async">
+             <img src="${logoSrc}" alt="Narbo's Salón Spa, ir al inicio" class="h-12 w-auto md:h-14 transition-transform duration-300 group-hover:scale-105" width="280" height="56" decoding="async">
         </a>
     `;
 }
