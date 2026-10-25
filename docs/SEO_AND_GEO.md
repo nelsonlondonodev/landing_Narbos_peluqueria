@@ -41,7 +41,7 @@ Al añadir un artículo de blog que sea autoridad en un tema nuevo, considera si
 
 ## Contenido editorial: blog
 
-- El backlog de temas de blog vive en [`PLAN_CONTENIDOS_BLOG.md`](PLAN_CONTENIDOS_BLOG.md).
+- El backlog de temas de blog vive fuera del repo, con el resto de la planificación de marketing (`datos-marketing`).
 - `pnpm new-post` hace scaffolding de un artículo nuevo; `pnpm generate:blog` regenera las páginas HTML del blog a partir de `js/data/articles.js`.
 - Cada artículo nuevo debe: enlazarse desde `blog/index.html`, incluir JSON-LD `BlogPosting`/`FAQPage`, y añadirse al sitemap (automático en el siguiente build).
 

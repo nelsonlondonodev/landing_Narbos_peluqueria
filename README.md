@@ -48,7 +48,6 @@
 ├── css/                                        # input.css (fuente) y styles.css (compilado)
 ├── scripts/                                    # Pipeline de build, SEO y sincronización (Node.js)
 ├── _templates/                                 # Plantilla HTML para nuevas páginas de servicio
-├── database/                                   # SQL de un futuro programa de fidelización (no integrado aún)
 ├── docs/                                       # Documentación técnica ampliada (ver abajo)
 ├── dist/                                       # Salida del build (generada, no editar a mano)
 └── CHANGELOG.md                                # Historial de releases
@@ -108,8 +107,6 @@ cp .env.example .env
 | [docs/LAYOUT_GUIDE.md](docs/LAYOUT_GUIDE.md) | Patrón HTML obligatorio de página (header fijo, `#app-wrapper`, z-index) |
 | [docs/BUILD_AND_DEPLOYMENT.md](docs/BUILD_AND_DEPLOYMENT.md) | Pipeline de build, CI/CD, variables de entorno y despliegue a Hostinger |
 | [docs/SEO_AND_GEO.md](docs/SEO_AND_GEO.md) | Estrategia de SEO técnico, JSON-LD, IndexNow, sitemap y GEO (`llms.txt`) |
-| [docs/PLAN_CONTENIDOS_BLOG.md](docs/PLAN_CONTENIDOS_BLOG.md) | Backlog editorial del blog |
-| [docs/GMB_ORCHESTRATOR_PLAN.md](docs/GMB_ORCHESTRATOR_PLAN.md) | Propuesta (no implementada) de orquestador de Google Business Profile |
 | [CHANGELOG.md](CHANGELOG.md) | Historial de releases, versión por versión |
 
 ## Convenciones para agentes de IA

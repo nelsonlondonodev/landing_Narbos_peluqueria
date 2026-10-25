@@ -24,7 +24,6 @@ El resultado final a desplegar es siempre `dist/` — nunca se sirve el código 
 | Variable | Dónde se usa | Notas |
 |---|---|---|
 | `GOOGLE_MAPS_API_KEY` | Inyectada en el JS bundleado en build time | Local: `.env` (ver `.env.example`). CI: GitHub Secret `GOOGLE_MAPS_API_KEY`. Debe estar **restringida por dominio/referrer** en Google Cloud Console. |
-| `GOOGLE_CLOUD_PROJECT_ID`, `GOOGLE_BUSINESS_LOCATION_ID`, `GOOGLE_OAUTH_REFRESH_TOKEN`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Reservadas para el futuro orquestador de Google Business Profile | Ver [GMB_ORCHESTRATOR_PLAN.md](GMB_ORCHESTRATOR_PLAN.md) — **no implementado aún** |
 
 `scripts/sync-google-hours.js` y `scripts/sync-google-reviews.js` cargan `.env` manualmente con un parser propio (no usan una librería tipo `dotenv`).
 
