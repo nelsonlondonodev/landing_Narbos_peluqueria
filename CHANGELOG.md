@@ -6,6 +6,19 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🧹 Menú más limpio, badge en nosotros y repo sin lastre v2.8.63 (25 de octubre de 2026)
+
+*   **Navbar**: «Inicio» sale del menú de escritorio; el logo lleva a la home y su alt lo dice («Narbo's Salón Spa, ir al inicio»). En el menú móvil se queda. En la home de escritorio, Clarity registraba 1 clic en «Inicio» frente a 7 en el logo en 30 días (`994784c`).
+*   **Nosotros**: el hero muestra el ABIERTO/CERRADO junto a «Agenda tu cita», como el resto de heroes (`3137340`).
+*   **Uñas acrílicas y gel**: la galería sirve en móvil las variantes de 640 px que ya existían; el móvil baja 148 K en vez de 324 K (`f2a4cc8`).
+*   **Política de privacidad**: fuera el «Club Narbo's» y sus cupones y regalos de cumpleaños, un programa que nunca llegó a funcionar. La revocación en cualquier momento se mantiene (`0c554a7`, `6aebdfa`).
+*   **Limpieza del repo**: fuera un vídeo de 2 MB, seis scripts, siete imágenes y nueve dependencias sin uso, el esquema de fidelización y el esqueleto del orquestador de GMB. Los análisis de GSC salen del repo (`8fa0efa`, `b7f8e1c`, `6a0ec5e`).
+*   **Docs técnicos** al día con el código: deploy por rsync, claves `_WEB`/`_BUILD`, SSG y schema (`2331d85`).
+*   **Reseñas sincronizadas**: 368 opiniones en Google (`da6864e`).
+*   **Versión**: `v2.8.63`.
+
+---
+
 ## 🧭 Heroes editoriales en toda la web, migas de pan y schema v2.8.62 (24 de octubre de 2026)
 
 *   **Se publica junto con la v2.8.61** (hero editorial de la home), que no llegó a desplegarse por separado.

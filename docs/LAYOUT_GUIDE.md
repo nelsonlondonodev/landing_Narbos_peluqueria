@@ -62,4 +62,4 @@ Reemplaza la larga lista de clases de utilidad (`fixed w-full z-50...`). Úsala 
 Bloquea el scroll del fondo cuando el menú está abierto. Se gestiona automáticamente desde `MobileMenu.js`.
 
 ---
-**Nota**: Si creas una nueva página, simplemente copia la estructura de `peluqueria/index.html` para asegurar compatibilidad.
+**Nota**: Si creas una nueva página, simplemente copia la estructura de `servicios/peluqueria/index.html` para asegurar compatibilidad.

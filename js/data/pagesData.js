@@ -301,12 +301,7 @@ export const pagesData = Object.freeze({
             ctaMessage: 'Hola, vi el video de la capacitación con Wella en su web y quiero agendar una cita.',
             alt: "Colorista de Narbo's Salón Spa aplicando mechas durante una capacitación de Wella Professionals",
             ariaLabel: 'Reproducir video: Capacitación Wella, Diseño de Color y Corte en Chía'
-        },
-        // Página de marca: se lee, no se reserva. El ABIERTO/CERRADO es un dato
-        // transaccional y aquí solo sería ruido; la calificación sí se queda.
-        // Va fuera de `hero` porque los badges se cuelgan de `section#inicio`, que
-        // también tienen las fichas sin bloque `hero`.
-        heroBadges: { status: false }
+        }
     },
     'contacto': {
         metaTitle: "Contacto y horarios | Narbo's Salón Spa en Chía",
@@ -1185,6 +1180,7 @@ export const pagesData = Object.freeze({
                 type: 'image',
                 layout: 'featured-video',
                 src: 'images/pages/unas/manicure-peluqueria-en-chia-narbos-salon.webp',
+                srcMobile: 'images/pages/unas/manicure-peluqueria-en-chia-narbos-salon-mobile.webp',
                 title: "Efecto Cat-Eye Borgoña",
                 subtitle: "Uñas Esculpidas & Brillo Magnético",
                 alt: "Manicure profesional con efecto cat eye borgoña brillante en Narbo's Chía",
@@ -1195,6 +1191,7 @@ export const pagesData = Object.freeze({
                 type: 'image',
                 layout: 'vertical',
                 src: 'images/pages/unas/estudios-de-manicure-chia-diseno-unas-narbos.webp',
+                srcMobile: 'images/pages/unas/estudios-de-manicure-chia-diseno-unas-narbos-mobile.webp',
                 title: "Manicure Ruso Blanco Milk",
                 subtitle: "Elegancia & Acabado Impecable",
                 alt: "Manicure blanco lechoso de alta precisión en Narbo's Salón Spa Chía",
@@ -1205,6 +1202,7 @@ export const pagesData = Object.freeze({
                 type: 'image',
                 layout: 'vertical',
                 src: 'images/pages/unas/manicure-diseno-flores-vino-tinto-chia-narbos.webp',
+                srcMobile: 'images/pages/unas/manicure-diseno-flores-vino-tinto-chia-narbos-mobile.webp',
                 title: "Diseño Vino & Flores",
                 subtitle: "Nail Art Elegante & Delicado",
                 alt: "Manicure con diseño floral en tono vino tinto realizado en Narbo's Chía",

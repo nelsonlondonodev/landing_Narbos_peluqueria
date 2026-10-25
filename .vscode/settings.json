@@ -24,7 +24,6 @@
     "**/.DS_Store",
     "**/*.log",
     "**/scratch/**",
-    "**/database/**",
     "**/dist/**",
     "**/seo_tracking/**",
     "**/.vscode/**",

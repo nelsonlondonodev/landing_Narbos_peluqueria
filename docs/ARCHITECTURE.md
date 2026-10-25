@@ -16,7 +16,7 @@ Este documento describe cómo está construido el frontend: no es una SPA ni usa
 - **`_checkIfHomePage()`** determina si la página actual es Home, para decidir si carga `HomeHubController`.
 - **`mountLayout()`** inyecta navbar/footer/contact-form en los contenedores `#navbar-root`, `#footer-root`, `#contact-root` si están vacíos.
 - **`mountHero()`** busca en `pagesData` (por coincidencia de path) los datos del hero y los renderiza.
-- **`initCoreComponents()`** instancia siempre: `MobileMenu`, `WhatsAppButton`, `HeaderController`, `PageTransitionController`, `HoursController`, `StoreBadge`.
+- **`initCoreComponents()`** instancia siempre: `MobileMenu`, `WhatsAppButton`, `HeaderController`, `PageTransitionController`, `HoursController`, `StoreBadge`, `SearchController`.
 - **`initInteractiveComponents()` + `observeAndInit()`**: patrón de **hidratación perezosa** — usa `IntersectionObserver` para hacer `import()` dinámico de un controlador/componente solo cuando su selector (`#gallery-root`, `#faq`, `#reviews-slider-wrapper`, etc.) entra en el viewport. Esto evita cargar JS de secciones que el usuario nunca llega a ver.
 - **`resolvePath()` / `resolveDeep()`**: resuelven URLs de rutas y assets (incluye `src`, `poster`, `subImages`) contra el `appRoot` calculado en runtime.
 
@@ -28,8 +28,9 @@ Este documento describe cómo está construido el frontend: no es una SPA ni usa
 | `controllers/` | Lógica de una página o feature concreta; se instancian una vez montado el DOM correspondiente | `HomeHubController.js`, `BlogController.js`, `OxidationCalculator.js` |
 | `services/` | Transversales a toda la app, no atados a una página | `AnalyticsService.js`, `CookieConsentService.js`, `UIService.js` |
 | `data/` | Contenido puro (arrays/objetos), sin lógica de render | `servicesData.js`, `pagesData.js`, `videoData.js`, `masterPrices.js` |
+| `utils/` | Funciones puras compartidas entre cliente y SSG | `migas.js` |
 
-Convención de nombres: los hubs de página siguen el patrón `<Área>HubController.js` (`HairHubController`, `NailsHubController`, `BarberHubController`, `EstheticsHubController`, `AboutHubController`, `HomeHubController`).
+Convención de nombres: los hubs de página siguen el patrón `<Área>HubController.js` (`HairHubController`, `NailsHubController`, `BarberHubController`, `EstheticsHubController`, `HomeHubController`).
 
 ## `js/config.js`: resolución de entorno y rutas
 
@@ -45,8 +46,9 @@ Convención de nombres: los hubs de página siguen el patrón `<Área>HubControl
 
 Antes de servir en producción, `scripts/build.js` invoca un SSG propio (`scripts/ssg.js`) que:
 
-- Importa directamente los mismos módulos de `js/components/` y `js/data/` que usa el cliente (Navbar, Footer, HeroSection, ServiceCard, ArticleCard, HomeModals) usando `JSDOM`.
-- Pre-renderiza el HTML de esas secciones **dentro** de los archivos `.html` de `dist/`, para que el contenido crítico (grids de servicios, cards de artículos) esté presente sin esperar hidratación en cliente — mejora LCP/CLS y indexabilidad.
+- Importa directamente los mismos módulos de `js/components/` y `js/data/` que usa el cliente (Navbar, Footer, HeroSection, HeroBadges, Breadcrumbs, VideoSection, ServiceCard, ArticleCard, tarjetas de `ReviewsMarquee`, HomeModals) usando `JSDOM`.
+- Pre-renderiza el HTML de esas secciones **dentro** de los archivos `.html` de `dist/`, para que el contenido crítico (hero, migas de pan, grids de servicios, cards de artículos) esté presente sin esperar hidratación en cliente — mejora LCP/CLS y indexabilidad.
+- Escribe también el JSON-LD que depende de datos sincronizados: `OpeningHoursSpecification` (de `business-hours.js`), `AggregateRating` y `{{reviewCount}}` (de `google-reviews.js`) y el `BreadcrumbList` de cada página.
 - El JS del lado del cliente sigue montando/hidratando el resto de forma perezosa como se describe arriba; el SSG solo adelanta el HTML inicial.
 
 ## Páginas de servicio y plantillas
@@ -57,7 +59,7 @@ Antes de servir en producción, `scripts/build.js` invoca un SSG propio (`script
 ## Estilos
 
 - `css/input.css` es la fuente (Tailwind v4 + utilidades custom como `.site-header`, `#app-wrapper`).
-- `css/styles.css` es el artefacto compilado (`pnpm dev` para watch, `pnpm build` para producción con purga).
+- `css/styles.css` es el artefacto compilado (`pnpm dev` para watch, `pnpm build` para producción minificado).
 
 ## Ver también
 
