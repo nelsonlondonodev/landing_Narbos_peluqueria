@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🔢 Contador de reseñas al día v2.8.64 (3 de noviembre de 2026)
+
+*   **Reseñas sincronizadas**: el contador sube de 368 a 369 opiniones en Google en los heroes, el `aggregateRating` de la home y de Nosotros, y el schema de Maquillaje.
+*   **Versión**: `v2.8.64`.
+
+---
+
 ## 🧹 Menú más limpio, badge en nosotros y repo sin lastre v2.8.63 (25 de octubre de 2026)
 
 *   **Navbar**: «Inicio» sale del menú de escritorio; el logo lleva a la home y su alt lo dice («Narbo's Salón Spa, ir al inicio»). En el menú móvil se queda. En la home de escritorio, Clarity registraba 1 clic en «Inicio» frente a 7 en el logo en 30 días (`994784c`).
