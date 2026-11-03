@@ -1,12 +1,12 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-10-25T10:30:02.438Z
+ * Última sincronización con Google Business Profile: 2026-11-03T06:52:02.835Z
  */
 const googleReviews = {
-    "lastSync": "2026-10-25T10:30:02.438Z",
+    "lastSync": "2026-11-03T06:52:02.835Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
-    "userRatingCount": 368,
+    "userRatingCount": 369,
     "reviews": [
         {
             "author": "Allyhome Manager",
@@ -37,10 +37,10 @@ const googleReviews = {
             "verified": true
         },
         {
-            "author": "Alejandra Millan",
+            "author": "Mariana",
             "rating": 5,
-            "text": "Quiero felicitarlos por el excelente servicios y el trabajo que realizan. Los elegí por las calificaciones en Google y no me arrepiento. Me asesoraron de la mejor forma. Mi primer Balayage y solo recibí cumplidos de mis familiares y amigos, por lo bonito que me dejaron el pelo.\nPasado un mes les escribí nuevamente para un tema de asesoría sobre el balayage y me atendieron presencialmente de una forma muy cordial.. me voy muy feliz. Recomendadisimos y volveré!",
-            "relativeTime": "Hace 4 meses",
+            "text": "Son super amables!! Ambiente tranquilo.\nMe maquilla una chica súper querida llamada Mónica y quedé espectacular!\nYo soy crespa y la verdad quedé sorprendida cuando aproveche su servicio de definición, increíble! Al igual la persona que me atendió Martha!! Todos son un amor ❤️❤️",
+            "relativeTime": "Hace 1 mes",
             "verified": true
         }
     ]
