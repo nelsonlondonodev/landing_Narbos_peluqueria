@@ -4561,6 +4561,27 @@
     animation: none;
   }
 }
+@media (min-width: 1024px) and (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hero-tile {
+    translate: calc(var(--mx, 0) * var(--z) * 1px) calc(var(--my, 0) * var(--z) * 1px);
+    transition: scale 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+  }
+  .hero-tile:hover {
+    z-index: 1;
+    box-shadow: 0 28px 56px -18px rgb(54 64 65 / 0.55);
+    scale: 1.03;
+  }
+  .hero-tile img {
+    translate: calc(var(--mx, 0) * var(--z) * -0.5px) calc(var(--my, 0) * var(--z) * -0.5px);
+    transition: scale 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .hero-mosaic:hover .hero-tile {
+    will-change: translate;
+  }
+  .hero-mosaic:hover .hero-tile img {
+    scale: 1.04;
+  }
+}
 .whatsapp-float {
   position: fixed;
   right: calc(var(--spacing) * 5);

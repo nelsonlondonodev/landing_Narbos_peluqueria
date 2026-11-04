@@ -17,6 +17,7 @@ export class HomeHubController {
     init() {
         this.mountHomeModals();
         this.mountHomeServices();
+        this.initHeroParallax();
         this.initInteractiveComponents();
         this.initMapLazyLoad();
     }
@@ -48,6 +49,21 @@ export class HomeHubController {
             };
             grid.appendChild(new ServiceCard(processedData).render());
         });
+    }
+
+    /**
+     * Activa el movimiento del mosaico del hero. El módulo se pide en la primera entrada
+     * del ratón, así no pesa en la carga ni llega a los móviles.
+     */
+    initHeroParallax() {
+        const mosaico = document.querySelector('.hero-mosaic');
+        const conRaton = '(min-width: 1024px) and (hover: hover) and (prefers-reduced-motion: no-preference)';
+        if (!mosaico || !window.matchMedia(conRaton).matches) return;
+
+        mosaico.addEventListener('pointerenter', async (evento) => {
+            const { seguirCursor } = await import('../components/HeroMosaicParallax.js');
+            seguirCursor(mosaico, evento);
+        }, { once: true });
     }
 
     /**
