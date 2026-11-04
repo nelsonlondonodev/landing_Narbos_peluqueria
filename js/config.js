@@ -142,6 +142,9 @@ export const siteConfig = Object.freeze({
     }
 });
 
+/** Mensaje de las páginas que no declaran uno propio. */
+export const DEFAULT_WHATSAPP_MESSAGE = "Hola, vengo de la web de Narbo's y quiero agendar una cita";
+
 /**
  * Compone un enlace de WhatsApp con el mensaje ya precargado.
  *
