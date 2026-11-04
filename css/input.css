@@ -339,6 +339,159 @@
   }
 }
 
+/* --- Paneles de servicios de la home ---
+   Efecto de Focus Cards (Aceternity) reescrito en CSS: el panel activo se ensancha y los
+   demás se desenfocan. Solo con ratón y desde lg; en táctil no hay hover que lo abra y
+   siguen las tarjetas de ServiceCard. `--abierto` vale 0 o 1 y todo lo demás se deriva de
+   él con transform, opacity y filter, para no recolocar el texto mientras crece el panel. */
+@media (min-width: 1024px) and (hover: hover) {
+  /* cqw y no vw: 100vw cuenta la barra de scroll y cortaría 15 px del último panel. */
+  #servicios {
+    container-type: inline-size;
+    padding-bottom: 0;
+  }
+
+  #services-grid {
+    display: flex;
+    gap: 0;
+    width: 100cqw;
+    height: clamp(30rem, 74vh, 42rem);
+    margin-inline: calc(50% - 50cqw);
+    background: var(--color-brand-gray-dark);
+    counter-reset: panel;
+  }
+
+  .service-panel {
+    --abierto: 0;
+    --curva: cubic-bezier(0.22, 1, 0.36, 1);
+    --titulo-cerrado: 0.6;
+    --margen: 1.5rem;
+
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-width: 0;
+    height: 100%;
+    padding: 2rem var(--margen);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    translate: none;
+    counter-increment: panel;
+    transition: flex-grow 0.8s var(--curva);
+  }
+
+  .service-panel + .service-panel {
+    border-left: 1px solid rgb(255 255 255 / 0.2);
+  }
+
+  .service-panel:is(:hover, :focus-visible),
+  #services-grid:not(:has(:hover, :focus-visible)) > .service-panel:first-child {
+    --abierto: 1;
+    flex-grow: 3.2;
+  }
+
+  .service-panel:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: -8px;
+  }
+
+  .service-panel::before {
+    content: counter(panel, decimal-leading-zero);
+    position: absolute;
+    top: 2rem;
+    left: var(--margen);
+    z-index: 10;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-size: 0.875rem;
+    font-variant-numeric: lining-nums;
+    letter-spacing: 0.2em;
+    text-shadow: 0 1px 6px rgb(0 0 0 / 0.6);
+  }
+
+  .service-panel__velo,
+  .service-panel__icono {
+    display: none;
+  }
+
+  .service-panel__sombra {
+    opacity: 1;
+    background: linear-gradient(to top, rgb(16 20 20 / 0.88), rgb(16 20 20 / 0.1) 60%);
+  }
+
+  .service-panel__foto {
+    opacity: 1;
+    scale: none;
+    filter: brightness(calc(0.68 + 0.32 * var(--abierto)));
+    transform: scale(calc(1.08 - 0.08 * var(--abierto)));
+    transition: transform 1s var(--curva), filter 0.6s ease;
+  }
+
+  /* Foto vertical: el recorte deja a la clienta y las manos del estilista en su pelo. */
+  #service-card-peluqueria .service-panel__foto {
+    object-position: 50% 62%;
+  }
+
+  #services-grid:has(:hover, :focus-visible) .service-panel:not(:hover, :focus-visible) .service-panel__foto {
+    filter: blur(3px) brightness(0.5) saturate(0.8);
+  }
+
+  /* El detalle cuelga por debajo del panel y sube con el título: es transform, no altura. */
+  .service-panel__texto {
+    flex: none;
+    width: 22rem;
+    transform: translateY(calc((1 - var(--abierto)) * 7.5rem));
+    transition: transform 0.8s var(--curva);
+  }
+
+  .service-panel__titulo {
+    width: max-content;
+    margin-bottom: 0.75rem;
+    font-size: 2.5rem;
+    line-height: 1.1;
+    transform: scale(calc(var(--titulo-cerrado) + (1 - var(--titulo-cerrado)) * var(--abierto)));
+    transform-origin: left bottom;
+    transition: transform 0.8s var(--curva);
+  }
+
+  .service-panel__detalle {
+    height: 7rem;
+    margin-bottom: -0.5rem;
+    opacity: var(--abierto);
+    transition: opacity 0.4s ease calc(var(--abierto) * 0.2s);
+  }
+
+  .service-panel.animate__zoomIn {
+    animation-name: panel-reveal;
+    animation-duration: 1.1s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes panel-reveal {
+    from { clip-path: inset(100% 0 0 0); }
+    to { clip-path: inset(0); }
+  }
+
+  @media (min-width: 1280px) {
+    .service-panel {
+      --titulo-cerrado: 0.7;
+      --margen: 2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-panel,
+    .service-panel__foto,
+    .service-panel__texto,
+    .service-panel__titulo,
+    .service-panel__detalle {
+      transition: none;
+    }
+  }
+}
+
 /* --- UI Badges --- */
 .badge-latest {
   @apply absolute top-4 left-4 z-20 px-3 py-1 bg-brand-green text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg border border-white/20 animate-pulse;
