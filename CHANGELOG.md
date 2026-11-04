@@ -6,6 +6,15 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## ✨ Paneles de servicios, hero interactivo y WhatsApp directo v2.8.65 (4 de noviembre de 2026)
+
+*   **Servicios en la home**: con ratón y desde 1024 px, las tarjetas bajo el hero pasan a cinco paneles a todo el ancho: el activo se ensancha y los demás se desenfocan. Es CSS puro, sin dependencias. En táctil sigue la tarjeta anterior y la lista móvil no cambia. La sección estrena foto de peluquería, vertical y con variante móvil, porque la de 640×480 se veía blanda (`32bb550`).
+*   **Hero de la home**: las teselas del mosaico siguen al cursor según su profundidad. El módulo pesa 494 bytes con gzip y solo se pide cuando entra el ratón, así que no toca la carga ni los móviles (`db85ca8`).
+*   **Botón flotante de WhatsApp**: abre el chat directamente, sin modal, con un mensaje que nombra la página. En 30 días, un tercio o más de quienes abrían el modal no seguía (`8b40792`).
+*   **Versión**: `v2.8.65`.
+
+---
+
 ## 🔢 Contador de reseñas al día v2.8.64 (3 de noviembre de 2026)
 
 *   **Reseñas sincronizadas**: el contador sube de 368 a 369 opiniones en Google en los heroes, el `aggregateRating` de la home y de Nosotros, y el schema de Maquillaje.
