@@ -25,7 +25,8 @@ export const servicesData = Object.freeze([
         i18nDesc: "service.hair.desc",
         icon: '<path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"/><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>',
         link: "servicios/peluqueria/",
-        image: "images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
+        image: "images/pages/peluqueria/balayage-correccion-color-chia-narbos-salon.webp",
+        imageMobile: "images/pages/peluqueria/balayage-correccion-color-chia-narbos-salon-mobile.webp",
         animationDelay: "0s"
     },
     {

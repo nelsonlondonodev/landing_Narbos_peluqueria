@@ -101,7 +101,7 @@ export const SITE_URL = 'https://narbossalon.com';
  * Configuración global del sitio.
  */
 export const siteConfig = Object.freeze({
-    version: "2.8.64", // Versión actualizada
+    version: "2.8.65", // Versión actualizada
     basePath: BASE_PATH,
     socialLinks: [
         {
@@ -141,6 +141,9 @@ export const siteConfig = Object.freeze({
         googleMapsApiKey: "___GOOGLE_MAPS_API_KEY___"
     }
 });
+
+/** Mensaje de las páginas que no declaran uno propio. */
+export const DEFAULT_WHATSAPP_MESSAGE = "Hola, vengo de la web de Narbo's y quiero agendar una cita";
 
 /**
  * Compone un enlace de WhatsApp con el mensaje ya precargado.

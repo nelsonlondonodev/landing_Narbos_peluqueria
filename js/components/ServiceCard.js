@@ -75,12 +75,7 @@ export class ServiceCard {
 
                 <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${this.props.description}</p>
                 
-                <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
-                    <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
-                        <span>Ver detalles</span>
-                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                    </span>
-                </div>
+                ${this.getActionButton()}
             </div>
         `;
     }
@@ -121,10 +116,13 @@ export class ServiceCard {
      * desde `md`, la tarjeta grande con la foto bajo el velo verde. Apiladas a tamaño
      * completo, las cinco sumaban 1.433 px de scroll en un móvil de 390 px, y son lo más
      * pulsado de la home: en fila caben todas en una pantalla.
+     *
+     * Con ratón y desde `lg`, `.service-panel` (css/input.css) las convierte en paneles
+     * a todo el ancho que se expanden; las clases `service-panel__*` solo sirven a eso.
      */
     renderOverlayContent(element) {
         element.className = [
-            'group relative overflow-hidden cursor-pointer select-none',
+            'service-panel group relative overflow-hidden cursor-pointer select-none',
             'max-md:flex max-md:items-center max-md:gap-4 max-md:p-3 max-md:rounded-xl max-md:bg-white max-md:shadow-md max-md:border max-md:border-brand-gray-lighter',
             'md:block md:h-full md:p-8 md:rounded-lg md:shadow-lg md:bg-brand-green md:hover:-translate-y-2 md:hover:shadow-2xl transition-[translate,box-shadow] duration-300'
         ].join(' ');
@@ -132,12 +130,14 @@ export class ServiceCard {
         element.innerHTML = `
             ${this.getOverlayBackground()}
             ${this.getOverlayIcon()}
-            <div class="relative z-10 flex-1 min-w-0">
-                <h3 class="font-serif font-bold max-md:text-lg max-md:text-brand-gray-dark max-md:mb-0.5 md:text-2xl md:text-white md:mb-3 md:drop-shadow-lg">${this.props.title}</h3>
-                <p class="text-sm font-medium max-md:text-brand-gray-dark/70 max-md:line-clamp-2 md:text-brand-light md:drop-shadow-md md:opacity-95 md:transition-colors md:duration-300 md:group-hover:text-white md:line-clamp-2">${this.props.description}</p>
-                <div class="max-md:hidden mt-4 pt-3 border-t border-white/10 w-full flex justify-between items-center text-sm font-medium text-white">
-                    <span>Ver más detalles</span>
-                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            <div class="service-panel__texto relative z-10 flex-1 min-w-0">
+                <h3 class="service-panel__titulo font-serif font-bold max-md:text-lg max-md:text-brand-gray-dark max-md:mb-0.5 md:text-2xl md:text-white md:mb-3 md:drop-shadow-lg">${this.props.title}</h3>
+                <div class="service-panel__detalle">
+                    <p class="text-sm font-medium max-md:text-brand-gray-dark/70 max-md:line-clamp-2 md:text-brand-light md:drop-shadow-md md:opacity-95 md:transition-colors md:duration-300 md:group-hover:text-white md:line-clamp-2">${this.props.description}</p>
+                    <div class="max-md:hidden mt-4 pt-3 border-t border-white/10 w-full flex justify-between items-center text-sm font-medium text-white">
+                        <span>Ver más detalles</span>
+                        ${this.getArrowIcon()}
+                    </div>
                 </div>
             </div>
             <svg class="md:hidden w-5 h-5 shrink-0 text-brand-green" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
@@ -149,7 +149,7 @@ export class ServiceCard {
             // En la fila del móvil es la miniatura; desde `md`, el fondo bajo el velo. El
             // <picture> solo es `contents` desde `md`: en la fila, su <source> contaría como
             // un hueco más del `gap` y desplazaría la miniatura.
-            const imgClass = "object-cover max-md:block max-md:w-20 max-md:h-20 max-md:shrink-0 max-md:rounded-lg md:absolute md:inset-0 md:w-full md:h-full md:z-0 md:opacity-40 md:transition-all md:duration-700 md:group-hover:opacity-100 md:group-hover:scale-105";
+            const imgClass = "service-panel__foto object-cover max-md:block max-md:w-20 max-md:h-20 max-md:shrink-0 max-md:rounded-lg md:absolute md:inset-0 md:w-full md:h-full md:z-0 md:opacity-40 md:transition-all md:duration-700 md:group-hover:opacity-100 md:group-hover:scale-105";
             const alt = this.props.imageAlt || `${this.props.title} en Narbo's Salón Spa Chía`;
             const img = `<img src="${this.props.image}" alt="${alt}" loading="lazy" width="${this.props.width}" height="${this.props.height}" class="${imgClass}">`;
 
@@ -163,10 +163,10 @@ export class ServiceCard {
                 ${picture}
 
                 <!-- Gradiente Base (Verde) que desaparece en hover -->
-                <div class="max-md:hidden absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0 transition-opacity duration-500 group-hover:opacity-0"></div>
+                <div class="service-panel__velo max-md:hidden absolute inset-0 bg-gradient-to-t from-brand-green/90 to-brand-green/60 z-0 transition-opacity duration-500 group-hover:opacity-0"></div>
                 
                 <!-- Gradiente Hover (Negro/Oscuro) para contraste de lectura -->
-                <div class="max-md:hidden absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="service-panel__sombra max-md:hidden absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             `;
         }
         return `<div class="max-md:hidden absolute inset-0 bg-gradient-to-br from-brand-green to-brand-green-dark z-0"></div>`;
@@ -174,7 +174,7 @@ export class ServiceCard {
 
     getOverlayIcon() {
         return `
-            <div class="max-md:hidden mb-4 relative z-10">
+            <div class="service-panel__icono max-md:hidden mb-4 relative z-10">
                 <svg class="w-12 h-12 text-white transition-colors duration-300 transition-transform duration-300 group-hover:scale-110 drop-shadow-md" 
                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
                      fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -188,19 +188,16 @@ export class ServiceCard {
      * Renderiza el contenido para la variante Standard (Grids).
      */
     renderStandardContent(element) {
-        // Updated classes: Removed transition-all, added transition-shadow.
         element.className = "group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full isolation-auto block text-left focus:outline-none focus:ring-0 active:outline-none hover:outline-none outline-none border-none ring-0";
 
         const imageHtml = this.props.image ? `
             <div class="relative aspect-[4/3] overflow-hidden bg-gray-100 shrink-0">
                 <img src="${this.props.image}" alt="${this.props.imageAlt || this.props.title}" loading="lazy" width="${this.props.width}" height="${this.props.height}" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
-                
-                <!-- Precio Overlay en Móvil/Desktop si se prefiere, pero aquí lo pondremos en el body para más claridad -->
+
             </div>
         ` : '';
 
-        // Sección de Precio Destacado
         const priceHtml = this.props.price ? `
             <div class="mt-2 mb-3">
                 <span class="inline-flex items-center gap-1.5 bg-brand-light/20 text-brand-green font-bold text-lg px-0 py-1 rounded-md">
@@ -209,15 +206,6 @@ export class ServiceCard {
                 </span>
             </div>
         ` : '';
-
-        const actionHtml = `
-            <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
-                <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
-                    <span>Ver detalles</span>
-                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                </span>
-            </div>
-        `;
 
         element.innerHTML = `
             ${imageHtml}
@@ -229,7 +217,23 @@ export class ServiceCard {
                 ${priceHtml}
 
                 <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${this.props.description}</p>
-                ${actionHtml}
+                ${this.getActionButton()}
+            </div>
+        `;
+    }
+
+    getArrowIcon() {
+        return `<svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>`;
+    }
+
+    /** Pie de las tarjetas de catálogo (variantes 'standard' y 'logo'). */
+    getActionButton() {
+        return `
+            <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
+                <span class="relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-green transition-colors duration-300 bg-brand-green/5 border border-brand-green/20 rounded-lg group-hover:bg-brand-green group-hover:text-white">
+                    <span>Ver detalles</span>
+                    ${this.getArrowIcon()}
+                </span>
             </div>
         `;
     }

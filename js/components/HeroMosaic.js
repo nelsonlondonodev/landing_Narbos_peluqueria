@@ -8,17 +8,18 @@
  */
 
 /**
- * Teselas del mosaico, en % del mosaico: posición, tamaño y retardo de entrada. La
+ * Teselas del mosaico, en % del mosaico: posición, tamaño y retardo de entrada. `z` es
+ * la profundidad: los píxeles que se desplaza con el cursor en el borde del mosaico. La
  * primera es la más grande y la única con alt y prioridad: es la candidata a LCP.
  * El encuadre de la foto lo pone `.hero-tile img` en `css/input.css`.
  */
 const TILES = Object.freeze([
-    { x: 26, y: 8, w: 40, h: 56, delay: '0.05s' },
-    { x: 69, y: 0, w: 31, h: 42, delay: '0.15s' },
-    { x: 26, y: 67, w: 40, h: 31, delay: '0.25s' },
-    { x: 69, y: 45, w: 31, h: 36, delay: '0.3s' },
-    { x: 0, y: 24, w: 23, h: 30, delay: '0.35s' },
-    { x: 0, y: 57, w: 23, h: 22, delay: '0.45s' }
+    { x: 26, y: 8, w: 40, h: 56, z: 10, delay: '0.05s' },
+    { x: 69, y: 0, w: 31, h: 42, z: 14, delay: '0.15s' },
+    { x: 26, y: 67, w: 40, h: 31, z: 12, delay: '0.25s' },
+    { x: 69, y: 45, w: 31, h: 36, z: 8, delay: '0.3s' },
+    { x: 0, y: 24, w: 23, h: 30, z: 14, delay: '0.35s' },
+    { x: 0, y: 57, w: 23, h: 22, z: 10, delay: '0.45s' }
 ]);
 
 /**
@@ -30,13 +31,13 @@ const TILES = Object.freeze([
 export function getHeroMosaicHTML({ image, imageMobile, alt, width, height }) {
     const source = imageMobile ? `<source media="(max-width: 768px)" srcset="${imageMobile}">` : '';
 
-    return TILES.map(({ x, y, w, h, delay }, index) => {
+    return TILES.map(({ x, y, w, h, z, delay }, index) => {
         const isMain = index === 0;
         const imgAttrs = isMain ? `alt="${alt}" fetchpriority="high"` : 'alt=""';
         // Las variables van en `style` y no como clases `[--x:26]`: Tailwind solo genera
         // las clases que encuentra escritas tal cual, y aquí los números se interpolan.
         return `
-            <div class="hero-tile" style="--x:${x};--y:${y};--w:${w};--h:${h};--d:${delay}"${isMain ? '' : ' aria-hidden="true"'}>
+            <div class="hero-tile" style="--x:${x};--y:${y};--w:${w};--h:${h};--z:${z};--d:${delay}"${isMain ? '' : ' aria-hidden="true"'}>
                 <picture>
                     ${source}
                     <img src="${image}" ${imgAttrs} loading="eager" decoding="async" width="${width}" height="${height}">

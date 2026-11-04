@@ -1,4 +1,4 @@
-import { getWhatsAppUrl, siteConfig } from '../config.js';
+import { getWhatsAppUrl, siteConfig, DEFAULT_WHATSAPP_MESSAGE } from '../config.js';
 import { getHeroMosaicHTML } from './HeroMosaic.js';
 
 /**
@@ -21,8 +21,6 @@ import { getHeroMosaicHTML } from './HeroMosaic.js';
  * @property {number} [imageWidth] - Medidas intrínsecas de la foto, para el mosaico.
  * @property {number} [imageHeight]
  */
-
-const DEFAULT_CTA_MESSAGE = "Hola, vengo de la web de Narbo's y quiero agendar una cita";
 
 const ARROW_RIGHT = '<svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg>';
 const PHONE_ICON = '<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 0 1 2-2h3.28a1 1 0 0 1 .95.68l1.5 4.5a1 1 0 0 1-.5 1.21l-2.26 1.13a11 11 0 0 0 5.52 5.52l1.13-2.26a1 1 0 0 1 1.21-.5l4.5 1.5a1 1 0 0 1 .68.95V19a2 2 0 0 1-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>';
@@ -66,7 +64,7 @@ const MOSAIC_DECOR = `
  */
 export const getHeroHTML = ({
     title, subtitle, imageSrc, imageSrcMobile, imageAlt, eyebrow, breadcrumb,
-    ctaMessage = DEFAULT_CTA_MESSAGE, ctaLabel = 'Agenda tu cita', actions = [], secondaryCta,
+    ctaMessage = DEFAULT_WHATSAPP_MESSAGE, ctaLabel = 'Agenda tu cita', actions = [], secondaryCta,
     mosaic = false, imageWidth, imageHeight
 }) => `
     <section id="inicio" class="relative bg-brand-light/30">
@@ -77,7 +75,7 @@ export const getHeroHTML = ({
                 <h1 id="hero-title"${breadcrumb ? ` data-breadcrumb="${breadcrumb}"` : ''} class="hero-rise [--d:0.05s] ${eyebrow ? 'mt-4' : ''} font-serif font-bold text-brand-gray-dark ${mosaic ? 'text-[2.3rem] leading-[1.08] sm:text-5xl lg:text-[4.25rem]' : 'text-[2.1rem] leading-[1.1] sm:text-5xl lg:text-[3.6rem]'}">${title}</h1>
                 <p id="hero-subtitle" class="hero-rise [--d:0.1s] mt-5 max-w-md text-lg text-brand-gray-dark/75 ${mosaic ? 'md:text-xl' : ''}">${subtitle}</p>
                 <div class="hero-rise [--d:0.15s] mt-8 flex flex-wrap items-center gap-x-4 gap-y-4">
-                    <a href="${getWhatsAppUrl(ctaMessage)}" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 rounded-full bg-brand-green px-7 py-3.5 font-semibold text-white shadow-lg shadow-brand-green/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-gray-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
+                    <a href="${getWhatsAppUrl(ctaMessage)}" data-whatsapp-page target="_blank" rel="noopener" class="group inline-flex items-center gap-2 rounded-full bg-brand-green px-7 py-3.5 font-semibold text-white shadow-lg shadow-brand-green/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-gray-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">
                         ${ctaLabel}
                         ${ARROW_RIGHT}
                     </a>

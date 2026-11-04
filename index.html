@@ -425,9 +425,11 @@
 
             <section id="servicios" class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24">
                 <div class="container mx-auto px-6 max-w-screen-xl">
-                    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-brand-gray-dark text-center" data-animation="fadeInUp">Tu centro de belleza y spa en Chía</h2>
-                    <p class="text-lg text-brand-gray-dark/80 mb-12 max-w-3xl mx-auto text-center" data-animation="fadeInUp" data-animation-delay="0.2s">Especialistas en <strong>peluquería, manicura y tratamientos de spa</strong>. Descubre por qué somos el salón de referencia en la sabana de Bogotá para el cuidado de tu imagen.</p>
-                    
+                    <div class="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-end lg:mb-14">
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl lg:leading-tight font-serif font-bold mb-4 lg:mb-0 text-brand-gray-dark text-center lg:text-left" data-animation="fadeInUp">Tu centro de belleza y spa en Chía</h2>
+                        <p class="text-lg text-brand-gray-dark/80 mb-12 lg:mb-0 max-w-3xl mx-auto text-center lg:text-left" data-animation="fadeInUp" data-animation-delay="0.2s">Especialistas en <strong>peluquería, manicura y tratamientos de spa</strong>. Descubre por qué somos el salón de referencia en la sabana de Bogotá para el cuidado de tu imagen.</p>
+                    </div>
+
                     <!-- Las tarjetas salen de servicesData: el SSG las pinta en dist y HomeHubController en desarrollo. -->
                     <div id="services-grid" class="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-8 lg:grid-cols-4"></div>
                 </div>
