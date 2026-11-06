@@ -6,6 +6,15 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## ♿ Enlaces rastreables, contraste y hero móvil v2.8.67 (6 de noviembre de 2026)
+
+*   **Galerías**: los enlaces dejan `javascript:void(0)` y llevan su URL real, y las transiciones de página ignoran los clics que cancela GLightbox (`17e2129`).
+*   **Contraste**: el texto sobre el título del hero pasa a un verde solo para texto (5,19:1) y las marcas a gray-500 (4,63:1).
+*   **Tratamientos capilares**: el hero estrena variante móvil, como prueba para el LCP.
+*   **Versión**: `v2.8.67`.
+
+---
+
 ## ✂️ Barbería retirada y precio del botox v2.8.66 (6 de noviembre de 2026)
 
 *   **Barbería**: por decisión de la propietaria, sale de la web: sus dos páginas pasan con 301 a peluquería y se retiran la tarjeta de la home, el menú, el buscador, el schema y sus precios (`3ad2cdf`).
