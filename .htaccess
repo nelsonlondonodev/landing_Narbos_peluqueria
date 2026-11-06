@@ -12,6 +12,9 @@
     #     la variante .html salte directa al destino, sin pasar por la limpia.
     RewriteRule ^servicios/estetica/depilacion(\.html)?/?$ /servicios/estetica/depilacion-corporal [R=301,L]
     RewriteRule ^peluqueria(\.html)?/?$ /servicios/peluqueria/ [R=301,L]
+    # La propietaria retiró la barbería el 2026-11-06. El deploy no borra archivos del
+    # servidor, así que esta regla tiene que ganarle a la que sirve los .html.
+    RewriteRule ^servicios/barberia(\.html|/.*)?$ /servicios/peluqueria/ [R=301,L]
     RewriteRule ^unas-acrilicas-gel(\.html)?/?$ /servicios/unas-spa/unas-acrilicas-gel [R=301,L]
     RewriteRule ^blog/articles/guia-cuidado-capilar-sabana-viento-casco-frio(\.html)?/?$ /blog/articles/cuidado-capilar-sabana-viento-casco-frio [R=301,L]
 

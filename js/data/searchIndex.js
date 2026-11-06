@@ -3,7 +3,6 @@ import { hairPageServices, hairSubpageForCategory } from './hairPageServices.js'
 import { nailsServices } from './nailsServices.js';
 import { estheticsServices } from './estheticsServices.js';
 import { makeupServices } from './makeupServices.js';
-import { barberServices } from './barberServices.js';
 import articles from './articles.js';
 import { normalize, tokenize } from '../utils/siteSearchEngine.js';
 
@@ -28,8 +27,7 @@ const serviceCatalogs = [
     },
     { items: nailsServices, section: 'Uñas', resolveLink: (/** @type {string} */ link) => `servicios/unas-spa/${link}` },
     { items: estheticsServices, section: 'Estética' },
-    { items: makeupServices, section: 'Maquillaje', resolveLink: () => 'servicios/maquillaje/' },
-    { items: barberServices, section: 'Barbería' }
+    { items: makeupServices, section: 'Maquillaje', resolveLink: () => 'servicios/maquillaje/' }
 ];
 
 /**

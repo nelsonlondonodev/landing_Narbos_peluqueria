@@ -18,7 +18,6 @@ import { Breadcrumbs } from '../js/components/Breadcrumbs.js';
 import { migasDePagina, itemsDeBreadcrumbList } from '../js/utils/migas.js';
 import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
-import { barberServices } from '../js/data/barberServices.js';
 import { hairSalonServices } from '../js/data/hairSalonServices.js';
 import { HAIR_SUBPAGES, hairServicesFor } from '../js/data/hairPageServices.js';
 import { estheticsServices } from '../js/data/estheticsServices.js';
@@ -36,7 +35,6 @@ const DIST_DIR = path.join(__dirname, '../dist');
  * Registry de fuentes de datos para servicios por página.
  */
 const SERVICE_SOURCE_REGISTRY = {
-    'barberia': { source: barberServices, gridId: 'barber-services-grid', variant: 'standard' },
     'peluqueria': { source: hairSalonServices, gridId: 'hair-services-grid', variant: 'standard' },
     'estetica': { source: estheticsServices, gridId: 'aesthetics-services-static', variant: 'standard' },
     'maquillaje': { source: makeupServices, gridId: 'makeup-services-grid', variant: 'standard' },

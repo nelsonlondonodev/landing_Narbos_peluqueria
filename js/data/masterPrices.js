@@ -38,6 +38,7 @@ export const masterPrices = Object.freeze({
         },
         tratamientos: {
             alisadoProgresivo: '$420.000', // Desde, con aminoácidos
+            botoxCapilar: '$380.000', // Desde; confirmado por la propietaria el 2026-11-06
             shampoo: '$10.000' // Desde
         },
         // Confirmados por la propietaria el 2026-09-28. La cortina invisible no tiene
@@ -47,13 +48,6 @@ export const masterPrices = Object.freeze({
             adhesivoPar: '$160.000', // Desde
             mantenimientoPunto: '$4.000' // Desde; entre 4.000 y 5.000 por punto
         }
-    },
-    barber: {
-        corte: '$38.000',
-        arregloBarba: '$45.000',
-        camuflajeCanas: '$120.000',
-        infantil: '$35.000'
-        // No hay combo de corte + barba: cada servicio se cobra aparte.
     },
     makeup: {
         social: '$120.000',

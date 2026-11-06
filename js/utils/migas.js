@@ -12,8 +12,7 @@ export const SECCIONES = Object.freeze({
     peluqueria: 'Peluquería',
     estetica: 'Estética',
     'unas-spa': 'Uñas y Spa',
-    maquillaje: 'Maquillaje',
-    barberia: 'Barbería'
+    maquillaje: 'Maquillaje'
 });
 
 /**

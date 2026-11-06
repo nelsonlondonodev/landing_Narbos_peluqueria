@@ -63,8 +63,6 @@ export const synonyms = Object.freeze({
     alisar: ['alisado'],
     cortar: ['corte'],
     peluqueado: ['corte'],
-    hombre: ['barberia', 'barba'],
-    caballero: ['barberia', 'barba'],
     nino: ['infantil'],
     novia: ['novia', 'maquillaje'],
     boda: ['novia', 'maquillaje'],

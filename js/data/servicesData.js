@@ -61,16 +61,5 @@ export const servicesData = Object.freeze([
         image: "images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos.webp",
         imageMobile: "images/pages/maquillaje/maquillaje-profesional-eventos-chia-narbos-mobile.webp",
         animationDelay: "0.5s"
-    },
-    {
-        title: "Barbería",
-        i18nTitle: "service.barber.title",
-        description: "Cortes de cabello de autor, perfilado de barba y rituales masculinos de cuidado.",
-        i18nDesc: "service.barber.desc",
-        icon: '<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M7 8l10 5M7 13l10 5M7 18l6 3M11 3l6 3"/>',
-        link: "servicios/barberia/",
-        image: "images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp",
-        imageMobile: "images/pages/barberia/barberia-salon-spa-premium-chia-hero-mobile.webp",
-        animationDelay: "0.6s"
     }
 ]);

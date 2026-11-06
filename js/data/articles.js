@@ -67,11 +67,11 @@ const articles = [
         id: 'camuflaje-canas-hombre-chia',
         date: '10 de junio de 2026',
         isoDate: '2026-06-10',
-        category: 'Barbería y Estilo Masculino',
+        category: 'Estilo Masculino',
         title: 'Camuflaje de canas vs. tinte clásico para hombres: la alternativa discreta en Chía',
         description: '¿Quieres disimular tus canas con naturalidad? Comparamos el camuflaje demipermanente frente al tinte clásico. Ideal para hombres en Chía.',
         image: '/images/pages/barberia/corte-hombre-fade-moderno.webp',
-        alt: 'Camuflaje de canas y matización masculina en Narbo\'s Barbería Chía',
+        alt: 'Camuflaje de canas y matización masculina en Narbo\'s Chía',
         link: '/blog/articles/camuflaje-canas-hombre-chia'
     },
     {

@@ -52,12 +52,5 @@ export const getMenuCategories = () => [
         items: [
             { label: "Todo en Maquillaje", link: "servicios/maquillaje/" }
         ]
-    },
-    {
-        title: "Barbería",
-        link: "servicios/barberia/",
-        items: [
-            { label: "Corte y Barba", link: "servicios/barberia/barberia-cortes-hombre" }
-        ]
     }
 ];
