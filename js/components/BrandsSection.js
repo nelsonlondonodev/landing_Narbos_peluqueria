@@ -32,8 +32,8 @@ export class BrandsSection {
 
         const createBrandItem = (brand) => `
             <div class="brands-item group cursor-default select-none">
-                <span class="text-3xl md:text-4xl font-serif font-bold text-gray-300 group-hover:text-brand-green transition-colors duration-300 whitespace-nowrap">${brand.name}</span>
-                <span class="block text-[0.6rem] tracking-widest text-gray-300 group-hover:text-gray-600 uppercase mt-1 text-center">${brand.sub}</span>
+                <span class="text-3xl md:text-4xl font-serif font-bold text-gray-500 group-hover:text-brand-green transition-colors duration-300 whitespace-nowrap">${brand.name}</span>
+                <span class="block text-[0.6rem] tracking-widest text-gray-500 group-hover:text-gray-600 uppercase mt-1 text-center">${brand.sub}</span>
             </div>
         `;
 

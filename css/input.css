@@ -29,6 +29,8 @@
 @theme {
   /* Brand Colors */
   --color-brand-green: #6B755A;
+  /* El verde de marca da 4,36:1 sobre el fondo del hero; el texto pequeño necesita 4,5. */
+  --color-brand-green-text: #5F6950;
   --color-brand-light: #DED2C4;
   --color-brand-medium: #C5AB94;
   --color-brand-gray-light: #BEC2B4;

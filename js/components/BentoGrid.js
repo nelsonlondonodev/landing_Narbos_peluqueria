@@ -101,7 +101,7 @@ function getMediaContentHTML(item) {
 function getHiddenSubImagesHTML(item, galleryId) {
     if (!item.subImages || item.subImages.length === 0) return '';
     return item.subImages.map(subItem => `
-        <a href="javascript:void(0);" data-href="${subItem.src}" class="glightbox hidden" data-gallery="${galleryId}" data-type="image" aria-label="${subItem.alt || ''}"></a>
+        <a href="${subItem.src}" data-href="${subItem.src}" class="glightbox hidden" data-gallery="${galleryId}" data-type="image" aria-label="${subItem.alt || ''}"></a>
     `).join('');
 }
 
@@ -129,10 +129,10 @@ function getOverlayHTML(item) {
  */
 function getTriggerLinkHTML(item, galleryId) {
     if (item.type === 'youtube') {
-        return `<a href="javascript:void(0);" data-video-id="${item.youtubeId}" class="youtube-modal-trigger absolute inset-0 z-10" aria-label="${item.alt}"></a>`;
+        return `<a href="https://www.youtube.com/watch?v=${item.youtubeId}" data-video-id="${item.youtubeId}" class="youtube-modal-trigger absolute inset-0 z-10" aria-label="${item.alt}"></a>`;
     }
     const triggerDataType = item.type === 'video' ? 'video' : 'image';
-    return `<a href="javascript:void(0);" data-href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${triggerDataType}" aria-label="${item.alt}"></a>`;
+    return `<a href="${item.src}" data-href="${item.src}" class="glightbox absolute inset-0 z-10" data-gallery="${galleryId}" data-type="${triggerDataType}" aria-label="${item.alt}"></a>`;
 }
 
 /**
