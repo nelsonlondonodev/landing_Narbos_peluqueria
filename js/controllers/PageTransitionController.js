@@ -19,7 +19,8 @@ export class PageTransitionController {
 
     setupExitAnimations() {
         document.body.addEventListener('click', (e) => {
-            if (this.isExiting) return;
+            // GLightbox cancela el clic en su propio enlace: si no, se navegaría a la imagen.
+            if (this.isExiting || e.defaultPrevented) return;
 
             const link = e.target.closest('a');
             if (!link) return;

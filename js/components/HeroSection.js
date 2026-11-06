@@ -71,7 +71,7 @@ export const getHeroHTML = ({
         ${mosaic ? MOSAIC_DECOR : ''}
         <div class="container relative mx-auto grid max-w-screen-xl items-center gap-10 px-6 py-10 ${imageSrc ? 'md:grid-cols-[1.05fr_1fr]' : ''} md:py-12 lg:gap-16 lg:py-14">
             <div class="${imageSrc ? 'max-w-xl' : 'max-w-3xl'}">
-                ${eyebrow ? `<p class="hero-rise text-xs font-semibold uppercase tracking-[0.3em] text-brand-green md:text-sm">${eyebrow}</p>` : ''}
+                ${eyebrow ? `<p class="hero-rise text-xs font-semibold uppercase tracking-[0.3em] text-brand-green-text md:text-sm">${eyebrow}</p>` : ''}
                 <h1 id="hero-title"${breadcrumb ? ` data-breadcrumb="${breadcrumb}"` : ''} class="hero-rise [--d:0.05s] ${eyebrow ? 'mt-4' : ''} font-serif font-bold text-brand-gray-dark ${mosaic ? 'text-[2.3rem] leading-[1.08] sm:text-5xl lg:text-[4.25rem]' : 'text-[2.1rem] leading-[1.1] sm:text-5xl lg:text-[3.6rem]'}">${title}</h1>
                 <p id="hero-subtitle" class="hero-rise [--d:0.1s] mt-5 max-w-md text-lg text-brand-gray-dark/75 ${mosaic ? 'md:text-xl' : ''}">${subtitle}</p>
                 <div class="hero-rise [--d:0.15s] mt-8 flex flex-wrap items-center gap-x-4 gap-y-4">

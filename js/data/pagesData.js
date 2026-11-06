@@ -609,6 +609,7 @@ export const pagesData = Object.freeze({
             title: "Tratamientos Capilares y <span class=\"text-brand-green\">Recuperación</span>",
             subtitle: "Recupera la salud y el brillo de tu cabello con nuestras terapias profundas.",
             imageSrc: "images/pages/peluqueria/lavado-spa-capilar.webp",
+            imageSrcMobile: "images/pages/peluqueria/lavado-spa-capilar-mobile.webp",
             imageAlt: "Tratamientos Capilares en Chía",
             breadcrumb: "Tratamientos",
             ctaMessage: "Hola, vengo de la página de tratamientos capilares de la web de Narbo's y quiero agendar una cita"
