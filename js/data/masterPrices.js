@@ -38,6 +38,7 @@ export const masterPrices = Object.freeze({
         },
         tratamientos: {
             alisadoProgresivo: '$420.000', // Desde, con aminoácidos
+            botoxCapilar: '$380.000', // Desde; confirmado por la propietaria el 2026-11-06
             shampoo: '$10.000' // Desde
         },
         // Confirmados por la propietaria el 2026-09-28. La cortina invisible no tiene
