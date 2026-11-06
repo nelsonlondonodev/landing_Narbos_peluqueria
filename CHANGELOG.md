@@ -6,6 +6,16 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## ✂️ Barbería retirada y precio del botox v2.8.66 (6 de noviembre de 2026)
+
+*   **Barbería**: por decisión de la propietaria, sale de la web: sus dos páginas pasan con 301 a peluquería y se retiran la tarjeta de la home, el menú, el buscador, el schema y sus precios (`3ad2cdf`).
+*   **Home**: los servicios pasan de cinco a cuatro, y el title queda como «Peluquería, Uñas y Estética en Chía».
+*   **Artículo de camuflaje de canas**: se conserva porque es color, sin menciones a barbería ni a la cita de corte, y enlaza a peluquería (`ccd1695`).
+*   **Botox capilar**: pasa de $180.000 a Desde $380.000, confirmado por la propietaria, y ya se publica en el JSON-LD (`be4a01c`).
+*   **Versión**: `v2.8.66`.
+
+---
+
 ## ✨ Paneles de servicios, hero interactivo y WhatsApp directo v2.8.65 (4 de noviembre de 2026)
 
 *   **Servicios en la home**: con ratón y desde 1024 px, las tarjetas bajo el hero pasan a cinco paneles a todo el ancho: el activo se ensancha y los demás se desenfocan. Es CSS puro, sin dependencias. En táctil sigue la tarjeta anterior y la lista móvil no cambia. La sección estrena foto de peluquería, vertical y con variante móvil, porque la de 640×480 se veía blanda (`32bb550`).
