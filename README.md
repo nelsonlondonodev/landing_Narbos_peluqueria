@@ -35,7 +35,7 @@
 ```
 ├── index.html, nosotros.html, contacto.html   # Páginas raíz
 ├── servicios/                                  # Páginas de servicio (silo SEO por categoría)
-│   ├── peluqueria/  barberia/  estetica/  unas-spa/  maquillaje/
+│   ├── peluqueria/  estetica/  unas-spa/  maquillaje/
 ├── blog/                                       # Hub de artículos + generador
 ├── legal/                                      # Cookies y privacidad
 ├── js/

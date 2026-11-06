@@ -12,7 +12,7 @@ test('ficha de servicio: Inicio > sección > página', () => {
 
 test('hub de sección: acaba en la sección, sin nombre de página', () => {
     assert.equal(nombres(migasDePagina('servicios/unas-spa/index.html', null)), 'Inicio > Uñas y Spa');
-    assert.equal(nombres(migasDePagina('/servicios/barberia/', undefined)), 'Inicio > Barbería');
+    assert.equal(nombres(migasDePagina('/servicios/estetica/', undefined)), 'Inicio > Estética');
 });
 
 test('artículo del blog: Inicio > Blog > artículo', () => {

@@ -49,13 +49,6 @@ export const masterPrices = Object.freeze({
             mantenimientoPunto: '$4.000' // Desde; entre 4.000 y 5.000 por punto
         }
     },
-    barber: {
-        corte: '$38.000',
-        arregloBarba: '$45.000',
-        camuflajeCanas: '$120.000',
-        infantil: '$35.000'
-        // No hay combo de corte + barba: cada servicio se cobra aparte.
-    },
     makeup: {
         social: '$120.000',
         diario: '$95.000'

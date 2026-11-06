@@ -17,8 +17,8 @@
  */
 export const pagesData = Object.freeze({
     'home': {
-        metaTitle: "Narbo's Salón Spa | Peluquería, Barbería y Estética en Chía",
-        metaDescription: "Bienvenida a Narbo's Salón Spa en Chía. Expertos en Balayage, Barbería Premium, Uñas Spa y Estética Facial. Reserva tu cita hoy y vive una experiencia única.",
+        metaTitle: "Narbo's Salón Spa | Peluquería, Uñas y Estética en Chía",
+        metaDescription: "Bienvenida a Narbo's Salón Spa en Chía. Expertos en Balayage, Uñas Spa y Estética Facial. Reserva tu cita hoy y vive una experiencia única.",
         hero: {
             eyebrow: "Peluquería · Spa · Uñas — Chía",
             // El «|» va en sr-only: el H1 se pinta a dos líneas pero su texto sigue siendo
@@ -215,68 +215,6 @@ export const pagesData = Object.freeze({
                 src: 'images/pages/peluqueria/lavado-spa-capilar.webp', // Nota: imagen repetida en origin, verificar si usar otra.
                 title: "Tratamientos",
                 alt: "Tratamientos capilares profundos"
-            }
-        ]
-    },
-    'barberia': {
-         metaTitle: "Barbería en Chía y Cajicá | Cortes de Hombre y Barba - Narbo's",
-         metaDescription: "Barbería clásica en Chía y Cajicá: corte de hombre a tijera y máquina, arreglo de barba con toalla caliente y camuflaje de canas. Reserva por WhatsApp.",
-         hero: {
-            title: "Barbería exclusiva <span class=\"text-brand-green\">en Chía</span>",
-            subtitle: "El espacio que mereces para cuidar tu imagen.",
-            imageSrc: "images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp",
-            imageSrcMobile: "images/pages/barberia/barberia-salon-spa-premium-chia-hero-mobile.webp",
-            imageAlt: "Interior de Narbo's Barbería - Salon de Belleza y Spa Premium en Chía",
-            eyebrow: "Barbería · Chía",
-            ctaMessage: "Hola, vengo de la página de barbería de la web de Narbo's y quiero agendar una cita"
-        },
-        gallery: [
-            {
-                type: 'image',
-                layout: 'horizontal',
-                src: 'images/pages/barberia/barberia-salon-spa-premium-chia-hero.webp',
-                title: "Ambiente Premium",
-                subtitle: "Comodidad y Estilo",
-                alt: "Ambiente exclusivo en Narbo's Barbería Chía: el espacio que mereces"
-            },
-            {
-                type: 'image',
-                layout: 'vertical',
-                src: 'images/pages/barberia/corte-cabello-caballero-profesional-chia.webp',
-                title: "Corte de Caballero",
-                subtitle: "Estilo Masculino",
-                alt: "Corte de cabello de caballero a tijera y máquina en Chía"
-            },
-            {
-                type: 'image',
-                layout: 'vertical',
-                src: 'images/pages/barberia/corte-hombre-fade-moderno.webp',
-                title: "Corte Clásico",
-                subtitle: "A Tijera, con Canas",
-                alt: "Corte clásico de caballero con canas, hecho a tijera en Narbo's Chía"
-            },
-            {
-                type: 'image',
-                layout: 'vertical',
-                src: 'images/pages/barberia/ritual-barba-vaporizador-relajante.webp',
-                title: "Spa de Barba",
-                subtitle: "Relajación Total",
-                alt: "Ritual de barba con vapor ozono en Narbo's Barbería"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: 'images/pages/barberia/corte-barba-tendencia-barberia.webp',
-                title: "Diseño de Barba",
-                alt: "Perfilado y diseño de barba con técnica profesional"
-            },
-            {
-                type: 'image',
-                layout: 'square',
-                src: 'images/pages/barberia/barbero-profesional-trabajando-narbos-chia.webp',
-                title: "Pasión por el detalle",
-                subtitle: "Servicio Experto",
-                alt: "Barbero profesional en plena acción realizando un corte clásico en Narbo's Barbería Chía"
             }
         ]
     },
@@ -1331,29 +1269,6 @@ export const pagesData = Object.freeze({
                 title: "Belleza Integral",
                 alt: "Detalle de manicura de alta calidad"
             }
-        ]
-    },
-    'barberia-cortes-hombre': {
-        metaTitle: "Cortes de hombre y arreglo de barba en Chía | Narbo's",
-        metaDescription: "Cortes de hombre clásicos en Chía y Cajicá: a tijera y máquina, arreglo de barba con toalla caliente y camuflaje de canas. Reserva por WhatsApp.",
-        hero: {
-            eyebrow: "Barbería · Chía",
-            title: "Cortes de Hombre y Arreglo de Barba <span class=\"text-brand-green\">en Chía</span>",
-            subtitle: "Corte clásico, barba impecable y camuflaje de canas para el hombre que cuida su imagen.",
-            imageSrc: "images/pages/barberia/corte-hombre-fade-moderno.webp",
-            imageSrcMobile: "images/pages/barberia/corte-hombre-fade-moderno-mobile.webp",
-            imageAlt: "Corte clásico de caballero con canas, hecho a tijera en Narbo's Chía",
-            breadcrumb: "Cortes de Hombre",
-            ctaMessage: "Hola, vengo de la página de cortes de hombre de la web de Narbo's y quiero agendar una cita"
-        },
-        gallery: [
-            { type: 'logo-card', layout: 'vertical', src: 'images/brand/logo_narbos.webp', alt: 'Corte Clásico', title: 'Corte Clásico' },
-            { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Camuflaje de Canas', title: 'Camuflaje de Canas' },
-            { type: 'logo-card', layout: 'horizontal', src: 'images/brand/logo_narbos.webp', alt: 'Perfilado', title: 'Perfilado de Barba' },
-            { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Asesoría de Imagen', title: 'Asesoría de Imagen' },
-            { type: 'logo-card', layout: 'vertical', src: 'images/brand/logo_narbos.webp', alt: 'Ritual de Barba', title: 'Ritual de Barba' },
-            { type: 'logo-card', layout: 'square', src: 'images/brand/logo_narbos.webp', alt: 'Corte Tijera', title: 'Corte a Tijera' },
-            { type: 'logo-card', layout: 'horizontal', src: 'images/brand/logo_narbos.webp', alt: 'Acabados', title: 'Acabados Premium' }
         ]
     }
 });

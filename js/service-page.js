@@ -1,5 +1,4 @@
 import { App } from './App.js';
-import { ServiceCard } from './components/ServiceCard.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
 import { getHeroHTML } from './components/HeroSection.js';
 
@@ -8,7 +7,6 @@ import { pagesData } from './data/pagesData.js';
 
 import { BrandsSection } from './components/BrandsSection.js'; 
  
-import { barberServices } from './data/barberServices.js';
 import { estheticsServices } from './data/estheticsServices.js'; 
 import { ServiceModal } from './components/ServiceModal.js'; 
 
@@ -18,7 +16,7 @@ import { ServiceModal } from './components/ServiceModal.js';
 
 /**
  * Gestor de la Página de Servicios.
- * Coordina la inicialización específica para páginas internas (Peluquería, Barbería, etc.).
+ * Coordina la inicialización específica para páginas internas (Peluquería, Estética, etc.).
  * Refactorizado para delegar la lógica a controladores atómicos.
  */
 class ServicePageManager {
@@ -48,16 +46,6 @@ class ServicePageManager {
      */
     initControllers() {
         if (!this.pageKey) return;
-
-        // Controlador de Barbería (Hub)
-        if (this.pageKey === 'barberia') {
-            import('./controllers/BarberHubController.js')
-                .then(({ BarberHubController }) => {
-                    new BarberHubController(this.app).init();
-                })
-                .catch(error => console.error("Error loading BarberHubController:", error));
-            return;
-        }
 
         // Controlador de Estética (Hub y Subpáginas)
         const estheticsPages = [
@@ -98,9 +86,7 @@ class ServicePageManager {
         }
 
         // --- Legado (Pendiente de refactorizar) ---
-        this.initServiceGrid();
         this.initBentoGallery();
-        this.initModalTriggers();
     }
 
     initApp() {
@@ -123,10 +109,6 @@ class ServicePageManager {
         if (path.includes('cejas-y-pestanas')) return 'cejas-y-pestanas';
         if (path.includes('depilacion-corporal')) return 'depilacion-corporal';
         if (path.includes('/estetica')) return 'estetica';
-
-        // Barbería
-        if (path.includes('barberia-cortes-hombre')) return 'barberia-cortes-hombre';
-        if (path.includes('barberia')) return 'barberia';
 
         // Uñas y Spa
         if (path.includes('unas-acrilicas-gel')) return 'unas-acrilicas-gel';
@@ -168,75 +150,6 @@ class ServicePageManager {
              }
         }
     }
-
-    initModalTriggers() {
-        const triggers = document.querySelectorAll('.js-open-beard-modal');
-        if (triggers.length > 0) {
-            let modalControllerInstance;
-            triggers.forEach(trigger => {
-                trigger.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (!modalControllerInstance) {
-                        import('./controllers/ModalController.js').then(m => {
-                            modalControllerInstance = new m.ModalController();
-                            modalControllerInstance.openModal('beard-modal');
-                        });
-                    } else {
-                        modalControllerInstance.openModal('beard-modal');
-                    }
-                });
-            });
-        }
-    }
-
-
-
-    initServiceGrid() {
-        this.initBarberServices();
-
-    }
-
-
-
-    initBarberServices() {
-        const grid = document.getElementById('barber-services-grid');
-        if (!grid || this.pageKey === 'barberia') return;
-        
-        const isCutsPage = this.pageKey === 'barberia-cortes-hombre';
-        let displayServices = barberServices;
-        if (isCutsPage) {
-            displayServices = barberServices.filter(s => s.link.includes('barberia-cortes-hombre'));
-        }
-        this._renderStandardCards(grid, displayServices);
-    }
-
-
-
-    _renderStandardCards(grid, services, modalInstance = null) {
-        // INTELLIGENT HYDRATION: Si la grilla ya tiene tarjetas del SSG, no borramos.
-        // Solo adjuntamos eventos si fuera necesario (en este caso no lo es para links estándar).
-        if (grid.children.length > 0 && !modalInstance) return;
-
-        grid.innerHTML = '';
-        services.forEach(data => {
-            const processedData = {
-                ...data,
-                image: this.app.resolvePath(data.image),
-                link: modalInstance ? '#' : this.app.resolvePath(data.link),
-                id: data.id 
-            };
-            const cardElement = new ServiceCard(processedData).render();
-            if (modalInstance) {
-                cardElement.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    modalInstance.open(data.id);
-                });
-            }
-            grid.appendChild(cardElement);
-        });
-    }
-
-
 
     initLightboxInstance() {
         // Limpiamos reintentos infinitos. Si GLightbox no está, se reintenta una vez tras 500ms o se ignora.

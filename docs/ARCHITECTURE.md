@@ -30,7 +30,7 @@ Este documento describe cómo está construido el frontend: no es una SPA ni usa
 | `data/` | Contenido puro (arrays/objetos), sin lógica de render | `servicesData.js`, `pagesData.js`, `videoData.js`, `masterPrices.js` |
 | `utils/` | Funciones puras compartidas entre cliente y SSG | `migas.js` |
 
-Convención de nombres: los hubs de página siguen el patrón `<Área>HubController.js` (`HairHubController`, `NailsHubController`, `BarberHubController`, `EstheticsHubController`, `HomeHubController`).
+Convención de nombres: los hubs de página siguen el patrón `<Área>HubController.js` (`HairHubController`, `NailsHubController`, `EstheticsHubController`, `HomeHubController`).
 
 ## `js/config.js`: resolución de entorno y rutas
 
@@ -53,7 +53,7 @@ Antes de servir en producción, `scripts/build.js` invoca un SSG propio (`script
 
 ## Páginas de servicio y plantillas
 
-- Cada categoría de servicio (`servicios/peluqueria/`, `servicios/barberia/`, `servicios/estetica/`, `servicios/unas-spa/`, `servicios/maquillaje/`) sigue una estrategia de **silo SEO**: un índice de categoría + páginas hijas por servicio específico.
+- Cada categoría de servicio (`servicios/peluqueria/`, `servicios/estetica/`, `servicios/unas-spa/`, `servicios/maquillaje/`) sigue una estrategia de **silo SEO**: un índice de categoría + páginas hijas por servicio específico.
 - Las páginas nuevas deben partir de `_templates/service.template.html` y respetar la estructura de `#app-wrapper` / `.site-header` documentada en [`LAYOUT_GUIDE.md`](LAYOUT_GUIDE.md) — es la fuente de verdad para evitar romper el menú móvil o el offset del header fijo.
 
 ## Estilos
