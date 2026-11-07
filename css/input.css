@@ -519,4 +519,36 @@
   @apply absolute top-4 left-4 z-20 px-3 py-1 bg-brand-medium text-brand-gray-dark text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg border border-white/20;
 }
 
+/* --- Servicios de 2 tarjetas ---
+   Desde `lg`, el texto va al lado de las tarjetas: con solo dos, centradas debajo del
+   encabezado, sobraba ancho y se alargaba el scroll. Por debajo el orden es el del HTML,
+   con el enlace después de las tarjetas. Las filas 1fr centran el texto en vertical. */
+@media (min-width: 1024px) {
+  .servicios-lateral {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr auto auto 1fr;
+    column-gap: 3rem;
+  }
 
+  .servicios-lateral__intro {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  .servicios-lateral__tarjetas {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .servicios-lateral__enlace {
+    grid-column: 1;
+    grid-row: 3;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+}

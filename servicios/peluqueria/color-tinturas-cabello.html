@@ -210,7 +210,8 @@
             <!-- Sección de Servicios (Ajuste de Padding para Overlap) -->
             <section class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24 overflow-x-hidden">
                 <div class="container mx-auto px-6 max-w-screen-xl">
-                    <header class="text-center mb-16">
+                    <div class="servicios-lateral">
+                    <header class="servicios-lateral__intro text-center mb-16">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">Expertos en Colorimetría Profesional</h2>
                         <p class="text-lg text-gray-700 max-w-2xl mx-auto">
                             Ofrecemos tintes completos, retoques de raíz y cubrimiento especializado de canas utilizando tecnología <strong>Plex</strong> para proteger tu fibra capilar.
@@ -218,9 +219,10 @@
                     </header>
         
                     <!-- Grid de Servicios (SSG Inyectado) -->
-                    <div id="hair-services-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div id="hair-services-grid" class="servicios-lateral__tarjetas grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     </div>
-                    <p class="text-center text-gray-700 mt-10">¿Buscas balayage o babylights? <a href="./balayage-mechas" class="font-semibold text-brand-green-text underline underline-offset-4 hover:text-brand-green transition-colors">Mira Balayage y Mechas</a></p>
+                    <p class="servicios-lateral__enlace text-center text-gray-700 mt-10">¿Buscas balayage o babylights? <a href="./balayage-mechas" class="font-semibold text-brand-green-text underline underline-offset-4 hover:text-brand-green transition-colors">Mira Balayage y Mechas</a></p>
+                    </div>
                 </div>
             </section>
 
