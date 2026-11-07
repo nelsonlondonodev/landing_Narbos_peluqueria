@@ -14,7 +14,6 @@ export class ServiceCard {
      * @param {string} [props.imageMobile] - Variante a 768px; si se pasa, la tarjeta
      *   envuelve la imagen en <picture> y la sirve por debajo de 768px de ancho
      * @param {string} [props.link] - URL de destino
-     * @param {string} [props.modalId] - ID de modal (si aplica)
      * @param {string} [props.animationDelay] - Delay de animación ("0.2s")
      * @param {'overlay'|'standard'|'logo'} [props.variant] - Estilo visual
      * @param {string} [props.price] - Precio del servicio (Opcional)
@@ -22,9 +21,9 @@ export class ServiceCard {
      * @param {boolean} [props.reserva] - Variante 'standard': la tarjeta cuenta todo el
      *   servicio y su botón abre WhatsApp, sin pasar por un modal
      */
-    constructor({ title, description, icon, image, imageMobile, imageAlt, link, modalId, animationDelay = "0s", variant = 'overlay', price, duration, reserva = false, width, height }) {
+    constructor({ title, description, icon, image, imageMobile, imageAlt, link, animationDelay = "0s", variant = 'overlay', price, duration, reserva = false, width, height }) {
         this.props = {
-            title, description, icon, image, imageMobile, imageAlt, link, modalId, animationDelay, variant, price, duration, reserva,
+            title, description, icon, image, imageMobile, imageAlt, link, animationDelay, variant, price, duration, reserva,
             width: width || (variant === 'overlay' ? 800 : 400),
             height: height || (variant === 'overlay' ? 600 : 300)
         };
@@ -36,9 +35,7 @@ export class ServiceCard {
      */
     render() {
         const isLink = !!this.props.link && this.props.link !== '#';
-        const isModal = !!this.props.modalId;
-        const tag = isLink ? 'a' : (isModal ? 'button' : 'div');
-        const element = document.createElement(tag);
+        const element = document.createElement(isLink ? 'a' : 'div');
 
         this.applyAttributes(element, isLink);
         
@@ -99,18 +96,6 @@ export class ServiceCard {
         if (isLink) {
             element.href = this.props.link;
             element.setAttribute('aria-label', `Ir a ${this.props.title}`);
-        } else if (this.props.modalId) {
-            if (element.tagName === 'BUTTON') {
-                element.type = "button";
-            } else {
-                element.setAttribute('role', 'button');
-                element.setAttribute('tabindex', '0');
-            }
-            element.setAttribute('aria-label', `Ver detalles de ${this.props.title}`);
-            
-            // SEMANTIC FIX: Usar el ID del servicio (slug) como target para facilitar la resolución de datos
-            const semanticTarget = this.toKebabCase(this.props.title);
-            element.setAttribute('data-modal-target', semanticTarget);
         }
     }
 

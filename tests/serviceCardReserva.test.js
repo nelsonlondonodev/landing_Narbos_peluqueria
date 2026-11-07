@@ -30,14 +30,13 @@ test('la tarjeta de reserva muestra la duración y el texto completo', () => {
     assert.equal(tarjeta.querySelector('.line-clamp-3'), null);
 });
 
-test('una tarjeta con modal sigue igual', () => {
-    const tarjeta = pintar({ modalId: 'service-modal' });
+test('una tarjeta con enlace sigue llevando a su página', () => {
+    const tarjeta = pintar({ link: '/servicios/balayage' });
 
-    assert.equal(tarjeta.tagName, 'BUTTON');
-    assert.equal(tarjeta.dataset.modalTarget, 'balayage');
+    assert.equal(tarjeta.tagName, 'A');
+    assert.equal(tarjeta.getAttribute('href'), '/servicios/balayage');
     assert.match(tarjeta.textContent, /Ver detalles/);
     assert.doesNotMatch(tarjeta.textContent, /Duración/);
-    assert.equal(tarjeta.querySelector('a'), null);
 });
 
 test('peluquería y maquillaje ya no piden modal y sus reservas traen duración', () => {

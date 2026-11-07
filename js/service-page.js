@@ -7,8 +7,6 @@ import { pagesData } from './data/pagesData.js';
 
 import { BrandsSection } from './components/BrandsSection.js'; 
  
-import { estheticsServices } from './data/estheticsServices.js'; 
-import { ServiceModal } from './components/ServiceModal.js'; 
 
 
 
