@@ -298,10 +298,15 @@ function injectServices(document, pageKey, prefix) {
         };
         grid.appendChild(new ServiceCard(processedData).render());
     });
+}
 
+/**
+ * Inyecta la carta de precios de las subpáginas de peluquería que la tienen.
+ */
+function injectHairCarta(document, pageKey) {
     const carta = hairCartaFor(pageKey);
-    const cartaRoot = document.getElementById('hair-carta-root');
-    if (carta && cartaRoot) cartaRoot.innerHTML = renderCartaServicios(carta);
+    const root = document.getElementById('hair-carta-root');
+    if (carta && root) root.innerHTML = renderCartaServicios(carta);
 }
 
 /**
@@ -845,6 +850,7 @@ async function processPage(pageConfig) {
     injectHeroBadges(document, pageConfig.key);
     injectBreadcrumbs(document, pageConfig.path, prefix);
     injectServices(document, pageConfig.key, prefix);
+    injectHairCarta(document, pageConfig.key);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path, prefix);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
     const faqIssues = sincronizarFaqPage(document, pageConfig.path);

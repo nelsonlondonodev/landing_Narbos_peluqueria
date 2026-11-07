@@ -1,5 +1,12 @@
 import { masterPrices } from './masterPrices.js';
 
+/**
+ * @template T
+ * @param {string} category
+ * @param {ReadonlyArray<T>} servicios
+ */
+const enCategoria = (category, servicios) => servicios.map(servicio => ({ ...servicio, category }));
+
 export const hairPageServices = Object.freeze([
     /* -------------------------------------------------------------------------- */
     /*                                HUB PRINCIPAL                               */
@@ -252,97 +259,75 @@ export const hairPageServices = Object.freeze([
     /*                           CARTA DE TRATAMIENTOS                            */
     /* -------------------------------------------------------------------------- */
     // Sin foto propia: salen en la lista de `CartaServicios`, no en el grid de tarjetas.
-    {
-        id: 38,
-        category: 'tratamientos-basicos',
-        title: "L'Oréal Vitamino Color",
-        description: "Cabello teñido o con color: protege el color, aporta brillo y suaviza la fibra capilar.",
-        price: masterPrices.hair.tratamientos.vitaminoColor
-    },
-    {
-        id: 39,
-        category: 'tratamientos-basicos',
-        title: "L'Oréal Absolut Repair",
-        description: "Cabello dañado o quebradizo: repara la fibra capilar, da elasticidad y mejora la suavidad.",
-        price: masterPrices.hair.tratamientos.absolutRepair
-    },
-    {
-        id: 40,
-        category: 'tratamientos-basicos',
-        title: "L'Oréal Metal Detox",
-        description: "Cabello con residuos de metal: desintoxica la fibra capilar, protege el color y aporta brillo.",
-        price: masterPrices.hair.tratamientos.metalDetox
-    },
-    {
-        id: 41,
-        category: 'tratamientos-basicos',
-        title: "Authentic Beauty Concept",
-        description: "Todo tipo de cabello: hidrata, suaviza y mejora la manejabilidad, con brillo y ligereza.",
-        price: masterPrices.hair.tratamientos.authenticBeauty
-    },
-    {
-        id: 42,
-        category: 'tratamientos-basicos',
-        title: "Tratamiento Nutritivo más Ampolleta",
-        description: "Cabello seco, opaco o sin vida: nutre en profundidad y devuelve la vitalidad y el brillo.",
-        price: `Desde ${masterPrices.hair.tratamientos.nutritivoAmpolleta}`
-    },
-    {
-        id: 43,
-        category: 'tratamientos-intensivos',
-        title: "Quinoa 911",
-        description: "Cabello frágil, dañado o sin brillo: repara, fortalece y mejora la elasticidad.",
-        price: masterPrices.hair.tratamientos.quinoa911
-    },
-    {
-        id: 44,
-        category: 'tratamientos-intensivos',
-        title: "69 Pro-Active",
-        description: "Cabello con caída o debilitado: fortalece la raíz, estimula el crecimiento y reduce la caída.",
-        price: masterPrices.hair.tratamientos.proActive69
-    },
-    {
-        id: 45,
-        category: 'tratamientos-intensivos',
-        title: "Risame (Curls)",
-        description: "Cabello ondulado, rizado o afro: define, hidrata, da plasticidad y controla el frizz.",
-        price: masterPrices.hair.tratamientos.risame
-    },
-    {
-        id: 46,
-        category: 'tratamientos-intensivos',
-        title: "Fusión Wella",
-        description: "Cabello dañado o sin fuerza: repara la fibra capilar, protege contra la rotura y devuelve la suavidad.",
-        price: masterPrices.hair.tratamientos.fusionWella
-    },
-    {
-        id: 47,
-        category: 'tratamientos-intensivos',
-        title: "Exfoliación + Nutrición",
-        description: "Cuero cabelludo con impurezas o cabello opaco: limpia en profundidad, estimula la oxigenación y nutre la fibra capilar.",
-        price: masterPrices.hair.tratamientos.exfoliacionNutricion
-    },
-    {
-        id: 48,
-        category: 'tratamientos-intensivos',
-        title: "Fibre Clinix",
-        description: "Cabello muy dañado o químicamente tratado: reconstruye la fibra capilar, restaura la elasticidad y la protege de daños futuros.",
-        price: masterPrices.hair.tratamientos.fibreClinix
-    },
-    {
-        id: 49,
-        category: 'tratamientos-intensivos',
-        title: "Tratamiento Narbo's (Protein + Lipids)",
-        description: "Cabello muy dañado, debilitado o con procesos químicos: reconstruye y fortalece con proteínas y lípidos.",
-        price: masterPrices.hair.tratamientos.proteinLipids
-    },
-    {
-        id: 50,
-        category: 'tratamientos-intensivos',
-        title: "Células Madres (Stem Cell)",
-        description: "Cabello dañado, envejecido o sin vida: regenera la fibra capilar y devuelve densidad, fuerza y brillo.",
-        price: masterPrices.hair.tratamientos.celulasMadres
-    }
+    ...enCategoria('tratamientos-basicos', [
+        {
+            title: "L'Oréal Vitamino Color",
+            description: "Cabello teñido o con color: protege el color, aporta brillo y suaviza la fibra capilar.",
+            price: masterPrices.hair.tratamientos.vitaminoColor
+        },
+        {
+            title: "L'Oréal Absolut Repair",
+            description: "Cabello dañado o quebradizo: repara la fibra capilar, da elasticidad y mejora la suavidad.",
+            price: masterPrices.hair.tratamientos.absolutRepair
+        },
+        {
+            title: "L'Oréal Metal Detox",
+            description: "Cabello con residuos de metal: desintoxica la fibra capilar, protege el color y aporta brillo.",
+            price: masterPrices.hair.tratamientos.metalDetox
+        },
+        {
+            title: "Authentic Beauty Concept",
+            description: "Todo tipo de cabello: hidrata, suaviza y mejora la manejabilidad, con brillo y ligereza.",
+            price: masterPrices.hair.tratamientos.authenticBeauty
+        },
+        {
+            title: "Tratamiento Nutritivo más Ampolleta",
+            description: "Cabello seco, opaco o sin vida: nutre en profundidad y devuelve la vitalidad y el brillo.",
+            price: `Desde ${masterPrices.hair.tratamientos.nutritivoAmpolleta}`
+        }
+    ]),
+    ...enCategoria('tratamientos-intensivos', [
+        {
+            title: "Quinoa 911",
+            description: "Cabello frágil, dañado o sin brillo: repara, fortalece y mejora la elasticidad.",
+            price: masterPrices.hair.tratamientos.quinoa911
+        },
+        {
+            title: "69 Pro-Active",
+            description: "Cabello con caída o debilitado: fortalece la raíz, estimula el crecimiento y reduce la caída.",
+            price: masterPrices.hair.tratamientos.proActive69
+        },
+        {
+            title: "Risame (Curls)",
+            description: "Cabello ondulado, rizado o afro: define, hidrata, da plasticidad y controla el frizz.",
+            price: masterPrices.hair.tratamientos.risame
+        },
+        {
+            title: "Fusión Wella",
+            description: "Cabello dañado o sin fuerza: repara la fibra capilar, protege contra la rotura y devuelve la suavidad.",
+            price: masterPrices.hair.tratamientos.fusionWella
+        },
+        {
+            title: "Exfoliación + Nutrición",
+            description: "Cuero cabelludo con impurezas o cabello opaco: limpia en profundidad, estimula la oxigenación y nutre la fibra capilar.",
+            price: masterPrices.hair.tratamientos.exfoliacionNutricion
+        },
+        {
+            title: "Fibre Clinix",
+            description: "Cabello muy dañado o químicamente tratado: reconstruye la fibra capilar, restaura la elasticidad y la protege de daños futuros.",
+            price: masterPrices.hair.tratamientos.fibreClinix
+        },
+        {
+            title: "Tratamiento Narbo's (Protein + Lipids)",
+            description: "Cabello muy dañado, debilitado o con procesos químicos: reconstruye y fortalece con proteínas y lípidos.",
+            price: masterPrices.hair.tratamientos.proteinLipids
+        },
+        {
+            title: "Células Madres (Stem Cell)",
+            description: "Cabello dañado, envejecido o sin vida: regenera la fibra capilar y devuelve densidad, fuerza y brillo.",
+            price: masterPrices.hair.tratamientos.celulasMadres
+        }
+    ])
 ]);
 
 /**
@@ -382,6 +367,16 @@ const SUBPAGINAS = {
 export const HAIR_SUBPAGES = Object.keys(SUBPAGINAS);
 
 /**
+ * Categorías de una subpágina, tarjetas y carta. Sin subpágina, las del hub.
+ * @param {string} pagina
+ * @returns {string[]}
+ */
+function categoriasDe(pagina) {
+    const { categorias = ['hub'], carta } = SUBPAGINAS[pagina] ?? {};
+    return [...categorias, ...(carta?.groups ?? []).map(grupo => grupo.category)];
+}
+
+/**
  * Clave de la subpágina a la que pertenece una ruta, o `null` si es el hub.
  * @param {string} ruta
  */
@@ -397,10 +392,7 @@ export function hairSubpageFor(ruta) {
  * @returns {string|null}
  */
 export function hairSubpageForCategory(category) {
-    return HAIR_SUBPAGES.find(pagina => [
-        ...SUBPAGINAS[pagina].categorias,
-        ...(SUBPAGINAS[pagina].carta?.groups ?? []).map(grupo => grupo.category)
-    ].includes(category)) ?? null;
+    return HAIR_SUBPAGES.find(pagina => categoriasDe(pagina).includes(category)) ?? null;
 }
 
 export function hairServicesFor(pagina) {
@@ -429,6 +421,6 @@ export function hairCartaFor(pagina) {
  * @param {string} pagina
  */
 export function hairOffersFor(pagina) {
-    const carta = hairCartaFor(pagina);
-    return [...hairServicesFor(pagina), ...(carta?.groups.flatMap(grupo => grupo.items) ?? [])];
+    const categorias = categoriasDe(pagina);
+    return hairPageServices.filter(s => categorias.includes(s.category));
 }

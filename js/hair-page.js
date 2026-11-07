@@ -37,6 +37,7 @@ function initPageComponents() {
     removeExpiredBadges();
     initGallery();
     initHairServicesGrid();
+    initHairCarta();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -129,8 +130,6 @@ function initHairCarta() {
 }
 
 function initHairServicesGrid() {
-    initHairCarta();
-
     const gridContainer = document.getElementById('hair-services-grid');
     if (!gridContainer) return;
 

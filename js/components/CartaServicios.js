@@ -1,9 +1,14 @@
 /**
+ * @typedef {{ title: string, description: string, price: string }} ServicioCarta
+ * @typedef {{ title: string, intro: string, items: ReadonlyArray<ServicioCarta> }} GrupoCarta
+ */
+
+/**
  * Carta de precios por grupos: una lista de texto para los servicios que no tienen foto
  * propia. Trece tarjetas con la misma imagen no se distinguirían entre sí.
  * La pinta el SSG en el build, y `hair-page.js` en cliente cuando el HTML llega sin ella.
  *
- * @param {{ heading: string, intro: string, groups: ReadonlyArray<{ title: string, intro: string, items: ReadonlyArray<{ title: string, description: string, price: string }> }> }} carta
+ * @param {{ heading: string, intro: string, groups: ReadonlyArray<GrupoCarta> }} carta
  * @returns {string}
  */
 export function renderCartaServicios({ heading, intro, groups }) {
@@ -22,7 +27,7 @@ export function renderCartaServicios({ heading, intro, groups }) {
     `;
 }
 
-/** @param {{ title: string, intro: string, items: ReadonlyArray<{ title: string, description: string, price: string }> }} grupo */
+/** @param {GrupoCarta} grupo */
 function renderGrupo({ title, intro, items }) {
     return `
         <div class="bg-white rounded-xl shadow-sm p-6 md:p-8">
@@ -35,7 +40,7 @@ function renderGrupo({ title, intro, items }) {
     `;
 }
 
-/** @param {{ title: string, description: string, price: string }} servicio */
+/** @param {ServicioCarta} servicio */
 function renderFila({ title, description, price }) {
     return `
         <li class="py-4 flex items-start justify-between gap-4">
