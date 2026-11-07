@@ -105,3 +105,28 @@ export const nailsServices = [
         link: 'manicure-pedicure'
     }
 ];
+
+/**
+ * Tarjetas de una página de uñas. El hub resume cada servicio y lleva a su subpágina;
+ * las subpáginas lo cuentan entero y se agenda desde ahí.
+ * @param {string} pagina
+ */
+export function nailsCardsFor(pagina) {
+    if (pagina === 'unas-spa') {
+        return nailsServices.map(({ alt, summary, link, ...servicio }) => ({
+            ...servicio,
+            imageAlt: alt,
+            description: summary,
+            link: `servicios/unas-spa/${link}`
+        }));
+    }
+
+    return nailsServices
+        .filter(servicio => servicio.link === pagina)
+        .map(({ alt, summary, description, link, ...servicio }) => ({
+            ...servicio,
+            imageAlt: alt,
+            description: `<strong>${summary}</strong> ${description}`,
+            reserva: true
+        }));
+}

@@ -1,8 +1,7 @@
-import { ServiceCard } from '../components/ServiceCard.js';
 import { getBentoGridHTML } from '../components/BentoGrid.js';
 import { pagesData } from '../data/pagesData.js';
-import { nailsServices } from '../data/nailsServices.js';
-import { ServiceModal } from '../components/ServiceModal.js';
+import { nailsCardsFor } from '../data/nailsServices.js';
+import { appendServiceCards } from '../utils/serviceCards.js';
 import { BrandsSection } from '../components/BrandsSection.js';
 import { nailBrands } from '../data/brandsData.js';
 
@@ -25,85 +24,12 @@ export class NailsHubController {
         }
     }
 
+    /** Pinta el grid en desarrollo; con el build ya llega pintado por el SSG. */
     renderServicesGrid() {
-        const gridContainer = document.getElementById('nail-services-grid');
-        if (!gridContainer) return;
+        const grid = document.getElementById('nail-services-grid');
+        if (!grid || grid.children.length > 0) return;
 
-        // Modal instance
-        const serviceModal = new ServiceModal(nailsServices);
-
-        // ROBUST FIX: Evitar destrucción de SSG (Mejora drástica de TBT y LCP)
-        if (gridContainer.children.length > 0) {
-            Array.from(gridContainer.children).forEach(element => {
-                const targetId = Number(element.dataset.modalTarget);
-                if (targetId) {
-                    const serviceConfig = nailsServices.find(s => s.id === targetId);
-                    if (serviceConfig) {
-                        this.attachClickBehavior(element, serviceConfig, serviceModal);
-                    }
-                }
-            });
-            return;
-        }
-
-        gridContainer.innerHTML = '';
-        
-        const excludeString = gridContainer.dataset.excludeIds;
-        const filteredServices = this.filterServices(nailsServices, excludeString);
-        
-        filteredServices.forEach(service => {
-            const cardElement = this.createServiceCard(service, serviceModal);
-            gridContainer.appendChild(cardElement);
-        });
-    }
-
-    filterServices(services, excludeString) {
-        if (!excludeString) return services;
-        const excludeIds = excludeString.split(',').map(Number);
-        return services.filter(s => !excludeIds.includes(s.id));
-    }
-
-    createServiceCard(service, modalInstance) {
-        const resolvedImage = this.app.resolvePath(service.image);
-        let linkOrHash = '#';
-        if (service.link) {
-             linkOrHash = this.app.resolvePath(service.link);
-        }
-
-        const cardElement = new ServiceCard({
-            title: service.title,
-            description: service.summary || service.description,
-            image: resolvedImage,
-            price: service.price,
-            link: linkOrHash,
-            variant: 'standard',
-            modalId: service.link ? null : 'service-modal'
-        }).render();
-
-        this.attachClickBehavior(cardElement, service, modalInstance);
-        return cardElement;
-    }
-
-    attachClickBehavior(element, service, modalInstance) {
-        if (service.link && !this.isCurrentPage(service.link)) {
-            // Normal navigation link, works natively
-        } else {
-            // Trigger Modal
-            element.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                modalInstance.open(service.id);
-            });
-            element.style.cursor = 'pointer';
-            if (service.link) {
-                 element.removeAttribute('href'); // Visual consistency so it feels like a modal trigger
-            }
-        }
-    }
-
-    isCurrentPage(linkRoute) {
-        const currentPath = window.location.pathname;
-        return currentPath.includes(linkRoute);
+        appendServiceCards(grid, nailsCardsFor(this.pageKey));
     }
 
     renderGallery() {

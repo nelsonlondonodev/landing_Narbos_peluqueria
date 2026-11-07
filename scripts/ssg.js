@@ -22,6 +22,7 @@ import { servicesData } from '../js/data/servicesData.js';
 import { hairSalonServices } from '../js/data/hairSalonServices.js';
 import { HAIR_SUBPAGES, hairCartaFor, hairOffersFor, hairServicesFor } from '../js/data/hairPageServices.js';
 import { estheticsCardsFor, estheticsServices } from '../js/data/estheticsServices.js';
+import { nailsCardsFor } from '../js/data/nailsServices.js';
 import { makeupServices } from '../js/data/makeupServices.js';
 import articles from '../js/data/articles.js';
 import { masterPrices } from '../js/data/masterPrices.js';
@@ -40,6 +41,10 @@ const SERVICE_SOURCE_REGISTRY = {
     'estetica': { source: estheticsServices, gridId: 'aesthetics-services-static', variant: 'standard' },
     'maquillaje': { source: makeupServices, gridId: 'makeup-services-grid', variant: 'standard' },
     'default': { source: servicesData, gridId: 'services-grid', variant: 'overlay' },
+    ...Object.fromEntries(['unas-spa', 'manicure-pedicure', 'unas-acrilicas-gel'].map(pagina => [
+        pagina,
+        { source: nailsCardsFor(pagina), gridId: 'nail-services-grid', variant: 'standard' }
+    ])),
     // Tres de estas subpáginas solo tenían tarjetas tras ejecutar JavaScript, así que su
     // texto y sus precios no llegaban en el HTML; spa facial las llevaba copiadas a mano.
     ...Object.fromEntries(['spa-facial-integral', 'masajes-relajantes', 'cejas-y-pestanas', 'depilacion-corporal'].map(pagina => [
