@@ -210,7 +210,8 @@
             <!-- Sección de Servicios (Ajuste de Padding para Overlap) -->
             <section class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24 overflow-x-hidden">
                 <div class="container mx-auto px-6 max-w-screen-xl">
-                    <header class="text-center mb-16">
+                    <div class="servicios-lateral">
+                    <header class="servicios-lateral__intro text-center mb-16">
                         <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">Expertos en Colorimetría Profesional</h2>
                         <p class="text-lg text-gray-700 max-w-2xl mx-auto">
                             Ofrecemos tintes completos, retoques de raíz y cubrimiento especializado de canas utilizando tecnología <strong>Plex</strong> para proteger tu fibra capilar.
@@ -218,7 +219,9 @@
                     </header>
         
                     <!-- Grid de Servicios (SSG Inyectado) -->
-                    <div id="hair-services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div id="hair-services-grid" class="servicios-lateral__tarjetas grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    </div>
+                    <p class="servicios-lateral__enlace text-center text-gray-700 mt-10">¿Buscas balayage o babylights? <a href="./balayage-mechas" class="font-semibold text-brand-green-text underline underline-offset-4 hover:text-brand-green transition-colors">Mira Balayage y Mechas</a></p>
                     </div>
                 </div>
             </section>
@@ -356,36 +359,5 @@
     <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js" defer></script>
     <script type="module" src="../../js/main.js?v=2.8.21"></script>
     <script type="module" src="../../js/hair-page.js?v=2.8.21"></script>
-
-    <!-- Modal (Unified Style) -->
-    <div id="service-modal" class="relative z-[100] hidden" role="dialog" aria-modal="true">
-        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" id="modal-backdrop"></div>
-        <div id="modal-scroll-container" class="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div class="flex min-h-full items-center justify-center p-4">
-                <div class="relative transform overflow-hidden rounded-xl bg-white text-left shadow-2xl transition-all sm:w-full sm:max-w-2xl" id="modal-panel">
-                    <button type="button" class="absolute right-4 top-4 z-20 p-2 rounded-full bg-black/10 text-white hover:bg-black/30 transition-colors" id="close-modal-btn">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12" /></svg>
-                    </button>
-                    <div class="bg-white">
-                        <div class="relative h-64 sm:h-80">
-                            <img id="modal-image" src="" alt="Servicio de coloración y tinturas en Narbo's Salón Spa Chía" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                            <div class="absolute bottom-6 left-6 right-6">
-                                <h3 id="modal-title" class="text-3xl font-serif font-bold text-white mb-2"></h3>
-                                <div class="flex items-center space-x-4">
-                                    <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-white text-sm" id="modal-duration"></span>
-                                    <span id="modal-price" class="text-xl font-bold text-brand-medium"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="px-6 py-8 sm:px-10">
-                            <p id="modal-description" class="text-gray-600 text-lg leading-relaxed mb-8"></p>
-                            <a id="modal-whatsapp-btn" href="https://wa.me/573123462618" target="_blank" class="w-full inline-flex justify-center items-center py-4 bg-brand-green text-white font-bold rounded-lg hover:bg-[#5a634b] transition-all">Agendar Cita</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
   </body>
 </html>

@@ -101,7 +101,7 @@ export const SITE_URL = 'https://narbossalon.com';
  * Configuración global del sitio.
  */
 export const siteConfig = Object.freeze({
-    version: "2.8.67", // Versión actualizada
+    version: "2.8.68", // Versión actualizada
     basePath: BASE_PATH,
     socialLinks: [
         {
@@ -160,5 +160,13 @@ export const DEFAULT_WHATSAPP_MESSAGE = "Hola, vengo de la web de Narbo's y quie
  */
 export function getWhatsAppUrl(message) {
     return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`;
+}
+
+/**
+ * WhatsApp con un servicio ya escrito en el mensaje.
+ * @param {string} servicio
+ */
+export function getServiceWhatsAppUrl(servicio) {
+    return getWhatsAppUrl(`Hola, quisiera agendar una cita para ${servicio}`);
 }
 

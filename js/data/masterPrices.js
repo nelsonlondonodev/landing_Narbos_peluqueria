@@ -39,7 +39,21 @@ export const masterPrices = Object.freeze({
         tratamientos: {
             alisadoProgresivo: '$420.000', // Desde, con aminoácidos
             botoxCapilar: '$380.000', // Desde; confirmado por la propietaria el 2026-11-06
-            shampoo: '$10.000' // Desde
+            shampoo: '$10.000', // Desde
+            // Carta de tratamientos que envió la propietaria el 2026-11-06.
+            vitaminoColor: '$60.000',
+            absolutRepair: '$70.000',
+            metalDetox: '$80.000',
+            authenticBeauty: '$80.000',
+            nutritivoAmpolleta: '$90.000', // Desde; la carta dice $90.000 / $100.000
+            quinoa911: '$120.000',
+            proActive69: '$120.000',
+            risame: '$130.000',
+            fusionWella: '$140.000',
+            exfoliacionNutricion: '$140.000',
+            fibreClinix: '$150.000',
+            proteinLipids: '$180.000',
+            celulasMadres: '$250.000'
         },
         // Confirmados por la propietaria el 2026-09-28. La cortina invisible no tiene
         // precio público: se cotiza en la valoración.

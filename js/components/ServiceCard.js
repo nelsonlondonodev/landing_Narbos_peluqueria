@@ -1,3 +1,5 @@
+import { getServiceWhatsAppUrl } from '../config.js';
+
 /**
  * Componente Tarjeta de Servicio.
  * Renderiza tarjetas de servicios en variantes 'overlay' (Home) o 'standard' (Grid).
@@ -12,14 +14,16 @@ export class ServiceCard {
      * @param {string} [props.imageMobile] - Variante a 768px; si se pasa, la tarjeta
      *   envuelve la imagen en <picture> y la sirve por debajo de 768px de ancho
      * @param {string} [props.link] - URL de destino
-     * @param {string} [props.modalId] - ID de modal (si aplica)
      * @param {string} [props.animationDelay] - Delay de animación ("0.2s")
      * @param {'overlay'|'standard'|'logo'} [props.variant] - Estilo visual
      * @param {string} [props.price] - Precio del servicio (Opcional)
+     * @param {string} [props.duration] - Duración; solo se pinta en tarjetas de `reserva`
+     * @param {boolean} [props.reserva] - Variante 'standard': la tarjeta cuenta todo el
+     *   servicio y su botón abre WhatsApp, sin pasar por un modal
      */
-    constructor({ title, description, icon, image, imageMobile, imageAlt, link, modalId, animationDelay = "0s", variant = 'overlay', price, width, height }) {
+    constructor({ title, description, icon, image, imageMobile, imageAlt, link, animationDelay = "0s", variant = 'overlay', price, duration, reserva = false, width, height }) {
         this.props = {
-            title, description, icon, image, imageMobile, imageAlt, link, modalId, animationDelay, variant, price,
+            title, description, icon, image, imageMobile, imageAlt, link, animationDelay, variant, price, duration, reserva,
             width: width || (variant === 'overlay' ? 800 : 400),
             height: height || (variant === 'overlay' ? 600 : 300)
         };
@@ -31,9 +35,7 @@ export class ServiceCard {
      */
     render() {
         const isLink = !!this.props.link && this.props.link !== '#';
-        const isModal = !!this.props.modalId;
-        const tag = isLink ? 'a' : (isModal ? 'button' : 'div');
-        const element = document.createElement(tag);
+        const element = document.createElement(isLink ? 'a' : 'div');
 
         this.applyAttributes(element, isLink);
         
@@ -73,9 +75,9 @@ export class ServiceCard {
                 
                 ${priceHtml}
 
-                <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${this.props.description}</p>
+                <p class="text-gray-600 text-sm mb-6 ${this.props.reserva ? '' : 'line-clamp-3 '}flex-grow leading-relaxed">${this.props.description}</p>
                 
-                ${this.getActionButton()}
+                ${this.getFooter()}
             </div>
         `;
     }
@@ -94,18 +96,6 @@ export class ServiceCard {
         if (isLink) {
             element.href = this.props.link;
             element.setAttribute('aria-label', `Ir a ${this.props.title}`);
-        } else if (this.props.modalId) {
-            if (element.tagName === 'BUTTON') {
-                element.type = "button";
-            } else {
-                element.setAttribute('role', 'button');
-                element.setAttribute('tabindex', '0');
-            }
-            element.setAttribute('aria-label', `Ver detalles de ${this.props.title}`);
-            
-            // SEMANTIC FIX: Usar el ID del servicio (slug) como target para facilitar la resolución de datos
-            const semanticTarget = this.toKebabCase(this.props.title);
-            element.setAttribute('data-modal-target', semanticTarget);
         }
     }
 
@@ -207,6 +197,9 @@ export class ServiceCard {
             </div>
         ` : '';
 
+        const { reserva, duration } = this.props;
+        const durationHtml = reserva && duration ? `<p class="text-gray-500 text-sm mb-3">Duración: ${duration}</p>` : '';
+
         element.innerHTML = `
             ${imageHtml}
             <div class="p-6 flex flex-col flex-grow">
@@ -215,9 +208,10 @@ export class ServiceCard {
                 </div>
                 
                 ${priceHtml}
+                ${durationHtml}
 
-                <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${this.props.description}</p>
-                ${this.getActionButton()}
+                <p class="text-gray-600 text-sm mb-6 ${reserva ? '' : 'line-clamp-3 '}flex-grow leading-relaxed">${this.props.description}</p>
+                ${this.getFooter()}
             </div>
         `;
     }
@@ -227,6 +221,10 @@ export class ServiceCard {
     }
 
     /** Pie de las tarjetas de catálogo (variantes 'standard' y 'logo'). */
+    getFooter() {
+        return this.props.reserva ? this.getReservaLink() : this.getActionButton();
+    }
+
     getActionButton() {
         return `
             <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
@@ -234,6 +232,16 @@ export class ServiceCard {
                     <span>Ver detalles</span>
                     ${this.getArrowIcon()}
                 </span>
+            </div>
+        `;
+    }
+
+    /** Pie de las tarjetas de `reserva`: WhatsApp con el servicio ya escrito en el mensaje. */
+    getReservaLink() {
+        const { title } = this.props;
+        return `
+            <div class="mt-auto pt-4 border-t border-gray-50 w-full">
+                <a href="${getServiceWhatsAppUrl(title)}" target="_blank" rel="noopener" data-whatsapp-servicio="${title}" aria-label="Agendar ${title} por WhatsApp" class="w-full inline-flex justify-center items-center rounded-lg bg-brand-green px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#5a634b] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">Agendar por WhatsApp</a>
             </div>
         `;
     }

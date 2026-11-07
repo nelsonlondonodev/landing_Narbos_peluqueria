@@ -178,6 +178,7 @@ class App {
         });
 
         this.initVideoTriggers();
+        this.initServiceBookingEvents();
 
         // Formulario
         this.observeAndInit('#contact-root', async () => {
@@ -245,6 +246,18 @@ class App {
         }, { rootMargin: '200px 0px', threshold: 0.01 });
 
         observer.observe(element);
+    }
+
+    /**
+     * Mide qué servicios llevan a WhatsApp desde sus tarjetas: el mapa de clics no
+     * distingue un botón de otro. Por delegación porque en desarrollo las tarjetas se
+     * pintan después de que esto corra.
+     */
+    initServiceBookingEvents() {
+        document.addEventListener('click', (e) => {
+            const servicio = e.target.closest('[data-whatsapp-servicio]')?.dataset.whatsappServicio;
+            if (servicio) trackClarityEvent('whatsapp_servicio', { whatsapp_servicio: servicio });
+        });
     }
 
     initServices() {

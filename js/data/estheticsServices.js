@@ -12,7 +12,7 @@ export const estheticsServices = [
         description: 'Protocolo esencial para eliminar impurezas y restaurar el equilibrio de tu piel.',
         image: '/images/pages/estetica/limpieza-facial-profunda-proceso.webp',
         link: 'servicios/estetica/spa-facial-integral',
-        price: masterPrices.esthetics.facial.basico,
+        price: `Desde ${masterPrices.esthetics.facial.basico}`,
         variant: 'standard'
     },
     {
@@ -20,7 +20,7 @@ export const estheticsServices = [
         description: 'Exfoliación profunda que renueva la textura de la piel y atenúa manchas.',
         image: '/images/pages/estetica/microdermoabrasion-hidrofacial-equipos-chia.webp',
         link: 'servicios/estetica/spa-facial-integral',
-        price: masterPrices.esthetics.facial.microdermoabrasion,
+        price: `Desde ${masterPrices.esthetics.facial.microdermoabrasion}`,
         variant: 'standard'
     },
     {
@@ -36,7 +36,7 @@ export const estheticsServices = [
         description: 'Protocolos especializados para unificar el tono de la piel y reducir manchas.',
         image: '/images/pages/estetica/tratamiento-despigmentante-mascarilla-facial.webp',
         link: 'servicios/estetica/spa-facial-integral',
-        price: `Sesión ${masterPrices.esthetics.facial.despigmentantes}`,
+        price: `Sesión desde ${masterPrices.esthetics.facial.despigmentantes}`,
         variant: 'standard'
     },
 
@@ -159,3 +159,14 @@ export const estheticsServices = [
         variant: 'logo'
     }
 ];
+
+/**
+ * Tarjetas de una subpágina de estética: sus servicios, para agendar sin salir de ella.
+ * El hub usa `estheticsServices` tal cual, porque sus tarjetas llevan a cada subpágina.
+ * @param {string} pagina
+ */
+export function estheticsCardsFor(pagina) {
+    return estheticsServices
+        .filter(servicio => servicio.link.endsWith(`/${pagina}`))
+        .map(({ link, ...servicio }) => ({ ...servicio, reserva: true }));
+}

@@ -7,7 +7,7 @@ export const makeupServices = Object.freeze([
         image: "images/pages/maquillaje/maquillaje-social-chia-trabajo-1.webp",
         price: 'Desde $120.000',
         duration: '60 min',
-        modal: true
+        reserva: true
     },
     {
         id: 2,
@@ -17,7 +17,7 @@ export const makeupServices = Object.freeze([
         image: "images/pages/maquillaje/maquillaje-novias-y-eventos-4.webp",
         price: 'Consultar planes',
         duration: '120 min',
-        modal: true
+        reserva: true
     },
     {
         id: 3,
@@ -27,6 +27,6 @@ export const makeupServices = Object.freeze([
         image: "images/pages/maquillaje/maquillaje-profesional-chia-narbos-spa.webp",
         price: 'Desde $95.000',
         duration: '45 min',
-        modal: true
+        reserva: true
     }
 ]);

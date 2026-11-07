@@ -5,6 +5,7 @@ import { JSDOM } from 'jsdom';
 
 // Importación de componentes y datos (Pre-cargados)
 import { ServiceCard } from '../js/components/ServiceCard.js';
+import { renderCartaServicios } from '../js/components/CartaServicios.js';
 import { getNavbarHTML } from '../js/components/Navbar.js';
 import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
@@ -19,8 +20,9 @@ import { migasDePagina, itemsDeBreadcrumbList } from '../js/utils/migas.js';
 import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { hairSalonServices } from '../js/data/hairSalonServices.js';
-import { HAIR_SUBPAGES, hairServicesFor } from '../js/data/hairPageServices.js';
-import { estheticsServices } from '../js/data/estheticsServices.js';
+import { HAIR_SUBPAGES, hairCartaFor, hairOffersFor, hairServicesFor } from '../js/data/hairPageServices.js';
+import { estheticsCardsFor, estheticsServices } from '../js/data/estheticsServices.js';
+import { nailsCardsFor } from '../js/data/nailsServices.js';
 import { makeupServices } from '../js/data/makeupServices.js';
 import articles from '../js/data/articles.js';
 import { masterPrices } from '../js/data/masterPrices.js';
@@ -39,6 +41,16 @@ const SERVICE_SOURCE_REGISTRY = {
     'estetica': { source: estheticsServices, gridId: 'aesthetics-services-static', variant: 'standard' },
     'maquillaje': { source: makeupServices, gridId: 'makeup-services-grid', variant: 'standard' },
     'default': { source: servicesData, gridId: 'services-grid', variant: 'overlay' },
+    ...Object.fromEntries(['unas-spa', 'manicure-pedicure', 'unas-acrilicas-gel'].map(pagina => [
+        pagina,
+        { source: nailsCardsFor(pagina), gridId: 'nail-services-grid', variant: 'standard' }
+    ])),
+    // Tres de estas subpáginas solo tenían tarjetas tras ejecutar JavaScript, así que su
+    // texto y sus precios no llegaban en el HTML; spa facial las llevaba copiadas a mano.
+    ...Object.fromEntries(['spa-facial-integral', 'masajes-relajantes', 'cejas-y-pestanas', 'depilacion-corporal'].map(pagina => [
+        pagina,
+        { source: estheticsCardsFor(pagina), gridId: 'aesthetics-services-static', variant: 'standard' }
+    ])),
     // Las subpáginas de peluquería llevaban el grid copiado a mano en el HTML: una
     // foto fija que no leía de ningún dato y se quedaba vieja con cada cambio.
     ...Object.fromEntries(HAIR_SUBPAGES.map(pagina => [
@@ -292,11 +304,19 @@ function injectServices(document, pageKey, prefix) {
             ...data,
             variant: data.variant || registry.variant, // Priorizar variante del dato si existe
             link: data.link ? resolveRoute(data.link, prefix) : undefined,
-            image: resolveAsset(data.image, prefix),
-            modalId: data.modal ? 'service-modal' : data.modalId
+            image: resolveAsset(data.image, prefix)
         };
         grid.appendChild(new ServiceCard(processedData).render());
     });
+}
+
+/**
+ * Inyecta la carta de precios de las subpáginas de peluquería que la tienen.
+ */
+function injectHairCarta(document, pageKey) {
+    const carta = hairCartaFor(pageKey);
+    const root = document.getElementById('hair-carta-root');
+    if (carta && root) root.innerHTML = renderCartaServicios(carta);
 }
 
 /**
@@ -502,7 +522,7 @@ function injectOfferCatalog(document, pageKey, pagePath) {
         servicio.hasOfferCatalog = {
             '@type': 'OfferCatalog',
             name: servicio.hasOfferCatalog?.name || `Catálogo de ${servicio.serviceType || servicio.name}`,
-            itemListElement: hairServicesFor(pageKey).map(item => ({
+            itemListElement: hairOffersFor(pageKey).map(item => ({
                 '@type': 'Offer',
                 itemOffered: {
                     '@type': 'Service',
@@ -840,6 +860,7 @@ async function processPage(pageConfig) {
     injectHeroBadges(document, pageConfig.key);
     injectBreadcrumbs(document, pageConfig.path, prefix);
     injectServices(document, pageConfig.key, prefix);
+    injectHairCarta(document, pageConfig.key);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path, prefix);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
     const faqIssues = sincronizarFaqPage(document, pageConfig.path);

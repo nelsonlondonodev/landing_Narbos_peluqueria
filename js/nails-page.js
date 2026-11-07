@@ -2,11 +2,10 @@ import { App } from './App.js';
 
 import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
-import { ServiceCard } from './components/ServiceCard.js';
-import { ServiceModal } from './components/ServiceModal.js'; // Import Modal Component
 import { nailBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
-import { nailsServices } from './data/nailsServices.js';
+import { nailsCardsFor } from './data/nailsServices.js';
+import { appendServiceCards } from './utils/serviceCards.js';
 
 /**
  * Nails Page Logic
@@ -96,89 +95,15 @@ function initBrandsCarousel() {
 
 
 /* -------------------------------------------------------------------------- */
-/*                                GRID & MODAL                                */
+/*                                    GRID                                    */
 /* -------------------------------------------------------------------------- */
 
 /**
- * Configura el contenedor principal del Grid de servicios.
+ * Pinta el grid en desarrollo; con el build ya llega pintado por el SSG.
  */
 function initNailServicesGrid() {
-    const gridContainer = document.getElementById('nail-services-grid');
-    if (!gridContainer) return;
+    const grid = document.getElementById('nail-services-grid');
+    if (!grid || grid.children.length > 0) return;
 
-    // Registrar servicios en el modal (incluso en SSG)
-    const serviceModal = new ServiceModal(nailsServices);
-
-    if (isHydrated(gridContainer)) return;
-
-    renderDynamicGrid(gridContainer, serviceModal);
+    appendServiceCards(grid, nailsCardsFor(getPageKeyFromPath(window.location.pathname)));
 }
-
-/**
- * Verifica si el contenedor ya tiene contenido inyectado por SSG.
- * @private
- */
-const isHydrated = (container) => container.children.length > 0;
-
-/**
- * Realiza el renderizado dinámico del grid cuando no hay SSG.
- * @private
- */
-function renderDynamicGrid(container, modal) {
-    container.innerHTML = '';
-    const excludeString = container.dataset.excludeIds;
-    const filteredServices = filterServices(nailsServices, excludeString);
-    
-    filteredServices.forEach(service => {
-        const cardElement = createServiceCard(service, modal);
-        container.appendChild(cardElement);
-    });
-}
-
-function filterServices(services, excludeString) {
-    if (!excludeString) return services;
-    const excludeIds = excludeString.split(',').map(Number);
-    return services.filter(s => !excludeIds.includes(s.id));
-}
-
-function createServiceCard(service, modalInstance) {
-    const cardElement = new ServiceCard({
-        title: service.title,
-        description: service.summary || service.description,
-        image: window.narbosApp.resolvePath(service.image),
-        price: service.price,
-        link: window.narbosApp.resolvePath(service.link || '#'),
-        variant: 'standard',
-        modalId: service.link ? null : 'service-modal'
-    }).render();
-
-    attachClickBehavior(cardElement, service, modalInstance);
-    return cardElement;
-}
-
-function attachClickBehavior(element, service, modalInstance) {
-    if (service.link && !isCurrentPage(service.link)) {
-        // Normal navigation behavior (anchor tag works natively)
-        // No custom listener needed
-    } else {
-        // Trigger Modal: either explicitly (no link) or prevention (same page)
-        element.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            modalInstance.open(service.id);
-        });
-        
-        element.style.cursor = 'pointer';
-        if (service.link) {
-             element.removeAttribute('href'); // Visual consistency
-        }
-    }
-}
-
-function isCurrentPage(link) {
-    const currentPath = window.location.pathname;
-    // Simple robust check
-    return currentPath.includes(link);
-}
-
-

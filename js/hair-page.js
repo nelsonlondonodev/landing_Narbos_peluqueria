@@ -4,11 +4,11 @@ import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
 import { getVideoSectionHTML } from './components/VideoSection.js';
 import { removeExpiredBadges } from './utils/newBadge.js';
-import { ServiceCard } from './components/ServiceCard.js';
-import { ServiceModal } from './components/ServiceModal.js';
+import { appendServiceCards } from './utils/serviceCards.js';
+import { renderCartaServicios } from './components/CartaServicios.js';
 import { hairBrands, smoothingBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
-import { hairPageServices, hairServicesFor, hairSubpageFor } from './data/hairPageServices.js';
+import { hairCartaFor, hairServicesFor, hairSubpageFor } from './data/hairPageServices.js';
 
 /**
  * Hair Page Logic
@@ -36,6 +36,7 @@ function initPageComponents() {
     removeExpiredBadges();
     initGallery();
     initHairServicesGrid();
+    initHairCarta();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -118,68 +119,19 @@ function initBrandsCarousel() {
 
 
 /* -------------------------------------------------------------------------- */
-/*                                GRID & MODAL                                */
+/*                                    GRID                                    */
 /* -------------------------------------------------------------------------- */
+
+function initHairCarta() {
+    const root = document.getElementById('hair-carta-root');
+    const carta = hairCartaFor(getPageKey());
+    if (root && carta && !root.children.length) root.innerHTML = renderCartaServicios(carta);
+}
 
 function initHairServicesGrid() {
     const gridContainer = document.getElementById('hair-services-grid');
-    if (!gridContainer) return;
+    // Con el build ya llega pintado por el SSG.
+    if (!gridContainer || gridContainer.querySelector('[id^="service-card-"]')) return;
 
-    // Check if the container already has content (SSG Check)
-    const hasStaticContent = gridContainer.children.length > 0 && 
-                             gridContainer.querySelector('[id^="service-card-"]');
-
-    const serviceModal = new ServiceModal(hairPageServices);
-    const filteredServices = getFilteredServices();
-
-    if (hasStaticContent) {
-        // CONTENT ALREADY INJECTED (SSG)
-        // We only initialize the modal logic to attach listeners to static cards
-        serviceModal.init();
-        return;
-    }
-
-    // Default Case: Dynamic rendering if empty
-    gridContainer.innerHTML = '';
-    renderServiceCards(gridContainer, filteredServices, serviceModal);
-}
-
-function getFilteredServices() {
-    return hairServicesFor(getPageKey());
-}
-
-function renderServiceCards(container, services, modalInstance) {
-    if (!services || services.length === 0) return;
-
-    services.forEach(service => {
-        const cardElement = createServiceCard(service, modalInstance);
-        container.appendChild(cardElement);
-    });
-}
-
-function createServiceCard(service, modalInstance) {
-    // If service has 'modal: true', it triggers modal. If it has 'link', it navigates.
-    const isModal = !!service.modal;
-
-    const cardElement = new ServiceCard({
-        title: service.title,
-        description: service.description, // already simple or markdown
-        image: window.narbosApp.resolvePath(service.image),
-        price: service.price,
-        link: window.narbosApp.resolvePath(service.link || '#'),
-        variant: service.variant || 'standard',
-        modalId: isModal ? 'service-modal' : null
-    }).render();
-
-    if (isModal) {
-        cardElement.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            modalInstance.open(service.id);
-        });
-        cardElement.style.cursor = 'pointer';
-        cardElement.removeAttribute('href');
-    }
-
-    return cardElement;
+    appendServiceCards(gridContainer, hairServicesFor(getPageKey()));
 }
