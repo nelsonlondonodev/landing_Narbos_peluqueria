@@ -6,6 +6,19 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💬 Agendar desde la tarjeta y carta de tratamientos v2.8.68 (7 de noviembre de 2026)
+
+*   **Modal de servicios**: desaparece de toda la web salvo la home. Peluquería, maquillaje, estética y uñas agendan por WhatsApp desde la tarjeta, con el servicio en el mensaje y el evento `whatsapp_servicio` en Clarity (`715c041`, `1480e60`, `fcdce4f`, `549d7a9`).
+*   **Tarjetas en el build**: las de estética y uñas salen del SSG. Las de masajes, cejas y depilación solo existían tras ejecutar JavaScript, y las de spa facial y uñas estaban copiadas a mano.
+*   **Hub de uñas**: navega a sus subpáginas, como los de peluquería y estética; antes el modal se adelantaba al enlace.
+*   **Carta de tratamientos capilares**: 13 tratamientos con precio en `tratamientos-capilares` y en su JSON-LD, con el capilógrafo y la Micro Mist sin costo adicional en los intensivos (`6fe63e0`).
+*   **Balayage y color**: dejan de compartir tarjetas y cada página enlaza a la otra (`fe40262`).
+*   **Páginas de dos servicios**: el texto va al lado de las tarjetas desde 1024 px en balayage, color, cortes, cejas y acrílicas (`06acfa0`).
+*   **Estética**: la limpieza facial, la microdermoabrasión y los despigmentantes recuperan el «Desde» en el hub.
+*   **Versión**: `v2.8.68`.
+
+---
+
 ## ♿ Enlaces rastreables, contraste y hero móvil v2.8.67 (6 de noviembre de 2026)
 
 *   **Galerías**: los enlaces dejan `javascript:void(0)` y llevan su URL real, y las transiciones de página ignoran los clics que cancela GLightbox (`17e2129`).
