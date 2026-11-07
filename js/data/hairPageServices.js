@@ -119,7 +119,7 @@ export const hairPageServices = Object.freeze([
     /* -------------------------------------------------------------------------- */
     {
         id: 20,
-        category: 'color', // Used for both color and balayage pages if unified, or separate
+        category: 'balayage',
         title: "Balayage",
         description: "<strong>Degradado natural y luminoso.</strong> Técnica a mano alzada para crear un efecto de barrido de color. Incluye decoloración, matizante y tratamiento post-color.",
         image: "images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
@@ -129,7 +129,7 @@ export const hairPageServices = Object.freeze([
     },
     {
         id: 21,
-        category: 'color',
+        category: 'balayage',
         title: "Babylights / Iluminaciones",
         description: "<strong>Destellos sutiles de luz.</strong> Mechas muy finas que imitan el brillo natural del sol en el cabello. Ideales para dar dimensión sin cambios drásticos.",
         image: "images/pages/peluqueria/imagen-balayage_chia.webp",
@@ -340,8 +340,8 @@ export const hairPageServices = Object.freeze([
  */
 const SUBPAGINAS = {
     'cortes-de-pelo': { categorias: ['cortes'] },
-    'balayage-mechas': { categorias: ['color', 'balayage'] },
-    'color-tinturas-cabello': { categorias: ['color', 'balayage'] },
+    'balayage-mechas': { categorias: ['balayage'] },
+    'color-tinturas-cabello': { categorias: ['color'] },
     'tratamientos-capilares': {
         categorias: ['tratamientos'],
         carta: {
@@ -387,7 +387,7 @@ export function hairSubpageFor(ruta) {
 /**
  * Primera subpágina que pinta una categoría. Los servicios de las subpáginas no traen
  * `link` porque ya están en su página; quien los enlaza desde fuera (el buscador) lo
- * saca de aquí. `color` lo pintan Balayage y Color, y gana la primera.
+ * saca de aquí.
  * @param {string} category
  * @returns {string|null}
  */
