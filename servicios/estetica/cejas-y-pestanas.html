@@ -134,17 +134,17 @@
       <!-- Sección 1: Introducción y Menú de Servicios (Hub) -->
       <section class="relative z-10 bg-white pt-16 md:pt-24 pb-16 md:pb-24">
         <div class="container mx-auto px-6 max-w-screen-xl">
-            <div class="text-center mb-16" data-animation="fadeInUp">
+            <div class="servicios-lateral">
+            <div class="servicios-lateral__intro text-center mb-16" data-animation="fadeInUp">
               <h2 class="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-8">Diseño de Mirada</h2>
-              <div class="w-20 h-1 bg-brand-green mx-auto mb-8 rounded-full"></div>
+              <div class="w-20 h-1 bg-brand-green mx-auto lg:mx-0 mb-8 rounded-full"></div>
               <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 Analizamos tus facciones para crear la armonía perfecta. Desde un lifting que realza tus pestañas naturales hasta un diseño de cejas que define tu rostro.
               </p>
             </div>
 
             <!-- Grid de Servicios (Estética) -->
-            <div id="aesthetics-services-static" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                <!-- Inyectado dinámicamente por EstheticsHubController -->
+            <div id="aesthetics-services-static" class="servicios-lateral__tarjetas grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12"></div>
             </div>
         </div>
       </section>

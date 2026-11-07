@@ -78,9 +78,9 @@ export class ServiceCard {
                 
                 ${priceHtml}
 
-                <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${this.props.description}</p>
+                <p class="text-gray-600 text-sm mb-6 ${this.props.reserva ? '' : 'line-clamp-3 '}flex-grow leading-relaxed">${this.props.description}</p>
                 
-                ${this.getActionButton()}
+                ${this.getFooter()}
             </div>
         `;
     }
@@ -226,7 +226,7 @@ export class ServiceCard {
                 ${durationHtml}
 
                 <p class="text-gray-600 text-sm mb-6 ${reserva ? '' : 'line-clamp-3 '}flex-grow leading-relaxed">${this.props.description}</p>
-                ${reserva ? this.getReservaLink() : this.getActionButton()}
+                ${this.getFooter()}
             </div>
         `;
     }
@@ -236,6 +236,10 @@ export class ServiceCard {
     }
 
     /** Pie de las tarjetas de catálogo (variantes 'standard' y 'logo'). */
+    getFooter() {
+        return this.props.reserva ? this.getReservaLink() : this.getActionButton();
+    }
+
     getActionButton() {
         return `
             <div class="mt-auto pt-4 border-t border-gray-50 w-full flex justify-end">
