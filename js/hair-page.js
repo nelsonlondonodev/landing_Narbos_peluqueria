@@ -5,10 +5,11 @@ import { getBentoGridHTML } from './components/BentoGrid.js';
 import { getVideoSectionHTML } from './components/VideoSection.js';
 import { removeExpiredBadges } from './utils/newBadge.js';
 import { ServiceCard } from './components/ServiceCard.js';
+import { renderCartaServicios } from './components/CartaServicios.js';
 import { ServiceModal } from './components/ServiceModal.js';
 import { hairBrands, smoothingBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
-import { hairPageServices, hairServicesFor, hairSubpageFor } from './data/hairPageServices.js';
+import { hairCartaFor, hairPageServices, hairServicesFor, hairSubpageFor } from './data/hairPageServices.js';
 
 /**
  * Hair Page Logic
@@ -121,7 +122,15 @@ function initBrandsCarousel() {
 /*                                GRID & MODAL                                */
 /* -------------------------------------------------------------------------- */
 
+function initHairCarta() {
+    const root = document.getElementById('hair-carta-root');
+    const carta = hairCartaFor(getPageKey());
+    if (root && carta && !root.children.length) root.innerHTML = renderCartaServicios(carta);
+}
+
 function initHairServicesGrid() {
+    initHairCarta();
+
     const gridContainer = document.getElementById('hair-services-grid');
     if (!gridContainer) return;
 

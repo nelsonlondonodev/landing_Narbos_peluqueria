@@ -5,6 +5,7 @@ import { JSDOM } from 'jsdom';
 
 // Importación de componentes y datos (Pre-cargados)
 import { ServiceCard } from '../js/components/ServiceCard.js';
+import { renderCartaServicios } from '../js/components/CartaServicios.js';
 import { getNavbarHTML } from '../js/components/Navbar.js';
 import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
@@ -19,7 +20,7 @@ import { migasDePagina, itemsDeBreadcrumbList } from '../js/utils/migas.js';
 import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { hairSalonServices } from '../js/data/hairSalonServices.js';
-import { HAIR_SUBPAGES, hairServicesFor } from '../js/data/hairPageServices.js';
+import { HAIR_SUBPAGES, hairCartaFor, hairOffersFor, hairServicesFor } from '../js/data/hairPageServices.js';
 import { estheticsServices } from '../js/data/estheticsServices.js';
 import { makeupServices } from '../js/data/makeupServices.js';
 import articles from '../js/data/articles.js';
@@ -297,6 +298,10 @@ function injectServices(document, pageKey, prefix) {
         };
         grid.appendChild(new ServiceCard(processedData).render());
     });
+
+    const carta = hairCartaFor(pageKey);
+    const cartaRoot = document.getElementById('hair-carta-root');
+    if (carta && cartaRoot) cartaRoot.innerHTML = renderCartaServicios(carta);
 }
 
 /**
@@ -502,7 +507,7 @@ function injectOfferCatalog(document, pageKey, pagePath) {
         servicio.hasOfferCatalog = {
             '@type': 'OfferCatalog',
             name: servicio.hasOfferCatalog?.name || `Catálogo de ${servicio.serviceType || servicio.name}`,
-            itemListElement: hairServicesFor(pageKey).map(item => ({
+            itemListElement: hairOffersFor(pageKey).map(item => ({
                 '@type': 'Offer',
                 itemOffered: {
                     '@type': 'Service',
