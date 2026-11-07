@@ -4,7 +4,7 @@ import { BrandsSection } from './components/BrandsSection.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
 import { getVideoSectionHTML } from './components/VideoSection.js';
 import { removeExpiredBadges } from './utils/newBadge.js';
-import { ServiceCard } from './components/ServiceCard.js';
+import { appendServiceCards } from './utils/serviceCards.js';
 import { renderCartaServicios } from './components/CartaServicios.js';
 import { hairBrands, smoothingBrands } from './data/brandsData.js';
 import { pagesData } from './data/pagesData.js';
@@ -133,12 +133,5 @@ function initHairServicesGrid() {
     // Con el build ya llega pintado por el SSG.
     if (!gridContainer || gridContainer.querySelector('[id^="service-card-"]')) return;
 
-    hairServicesFor(getPageKey()).forEach(service => {
-        gridContainer.appendChild(new ServiceCard({
-            ...service,
-            image: window.narbosApp.resolvePath(service.image),
-            link: service.link && window.narbosApp.resolvePath(service.link),
-            variant: service.variant || 'standard'
-        }).render());
-    });
+    appendServiceCards(gridContainer, hairServicesFor(getPageKey()));
 }

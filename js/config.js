@@ -162,3 +162,11 @@ export function getWhatsAppUrl(message) {
     return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`;
 }
 
+/**
+ * WhatsApp con un servicio ya escrito en el mensaje.
+ * @param {string} servicio
+ */
+export function getServiceWhatsAppUrl(servicio) {
+    return getWhatsAppUrl(`Hola, quisiera agendar una cita para ${servicio}`);
+}
+

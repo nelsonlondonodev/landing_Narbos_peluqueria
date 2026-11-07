@@ -1,4 +1,4 @@
-import { getWhatsAppUrl } from '../config.js';
+import { getServiceWhatsAppUrl } from '../config.js';
 
 /**
  * Componente Tarjeta de Servicio.
@@ -250,11 +250,9 @@ export class ServiceCard {
     /** Pie de las tarjetas de `reserva`: WhatsApp con el servicio ya escrito en el mensaje. */
     getReservaLink() {
         const { title } = this.props;
-        const href = getWhatsAppUrl(`Hola, quisiera agendar una cita para ${title}`);
-
         return `
             <div class="mt-auto pt-4 border-t border-gray-50 w-full">
-                <a href="${href}" target="_blank" rel="noopener" data-whatsapp-servicio="${title}" aria-label="Agendar ${title} por WhatsApp" class="w-full inline-flex justify-center items-center rounded-lg bg-brand-green px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#5a634b] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">Agendar por WhatsApp</a>
+                <a href="${getServiceWhatsAppUrl(title)}" target="_blank" rel="noopener" data-whatsapp-servicio="${title}" aria-label="Agendar ${title} por WhatsApp" class="w-full inline-flex justify-center items-center rounded-lg bg-brand-green px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#5a634b] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">Agendar por WhatsApp</a>
             </div>
         `;
     }

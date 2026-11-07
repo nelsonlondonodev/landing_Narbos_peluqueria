@@ -1,4 +1,4 @@
-import { getWhatsAppUrl } from '../config.js';
+import { getServiceWhatsAppUrl } from '../config.js';
 
 export class ServiceModal {
     constructor(services) {
@@ -179,7 +179,7 @@ export class ServiceModal {
         }
 
         if (this.refs.whatsappBtn) {
-            this.refs.whatsappBtn.href = getWhatsAppUrl(`Hola, quisiera agendar una cita para ${service.title}`);
+            this.refs.whatsappBtn.href = getServiceWhatsAppUrl(service.title);
         }
     }
 

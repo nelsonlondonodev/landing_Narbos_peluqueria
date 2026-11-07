@@ -1,5 +1,5 @@
 import { App } from './App.js';
-import { ServiceCard } from './components/ServiceCard.js';
+import { appendServiceCards } from './utils/serviceCards.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
 import { pagesData } from './data/pagesData.js';
 import { makeupServices } from './data/makeupServices.js';
@@ -39,13 +39,7 @@ function initMakeupServicesGrid() {
     const gridContainer = document.getElementById('makeup-services-grid');
     if (!gridContainer || gridContainer.children.length > 0) return;
 
-    makeupServices.forEach(service => {
-        gridContainer.appendChild(new ServiceCard({
-            ...service,
-            image: window.narbosApp.resolvePath(service.image),
-            variant: service.variant || 'standard'
-        }).render());
-    });
+    appendServiceCards(gridContainer, makeupServices);
 }
 
 /**
