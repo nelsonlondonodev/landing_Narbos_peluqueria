@@ -293,8 +293,7 @@ function injectServices(document, pageKey, prefix) {
             ...data,
             variant: data.variant || registry.variant, // Priorizar variante del dato si existe
             link: data.link ? resolveRoute(data.link, prefix) : undefined,
-            image: resolveAsset(data.image, prefix),
-            modalId: data.modal ? 'service-modal' : data.modalId
+            image: resolveAsset(data.image, prefix)
         };
         grid.appendChild(new ServiceCard(processedData).render());
     });

@@ -100,7 +100,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp",
         price: 'Desde $35.000',
         duration: '45 min',
-        modal: true
+        reserva: true
     },
 
     {
@@ -111,7 +111,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
         price: 'Desde $35.000',
         duration: '45 min',
-        modal: true
+        reserva: true
     },
 
     /* -------------------------------------------------------------------------- */
@@ -125,7 +125,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/balayage-rubio-perfecto-ondas-chia-narbos.webp",
         price: 'Desde $450.000',
         duration: '4 - 6 horas',
-        modal: true
+        reserva: true
     },
     {
         id: 21,
@@ -135,7 +135,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/imagen-balayage_chia.webp",
         price: 'Desde $320.000',
         duration: '3 - 5 horas',
-        modal: true
+        reserva: true
     },
     {
         id: 22,
@@ -145,7 +145,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/cubrimiento-de-canas-natural.webp",
         price: 'Desde $200.000',
         duration: '2 horas',
-        modal: true
+        reserva: true
     },
     {
         id: 23,
@@ -155,7 +155,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/retoque-de-raiz-tinte.webp",
         price: 'Desde $120.000',
         duration: '90 min',
-        modal: true
+        reserva: true
     },
 
     /* -------------------------------------------------------------------------- */
@@ -169,7 +169,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/lavado-spa-capilar.webp",
         price: `Desde ${masterPrices.hair.tratamientos.alisadoProgresivo}`,
         duration: '3 - 4 horas',
-        modal: true
+        reserva: true
     },
     {
         id: 31,
@@ -182,7 +182,7 @@ export const hairPageServices = Object.freeze([
         // tarjeta como hasta ahora, pero el SSG no lo publica en el JSON-LD.
         precioSinConfirmar: true,
         duration: '90 min',
-        modal: true
+        reserva: true
     },
     {
         id: 32,
@@ -192,7 +192,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/lavado-spa-capilar.webp", // Placeholder reused
         price: `Desde ${masterPrices.hair.tratamientos.botoxCapilar}`,
         duration: '2 horas',
-        modal: true
+        reserva: true
     },
     {
         id: 33,
@@ -202,7 +202,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/lavado-spa-capilar.webp",
         price: 'Desde $10.000',
         duration: '20 min',
-        modal: true
+        reserva: true
     },
 
     /* -------------------------------------------------------------------------- */
@@ -216,7 +216,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-mobile.webp",
         price: `Desde ${masterPrices.hair.extensiones.porPunto} por punto`,
         duration: '2 a 4 horas',
-        modal: true
+        reserva: true
     },
     {
         id: 35,
@@ -229,7 +229,7 @@ export const hairPageServices = Object.freeze([
         imageAlt: "Colocación de extensiones adhesivas de cabello natural en Narbo's Salón Spa Chía",
         price: `Desde ${masterPrices.hair.extensiones.adhesivoPar} el par`,
         duration: '2 a 4 horas',
-        modal: true
+        reserva: true
     },
     {
         id: 36,
@@ -242,7 +242,7 @@ export const hairPageServices = Object.freeze([
         // sirve igual: el SSG no publica una `price` que no existe.
         precioSinConfirmar: true,
         duration: '2 a 4 horas',
-        modal: true
+        reserva: true
     },
     {
         id: 37,
@@ -252,7 +252,7 @@ export const hairPageServices = Object.freeze([
         image: "images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-mobile.webp",
         price: `Desde ${masterPrices.hair.extensiones.mantenimientoPunto} por punto`,
         duration: 'Según la cantidad de puntos',
-        modal: true
+        reserva: true
     },
 
     /* -------------------------------------------------------------------------- */

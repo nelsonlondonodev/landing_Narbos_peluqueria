@@ -1,3 +1,5 @@
+import { getWhatsAppUrl } from '../config.js';
+
 /**
  * Componente Tarjeta de Servicio.
  * Renderiza tarjetas de servicios en variantes 'overlay' (Home) o 'standard' (Grid).
@@ -16,10 +18,13 @@ export class ServiceCard {
      * @param {string} [props.animationDelay] - Delay de animación ("0.2s")
      * @param {'overlay'|'standard'|'logo'} [props.variant] - Estilo visual
      * @param {string} [props.price] - Precio del servicio (Opcional)
+     * @param {string} [props.duration] - Duración; solo se pinta en tarjetas de `reserva`
+     * @param {boolean} [props.reserva] - Variante 'standard': la tarjeta cuenta todo el
+     *   servicio y su botón abre WhatsApp, sin pasar por un modal
      */
-    constructor({ title, description, icon, image, imageMobile, imageAlt, link, modalId, animationDelay = "0s", variant = 'overlay', price, width, height }) {
+    constructor({ title, description, icon, image, imageMobile, imageAlt, link, modalId, animationDelay = "0s", variant = 'overlay', price, duration, reserva = false, width, height }) {
         this.props = {
-            title, description, icon, image, imageMobile, imageAlt, link, modalId, animationDelay, variant, price,
+            title, description, icon, image, imageMobile, imageAlt, link, modalId, animationDelay, variant, price, duration, reserva,
             width: width || (variant === 'overlay' ? 800 : 400),
             height: height || (variant === 'overlay' ? 600 : 300)
         };
@@ -207,6 +212,9 @@ export class ServiceCard {
             </div>
         ` : '';
 
+        const { reserva, duration } = this.props;
+        const durationHtml = reserva && duration ? `<p class="text-gray-500 text-sm mb-3">Duración: ${duration}</p>` : '';
+
         element.innerHTML = `
             ${imageHtml}
             <div class="p-6 flex flex-col flex-grow">
@@ -215,9 +223,10 @@ export class ServiceCard {
                 </div>
                 
                 ${priceHtml}
+                ${durationHtml}
 
-                <p class="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow leading-relaxed">${this.props.description}</p>
-                ${this.getActionButton()}
+                <p class="text-gray-600 text-sm mb-6 ${reserva ? '' : 'line-clamp-3 '}flex-grow leading-relaxed">${this.props.description}</p>
+                ${reserva ? this.getReservaLink() : this.getActionButton()}
             </div>
         `;
     }
@@ -234,6 +243,18 @@ export class ServiceCard {
                     <span>Ver detalles</span>
                     ${this.getArrowIcon()}
                 </span>
+            </div>
+        `;
+    }
+
+    /** Pie de las tarjetas de `reserva`: WhatsApp con el servicio ya escrito en el mensaje. */
+    getReservaLink() {
+        const { title } = this.props;
+        const href = getWhatsAppUrl(`Hola, quisiera agendar una cita para ${title}`);
+
+        return `
+            <div class="mt-auto pt-4 border-t border-gray-50 w-full">
+                <a href="${href}" target="_blank" rel="noopener" data-whatsapp-servicio="${title}" aria-label="Agendar ${title} por WhatsApp" class="w-full inline-flex justify-center items-center rounded-lg bg-brand-green px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#5a634b] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green">Agendar por WhatsApp</a>
             </div>
         `;
     }

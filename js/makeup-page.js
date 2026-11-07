@@ -1,6 +1,5 @@
 import { App } from './App.js';
 import { ServiceCard } from './components/ServiceCard.js';
-import { ServiceModal } from './components/ServiceModal.js';
 import { getBentoGridHTML } from './components/BentoGrid.js';
 import { pagesData } from './data/pagesData.js';
 import { makeupServices } from './data/makeupServices.js';
@@ -30,93 +29,23 @@ function initPageComponents() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*                                GRID & MODAL                                */
+/*                                    GRID                                    */
 /* -------------------------------------------------------------------------- */
 
 /**
- * Configura el contenedor principal del Grid de servicios
+ * Pinta el grid de servicios en desarrollo; con el build ya llega pintado por el SSG.
  */
 function initMakeupServicesGrid() {
     const gridContainer = document.getElementById('makeup-services-grid');
-    if (!gridContainer) return;
-    
-    // Registrar servicios en el modal aunque haya SSG para habilitar la interactividad
-    const serviceModal = new ServiceModal(makeupServices);
+    if (!gridContainer || gridContainer.children.length > 0) return;
 
-    if (isHydrated(gridContainer)) return;
-
-    renderDynamicGrid(gridContainer, serviceModal);
-}
-
-/**
- * Verifica si el contenedor ya tiene contenido inyectado por SSG.
- * @private
- */
-const isHydrated = (container) => container.children.length > 0;
-
-/**
- * Realiza el renderizado dinámico del grid cuando no hay SSG.
- * @private
- */
-function renderDynamicGrid(container, modal) {
-    container.innerHTML = '';
-    const hubServices = makeupServices.filter(s => s.category === 'hub');
-    renderServiceCards(container, hubServices, modal);
-}
-
-/**
- * Renderiza múltiples tarjetas en un contenedor dado
- * @param {HTMLElement} container - Contenedor DOM
- * @param {Array} services - Lista de servicios a renderizar
- * @param {ServiceModal} modalInstance - Instancia del modal para inyección
- */
-function renderServiceCards(container, services, modalInstance) {
-    if (!services || services.length === 0) return;
-
-    services.forEach(service => {
-        const cardElement = createServiceCard(service, modalInstance);
-        container.appendChild(cardElement);
+    makeupServices.forEach(service => {
+        gridContainer.appendChild(new ServiceCard({
+            ...service,
+            image: window.narbosApp.resolvePath(service.image),
+            variant: service.variant || 'standard'
+        }).render());
     });
-}
-
-/**
- * Crea el elemento DOM individual de una tarjeta de servicio
- * @param {Object} service - Objeto de datos del servicio
- * @param {ServiceModal} modalInstance - Instancia del modal
- * @returns {HTMLElement} Elemento DOM construido
- */
-function createServiceCard(service, modalInstance) {
-    const isModal = !!service.modal;
-
-    const cardElement = new ServiceCard({
-        title: service.title,
-        description: service.description,
-        image: window.narbosApp.resolvePath(service.image),
-        price: service.price,
-        link: window.narbosApp.resolvePath(service.link || '#'),
-        variant: service.variant || 'standard',
-        modalId: isModal ? 'service-modal' : null
-    }).render();
-
-    if (isModal) attachModalEvent(cardElement, service.id, modalInstance);
-
-    return cardElement;
-}
-
-/**
- * Agrega el listener de eventos para abrir el modal
- * @param {HTMLElement} cardElement - Elemento que recibe el clic
- * @param {number} serviceId - Id del servicio atado al modal
- * @param {ServiceModal} modalInstance - Gestor del modal
- */
-function attachModalEvent(cardElement, serviceId, modalInstance) {
-    cardElement.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        modalInstance.open(serviceId);
-    });
-    cardElement.style.cursor = 'pointer';
-    cardElement.removeAttribute('href');
 }
 
 /**
