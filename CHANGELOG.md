@@ -6,6 +6,14 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🖼️ Imagen grande para Discover v2.8.69 (8 de noviembre de 2026)
+
+*   **Meta robots**: el build añade `max-image-preview:large` a todas las páginas indexables. Sin esa directiva Google solo puede enseñar una miniatura, y Discover casi no muestra tarjetas sin imagen grande. La propiedad llevaba 0 clics y 0 impresiones en Discover del 7 de agosto al 6 de noviembre de 2026. Las páginas `noindex` no se tocan, y si una página ya trae meta robots se amplía su content en lugar de duplicarla.
+*   **Guarda**: el SSG aborta si una URL del sitemap llega a dist sin la directiva.
+*   **Versión**: `v2.8.69`.
+
+---
+
 ## 💬 Agendar desde la tarjeta y carta de tratamientos v2.8.68 (7 de noviembre de 2026)
 
 *   **Modal de servicios**: desaparece de toda la web salvo la home. Peluquería, maquillaje, estética y uñas agendan por WhatsApp desde la tarjeta, con el servicio en el mensaje y el evento `whatsapp_servicio` en Clarity (`715c041`, `1480e60`, `fcdce4f`, `549d7a9`).
