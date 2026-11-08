@@ -830,6 +830,34 @@ function injectReviewsMarquee(document) {
     track.innerHTML = reviews.map(reviewCardHTML).join('');
 }
 
+const IMAGEN_GRANDE = 'max-image-preview:large';
+
+/**
+ * Autoriza a Google a enseñar la imagen de la página a tamaño grande.
+ *
+ * Sin esta directiva Google usa como mucho una miniatura, y Discover casi no muestra
+ * tarjetas sin imagen grande: la propiedad llevaba tres meses a cero clics y cero
+ * impresiones (línea base del 7 de agosto al 6 de noviembre de 2026). Se pone en el
+ * build y no en cada HTML para que las páginas nuevas de las plantillas la lleven sin
+ * acordarse. Si la página ya trae una meta robots se amplía su content en vez de
+ * añadir otra, y las `noindex` se dejan como están, porque ahí no aporta nada.
+ */
+function permitirImagenGrande(document) {
+    const meta = document.querySelector('meta[name="robots"]');
+
+    if (!meta) {
+        const nueva = document.createElement('meta');
+        nueva.name = 'robots';
+        nueva.content = IMAGEN_GRANDE;
+        document.head.appendChild(nueva);
+        return;
+    }
+
+    const content = meta.getAttribute('content') || '';
+    if (/noindex/i.test(content) || content.includes(IMAGEN_GRANDE)) return;
+    meta.setAttribute('content', content.trim() ? `${content}, ${IMAGEN_GRANDE}` : IMAGEN_GRANDE);
+}
+
 async function processPage(pageConfig) {
     const fullPath = path.join(DIST_DIR, pageConfig.path);
     if (!fs.existsSync(fullPath)) return;
@@ -869,6 +897,7 @@ async function processPage(pageConfig) {
     injectReviewsMarquee(document);
     injectSEO(document, pageConfig.key, pageConfig.path);
     sincronizarMetadatosSociales(document);
+    permitirImagenGrande(document);
     precargarLogo(document);
     ordenarHead(document);
 
@@ -1518,6 +1547,32 @@ function checkSitemapIndexable() {
 }
 
 /**
+ * Aborta si una URL del sitemap se publica sin `max-image-preview:large`.
+ *
+ * La pone `permitirImagenGrande` en el build; esta guarda vigila que ninguna página
+ * se quede fuera de esa pasada, que es lo que la sacaría de Discover sin avisar.
+ */
+function checkImagenGrande() {
+    const sitemapPath = path.join(DIST_DIR, 'sitemap.xml');
+    if (!fs.existsSync(sitemapPath)) return ['no se generó dist/sitemap.xml'];
+
+    const xml = fs.readFileSync(sitemapPath, 'utf8');
+    const issues = [];
+
+    for (const [, loc] of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+        const fichero = resolveUrlToFile(loc);
+        if (!fs.existsSync(fichero)) continue; // ya lo reporta checkSitemapIndexable
+
+        const meta = fs.readFileSync(fichero, 'utf8').match(/<meta[^>]+name=["']robots["'][^>]*>/i);
+        if (!meta || !meta[0].includes(IMAGEN_GRANDE)) {
+            issues.push(`${loc} — sin meta robots ${IMAGEN_GRANDE}`);
+        }
+    }
+
+    return issues;
+}
+
+/**
  * Aborta si una canónica apunta a una URL que no existe en dist.
  *
  * La canónica es la señal con la que Google decide qué URL indexar, así que apuntarla
@@ -1731,6 +1786,11 @@ async function runSSG() {
             titulo: 'URLs del sitemap que no se pueden indexar',
             issues: checkSitemapIndexable(),
             motivo: 'pedirle a Google que indexe lo que la propia página le prohíbe gasta rastreo y ensucia el informe de cobertura.'
+        },
+        {
+            titulo: 'URLs del sitemap sin max-image-preview:large',
+            issues: checkImagenGrande(),
+            motivo: 'sin ella Google solo enseña una miniatura y Discover casi no saca tarjetas sin imagen grande.'
         },
         {
             titulo: 'Entradas de pagesData que publican su hero como metadatos',
