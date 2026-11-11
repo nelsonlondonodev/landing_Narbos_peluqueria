@@ -6,6 +6,17 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💆‍♀️ Carta de tratamientos según la propietaria v2.8.70 (11 de noviembre de 2026)
+
+*   **Capilógrafo**: entra sin costo en cualquier diagnóstico, también en los tratamientos básicos y express. La Micro Mist queda solo para los intensivos, desde el Quinoa 911 (`babd008`).
+*   **Nutritivo más ampolleta**: sigue en «Desde $90.000», y la descripción explica que el valor depende de lo que necesite el cabello.
+*   **Repolarización**: se retira de la tarjeta, la meta de tratamientos, la FAQ del hub de peluquería y dos artículos del blog, porque una clienta la confundió con otro servicio.
+*   **Precio en el schema**: la oferta del JSON-LD solo lleva `price` si el texto trae cifras; desaparece la marca `precioSinConfirmar`. El JSON-LD publicado no cambia.
+*   **Reseñas**: 377 en la ficha (`fb8ee4a`).
+*   **Versión**: `v2.8.70`.
+
+---
+
 ## 🖼️ Imagen grande para Discover v2.8.69 (8 de noviembre de 2026)
 
 *   **Meta robots**: el build añade `max-image-preview:large` a todas las páginas indexables. Sin esa directiva Google solo puede enseñar una miniatura, y Discover casi no muestra tarjetas sin imagen grande. La propiedad llevaba 0 clics y 0 impresiones en Discover del 7 de agosto al 6 de noviembre de 2026. Las páginas `noindex` no se tocan, y si una página ya trae meta robots se amplía su content en lugar de duplicarla.
