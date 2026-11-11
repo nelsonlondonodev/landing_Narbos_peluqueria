@@ -1,12 +1,12 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-11-08T16:34:34.556Z
+ * Última sincronización con Google Business Profile: 2026-11-11T16:00:56.160Z
  */
 const googleReviews = {
-    "lastSync": "2026-11-08T16:34:34.556Z",
+    "lastSync": "2026-11-11T16:00:56.160Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
-    "userRatingCount": 376,
+    "userRatingCount": 377,
     "reviews": [
         {
             "author": "Allyhome Manager",
