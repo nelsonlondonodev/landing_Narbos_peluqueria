@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { hairCartaFor, hairOffersFor, hairServicesFor, hairSubpageForCategory } from '../js/data/hairPageServices.js';
+import { hairCartaFor, hairOfferSchema, hairOffersFor, hairServicesFor, hairSubpageForCategory } from '../js/data/hairPageServices.js';
 import { searchIndex } from '../js/data/searchIndex.js';
 
 const PAGINA = 'tratamientos-capilares';
@@ -18,10 +18,21 @@ test('una página sin carta no devuelve carta', () => {
 
 test('la carta se declara en las ofertas, pero no entra en el grid de tarjetas', () => {
     const tarjetas = hairServicesFor(PAGINA);
+    const itemsCarta = hairCartaFor(PAGINA).groups.flatMap(grupo => grupo.items);
 
-    assert.equal(tarjetas.length, 4);
-    assert.equal(hairOffersFor(PAGINA).length, 17);
-    assert.deepEqual(hairOffersFor(PAGINA).slice(0, 4), tarjetas);
+    assert.ok(tarjetas.length > 0);
+    assert.deepEqual(hairOffersFor(PAGINA), [...tarjetas, ...itemsCarta]);
+});
+
+test('la oferta del schema lleva el importe solo cuando el precio trae cifras', () => {
+    const conPrecio = hairOfferSchema({ title: 'Quinoa 911', description: '<strong>Repara</strong>', price: 'Desde $120.000' });
+    const sinPrecio = hairOfferSchema({ title: 'Cortina Invisible', description: 'Texto', price: 'Según valoración' });
+
+    assert.equal(conPrecio.price, '120000');
+    assert.equal(conPrecio.priceCurrency, 'COP');
+    assert.equal(conPrecio.itemOffered.description, 'Repara');
+    assert.equal('price' in sinPrecio, false);
+    assert.equal('priceCurrency' in sinPrecio, false);
 });
 
 test('las páginas sin carta ofrecen lo mismo que sus tarjetas', () => {

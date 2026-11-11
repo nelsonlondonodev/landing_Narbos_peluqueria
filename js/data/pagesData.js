@@ -615,7 +615,7 @@ export const pagesData = Object.freeze({
             ctaMessage: "Hola, vengo de la página de tratamientos capilares de la web de Narbo's y quiero agendar una cita"
         },
         metaTitle: "Tratamientos capilares en Chía: keratina y botox | Narbo's",
-        metaDescription: "Recuperación capilar en Chía y Cajicá: keratina, botox capilar, repolarización y alisados progresivos. Diagnóstico del cabello antes de tratar.",
+        metaDescription: "Recuperación capilar en Chía y Cajicá: keratina, botox capilar, tratamientos intensivos y alisados progresivos. Diagnóstico del cabello antes de tratar.",
         gallery: [
              {
                 type: 'logo-card',

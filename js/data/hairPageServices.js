@@ -172,19 +172,6 @@ export const hairPageServices = Object.freeze([
         reserva: true
     },
     {
-        id: 31,
-        category: 'tratamientos',
-        title: "Repolarización Capilar",
-        description: "<strong>Coctel de nutrientes.</strong> Tratamiento profundo con aparatología (gorro térmico/enfriador) para sellar vitaminas y keratina en la fibra capilar.",
-        image: "images/pages/peluqueria/lavado-spa-capilar.webp", // Placeholder reused
-        price: '$120.000',
-        // Sin confirmar por la propietaria (pregunta enviada el 2026-09-27): se ve en la
-        // tarjeta como hasta ahora, pero el SSG no lo publica en el JSON-LD.
-        precioSinConfirmar: true,
-        duration: '90 min',
-        reserva: true
-    },
-    {
         id: 32,
         category: 'tratamientos',
         title: "Botox Capilar",
@@ -238,9 +225,6 @@ export const hairPageServices = Object.freeze([
         description: "<strong>Cabello natural en cortina.</strong> El precio depende de tu cabello y del resultado que buscas, así que se define en la valoración.",
         image: "images/pages/peluqueria/extensiones-cabello-natural-chia-narbos-mobile.webp",
         price: 'Según valoración',
-        // No es un precio sin confirmar sino que no tiene precio público; la marca
-        // sirve igual: el SSG no publica una `price` que no existe.
-        precioSinConfirmar: true,
         duration: '2 a 4 horas',
         reserva: true
     },
@@ -282,7 +266,7 @@ export const hairPageServices = Object.freeze([
         },
         {
             title: "Tratamiento Nutritivo más Ampolleta",
-            description: "Cabello seco, opaco o sin vida: nutre en profundidad y devuelve la vitalidad y el brillo.",
+            description: "Cabello seco, opaco o sin vida: nutre en profundidad y devuelve la vitalidad y el brillo. El valor depende de lo que necesite tu cabello.",
             price: `Desde ${masterPrices.hair.tratamientos.nutritivoAmpolleta}`
         }
     ]),
@@ -346,7 +330,7 @@ const SUBPAGINAS = {
         categorias: ['tratamientos'],
         carta: {
             heading: 'Carta de Tratamientos Capilares',
-            intro: 'Elegimos contigo el tratamiento según lo que tu cabello necesita.',
+            intro: 'Elegimos contigo el tratamiento según lo que tu cabello necesita, con un diagnóstico previo con capilógrafo sin costo.',
             groups: [
                 {
                     category: 'tratamientos-basicos',
@@ -356,7 +340,7 @@ const SUBPAGINAS = {
                 {
                     category: 'tratamientos-intensivos',
                     title: 'Intensivos',
-                    intro: 'Incluyen diagnóstico previo con capilógrafo y aparatología como la Micro Mist, sin costo adicional.'
+                    intro: 'Incluyen aparatología como la Micro Mist, sin costo adicional.'
                 }
             ]
         }
@@ -423,4 +407,22 @@ export function hairCartaFor(pagina) {
 export function hairOffersFor(pagina) {
     const categorias = categoriasDe(pagina);
     return hairPageServices.filter(s => categorias.includes(s.category));
+}
+
+/**
+ * Un servicio como `Offer` del JSON-LD. El precio solo sale si el texto trae cifras:
+ * «Según valoración» se anuncia sin `price`, nunca con uno vacío.
+ * @param {{ title: string, description: string, price?: string }} item
+ */
+export function hairOfferSchema(item) {
+    const importe = item.price?.replace(/\D/g, '') ?? '';
+    return {
+        '@type': 'Offer',
+        itemOffered: {
+            '@type': 'Service',
+            name: item.title,
+            description: item.description.replace(/<[^>]+>/g, '')
+        },
+        ...(importe && { price: importe, priceCurrency: 'COP' })
+    };
 }
