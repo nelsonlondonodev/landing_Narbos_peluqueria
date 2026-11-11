@@ -20,7 +20,7 @@ import { migasDePagina, itemsDeBreadcrumbList } from '../js/utils/migas.js';
 import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { hairSalonServices } from '../js/data/hairSalonServices.js';
-import { HAIR_SUBPAGES, hairCartaFor, hairOffersFor, hairServicesFor } from '../js/data/hairPageServices.js';
+import { HAIR_SUBPAGES, hairCartaFor, hairOfferSchema, hairOffersFor, hairServicesFor } from '../js/data/hairPageServices.js';
 import { estheticsCardsFor, estheticsServices } from '../js/data/estheticsServices.js';
 import { nailsCardsFor } from '../js/data/nailsServices.js';
 import { makeupServices } from '../js/data/makeupServices.js';
@@ -522,19 +522,7 @@ function injectOfferCatalog(document, pageKey, pagePath) {
         servicio.hasOfferCatalog = {
             '@type': 'OfferCatalog',
             name: servicio.hasOfferCatalog?.name || `Catálogo de ${servicio.serviceType || servicio.name}`,
-            itemListElement: hairOffersFor(pageKey).map(item => ({
-                '@type': 'Offer',
-                itemOffered: {
-                    '@type': 'Service',
-                    name: item.title,
-                    description: item.description.replace(/<[^>]+>/g, '')
-                },
-                // Un precio que la propietaria no ha confirmado no se le anuncia a Google.
-                ...(item.precioSinConfirmar ? {} : {
-                    price: item.price.replace(/\D/g, ''),
-                    priceCurrency: 'COP'
-                })
-            }))
+            itemListElement: hairOffersFor(pageKey).map(hairOfferSchema)
         };
         // La `Offer` suelta sin precio decía «Consultar precios»: el catálogo la sustituye.
         if (servicio.offers && !servicio.offers.price) delete servicio.offers;
