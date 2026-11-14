@@ -173,6 +173,15 @@ export const videoCatalog = [
         // Mismo caso que `GD3bWZQSC8A`: `hqdefault` recorta el frame y asoma el título por
         // abajo; `maxresdefault` trae el relleno desenfocado y el antes/después limpio.
         thumbnailUrl: getYouTubeThumbnail('ZIA5AIH7xJI', 'maxresdefault')
+    },
+    {
+        id: 'KOCsCYmkV74',
+        title: "Mechas Cenizas: de Castaño Oscuro a Rubio Ceniza en Chía",
+        description: "De una melena castaño oscuro, lisa y de un solo tono, a mechas finas en rubio ceniza desde la raíz hasta las puntas, terminadas en ondas. Narbo's Salón Spa, Chía.",
+        uploadDate: "2026-11-14T01:32:25-05:00",
+        // Con miniatura propia (la portada antes/después): `maxresdefault` la trae en el
+        // centro con relleno desenfocado, igual que los dos anteriores.
+        thumbnailUrl: getYouTubeThumbnail('KOCsCYmkV74', 'maxresdefault')
     }
 ];
 
