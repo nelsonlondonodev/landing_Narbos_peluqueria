@@ -1,9 +1,6 @@
 import googleReviews from '../data/google-reviews.js';
 // El texto llega de Google escrito por cualquiera y acaba en `innerHTML`.
 import { escapeHTML } from '../utils/escapeHTML.js';
-import { siteConfig } from '../config.js';
-
-const MAPS_URL = siteConfig.contact.mapsLink;
 
 const AVATAR_COLORS = [
     'bg-brand-green/10 text-brand-green',
@@ -14,9 +11,53 @@ const AVATAR_COLORS = [
     'bg-sky-600/10 text-sky-600'
 ];
 
+// Las opiniones habituales rondan los 230-350 caracteres. Por encima de LIMITE_TEXTO
+// se recorta hacia CORTE_TEXTO para que la tarjeta mida como sus vecinas, y el resto
+// queda tras «Ver más». Recortar por caracteres y no con line-clamp deja la decisión
+// en el build: el SSG ya sabe qué tarjetas llevan botón sin medir nada en el cliente.
+const LIMITE_TEXTO = 360;
+const CORTE_TEXTO = 300;
+
+const QUOTE_CLASS = 'text-brand-gray-dark/80 text-sm leading-relaxed';
+const TOGGLE = '[data-review-toggle]';
+const OPEN = `${TOGGLE}[aria-expanded="true"]`;
+
+/** @param {string} raw @returns {string} */
+const formatText = raw => escapeHTML(raw).replace(/\n/g, '<br>');
+
+/**
+ * Corta en el último espacio antes de `max` para no partir una palabra.
+ * @param {string} text
+ * @param {number} max
+ * @returns {string}
+ */
+function cutAtWord(text, max) {
+    const cut = text.slice(0, max);
+    const lastSpace = cut.lastIndexOf(' ');
+    return (lastSpace > 0 ? cut.slice(0, lastSpace) : cut).replace(/[\s.,;:!¡¿?-]+$/, '');
+}
+
+/**
+ * Cuerpo de la opinión. Si es larga, lleva las dos versiones en el HTML: el rastreador
+ * lee la completa aunque esté oculta, y «Ver más» solo alterna cuál se ve.
+ * @param {string} raw
+ * @returns {string}
+ */
+function reviewBodyHTML(raw) {
+    if (raw.length <= LIMITE_TEXTO) {
+        return `<p class="${QUOTE_CLASS}">"${formatText(raw)}"</p>`;
+    }
+    return `
+            <p class="${QUOTE_CLASS}" data-review-short>"${formatText(cutAtWord(raw, CORTE_TEXTO))}…"</p>
+            <p class="${QUOTE_CLASS} hidden" data-review-full>"${formatText(raw)}"</p>
+            <button type="button" class="mt-2 text-sm font-semibold text-brand-green hover:underline" data-review-toggle aria-expanded="false">Ver más</button>`;
+}
+
 /**
  * Tarjeta de una opinión. La comparten el componente y el SSG, que pinta el carril en
  * el build para que el rastreador vea las reseñas reales sin depender del JS.
+ * No enlaza a la ficha: el clic sacaba al usuario de la web en mitad de la lectura, y
+ * el enlace a Google ya está en la cabecera con la calificación.
  * @param {{author: string, rating: number, text: string, relativeTime: string}} review
  * @param {number} index - Posición, para rotar el color del avatar.
  * @returns {string}
@@ -25,11 +66,10 @@ export function reviewCardHTML(review, index) {
     const author = escapeHTML(review.author || '');
     const initial = author ? author.charAt(0).toUpperCase() : 'C';
     const colorClass = AVATAR_COLORS[index % AVATAR_COLORS.length];
-    const text = escapeHTML(review.text || '').replace(/\n/g, '<br>');
     const stars = '★'.repeat(review.rating || 5);
 
     return `
-        <a href="${MAPS_URL}" target="_blank" rel="noopener noreferrer" class="block w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" title="Ver opiniones en Google Maps">
+        <article class="w-80 md:w-96 flex-shrink-0 bg-white p-6 rounded-xl shadow-md border border-gray-100/50 hover:shadow-xl transition-shadow duration-300">
             <div class="flex items-start justify-between mb-4">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-full ${colorClass} flex items-center justify-center font-bold text-lg">${initial}</div>
@@ -46,10 +86,8 @@ export function reviewCardHTML(review, index) {
                 </svg>
             </div>
             <div class="flex text-yellow-400 mb-3 text-sm">${stars}</div>
-            <p class="text-brand-gray-dark/80 text-sm leading-relaxed">
-                "${text}"
-            </p>
-        </a>
+            ${reviewBodyHTML(review.text || '')}
+        </article>
     `;
 }
 
@@ -83,6 +121,59 @@ export class ReviewsMarquee {
         }
 
         this._duplicateForLoop();
+        this._bindExpand();
+    }
+
+    /**
+     * «Ver más» abre solo su tarjeta, y mientras haya una abierta el carril se detiene
+     * (`is-paused`). Cuándo se cierra depende del puntero:
+     * - Con ratón, el hover ya lo detiene: al salir del carril se cierra y sigue.
+     * - Sin ratón (móvil), un toque fuera de la tarjeta abierta la cierra y reanuda.
+     * Un solo listener de clic en `document` cubre las dos cosas: alterna la tarjeta
+     * del botón pulsado y cierra cualquier otra, así que nunca hay dos abiertas.
+     * @private
+     */
+    _bindExpand() {
+        this.track.addEventListener('pointerleave', event => {
+            if (event.pointerType === 'mouse') this._closeAllExcept(null);
+        });
+
+        document.addEventListener('click', event => {
+            const target = /** @type {Element} */ (event.target);
+            const card = this.track.contains(target) ? target.closest('article') : null;
+            if (card && target.closest(TOGGLE)) this._setExpanded(card, !this._isOpen(card));
+            this._closeAllExcept(card);
+        });
+    }
+
+    /** @param {Element} card @returns {boolean} @private */
+    _isOpen(card) {
+        return card.querySelector(OPEN) !== null;
+    }
+
+    /**
+     * @param {Element} card
+     * @param {boolean} expanded
+     * @private
+     */
+    _setExpanded(card, expanded) {
+        const button = card.querySelector(TOGGLE);
+        card.querySelector('[data-review-short]').classList.toggle('hidden', expanded);
+        card.querySelector('[data-review-full]').classList.toggle('hidden', !expanded);
+        button.setAttribute('aria-expanded', String(expanded));
+        button.textContent = expanded ? 'Ver menos' : 'Ver más';
+        this.track.classList.toggle('is-paused', this.track.querySelector(OPEN) !== null);
+    }
+
+    /**
+     * @param {Element|null} except - Tarjeta que se deja como está.
+     * @private
+     */
+    _closeAllExcept(except) {
+        this.track.querySelectorAll(OPEN).forEach(button => {
+            const card = button.closest('article');
+            if (card !== except) this._setExpanded(card, false);
+        });
     }
 
     /**
@@ -111,6 +202,8 @@ export class ReviewsMarquee {
             const clone = card.cloneNode(true);
             clone.setAttribute('aria-hidden', 'true');
             clone.classList.add('clone');
+            // Un botón dentro de `aria-hidden` no debe recibir el foco del teclado.
+            clone.querySelectorAll('button').forEach(b => b.setAttribute('tabindex', '-1'));
             this.track.appendChild(clone);
         });
     }

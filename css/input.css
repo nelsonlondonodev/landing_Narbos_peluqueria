@@ -232,8 +232,20 @@
 }
 
 /* Marquee & Brands Slider */
+/* `items-start`: cada tarjeta mide lo que su texto; estiradas a la más alta, las
+   cortas quedaban con un hueco enorme abajo y «Ver más» las agrandaba todas.
+   Se detiene al pasar el ratón, con el foco del teclado dentro y con una opinión
+   abierta (`is-paused`, lo pone ReviewsMarquee; al sacar el ratón o tocar fuera se
+   cierra y sigue). `:focus-visible` y no `:focus-within`: tras un clic el botón se
+   queda con el foco, y con `:focus-within` el carril seguía parado. */
 .marquee-track {
-    @apply w-max animate-marquee;
+    @apply w-max items-start animate-marquee;
+}
+
+.marquee-track:hover,
+.marquee-track:has(:focus-visible),
+.marquee-track.is-paused {
+    animation-play-state: paused;
 }
 
 /* Desvanecido de los extremos de cualquier marquesina.
