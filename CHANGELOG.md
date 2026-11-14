@@ -6,6 +6,15 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💬 Opiniones legibles v2.8.72 (14 de noviembre de 2026)
+
+*   **«Ver más»**: las reseñas de más de 360 caracteres se recortan por palabra hacia los 300 y se abren solo en su tarjeta. Cada tarjeta mide lo que su texto: la reseña larga que entró estiraba a todas (`d680c8a`).
+*   **Pausa del carril**: se detiene con el ratón encima, con foco de teclado y con una reseña abierta. Con ratón, al salir se cierra y sigue; en el móvil, un toque fuera. La clase `hover:pause-animation` no existía y el carril nunca se paraba.
+*   **Sin enlace en las tarjetas**: ya no llevan a la ficha de Google; el enlace sigue en la cabecera de la calificación. Aplica a la home y a `nosotros`.
+*   **Versión**: `v2.8.72`.
+
+---
+
 ## 🎬 Short de mechas cenizas en la home v2.8.71 (14 de noviembre de 2026)
 
 *   **Galería de la home**: entra el Short de mechas cenizas (de castaño oscuro a rubio ceniza), el primero de la parrilla y de su `ItemList` (`3854552`). La galería llega a 12, el tope: el próximo vídeo sustituye a otro.
