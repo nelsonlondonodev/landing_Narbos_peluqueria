@@ -6,6 +6,14 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🎬 Short de mechas cenizas en la home v2.8.71 (14 de noviembre de 2026)
+
+*   **Galería de la home**: entra el Short de mechas cenizas (de castaño oscuro a rubio ceniza), el primero de la parrilla y de su `ItemList` (`3854552`). La galería llega a 12, el tope: el próximo vídeo sustituye a otro.
+*   **Datos de Google**: horarios y reseñas sincronizados, siguen en 377 (`fe67d07`).
+*   **Versión**: `v2.8.71`.
+
+---
+
 ## 💆‍♀️ Carta de tratamientos según la propietaria v2.8.70 (11 de noviembre de 2026)
 
 *   **Capilógrafo**: entra sin costo en cualquier diagnóstico, también en los tratamientos básicos y express. La Micro Mist queda solo para los intensivos, desde el Quinoa 911 (`babd008`).
