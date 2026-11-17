@@ -6,6 +6,15 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💄 Galería de maquillaje: gloss vino y visor v2.8.73 (17 de noviembre de 2026)
+
+*   **Galería de `/servicios/maquillaje/`**: entra una foto real del salón (maquilladora aplicando gloss vino), la misma del post de la ficha del 17 de noviembre. Va en segunda posición y en vertical, junto a la destacada; la rejilla queda sin huecos en escritorio y en móvil (`219c720`).
+*   **Visor de la galería**: la página cargaba el CSS de GLightbox pero no su JS, así que al pulsar una foto el navegador abría el `.webp` suelto en la pestaña, sin botón de cerrar. Ahora se abre en el visor con cerrar, flechas y Esc (`d729707`).
+*   **Datos**: horarios, reseñas (377) y sitemap sincronizados con Google (`687a5ea`).
+*   **Versión**: `v2.8.73`.
+
+---
+
 ## 💬 Opiniones legibles v2.8.72 (14 de noviembre de 2026)
 
 *   **«Ver más»**: las reseñas de más de 360 caracteres se recortan por palabra hacia los 300 y se abren solo en su tarjeta. Cada tarjeta mide lo que su texto: la reseña larga que entró estiraba a todas (`d680c8a`).

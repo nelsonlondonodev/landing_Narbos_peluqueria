@@ -61,6 +61,14 @@ export const pagesData = Object.freeze({
             },
             {
                 type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/maquillaje/maquillaje-social-gloss-vino-chia-narbos.webp',
+                title: "Gloss vino",
+                subtitle: "Trabajo real en Narbo's",
+                alt: "Maquilladora aplicando gloss vino a una clienta en Narbo's Salón Spa, Chía"
+            },
+            {
+                type: 'image',
                 layout: 'square',
                 src: 'images/pages/maquillaje/maquillaje-ojos-ahumados-narbos-2.webp',
                 title: "Smokey Eyes",
