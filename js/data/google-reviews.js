@@ -1,9 +1,9 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-11-14T07:12:35.906Z
+ * Última sincronización con Google Business Profile: 2026-11-17T06:00:59.399Z
  */
 const googleReviews = {
-    "lastSync": "2026-11-14T07:12:35.906Z",
+    "lastSync": "2026-11-17T06:00:59.399Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
     "userRatingCount": 377,
@@ -12,7 +12,7 @@ const googleReviews = {
             "author": "Allyhome Manager",
             "rating": 5,
             "text": "⭐⭐⭐⭐⭐\n¡Excelente experiencia! Cristian Barrera hizo un trabajo impecable. Me encantó cómo quedó mi cabello: entendió exactamente lo que quería y el resultado superó mis expectativas. Además de su profesionalismo, brinda una atención amable y dedicada. Sin duda lo recomiendo y volveré para mi próximo cambio de look. ¡Muchas gracias, Cristian!",
-            "relativeTime": "Hace 3 meses",
+            "relativeTime": "Hace 4 meses",
             "verified": true
         },
         {
