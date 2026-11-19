@@ -1,9 +1,9 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-11-17T06:00:59.048Z
+ * Última sincronización con Google Business Profile: 2026-11-19T06:38:08.484Z
  */
 const businessHours = {
-    "lastSync": "2026-11-17T06:00:59.048Z",
+    "lastSync": "2026-11-19T06:38:08.484Z",
     "source": "Google Places API (Sincronizado)",
     "weekdayText": [
         "lunes: 7:00–20:00",

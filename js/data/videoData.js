@@ -71,6 +71,9 @@ export function getYouTubeShortUrl(videoId) {
 export const videoCatalog = [
     {
         id: 'sz-uA1RgpVs',
+        // Fuera de la parrilla desde el 2026-11-19: con `iwFafry7iWk` pasaba de 12 y se
+        // retira el más antiguo. Sigue en el catálogo por su `VideoObject`.
+        excludeFromGallery: true,
         title: "Transformación de Color y Balayage en Chía",
         description: "Mira el proceso real de una transformación de color y técnica de balayage en nuestro salón en Chía. Resultados profesionales y cuidado capilar integral.",
         uploadDate: "2026-05-05T05:01:24-05:00",
@@ -182,6 +185,14 @@ export const videoCatalog = [
         // Con miniatura propia (la portada antes/después): `maxresdefault` la trae en el
         // centro con relleno desenfocado, igual que los dos anteriores.
         thumbnailUrl: getYouTubeThumbnail('KOCsCYmkV74', 'maxresdefault')
+    },
+    {
+        id: 'iwFafry7iWk',
+        title: "Balayage Rubio: de Raíz Crecida a Rubio Beige en Chía",
+        description: "Una raíz castaña crecida y un rubio opaco: aclaramos mechón a mechón en papel para fundir la raíz con el largo y dejar un rubio beige luminoso, sin líneas. Narbo's Salón Spa, Chía.",
+        uploadDate: "2026-11-19T01:22:27-05:00",
+        // Miniatura propia (la portada antes/después), como `KOCsCYmkV74`.
+        thumbnailUrl: getYouTubeThumbnail('iwFafry7iWk', 'maxresdefault')
     }
 ];
 
