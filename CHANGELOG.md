@@ -6,6 +6,16 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## ✨ Balayage rubio: Short y caso real v2.8.74 (19 de noviembre de 2026)
+
+*   **Galería de vídeos de la home**: entra primero el Short del balayage rubio del 18 de noviembre (`iwFafry7iWk`), con la etiqueta «Última publicación». Para no pasar de 12 vídeos, `sz-uA1RgpVs` sale de la parrilla; sigue en el catálogo por su `VideoObject` (`36233ed`).
+*   **Galería de `/servicios/peluqueria/balayage-mechas`**: el mismo trabajo entra como caso antes/después en segunda posición, con la etiqueta «Nuevo» durante 28 días. «Hidratación» pasa a vertical y «Rubio Tendencia» a cuadrada: la rejilla cierra sin huecos (4×4 en escritorio, 2×7 en móvil), y antes ya tenía dos en cada vista (`36233ed`).
+*   **Blog**: deja de cargar el CSS de GLightbox, que no usa (`71b9b92`).
+*   **Datos**: horarios, reseñas (377) y sitemap sincronizados con Google (`5a18491`).
+*   **Versión**: `v2.8.74`.
+
+---
+
 ## 💄 Galería de maquillaje: gloss vino y visor v2.8.73 (17 de noviembre de 2026)
 
 *   **Galería de `/servicios/maquillaje/`**: entra una foto real del salón (maquilladora aplicando gloss vino), la misma del post de la ficha del 17 de noviembre. Va en segunda posición y en vertical, junto a la destacada; la rejilla queda sin huecos en escritorio y en móvil (`219c720`).
