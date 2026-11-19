@@ -367,10 +367,31 @@ export const pagesData = Object.freeze({
                     }
                 ]
             },
+            // Balayage rubio del 2026-11-18, el mismo del Short iwFafry7iWk. Va segundo y en
+            // vertical. Para que la rejilla cierre sin huecos (4×4 en escritorio, 2×7 en
+            // móvil), «Hidratación» pasa a vertical y «Rubio Tendencia» a cuadrada.
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/peluqueria/casos_exito/balayage-rubio-raiz-crecida-chia-despues.webp',
+                srcMobile: 'images/pages/peluqueria/casos_exito/balayage-rubio-raiz-crecida-chia-despues-mobile.webp',
+                title: "Balayage Rubio",
+                subtitle: "De raíz crecida a rubio beige",
+                // Etiqueta «Nuevo» 28 días desde que el Short salió en YouTube, como el caso destacado.
+                addedAt: '2026-11-19T01:22:27-05:00',
+                badgeDurationDays: 28,
+                alt: "Resultado final: balayage rubio beige luminoso, liso y sin líneas, en Narbo's Salón Spa Chía.",
+                subImages: [
+                    {
+                        src: 'images/pages/peluqueria/casos_exito/balayage-rubio-raiz-crecida-chia-antes.webp',
+                        alt: 'Antes: raíz castaña crecida y puntas rubias opacas.'
+                    }
+                ]
+            },
              // Caso Estrella: Corrección Rubio Extremo
              {
                 type: 'image',
-                layout: 'square',
+                layout: 'vertical',
                 src: 'images/pages/peluqueria/casos_exito/tratamiento-hidratacion-chia-despues.webp',
                 srcMobile: 'images/pages/peluqueria/casos_exito/tratamiento-hidratacion-chia-despues-mobile.webp',
                 title: "Hidratación Profunda",
@@ -462,10 +483,10 @@ export const pagesData = Object.freeze({
                     }
                 ]
             },
-            // Caso 5: Rubio Tendencia (Nuevo)
+            // Caso 5: Rubio Tendencia
             {
                 type: 'image',
-                layout: 'vertical',
+                layout: 'square',
                 src: 'images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-despues.webp',
                 srcMobile: 'images/pages/peluqueria/casos_exito/balayage-rubio-tendencia-chia-despues-mobile.webp',
                 title: "Rubio Tendencia",
