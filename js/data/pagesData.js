@@ -1091,6 +1091,26 @@ export const pagesData = Object.freeze({
                 subtitle: "Diseños exclusivos",
                 alt: "Uñas acrílicas y diseños artísticos personalizados"
             },
+            // Trabajo real del 2026-11-21, el mismo del post de la ficha. Dos verticales tras
+            // el destacado: la rejilla queda 4×4 en escritorio y 2×7 en móvil, sin huecos.
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/unas/unas-decoradas-espirales-estrella-chia-narbos.webp',
+                title: "Uñas Decoradas",
+                subtitle: "Trabajo real en Narbo's",
+                addedAt: '2026-11-21T08:00:00-05:00',
+                badgeDurationDays: 28,
+                alt: "Uñas almendra decoradas a mano alzada con espirales vino, puntos, caritas y una estrella en Narbo's Salón Spa, Chía"
+            },
+            {
+                type: 'image',
+                layout: 'vertical',
+                src: 'images/pages/unas/unas-decoradas-espirales-caritas-chia-narbos.webp',
+                title: "Nail Art a Mano Alzada",
+                subtitle: "Cada uña distinta",
+                alt: "Manos cruzadas con uñas decoradas: espirales color vino, puntos negros sobre nude y caritas sobre blanco"
+            },
             {
                 type: 'image',
                 layout: 'square',
