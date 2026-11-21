@@ -6,6 +6,7 @@ import { JSDOM } from 'jsdom';
 // Importación de componentes y datos (Pre-cargados)
 import { ServiceCard } from '../js/components/ServiceCard.js';
 import { renderCartaServicios } from '../js/components/CartaServicios.js';
+import { cartaFor } from '../js/data/cartasServicios.js';
 import { getNavbarHTML } from '../js/components/Navbar.js';
 import { getFooterHTML } from '../js/components/Footer.js';
 import { getHomeModalsHTML } from '../js/components/HomeModals.js';
@@ -20,7 +21,7 @@ import { migasDePagina, itemsDeBreadcrumbList } from '../js/utils/migas.js';
 import googleReviews from '../js/data/google-reviews.js';
 import { servicesData } from '../js/data/servicesData.js';
 import { hairSalonServices } from '../js/data/hairSalonServices.js';
-import { HAIR_SUBPAGES, hairCartaFor, hairOfferSchema, hairOffersFor, hairServicesFor } from '../js/data/hairPageServices.js';
+import { HAIR_SUBPAGES, hairOfferSchema, hairOffersFor, hairServicesFor } from '../js/data/hairPageServices.js';
 import { estheticsCardsFor, estheticsServices } from '../js/data/estheticsServices.js';
 import { nailsCardsFor } from '../js/data/nailsServices.js';
 import { makeupServices } from '../js/data/makeupServices.js';
@@ -311,11 +312,11 @@ function injectServices(document, pageKey, prefix) {
 }
 
 /**
- * Inyecta la carta de precios de las subpáginas de peluquería que la tienen.
+ * Inyecta la carta de precios de las páginas que la tienen (peluquería, uñas, estética).
  */
-function injectHairCarta(document, pageKey) {
-    const carta = hairCartaFor(pageKey);
-    const root = document.getElementById('hair-carta-root');
+function injectCarta(document, pageKey) {
+    const carta = cartaFor(pageKey);
+    const root = document.getElementById('carta-root');
     if (carta && root) root.innerHTML = renderCartaServicios(carta);
 }
 
@@ -876,7 +877,7 @@ async function processPage(pageConfig) {
     injectHeroBadges(document, pageConfig.key);
     injectBreadcrumbs(document, pageConfig.path, prefix);
     injectServices(document, pageConfig.key, prefix);
-    injectHairCarta(document, pageConfig.key);
+    injectCarta(document, pageConfig.key);
     const videoIssue = injectVideoSection(document, pageConfig.key, pageConfig.path, prefix);
     const catalogIssue = injectOfferCatalog(document, pageConfig.key, pageConfig.path);
     const faqIssues = sincronizarFaqPage(document, pageConfig.path);

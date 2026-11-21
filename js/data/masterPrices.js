@@ -24,6 +24,21 @@ export const masterPrices = Object.freeze({
         },
         disenos: {
             nailArt: '$3.000' // Desde; libreta de la propietaria del 2026-11-21
+        },
+        // Libreta del 2026-11-21: técnicas y arreglos que no estaban en la web.
+        tecnicas: {
+            dipping: '$78.000',
+            rubber: '$72.000',
+            recubrimientoGel: '$110.000',
+            mantenimientoGel: '$100.000'
+        },
+        arreglos: {
+            cambioNormal: '$17.000',
+            cambioSecadoRapido: '$20.000',
+            cambioSemipermanente: '$35.000',
+            reparacion: '$10.000', // Por uña
+            alargamiento: '$12.000', // Por uña
+            efectos: '$10.000'
         }
     },
     hair: {
@@ -81,6 +96,14 @@ export const masterPrices = Object.freeze({
             masajeDescontracturanteCuerpo: '$170.000', // Todo el cuerpo
             drenajeLinfatico: '$150.000', // Todo el cuerpo
             moldeamiento: '$75.000' // Sesiones desde
+        },
+        // Libreta del 2026-11-21. El laminado es de pestañas: el de cejas no trae precio.
+        cejasPestanas: {
+            lifting: '$112.000',
+            laminadoPestanas: '$100.000',
+            aplicacionHenna: '$37.000',
+            hennaConCera: '$55.000',
+            hennaConHilo: '$60.000'
         },
         // Libreta de la propietaria del 2026-11-21 (precios de mujer). Cejas y bigote
         // se cobran por separado; la nariz y el cuerpo solo se hacen con cera.
