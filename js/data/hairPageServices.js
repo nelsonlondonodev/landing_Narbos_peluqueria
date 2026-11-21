@@ -18,7 +18,7 @@ export const hairPageServices = Object.freeze([
         description: "Diseños personalizados, puntas perfectas y cambios de look completos.",
         link: "servicios/peluqueria/cortes-de-pelo",
         image: "images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp",
-        price: 'Desde $35.000',
+        price: `Desde ${masterPrices.hair.corte.dama}`,
         duration: '45 min',
         variant: "standard"
     },
@@ -29,7 +29,7 @@ export const hairPageServices = Object.freeze([
         description: "Luce una melena de impacto. Incluye lavado y estilizado profesional.",
         link: "servicios/peluqueria/cortes-de-pelo",
         image: "images/pages/peluqueria/corte-de-cabello-color-en-chia.webp", 
-        price: 'Desde $35.000',
+        price: `Desde ${masterPrices.hair.corte.cepillados}`,
         duration: '45 min',
         variant: "standard"
     },
@@ -98,7 +98,7 @@ export const hairPageServices = Object.freeze([
         title: "Corte para Dama",
         description: "<strong>El corte perfecto para ti.</strong> Incluye asesoría de imagen, lavado spa y cepillado básico. Realizamos cortes Bob, capas, rectos y en V.",
         image: "images/pages/peluqueria/corte-cabello-dama-salon-belleza-chia-narbos.webp",
-        price: 'Desde $35.000',
+        price: `Desde ${masterPrices.hair.corte.dama}`,
         duration: '45 min',
         reserva: true
     },
@@ -109,7 +109,7 @@ export const hairPageServices = Object.freeze([
         title: "Cepillados",
         description: "<strong>Luce una melena de impacto.</strong> Incluye lavado y estilizado con secador y plancha/pinzas para ondas. Perfecto para eventos o tu día a día.",
         image: "images/pages/peluqueria/corte-de-cabello-color-en-chia.webp",
-        price: 'Desde $35.000',
+        price: `Desde ${masterPrices.hair.corte.cepillados}`,
         duration: '45 min',
         reserva: true
     },

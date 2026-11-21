@@ -43,7 +43,7 @@ export const masterPrices = Object.freeze({
     },
     hair: {
         corte: {
-            dama: '$35.000',
+            dama: '$38.000', // Desde; la propietaria lo subió el 2026-11-21
             cepillados: '$35.000' // Desde
         },
         color: {
