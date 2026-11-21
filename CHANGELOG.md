@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💅 Uñas decoradas en la galería v2.8.76 (21 de noviembre de 2026)
+
+*   **Galería de `/servicios/unas-spa/`**: entran dos fotos reales del 21 de noviembre (uñas almendra a mano alzada con espirales vino, puntos, caritas y estrella), las mismas del post de la ficha. Verticales tras el destacado, la primera con «Nuevo» durante 28 días; la rejilla cierra sin huecos (4×4 en escritorio, 2×7 en móvil) (`7876b15`).
+*   **Versión**: `v2.8.76`.
+
+---
+
 ## 💅 Precios nuevos de uñas, depilación y corte v2.8.75 (21 de noviembre de 2026)
 
 *   **Uñas**: manicura tradicional, secado rápido y semipermanente pasan a 25/37/58 mil y la pedicura a 32/43/63 mil; la decoración baja a «desde $3.000» y la tarjeta de diseños lee el precio de `masterPrices`. El JSON-LD de manicure-pedicure y el artículo de San Valentín se actualizan con las mismas cifras (`93c1603`).
