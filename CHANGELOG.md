@@ -6,6 +6,17 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💅 Precios nuevos de uñas, depilación y corte v2.8.75 (21 de noviembre de 2026)
+
+*   **Uñas**: manicura tradicional, secado rápido y semipermanente pasan a 25/37/58 mil y la pedicura a 32/43/63 mil; la decoración baja a «desde $3.000» y la tarjeta de diseños lee el precio de `masterPrices`. El JSON-LD de manicure-pedicure y el artículo de San Valentín se actualizan con las mismas cifras (`93c1603`).
+*   **Depilación**: suben axilas, piernas y bikini. Cejas y bigote se separan (cejas 22/27 mil con cera o hilo, bigote 14 mil) y entran «Otras zonas del rostro» desde $7.000 y los pies (`16b9616`).
+*   **Carta de servicios sin foto**: la carta de precios deja de ser solo de peluquería (`cartaFor()`). Entra en acrílicas y gel (dipping, rubber, gel), en manicure-pedicure (cambios de esmalte, reparación, alargamiento, efectos, decoración) y en cejas y pestañas (lifting, laminado de pestañas, henna) (`7f3e3bb`).
+*   **Corte de dama**: desde $38.000; las tarjetas de corte y cepillado leen el precio de `masterPrices` (`33687b7`).
+*   **Datos**: horarios, reseñas (380) y sitemap sincronizados con Google (`c5f59e9`, `39c6fe7`, `5fb4574`).
+*   **Versión**: `v2.8.75`.
+
+---
+
 ## ✨ Balayage rubio: Short y caso real v2.8.74 (19 de noviembre de 2026)
 
 *   **Galería de vídeos de la home**: entra primero el Short del balayage rubio del 18 de noviembre (`iwFafry7iWk`), con la etiqueta «Última publicación». Para no pasar de 12 vídeos, `sz-uA1RgpVs` sale de la parrilla; sigue en el catálogo por su `VideoObject` (`36233ed`).
