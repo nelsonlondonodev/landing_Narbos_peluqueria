@@ -77,7 +77,7 @@ export const nailsServices = [
     {
         id: 8,
         title: 'Diseños (Nail Art)',
-        price: 'Desde $5.000',
+        price: `Desde ${masterPrices.nails.disenos.nailArt}`,
         duration: '15+ min',
         summary: 'Personalización total: tendencias, mano alzada y decoración.',
         description: 'Desde líneas minimalistas y francesas modernas hasta efectos especiales.',

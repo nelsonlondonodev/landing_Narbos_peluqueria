@@ -6,15 +6,15 @@
 export const masterPrices = Object.freeze({
     nails: {
         manicura: {
-            tradicional: '$23.000',
-            secadoRapido: '$34.000',
-            semipermanente: '$56.000',
+            tradicional: '$25.000',
+            secadoRapido: '$37.000',
+            semipermanente: '$58.000',
             spa: '$25.000' // Desde
         },
         pedicura: {
-            tradicional: '$29.000',
-            secadoRapido: '$41.000',
-            semipermanente: '$61.000',
+            tradicional: '$32.000',
+            secadoRapido: '$43.000',
+            semipermanente: '$63.000',
             spa: '$25.000' // Desde
         },
         extensiones: {
@@ -23,7 +23,7 @@ export const masterPrices = Object.freeze({
             pressOn: '$130.000' // Con aplicación semipermanente
         },
         disenos: {
-            nailArt: '$5.000' // Desde, por uña
+            nailArt: '$3.000' // Desde; libreta de la propietaria del 2026-11-21
         }
     },
     hair: {
