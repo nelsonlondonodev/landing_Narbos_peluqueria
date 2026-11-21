@@ -5,7 +5,7 @@ import { ServiceCard } from '../js/components/ServiceCard.js';
 import { getServiceWhatsAppUrl } from '../js/config.js';
 import { estheticsCardsFor, estheticsServices } from '../js/data/estheticsServices.js';
 
-const SUBPAGINAS = { 'spa-facial-integral': 4, 'masajes-relajantes': 5, 'cejas-y-pestanas': 2, 'depilacion-corporal': 5 };
+const SUBPAGINAS = { 'spa-facial-integral': 4, 'masajes-relajantes': 5, 'cejas-y-pestanas': 4, 'depilacion-corporal': 6 };
 
 test('cada subpágina de estética agenda sus servicios sin enlace propio', () => {
     for (const [pagina, total] of Object.entries(SUBPAGINAS)) {
@@ -16,7 +16,7 @@ test('cada subpágina de estética agenda sus servicios sin enlace propio', () =
 });
 
 test('el hub de estética sigue enlazando a sus subpáginas', () => {
-    assert.equal(estheticsServices.length, 16);
+    assert.equal(estheticsServices.length, 19);
     assert.ok(estheticsServices.every(servicio => servicio.link && !servicio.reserva));
 });
 

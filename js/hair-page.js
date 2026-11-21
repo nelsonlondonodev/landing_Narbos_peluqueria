@@ -123,7 +123,7 @@ function initBrandsCarousel() {
 /* -------------------------------------------------------------------------- */
 
 function initHairCarta() {
-    const root = document.getElementById('hair-carta-root');
+    const root = document.getElementById('carta-root');
     const carta = hairCartaFor(getPageKey());
     if (root && carta && !root.children.length) root.innerHTML = renderCartaServicios(carta);
 }

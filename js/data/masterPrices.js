@@ -6,15 +6,15 @@
 export const masterPrices = Object.freeze({
     nails: {
         manicura: {
-            tradicional: '$23.000',
-            secadoRapido: '$34.000',
-            semipermanente: '$56.000',
+            tradicional: '$25.000',
+            secadoRapido: '$37.000',
+            semipermanente: '$58.000',
             spa: '$25.000' // Desde
         },
         pedicura: {
-            tradicional: '$29.000',
-            secadoRapido: '$41.000',
-            semipermanente: '$61.000',
+            tradicional: '$32.000',
+            secadoRapido: '$43.000',
+            semipermanente: '$63.000',
             spa: '$25.000' // Desde
         },
         extensiones: {
@@ -23,12 +23,27 @@ export const masterPrices = Object.freeze({
             pressOn: '$130.000' // Con aplicación semipermanente
         },
         disenos: {
-            nailArt: '$5.000' // Desde, por uña
+            nailArt: '$3.000' // Desde; libreta de la propietaria del 2026-11-21
+        },
+        // Libreta del 2026-11-21: técnicas y arreglos que no estaban en la web.
+        tecnicas: {
+            dipping: '$78.000',
+            rubber: '$72.000',
+            recubrimientoGel: '$110.000',
+            mantenimientoGel: '$100.000'
+        },
+        arreglos: {
+            cambioNormal: '$17.000',
+            cambioSecadoRapido: '$20.000',
+            cambioSemipermanente: '$35.000',
+            reparacion: '$10.000', // Por uña
+            alargamiento: '$12.000', // Por uña
+            efectos: '$10.000'
         }
     },
     hair: {
         corte: {
-            dama: '$35.000',
+            dama: '$38.000', // Desde; la propietaria lo subió el 2026-11-21
             cepillados: '$35.000' // Desde
         },
         color: {
@@ -82,17 +97,37 @@ export const masterPrices = Object.freeze({
             drenajeLinfatico: '$150.000', // Todo el cuerpo
             moldeamiento: '$75.000' // Sesiones desde
         },
+        // Libreta del 2026-11-21. El laminado es de pestañas: el de cejas no trae precio.
+        cejasPestanas: {
+            lifting: '$112.000',
+            laminadoPestanas: '$100.000',
+            aplicacionHenna: '$37.000',
+            hennaConCera: '$55.000',
+            hennaConHilo: '$60.000'
+        },
+        // Libreta de la propietaria del 2026-11-21 (precios de mujer). Cejas y bigote
+        // se cobran por separado; la nariz y el cuerpo solo se hacen con cera.
         depilacion: {
             cera: {
-                cejasBigote: '$22.000',
-                axilas: '$15.000',
-                piernaCompleta: '$38.000',
-                mediaPierna: '$28.000',
-                bikiniParcial: '$28.000',
-                bikiniCompleto: '$38.000'
+                cejas: '$22.000',
+                bigote: '$14.000',
+                menton: '$7.000',
+                nariz: '$14.000',
+                patillas: '$9.000',
+                mejillas: '$12.000',
+                axilas: '$18.000',
+                piernaCompleta: '$40.000',
+                mediaPierna: '$30.000',
+                bikiniParcial: '$31.000',
+                bikiniCompleto: '$41.000',
+                pies: '$12.000'
             },
             hilo: {
-                cejasBigote: '$37.000'
+                cejas: '$27.000',
+                bigote: '$14.000',
+                menton: '$9.000',
+                patillas: '$12.000',
+                mejillas: '$12.000'
             }
         }
     }
