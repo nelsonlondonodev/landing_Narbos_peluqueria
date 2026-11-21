@@ -93,22 +93,38 @@ export const estheticsServices = [
     /* -------------------------------------------------------------------------- */
     /*                                DEPILACIÓN (CERA E HILO)                    */
     /* -------------------------------------------------------------------------- */
-    // FACIAL (Cejas y Bigote)
+    // FACIAL: cejas y bigote se cobran por separado desde la libreta del 2026-11-21.
     {
-        title: 'Depilación Cejas y Bigote (Cera)',
+        title: 'Depilación de Cejas (Cera)',
         description: 'Diseño y limpieza rápida con cera suave para el rostro.',
         image: '/images/brand/logo_narbos.webp',
         link: 'servicios/estetica/cejas-y-pestanas',
-        price: masterPrices.esthetics.depilacion.cera.cejasBigote,
+        price: masterPrices.esthetics.depilacion.cera.cejas,
         variant: 'logo'
     },
     {
-        title: 'Depilación con Hilo (Cejas y Bigote)',
+        title: 'Depilación de Cejas con Hilo',
         description: 'Técnica milenaria para una definición precisa y duradera del arco de tus cejas.',
         image: '/images/pages/estetica/depilacion-hilo-facial-estetica-chia.webp',
         link: 'servicios/estetica/cejas-y-pestanas',
-        price: masterPrices.esthetics.depilacion.hilo.cejasBigote,
+        price: masterPrices.esthetics.depilacion.hilo.cejas,
         variant: 'standard'
+    },
+    {
+        title: 'Depilación de Bigote (Cera o Hilo)',
+        description: 'El mismo precio con cera o con hilo, según tu piel.',
+        image: '/images/brand/logo_narbos.webp',
+        link: 'servicios/estetica/cejas-y-pestanas',
+        price: masterPrices.esthetics.depilacion.cera.bigote,
+        variant: 'logo'
+    },
+    {
+        title: 'Otras Zonas del Rostro',
+        description: 'Mentón, nariz, patillas o mejillas, con cera o con hilo.',
+        image: '/images/brand/logo_narbos.webp',
+        link: 'servicios/estetica/cejas-y-pestanas',
+        price: `Desde ${masterPrices.esthetics.depilacion.cera.menton}`,
+        variant: 'logo'
     },
 
     // CORPORAL (Axilas, Piernas, Bikini)
@@ -156,6 +172,14 @@ export const estheticsServices = [
         image: '/images/brand/logo_narbos.webp',
         link: 'servicios/estetica/depilacion-corporal',
         price: masterPrices.esthetics.depilacion.cera.bikiniCompleto,
+        variant: 'logo'
+    },
+    {
+        title: 'Depilación de Pies (Cera)',
+        description: 'Empeine y dedos libres de vello, ideal para lucir sandalias.',
+        image: '/images/brand/logo_narbos.webp',
+        link: 'servicios/estetica/depilacion-corporal',
+        price: masterPrices.esthetics.depilacion.cera.pies,
         variant: 'logo'
     }
 ];

@@ -82,17 +82,29 @@ export const masterPrices = Object.freeze({
             drenajeLinfatico: '$150.000', // Todo el cuerpo
             moldeamiento: '$75.000' // Sesiones desde
         },
+        // Libreta de la propietaria del 2026-11-21 (precios de mujer). Cejas y bigote
+        // se cobran por separado; la nariz y el cuerpo solo se hacen con cera.
         depilacion: {
             cera: {
-                cejasBigote: '$22.000',
-                axilas: '$15.000',
-                piernaCompleta: '$38.000',
-                mediaPierna: '$28.000',
-                bikiniParcial: '$28.000',
-                bikiniCompleto: '$38.000'
+                cejas: '$22.000',
+                bigote: '$14.000',
+                menton: '$7.000',
+                nariz: '$14.000',
+                patillas: '$9.000',
+                mejillas: '$12.000',
+                axilas: '$18.000',
+                piernaCompleta: '$40.000',
+                mediaPierna: '$30.000',
+                bikiniParcial: '$31.000',
+                bikiniCompleto: '$41.000',
+                pies: '$12.000'
             },
             hilo: {
-                cejasBigote: '$37.000'
+                cejas: '$27.000',
+                bigote: '$14.000',
+                menton: '$9.000',
+                patillas: '$12.000',
+                mejillas: '$12.000'
             }
         }
     }
