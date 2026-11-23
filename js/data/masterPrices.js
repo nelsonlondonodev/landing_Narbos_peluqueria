@@ -97,10 +97,11 @@ export const masterPrices = Object.freeze({
             drenajeLinfatico: '$150.000', // Todo el cuerpo
             moldeamiento: '$75.000' // Sesiones desde
         },
-        // Libreta del 2026-11-21. El laminado es de pestañas: el de cejas no trae precio.
+        // Libreta del 2026-11-21, corregida por Jimena el mismo día: el laminado es de
+        // cejas (no de pestañas) y el lifting pasa a 115.000 (la libreta decía 112.000).
         cejasPestanas: {
-            lifting: '$112.000',
-            laminadoPestanas: '$100.000',
+            lifting: '$115.000',
+            laminadoCejas: '$100.000',
             aplicacionHenna: '$37.000',
             hennaConCera: '$55.000',
             hennaConHilo: '$60.000'
@@ -128,6 +129,36 @@ export const masterPrices = Object.freeze({
                 menton: '$9.000',
                 patillas: '$12.000',
                 mejillas: '$12.000'
+            }
+        },
+        // Libreta «Caballero» que envió Jimena el 2026-11-21 (con cera).
+        depilacionCaballero: {
+            rostro: {
+                disenoCejas: '$25.000',
+                nariz: '$18.000',
+                orejas: '$18.000',
+                pomulos: '$20.000',
+                barbaPerfilado: '$35.000',
+                rostroCompleto: '$75.000'
+            },
+            torso: {
+                axilas: '$30.000',
+                pecho: '$55.000',
+                abdomen: '$45.000',
+                pechoAbdomen: '$90.000',
+                espaldaCompleta: '$70.000',
+                hombros: '$30.000',
+                espaldaHombros: '$90.000'
+            },
+            brazos: {
+                medioBrazo: '$35.000',
+                brazoCompleto: '$55.000',
+                manosDedos: '$20.000'
+            },
+            combos: {
+                pechoAbdomenAxilas: '$110.000',
+                espaldaHombrosCuello: '$105.000',
+                cuerpoSuperior: '$190.000'
             }
         }
     }

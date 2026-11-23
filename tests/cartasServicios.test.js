@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { cartaFor } from '../js/data/cartasServicios.js';
 import { hairCartaFor } from '../js/data/hairPageServices.js';
 
-const PAGINAS = ['unas-acrilicas-gel', 'manicure-pedicure', 'cejas-y-pestanas'];
+const PAGINAS = ['unas-acrilicas-gel', 'manicure-pedicure', 'cejas-y-pestanas', 'depilacion-corporal'];
 
-test('uñas y cejas tienen carta, con precio en cada fila', () => {
+test('uñas, cejas y depilación de caballero tienen carta, con precio en cada fila', () => {
     for (const pagina of PAGINAS) {
         const filas = cartaFor(pagina)?.groups.flatMap(grupo => grupo.items) ?? [];
         assert.ok(filas.length > 0, pagina);
