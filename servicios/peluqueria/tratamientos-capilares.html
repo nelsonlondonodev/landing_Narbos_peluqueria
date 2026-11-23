@@ -78,6 +78,23 @@
       "description": "Tratamientos capilares: hidratación, nutrición y reparación."
     }
     </script>
+    <!-- VIDEO-OBJECT:tratamientos-capilares -->
+    <script type="application/ld+json">
+    {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "name": "Masaje de Cuero Cabelludo: un Momento de Calma en Chía",
+          "description": "Mientras tu cabello se cuida, un masajeador recorre todo el cuero cabelludo con movimientos suaves, de la raíz hacia atrás. Tratamientos capilares en Narbo's Salón Spa, Chía.",
+          "thumbnailUrl": [
+                "https://img.youtube.com/vi/awhFr49nfpI/hqdefault.jpg",
+                "https://img.youtube.com/vi/awhFr49nfpI/maxresdefault.jpg"
+          ],
+          "uploadDate": "2026-11-23T02:56:57-05:00",
+          "contentUrl": "https://youtube.com/shorts/awhFr49nfpI",
+          "embedUrl": "https://www.youtube.com/embed/awhFr49nfpI"
+    }
+    </script>
+    <!-- /VIDEO-OBJECT -->
 
     <link rel="preload" href="../../css/styles.css?v=2.8.20" as="style" />
     <!-- Fuentes autohospedadas: sin preload no se descubren hasta parsear el CSS. -->
@@ -142,8 +159,12 @@
                 <div id="hair-gallery-root"></div>
             </div>
           </section>
-    
-          <!-- Sección 3: Preguntas Frecuentes (FAQ) -->
+
+          <!-- Sección 3: Video del masaje capilar (respalda el VideoObject del JSON-LD).
+               Contenido en pagesData['tratamientos-capilares'].video -->
+          <div id="video-section-root"></div>
+
+          <!-- Sección 4: Preguntas Frecuentes (FAQ) -->
           <section id="faq" class="py-16 md:py-24 bg-brand-light/10 relative">
             <div class="container mx-auto px-6 max-w-4xl">
                 <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark mb-12 text-center" data-animation="fadeInUp">Preguntas Frecuentes</h2>

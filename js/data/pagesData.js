@@ -645,6 +645,21 @@ export const pagesData = Object.freeze({
         },
         metaTitle: "Tratamientos capilares en Chía: keratina y botox | Narbo's",
         metaDescription: "Recuperación capilar en Chía y Cajicá: keratina, botox capilar, tratamientos intensivos y alisados progresivos. Diagnóstico del cabello antes de tratar.",
+        video: {
+            id: 'awhFr49nfpI',
+            // La portada de la edición (una sola foto, «Masaje»), 9:16 nativa.
+            poster: 'images/pages/peluqueria/video-masaje-cuero-cabelludo-tratamiento-capilar.webp',
+            // Etiqueta «Nuevo» 28 días desde que salió en YouTube.
+            addedAt: '2026-11-23T02:56:57-05:00',
+            badgeDurationDays: 28,
+            headingId: 'tratamientos-video-title',
+            heading: 'Un momento de <span class="text-brand-green">calma</span> en tu tratamiento',
+            body: 'Mientras tu cabello se cuida, un masajeador recorre todo el cuero cabelludo con movimientos suaves, de la raíz hacia atrás. Es la pausa que acompaña nuestros lavados y tratamientos capilares.',
+            ctaLabel: 'Agendar mi Tratamiento',
+            ctaMessage: 'Hola, vi el video del masaje capilar en su web y quiero agendar un tratamiento.',
+            alt: "Masaje de cuero cabelludo con masajeador de varillas durante un tratamiento capilar en Narbo's Salón Spa Chía",
+            ariaLabel: 'Reproducir video: Masaje de Cuero Cabelludo en Chía'
+        },
         gallery: [
              {
                 type: 'logo-card',

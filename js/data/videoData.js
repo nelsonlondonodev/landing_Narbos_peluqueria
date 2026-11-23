@@ -81,6 +81,9 @@ export const videoCatalog = [
     },
     {
         id: 'MC-SPNzjk0E',
+        // Fuera de la parrilla desde el 2026-11-23: con `awhFr49nfpI` pasaba de 12 y se
+        // retira el más antiguo. Sigue en el catálogo por su `VideoObject`.
+        excludeFromGallery: true,
         title: "Transformación de Estilo y Color en Chía",
         description: "Descubre el proceso de transformación de estilo y color en Narbo's Salón Spa. Resultados vibrantes y profesionales con técnicas de vanguardia.",
         uploadDate: "2026-05-13T02:00:27-05:00",
@@ -193,6 +196,14 @@ export const videoCatalog = [
         uploadDate: "2026-11-19T01:22:27-05:00",
         // Miniatura propia (la portada antes/después), como `KOCsCYmkV74`.
         thumbnailUrl: getYouTubeThumbnail('iwFafry7iWk', 'maxresdefault')
+    },
+    {
+        id: 'awhFr49nfpI',
+        title: "Masaje de Cuero Cabelludo: un Momento de Calma en Chía",
+        description: "Mientras tu cabello se cuida, un masajeador recorre todo el cuero cabelludo con movimientos suaves, de la raíz hacia atrás. Tratamientos capilares en Narbo's Salón Spa, Chía.",
+        uploadDate: "2026-11-23T02:56:57-05:00",
+        // Miniatura propia (una sola foto, «Masaje»).
+        thumbnailUrl: getYouTubeThumbnail('awhFr49nfpI', 'maxresdefault')
     }
 ];
 
