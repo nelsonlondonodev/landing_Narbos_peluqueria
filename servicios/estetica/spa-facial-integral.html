@@ -72,15 +72,6 @@
       },
       "areaServed": ["Chía", "Cajicá", "Zipaquirá", "Sopó", "Cota", "Fontanar"],
       "description": "Tu mejor opción de Spa Facial en Chía. Limpieza profunda, hidratación intensiva, aparatología facial y masajes relajantes para un rostro radiante.",
-      "video": {
-        "@type": "VideoObject",
-        "name": "Experiencia de spa facial en Narbo's Salón Spa Chía",
-        "description": "Visualiza nuestro protocolo de cuidado y spa facial en cabina privada en Narbo's Chía.",
-        "thumbnailUrl": "https://narbossalon.com/images/pages/estetica/masaje-facial-relajante-narbos.webp",
-        "uploadDate": "2026-07-18T07:58:37-05:00",
-        "contentUrl": "https://youtube.com/shorts/b5hfY4Cuc2w",
-        "embedUrl": "https://www.youtube.com/embed/b5hfY4Cuc2w"
-      },
       "offers": {
         "@type": "Offer",
         "priceCurrency": "COP",
@@ -89,6 +80,23 @@
       }
     }
     </script>
+    <!-- VIDEO-OBJECT:spa-facial-integral -->
+    <script type="application/ld+json">
+    {
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "name": "Limpieza Facial Profunda con Alta Frecuencia en Chía",
+          "description": "Así es la limpieza facial profunda en cabina: alta frecuencia después de la extracción para calmar, desinflamar y desinfectar la piel. Spa facial en Narbo's Salón Spa, Chía.",
+          "thumbnailUrl": [
+                "https://img.youtube.com/vi/b5hfY4Cuc2w/hqdefault.jpg",
+                "https://img.youtube.com/vi/b5hfY4Cuc2w/maxresdefault.jpg"
+          ],
+          "uploadDate": "2026-07-18T07:58:37-05:00",
+          "contentUrl": "https://youtube.com/shorts/b5hfY4Cuc2w",
+          "embedUrl": "https://www.youtube.com/embed/b5hfY4Cuc2w"
+    }
+    </script>
+    <!-- /VIDEO-OBJECT -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -188,23 +196,6 @@
 
             <!-- Grid de Servicios (Estética) -->
             <div id="aesthetics-services-static" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
-
-            <!-- Video demostrativo Short -->
-            <div class="mt-16 flex flex-col items-center animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
-              <h3 class="text-2xl font-serif font-bold text-gray-900 mb-2">Conoce la experiencia en cabina</h3>
-              <p class="text-sm text-gray-500 mb-6 italic">Visualiza nuestro protocolo de cuidado facial en Chía</p>
-              <div class="rounded-2xl shadow-xl overflow-hidden bg-gray-100 border border-gray-100 mx-auto" style="width: 320px; max-width: 100%; height: 569px;">
-                <iframe 
-                  class="w-full h-full"
-                  src="https://www.youtube.com/embed/b5hfY4Cuc2w" 
-                  title="Experiencia de spa facial en Narbo's Salón Spa Chía" 
-                  frameborder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  allowfullscreen 
-                  loading="lazy">
-                </iframe>
-              </div>
-            </div>
         </div>
       </section>
 
@@ -216,7 +207,11 @@
         </div>
       </section>
 
-      <!-- Sección 3: Preguntas Frecuentes (FAQ) -->
+      <!-- Sección 3: Video de la limpieza facial (respalda el VideoObject del JSON-LD).
+           Contenido en pagesData['spa-facial-integral'].video -->
+      <div id="video-section-root"></div>
+
+      <!-- Sección 4: Preguntas Frecuentes (FAQ) -->
       <section id="faq" class="py-16 md:py-24 bg-brand-light/10 relative">
         <div class="container mx-auto px-6 max-w-4xl">
             <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-gray-dark mb-12 text-center">Preguntas Frecuentes</h2>

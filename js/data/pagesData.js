@@ -645,6 +645,21 @@ export const pagesData = Object.freeze({
         },
         metaTitle: "Tratamientos capilares en Chía: keratina y botox | Narbo's",
         metaDescription: "Recuperación capilar en Chía y Cajicá: keratina, botox capilar, tratamientos intensivos y alisados progresivos. Diagnóstico del cabello antes de tratar.",
+        video: {
+            id: 'awhFr49nfpI',
+            // La portada de la edición (una sola foto, «Masaje»), 9:16 nativa.
+            poster: 'images/pages/peluqueria/video-masaje-cuero-cabelludo-tratamiento-capilar.webp',
+            // Etiqueta «Nuevo» 28 días desde que salió en YouTube.
+            addedAt: '2026-11-23T02:56:57-05:00',
+            badgeDurationDays: 28,
+            headingId: 'tratamientos-video-title',
+            heading: 'Un momento de <span class="text-brand-green">calma</span> en tu tratamiento',
+            body: 'Mientras tu cabello se cuida, un masajeador recorre todo el cuero cabelludo con movimientos suaves, de la raíz hacia atrás. Es la pausa que acompaña nuestros lavados y tratamientos capilares.',
+            ctaLabel: 'Agendar mi Tratamiento',
+            ctaMessage: 'Hola, vi el video del masaje capilar en su web y quiero agendar un tratamiento.',
+            alt: "Masaje de cuero cabelludo con masajeador de varillas durante un tratamiento capilar en Narbo's Salón Spa Chía",
+            ariaLabel: 'Reproducir video: Masaje de Cuero Cabelludo en Chía'
+        },
         gallery: [
              {
                 type: 'logo-card',
@@ -935,6 +950,20 @@ export const pagesData = Object.freeze({
         },
         metaTitle: "Spa Facial Integral en Chía | Rejuvenecimiento y Bienestar | Narbo's",
         metaDescription: "Vive una experiencia de lujo con nuestro Spa Facial Integral en Chía. Hidratación, masajes faciales y terapias de rejuvenecimiento en un ambiente único.",
+        video: {
+            id: 'b5hfY4Cuc2w',
+            // Portada con el estilo de los Shorts (PortadaNarbos, una sola foto, «Facial») sobre
+            // el fotograma de los 8 s del propio Short (alta frecuencia encendida). Su miniatura
+            // `oar2` de YouTube cae en un fundido con dos caras superpuestas.
+            poster: 'images/pages/estetica/video-limpieza-facial-alta-frecuencia-chia.webp',
+            headingId: 'spa-facial-video-title',
+            heading: 'Conoce la experiencia <span class="text-brand-green">en cabina</span>',
+            body: 'Así es la limpieza facial profunda: después de la extracción, la alta frecuencia calma, desinflama y desinfecta la piel. Todo en cabina privada y con protocolos de bioseguridad.',
+            ctaLabel: 'Agendar mi Spa Facial',
+            ctaMessage: 'Hola, vi el video del spa facial en su web y quiero agendar mi cita.',
+            alt: "Limpieza facial con alta frecuencia en cabina en Narbo's Salón Spa Chía",
+            ariaLabel: 'Reproducir video: Limpieza Facial con Alta Frecuencia en Chía'
+        },
         gallery: [
             {
                 type: 'image',
