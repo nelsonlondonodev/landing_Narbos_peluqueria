@@ -120,6 +120,15 @@ export const videoCatalog = [
         thumbnailUrl: getYouTubeThumbnail('VCnNQODdxy0', 'hqdefault')
     },
     {
+        id: 'b5hfY4Cuc2w',
+        // Vive en `spa-facial-integral`, no en la parrilla de transformaciones de cabello.
+        excludeFromGallery: true,
+        title: "Limpieza Facial Profunda con Alta Frecuencia en Chía",
+        description: "Así es la limpieza facial profunda en cabina: alta frecuencia después de la extracción para calmar, desinflamar y desinfectar la piel. Spa facial en Narbo's Salón Spa, Chía.",
+        uploadDate: "2026-07-18T07:58:37-05:00",
+        thumbnailUrl: getYouTubeThumbnail('b5hfY4Cuc2w', 'maxresdefault')
+    },
+    {
         id: '_33Xsn18z8s',
         title: "Transformación Increíble: Balayage y Ondas en Chía",
         description: "Mira la transformación completa de un balayage con ondas suaves en Narbo's Salón Spa. Rubios luminosos, movimiento natural y acabado profesional en Chía.",

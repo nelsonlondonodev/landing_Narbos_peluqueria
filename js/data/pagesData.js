@@ -950,6 +950,20 @@ export const pagesData = Object.freeze({
         },
         metaTitle: "Spa Facial Integral en Chía | Rejuvenecimiento y Bienestar | Narbo's",
         metaDescription: "Vive una experiencia de lujo con nuestro Spa Facial Integral en Chía. Hidratación, masajes faciales y terapias de rejuvenecimiento en un ambiente único.",
+        video: {
+            id: 'b5hfY4Cuc2w',
+            // Portada con el estilo de los Shorts (PortadaNarbos, una sola foto, «Facial») sobre
+            // el fotograma de los 8 s del propio Short (alta frecuencia encendida). Su miniatura
+            // `oar2` de YouTube cae en un fundido con dos caras superpuestas.
+            poster: 'images/pages/estetica/video-limpieza-facial-alta-frecuencia-chia.webp',
+            headingId: 'spa-facial-video-title',
+            heading: 'Conoce la experiencia <span class="text-brand-green">en cabina</span>',
+            body: 'Así es la limpieza facial profunda: después de la extracción, la alta frecuencia calma, desinflama y desinfecta la piel. Todo en cabina privada y con protocolos de bioseguridad.',
+            ctaLabel: 'Agendar mi Spa Facial',
+            ctaMessage: 'Hola, vi el video del spa facial en su web y quiero agendar mi cita.',
+            alt: "Limpieza facial con alta frecuencia en cabina en Narbo's Salón Spa Chía",
+            ariaLabel: 'Reproducir video: Limpieza Facial con Alta Frecuencia en Chía'
+        },
         gallery: [
             {
                 type: 'image',
