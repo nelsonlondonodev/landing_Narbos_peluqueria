@@ -6,6 +6,17 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💆 Shorts de masaje y limpieza facial, laminado de cejas y depilación de caballero v2.8.77 (23 de noviembre de 2026)
+
+*   **Tratamientos capilares**: la página estrena sección de vídeo con el Short del masaje de cuero cabelludo (`awhFr49nfpI`), con póster de la portada de la edición y su `VideoObject` generado desde el catálogo. En la home encabeza la galería de vídeos; `MC-SPNzjk0E` sale de la parrilla para no pasar de 12 (`433da68`).
+*   **Spa facial**: el Short de limpieza facial con alta frecuencia (`b5hfY4Cuc2w`) pasa del iframe antiguo a la sección estándar de vídeo, con póster «Facial» sobre un fotograma real del propio Short. Sale del artículo de amor y amistad (iframe y `VideoObject`), que ahora enlaza a la sección y actualiza su `dateModified`: el vídeo ya no compite consigo mismo en dos URLs (`f2a7b56`).
+*   **Cejas y pestañas**: el laminado es de cejas ($100.000), no de pestañas, y el lifting de pestañas queda en $115.000. La carta pasa a «Lifting, Laminado y Henna» y el schema suma «Laminado de Cejas» (`71de667`).
+*   **Depilación corporal**: nueva carta «Depilación para Caballero» con 19 zonas con cera (rostro, torso y espalda, brazos y manos, y combos), con las ofertas en el schema (`71de667`).
+*   **Datos**: horarios, reseñas (381) y sitemap sincronizados con Google (`adc36a3`, `066f1d7`, `70c263a`).
+*   **Versión**: `v2.8.77`.
+
+---
+
 ## 💅 Uñas decoradas en la galería v2.8.76 (21 de noviembre de 2026)
 
 *   **Galería de `/servicios/unas-spa/`**: entran dos fotos reales del 21 de noviembre (uñas almendra a mano alzada con espirales vino, puntos, caritas y estrella), las mismas del post de la ficha. Verticales tras el destacado, la primera con «Nuevo» durante 28 días; la rejilla cierra sin huecos (4×4 en escritorio, 2×7 en móvil) (`7876b15`).
