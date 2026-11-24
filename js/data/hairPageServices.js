@@ -84,7 +84,7 @@ export const hairPageServices = Object.freeze([
         description: "Limpieza profunda y revitalizante con productos profesionales. Incluye masaje capilar relajante.",
         link: "servicios/peluqueria/tratamientos-capilares",
         image: "images/pages/peluqueria/lavado-spa-capilar.webp",
-        price: 'Desde $10.000',
+        price: `Desde ${masterPrices.hair.tratamientos.shampoo}`,
         duration: '20 min',
         variant: "standard"
     },
@@ -187,7 +187,7 @@ export const hairPageServices = Object.freeze([
         title: "Shampoo",
         description: "<strong>Limpieza revitalizante.</strong> Lavado profundo con masaje capilar y productos profesionales. Ideal para refrescar tu cuero cabelludo.",
         image: "images/pages/peluqueria/lavado-spa-capilar.webp",
-        price: 'Desde $10.000',
+        price: `Desde ${masterPrices.hair.tratamientos.shampoo}`,
         duration: '20 min',
         reserva: true
     },

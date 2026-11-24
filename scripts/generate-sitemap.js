@@ -10,14 +10,41 @@ const __dirname = path.dirname(__filename);
 
 const PROJECT_ROOT = path.join(__dirname, '../');
 const SITEMAP_PATH = path.join(__dirname, '../sitemap.xml');
-const TODAY = new Date().toISOString().split('T')[0];
 
 /**
- * Genera el XML del sitemap dinámicamente
+ * Fecha de `lastmod` de un artículo: la de `dateModified` de su JSON-LD, que es la que se
+ * actualiza al revisarlo. `isoDate` es la de publicación y solo queda de reserva.
+ * @param {string} html
+ * @param {string} [isoDate]
+ * @returns {string | undefined}
  */
-function generateSitemap() {
-    console.log('🚀 Generando sitemap.xml...');
+export function articleLastmod(html, isoDate) {
+    return html.match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})/)?.[1] ?? isoDate;
+}
 
+/**
+ * @param {{ loc: string, lastmod?: string, priority: string }} entry
+ * @returns {string}
+ */
+function urlEntry({ loc, lastmod, priority }) {
+    const lastmodLine = lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : '';
+    return `
+  <url>
+    <loc>${loc}</loc>${lastmodLine}
+    <changefreq>monthly</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+}
+
+/**
+ * Construye el XML del sitemap.
+ *
+ * Las páginas fijas van sin `lastmod`: su contenido sale de `pagesData` y `masterPrices`,
+ * así que ni la fecha del build ni la del HTML en git dicen cuándo cambiaron, y Google
+ * deja de hacer caso a un `lastmod` que no es fiable.
+ * @returns {{ xml: string, urlCount: number }}
+ */
+export function buildSitemap() {
     const allHtmlFiles = getHtmlFiles(PROJECT_ROOT);
     const priorityMap = {
         'index.html': '1.0',
@@ -47,32 +74,30 @@ function generateSitemap() {
         const priority = priorityMap[file] || '0.8';
         const loc = `${SITE_URL}${urlPath}`;
         
-        xml += `
-  <url>
-    <loc>${loc}</loc>
-    <lastmod>${TODAY}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>${priority}</priority>
-  </url>`;
+        xml += urlEntry({ loc, priority });
         urlCount++;
     });
 
     // 2. Agregar artículos del blog
     articles.forEach(article => {
-        let link = article.link.startsWith('/') ? article.link : `/${article.link}`;
-        if (link.endsWith('.html')) link = link.slice(0, -5);
-        
-        xml += `
-  <url>
-    <loc>${SITE_URL}${link}</loc>
-    <lastmod>${article.isoDate || TODAY}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>`;
+        const link = article.link.replace(/^\/?/, '/').replace(/\.html$/, '');
+        const htmlPath = path.join(PROJECT_ROOT, `${link}.html`);
+        const html = fs.existsSync(htmlPath) ? fs.readFileSync(htmlPath, 'utf8') : '';
+        xml += urlEntry({
+            loc: `${SITE_URL}${link}`,
+            lastmod: articleLastmod(html, article.isoDate),
+            priority: '0.8'
+        });
         urlCount++;
     });
 
     xml += `\n</urlset>`;
+    return { xml, urlCount };
+}
+
+function generateSitemap() {
+    console.log('🚀 Generando sitemap.xml...');
+    const { xml, urlCount } = buildSitemap();
 
     try {
         fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
@@ -82,4 +107,4 @@ function generateSitemap() {
     }
 }
 
-generateSitemap();
+if (process.argv[1] === __filename) generateSitemap();

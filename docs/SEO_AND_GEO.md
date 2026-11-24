@@ -7,6 +7,7 @@ Este proyecto invierte fuertemente en SEO técnico clásico (sitemap, JSON-LD, i
 - Generado por `scripts/generate-sitemap.js`, ejecutado en cada `pnpm build`.
 - Escanea recursivamente todos los `.html` del proyecto (excluye `node_modules`, `dist`, `css`, `js`, `images`, `scripts`, `lang`, `legal`) e infiere `changefreq`/`priority` por tipo de página (`priorityMap`: home y páginas core más altas, artículos de blog e internas por defecto en `0.8`).
 - Incluye la lista de artículos desde `js/data/articles.js`, así que un artículo nuevo aparece automáticamente sin tocar el sitemap a mano.
+- `lastmod` solo en los artículos, leído del `dateModified` de su JSON-LD. Las páginas fijas van sin él: su contenido sale de `pagesData` y `masterPrices`, y ninguna fecha del HTML dice cuándo cambiaron.
 
 ## JSON-LD / Schema.org
 
