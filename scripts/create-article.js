@@ -63,7 +63,7 @@ function generateSchemaMarkup(data) {
       },
       // Google avisa si la fecha va sin hora ni zona horaria. Las 8:00 de Bogotá es la
       // convención del resto de artículos; `isoDate` sigue siendo AAAA-MM-DD para el
-      // orden del blog y el `lastmod` del sitemap.
+      // orden del blog; el `lastmod` del sitemap sale de `dateModified`.
       "datePublished": `${isoDate}T08:00:00-05:00`,
       "dateModified": `${isoDate}T08:00:00-05:00`,
       "mainEntityOfPage": {
