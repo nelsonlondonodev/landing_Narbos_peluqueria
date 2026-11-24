@@ -6,6 +6,14 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🧴 Precio del shampoo y fechas del sitemap v2.8.78 (24 de noviembre de 2026)
+
+*   **Tratamientos capilares**: el shampoo pasa a «Desde $12.000» (anunciaba $10.000) y la tarjeta lee el precio de `masterPrices` (`6eb44e3`).
+*   **Sitemap**: los artículos llevan como `lastmod` el `dateModified` de su JSON-LD y las 19 páginas fijas van sin él, porque la fecha del build no decía cuándo habían cambiado (`f41b100`).
+*   **Versión**: `v2.8.78`.
+
+---
+
 ## 💆 Shorts de masaje y limpieza facial, laminado de cejas y depilación de caballero v2.8.77 (23 de noviembre de 2026)
 
 *   **Tratamientos capilares**: la página estrena sección de vídeo con el Short del masaje de cuero cabelludo (`awhFr49nfpI`), con póster de la portada de la edición y su `VideoObject` generado desde el catálogo. En la home encabeza la galería de vídeos; `MC-SPNzjk0E` sale de la parrilla para no pasar de 12 (`433da68`).
