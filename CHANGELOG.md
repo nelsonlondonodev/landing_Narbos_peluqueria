@@ -6,6 +6,14 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💅 Uñas Polygel desde $130.000 y tarjetas separadas v2.8.79 (25 de noviembre de 2026)
+
+*   **Uñas Acrílicas y Gel**: «Uñas Polygel» pasa a «Desde $130.000» (básicas, diseño aparte) y se separa en su propia tarjeta frente a «Uñas Acrílicas» («Desde $160.000»), leyendo ambas desde `masterPrices` (`b1f5044`).
+*   **Schema Markup**: `unas-acrilicas-gel.html` añade importes en `COP` a las ofertas del `OfferCatalog` (Acrílicas $160.000, Polygel $130.000, Press On $130.000 y Nail Art $3.000) (`1a99e54`).
+*   **Versión**: `v2.8.79`.
+
+---
+
 ## 🧴 Precio del shampoo y fechas del sitemap v2.8.78 (24 de noviembre de 2026)
 
 *   **Tratamientos capilares**: el shampoo pasa a «Desde $12.000» (anunciaba $10.000) y la tarjeta lee el precio de `masterPrices` (`6eb44e3`).
