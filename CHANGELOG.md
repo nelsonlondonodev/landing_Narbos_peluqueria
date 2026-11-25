@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 💅 Foto real de uñas polygel en tarjeta y galería v2.8.80 (25 de noviembre de 2026)
+
+*   **Uñas Acrílicas y Gel**: la tarjeta de «Uñas Polygel» estrena foto real del salón en formato WebP 4:3 (`48 KB`, `960×720`) con `width`/`height` explícitos y `alt` descriptivo, y entra en la galería de `/servicios/unas-spa/unas-acrilicas-gel` como bloque horizontal con badge «Nuevo» (28 días), cerrando la rejilla sin huecos (4×5 en escritorio, 2×9 en móvil) y sumándose al array `image` del JSON-LD (`1c7a3ed`).
+*   **Versión**: `v2.8.80`.
+
+---
+
 ## 💅 Uñas Polygel desde $130.000 y tarjetas separadas v2.8.79 (25 de noviembre de 2026)
 
 *   **Uñas Acrílicas y Gel**: «Uñas Polygel» pasa a «Desde $130.000» (básicas, diseño aparte) y se separa en su propia tarjeta frente a «Uñas Acrílicas» («Desde $160.000»), leyendo ambas desde `masterPrices` (`b1f5044`).
