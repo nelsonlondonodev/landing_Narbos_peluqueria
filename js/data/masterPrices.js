@@ -18,8 +18,8 @@ export const masterPrices = Object.freeze({
             spa: '$25.000' // Desde
         },
         extensiones: {
-            poligel: '$160.000',
-            acrilicas: '$160.000',
+            poligel: '$130.000', // Desde (básicas, diseño aparte); bajó desde $160.000 el 2026-11-25
+            acrilicas: '$160.000', // Desde (básicas, diseño aparte)
             pressOn: '$130.000' // Con aplicación semipermanente
         },
         disenos: {

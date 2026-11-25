@@ -46,11 +46,21 @@ export const nailsServices = [
     },
     {
         id: 5,
-        title: 'Uñas Acrílicas / Polygel',
+        title: 'Uñas Polygel',
         price: `Desde ${masterPrices.nails.extensiones.poligel}`,
         duration: '120 min',
-        summary: 'Extensiones esculpidas para longitud y resistencia superior.',
-        description: 'Formas Coffin, Stiletto o Almendra. Incluye manicura completa y esmaltado semipermanente.',
+        summary: 'Extensiones ligeras y resistentes de acabado natural. Precio base para básicas; el diseño se cobra aparte.',
+        description: 'Formas Coffin, Stiletto o Almendra. Incluye manicura completa y esmaltado semipermanente básico (nail art adicional).',
+        image: '../../images/pages/unas/acrilicas-polygel.webp',
+        link: 'unas-acrilicas-gel'
+    },
+    {
+        id: 11,
+        title: 'Uñas Acrílicas',
+        price: `Desde ${masterPrices.nails.extensiones.acrilicas}`,
+        duration: '120 min',
+        summary: 'Extensiones esculpidas de alta resistencia y duración. Precio base para básicas; el diseño se cobra aparte.',
+        description: 'Formas Coffin, Stiletto o Almendra. Incluye manicura completa y esmaltado semipermanente básico (nail art adicional).',
         image: '../../images/pages/unas/unas-acrilicas-tendencia-2026-chia.webp',
         link: 'unas-acrilicas-gel'
     },
