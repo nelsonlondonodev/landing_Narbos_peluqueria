@@ -51,7 +51,10 @@ export const nailsServices = [
         duration: '120 min',
         summary: 'Extensiones ligeras y resistentes de acabado natural. Precio base para básicas; el diseño se cobra aparte.',
         description: 'Formas Coffin, Stiletto o Almendra. Incluye manicura completa y esmaltado semipermanente básico (nail art adicional).',
-        image: '../../images/pages/unas/acrilicas-polygel.webp',
+        image: '../../images/pages/unas/unas-polygel-francesa-mono-3d-chia-narbos.webp',
+        width: 960,
+        height: 720,
+        alt: "Uñas polygel almendra con manicure francesa, moño 3D y glitter realizadas en Narbo's Salón Spa, Chía",
         link: 'unas-acrilicas-gel'
     },
     {

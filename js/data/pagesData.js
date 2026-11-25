@@ -1226,6 +1226,18 @@ export const pagesData = Object.freeze({
                 isNew: true,
                 addedAt: '2026-08-01'
             },
+            // Trabajo real del 2026-11-25, el mismo del post de la ficha. Horizontal (2×1):
+            // cierra la rejilla en 4×5 en escritorio (20 celdas) y 2×9 en móvil (18), sin huecos.
+            {
+                type: 'image',
+                layout: 'horizontal',
+                src: 'images/pages/unas/unas-polygel-francesa-mono-3d-chia-narbos.webp',
+                title: "Uñas Polygel",
+                subtitle: "Francesa con moño 3D · Trabajo real",
+                addedAt: '2026-11-25T12:00:00-05:00',
+                badgeDurationDays: 28,
+                alt: "Uñas polygel en forma almendra con base rosada, manicure francesa blanca, moño 3D y glitter iridiscente en Narbo's Salón Spa, Chía"
+            },
             {
                 type: 'image',
                 layout: 'vertical',
