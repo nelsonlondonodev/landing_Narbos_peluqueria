@@ -1,12 +1,12 @@
 /**
  * AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
- * Última sincronización con Google Business Profile: 2026-11-23T08:46:39.933Z
+ * Última sincronización con Google Business Profile: 2026-11-27T08:12:18.005Z
  */
 const googleReviews = {
-    "lastSync": "2026-11-23T08:46:39.933Z",
+    "lastSync": "2026-11-27T08:12:18.005Z",
     "source": "Google Places API (Sincronizado)",
     "rating": 5,
-    "userRatingCount": 381,
+    "userRatingCount": 382,
     "reviews": [
         {
             "author": "Allyhome Manager",
@@ -37,10 +37,10 @@ const googleReviews = {
             "verified": true
         },
         {
-            "author": "Elizabeth Daza",
+            "author": "Valentina Paez",
             "rating": 5,
-            "text": "¡Me encantó la experiencia! ❤️ La atención fue excelente, el trato muy amable y profesional. Quedé feliz con el resultado y, especialmente, con el color. Se nota el cuidado y la dedicación en cada detalle. ¡Súper recomendado! Sin duda, volveré. ✨",
-            "relativeTime": "Hace 2 semanas",
+            "text": "Nabo's salón es increíble desde el inicio hasta la salida, yo me realice un servicio de manicure y pedicure y me encantó relsultado, cumplieron mis expectativas en todo lo que quería, el servicio y la atención es espectacular muy atentas,  amables y cuidadosas con cada parte del proceso. Definitivamente volveré ✨️",
+            "relativeTime": "Hace 3 meses",
             "verified": true
         }
     ]
