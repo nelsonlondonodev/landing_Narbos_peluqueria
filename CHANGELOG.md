@@ -6,6 +6,14 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🎬 Short del balayage castaño caramelo en la home v2.8.81 (27 de noviembre de 2026)
+
+*   **Galería de vídeos de la home**: la encabeza el Short «Balayage Castaño Caramelo: Antes y Después en Chía» (`sIE44s_NKvc`); para mantener el tope de 12 sale de la parrilla «Corte de Cabello y Estilo de Vanguardia», que sigue en `cortes-de-pelo` (`0424034`).
+*   **Datos de Google**: sincronización de reseñas (382) y horarios.
+*   **Versión**: `v2.8.81`.
+
+---
+
 ## 💅 Foto real de uñas polygel en tarjeta y galería v2.8.80 (25 de noviembre de 2026)
 
 *   **Uñas Acrílicas y Gel**: la tarjeta de «Uñas Polygel» estrena foto real del salón en formato WebP 4:3 (`48 KB`, `960×720`) con `width`/`height` explícitos y `alt` descriptivo, y entra en la galería de `/servicios/unas-spa/unas-acrilicas-gel` como bloque horizontal con badge «Nuevo» (28 días), cerrando la rejilla sin huecos (4×5 en escritorio, 2×9 en móvil) y sumándose al array `image` del JSON-LD (`1c7a3ed`).

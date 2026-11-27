@@ -92,6 +92,7 @@ export const videoCatalog = [
     {
         id: 'ImN8W2AXEJI',
         orientation: 'horizontal',   // nativo apaisado, no es un short (oar2 -> 404)
+        excludeFromGallery: true,    // sigue en `cortes-de-pelo`; sale de la parrilla por el tope de 12
         title: "Corte de Cabello y Estilo de Vanguardia en Chía",
         description: "Descubre el proceso de un corte y peinado de vanguardia en Narbo's Salón Spa. Estilo sofisticado y profesional en Chía.",
         uploadDate: "2026-06-15T00:59:11-05:00",
@@ -213,6 +214,14 @@ export const videoCatalog = [
         uploadDate: "2026-11-23T02:56:57-05:00",
         // Miniatura propia (una sola foto, «Masaje»).
         thumbnailUrl: getYouTubeThumbnail('awhFr49nfpI', 'maxresdefault')
+    },
+    {
+        id: 'sIE44s_NKvc',
+        title: "Balayage Castaño Caramelo: Antes y Después en Chía",
+        description: "De una raíz oscura muy marcada y unas puntas desiguales a un balayage castaño con reflejos caramelo, fundido de la raíz a las puntas y con mucho brillo. Narbo's Salón Spa, Chía.",
+        uploadDate: "2026-11-27T03:06:43-05:00",
+        // Miniatura propia (la portada antes/después), como `iwFafry7iWk`.
+        thumbnailUrl: getYouTubeThumbnail('sIE44s_NKvc', 'maxresdefault')
     }
 ];
 
