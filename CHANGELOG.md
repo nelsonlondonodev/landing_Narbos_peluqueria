@@ -6,6 +6,15 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## ▶️ Botón «Ver más videos» en la galería de la home v2.8.82 (27 de noviembre de 2026)
+
+*   **Galería de vídeos de la home**: pinta los 12 más recientes y desde tablet «Ver más videos» añade el resto de 6 en 6; en móvil la fila lateral se queda en 12. El tope pasa a ser automático, así que los 3 vídeos que se habían excluido a mano vuelven a estar accesibles (`050d5fe`).
+*   **SEO y rendimiento**: el `ItemList` declara solo las tarjetas visibles al cargar y las miniaturas pasan a carga diferida.
+*   **Medición**: cada pulsación envía a Clarity el evento `ver_mas_videos_home`.
+*   **Versión**: `v2.8.82`.
+
+---
+
 ## 🎬 Short del balayage castaño caramelo en la home v2.8.81 (27 de noviembre de 2026)
 
 *   **Galería de vídeos de la home**: la encabeza el Short «Balayage Castaño Caramelo: Antes y Después en Chía» (`sIE44s_NKvc`); para mantener el tope de 12 sale de la parrilla «Corte de Cabello y Estilo de Vanguardia», que sigue en `cortes-de-pelo` (`0424034`).
