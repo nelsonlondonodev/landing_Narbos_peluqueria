@@ -1,4 +1,6 @@
 import { siteConfig } from '../config.js';
+import { GALLERY_INITIAL, GALLERY_STEP } from '../data/videoData.js';
+import { trackClarityEvent } from '../utils/clarity.js';
 import { getPlayIconHTML } from '../utils/playIcon.js';
 import { escapeHTML } from '../utils/escapeHTML.js';
 
@@ -13,6 +15,9 @@ const MOBILE_SLIDE = 'max-md:shrink-0 max-md:w-[85%] snap-start';
  * En móvil es una fila con scroll lateral y en escritorio una parrilla. Apilados a
  * ancho completo, los 11 vídeos sumaban unos 2.400 px de scroll en el móvil, y Clarity
  * mostraba que la mitad de las visitas se iba en esa zona sin llegar a las reseñas.
+ *
+ * Pinta los `GALLERY_INITIAL` más recientes. Desde tablet, «Ver más videos» añade el
+ * resto por tandas; en móvil la fila se queda en las iniciales y el resto está en el canal.
  */
 export class YouTubeGallery {
     /**
@@ -22,6 +27,8 @@ export class YouTubeGallery {
     constructor(containerId, videos = []) {
         this.container = document.getElementById(containerId);
         this.videos = videos;
+        this.newestFirst = [...videos].reverse();
+        this.shown = Math.min(GALLERY_INITIAL, videos.length);
         this.gridId = 'youtube-video-grid';
         this.youtubeUrl = siteConfig.socialLinks.find(l => l.name === 'YouTube')?.url || 'https://youtube.com';
     }
@@ -32,7 +39,11 @@ export class YouTubeGallery {
     render() {
         if (!this.container) return;
 
+        this.shown = Math.min(GALLERY_INITIAL, this.videos.length);
         this.container.innerHTML = this._getLayout();
+
+        const moreButton = this.container.querySelector('[data-gallery-more]');
+        moreButton?.addEventListener('click', () => this._showMore(moreButton));
     }
 
     // --- Private Methods ---
@@ -81,19 +92,54 @@ export class YouTubeGallery {
             <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-6 -mx-6 px-6 pb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
                         md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:overflow-visible md:mx-0 md:px-0 md:pb-0" id="${this.gridId}">
                 ${hasVideos
-                    ? [...this.videos].reverse().map((video, index) => this._getVideoCard(video, index === 0)).join('')
+                    ? this.newestFirst.slice(0, this.shown).map((video, index) => this._getVideoCard(video, index === 0)).join('')
                     : this._getEmptyState()}
             </div>
         `;
     }
 
     /**
-     * Renders the call-to-action button.
+     * Añade la siguiente tanda al final de la parrilla y lleva el foco a su primera
+     * tarjeta, para que con teclado no se pierda cuando el botón desaparece.
+     * @param {Element} button
+     * @private
+     */
+    _showMore(button) {
+        const grid = this.container.querySelector(`#${this.gridId}`);
+        const next = this.newestFirst.slice(this.shown, this.shown + GALLERY_STEP);
+        const firstNew = grid.children.length;
+
+        grid.insertAdjacentHTML('beforeend', next.map(video => this._getVideoCard(video, false)).join(''));
+        this.shown += next.length;
+        trackClarityEvent('ver_mas_videos_home');
+
+        grid.children[firstNew]?.focus({ preventScroll: true });
+        if (this.shown >= this.newestFirst.length) button.remove();
+    }
+
+    /**
+     * Renders the «ver más» button, only when some videos are still hidden.
+     * @private
+     */
+    _renderMoreButton() {
+        if (this.newestFirst.length <= this.shown) return '';
+
+        return `
+            <button type="button" data-gallery-more aria-controls="${this.gridId}"
+                class="hidden md:inline-flex items-center px-8 py-3 border-2 border-brand-green text-brand-green font-bold rounded-full cursor-pointer hover:bg-brand-green hover:text-white transition-colors duration-300">
+                Ver más videos
+            </button>
+        `;
+    }
+
+    /**
+     * Renders the call-to-action buttons.
      * @private
      */
     _renderFooterButton() {
         return `
-            <div class="mt-2 md:mt-16 text-center">
+            <div class="mt-2 md:mt-16 flex flex-wrap items-center justify-center gap-4">
+                ${this._renderMoreButton()}
                 <a href="${this.youtubeUrl}" target="_blank" 
                    class="inline-flex items-center gap-3 px-8 py-3 bg-brand-green text-white font-bold rounded-full hover:bg-brand-green-dark transition-all duration-300 shadow-lg hover:shadow-xl group">
                     <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
@@ -131,7 +177,7 @@ export class YouTubeGallery {
                 ${isLatest ? '<div class="badge-latest">Última publicación</div>' : ''}
 
                 <!-- Thumbnail with hover effect -->
-                <img src="${thumbnailUrl}" alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                <img src="${thumbnailUrl}" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100">
                 
                 <!-- Play Button Overlay -->
                 <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0 transition-colors duration-300">

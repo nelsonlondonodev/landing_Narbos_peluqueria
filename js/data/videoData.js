@@ -12,8 +12,9 @@
  *   No todo lo que se publica es un short. Señal fiable para clasificarlos: los shorts
  *   tienen miniatura `oar2`, los apaisados devuelven 404. Determina la proporción de la
  *   tarjeta en `VideoSection` y la URL canónica del video.
- * @property {boolean} [excludeFromGallery=false] - Lo deja fuera de la parrilla de la
- *   home sin sacarlo del catálogo. Ver `galleryVideos`.
+ * @property {boolean} [excludeFromGallery=false] - Lo deja fuera de la galería de la
+ *   home sin sacarlo del catálogo, porque no es una transformación. No sirve para
+ *   limitar la cantidad: de eso se encarga `GALLERY_INITIAL`. Ver `galleryVideos`.
  */
 
 /**
@@ -71,9 +72,6 @@ export function getYouTubeShortUrl(videoId) {
 export const videoCatalog = [
     {
         id: 'sz-uA1RgpVs',
-        // Fuera de la parrilla desde el 2026-11-19: con `iwFafry7iWk` pasaba de 12 y se
-        // retira el más antiguo. Sigue en el catálogo por su `VideoObject`.
-        excludeFromGallery: true,
         title: "Transformación de Color y Balayage en Chía",
         description: "Mira el proceso real de una transformación de color y técnica de balayage en nuestro salón en Chía. Resultados profesionales y cuidado capilar integral.",
         uploadDate: "2026-05-05T05:01:24-05:00",
@@ -81,9 +79,6 @@ export const videoCatalog = [
     },
     {
         id: 'MC-SPNzjk0E',
-        // Fuera de la parrilla desde el 2026-11-23: con `awhFr49nfpI` pasaba de 12 y se
-        // retira el más antiguo. Sigue en el catálogo por su `VideoObject`.
-        excludeFromGallery: true,
         title: "Transformación de Estilo y Color en Chía",
         description: "Descubre el proceso de transformación de estilo y color en Narbo's Salón Spa. Resultados vibrantes y profesionales con técnicas de vanguardia.",
         uploadDate: "2026-05-13T02:00:27-05:00",
@@ -92,7 +87,6 @@ export const videoCatalog = [
     {
         id: 'ImN8W2AXEJI',
         orientation: 'horizontal',   // nativo apaisado, no es un short (oar2 -> 404)
-        excludeFromGallery: true,    // sigue en `cortes-de-pelo`; sale de la parrilla por el tope de 12
         title: "Corte de Cabello y Estilo de Vanguardia en Chía",
         description: "Descubre el proceso de un corte y peinado de vanguardia en Narbo's Salón Spa. Estilo sofisticado y profesional en Chía.",
         uploadDate: "2026-06-15T00:59:11-05:00",
@@ -226,7 +220,7 @@ export const videoCatalog = [
 ];
 
 /**
- * Los vídeos que se pintan en la parrilla de la home y en su `ItemList`.
+ * Los vídeos de la galería de la home, del más antiguo al más reciente.
  *
  * Catálogo y galería dejaron de ser lo mismo al publicar formación del equipo: es
  * contenido de marca, no una transformación, y como `YouTubeGallery` invierte el array
@@ -235,4 +229,17 @@ export const videoCatalog = [
  * @type {Array<VideoItem>}
  */
 export const galleryVideos = videoCatalog.filter(video => !video.excludeFromGallery);
+
+/** Tarjetas que la galería pinta al cargar, las más recientes. */
+export const GALLERY_INITIAL = 12;
+
+/** Tarjetas que añade cada pulsación de «Ver más videos». */
+export const GALLERY_STEP = 6;
+
+/**
+ * Los vídeos visibles al cargar la home, el más reciente primero. Son los que declara
+ * el `ItemList`: el marcado describe lo que se ve, no lo que hay tras el botón.
+ * @type {Array<VideoItem>}
+ */
+export const initialGalleryVideos = galleryVideos.slice(-GALLERY_INITIAL).reverse();
 
