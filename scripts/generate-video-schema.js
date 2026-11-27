@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { galleryVideos, getVideoById, getVideoUrl, getYouTubeThumbnail } from '../js/data/videoData.js';
+import { initialGalleryVideos, getVideoById, getVideoUrl, getYouTubeThumbnail } from '../js/data/videoData.js';
 import { pagesData } from '../js/data/pagesData.js';
 import { getHtmlFiles } from './utils.js';
 
@@ -126,10 +126,9 @@ function generatePageVideoObjects() {
  * @returns {Object} El grafo ItemList listo para serializar.
  */
 function buildItemList() {
-    // `YouTubeGallery` invierte el array al pintar, así que el más reciente encabeza la
-    // parrilla. El ItemList replica ese orden para que `position` case con lo que se ve,
-    // y parte de `galleryVideos` por lo mismo: describe la galería, no el catálogo.
-    const ordered = [...galleryVideos].reverse();
+    // Las mismas tarjetas y en el mismo orden que `YouTubeGallery` pinta al cargar, para
+    // que `position` case con lo que se ve. Lo que queda tras «Ver más» no se declara.
+    const ordered = initialGalleryVideos;
 
     return {
         '@context': 'https://schema.org',
