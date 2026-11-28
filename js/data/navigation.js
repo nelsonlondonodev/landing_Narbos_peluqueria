@@ -40,7 +40,7 @@ export const getMenuCategories = () => [
         title: "Estética",
         link: "servicios/estetica/",
         items: [
-            { label: "Spa Facial", link: "servicios/estetica/spa-facial-integral" },
+            { label: "Limpieza y Spa Facial", link: "servicios/estetica/spa-facial-integral" },
             { label: "Masajes Relajantes", link: "servicios/estetica/masajes-relajantes" },
             { label: "Cejas y Pestañas", link: "servicios/estetica/cejas-y-pestanas" },
             { label: "Depilación Corporal", link: "servicios/estetica/depilacion-corporal" }
@@ -50,7 +50,7 @@ export const getMenuCategories = () => [
         title: "Maquillaje",
         link: "servicios/maquillaje/",
         items: [
-            { label: "Todo en Maquillaje", link: "servicios/maquillaje/" }
+            { label: "Social y novias", link: "servicios/maquillaje/" }
         ]
     }
 ];
