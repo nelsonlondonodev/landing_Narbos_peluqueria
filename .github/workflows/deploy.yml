@@ -36,11 +36,27 @@ jobs:
           # BUILD: la usan los scripts de sync desde Node, sin restricción de referrer.
           GOOGLE_MAPS_API_KEY_BUILD: ${{ secrets.GOOGLE_MAPS_API_KEY_BUILD }}
 
+      # El despliegue borra del servidor lo que no esté en dist/: un build incompleto
+      # vaciaría la web.
+      - name: 🛡️ Verify build is complete
+        run: |
+          for file in dist/index.html dist/.htaccess; do
+            test -s "$file" || { echo "::error::Falta $file; no se publica."; exit 1; }
+          done
+          total=$(find dist -type f ! -name '.DS_Store' | wc -l)
+          if [ "$total" -lt 250 ]; then
+            echo "::error::dist/ tiene $total archivos (mínimo 250); no se publica."
+            exit 1
+          fi
+
       - name: 🚀 Deploy to Hostinger via rsync/SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY_B64 }}" | base64 -d > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          rsync -rlvz \
+          # --delete-after: borra solo cuando lo nuevo ya está arriba.
+          # .well-known/ lo escribe el servidor al validar certificados.
+          rsync -rlvz --delete-after \
+            --exclude='.DS_Store' --exclude='.well-known/' \
             -e "ssh -i ~/.ssh/deploy_key -p 65002 -o StrictHostKeyChecking=no -o BatchMode=yes" \
             dist/ "u749405456@178.16.128.189:domains/narbossalon.com/public_html/"
