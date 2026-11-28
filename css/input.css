@@ -85,22 +85,107 @@
 }
 
 /* --- Navigation --- */
-.nav-link-active {
-  @apply text-white font-bold scale-110;
+/* Barra: subrayado blanco al pasar el cursor, con el menú abierto y en la página actual. */
+.nav-top {
+  @apply relative no-underline;
 }
 
-.site-header nav .desktop-menu a {
-  @apply relative no-underline transition-all duration-300;
-}
-
-.site-header nav .desktop-menu a::after {
+.nav-top::after {
   content: '';
   @apply absolute w-full h-[2px] -bottom-1 left-0 bg-white scale-x-0 origin-bottom-right transition-transform duration-300 ease-out;
 }
 
-.site-header nav .desktop-menu a:hover::after,
-.site-header nav .desktop-menu a.nav-link-active::after {
+a.nav-top:hover::after,
+a.nav-top:focus-visible::after,
+a.nav-top[aria-current]::after,
+.services-trigger:hover .nav-top::after,
+.services-trigger[data-current] .nav-top::after,
+.services-nav[data-open] .nav-top::after {
   @apply scale-x-100 origin-bottom-left;
+}
+
+/* El botón ocupa todo el alto de la barra: el aro de foco rodea solo el texto. */
+.services-trigger:focus-visible .nav-top {
+  @apply rounded-sm outline-2 outline-offset-8 outline-white/70;
+}
+
+/* Desplegable de servicios. `ServicesMenu` pone `data-open`; sin JavaScript (sin
+   `data-enhanced`) lo abren `:hover` y `:focus-within`. */
+.services-panel {
+  @apply invisible opacity-0 translate-y-2;
+  transition: opacity 0.2s ease-out, translate 0.2s ease-out, visibility 0s 0.2s;
+}
+
+.services-nav[data-open] .services-panel,
+.services-nav:not([data-enhanced]):is(:hover, :focus-within) .services-panel {
+  @apply visible opacity-100 translate-y-0;
+  transition-delay: 0s;
+}
+
+.services-nav[data-open] .services-chevron {
+  rotate: 180deg;
+}
+
+/* En pantallas bajas (móvil girado) el panel cuelga de un header fijo: si no cabe, se
+   desplaza por dentro. Los 8 px son el margen del panel bajo el header. */
+.services-grid {
+  max-height: calc(100dvh - var(--header-height) - 8px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Puente invisible sobre el hueco entre el botón y el panel. */
+.services-nav[data-open] .services-trigger::after {
+  content: '';
+  @apply absolute top-full -left-4 -right-4 h-6;
+}
+
+/* Enlaces del panel: el panel es blanco, así que el realce es de fondo. */
+.services-title {
+  @apply flex items-center justify-between border-b-2 border-brand-green pb-2 font-serif text-base font-bold uppercase tracking-wider text-brand-green;
+}
+
+.services-link {
+  @apply block -mx-3 rounded-md px-3 py-2 text-sm text-brand-gray-dark;
+}
+
+.services-link,
+.services-title,
+.services-arrow {
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s, translate 0.2s;
+}
+
+.services-link:hover,
+.services-link:focus-visible {
+  @apply bg-brand-medium/25 outline-none;
+}
+
+.services-link:focus-visible,
+.services-title:focus-visible {
+  @apply outline-2 outline-brand-green;
+}
+
+.services-link[aria-current] {
+  @apply bg-brand-medium/35 font-semibold;
+}
+
+.services-title:hover,
+.services-title:focus-visible,
+.services-title[aria-current] {
+  @apply border-brand-medium text-brand-green-text;
+}
+
+.services-title:hover .services-arrow,
+.services-title:focus-visible .services-arrow {
+  translate: 4px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-panel,
+  .services-chevron,
+  .services-arrow {
+    transition: none;
+  }
 }
 
 /* --- Mobile Menu --- */
@@ -109,8 +194,20 @@
 }
 
 /* --- Layout Components --- */
+/* Alto del header: lo usan el propio header, el hueco que deja encima de la página y el
+   alto máximo del panel de servicios. */
+:root {
+  --header-height: 90px;
+}
+
+@media (width >= 48rem) {
+  :root {
+    --header-height: 110px;
+  }
+}
+
 .site-header {
-  @apply bg-brand-green backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md h-[90px] md:h-[110px] flex items-center transition-all duration-300;
+  @apply bg-brand-green backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md h-(--header-height) flex items-center transition-all duration-300;
 }
 
 .site-header.header-scrolled {
@@ -122,7 +219,7 @@
 }
 
 #app-wrapper {
-  @apply pt-[90px] md:pt-[110px];
+  @apply pt-(--header-height);
 }
 
 /* --- UI Elements --- */

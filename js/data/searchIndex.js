@@ -46,7 +46,7 @@ function buildPageEntries() {
     const fromMenu = getMenuCategories().flatMap(category => [
         { type: 'pagina', title: category.title, subtitle: 'Todos los servicios', link: category.link },
         ...category.items
-            // «Todo en Maquillaje» repite el enlace de su categoría.
+            // «Social y novias» repite el enlace de su categoría (Maquillaje).
             .filter(item => item.link !== category.link)
             .map(item => ({ type: 'pagina', title: item.label, subtitle: category.title, link: item.link }))
     ]);

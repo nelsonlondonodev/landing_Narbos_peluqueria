@@ -6,6 +6,17 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🧭 Menú de servicios rehecho v2.8.84 (28 de noviembre de 2026)
+
+*   **Fallo corregido**: en la sección de servicios del inicio, «Peluquería» se pintaba de blanco sobre el panel blanco y desaparecía del menú (`e1aafa9`).
+*   **Desplegable**: abre con ratón, clic, toque y teclado, no se cierra al cruzar hasta el panel, resalta cada enlace y señala la página actual.
+*   **Móvil en horizontal**: el panel se desplaza por dentro; antes dejaba hasta siete enlaces fuera de la pantalla (`b98011c`).
+*   **Etiquetas**: «Limpieza y Spa Facial» y «Social y novias».
+*   **Código**: rutas, estilos del panel y alto del header definidos en un solo sitio (`769ca72`).
+*   **Versión**: `v2.8.84`.
+
+---
+
 ## 🧖 Cada página de estética, su propia búsqueda v2.8.83 (28 de noviembre de 2026)
 
 *   **Hub de estética**: título y encabezado «Spa y Estética en Chía y Cajicá»; los masajes quedan en su propia página y la guía de spa enlaza al hub con «spa en Chía» (`e76be53`).

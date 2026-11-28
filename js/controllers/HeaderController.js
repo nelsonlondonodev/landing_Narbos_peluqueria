@@ -1,189 +1,64 @@
+import { ServicesMenu } from './ServicesMenu.js';
+import { limpiarRuta } from '../utils/rutas.js';
+
+/** Además, sin barra final: `/blog` y `/blog/` son la misma página. */
+const rutaDePagina = (pathname) => limpiarRuta(pathname).replace(/\/+$/, '');
+
 /**
  * Controlador del Header.
- * Maneja el estado del scroll, menús desplegables y scroll spy.
+ * Maneja el estado del scroll, el desplegable de servicios y la página actual.
  */
 export class HeaderController {
     constructor(headerElement) {
-        // Inicialización inmediata: El Header ya viene en el HTML (SSG)
-        this.DOM = {
-            header: headerElement || document.querySelector(".site-header") || document.querySelector("header"),
-            dropdownBtn: null,
-            dropdownMenu: null
-        };
-
-        if (this.DOM.header) {
-            this.init();
-        } else {
-            // console.warn("[HeaderController] Site header not found in DOM.");
-        }
+        // El Header ya viene en el HTML (SSG).
+        this.header = headerElement || document.querySelector('.site-header') || document.querySelector('header');
     }
 
     init() {
-        // console.log("HeaderController: init() called.");
-        this.createBackdrop();
+        if (!this.header) return;
+
         this.initScrollEffect();
-        this.initDropdowns();
-        this.initScrollSpy();
+        new ServicesMenu(this.header.querySelector('[data-services-nav]')).init();
+        this.markCurrentPage();
     }
 
-    createBackdrop() {
-        this.backdrop = document.createElement('div');
-        this.backdrop.id = 'desktop-menu-backdrop';
-        this.backdrop.className = 'fixed inset-0 bg-black/60 z-[40] opacity-0 pointer-events-none transition-opacity duration-300';
-        document.body.appendChild(this.backdrop);
-
-        this.backdrop.addEventListener('click', () => this.closeDropdown());
-    }
-
-    /**
-     * Cambia el estilo del header al hacer scroll.
-     */
     /**
      * Cambia el estilo del header al hacer scroll.
      * Optimizado con requestAnimationFrame para evitar sobrecarga.
      */
     initScrollEffect() {
-        // Re-intentar seleccionar el header si no se encontró en el constructor
-        if (!this.DOM.header) {
-            this.DOM.header = document.querySelector(".site-header");
-        }
-
-        if (!this.DOM.header) {
-            console.error("HeaderController: FATAL - .site-header no encontrado en el DOM tras reintentos.");
-            return;
-        }
-
         let ticking = false;
 
         const handleScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const isScrolled = window.scrollY > 50;
-                    this.DOM.header.classList.toggle("header-scrolled", isScrolled);
-                    ticking = false;
-                });
-                ticking = true;
-            }
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(() => {
+                this.header.classList.toggle('header-scrolled', window.scrollY > 50);
+                ticking = false;
+            });
         };
 
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        
-        // Initial check
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
         handleScroll();
     }
 
     /**
-     * Maneja la lógica del menú desplegable de servicios.
+     * Señala con `aria-current` el enlace de la página abierta. Un enlace principal («Blog»)
+     * queda marcado también dentro de sus subpáginas.
      */
-    initDropdowns() {
-        if (!this.DOM.dropdownBtn || !this.DOM.dropdownMenu) return;
+    markCurrentPage() {
+        const current = rutaDePagina(window.location.pathname);
 
-        let hoverTimeout;
+        this.header.querySelectorAll('.desktop-menu a[href]').forEach((link) => {
+            const target = rutaDePagina(new URL(link.href, window.location.href).pathname);
+            const isPage = target === current;
+            const isSection = link.classList.contains('nav-top') && target !== '' && current.startsWith(`${target}/`);
 
-        // Mouse Enter (Button)
-        this.DOM.dropdownBtn.addEventListener("mouseenter", () => {
-            clearTimeout(hoverTimeout);
-            this.openDropdown();
+            if (!isPage && !isSection) return;
+
+            link.setAttribute('aria-current', isPage ? 'page' : 'true');
+            link.closest('[data-services-nav]')?.querySelector('button')?.setAttribute('data-current', '');
         });
-
-        // Mouse Enter (Menu)
-        this.DOM.dropdownMenu.addEventListener("mouseenter", () => {
-            clearTimeout(hoverTimeout);
-        });
-
-        // Mouse Leave (Button)
-        this.DOM.dropdownBtn.addEventListener("mouseleave", () => {
-             hoverTimeout = setTimeout(() => this.closeDropdown(), 300);
-        });
-
-        // Mouse Leave (Menu)
-        this.DOM.dropdownMenu.addEventListener("mouseleave", () => {
-             hoverTimeout = setTimeout(() => this.closeDropdown(), 300);
-        });
-
-        // Click (Toggle)
-        this.DOM.dropdownBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            this.toggleDropdown();
-        });
-
-        // Escape Key
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") this.closeDropdown();
-        });
-    }
-
-    toggleDropdown() {
-        const isHidden = this.DOM.dropdownMenu.classList.contains("hidden");
-        if (isHidden) {
-            this.openDropdown();
-        } else {
-            this.closeDropdown();
-        }
-    }
-
-    openDropdown() {
-        if (!this.DOM.dropdownMenu.classList.contains("hidden")) return;
-
-        this.DOM.dropdownMenu.classList.remove("hidden");
-        this.DOM.dropdownBtn.setAttribute("aria-expanded", "true");
-        
-        // Activar Backdrop
-        if (this.backdrop) {
-            this.backdrop.classList.remove('pointer-events-none', 'opacity-0');
-        }
-    }
-
-    closeDropdown() {
-        if (this.DOM.dropdownMenu.classList.contains("hidden")) return;
-
-        this.DOM.dropdownMenu.classList.add("hidden");
-        this.DOM.dropdownBtn.setAttribute("aria-expanded", "false");
-
-        // Desactivar Backdrop
-        if (this.backdrop) {
-            this.backdrop.classList.add('opacity-0', 'pointer-events-none');
-        }
-    }
-
-    isClickInsideDropdown(target) {
-        return this.DOM.dropdownBtn.contains(target) || this.DOM.dropdownMenu.contains(target);
-    }
-
-    /**
-     * Actualiza el enlace activo del menú usando IntersectionObserver.
-     * Mucho más eficiente que el evento scroll.
-     */
-    initScrollSpy() {
-        const sections = document.querySelectorAll("main section[id], footer[id]");
-        const navLinks = document.querySelectorAll("header nav .desktop-menu a");
-
-        if (sections.length === 0 || navLinks.length === 0) return;
-
-        // Configuración: Se activa cuando la sección cruza una línea imaginaria en el top 30% de la pantalla
-        const observerOptions = {
-            root: null,
-            rootMargin: '-20% 0px -60% 0px', 
-            threshold: 0
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    this.updateActiveLink(navLinks, entry.target.id);
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach((section) => observer.observe(section));
-    }
-
-    updateActiveLink(navLinks, sectionId) {
-        navLinks.forEach((link) => link.classList.remove("nav-link-active"));
-        
-        const activeLink = document.querySelector(`header nav .desktop-menu a[href*="${sectionId}"]`);
-        if (activeLink) {
-            activeLink.classList.add("nav-link-active");
-        }
     }
 }
