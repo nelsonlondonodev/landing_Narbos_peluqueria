@@ -694,10 +694,10 @@ export const pagesData = Object.freeze({
         ]
     },
     'estetica': {
-        metaTitle: "Estética, Masajes y Spa en Chía y Cajicá | Narbo's",
+        metaTitle: "Spa y Estética en Chía y Cajicá | Narbo's",
         metaDescription: "¿Buscas un spa en Chía o Cajicá? Disfruta de masajes relajantes, limpiezas faciales profundas y tratamientos corporales en Narbo's.",
         hero: {
-            title: "Estética, Masajes y Spa <span class=\"text-brand-green\">en Chía</span>",
+            title: "Spa y Estética <span class=\"text-brand-green\">en Chía y Cajicá</span>",
             subtitle: "Relájate y renueva tu piel con nuestros masajes y tratamientos faciales en Chía, muy cerca de Cajicá.",
             imageSrc: "images/pages/estetica/cabina-doble-spa-estetica-chia.webp",
             imageSrcMobile: "images/pages/estetica/cabina-doble-spa-estetica-chia-mobile.webp",
@@ -941,14 +941,14 @@ export const pagesData = Object.freeze({
     'spa-facial-integral': {
         hero: {
             eyebrow: "Estética · Chía",
-            title: "Spa Facial y Estética <span class=\"text-brand-green\">en Chía</span>",
+            title: "Limpieza Facial y Spa Facial <span class=\"text-brand-green\">en Chía</span>",
             subtitle: "Renueva tu piel y relaja tu cuerpo con nuestros servicios profesionales.",
             imageSrc: "images/pages/estetica/spa-hero.webp",
             imageAlt: "Spa y Estética en Chía",
             breadcrumb: "Spa Facial",
             ctaMessage: "Hola, vengo de la página de spa facial de la web de Narbo's y quiero agendar una cita"
         },
-        metaTitle: "Spa Facial Integral en Chía | Rejuvenecimiento y Bienestar | Narbo's",
+        metaTitle: "Limpieza Facial y Spa Facial en Chía | Narbo's",
         metaDescription: "Vive una experiencia de lujo con nuestro Spa Facial Integral en Chía. Hidratación, masajes faciales y terapias de rejuvenecimiento en un ambiente único.",
         video: {
             id: 'b5hfY4Cuc2w',
