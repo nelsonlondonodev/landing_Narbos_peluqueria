@@ -101,7 +101,7 @@ export const SITE_URL = 'https://narbossalon.com';
  * Configuración global del sitio.
  */
 export const siteConfig = Object.freeze({
-    version: "2.8.82", // Versión actualizada
+    version: "2.8.83", // Versión actualizada
     basePath: BASE_PATH,
     socialLinks: [
         {
