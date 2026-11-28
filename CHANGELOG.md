@@ -6,6 +6,15 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🧖 Cada página de estética, su propia búsqueda v2.8.83 (28 de noviembre de 2026)
+
+*   **Hub de estética**: título y encabezado «Spa y Estética en Chía y Cajicá»; los masajes quedan en su propia página y la guía de spa enlaza al hub con «spa en Chía» (`e76be53`).
+*   **Spa facial**: título, encabezado y textos de entrada orientados a limpieza facial y spa facial.
+*   **Enlaces del blog**: los artículos de novias y de amor y amistad dejan de apuntar a la ficha de limpieza facial, que no se indexa.
+*   **Versión**: `v2.8.83`.
+
+---
+
 ## ▶️ Botón «Ver más videos» en la galería de la home v2.8.82 (27 de noviembre de 2026)
 
 *   **Galería de vídeos de la home**: pinta los 12 más recientes y desde tablet «Ver más videos» añade el resto de 6 en 6; en móvil la fila lateral se queda en 12. El tope pasa a ser automático, así que los 3 vídeos que se habían excluido a mano vuelven a estar accesibles (`050d5fe`).
