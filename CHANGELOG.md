@@ -6,6 +6,17 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🛡️ Publicación y servidor más seguros v2.8.85 (28 de noviembre de 2026)
+
+*   **Servidor limpio**: la publicación borra lo que ya no forma parte del sitio, y se cancela si la compilación sale incompleta (`69c76d9`).
+*   **Publicación**: acciones fijadas por commit, permiso de solo lectura y verificación de la identidad del servidor (`2f396e5`).
+*   **Herramientas**: de 44 avisos de seguridad a ninguno; `html-minifier-terser` y `sharp` sustituyen a las librerías antiguas, y las páginas legales se publican minificadas (`d0f63ec`).
+*   **Dominio**: `www` redirige a `narbossalon.com`.
+*   **Cabeceras**: `Strict-Transport-Security` y `Permissions-Policy`; sin `no-store` en el HTML para que «atrás» sea instantáneo (`aaf5ee5`).
+*   **Versión**: `v2.8.85`.
+
+---
+
 ## 🧭 Menú de servicios rehecho v2.8.84 (28 de noviembre de 2026)
 
 *   **Fallo corregido**: en la sección de servicios del inicio, «Peluquería» se pintaba de blanco sobre el panel blanco y desaparecía del menú (`e1aafa9`).
