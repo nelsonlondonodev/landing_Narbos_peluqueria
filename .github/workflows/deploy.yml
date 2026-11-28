@@ -6,21 +6,26 @@ on:
     branches:
       - main
 
+# El despliegue solo necesita leer el repositorio.
+permissions:
+  contents: read
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Acciones fijadas por commit: una etiqueta como `v4` puede moverse a otro código.
       - name: 🚚 Get latest code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: 📦 Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
         with:
           version: 11
 
       - name: 🛠️ Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '22'
           cache: 'pnpm'
@@ -36,11 +41,32 @@ jobs:
           # BUILD: la usan los scripts de sync desde Node, sin restricción de referrer.
           GOOGLE_MAPS_API_KEY_BUILD: ${{ secrets.GOOGLE_MAPS_API_KEY_BUILD }}
 
+      # El despliegue borra del servidor lo que no esté en dist/: un build incompleto
+      # vaciaría la web.
+      - name: 🛡️ Verify build is complete
+        run: |
+          for file in dist/index.html dist/.htaccess; do
+            test -s "$file" || { echo "::error::Falta $file; no se publica."; exit 1; }
+          done
+          total=$(find dist -type f ! -name '.DS_Store' | wc -l)
+          if [ "$total" -lt 250 ]; then
+            echo "::error::dist/ tiene $total archivos (mínimo 250); no se publica."
+            exit 1
+          fi
+
       - name: 🚀 Deploy to Hostinger via rsync/SSH
+        env:
+          # Clave pública del servidor. Si Hostinger la cambia, la publicación se cancela:
+          # comprobar el motivo antes de actualizarla.
+          SSH_HOST_KEY: '[178.16.128.189]:65002 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIATqx21Ks8jSu0A+QcTfsP5pkni/nvSYSlPhOZfzBUKH'
         run: |
           mkdir -p ~/.ssh
+          echo "$SSH_HOST_KEY" > ~/.ssh/known_hosts
           echo "${{ secrets.SSH_PRIVATE_KEY_B64 }}" | base64 -d > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          rsync -rlvz \
-            -e "ssh -i ~/.ssh/deploy_key -p 65002 -o StrictHostKeyChecking=no -o BatchMode=yes" \
+          # --delete-after: borra solo cuando lo nuevo ya está arriba.
+          # .well-known/ lo escribe el servidor al validar certificados.
+          rsync -rlvz --delete-after \
+            --exclude='.DS_Store' --exclude='.well-known/' \
+            -e "ssh -i ~/.ssh/deploy_key -p 65002 -o StrictHostKeyChecking=yes -o BatchMode=yes" \
             dist/ "u749405456@178.16.128.189:domains/narbossalon.com/public_html/"

@@ -25,7 +25,7 @@
 | Markup | HTML5 multi-página (una página física por ruta, sin SPA router) |
 | Estilos | [Tailwind CSS v4](https://tailwindcss.com/) (`css/input.css` → `css/styles.css`) |
 | Lógica de cliente | Vanilla JS (ES Modules), sin framework — arquitectura de Componentes/Controladores/Data |
-| Build | Node.js (ESM) + [esbuild](https://esbuild.github.io/) + `html-minifier` + SSG propio (`scripts/ssg.js`) |
+| Build | Node.js (ESM) + [esbuild](https://esbuild.github.io/) + `html-minifier-terser` + SSG propio (`scripts/ssg.js`) |
 | Gestor de paquetes | [pnpm](https://pnpm.io/) (ver `pnpm-workspace.yaml`) |
 | CI/CD | GitHub Actions → despliegue FTPS a Hostinger |
 | Datos externos | Google Places API (horarios y reseñas), YouTube (videos embebidos), Google Maps |

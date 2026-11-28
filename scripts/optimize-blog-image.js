@@ -1,8 +1,7 @@
 import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import imagemin from 'imagemin';
-import imageminWebp from 'imagemin-webp';
+import sharp from 'sharp';
 
 /**
  * Retorna el peso del archivo formateado de manera legible.
@@ -16,7 +15,7 @@ function getFileSizeInKB(filePath) {
 }
 
 /**
- * Procesa y optimiza una sola versión (desktop o mobile) usando sips y la API de imagemin en JS.
+ * Procesa y optimiza una sola versión (desktop o mobile) usando sips y sharp.
  * @param {string} src Ruta origen de la imagen JPEG
  * @param {string} destPath Ruta de destino final para el archivo WebP (ej. blog/articles/images/nombre.webp)
  * @param {number} width Ancho deseado en píxeles
@@ -25,65 +24,28 @@ async function processImageVersion(src, destPath, width) {
     console.log(`-> Procesando versión (${width}px) para: ${destPath}`);
 
     const tempJpg = `temp_optimize_${width}.jpg`;
-    const tempDir = `temp_out_dir_${width}`;
 
     try {
-        // Paso 1: Redimensionar con sips a un archivo JPEG temporal en el workspace
+        // Paso 1: Redimensionar con sips a un JPEG temporal (sips también lee HEIC)
         execSync(`sips -s format jpeg --resampleWidth ${width} "${src}" --out "${tempJpg}"`, { stdio: 'ignore' });
 
         if (!fs.existsSync(tempJpg)) {
             throw new Error(`No se pudo crear el archivo temporal de redimensionado ${tempJpg}`);
         }
 
-        // Asegurar que el directorio de salida temporal esté limpio
-        if (fs.existsSync(tempDir)) {
-            fs.rmSync(tempDir, { recursive: true, force: true });
-        }
-        fs.mkdirSync(tempDir);
+        fs.mkdirSync(path.dirname(destPath), { recursive: true });
 
-        // Paso 2: Convertir a WebP comprimido usando la API de JS de imagemin
-        const files = await imagemin([tempJpg], {
-            destination: tempDir,
-            plugins: [
-                imageminWebp({ quality: 80 })
-            ]
-        });
+        // Paso 2: Convertir a WebP; `autoOrient` aplica la rotación que traiga la foto
+        await sharp(tempJpg).autoOrient().webp({ quality: 80 }).toFile(destPath);
 
-        if (files && files.length > 0) {
-            // El archivo producido tendrá el mismo nombre base pero con extensión .webp
-            const producedWebp = path.join(tempDir, `temp_optimize_${width}.webp`);
-            
-            if (fs.existsSync(producedWebp)) {
-                // Asegurar que el directorio de destino final exista
-                const destDir = path.dirname(destPath);
-                if (!fs.existsSync(destDir)) {
-                    fs.mkdirSync(destDir, { recursive: true });
-                }
-
-                // Eliminar el archivo destino previo si existe
-                if (fs.existsSync(destPath)) {
-                    fs.unlinkSync(destPath);
-                }
-
-                // Mover al destino final
-                fs.renameSync(producedWebp, destPath);
-                console.log(`   ✅ ¡Éxito! Versión creada en: ${destPath}`);
-                console.log(`      └─ Peso Optimizado: ${getFileSizeInKB(destPath)}`);
-            } else {
-                throw new Error(`No se encontró el archivo WebP optimizado en el directorio temporal.`);
-            }
-        } else {
-            throw new Error(`imagemin no devolvió archivos procesados.`);
-        }
+        console.log(`   ✅ ¡Éxito! Versión creada en: ${destPath}`);
+        console.log(`      └─ Peso Optimizado: ${getFileSizeInKB(destPath)}`);
     } catch (error) {
         console.error(`   ❌ Error procesando versión de ${width}px:`, error.message);
     } finally {
-        // Limpieza de archivos y directorios temporales
+        // Limpieza del archivo temporal
         if (fs.existsSync(tempJpg)) {
             fs.unlinkSync(tempJpg);
-        }
-        if (fs.existsSync(tempDir)) {
-            fs.rmSync(tempDir, { recursive: true, force: true });
         }
     }
 }
@@ -110,7 +72,7 @@ async function main() {
     const destDesktop = `blog/articles/images/${destName}.webp`;
     const destMobile = `blog/articles/images/${destName}-mobile.webp`;
 
-    console.log(`🚀 Iniciando optimización de imagen para artículo de blog (Vía API JS)...`);
+    console.log(`🚀 Iniciando optimización de imagen para artículo de blog (sips + sharp)...`);
     console.log(`   └─ Imagen Origen: ${src} (${getFileSizeInKB(src)})`);
 
     if (!fs.existsSync(src)) {

@@ -5,9 +5,8 @@ import util from 'util';
 import { fileURLToPath } from 'url';
 import crypto from 'crypto';
 import esbuild from 'esbuild';
-import htmlMinifier from 'html-minifier';
+import { minify } from 'html-minifier-terser';
 import { loadEnv } from './load-env.js';
-const { minify } = htmlMinifier;
 
 loadEnv();
 
@@ -113,7 +112,7 @@ const buildHTML = async () => {
         ensureDir(path.dirname(destPath));
         try {
             const content = fs.readFileSync(file, 'utf8');
-            const minified = minify(content, options);
+            const minified = await minify(content, options);
             fs.writeFileSync(destPath, minified, 'utf8');
         } catch (e) {
             console.error(`Error al minificar ${file}, copiando sin minificar:`, e);
@@ -125,7 +124,7 @@ const buildHTML = async () => {
 const copyAssets = async () => {
     log('Copying assets...');
     const assets = [
-        'images', 'fonts', 'vendor', 'blog/articles/images', 'legal', 
+        'images', 'fonts', 'vendor', 'blog/articles/images', 
         'robots.txt', 'sitemap.xml', 'llms.txt', '.htaccess'
     ];
     assets.forEach(asset => {

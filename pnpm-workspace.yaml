@@ -1,7 +1,3 @@
 allowBuilds:
   '@parcel/watcher': true
-  cwebp-bin: true
   esbuild: true
-  gifsicle: true
-  jpegtran-bin: true
-  optipng-bin: true
