@@ -1,6 +1,3 @@
-/**
- * Genera el HTML de la barra de navegación.
- */
 import { getMenuCategories } from '../data/navigation.js';
 import { resolveAsset, resolveRoute } from '../config.js';
 
@@ -115,49 +112,51 @@ function renderMobileMenuHeader() {
     `;
 }
 
-/**
- * Renderiza una categoría individual para el menú.
- */
-function renderCategory(cat, basePath, isMobile = false) {
-    const itemsHTML = cat.items.map(item => `
+/** Flecha que señala los desplegables. */
+const chevronIcon = (classes) => `<svg class="${classes}" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>`;
+
+/** Los servicios de una categoría como elementos de lista. */
+const renderCategoryItems = (items, basePath, linkClasses) => items.map(item => `
         <li>
-            <a href="${resolveRoute(item.link, basePath)}" class="${isMobile ? 'block text-brand-gray-dark text-sm hover:text-brand-gold py-1' : 'services-link block -mx-3 rounded-md px-3 py-2 text-sm text-brand-gray-dark'}">
+            <a href="${resolveRoute(item.link, basePath)}" class="${linkClasses}">
                 ${item.label}
             </a>
         </li>
     `).join('');
 
-    if (isMobile) {
-        return `
-            <div class="px-6 py-2">
-                <a href="${resolveRoute(cat.link, basePath)}" class="block font-bold text-brand-green text-base mb-2 select-none">${cat.title}</a>
-                <ul class="border-l-2 border-gray-200 pl-3 space-y-2">
-                    ${itemsHTML}
-                </ul>
-            </div>
-        `;
-    }
-
+/** Columna del panel de escritorio. Sus estilos viven en `input.css`. */
+function renderDesktopCategory(cat, basePath) {
     return `
         <div class="flex flex-col space-y-2">
-            <a href="${resolveRoute(cat.link, basePath)}" class="services-title flex items-center justify-between border-b-2 border-brand-green pb-2 font-serif text-base font-bold uppercase tracking-wider text-brand-green">
+            <a href="${resolveRoute(cat.link, basePath)}" class="services-title">
                 <span>${cat.title}</span>
                 <span class="services-arrow" aria-hidden="true">&rarr;</span>
             </a>
             <ul>
-                ${itemsHTML}
+                ${renderCategoryItems(cat.items, basePath, 'services-link')}
+            </ul>
+        </div>
+    `;
+}
+
+function renderMobileCategory(cat, basePath) {
+    return `
+        <div class="px-6 py-2">
+            <a href="${resolveRoute(cat.link, basePath)}" class="block font-bold text-brand-green text-base mb-2 select-none">${cat.title}</a>
+            <ul class="border-l-2 border-gray-200 pl-3 space-y-2">
+                ${renderCategoryItems(cat.items, basePath, 'block text-brand-gray-dark text-sm py-1')}
             </ul>
         </div>
     `;
 }
 
 function renderMegaMenuDesktop(menuCategories, basePath) {
-    const gridContent = menuCategories.map(cat => renderCategory(cat, basePath)).join('');
+    const gridContent = menuCategories.map(cat => renderDesktopCategory(cat, basePath)).join('');
     return `
         <div class="services-nav static flex h-full items-center" data-services-nav>
             <button type="button" id="desktop-services-btn" class="services-trigger relative z-10 flex h-full cursor-pointer items-center py-4 font-medium text-white focus:outline-none" aria-expanded="false" aria-controls="desktop-services-menu">
                 <span class="nav-top">Servicios</span>
-                <svg class="services-chevron ml-1 h-4 w-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                ${chevronIcon('services-chevron ml-1 h-4 w-4 transition-transform duration-300')}
             </button>
             <div id="desktop-services-menu" class="services-panel absolute left-0 top-full z-40 w-full pt-2">
                 <div class="services-grid mx-auto grid w-full max-w-screen-xl grid-cols-1 gap-8 rounded-b-xl border-t-2 border-brand-medium bg-white p-8 shadow-2xl md:grid-cols-2 lg:grid-cols-4">
@@ -169,12 +168,12 @@ function renderMegaMenuDesktop(menuCategories, basePath) {
 }
 
 function renderMegaMenuMobile(menuCategories, basePath) {
-    const content = menuCategories.map(cat => renderCategory(cat, basePath, true)).join('');
+    const content = menuCategories.map(cat => renderMobileCategory(cat, basePath)).join('');
     return `
         <div class="border-b border-gray-100 pb-2">
              <button class="mobile-services-toggle w-full flex justify-between items-center py-3 px-4 text-lg font-bold text-gray-500 uppercase tracking-wider hover:bg-gray-50 focus:outline-none">
                 <span>Servicios</span>
-                <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                ${chevronIcon('w-4 h-4 transition-transform duration-200')}
             </button>
             <div class="hidden bg-gray-50/50 space-y-1 pb-4">
                 ${content}

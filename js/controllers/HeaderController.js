@@ -1,8 +1,8 @@
 import { ServicesMenu } from './ServicesMenu.js';
+import { limpiarRuta } from '../utils/rutas.js';
 
-/** Ruta comparable: sin `index.html`, sin `.html` y sin barra final. */
-const normalizePathname = (pathname) =>
-    pathname.replace(/\/index(\.html)?$/, '/').replace(/\.html$/, '').replace(/\/+$/, '');
+/** Además, sin barra final: `/blog` y `/blog/` son la misma página. */
+const rutaDePagina = (pathname) => limpiarRuta(pathname).replace(/\/+$/, '');
 
 /**
  * Controlador del Header.
@@ -48,10 +48,10 @@ export class HeaderController {
      * queda marcado también dentro de sus subpáginas.
      */
     markCurrentPage() {
-        const current = normalizePathname(window.location.pathname);
+        const current = rutaDePagina(window.location.pathname);
 
         this.header.querySelectorAll('.desktop-menu a[href]').forEach((link) => {
-            const target = normalizePathname(new URL(link.href, window.location.href).pathname);
+            const target = rutaDePagina(new URL(link.href, window.location.href).pathname);
             const isPage = target === current;
             const isSection = link.classList.contains('nav-top') && target !== '' && current.startsWith(`${target}/`);
 

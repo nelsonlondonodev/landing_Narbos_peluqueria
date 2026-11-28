@@ -127,10 +127,9 @@ a.nav-top[aria-current]::after,
 }
 
 /* En pantallas bajas (móvil girado) el panel cuelga de un header fijo: si no cabe, se
-   desplaza por dentro. Los 118 px son el header de escritorio más el margen del panel. */
+   desplaza por dentro. Los 8 px son el margen del panel bajo el header. */
 .services-grid {
-  max-height: calc(100vh - 118px);
-  max-height: calc(100dvh - 118px);
+  max-height: calc(100dvh - var(--header-height) - 8px);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -142,6 +141,14 @@ a.nav-top[aria-current]::after,
 }
 
 /* Enlaces del panel: el panel es blanco, así que el realce es de fondo. */
+.services-title {
+  @apply flex items-center justify-between border-b-2 border-brand-green pb-2 font-serif text-base font-bold uppercase tracking-wider text-brand-green;
+}
+
+.services-link {
+  @apply block -mx-3 rounded-md px-3 py-2 text-sm text-brand-gray-dark;
+}
+
 .services-link,
 .services-title,
 .services-arrow {
@@ -187,8 +194,20 @@ a.nav-top[aria-current]::after,
 }
 
 /* --- Layout Components --- */
+/* Alto del header: lo usan el propio header, el hueco que deja encima de la página y el
+   alto máximo del panel de servicios. */
+:root {
+  --header-height: 90px;
+}
+
+@media (width >= 48rem) {
+  :root {
+    --header-height: 110px;
+  }
+}
+
 .site-header {
-  @apply bg-brand-green backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md h-[90px] md:h-[110px] flex items-center transition-all duration-300;
+  @apply bg-brand-green backdrop-blur-sm fixed top-0 left-0 w-full z-50 shadow-md h-(--header-height) flex items-center transition-all duration-300;
 }
 
 .site-header.header-scrolled {
@@ -200,7 +219,7 @@ a.nav-top[aria-current]::after,
 }
 
 #app-wrapper {
-  @apply pt-[90px] md:pt-[110px];
+  @apply pt-(--header-height);
 }
 
 /* --- UI Elements --- */

@@ -6,6 +6,7 @@
  */
 
 import { SITE_URL } from '../config.js';
+import { limpiarRuta } from './rutas.js';
 
 /** Nombre visible de cada sección, por la carpeta de su URL. */
 export const SECCIONES = Object.freeze({
@@ -33,7 +34,7 @@ export const SECCIONES = Object.freeze({
  * @returns {Miga[]} Vacío si la página no lleva miga (home, contacto, nosotros…).
  */
 export function migasDePagina(ruta, nombrePagina) {
-    const limpia = ruta.replace(/^\/+/, '').replace(/\.html$/, '').replace(/(^|\/)index$/, '$1');
+    const limpia = limpiarRuta(ruta);
 
     const servicio = limpia.match(/^servicios\/([^/]+)\/(.*)$/);
     if (servicio && SECCIONES[servicio[1]]) {
