@@ -2,6 +2,12 @@
     RewriteEngine On
     RewriteBase /
 
+    # Un solo dominio: www respondia 200 y duplicaba la web. Va la primera para que
+    # cualquier URL llegue en un salto; .well-known queda fuera (certificados).
+    RewriteCond %{HTTP_HOST} ^www\.narbossalon\.com$ [NC]
+    RewriteCond %{REQUEST_URI} !^/\.well-known/
+    RewriteRule ^ https://narbossalon.com%{REQUEST_URI} [R=301,L]
+
     # 0. /servicios/ no es una pagina: se retiro al crear los hubs de cada
     #    categoria, que ya cubren ese contenido. El directorio sigue existiendo
     #    (contiene las 5 categorias) pero sin index.html el servidor responde
@@ -12,8 +18,7 @@
     #     la variante .html salte directa al destino, sin pasar por la limpia.
     RewriteRule ^servicios/estetica/depilacion(\.html)?/?$ /servicios/estetica/depilacion-corporal [R=301,L]
     RewriteRule ^peluqueria(\.html)?/?$ /servicios/peluqueria/ [R=301,L]
-    # La propietaria retiró la barbería el 2026-11-06. El deploy no borra archivos del
-    # servidor, así que esta regla tiene que ganarle a la que sirve los .html.
+    # La propietaria retiró la barbería el 2026-11-06.
     RewriteRule ^servicios/barberia(\.html|/.*)?$ /servicios/peluqueria/ [R=301,L]
     RewriteRule ^unas-acrilicas-gel(\.html)?/?$ /servicios/unas-spa/unas-acrilicas-gel [R=301,L]
     RewriteRule ^blog/articles/guia-cuidado-capilar-sabana-viento-casco-frio(\.html)?/?$ /blog/articles/cuidado-capilar-sabana-viento-casco-frio [R=301,L]
@@ -67,7 +72,9 @@
         Header set Cache-Control "max-age=31536000, public"
     </FilesMatch>
     <FilesMatch "\.(html|htm)$">
-        Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+        # Sin `no-store`: se revalida en cada visita, pero el navegador puede
+        # restaurar la pagina al instante con el boton «atras».
+        Header set Cache-Control "max-age=0, no-cache, must-revalidate"
     </FilesMatch>
     
     # Seguridad Básica
@@ -75,6 +82,10 @@
     Header set X-XSS-Protection "1; mode=block"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
+    # Un mes y sin subdominios: el navegador lo recuerda aunque se quite de aqui.
+    Header always set Strict-Transport-Security "max-age=2592000"
+    # La web no usa nada de esto; tampoco lo que se incruste en ella.
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
     
     # Asegurar que llms.txt se sirva siempre fresco para las IAs
     <FilesMatch "llms\.txt$">
