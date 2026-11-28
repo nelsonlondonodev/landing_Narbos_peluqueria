@@ -160,7 +160,7 @@ function renderMegaMenuDesktop(menuCategories, basePath) {
                 <svg class="services-chevron ml-1 h-4 w-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             <div id="desktop-services-menu" class="services-panel absolute left-0 top-full z-40 w-full pt-2">
-                <div class="mx-auto grid w-full max-w-screen-xl grid-cols-1 gap-8 rounded-b-xl border-t-2 border-brand-medium bg-white p-8 shadow-2xl md:grid-cols-2 lg:grid-cols-4">
+                <div class="services-grid mx-auto grid w-full max-w-screen-xl grid-cols-1 gap-8 rounded-b-xl border-t-2 border-brand-medium bg-white p-8 shadow-2xl md:grid-cols-2 lg:grid-cols-4">
                     ${gridContent}
                 </div>
             </div>

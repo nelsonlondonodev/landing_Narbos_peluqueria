@@ -126,6 +126,15 @@ a.nav-top[aria-current]::after,
   rotate: 180deg;
 }
 
+/* En pantallas bajas (móvil girado) el panel cuelga de un header fijo: si no cabe, se
+   desplaza por dentro. Los 118 px son el header de escritorio más el margen del panel. */
+.services-grid {
+  max-height: calc(100vh - 118px);
+  max-height: calc(100dvh - 118px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
 /* Puente invisible sobre el hueco entre el botón y el panel. */
 .services-nav[data-open] .services-trigger::after {
   content: '';
