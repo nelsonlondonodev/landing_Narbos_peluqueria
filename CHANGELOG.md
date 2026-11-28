@@ -6,6 +6,13 @@ Todos los cambios notables de este proyecto se documentan en este archivo, en or
 
 ---
 
+## 🖼️ Imagen para compartir de contacto v2.8.86 (28 de noviembre de 2026)
+
+*   **Fallo corregido**: al compartir la página de contacto no salía foto, porque la imagen enlazada ya no existía; ahora es la de la recepción (`dbba404`).
+*   **Versión**: `v2.8.86`.
+
+---
+
 ## 🛡️ Publicación y servidor más seguros v2.8.85 (28 de noviembre de 2026)
 
 *   **Servidor limpio**: la publicación borra lo que ya no forma parte del sitio, y se cancela si la compilación sale incompleta (`69c76d9`).
